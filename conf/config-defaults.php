@@ -16,9 +16,9 @@ $Configuration['ImageUpload']['Limits']['Height'] = '1400';
 
 // Database defaults.
 $Configuration['Database']['Engine'] = 'MySQL';
-$Configuration['Database']['Host'] = 'dbhost';
-$Configuration['Database']['Name'] = 'dbname';
-$Configuration['Database']['User'] = 'dbuser';
+$Configuration['Database']['Host'] = 'localhost';
+$Configuration['Database']['Name'] = 'vanilla_dev';
+$Configuration['Database']['User'] = 'root';
 $Configuration['Database']['Password']  = '';
 $Configuration['Database']['CharacterEncoding'] = 'utf8mb4';
 $Configuration['Database']['DatabasePrefix'] = 'GDN_';
@@ -72,7 +72,7 @@ $Configuration['Garden']['Authenticator']['SignOutUrl'] = '/entry/signout/{Sessi
 $Configuration['Garden']['Authenticator']['EnabledSchemes'] = ['password'];
 $Configuration['Garden']['Authenticators']['password']['Name'] = "Password";
 $Configuration['Garden']['UserAccount']['AllowEdit'] = true; // Allow users to edit their account information? (SSO requires accounts be edited in external system).
-$Configuration['Garden']['Registration']['Method'] = 'Captcha'; // Options are: Basic, Captcha, Approval, Invitation
+$Configuration['Garden']['Registration']['Method'] = 'Basic'; // Options are: Basic, Captcha, Approval, Invitation
 $Configuration['Garden']['Registration']['InviteExpiration'] = '1 week'; // When invitations expire. This will be plugged into strtotime().
 $Configuration['Garden']['Registration']['InviteRoles'] = 'FALSE';
 $Configuration['Garden']['Registration']['ConfirmEmail'] = false;
