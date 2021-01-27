@@ -114,8 +114,8 @@ $Configuration['Garden']['Profile']['MaxWidth'] = 560;
 $Configuration['Garden']['Thumbnail']['Size'] = 200;
 
 // Appearance.
-$Configuration['Garden']['Theme'] = 'theme-foundation';
-$Configuration['Garden']['MobileTheme'] = 'theme-foundation';
+$Configuration['Garden']['Theme'] = 'theme-alloprof';
+$Configuration['Garden']['MobileTheme'] = 'theme-alloprof';
 $Configuration['Garden']['Menu']['Sort'] = ['Dashboard', 'Discussions', 'Questions', 'Activity', 'Applicants', 'Conversations', 'User'];
 $Configuration['Garden']['ThemeOptions']['Styles']['Key'] = 'Default';
 $Configuration['Garden']['ThemeOptions']['Styles']['Value'] = '%s_default';
