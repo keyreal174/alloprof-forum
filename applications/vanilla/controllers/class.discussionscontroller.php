@@ -77,6 +77,7 @@ class DiscussionsController extends VanillaController {
         }
         Gdn_Theme::section('DiscussionList');
 
+
         $this->addJsFile('jquery.autosize.min.js');
         $this->addJsFile('autosave.js');
         $this->addJsFile('post.js');

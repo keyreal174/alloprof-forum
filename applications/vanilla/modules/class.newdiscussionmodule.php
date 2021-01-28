@@ -14,6 +14,9 @@ use Vanilla\Contracts\LocaleInterface;
  * Renders the "Start a New Discussion" button.
  */
 class NewDiscussionModule extends Gdn_Module {
+
+    use \Vanilla\Formatting\FormatCompatTrait;
+
     /** @var LocaleInterface */
     private $locale;
 
@@ -29,8 +32,8 @@ class NewDiscussionModule extends Gdn_Module {
     /** @var string Query string to append to button URL. */
     public $QueryString = '';
 
-    /** @var Gdn_Form */
-    public $Form;
+    /** @var array An associative array of form types and their locations. */
+    public $FormCollection;
 
     /** @var array Collection of buttons to display. */
     public $Buttons = [];
@@ -44,6 +47,9 @@ class NewDiscussionModule extends Gdn_Module {
     /** @var boolean Reorder HTML for easier styling */
     public $reorder = false;
 
+    public $ShowCategorySelector = false;
+
+
     /**
      * Set default button.
      *
@@ -55,24 +61,25 @@ class NewDiscussionModule extends Gdn_Module {
         $this->locale = Gdn::getContainer()->get(\Vanilla\Contracts\LocaleInterface::class);
         // Customize main button by setting Vanilla.DefaultNewButton to URL code. Example: "post/question"
         $this->DefaultButton = c('Vanilla.DefaultNewButton', false);
+        $this->ShowCategorySelector = (bool)c('Vanilla.Categories.Use');
 
-        // $validation = new Gdn_Validation();
-        // $blogModel = new Gdn_Model('Blog', $validation);
+        // Define the form for the comment input
+        $this->Form = Gdn::factory('Form', 'Discussion');
+        $this->Form->Action = url('/post/discussion');
 
-        // $this->Form->setModel($blogModel);
+        if (Gdn::config('Garden.ForceInputFormatter')) {
+            $format = Gdn::config('Garden.InputFormatter', '');
+            $this->Form->setFormValue('Format', $format);
+        }
 
+        $inputFormatter = $this->Form->getFormValue('Format', c('Garden.InputFormatter'));
 
-        // if ($this->Form->authenticatedPostBack()) {
-        //     // Attempt to save the form values
-        //     $blogID = $this->Form->save();
-
-        //     // If it saved, redirect to the new entry:
-        //     if ($blogID !== false)
-        //        redirect('/bloggingtool/entries/'.$blogID);
-
-        //  }
-
+        $this->Form->setFormValue(
+            'Body',
+            nl2br($this->Form->getFormValue('Body'))
+        );
     }
+
 
     /**
      *
