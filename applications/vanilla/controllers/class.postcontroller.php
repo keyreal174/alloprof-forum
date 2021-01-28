@@ -53,7 +53,7 @@ class PostController extends VanillaController {
 
         $this->setData('CurrentFormName', $currentFormName);
         $forms = [];
-        $forms[] = ['Name' => 'Discussion', 'Label' => sprite('SpNewDiscussion').t('New Discussion'), 'Url' => 'vanilla/post/discussion'];
+        $forms[] = ['Name' => 'Discussion', 'Label' => sprite('SpNewDiscussion').t('New Question'), 'Url' => 'vanilla/post/discussion'];
         /*
         $Forms[] = array('Name' => 'Question', 'Label' => sprite('SpAskQuestion').t('Ask Question'), 'Url' => 'vanilla/post/discussion');
         $Forms[] = array('Name' => 'Poll', 'Label' => sprite('SpNewPoll').t('New Poll'), 'Url' => 'activity');

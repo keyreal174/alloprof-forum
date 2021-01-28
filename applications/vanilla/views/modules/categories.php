@@ -12,7 +12,7 @@ if ($this->Data !== FALSE && $displayModule) {
     }
     ?>
     <div class="Box BoxCategories">
-        <?php echo panelHeading(t('Categories')); ?>
+        <?php echo panelHeading(t('Subjects followed')); ?>
         <ul class="PanelInfo PanelCategories">
             <?php
             if (!Gdn::themeFeatures()->useDataDrivenTheme()) {

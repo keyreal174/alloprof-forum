@@ -35,6 +35,12 @@ class DiscussionsController extends VanillaController {
     /** @var boolean Value indicating whether to show the category following filter */
     public $enableFollowingFilter = false;
 
+    /** @var Gdn_Form */
+    public $Form;
+
+    /** @var array An associative array of form types and their locations. */
+    public $FormCollection;
+
     /**
      * "Table" layout for discussions. Mimics more traditional forum discussion layout.
      *
@@ -70,6 +76,10 @@ class DiscussionsController extends VanillaController {
                 break;
         }
         Gdn_Theme::section('DiscussionList');
+
+        $this->addJsFile('jquery.autosize.min.js');
+        $this->addJsFile('autosave.js');
+        $this->addJsFile('post.js');
 
         // Remove score sort
         DiscussionModel::removeSort('top');
@@ -108,7 +118,7 @@ class DiscussionsController extends VanillaController {
             if ($Title && ($DefaultControllerRoute == 'discussions')) {
                 $this->title($Title, '');
             } else {
-                $this->title(t('Recent Discussions'));
+                $this->title(t('Popular questions'));
             }
         }
         if (!$this->description()) {
@@ -119,13 +129,22 @@ class DiscussionsController extends VanillaController {
         }
 
         // Add modules
-        $this->addModule('DiscussionFilterModule');
+        // $this->addModule('DiscussionFilterModule');
+        $this->addModule('ProfileFilterModule');
         $this->addModule('NewDiscussionModule');
         $this->addModule('CategoriesModule');
-        $this->addModule('BookmarkedModule');
-        $this->addModule('TagModule');
 
-        $this->setData('Breadcrumbs', [['Name' => t('Recent Discussions'), 'Url' => '/discussions']]);
+       // Make sure the userphoto module gets added to the page
+        $this->addModule('UserPhotoModule');
+
+        // And add the filter menu module
+        $this->fireEvent('AfterAddSideMenu');
+        $this->addModule('ProfileFilterModule');
+        // $this->addModule('BookmarkedModule');
+        // $this->addModule('TagModule');
+
+        $this->setData('Breadcrumbs', [['Name' => t('Popular questions'), 'Url' => '/discussions']]);
+        // $this->setData('QuestionSubMenus', [['Name' => t('Popular questions'), 'Url' => '/discussions']]);
 
         $categoryModel = new CategoryModel();
         $followingEnabled = $categoryModel->followingEnabled();

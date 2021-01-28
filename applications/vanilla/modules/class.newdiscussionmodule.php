@@ -29,6 +29,9 @@ class NewDiscussionModule extends Gdn_Module {
     /** @var string Query string to append to button URL. */
     public $QueryString = '';
 
+    /** @var Gdn_Form */
+    public $Form;
+
     /** @var array Collection of buttons to display. */
     public $Buttons = [];
 
@@ -52,6 +55,23 @@ class NewDiscussionModule extends Gdn_Module {
         $this->locale = Gdn::getContainer()->get(\Vanilla\Contracts\LocaleInterface::class);
         // Customize main button by setting Vanilla.DefaultNewButton to URL code. Example: "post/question"
         $this->DefaultButton = c('Vanilla.DefaultNewButton', false);
+
+        // $validation = new Gdn_Validation();
+        // $blogModel = new Gdn_Model('Blog', $validation);
+
+        // $this->Form->setModel($blogModel);
+
+
+        // if ($this->Form->authenticatedPostBack()) {
+        //     // Attempt to save the form values
+        //     $blogID = $this->Form->save();
+
+        //     // If it saved, redirect to the new entry:
+        //     if ($blogID !== false)
+        //        redirect('/bloggingtool/entries/'.$blogID);
+
+        //  }
+
     }
 
     /**
@@ -60,7 +80,7 @@ class NewDiscussionModule extends Gdn_Module {
      * @return string
      */
     public function assetTarget() {
-        return 'Panel';
+        return 'Content';
     }
 
     /**

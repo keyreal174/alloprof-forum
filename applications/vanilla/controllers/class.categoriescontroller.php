@@ -423,7 +423,7 @@ class CategoriesController extends VanillaController {
             $this->setData('CategoryID', $categoryID, true);
 
             // Add modules
-            $this->addModule('NewDiscussionModule');
+            // $this->addModule('NewDiscussionModule');
             $this->addModule('DiscussionFilterModule');
             $this->addModule('CategoriesModule');
             $this->addModule('BookmarkedModule');
@@ -611,7 +611,7 @@ class CategoriesController extends VanillaController {
         $this->setData('CategoryTree', $categoryTree);
 
         // Add modules
-        $this->addModule('NewDiscussionModule');
+        // $this->addModule('NewDiscussionModule');
         $this->addModule('DiscussionFilterModule');
         $this->addModule('BookmarkedModule');
         $this->addModule('CategoriesModule');
@@ -719,7 +719,7 @@ class CategoriesController extends VanillaController {
         $this->setData('Discussions', $Discussions);
 
         // Add modules
-        $this->addModule('NewDiscussionModule');
+        // $this->addModule('NewDiscussionModule');
         $this->addModule('DiscussionFilterModule');
         $this->addModule('CategoriesModule');
         $this->addModule('BookmarkedModule');

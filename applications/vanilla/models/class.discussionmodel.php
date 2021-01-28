@@ -593,7 +593,7 @@ class DiscussionModel extends Gdn_Model implements FormatFieldInterface, EventFr
                 'Singular' => 'Discussion',
                 'Plural' => 'Discussions',
                 'AddUrl' => '/post/discussion',
-                'AddText' => 'New Discussion'
+                'AddText' => 'What is your question?'
             ]];
 
             Gdn::pluginManager()->EventArguments['Category'] = &$category;

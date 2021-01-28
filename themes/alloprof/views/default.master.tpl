@@ -34,14 +34,14 @@
             </div>
         {/if}
     {/if}
-    
+
     {if !$DataDrivenTitleBar}
         {activity_link format=$linkFormat}
         {categories_link format=$linkFormat}
         {discussions_link format=$linkFormat}
         {knowledge_link format=$linkFormat}
         {custom_menu format=$linkFormat}
-          
+
     {/if}
 {/capture}
 {capture name="navLinks"}
@@ -50,8 +50,13 @@
         {categories_link format=$linkFormat}
         {discussions_link format=$linkFormat}
         {custom_menu format=$linkFormat}
-       
     {/if}
+{/capture}
+{capture name="submenuLinks"}
+    {discussions_link format=$linkFormat}
+    {mydiscussions_link format=$linkFormat}
+    {followed_link format=$linkFormat}
+    {resources_link format=$linkFormat}
 {/capture}
 {assign var="SectionGroups" value=(isset($Groups) || isset($Group))}
 {assign var="TemplateCss" value="
@@ -145,6 +150,10 @@
                 <div class="Frame-content">
                     <div class="Container">
                         <div class="Frame-contentWrap">
+                            <nav class="Question-submenu">
+                                {$smarty.capture.submenuLinks}
+                             </nav>
+
                             <div class="Frame-details">
                                 {if !$isHomepage}
                                     <div class="Frame-row">
@@ -167,6 +176,9 @@
                                     </div>
                                 {/if}
                                 <div class="Frame-row">
+                                    <aside class="Panel Panel-main left LeftPanel">
+                                        {asset name="LeftPanel"}
+                                    </aside>
                                     <main id="MainContent" class="Content MainContent">
                                         {if inSection("Profile")}
                                             <div class="Profile-header">
