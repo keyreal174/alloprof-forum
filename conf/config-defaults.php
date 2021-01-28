@@ -54,8 +54,8 @@ $Configuration['Garden']['Forms']['HoneypotName'] = 'hpt';
 $Configuration['Feature']['DeferredLegacyScripts']['Enabled'] = true;
 
 // Developer stuff.
-$Configuration['Garden']['Debug'] = false;
-$Configuration['Garden']['Errors']['LogFile'] = '';
+$Configuration['Garden']['Debug'] = true;
+$Configuration['Garden']['Errors']['LogFile'] = 'log/DebugLog';
 $Configuration['Garden']['FolderBlacklist'] = ['.', '..', '_svn', '.git']; // Folders we should never search for classes.
 
 // User registration & authentication.
