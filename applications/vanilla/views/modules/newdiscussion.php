@@ -49,9 +49,11 @@ Gdn::controller()->fireEvent('AfterNewDiscussionButton');
     echo wrap($this->Form->textBox('Name', ['maxlength' => 100, 'class' => 'InputBox BigInput', 'spellcheck' => 'true']), 'div', ['class' => 'TextBoxWrapper']);
     echo '</div>';
 
-    // echo '<div class="P">';
-    // echo $this->Form->bodyBox('Body', ['Table' => 'Discussion', 'FileUpload' => true, 'placeholder' => t('Type your question'), 'title' => t('Type your question')]);
-    // echo '</div>';
+    $this->fireEvent('BeforeBodyInput');
+
+    echo '<div class="P">';
+    echo $this->Form->bodyBox('Body', ['Table' => 'Discussion', 'FileUpload' => true, 'placeholder' => t('Type your question'), 'title' => t('Type your question')]);
+    echo '</div>';
 
 
     $this->EventArguments['Options'] = &$Options;

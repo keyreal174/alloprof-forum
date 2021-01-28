@@ -304,7 +304,7 @@ class Gdn_Form extends Gdn_Pluggable {
         $this->EventArguments['Column'] = $column;
         $this->EventArguments['Attributes'] = $attributes;
         $this->EventArguments['BodyBox'] =& $result;
-        $this->fireEvent('BeforeBodyBox');
+        // $this->fireEvent('BeforeBodyBox');
 
         // Only add the format if it was set on the form. This allows plugins to remove the format.
         if ($format = $this->getValue('Format')) {
