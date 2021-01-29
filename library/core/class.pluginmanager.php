@@ -805,6 +805,7 @@ class Gdn_PluginManager extends Gdn_Pluggable implements ContainerInterface {
                 $eventKey = $originalEventKey;
         }
 
+
         $results = $this->eventManager->fire(
             $eventKey,
             $sender,
