@@ -51,9 +51,9 @@ Gdn::controller()->fireEvent('AfterNewDiscussionButton');
 
     $this->fireEvent('BeforeBodyInput');
 
-    echo '<div class="P">';
-    echo $this->Form->bodyBox('Body', ['Table' => 'Discussion', 'FileUpload' => true, 'placeholder' => t('Type your question'), 'title' => t('Type your question')]);
-    echo '</div>';
+    // echo '<div class="P">';
+    // echo $this->Form->bodyBox('Body', ['Table' => 'Discussion', 'FileUpload' => true, 'placeholder' => t('Type your question'), 'title' => t('Type your question')]);
+    // echo '</div>';
 
 
     $this->EventArguments['Options'] = &$Options;

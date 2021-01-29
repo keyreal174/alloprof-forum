@@ -387,7 +387,7 @@ class DiscussionsController extends VanillaController {
     public function initialize() {
         parent::initialize();
         $this->ShowOptions = true;
-        $this->Menu->highlightRoute('/discussions');
+        // $this->Menu->highlightRoute('/discussions');
         $this->addJsFile('discussions.js');
 
         // Inform moderator of checked comments in this discussion
