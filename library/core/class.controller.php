@@ -878,7 +878,7 @@ class Gdn_Controller extends Gdn_Pluggable {
         $ViewPath = $this->fetchViewLocation($View, $ControllerName, $ApplicationFolder);
 
         // Check to see if there is a handler for this particular extension.
-        $ViewHandler = Gdn::factory('ViewHandler'.strtolower(strrchr($ViewPath, '.')));
+        $ViewHandler = null; //Gdn::factory('ViewHandler'.strtolower(strrchr($ViewPath, '.')));
 
         $ViewContents = '';
         ob_start();

@@ -72,7 +72,7 @@ class DiscussionsController extends VanillaController {
                 }
                 break;
             default:
-                // $this->View = 'index';
+                $this->View = 'index';
                 break;
         }
         Gdn_Theme::section('DiscussionList');
@@ -131,8 +131,8 @@ class DiscussionsController extends VanillaController {
         }
 
         // Add modules
-        // $this->addModule('DiscussionFilterModule');
-        $this->addModule('ProfileFilterModule');
+        $this->addModule('DiscussionFilterModule');
+
         $this->addModule('NewDiscussionModule');
         // $this->addModule('AskQuestionModule');
         $this->addModule('CategoriesModule');
@@ -140,6 +140,7 @@ class DiscussionsController extends VanillaController {
 
        // Make sure the userphoto module gets added to the page
         $this->addModule('UserPhotoModule');
+        $this->addModule('ProfileFilterModule');
 
         // And add the filter menu module
         $this->fireEvent('AfterAddSideMenu');
