@@ -50,8 +50,6 @@ if ($this->data('EnableFollowingFilter')) {
 $this->fireEvent('PageControls');
 echo '</div>';
 
-// include $this->fetchViewLocation('discussion', 'post', 'vanilla');
-
 if ($this->DiscussionData->numRows() > 0 || (isset($this->AnnounceData) && is_object($this->AnnounceData) && $this->AnnounceData->numRows() > 0)) {
     ?>
     <h2 class="sr-only"><?php echo t('Discussion List'); ?></h2>
