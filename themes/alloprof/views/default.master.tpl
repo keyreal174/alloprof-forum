@@ -198,7 +198,6 @@
                                                 </div>
                                             </div>
                                         {/if}
-                                        {module name="AskQuestionModule"}
                                         {asset name="Content"}
                                     </main>
                                     <aside class="Panel Panel-main">

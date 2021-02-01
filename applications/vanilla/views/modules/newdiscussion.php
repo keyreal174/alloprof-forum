@@ -46,18 +46,6 @@
         echo $this->Form->bodyBox('Body', ['Table' => 'Discussion', 'FileUpload' => true, 'placeholder' => t('Type your question'), 'title' => t('Type your question')]);
         echo '</div>';
 
-
-        $this->EventArguments['Options'] = &$Options;
-        $this->fireEvent('DiscussionFormOptions');
-
-        if ($Options != '') {
-            echo '<div class="P">';
-            echo '<ul class="List Inline PostOptions">'.$Options.'</ul>';
-            echo '</div>';
-        }
-
-        $this->fireEvent('AfterDiscussionFormOptions');
-
     ?>
     </div>
     <?php
@@ -86,8 +74,10 @@
         }
         echo '</div>';
         echo '<div class="Buttons">';
+
         $this->fireEvent('BeforeFormButtons');
         echo $this->Form->button((property_exists($this, 'Discussion')) ? 'Save' : 'Publish', ['class' => 'btn-default btn-shadow']);
+        $this->fireEvent('AfterFormButtons');
         echo '</div>';
 
         echo $this->Form->close();

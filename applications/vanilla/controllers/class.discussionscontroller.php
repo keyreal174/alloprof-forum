@@ -95,7 +95,7 @@ class DiscussionsController extends VanillaController {
                 }
                 break;
             default:
-                // $this->View = 'index';
+                $this->View = 'index';
                 break;
         }
         Gdn_Theme::section('DiscussionList');

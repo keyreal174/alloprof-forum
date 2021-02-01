@@ -49,7 +49,7 @@ class NewDiscussionModule extends Gdn_Module {
 
     public $ShowCategorySelector = false;
 
-
+    public $Form;
     /**
      * Set default button.
      *
@@ -62,22 +62,6 @@ class NewDiscussionModule extends Gdn_Module {
         // Customize main button by setting Vanilla.DefaultNewButton to URL code. Example: "post/question"
         $this->DefaultButton = c('Vanilla.DefaultNewButton', false);
         $this->ShowCategorySelector = (bool)c('Vanilla.Categories.Use');
-
-        // Define the form for the comment input
-        $this->Form = Gdn::factory('Form', 'Discussion');
-        $this->Form->Action = url('/post/discussion');
-
-        if (Gdn::config('Garden.ForceInputFormatter')) {
-            $format = Gdn::config('Garden.InputFormatter', '');
-            $this->Form->setFormValue('Format', $format);
-        }
-
-        $inputFormatter = $this->Form->getFormValue('Format', c('Garden.InputFormatter'));
-
-        $this->Form->setFormValue(
-            'Body',
-            nl2br($this->Form->getFormValue('Body'))
-        );
     }
 
 
@@ -107,6 +91,23 @@ class NewDiscussionModule extends Gdn_Module {
      * @return string
      */
     public function toString() {
+
+        // Define the form for the comment input
+        $this->Form = Gdn::factory('Form', 'Discussion');
+        $this->Form->Action = url('/post/discussion');
+
+        if (Gdn::config('Garden.ForceInputFormatter')) {
+            $format = Gdn::config('Garden.InputFormatter', '');
+            $this->Form->setFormValue('Format', $format);
+        }
+
+        $inputFormatter = $this->Form->getFormValue('Format', c('Garden.InputFormatter'));
+
+        $this->Form->setFormValue(
+            'Body',
+            nl2br($this->Form->getFormValue('Body'))
+        );
+
         // Set CategoryID if we have one.
         if (c('Vanilla.Categories.Use', true) && $this->CategoryID === null) {
             $this->CategoryID = Gdn::controller()->data('Category.CategoryID', Gdn::controller()->data('ContextualCategoryID', false));
