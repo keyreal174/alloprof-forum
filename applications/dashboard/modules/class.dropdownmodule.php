@@ -228,7 +228,7 @@ class DropdownModule extends Gdn_Module {
      * @param array $attributes The attributes to add to the trigger.
      * @return object $this The calling DropdownModule object.
      */
-    public function setTrigger($text = '', $type = 'button', $cssClass = 'btn-default', $icon = 'caret-down', $url = '', $attributes = []) {
+    public function setTrigger($text = '', $type = 'button', $cssClass = 'btn-default', $icon = 'arrows-fullscreen', $url = '', $attributes = []) {
         $this->trigger['text'] = $text;
         $this->trigger['type'] = in_array($type, $this->triggerTypes) ? $type : 'button';
         $this->trigger['icon'] = $icon;

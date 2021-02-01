@@ -1003,19 +1003,9 @@ table.PreferenceGroup th {
 }
 
 .SpFlyoutHandle:before {
-    -webkit-font-smoothing: antialiased;
-    color: inherit;
-    content: "";
-    display: inline-block;
-    font-family: kbicons;
-    font-style: normal;
-    font-variant: normal;
-    font-weight: 400;
-    line-height: inherit;
-    min-width: 1em;
-    text-align: center;
-    text-decoration: inherit;
-    text-transform: none
+    content: '\2807';
+    font-size: 40px !important;
+    transform: rotate(90deg);
 }
 
 .SpOptions:before {
@@ -12142,4 +12132,52 @@ select {
 .AskQuestionForm .richEditor-frame {
     border: none !important;
     background: transparent !important;
+}
+
+.Options-Icon {
+    position: absolute;
+    right: 40px;
+}
+
+.Back-Icon {
+    background: url("images/back.png") no-repeat !important;
+    width: 24px;
+    height: 24px;
+}
+
+.Notifications-Icon {
+    background: url("images/Follow.png") no-repeat !important;
+    width: 24px;
+    height: 24px;
+}
+
+.Favorite-Icon {
+    background: url("images/Path.png") no-repeat !important;
+    width: 24px;
+    height: 24px;
+}
+
+.Options>span {
+    margin-left: 0 !important;
+    margin-right: 27px;
+}
+
+.Options>span:last-child {
+    margin-right: 0;
+}
+
+.Item-Footer-Icons {
+    display: flex;
+}
+
+.Item-Footer-Icons .Response {
+    font-size: 17px;
+    line-height: 19px;
+}
+
+.Item-Footer-Icons .Separator {
+    width: 1px;
+    height: 100%;
+    background-color: #1A1919;
+    margin: 0 20px;
 }

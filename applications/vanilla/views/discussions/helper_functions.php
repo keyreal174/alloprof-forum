@@ -271,12 +271,47 @@ if (!function_exists('WriteDiscussion')) :
     }
 endif;
 
+if (!function_exists('timeElapsedString')) :
+    function timeElapsedString($datetime, $full = false) {
+        $now = new DateTime;
+        $ago = new DateTime($datetime);
+        $diff = $now->diff($ago);
+
+        $diff->w = floor($diff->d / 7);
+        $diff->d -= $diff->w * 7;
+
+        $string = array(
+            'y' => 'year',
+            'm' => 'month',
+            'w' => 'week',
+            'd' => 'day',
+            'h' => 'hour',
+            'i' => 'minute',
+            's' => 'second',
+        );
+
+        foreach ($string as $k => &$v) {
+            if ($diff->$k) {
+                $v = $diff->$k . ' ' . $v . ($diff->
+                $k > 1 ? 's' : '');
+            } else {
+                unset($string[$k]);
+            }
+        }
+
+        if (!$full) $string = array_slice($string, 0, 1);
+        return $string ? implode(', ', $string) . ' ago' : 'just now';
+    }
+endif;
+
 if (!function_exists('writeDiscussionDetail')) :
     function writeDiscussionDetail($Discussion, $sender, $session) {
         $Author = Gdn::userModel()->getID($Discussion->InsertUserID); // userBuilder($Discussion, 'Insert');
         $cssClass = cssClass($Discussion);
         $category = CategoryModel::categories($discussion->CategoryID);
         $discussionUrl = $discussion->Url;
+
+        $dateTimeFormatter = Gdn::getContainer()->get(\Vanilla\Formatting\DateTimeFormatter::class);
 
         $sender->EventArguments['Discussion'] = &$DiscussionDiscussion;
         $sender->EventArguments['DiscussionUrl'] = &$discussionUrl;
@@ -291,6 +326,17 @@ if (!function_exists('writeDiscussionDetail')) :
         <li id="Discussion_<?php echo $discussion->DiscussionID; ?>" class="<?php echo $cssClass; ?>">
             <div class="Discussion">
                 <div class="Item-Header DiscussionHeader">
+                    <?php
+                    if (!Gdn::themeFeatures()->get('EnhancedAccessibility')) {
+                        ?>
+                        <span class="Options-Icon">
+                        <?php
+                            echo optionsList($discussion);
+                        ?>
+                        </span>
+                        <?php
+                    }
+                    ?>
                     <div class="AuthorWrap">
                         <span class="Author">
                             <?php
@@ -383,16 +429,22 @@ if (!function_exists('writeDiscussionDetail')) :
                         ?>
                     </div>
                     <div class="Item-Footer">
-                        <div>
+                        <div class="Item-Footer-Icons">
                             <?php
                             // render legacy options
                             if (!Gdn::themeFeatures()->get('EnhancedAccessibility')) {
                                     echo '<span class="Options">';
-                                    echo optionsList($discussion);
-                                    echo bookmarkButton($discussion);
+                                    echo '<span class="Notifications-Icon"></span>';
+                                    echo '<span class="Favorite-Icon"></span>';
+                                    echo '<span class="Back-Icon"></span>';
+                                    // echo bookmarkButton($discussion);
                                     echo '</span>';
                                 }
                             ?>
+                            <div class="Separator"></div>
+                            <span class="Response">
+                                3 réponses
+                            </span>
                         </div>
                         <div>
                             <a class="SeeButton" href="<?php echo $discussionUrl; ?>">Voir</a>
