@@ -16,9 +16,9 @@ $Configuration['ImageUpload']['Limits']['Height'] = '1400';
 
 // Database defaults.
 $Configuration['Database']['Engine'] = 'MySQL';
-$Configuration['Database']['Host'] = 'dbhost';
-$Configuration['Database']['Name'] = 'dbname';
-$Configuration['Database']['User'] = 'dbuser';
+$Configuration['Database']['Host'] = 'localhost';
+$Configuration['Database']['Name'] = 'vanilla_dev';
+$Configuration['Database']['User'] = 'root';
 $Configuration['Database']['Password']  = '';
 $Configuration['Database']['CharacterEncoding'] = 'utf8mb4';
 $Configuration['Database']['DatabasePrefix'] = 'GDN_';
@@ -54,8 +54,8 @@ $Configuration['Garden']['Forms']['HoneypotName'] = 'hpt';
 $Configuration['Feature']['DeferredLegacyScripts']['Enabled'] = true;
 
 // Developer stuff.
-$Configuration['Garden']['Debug'] = false;
-$Configuration['Garden']['Errors']['LogFile'] = '';
+$Configuration['Garden']['Debug'] = true;
+$Configuration['Garden']['Errors']['LogFile'] = 'log/DebugLog';
 $Configuration['Garden']['FolderBlacklist'] = ['.', '..', '_svn', '.git']; // Folders we should never search for classes.
 
 // User registration & authentication.
@@ -72,7 +72,7 @@ $Configuration['Garden']['Authenticator']['SignOutUrl'] = '/entry/signout/{Sessi
 $Configuration['Garden']['Authenticator']['EnabledSchemes'] = ['password'];
 $Configuration['Garden']['Authenticators']['password']['Name'] = "Password";
 $Configuration['Garden']['UserAccount']['AllowEdit'] = true; // Allow users to edit their account information? (SSO requires accounts be edited in external system).
-$Configuration['Garden']['Registration']['Method'] = 'Captcha'; // Options are: Basic, Captcha, Approval, Invitation
+$Configuration['Garden']['Registration']['Method'] = 'Basic'; // Options are: Basic, Captcha, Approval, Invitation
 $Configuration['Garden']['Registration']['InviteExpiration'] = '1 week'; // When invitations expire. This will be plugged into strtotime().
 $Configuration['Garden']['Registration']['InviteRoles'] = 'FALSE';
 $Configuration['Garden']['Registration']['ConfirmEmail'] = false;
@@ -114,8 +114,8 @@ $Configuration['Garden']['Profile']['MaxWidth'] = 560;
 $Configuration['Garden']['Thumbnail']['Size'] = 200;
 
 // Appearance.
-$Configuration['Garden']['Theme'] = 'theme-foundation';
-$Configuration['Garden']['MobileTheme'] = 'theme-foundation';
+$Configuration['Garden']['Theme'] = 'theme-alloprof';
+$Configuration['Garden']['MobileTheme'] = 'theme-alloprof';
 $Configuration['Garden']['Menu']['Sort'] = ['Dashboard', 'Discussions', 'Questions', 'Activity', 'Applicants', 'Conversations', 'User'];
 $Configuration['Garden']['ThemeOptions']['Styles']['Key'] = 'Default';
 $Configuration['Garden']['ThemeOptions']['Styles']['Value'] = '%s_default';

@@ -14,7 +14,7 @@
 class ProfileFilterModule extends Gdn_Module {
 
     public function assetTarget() {
-        return 'Panel';
+        return 'LeftPanel';
     }
 
     public function toString() {

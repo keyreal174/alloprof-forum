@@ -16,6 +16,6 @@
 function smarty_function_mydiscussions_link($params, &$smarty) {
     $wrap = val('wrap', $params, 'li');
     return Gdn_Theme::link('discussions/mine',
-        val('text', $params, t('My Discussions')),
+        val('text', $params, t('My Questions')),
         val('format', $params, wrap('<a href="%url" class="%class">%text</a>', $wrap)));
 }
