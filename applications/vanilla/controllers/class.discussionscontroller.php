@@ -81,6 +81,7 @@ class DiscussionsController extends VanillaController {
         $this->addJsFile('jquery.autosize.min.js');
         $this->addJsFile('autosave.js');
         $this->addJsFile('post.js');
+        $this->addJsFile('askquestion.js');
 
         // Remove score sort
         DiscussionModel::removeSort('top');
@@ -133,7 +134,9 @@ class DiscussionsController extends VanillaController {
         // $this->addModule('DiscussionFilterModule');
         $this->addModule('ProfileFilterModule');
         $this->addModule('NewDiscussionModule');
+        // $this->addModule('AskQuestionModule');
         $this->addModule('CategoriesModule');
+
 
        // Make sure the userphoto module gets added to the page
         $this->addModule('UserPhotoModule');
@@ -144,7 +147,7 @@ class DiscussionsController extends VanillaController {
         // $this->addModule('BookmarkedModule');
         // $this->addModule('TagModule');
 
-        $this->setData('Breadcrumbs', [['Name' => t('Popular questions'), 'Url' => '/discussions']]);
+        // $this->setData('Breadcrumbs', [['Name' => t('Popular questions'), 'Url' => '/discussions']]);
         // $this->setData('QuestionSubMenus', [['Name' => t('Popular questions'), 'Url' => '/discussions']]);
 
         $categoryModel = new CategoryModel();

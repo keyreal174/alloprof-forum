@@ -203,13 +203,14 @@
                                                 </div>
                                             </div>
                                         {/if}
+                                        {module name="AskQuestionModule"}
                                         {asset name="Content"}
                                     </main>
                                     <aside class="Panel Panel-main">
                                         {if !$SectionGroups && !$DataDrivenTitleBar}
-                                            <div class="SearchBox js-sphinxAutoComplete" role="search">
+                                            <!-- <div class="SearchBox js-sphinxAutoComplete" role="search">
                                                 {searchbox}
-                                            </div>
+                                            </div> -->
                                         {/if}
                                         {asset name="Panel"}
                                     </aside>
@@ -221,7 +222,7 @@
             </div>
         </div>
         <div class="Frame-footer">
-            {include file="partials/footer.tpl"}
+
         </div>
     </div>
     <div id="modals"></div>

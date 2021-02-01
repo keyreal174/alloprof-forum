@@ -349,3 +349,143 @@
 	color: white;
 }
 
+
+/* Basic inputs */
+
+select {
+	background: #F2F2F2 !important;
+	border-color: #F2F2F2 !important;
+	width: 100%;
+	padding-left: 48px;
+}
+
+.btn-default {
+	border: 1px solid #1A1919;
+	border-radius: 38px;
+	background: white;
+	color: #1A1919;
+	font-weight: bold;
+	padding: 10px 30px;
+	font-size: 18px;
+}
+
+.btn-shadow {
+	box-shadow: 3px 5px 0px #1A1919;
+}
+
+.rich-select {
+	min-height: 44px;
+	border-radius: 38px;
+	background: #F2F2F2;
+	display: flex;
+	align-items: center;
+	overflow: hidden;
+	position: relative;
+}
+
+.rich-select i,
+.rich-select img {
+	position: absolute;
+    left: 20px;
+    top: 14px;
+    z-index: 1;
+}
+
+.rich-select .SelectWrapper {
+	width: 100%;
+}
+
+
+/* Ask a question form */
+
+.AskQuestionForm .FormWrapper {
+	height: 68px;
+	overflow: hidden;
+	transition: 0.3s all;
+}
+
+.AskQuestionForm .FormWrapper.open {
+	height: auto;
+	overflow: visible;
+}
+
+.AskQuestionForm .placeholder.close {
+	height: 0;
+	overflow: hidden;
+}
+
+.AskQuestionForm .vanilla-bjyl8i-richEditor-paragraphMenu {
+	left: 20px;
+}
+
+.AskQuestionForm .content{
+	padding: 20px 20px 0 20px !important;
+    background: #eee !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    transition: 0.3s all;
+	color: rgba(71,82,93,.8) !important;
+	border-radius: 6px;
+}
+
+.AskQuestionForm .content .placeholder {
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+}
+
+.AskQuestionForm .content .placeholder .icon {
+	border-radius: 50%;
+	background: white;
+	margin-right: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 30px;
+	height: 30px;
+}
+
+.AskQuestionForm .content .placeholder img {
+	width: 15px;
+}
+
+.AskQuestionForm .selects {
+	display: flex;
+	margin-top: 40px;
+}
+
+.AskQuestionForm span.space {
+	width: 30px;
+}
+
+.AskQuestionForm .selects > div {
+	flex: 1;
+}
+
+.AskQuestionForm .Buttons {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 30px;
+}
+
+.AskQuestionForm {
+	position: relative;
+}
+
+.AskQuestionForm .close-icon {
+	position: absolute;
+    top: 50px;
+	right: 35px;
+	cursor: pointer;
+	display: none;
+}
+
+.AskQuestionForm .close-icon.show {
+	display: block;
+}
+
+.AskQuestionForm .richEditor-frame {
+	border: none !important;
+	background: transparent !important;
+}
+
