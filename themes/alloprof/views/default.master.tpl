@@ -208,9 +208,9 @@
                                     </main>
                                     <aside class="Panel Panel-main">
                                         {if !$SectionGroups && !$DataDrivenTitleBar}
-                                            <div class="SearchBox js-sphinxAutoComplete" role="search">
+                                            <!-- <div class="SearchBox js-sphinxAutoComplete" role="search">
                                                 {searchbox}
-                                            </div>
+                                            </div> -->
                                         {/if}
                                         {asset name="Panel"}
                                     </aside>
