@@ -19,8 +19,8 @@ foreach ($Controller->ProfileTabs as $TabCode => $TabInfo) {
         $SortOrder[] = $TabCode;
 }
 ?>
-<div class="BoxFilter BoxProfileFilter">
-    <ul class="FilterMenu">
+<div class="BoxFilter BoxProfileInfo">
+    <div class="BoxProfileInfo_detailbox">
         <?php
         // Get sorted filter links
         foreach ($SortOrder as $TabCode) {
@@ -28,10 +28,12 @@ foreach ($Controller->ProfileTabs as $TabCode => $TabInfo) {
             // array_key_exists: Just in case a method was removed but is still present in sortorder
             if (array_key_exists($TabCode, $Controller->ProfileTabs)) {
                 $TabInfo = val($TabCode, $Controller->ProfileTabs, []);
+                print_r($TabInfo->TabHtml);
                 $CssClass .= val('CssClass', $TabInfo, '');
-                echo '<li'.($CssClass == '' ? '' : ' class="'.$CssClass.'"').'>'.anchor(val('TabHtml', $TabInfo, $TabCode), val('TabUrl', $TabInfo))."</li>\r\n";
+                echo '<div class="BoxProfileInfo_detailbox__item"><img src="/images/icons/'.$TabCode.'.svg"/>'.anchor(val('TabHtml', $TabInfo, $TabCode), val('TabUrl', $TabInfo))."</div>";
             }
         }
+
         ?>
-    </ul>
+    </div>
 </div>

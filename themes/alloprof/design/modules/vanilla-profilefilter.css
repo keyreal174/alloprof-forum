@@ -1,0 +1,13 @@
+.BoxProfileInfo .BoxProfileInfo_detailbox {
+    display: flex;
+    justify-content: center;
+}
+
+.BoxProfileInfo .BoxProfileInfo_detailbox .BoxProfileInfo_detailbox__item {
+    text-align: center;
+    padding: 44px;
+}
+
+.BoxProfileInfo .BoxProfileInfo_detailbox .BoxProfileInfo_detailbox__item .Count {
+    margin: auto;
+}

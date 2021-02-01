@@ -19,6 +19,9 @@
  * @copyright 2009-2018 Vanilla Forums Inc.
  * @license GPL-2.0-only
  */
+
+@import url("./modules/vanilla-profilefilter.css");
+
 @font-face {
     font-family: kbicons;
     font-style: normal;
@@ -340,7 +343,7 @@ abbr {
     border: none;
     border-radius: 0;
     padding: 0;
-    width: calc(100% - 500px)
+    width: calc(100% - 780px)
 }
 
 @media screen and (max-width:992px) {
@@ -9143,7 +9146,7 @@ screen and (-ms-high-contrast:none) {
     border-radius: 0;
     margin-left: auto;
     padding: 0;
-    width: 220px
+    width: 360px
 }
 
 @media screen and (max-width:992px) {
@@ -11807,7 +11810,7 @@ body.Section-SearchResults .AdvancedSearch .AdvancedWrap .CheckBoxLabel {
 /*# sourceMappingURL=custom.css.map */
 
 .Container {
-    max-width: 1500px !important;
+    max-width: 1596px !important;
 }
 
 .Header .MeButton {
@@ -11919,7 +11922,7 @@ body.Section-SearchResults .AdvancedSearch .AdvancedWrap .CheckBoxLabel {
     background-color: #e5e5e5;
     position: sticky;
     top: 96px;
-    z-index: 2;
+    z-index: 1;
     box-sizing: border-box;
     padding-top: 18px;
 }

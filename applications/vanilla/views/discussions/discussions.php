@@ -11,11 +11,11 @@ if (!function_exists('formatMeAction'))
 
 if (property_exists($this, 'AnnounceData') && is_object($this->AnnounceData)) {
     foreach ($this->AnnounceData->result() as $Discussion) {
-        writeDiscussion($Discussion, $this, $Session);
+        // writeDiscussion($Discussion, $this, $Session);
     }
 }
 
 foreach ($this->DiscussionData->result() as $Discussion) {
-    writeDiscussion($Discussion, $this, $Session);
+    // writeDiscussion($Discussion, $this, $Session);
     writeDiscussionDetail($Discussion, $this, $Session);
 }

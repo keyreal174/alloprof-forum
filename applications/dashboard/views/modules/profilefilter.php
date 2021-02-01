@@ -24,6 +24,7 @@ foreach ($Controller->ProfileTabs as $TabCode => $TabInfo) {
         <?php
         // Get sorted filter links
         foreach ($SortOrder as $TabCode) {
+
             $CssClass = $TabCode == $Controller->CurrentTab ? 'Active ' : '';
             // array_key_exists: Just in case a method was removed but is still present in sortorder
             if (array_key_exists($TabCode, $Controller->ProfileTabs)) {
@@ -32,6 +33,7 @@ foreach ($Controller->ProfileTabs as $TabCode => $TabInfo) {
                 echo '<li'.($CssClass == '' ? '' : ' class="'.$CssClass.'"').'>'.anchor(val('TabHtml', $TabInfo, $TabCode), val('TabUrl', $TabInfo))."</li>\r\n";
             }
         }
+
         ?>
     </ul>
 </div>
