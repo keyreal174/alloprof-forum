@@ -131,7 +131,7 @@ class DiscussionsController extends VanillaController {
         }
 
         // Add modules
-        $this->addModule('DiscussionFilterModule');
+        // $this->addModule('DiscussionFilterModule');
 
         $this->addModule('NewDiscussionModule');
         // $this->addModule('AskQuestionModule');
