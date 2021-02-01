@@ -24,3 +24,9 @@
 [01-Feb-2021 10:00:25 UTC] PHP Warning:  Duplicate addon: theme-boilerplate in /srv/vanilla-repositories/vanilla/library/Vanilla/AddonManager.php on line 405
 [01-Feb-2021 10:00:36 UTC] PHP Warning:  Duplicate addon: theme-boilerplate in /srv/vanilla-repositories/vanilla/library/Vanilla/AddonManager.php on line 405
 [01-Feb-2021 10:00:58 UTC] PHP Warning:  Duplicate addon: theme-boilerplate in /srv/vanilla-repositories/vanilla/library/Vanilla/AddonManager.php on line 405
+[01-Feb-2021 12:20:26 UTC] PHP Fatal error:  Uncaught  --> Smarty: Unable to load template 'file:partials/footer.tpl' in '/srv/vanilla-repositories/vanilla/themes/alloprof/views/default.master.tpl' <-- 
+  thrown in /srv/vanilla-repositories/vanilla/vendor/smarty/smarty/libs/sysplugins/smarty_internal_template.php on line 195
+[01-Feb-2021 12:20:26 UTC] PHP Fatal error:  Uncaught  --> Smarty: Unable to load template 'file:partials/footer.tpl' in '/srv/vanilla-repositories/vanilla/themes/alloprof/views/default.master.tpl' <-- 
+  thrown in /srv/vanilla-repositories/vanilla/vendor/smarty/smarty/libs/sysplugins/smarty_internal_template.php on line 195
+[01-Feb-2021 12:21:01 UTC] PHP Fatal error:  Uncaught  --> Smarty: Unable to load template 'file:partials/footer.tpl' in '/srv/vanilla-repositories/vanilla/themes/alloprof/views/default.master.tpl' <-- 
+  thrown in /srv/vanilla-repositories/vanilla/vendor/smarty/smarty/libs/sysplugins/smarty_internal_template.php on line 195

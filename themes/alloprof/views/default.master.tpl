@@ -156,18 +156,13 @@
                 <div class="Frame-content">
                     <div class="Container">
                         <div class="Frame-contentWrap">
-                            <nav class="Question-submenu">
-                                {$smarty.capture.submenuLinks}
-                             </nav>
+                            <div class="Frame-menubar">
+                                <nav class="Question-submenu">
+                                    {$smarty.capture.submenuLinks}
+                                </nav>
+                            </div>
 
                             <div class="Frame-details">
-                                {if !$isHomepage}
-                                    <div class="Frame-row">
-                                        <nav class="BreadcrumbsBox">
-                                            {breadcrumbs}
-                                        </nav>
-                                    </div>
-                                {/if}
                                 {if !$DataDrivenTitleBar}
                                     <div class="Frame-row SearchBoxMobile">
                                         {if !$SectionGroups && !inSection(["SearchResults"])}
@@ -221,9 +216,8 @@
                 </div>
             </div>
         </div>
-        <div class="Frame-footer">
-
-        </div>
+        <!-- <div class="Frame-footer">
+        </div> -->
     </div>
     <div id="modals"></div>
     {event name="AfterBody"}
