@@ -172,6 +172,7 @@ class DiscussionsController extends VanillaController {
         $this->fireEvent('AddProfileTabsInfo');
 
         $this->addModule('ProfileFilterModule');
+        $this->addModule('QuickQuestionModule');
         // $this->addModule('BookmarkedModule');
         // $this->addModule('TagModule');
 

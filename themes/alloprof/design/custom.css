@@ -26,6 +26,7 @@
 @import url("./modules/vanilla-avatarupload.css");
 @import url("./modules/vanilla-profilefilter.css");
 @import url("./modules/vanilla-askquestion.css");
+@import url("./modules/vanilla-category.css");
 
 .BoxNewDiscussion {
     -webkit-box-shadow: none;

@@ -2,5 +2,25 @@
     border-radius: 50%;
     width: 140px;
     height: 140px;
+    margin-bottom: 16px;
+}
+
+.userphoto-personalinfo {
     margin-bottom: 48px;
+}
+
+.userphoto-personalinfo .userphoto-personalinfo__name {
+    font-family: Chromatica Modifiée;
+    font-size: 21px;
+    line-height: 25px;
+    text-align: center;
+    color: #1A1919;
+}
+
+.userphoto-personalinfo .userphoto-personalinfo__secondary {
+    font-family: Chromatica Modifiée;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: center;
+    color: #6C6767;
 }
