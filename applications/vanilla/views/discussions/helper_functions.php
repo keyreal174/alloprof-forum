@@ -380,14 +380,6 @@ if (!function_exists('writeDiscussionDetail')) :
                                 echo 'Secondaire 1' . '  ' . timeElapsedString($Discussion->LastDate, false);
                             ?>
                         </span>
-                        <span class="MItem DateCreated">
-                            <?php
-                                // echo anchor(Gdn_Format::date($Discussion->DateInserted, 'html'), $Discussion->Url, 'Permalink', ['rel' => 'nofollow']);
-                            ?>
-                        </span>
-                        <?php
-                            // echo dateUpdated($Discussion, ['<span class="MItem">', '</span>']);
-                        ?>
                         <?php
                             // // Include source if one was set
                             // if ($Source = val('Source', $Discussion)) {
@@ -443,7 +435,9 @@ if (!function_exists('writeDiscussionDetail')) :
                             ?>
                             <div class="Separator"></div>
                             <span class="Response">
-                                3 réponses
+                                <?php
+                                    echo $Discussion->CountComments . ' ' . 'réponses';
+                                ?>
                             </span>
                         </div>
                         <div>
