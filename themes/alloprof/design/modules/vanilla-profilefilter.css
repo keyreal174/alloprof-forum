@@ -13,8 +13,14 @@
     padding-right: 44px;
 }
 
+.BoxProfileInfo .BoxProfileInfo_detailbox .BoxProfileInfo_detailbox__item img {
+    width: 32px;
+}
+
 .BoxProfileInfo .BoxProfileInfo_detailbox .BoxProfileInfo_detailbox__item a {
     justify-content: center;
+    font-size: 21px;
+    font-weight: bold;
 }
 
 .BoxProfileInfo .BoxProfileInfo_viewprofile {
@@ -22,7 +28,6 @@
 }
 
 .BoxProfileInfo .BoxProfileInfo_viewprofile .BoxProfileInfo_viewprofile__btn {
-    font-family: Chromatica Modifiée;
     font-size: 21px;
     line-height: 25px;
     color: #1A1919;

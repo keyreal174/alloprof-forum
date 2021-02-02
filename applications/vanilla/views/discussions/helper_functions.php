@@ -441,7 +441,7 @@ if (!function_exists('writeDiscussionDetail')) :
                             </span>
                         </div>
                         <div>
-                            <a class="SeeButton" href="<?php echo $discussionUrl; ?>">Voir</a>
+                            <a class="btn-default" href="<?php echo $discussionUrl; ?>">Voir</a>
                         </div>
                     </div>
                 </div>

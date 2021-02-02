@@ -53,6 +53,8 @@
 .Item-Footer {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
 .Item-Footer .Options {
@@ -106,6 +108,7 @@
 
 .Item-Footer-Icons {
     display: flex;
+    align-items: center;
 }
 
 .Item-Footer-Icons .Response {
@@ -115,7 +118,7 @@
 
 .Item-Footer-Icons .Separator {
     width: 1px;
-    height: 100%;
+    height: 30px;
     background-color: #1A1919;
     margin: 0 20px;
 }

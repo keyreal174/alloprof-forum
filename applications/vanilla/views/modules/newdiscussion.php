@@ -3,7 +3,7 @@
     <?php echo t('Ask a question'); ?>
 </h1>
 <div class="close-icon">
-    <img src="/images/icons/close.svg" />
+    <img src="/themes/alloprof/design/images/icons/close.svg" />
 </div>
 <?php if (!defined('APPLICATION')) exit();
 // $Css = 'Button Primary Action NewDiscussion';
@@ -65,7 +65,7 @@
 
             echo '<div>';
             echo '<div class="Category rich-select">';
-            echo '<img src="/images/icons/subject.svg"/>';
+            echo '<img src="/themes/alloprof/design/images/icons/subject.svg"/>';
             echo $this->Form->categoryDropDown('CategoryID', $options);
             echo '</div>';
             echo '</div>';
