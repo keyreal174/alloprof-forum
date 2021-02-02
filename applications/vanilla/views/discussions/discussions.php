@@ -3,6 +3,9 @@ $Session = Gdn::session();
 if (!function_exists('writeDiscussion'))
     include($this->fetchViewLocation('helper_functions', 'discussions', 'vanilla'));
 
+if (!function_exists('writeDiscussionDetail'))
+    include($this->fetchViewLocation('helper_functions', 'discussions', 'vanilla'));
+
 if (!function_exists('formatBody'))
     include($this->fetchViewLocation('helper_functions', 'discussion', 'vanilla'));
 

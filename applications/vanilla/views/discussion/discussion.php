@@ -7,7 +7,11 @@
 if (!defined('APPLICATION')) {
     exit();
 }
+
 use Vanilla\Utility\HtmlUtils;
+if (!function_exists('writeDiscussionDetail'))
+    include($this->fetchViewLocation('helper_functions', 'discussion', 'vanilla'));
+
 $UserPhotoFirst = c('Vanilla.Comment.UserPhotoFirst', true);
 
 $Discussion = $this->data('Discussion');
@@ -40,7 +44,7 @@ $this->fireEvent('BeforeDiscussionDisplay');
                     echo userPhoto($Author);
                 }
                 echo formatMeAction($Discussion);
-?>
+                ?>
             </span>
             <span class="AuthorInfo">
                 <?php

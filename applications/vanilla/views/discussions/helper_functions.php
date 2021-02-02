@@ -309,7 +309,7 @@ if (!function_exists('writeDiscussionDetail')) :
         $Author = Gdn::userModel()->getID($Discussion->InsertUserID); // userBuilder($Discussion, 'Insert');
         $cssClass = cssClass($Discussion);
         $category = CategoryModel::categories($discussion->CategoryID);
-        $discussionUrl = $discussion->Url;
+        $discussionUrl = $Discussion->Url;
 
         $dateTimeFormatter = Gdn::getContainer()->get(\Vanilla\Formatting\DateTimeFormatter::class);
 
@@ -377,17 +377,9 @@ if (!function_exists('writeDiscussionDetail')) :
                     <div class="Meta DiscussionMeta">
                         <span class="MItem TimeAgo">
                             <?php
-                                echo 'Secondaire 1 • Il y a 2 heures';
+                                echo 'Secondaire 1' . '  ' . timeElapsedString($Discussion->LastDate, false);
                             ?>
                         </span>
-                        <span class="MItem DateCreated">
-                            <?php
-                                // echo anchor(Gdn_Format::date($Discussion->DateInserted, 'html'), $Discussion->Url, 'Permalink', ['rel' => 'nofollow']);
-                            ?>
-                        </span>
-                        <?php
-                            // echo dateUpdated($Discussion, ['<span class="MItem">', '</span>']);
-                        ?>
                         <?php
                             // // Include source if one was set
                             // if ($Source = val('Source', $Discussion)) {
@@ -443,7 +435,9 @@ if (!function_exists('writeDiscussionDetail')) :
                             ?>
                             <div class="Separator"></div>
                             <span class="Response">
-                                3 réponses
+                                <?php
+                                    echo $Discussion->CountComments . ' ' . 'réponses';
+                                ?>
                             </span>
                         </div>
                         <div>
