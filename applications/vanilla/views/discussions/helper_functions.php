@@ -309,7 +309,7 @@ if (!function_exists('writeDiscussionDetail')) :
         $Author = Gdn::userModel()->getID($Discussion->InsertUserID); // userBuilder($Discussion, 'Insert');
         $cssClass = cssClass($Discussion);
         $category = CategoryModel::categories($discussion->CategoryID);
-        $discussionUrl = $discussion->Url;
+        $discussionUrl = $Discussion->Url;
 
         $dateTimeFormatter = Gdn::getContainer()->get(\Vanilla\Formatting\DateTimeFormatter::class);
 
