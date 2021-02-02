@@ -21,6 +21,8 @@
  */
 
 @import url("./modules/vanilla-profilefilter.css");
+@import url("./modules/vanilla-layout.css");
+@import url("./modules/vanilla-question.css");
 
 @font-face {
     font-family: kbicons;
@@ -11841,12 +11843,6 @@ body.Section-SearchResults .AdvancedSearch .AdvancedWrap .CheckBoxLabel {
     margin-bottom: 40px;
 }
 
-.DataList.Discussions>li {
-    border-radius: 5px;
-    margin-bottom: 20px;
-    padding: 40px;
-}
-
 .BoxNewDiscussion {
     -webkit-box-shadow: none;
     background: #fff;
@@ -11902,36 +11898,6 @@ body.Section-SearchResults .AdvancedSearch .AdvancedWrap .CheckBoxLabel {
     color: white;
 }
 
-/* Make content only scrolling */
-.Frame-header {
-    position: fixed;
-    width: 100%;
-    z-index: 2;
-}
-
-.Frame-body {
-    padding-top: 96px;
-}
-
-.Frame-contentWrap {
-    padding-top: 0;
-}
-
-.Frame-menubar {
-    padding-bottom: 30px;
-    background-color: #e5e5e5;
-    position: sticky;
-    top: 96px;
-    z-index: 1;
-    box-sizing: border-box;
-    padding-top: 18px;
-}
-
-.Panel {
-    position: sticky;
-    top: 194px;
-}
-
 /* Discussion Detail */
 .DataList .PhotoWrap,
 .MessageList .PhotoWrap {
@@ -11944,7 +11910,7 @@ body.Section-SearchResults .AdvancedSearch .AdvancedWrap .CheckBoxLabel {
     margin-bottom: 40px;
 }
 
-.Item .Author a.Username {
+.ItemDiscussion .Author a.Username {
     color: #1A1919;
     font-size: 21px;
     line-height: 25px;

@@ -1,0 +1,29 @@
+/* Make content only scrolling */
+.Frame-header {
+    position: fixed;
+    width: 100%;
+    z-index: 2;
+}
+
+.Frame-body {
+    padding-top: 96px;
+}
+
+.Frame-contentWrap {
+    padding-top: 0;
+}
+
+.Frame-menubar {
+    padding-bottom: 30px;
+    background-color: #e5e5e5;
+    position: sticky;
+    top: 96px;
+    z-index: 1;
+    box-sizing: border-box;
+    padding-top: 18px;
+}
+
+.Panel {
+    position: sticky;
+    top: 194px;
+}
