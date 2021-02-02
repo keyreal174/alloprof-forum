@@ -1,5 +1,121 @@
-.ItemDiscussion {
+.DataList .ItemDiscussion,
+.MessageList .ItemComment.ItemComment,
+.MessageList .ItemDiscussion.ItemDiscussion {
     border-radius: 5px;
     margin-bottom: 20px;
     padding: 40px;
+}
+
+/* Discussion Detail */
+.DataList .PhotoWrap,
+.MessageList .PhotoWrap {
+    height: 64px;
+    width: 64px;
+}
+
+.Item-Header.DiscussionHeader {
+    height: 64px;
+    margin-bottom: 40px;
+}
+
+.ItemDiscussion .Author a.Username {
+    color: #1A1919;
+    font-size: 21px;
+    line-height: 25px;
+    font-weight: 600;
+    margin-bottom: 9px;
+    padding-top: 10px;
+}
+
+.DataList .MItem.TimeAgo {
+    font-size: 14px;
+    line-height: 16px;
+    color: #676767;
+    margin: 0;
+}
+
+.DataList.Discussions .Discussion .Item-BodyWrap .Message.userContent {
+    display: flex;
+    flex-direction: column;
+    background-color: #f2f2f2;
+    border-radius: 8px;
+    padding: 32px;
+
+    font-size: 18px !important;
+    color: #1A1919;
+    line-height: 21px;
+}
+
+.Item-Body {
+    margin-bottom: 55px;
+}
+
+.Item-Footer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.Item-Footer .Options {
+    float: none;
+}
+
+.Item-Footer a.SeeButton {
+    padding: 16px 36px;
+    font-size: 18px;
+    line-height: 21px;
+    color: #1A1919;
+    border: 1px solid #1A1919;
+    border-radius: 100px;
+}
+
+.Item-Footer a.SeeButton:hover {
+    background-color: #f2f2f2;
+}
+
+.Options-Icon {
+    position: absolute;
+    right: 40px;
+}
+
+.Back-Icon {
+    background: url("../images/back.png") no-repeat !important;
+    width: 24px;
+    height: 24px;
+}
+
+.Notifications-Icon {
+    background: url("../images/Follow.png") no-repeat !important;
+    width: 24px;
+    height: 24px;
+}
+
+.Favorite-Icon {
+    background: url("../images/Path.png") no-repeat !important;
+    width: 24px;
+    height: 24px;
+}
+
+.Options>span {
+    margin-left: 0 !important;
+    margin-right: 27px;
+}
+
+.Options>span:last-child {
+    margin-right: 0;
+}
+
+.Item-Footer-Icons {
+    display: flex;
+}
+
+.Item-Footer-Icons .Response {
+    font-size: 17px;
+    line-height: 19px;
+}
+
+.Item-Footer-Icons .Separator {
+    width: 1px;
+    height: 100%;
+    background-color: #1A1919;
+    margin: 0 20px;
 }
