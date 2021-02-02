@@ -11,8 +11,8 @@ if ($this->Data !== FALSE && $displayModule) {
         $CountDiscussions = $CountDiscussions + $Category->CountDiscussions;
     }
     ?>
-    <div class="Box BoxCategories">
-        <?php echo panelHeading(t('Subjects followed')); ?>
+    <div class="Box BoxCategories vanilla-categories">
+        <?php echo panelHeading(t('Subjects monitored')); ?>
         <ul class="PanelInfo PanelCategories">
             <?php
             if (!Gdn::themeFeatures()->useDataDrivenTheme()) {
@@ -59,6 +59,7 @@ if ($this->Data !== FALSE && $displayModule) {
             }
             ?>
         </ul>
+        <a href="" class="vanilla-categories__viewall">See all subjects</a>
     </div>
 <?php
 }

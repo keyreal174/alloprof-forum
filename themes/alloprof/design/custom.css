@@ -23,6 +23,7 @@
 @import url("./modules/vanilla-leftpanel.css");
 @import url("./modules/vanilla-avatarupload.css");
 @import url("./modules/vanilla-profilefilter.css");
+@import url("./modules/vanilla-category.css");
 
 @font-face {
     font-family: kbicons;
