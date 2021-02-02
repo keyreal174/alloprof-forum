@@ -153,7 +153,7 @@ $dic->setInstance(Garden\Container\Container::class, $dic)
     ->addCall('setSecure', [new \Garden\Container\Callback(function (\Psr\Container\ContainerInterface $container) {
         $config = $container->get(Gdn_Configuration::class);
         $request = $container->get(\Garden\Web\RequestInterface::class);
-        // $secure = $config->get('Garden.ForceSSL') && $request->getScheme() === 'https';
+        $secure = $config->get('Garden.ForceSSL') && $request->getScheme() === 'https';
         return $secure;
     })])
     ->addAlias('Cookie')
