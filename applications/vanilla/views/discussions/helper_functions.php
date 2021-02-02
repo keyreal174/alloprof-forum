@@ -377,7 +377,7 @@ if (!function_exists('writeDiscussionDetail')) :
                     <div class="Meta DiscussionMeta">
                         <span class="MItem TimeAgo">
                             <?php
-                                echo 'Secondaire 1 • Il y a 2 heures';
+                                echo 'Secondaire 1' . '  ' . timeElapsedString($Discussion->LastDate, false);
                             ?>
                         </span>
                         <span class="MItem DateCreated">
