@@ -1,13 +1,40 @@
 .BoxProfileInfo .BoxProfileInfo_detailbox {
     display: flex;
     justify-content: center;
+    border-top: 1px solid #E0E0E0;
+    border-bottom: 1px solid #E0E0E0;
+    padding-top: 28px;
+    padding-bottom: 24px;
 }
 
 .BoxProfileInfo .BoxProfileInfo_detailbox .BoxProfileInfo_detailbox__item {
     text-align: center;
-    padding: 44px;
+    padding-left: 44px;
+    padding-right: 44px;
 }
 
-.BoxProfileInfo .BoxProfileInfo_detailbox .BoxProfileInfo_detailbox__item .Count {
-    margin: auto;
+.BoxProfileInfo .BoxProfileInfo_detailbox .BoxProfileInfo_detailbox__item a {
+    justify-content: center;
+}
+
+.BoxProfileInfo .BoxProfileInfo_viewprofile {
+    padding-top: 48px;
+}
+
+.BoxProfileInfo .BoxProfileInfo_viewprofile .BoxProfileInfo_viewprofile__btn {
+    font-family: Chromatica Modifiée;
+    font-size: 21px;
+    line-height: 25px;
+    color: #1A1919;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin: 0 auto;
+    width: max-content;
+}
+
+.BoxProfileInfo .BoxProfileInfo_viewprofile .BoxProfileInfo_viewprofile__btn img {
+    margin-right: 12px;
+    width: 19.5px;
+    height: 19.5px;
 }

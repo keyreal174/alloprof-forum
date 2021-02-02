@@ -752,7 +752,7 @@ class VanillaHooks extends Gdn_Plugin {
      *
      * @param ProfileController $sender
      */
-    public function profileController_addProfileTabsInfo_handler($sender) {
+    public function profileController_addProfileTabs_handler($sender) {
         if (is_object($sender->User) && $sender->User->UserID > 0) {
             $userID = $sender->User->UserID;
             // Add the discussion tab
@@ -801,15 +801,9 @@ class VanillaHooks extends Gdn_Plugin {
             $commentsLabel = "";
             if (c('Vanilla.Profile.ShowCounts', true)) {
                 $discussionsCount = getValueR('User.CountDiscussions', $sender, null);
-                $commentsCount = getValueR('User.CountComments', $sender, null);
-
-                if (!is_null($discussionsCount) && !empty($discussionsCount)) {
-                    $discussionsLabel .=
-                        countString(bigPlural($discussionsCount, '%s discussion'), "/profile/count/discussions?userid=$userID");
-                }
-                if (!is_null($commentsCount)  && !empty($commentsCount)) {
-                    $commentsLabel .= countString(bigPlural($commentsCount, '%s comment'), "/profile/count/comments?userid=$userID");
-                }
+                $commentsCount = getValueR('User.CountComments', $sender, "0");
+                $discussionsLabel .= $discussionsCount;
+                $commentsLabel .= $commentsCount;
             }
             $sender->addProfileTab(t('Questions'), userUrl($sender->User, '', 'discussions'), 'Questions', $discussionsLabel);
             $sender->addProfileTab(t('Comments'), userUrl($sender->User, '', 'comments'), 'Comments', $commentsLabel);

@@ -32,7 +32,8 @@ if ($Photo) : ?>
 
         if (!$User->Banned && $canEditPhotos && (Gdn::session()->UserID == $User->UserID || checkPermission('Garden.Users.Edit'))) {
             $contents = ($dataDriven ? '<span class="icon icon-camera"></span>' : '').t('Change Icon');
-            echo anchor(wrap($contents, "span", ["class" => "ChangePicture-Text"]), '/profile/picture?userid='.$User->UserID, 'ChangePicture Popup', ["aria-label" => t("Change Picture")]);
+            echo "<a href='/profile/picture?userid=".$User->UserID."' class='ChangePicture Popup'><img src='".$Photo."' class='ProfilePhotoLarge' alt='".$PhotoAlt."'/></a>";
+            // echo anchor(wrap($contents, "span", ["class" => "ChangePicture-Text"]), '/profile/picture?userid='.$User->UserID, 'ChangePicture Popup', ["aria-label" => t("Change Picture")]);
         }
 
         echo img($Photo, ['class' => 'ProfilePhotoLarge', 'alt' => $PhotoAlt]);
