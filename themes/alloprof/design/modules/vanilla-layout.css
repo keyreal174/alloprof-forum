@@ -10,7 +10,7 @@
 }
 
 .Panel {
-    padding: 30px 25px !important;
+    padding: 30px 25px;
     border-radius: 5px;
     position: sticky;
     top: 194px;
@@ -29,9 +29,13 @@
 }
 
 .Panel.left {
+    text-align: center;
     margin-left: 0 !important;
     margin-right: auto !important;
     margin-bottom: 40px;
+    padding-top: 50px !important;
+    padding-left: 22px !important;
+    padding-right: 22px !important;
 }
 
 .Frame-header {

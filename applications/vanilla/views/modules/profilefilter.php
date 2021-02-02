@@ -28,12 +28,14 @@ foreach ($Controller->ProfileTabs as $TabCode => $TabInfo) {
             // array_key_exists: Just in case a method was removed but is still present in sortorder
             if (array_key_exists($TabCode, $Controller->ProfileTabs)) {
                 $TabInfo = val($TabCode, $Controller->ProfileTabs, []);
-                print_r($TabInfo->TabHtml);
                 $CssClass .= val('CssClass', $TabInfo, '');
                 echo '<div class="BoxProfileInfo_detailbox__item"><img src="/images/icons/'.$TabCode.'.svg"/>'.anchor(val('TabHtml', $TabInfo, $TabCode), val('TabUrl', $TabInfo))."</div>";
             }
         }
 
         ?>
+    </div>
+    <div class="BoxProfileInfo_viewprofile">
+        <a href="/profile" class="BoxProfileInfo_viewprofile__btn"><img src="/images/icons/emoticon.svg"/>View Profile</a>
     </div>
 </div>
