@@ -325,6 +325,8 @@ abbr {
 
 .sidebar {
     width: 20%;
+    position: sticky;
+    top: 220px;
 }
 
 .sidebar.left {
@@ -389,7 +391,8 @@ html {
 
 body {
     -webkit-box-sizing: border-box;
-    box-sizing: border-box
+    box-sizing: border-box;
+    visibility: visible !important;
 }
 
 * {
