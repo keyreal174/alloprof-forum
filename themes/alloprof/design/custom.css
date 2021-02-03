@@ -59,9 +59,10 @@
 }
 
 .Question-submenu {
+    margin-top: 30px;
     justify-content: center;
     width: 100%;
-    border-bottom: 1px solid rgba(0, 0, 0, .3);
+    border-bottom: 1px solid #BDBDBD;
     display: flex;
 }
 

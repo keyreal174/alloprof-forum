@@ -177,9 +177,11 @@
                                     </div>
                                 {/if}
                                 <div class="Frame-row">
-                                    <aside class="Panel Panel-main left LeftPanel">
-                                        {asset name="LeftPanel"}
-                                    </aside>
+                                    <div class="sidebar left">
+                                        <aside class="Panel Panel-main left LeftPanel">
+                                            {asset name="LeftPanel"}
+                                        </aside>
+                                    </div>
                                     <main id="MainContent" class="Content MainContent">
                                         {if inSection("Profile")}
                                             <div class="Profile-header">
@@ -200,14 +202,16 @@
                                         {/if}
                                         {asset name="Content"}
                                     </main>
-                                    <aside class="Panel Panel-main">
-                                        {if !$SectionGroups && !$DataDrivenTitleBar}
-                                            <!-- <div class="SearchBox js-sphinxAutoComplete" role="search">
-                                                {searchbox}
-                                            </div> -->
-                                        {/if}
-                                        {asset name="Panel"}
-                                    </aside>
+                                    <div class="sidebar right">
+                                        <aside class="Panel Panel-main">
+                                            {if !$SectionGroups && !$DataDrivenTitleBar}
+                                                <!-- <div class="SearchBox js-sphinxAutoComplete" role="search">
+                                                    {searchbox}
+                                                </div> -->
+                                            {/if}
+                                            {asset name="Panel"}
+                                        </aside>
+                                    </div>
                                 </div>
                             </div>
                         </div>

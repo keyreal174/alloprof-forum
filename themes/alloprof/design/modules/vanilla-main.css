@@ -109,11 +109,12 @@ h6 {
     font-size: 16px;
     font-weight: 700;
     line-height: 1.25;
-    margin: 0
+    margin: 0;
+    color: #1A1919;
 }
 
 h1 {
-    font-size: 32px;
+    font-size: 24px;
     font-weight: 700
 }
 
@@ -320,6 +321,20 @@ abbr {
     border-radius: 0;
     padding: 0;
     width: 57%
+}
+
+.sidebar {
+    width: 20%;
+}
+
+.sidebar.left {
+    margin-left: 0 !important;
+    margin-right: auto !important;
+}
+
+.sidebar.right {
+    margin-left: auto !important;
+    margin-right: 0 !important;
 }
 
 @media screen and (max-width:992px) {
@@ -8841,13 +8856,13 @@ screen and (-ms-high-contrast:none) {
 }
 
 .Navigation-link {
-    color: #555a62;
+    color: #1A1919;
+    font-weight: bold;
     display: block;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     font-size: 16px;
-    font-weight: 400;
     min-height: 32px;
     padding: 0 18px;
     width: 100%
@@ -9437,13 +9452,27 @@ body.Section-EditProfile .Box a {
     background-color: rgba(0, 0, 0, 0);
     border: none;
     border-radius: 6px;
-    color: #555a62;
+    font-size: 21px;
+    color: #1A1919;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     padding: 5px;
     transition: color .35s ease-out, background-color .35s ease-out;
     width: 100%
+}
+
+.BoxCategories.BoxCategories a span {
+    font-size: 21px;
+}
+
+.BoxCategories.BoxCategories a span.category-icon {
+    min-width: 39px;
+}
+
+.BoxCategories.BoxCategories a span img {
+    max-width: 29px;
+    margin-right: 10px;
 }
 
 .BoxCategories.BoxCategories a:active,
