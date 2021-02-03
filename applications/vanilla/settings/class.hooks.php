@@ -813,6 +813,28 @@ class VanillaHooks extends Gdn_Plugin {
         }
     }
 
+    public function discussionController_addProfileInfo_handler($sender) {
+        if (is_object($sender->User) && $sender->User->UserID > 0) {
+            $userID = $sender->User->UserID;
+            // Add the discussion tab
+            // $discussionsLabel = sprite('SpDiscussions').' '.t('Questions');
+            // $commentsLabel = sprite('SpComments').' '.t('Comments');
+            $discussionsLabel = "";
+            $commentsLabel = "";
+            if (c('Vanilla.Profile.ShowCounts', true)) {
+                $discussionsCount = getValueR('User.CountDiscussions', $sender, null);
+                $commentsCount = getValueR('User.CountComments', $sender, "0");
+                $discussionsLabel .= $discussionsCount;
+                $commentsLabel .= $commentsCount;
+            }
+            $sender->addProfileTab(t('Questions'), userUrl($sender->User, '', 'discussions'), 'Questions', $discussionsLabel);
+            $sender->addProfileTab(t('Comments'), userUrl($sender->User, '', 'comments'), 'Comments', $commentsLabel);
+            // Add the discussion tab's CSS and Javascript.
+            $sender->addJsFile('jquery.gardenmorepager.js');
+            $sender->addJsFile('discussions.js', 'vanilla');
+        }
+    }
+
     /**
      * Adds email notification options to profiles.
      *

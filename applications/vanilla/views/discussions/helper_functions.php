@@ -308,7 +308,7 @@ if (!function_exists('writeDiscussionDetail')) :
     function writeDiscussionDetail($Discussion, $sender, $session) {
         $Author = Gdn::userModel()->getID($Discussion->InsertUserID); // userBuilder($Discussion, 'Insert');
         $cssClass = cssClass($Discussion);
-        $category = CategoryModel::categories($discussion->CategoryID);
+        $category = CategoryModel::categories($Discussion->CategoryID);
         $discussionUrl = $Discussion->Url;
 
         $dateTimeFormatter = Gdn::getContainer()->get(\Vanilla\Formatting\DateTimeFormatter::class);
@@ -352,6 +352,7 @@ if (!function_exists('writeDiscussionDetail')) :
                         </span>
                         <span class="AuthorInfo">
                             <?php
+                            echo "<a class='DiscussionHeader_category' href='/categories/".$category["UrlCode"]."'>".$category["Name"]."</a>";
                             echo wrapIf(htmlspecialchars(val('Title', $Author)), 'span', ['class' => 'MItem AuthorTitle']);
                             echo wrapIf(htmlspecialchars(val('Location', $Author)), 'span', ['class' => 'MItem AuthorLocation']);
                             $sender->fireEvent('AuthorInfo');

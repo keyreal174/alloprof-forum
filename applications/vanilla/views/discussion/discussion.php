@@ -55,32 +55,38 @@ $this->fireEvent('BeforeDiscussionDisplay');
             </span>
             </div>
             <div class="Meta DiscussionMeta">
-            <span class="MItem DateCreated">
-                <?php
-                echo anchor(Gdn_Format::date($Discussion->DateInserted, 'html'), $Discussion->Url, 'Permalink', ['rel' => 'nofollow']);
-                ?>
-            </span>
-                <?php
-                echo dateUpdated($Discussion, ['<span class="MItem">', '</span>']);
-                ?>
-                <?php
-                // Include source if one was set
-                if ($Source = val('Source', $Discussion)) {
-                    echo ' '.wrap(sprintf(t('via %s'), t($Source.' Source', $Source)), 'span', ['class' => 'MItem MItem-Source']).' ';
-                }
-                // Category
-                if (c('Vanilla.Categories.Use')) {
-                    $accessibleLabel = HtmlUtils::accessibleLabel('Category: "%s"', [$this->data('Discussion.Category')]);
-                    echo ' <span class="MItem Category">';
-                    echo ' '.t('in').' ';
-                    echo anchor(htmlspecialchars($this->data('Discussion.Category')), categoryUrl($this->data('Discussion.CategoryUrlCode')), ["aria-label" => $accessibleLabel]);
-                    echo '</span> ';
-                }
+                <span class="MItem TimeAgo">
+                    <?php
+                        // echo 'Secondaire 1' . '  ' . timeElapsedString($Discussion->LastDate, false);
+                    ?>
+                </span>
+                <span class="MItem DateCreated">
 
-                // Include IP Address if we have permission
-                if ($Session->checkPermission('Garden.PersonalInfo.View')) {
-                    echo wrap(ipAnchor($Discussion->InsertIPAddress), 'span', ['class' => 'MItem IPAddress']);
-                }
+                    <?php
+                    // echo anchor(Gdn_Format::date($Discussion->DateInserted, 'html'), $Discussion->Url, 'Permalink', ['rel' => 'nofollow']);
+                    ?>
+                </span>
+                <?php
+                // echo dateUpdated($Discussion, ['<span class="MItem">', '</span>']);
+                ?>
+                <?php
+                // // Include source if one was set
+                // if ($Source = val('Source', $Discussion)) {
+                //     echo ' '.wrap(sprintf(t('via %s'), t($Source.' Source', $Source)), 'span', ['class' => 'MItem MItem-Source']).' ';
+                // }
+                // // Category
+                // if (c('Vanilla.Categories.Use')) {
+                //     $accessibleLabel = HtmlUtils::accessibleLabel('Category: "%s"', [$this->data('Discussion.Category')]);
+                //     echo ' <span class="MItem Category">';
+                //     echo ' '.t('in').' ';
+                //     echo anchor(htmlspecialchars($this->data('Discussion.Category')), categoryUrl($this->data('Discussion.CategoryUrlCode')), ["aria-label" => $accessibleLabel]);
+                //     echo '</span> ';
+                // }
+
+                // // Include IP Address if we have permission
+                // if ($Session->checkPermission('Garden.PersonalInfo.View')) {
+                //     echo wrap(ipAnchor($Discussion->InsertIPAddress), 'span', ['class' => 'MItem IPAddress']);
+                // }
 
                 $this->fireEvent('DiscussionInfo');
                 $this->fireEvent('AfterDiscussionMeta'); // DEPRECATED

@@ -18,6 +18,17 @@
     margin-bottom: 40px;
 }
 
+.Item-Header.DiscussionHeader .DiscussionHeader_category {
+    font-size: 12px;
+    line-height: 14px;
+    color: #1A1919;
+    padding: 4.5px 16px;
+    border: 1px solid #1A1919;
+    box-sizing: border-box;
+    border-radius: 43px;
+    margin-left: 10px;
+}
+
 .ItemDiscussion .Author a.Username {
     color: #1A1919;
     font-size: 21px;
