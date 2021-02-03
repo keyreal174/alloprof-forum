@@ -32,7 +32,6 @@ foreach ($Controller->ProfileTabs as $TabCode => $TabInfo) {
                 echo '<li'.($CssClass == '' ? '' : ' class="'.$CssClass.'"').'>'.anchor(val('TabHtml', $TabInfo, $TabCode), val('TabUrl', $TabInfo))."</li>\r\n";
             }
         }
-
         ?>
     </ul>
 </div>
