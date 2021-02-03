@@ -28,7 +28,7 @@
     <div class="content">
         <div class="placeholder">
             <div class="icon">
-                <img src="/images/icons/ask_question.svg" />
+                <img src="/themes/alloprof/design/images/icons/ask_question.svg" />
             </div>
             <?php echo t('What is your question?'); ?>
         </div>

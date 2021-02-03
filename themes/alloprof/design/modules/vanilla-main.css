@@ -319,7 +319,7 @@ abbr {
     border: none;
     border-radius: 0;
     padding: 0;
-    width: calc(100% - 780px)
+    width: 57%
 }
 
 @media screen and (max-width:992px) {
@@ -9122,7 +9122,6 @@ screen and (-ms-high-contrast:none) {
     border-radius: 0;
     margin-left: auto;
     padding: 0;
-    width: 360px
 }
 
 @media screen and (max-width:992px) {

@@ -170,9 +170,9 @@ class DiscussionsController extends VanillaController {
 
         // Add discussion and question count on the profile block
         $this->fireEvent('AddProfileTabsInfo');
-
         $this->addModule('ProfileFilterModule');
-        $this->addModule('QuickQuestionModule');
+
+        // $this->addModule('QuickQuestionModule');
         // $this->addModule('BookmarkedModule');
         // $this->addModule('TagModule');
 

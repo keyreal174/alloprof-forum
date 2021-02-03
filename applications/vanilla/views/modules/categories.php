@@ -15,12 +15,6 @@ if ($this->Data !== FALSE && $displayModule) {
         <?php echo panelHeading(t('Subjects monitored')); ?>
         <ul class="PanelInfo PanelCategories">
             <?php
-            if (!Gdn::themeFeatures()->useDataDrivenTheme()) {
-                echo '<li'.($OnCategories ? ' class="Active"' : '').'>'.
-                    anchor('<span class="Aside"><span class="Count">'.bigPlural($CountDiscussions, '%s discussion').'</span></span> '.t('All Categories'), '/categories', 'ItemLink ItemLinkAllCategories')
-                    .'</li>';
-            }
-
             $MaxDepth = c('Vanilla.Categories.MaxDisplayDepth');
 
             $dbRecords = $this->Data->result();
