@@ -616,7 +616,7 @@ if (!function_exists('writeCommentForm')) :
         }
 
         if (($discussion->Closed == '1' && $userCanClose) || ($discussion->Closed == '0' && $userCanComment)) {
-            echo $controller->fetchView('comment', 'post', 'vanilla');
+            // echo $controller->fetchView('comment', 'post', 'vanilla');
         }
     }
 endif;

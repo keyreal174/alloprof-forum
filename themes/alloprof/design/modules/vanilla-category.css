@@ -1,0 +1,25 @@
+.BoxCategories.vanilla-categories h4 {
+    font-size: 24px;
+    line-height: 28px;
+    color: #1A1919;
+}
+
+.BoxCategories.vanilla-categories .vanilla-categories__viewall {
+    font-size: 16px;
+    line-height: 19px;
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    color: #1A1919;
+    padding: 12px 32px;
+
+    border: 1px solid #1A1919;
+    box-sizing: border-box;
+    border-radius: 38px;
+
+    width: max-content;
+    margin: auto;
+    margin-top: 50px;
+}

@@ -55,6 +55,8 @@ class ProfileController extends Gdn_Controller {
     /** @var bool Whether data has been stored in $this->User yet. */
     protected $_UserInfoRetrieved = false;
 
+    public $IsProfilePage = true;
+
     /**
      * Prep properties.
      *

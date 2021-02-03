@@ -1,0 +1,132 @@
+@charset "UTF-8";
+
+/*!
+ * @copyright 2009-2018 Vanilla Forums Inc.
+ * @license GPL-2.0-only
+ */
+/*!
+ * @author Isis (igraziatto) Graziatto <isis.g@vanillaforums.com>
+ * @copyright 2009-2018 Vanilla Forums Inc.
+ * @license GPL-2.0-only
+ */
+/*!
+ * @author Isis (igraziatto) Graziatto <isis.g@vanillaforums.com>
+ * @copyright 2009-2018 Vanilla Forums Inc.
+ * @license GPL-2.0-only
+ */
+/*!
+ * @author Isis (igraziatto) Graziatto <isis.g@vanillaforums.com>
+ * @copyright 2009-2018 Vanilla Forums Inc.
+ * @license GPL-2.0-only
+ */
+
+@import url("./modules/vanilla-main.css");
+@import url("./modules/vanilla-layout.css");
+@import url("./modules/vanilla-question.css");
+@import url("./modules/vanilla-avatarupload.css");
+@import url("./modules/vanilla-profilefilter.css");
+@import url("./modules/vanilla-askquestion.css");
+@import url("./modules/vanilla-category.css");
+
+.BoxNewDiscussion {
+    -webkit-box-shadow: none;
+    background: #fff;
+    border-top: 1px solid #d6d7d9;
+    box-shadow: none;
+    padding: 40px;
+    margin-bottom: 50px;
+}
+
+.BoxNewDiscussion h1 {
+    margin-bottom: 30px;
+}
+
+.BoxNewDiscussion .BigButton {
+    padding: 20px !important;
+    background: #eee !important;
+    border: #eee !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    transition: 0.3s all;
+    color: rgba(71, 82, 93, .8) !important;
+    text-align: left !important;
+}
+
+.BoxNewDiscussion .BigButton:hover {
+    background: #0291db !important;
+    border: #0291db !important;
+    color: white !important;
+}
+
+.Question-submenu {
+    justify-content: center;
+    width: 100%;
+    border-bottom: 1px solid rgba(0, 0, 0, .3);
+    display: flex;
+}
+
+.Question-submenu .Navigation-linkContainer {
+    margin: 0 20px;
+}
+
+.Question-submenu a span.Count {
+    background: #ff00008c;
+    color: white;
+    width: 20px;
+    height: 20px;
+    margin-left: 5px;
+}
+
+.Question-submenu a.Selected {
+    background: #05BF8E;
+    border-radius: 20px;
+    color: white;
+}
+
+/* Basic inputs */
+
+select {
+    background: #F2F2F2 !important;
+    border-color: #F2F2F2 !important;
+    width: 100%;
+    padding-left: 48px;
+}
+
+.btn-default {
+    border: 1px solid #1A1919;
+    border-radius: 38px;
+    background: white;
+    color: #1A1919;
+    font-weight: bold;
+    padding: 10px 30px;
+    font-size: 18px;
+    white-space: nowrap;
+    display: block;
+}
+
+.btn-shadow {
+    box-shadow: 3px 5px 0px #1A1919;
+}
+
+.rich-select {
+    min-height: 44px;
+    border-radius: 38px;
+    background: #F2F2F2;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    z-index: 0;
+}
+
+.rich-select i,
+.rich-select img {
+    position: absolute;
+    left: 20px;
+    top: 14px;
+    z-index: 1;
+}
+
+.rich-select .SelectWrapper {
+    width: 100%;
+}

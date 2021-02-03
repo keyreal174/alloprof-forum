@@ -11,16 +11,10 @@ if ($this->Data !== FALSE && $displayModule) {
         $CountDiscussions = $CountDiscussions + $Category->CountDiscussions;
     }
     ?>
-    <div class="Box BoxCategories">
-        <?php echo panelHeading(t('Categories')); ?>
+    <div class="Box BoxCategories vanilla-categories">
+        <?php echo panelHeading(t('Subjects monitored')); ?>
         <ul class="PanelInfo PanelCategories">
             <?php
-            if (!Gdn::themeFeatures()->useDataDrivenTheme()) {
-                echo '<li'.($OnCategories ? ' class="Active"' : '').'>'.
-                    anchor('<span class="Aside"><span class="Count">'.bigPlural($CountDiscussions, '%s discussion').'</span></span> '.t('All Categories'), '/categories', 'ItemLink ItemLinkAllCategories')
-                    .'</li>';
-            }
-
             $MaxDepth = c('Vanilla.Categories.MaxDisplayDepth');
 
             $dbRecords = $this->Data->result();
@@ -59,6 +53,7 @@ if ($this->Data !== FALSE && $displayModule) {
             }
             ?>
         </ul>
+        <a href="" class="vanilla-categories__viewall">See all subjects</a>
     </div>
 <?php
 }

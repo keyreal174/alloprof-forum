@@ -271,6 +271,237 @@ if (!function_exists('WriteDiscussion')) :
     }
 endif;
 
+if (!function_exists('timeElapsedString')) :
+    function timeElapsedString($datetime, $full = false) {
+        $now = new DateTime;
+        $ago = new DateTime($datetime);
+        $diff = $now->diff($ago);
+
+        $diff->w = floor($diff->d / 7);
+        $diff->d -= $diff->w * 7;
+
+        $string = array(
+            'y' => 'year',
+            'm' => 'month',
+            'w' => 'week',
+            'd' => 'day',
+            'h' => 'hour',
+            'i' => 'minute',
+            's' => 'second',
+        );
+
+        foreach ($string as $k => &$v) {
+            if ($diff->$k) {
+                $v = $diff->$k . ' ' . $v . ($diff->
+                $k > 1 ? 's' : '');
+            } else {
+                unset($string[$k]);
+            }
+        }
+
+        if (!$full) $string = array_slice($string, 0, 1);
+        return $string ? implode(', ', $string) . ' ago' : 'just now';
+    }
+endif;
+
+if (!function_exists('writeDiscussionDetail')) :
+    function writeDiscussionDetail($Discussion, $sender, $session) {
+        $Author = Gdn::userModel()->getID($Discussion->InsertUserID); // userBuilder($Discussion, 'Insert');
+        $cssClass = cssClass($Discussion);
+        $category = CategoryModel::categories($discussion->CategoryID);
+        $discussionUrl = $Discussion->Url;
+
+        $dateTimeFormatter = Gdn::getContainer()->get(\Vanilla\Formatting\DateTimeFormatter::class);
+
+        $sender->EventArguments['Discussion'] = &$DiscussionDiscussion;
+        $sender->EventArguments['DiscussionUrl'] = &$discussionUrl;
+        $sender->EventArguments['Author'] = &$Author;
+        $sender->EventArguments['CssClass'] = &$cssClass;
+
+        $sender->EventArguments['Object'] = &$Discussion;
+        $sender->EventArguments['Type'] = 'Discussion';
+
+        $sender->fireEvent('BeforeDiscussionDisplay');
+        ?>
+        <li id="Discussion_<?php echo $discussion->DiscussionID; ?>" class="<?php echo $cssClass; ?>">
+            <div class="Discussion">
+                <div class="Item-Header DiscussionHeader">
+                    <?php
+                    if (!Gdn::themeFeatures()->get('EnhancedAccessibility')) {
+                        ?>
+                        <span class="Options-Icon">
+                        <?php
+                            echo optionsList($discussion);
+                        ?>
+                        </span>
+                        <?php
+                    }
+                    ?>
+                    <div class="AuthorWrap">
+                        <span class="Author">
+                            <?php
+                            if ($UserPhotoFirst) {
+                                echo userPhoto($Author);
+                                echo userAnchor($Author, 'Username');
+                            } else {
+                                echo userAnchor($Author, 'Username');
+                                echo userPhoto($Author);
+                            }
+                            echo formatMeAction($Discussion);
+                            ?>
+                        </span>
+                        <span class="AuthorInfo">
+                            <?php
+                            echo wrapIf(htmlspecialchars(val('Title', $Author)), 'span', ['class' => 'MItem AuthorTitle']);
+                            echo wrapIf(htmlspecialchars(val('Location', $Author)), 'span', ['class' => 'MItem AuthorLocation']);
+                            $sender->fireEvent('AuthorInfo');
+                            ?>
+                        </span>
+                        <?php
+                            if ($sender->data('_ShowCategoryLink', true) && $category && c('Vanilla.Categories.Use') &&
+                                CategoryModel::checkPermission($category, 'Vanilla.Discussions.View')) {
+                                $accessibleAttributes = ["tabindex" => "0", "aria-label" => HtmlUtils::accessibleLabel($template, $accessibleVars)];
+                                if ($layout === "mixed") { // The links to categories are duplicates and have no accessible value
+                                    $accessibleAttributes['tabindex'] = "-1";
+                                    $accessibleAttributes['aria-hidden'] = "true";
+                                }
+                                echo wrap(
+                                    anchor(htmlspecialchars($discussion->Category),
+                                        categoryUrl($discussion->CategoryUrlCode), $accessibleAttributes),
+                                    'span',
+                                    ['class' => 'MItem Category '.$category['CssClass']]
+                                );
+                            }
+                        ?>
+                    </div>
+                    <div class="Meta DiscussionMeta">
+                        <span class="MItem TimeAgo">
+                            <?php
+                                echo 'Secondaire 1' . '  ' . timeElapsedString($Discussion->LastDate, false);
+                            ?>
+                        </span>
+                        <?php
+                            // // Include source if one was set
+                            // if ($Source = val('Source', $Discussion)) {
+                            //     echo ' '.wrap(sprintf(t('via %s'), t($Source.' Source', $Source)), 'span', ['class' => 'MItem MItem-Source']).' ';
+                            // }
+                            // // Category
+                            // if (c('Vanilla.Categories.Use')) {
+                            //     $accessibleLabel = HtmlUtils::accessibleLabel('Category: "%s"', [$sender->data('Discussion.Category')]);
+                            //     echo ' <span class="MItem Category">';
+                            //     echo ' '.t('in').' ';
+                            //     echo anchor(htmlspecialchars($sender->data('Discussion.Category')), categoryUrl($sender->data('Discussion.CategoryUrlCode')), ["aria-label" => $accessibleLabel]);
+                            //     echo '</span> ';
+                            // }
+
+                            // Include IP Address if we have permission
+                            // if ($session->checkPermission('Garden.PersonalInfo.View')) {
+                            //     echo wrap(ipAnchor($Discussion->InsertIPAddress), 'span', ['class' => 'MItem IPAddress']);
+                            // }
+
+                            $sender->fireEvent('DiscussionInfo');
+                            $sender->fireEvent('AfterDiscussionMeta'); // DEPRECATED
+                        ?>
+                    </div>
+                </div>
+                <?php $sender->fireEvent('BeforeDiscussionBody'); ?>
+                <div class="Item-BodyWrap">
+                    <div class="Item-Body">
+                        <div class="Message userContent">
+                            <?php
+                            echo formatBody($Discussion);
+                            ?>
+                        </div>
+                        <?php
+                        $sender->fireEvent('AfterDiscussionBody');
+                        writeReactions($Discussion);
+                        if (val('Attachments', $Discussion)) {
+                            writeAttachments($Discussion->Attachments);
+                        }
+                        ?>
+                    </div>
+                    <div class="Item-Footer">
+                        <div class="Item-Footer-Icons">
+                            <?php
+                            // render legacy options
+                            if (!Gdn::themeFeatures()->get('EnhancedAccessibility')) {
+                                    echo '<span class="Options">';
+                                    echo '<span class="Notifications-Icon"></span>';
+                                    echo '<span class="Favorite-Icon"></span>';
+                                    echo '<span class="Back-Icon"></span>';
+                                    // echo bookmarkButton($discussion);
+                                    echo '</span>';
+                                }
+                            ?>
+                            <div class="Separator"></div>
+                            <span class="Response">
+                                <?php
+                                    echo $Discussion->CountComments . ' ' . 'réponses';
+                                ?>
+                            </span>
+                        </div>
+                        <div>
+                            <a class="btn-default" href="<?php echo $discussionUrl; ?>">Voir</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <?php
+    }
+endif;
+
+
+if (!function_exists('writeCommentForm')) :
+    /**
+     * Output comment form.
+     *
+     * @since 2.1
+     */
+    function writeCommentForm() {
+        $session = Gdn::session();
+        $controller = Gdn::controller();
+
+        // $discussion = $controller->data('Discussion');
+        // $categoryID = val('CategoryID', $discussion);
+        // $userCanClose = CategoryModel::checkPermission($categoryID, 'Vanilla.Discussions.Close');
+        // $userCanComment = CategoryModel::checkPermission($categoryID, 'Vanilla.Comments.Add');
+
+        // // Closed notification
+        // if ($discussion->Closed == '1') {
+        //     ?>
+        //     <div class="Foot Closed">
+        //         <div class="Note Closed"><?php echo t('This discussion has been closed.'); ?></div>
+        //     </div>
+        // <?php
+        // } elseif (!$userCanComment) {
+        //     if (!Gdn::session()->isValid()) {
+        //         ?>
+        //         <div class="Foot Closed">
+        //             <div class="Note Closed SignInOrRegister"><?php
+        //                 $popup = (c('Garden.SignIn.Popup')) ? ' class="Popup"' : '';
+        //                 $returnUrl = Gdn::request()->pathAndQuery();
+        //                 echo formatString(
+        //                     t('Sign In or Register to Comment.', '<a href="{SignInUrl,html}"{Popup}>Sign In</a> or <a href="{RegisterUrl,html}">Register</a> to comment.'),
+        //                     [
+        //                         'SignInUrl' => url(signInUrl($returnUrl)),
+        //                         'RegisterUrl' => url(registerUrl($returnUrl)),
+        //                         'Popup' => $popup
+        //                     ]
+        //                 ); ?>
+        //             </div>
+        //             <?php //echo anchor(t('All Discussions'), 'discussions', 'TabLink'); ?>
+        //         </div>
+        //     <?php
+        //     }
+        // }
+
+        // if (($discussion->Closed == '1' && $userCanClose) || ($discussion->Closed == '0' && $userCanComment)) {
+            echo $controller->fetchView('comment', 'post', 'vanilla');
+        // }
+    }
+endif;
+
 if (!function_exists('WriteDiscussionSorter')) :
     /**
      *

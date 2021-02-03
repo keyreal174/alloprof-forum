@@ -1,6 +1,7 @@
 <?php if (!defined('APPLICATION')) exit();
 $dataDriven = \Gdn::themeFeatures()->useDataDrivenTheme();
 $User = val('User', Gdn::controller());
+$IsProfilePage = val('IsProfilePage', Gdn::controller());
 if (!$User && Gdn::session()->isValid()) {
     $User = Gdn::session()->User;
 }
@@ -25,6 +26,12 @@ if ($User->Banned) {
     }
 }
 
+if ($IsProfilePage) {
+    $AllowEditClass = "ChangePicture Popup";
+} else {
+    $AllowEditClass = "";
+}
+
 if ($Photo) : ?>
     <div class="Photo PhotoWrap PhotoWrapLarge <?php echo val('_CssClass', $User); ?>">
         <?php
@@ -32,7 +39,8 @@ if ($Photo) : ?>
 
         if (!$User->Banned && $canEditPhotos && (Gdn::session()->UserID == $User->UserID || checkPermission('Garden.Users.Edit'))) {
             $contents = ($dataDriven ? '<span class="icon icon-camera"></span>' : '').t('Change Icon');
-            echo anchor(wrap($contents, "span", ["class" => "ChangePicture-Text"]), '/profile/picture?userid='.$User->UserID, 'ChangePicture Popup', ["aria-label" => t("Change Picture")]);
+            echo "<a href='/profile/picture?userid=".$User->UserID."' class='".$AllowEditClass."'><img src='".$Photo."' class='ProfilePhotoLarge' alt='".$PhotoAlt."'/></a>";
+            // echo anchor(wrap($contents, "span", ["class" => "ChangePicture-Text"]), '/profile/picture?userid='.$User->UserID, 'ChangePicture Popup', ["aria-label" => t("Change Picture")]);
         }
 
         echo img($Photo, ['class' => 'ProfilePhotoLarge', 'alt' => $PhotoAlt]);
@@ -44,3 +52,8 @@ if ($Photo) : ?>
     </div>
 <?php
 endif;
+?>
+<div class="userphoto-personalinfo">
+    <h5 class="userphoto-personalinfo__name"><?php echo $User->Name ?></h5>
+    <p class="userphoto-personalinfo__secondary"><?php echo $User->Email ?></p>
+</div>
