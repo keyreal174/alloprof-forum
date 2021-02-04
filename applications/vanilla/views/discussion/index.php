@@ -13,13 +13,10 @@ echo '<!-- Page Title -->
 echo '<div class="Options">';
 
 $this->fireEvent('BeforeDiscussionOptions');
-writeBookmarkLink();
 echo getDiscussionOptionsDropdown();
 writeAdminCheck();
 
 echo '</div>';
-
-echo '<h1>'.($this->data('Discussion.displayName') ? $this->data('Discussion.displayName') : $this->data('Discussion.Name')).'</h1>';
 
 echo "</div>\n\n";
 
@@ -36,6 +33,8 @@ if ($this->data('Page') == 1) {
     echo '</div>'; // close discussion wrap
 }
 
+writeCommentForm();
+
 echo '<div class="CommentsWrap">';
 
 // Write the comments.
@@ -47,7 +46,17 @@ echo '</span>';
 
 echo '<div class="DataBox DataBox-Comments">';
 if ($this->data('Comments')->numRows() > 0)
-    echo '<h2 class="CommentHeading">'.$this->data('_CommentsHeader', t('Answers')).' ('.$this->data('_LatestItem').')</h2>';
+    $options = array_map(
+        't',
+        explode(',', 'Most Recent, Earlier')
+    );
+    echo '<div class="CommentHeadingWrapper">';
+    echo '<h2 class="CommentHeading">'.$this->data('_CommentsHeader', t('Answers')).'('.$this->data('_LatestItem').')</h2>';
+    echo '<div class="Category rich-select bg-transparent">';
+    echo '<img src="/themes/alloprof/design/images/icons/sort.svg"/>';
+    echo $this->Form->dropDown('SortComments', $options);
+    echo '</div>';
+    echo '</div>';
 ?>
     <ul class="MessageList DataList Comments">
         <?php include $this->fetchViewLocation('comments'); ?>
@@ -67,5 +76,3 @@ $this->Pager->Wrapper = '<div %1$s>%2$s</div>';
 echo $this->Pager->toString('more');
 echo '</div>';
 echo '</div>';
-
-writeCommentForm();

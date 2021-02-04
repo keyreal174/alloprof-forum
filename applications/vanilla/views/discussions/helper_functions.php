@@ -382,24 +382,6 @@ if (!function_exists('writeDiscussionDetail')) :
                             ?>
                         </span>
                         <?php
-                            // // Include source if one was set
-                            // if ($Source = val('Source', $Discussion)) {
-                            //     echo ' '.wrap(sprintf(t('via %s'), t($Source.' Source', $Source)), 'span', ['class' => 'MItem MItem-Source']).' ';
-                            // }
-                            // // Category
-                            // if (c('Vanilla.Categories.Use')) {
-                            //     $accessibleLabel = HtmlUtils::accessibleLabel('Category: "%s"', [$sender->data('Discussion.Category')]);
-                            //     echo ' <span class="MItem Category">';
-                            //     echo ' '.t('in').' ';
-                            //     echo anchor(htmlspecialchars($sender->data('Discussion.Category')), categoryUrl($sender->data('Discussion.CategoryUrlCode')), ["aria-label" => $accessibleLabel]);
-                            //     echo '</span> ';
-                            // }
-
-                            // Include IP Address if we have permission
-                            // if ($session->checkPermission('Garden.PersonalInfo.View')) {
-                            //     echo wrap(ipAnchor($Discussion->InsertIPAddress), 'span', ['class' => 'MItem IPAddress']);
-                            // }
-
                             $sender->fireEvent('DiscussionInfo');
                             $sender->fireEvent('AfterDiscussionMeta'); // DEPRECATED
                         ?>
@@ -421,30 +403,9 @@ if (!function_exists('writeDiscussionDetail')) :
                         }
                         ?>
                     </div>
-                    <div class="Item-Footer">
-                        <div class="Item-Footer-Icons">
-                            <?php
-                            // render legacy options
-                            if (!Gdn::themeFeatures()->get('EnhancedAccessibility')) {
-                                    echo '<span class="Options">';
-                                    echo '<span class="Notifications-Icon"></span>';
-                                    echo '<span class="Favorite-Icon"></span>';
-                                    echo '<span class="Back-Icon"></span>';
-                                    // echo bookmarkButton($discussion);
-                                    echo '</span>';
-                                }
-                            ?>
-                            <div class="Separator"></div>
-                            <span class="Response">
-                                <?php
-                                    echo $Discussion->CountComments . ' ' . 'réponses';
-                                ?>
-                            </span>
-                        </div>
-                        <div>
-                            <a class="btn-default" href="<?php echo $discussionUrl; ?>">See</a>
-                        </div>
-                    </div>
+                    <?php
+                        writeDiscussionFooter($Discussion, $sender);
+                    ?>
                 </div>
             </div>
         </li>

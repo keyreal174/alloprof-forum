@@ -3,13 +3,16 @@
 $Session = Gdn::session();
 $NewOrDraft = !isset($this->Comment) || property_exists($this->Comment, 'DraftID') ? true : false;
 $Editing = isset($this->Comment);
-$formCssClass = 'MessageForm CommentForm FormTitleWrapper';
+$formCssClass = 'BoxButtons BoxNewDiscussion MessageForm CommentPostForm FormTitleWrapper';
 $this->EventArguments['FormCssClass'] = &$formCssClass;
 $this->fireEvent('BeforeCommentForm');
+// print_r ($this);
 ?>
 <div class="<?php echo $formCssClass; ?>">
     <h2 class="H"><?php echo t($Editing ? 'Edit Comment' : 'Leave a Comment'); ?></h2>
-
+    <div class="close-icon">
+        <img src="/themes/alloprof/design/images/icons/close.svg" />
+    </div>
     <div class="CommentFormWrap">
         <?php if (Gdn::session()->isValid()) : ?>
             <div class="Form-HeaderWrap">

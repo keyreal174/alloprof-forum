@@ -108,7 +108,7 @@ if (!function_exists('writeComment')) :
 
         // First comment template event
         $sender->fireEvent('BeforeCommentDisplay'); ?>
-        <li class="<?php echo $cssClass; ?>" id="<?php echo 'Comment_'.$comment->CommentID; ?>">
+        <li class="<?php echo $cssClass.' blue-border'; ?>" id="<?php echo 'Comment_'.$comment->CommentID; ?>">
             <div class="Comment">
 
                 <?php
@@ -616,7 +616,7 @@ if (!function_exists('writeCommentForm')) :
         }
 
         if (($discussion->Closed == '1' && $userCanClose) || ($discussion->Closed == '0' && $userCanComment)) {
-            // echo $controller->fetchView('comment', 'post', 'vanilla');
+            echo $controller->fetchView('comment', 'post', 'vanilla');
         }
     }
 endif;
@@ -742,5 +742,46 @@ if (!function_exists('formatMeAction')) :
         }
 
         return '<div class="AuthorAction">'.$body.'</div>';
+    }
+endif;
+
+if (!function_exists('writeDiscussionFooter')) :
+    function writeDiscussionFooter($Discussion, $sender) {
+        $discussionUrl = $Discussion->Url;
+        ?>
+        <div class="Item-Footer">
+            <div class="Item-Footer-Icons">
+                <?php
+                if (!Gdn::themeFeatures()->get('EnhancedAccessibility')) {
+                        echo '<span class="Options">';
+                        echo '<span class="Notifications-Icon"></span>';
+                        echo '<span class="Favorite-Icon"></span>';
+                        echo '<span class="Back-Icon"></span>';
+                        echo '</span>';
+                    }
+                ?>
+                <div class="Separator"></div>
+                <span class="Response">
+                    <?php
+                        echo $Discussion->CountComments . ' ' . 'réponses';
+                    ?>
+                </span>
+            </div>
+            <div>
+                <?php
+                    if (!$sender->data('IsAnswer')) {
+                        echo '<a class="btn-default" href="'.$discussionUrl.'">See</a>';
+                    } else {
+                        echo '<div class="ReplyQuestionButton">';
+
+                        $sender->fireEvent('BeforeFormButtons');
+                        echo $sender->Form->button('Reply', ['class' => 'btn-default btn-shadow']);
+                        $sender->fireEvent('AfterFormButtons');
+                        echo '</div>';
+                    }
+                ?>
+            </div>
+        </div>
+        <?php
     }
 endif;

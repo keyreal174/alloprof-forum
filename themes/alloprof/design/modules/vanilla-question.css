@@ -1,3 +1,7 @@
+.MessageList {
+    position: relative;
+}
+
 .DataList .ItemDiscussion,
 .MessageList .ItemComment.ItemComment,
 .MessageList .ItemDiscussion.ItemDiscussion {
@@ -13,12 +17,20 @@
     width: 64px;
 }
 
-.Item-Header.DiscussionHeader, .MessageList .Item-Header.DiscussionHeader {
+.Item-Header.DiscussionHeader,
+.MessageList .Item-Header.DiscussionHeader {
     height: 64px;
     margin-bottom: 40px;
+    padding: 0;
 }
 
-.MessageList .Item-Header.DiscussionHeader .DiscussionHeader_category, .Item-Header.DiscussionHeader .DiscussionHeader_category {
+.MessageList .ItemComment .Item-BodyWrap,
+.MessageList .ItemDiscussion .Item-BodyWrap {
+    padding: 0;
+}
+
+.MessageList .Item-Header.DiscussionHeader .DiscussionHeader_category,
+.Item-Header.DiscussionHeader .DiscussionHeader_category {
     font-size: 12px;
     line-height: 14px;
     color: #1A1919;
@@ -29,7 +41,8 @@
     margin-left: 10px;
 }
 
-.MessageList .ItemDiscussion .Author a.Username, .ItemDiscussion .Author a.Username {
+.MessageList .ItemDiscussion .Author a.Username,
+.ItemDiscussion .Author a.Username {
     color: #1A1919;
     font-size: 21px;
     line-height: 25px;
@@ -38,14 +51,16 @@
     padding-top: 10px;
 }
 
-.MessageList .MItem.TimeAgo, .DataList .MItem.TimeAgo {
+.MessageList .MItem.TimeAgo,
+.DataList .MItem.TimeAgo {
     font-size: 14px;
     line-height: 16px;
     color: #676767;
     margin: 0;
 }
 
-.MessageList .Discussion .Item-BodyWrap .Message.userContent, .DataList.Discussions .Discussion .Item-BodyWrap .Message.userContent {
+.MessageList .Discussion .Item-BodyWrap .Message.userContent,
+.DataList.Discussions .Discussion .Item-BodyWrap .Message.userContent {
     display: flex;
     flex-direction: column;
     background-color: #f2f2f2;
@@ -134,8 +149,61 @@
     margin: 0 20px;
 }
 
-.MessageList .ItemComment .AuthorWrap, .MessageList .ItemComment .Meta, .MessageList .ItemDiscussion .AuthorWrap, .MessageList .ItemDiscussion .Meta {
+.MessageList .ItemComment .AuthorWrap,
+.MessageList .ItemComment .Meta,
+.MessageList .ItemDiscussion .AuthorWrap,
+.MessageList .ItemDiscussion .Meta {
     padding-left: 0;
     display: block;
 }
 
+.CommentHeadingWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.CommentHeading {
+    font-size: 28px;
+    line-height: 33px;
+    color: #1A1919;
+}
+
+.Discussion .PageTitle {
+    position: absolute;
+    right: 45px;
+    top: 55px;
+}
+
+.Discussion .PageTitle .Options {
+    float: none;
+}
+
+.MessageList .ItemDiscussion {
+    position: initial;
+}
+
+/* Comment Post Box */
+.CommentPostForm {
+    display: none;
+    border-radius: 8px;
+    position: relative;
+}
+
+.CommentPostForm.open {
+    display: block;
+}
+
+.CommentPostForm .close-icon {
+    position: absolute;
+    top: 50px;
+    right: 35px;
+    cursor: pointer;
+    display: block;
+}
+
+.CommentPostForm .richEditor-frame {
+    border: none;
+    background: #f2f2f2;
+}

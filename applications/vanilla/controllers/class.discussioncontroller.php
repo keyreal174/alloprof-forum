@@ -111,6 +111,7 @@ class DiscussionController extends VanillaController {
         $this->addJsFile('jquery.autosize.min.js');
         $this->addJsFile('autosave.js');
         $this->addJsFile('discussion.js');
+        $this->addJsFile('replyQuestion.js');
         $this->addModule('UserPhotoModule');
         $this->addModule('ProfileFilterModule');
         $this->fireEvent('AddProfileInfo');
@@ -358,6 +359,7 @@ class DiscussionController extends VanillaController {
             'DiscussionForumPosting',
             $this->DiscussionModel->structuredData((array)$this->Discussion)
         );
+        $this->setData('IsAnswer', true);
         $this->render();
     }
 
