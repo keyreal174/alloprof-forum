@@ -348,7 +348,7 @@ class DiscussionsController extends VanillaController {
 
         // Add modules
         $this->addModule('DiscussionFilterModule');
-        $this->addModule('NewDiscussionModule');
+        // $this->addModule('NewDiscussionModule');
         $this->addModule('CategoriesModule');
         $this->addModule('BookmarkedModule');
         $this->addModule('TagModule');
@@ -525,7 +525,7 @@ class DiscussionsController extends VanillaController {
 
         // Add modules
         $this->addModule('DiscussionFilterModule');
-        $this->addModule('NewDiscussionModule');
+        // $this->addModule('NewDiscussionModule');
         $this->addModule('CategoriesModule');
         $this->addModule('TagModule');
 
@@ -626,7 +626,7 @@ class DiscussionsController extends VanillaController {
 
         // Add modules
         $this->addModule('DiscussionFilterModule');
-        $this->addModule('NewDiscussionModule');
+        // $this->addModule('NewDiscussionModule');
         $this->addModule('CategoriesModule');
         $this->addModule('BookmarkedModule');
         $this->addModule('TagModule');
@@ -877,7 +877,7 @@ class DiscussionsController extends VanillaController {
         }
 
         // Add Modules
-        $this->addModule('NewDiscussionModule');
+        // $this->addModule('NewDiscussionModule');
         $this->addModule('DiscussionFilterModule');
         $this->addModule('BookmarkedModule');
 
