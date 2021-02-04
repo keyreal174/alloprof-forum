@@ -12,10 +12,44 @@ use Vanilla\Utility\HtmlUtils;
 if (!function_exists('writeDiscussionDetail'))
     include($this->fetchViewLocation('helper_functions', 'discussion', 'vanilla'));
 
+if (!function_exists('timeElapsedString')) :
+    function timeElapsedString($datetime, $full = false) {
+        $now = new DateTime;
+        $ago = new DateTime($datetime);
+        $diff = $now->diff($ago);
+
+        $diff->w = floor($diff->d / 7);
+        $diff->d -= $diff->w * 7;
+
+        $string = array(
+            'y' => 'year',
+            'm' => 'month',
+            'w' => 'week',
+            'd' => 'day',
+            'h' => 'hour',
+            'i' => 'minute',
+            's' => 'second',
+        );
+
+        foreach ($string as $k => &$v) {
+            if ($diff->$k) {
+                $v = $diff->$k . ' ' . $v . ($diff->
+                $k > 1 ? 's' : '');
+            } else {
+                unset($string[$k]);
+            }
+        }
+
+        if (!$full) $string = array_slice($string, 0, 1);
+        return $string ? implode(', ', $string) . ' ago' : 'just now';
+    }
+endif;
+
 $UserPhotoFirst = c('Vanilla.Comment.UserPhotoFirst', true);
 
 $Discussion = $this->data('Discussion');
 $Author = Gdn::userModel()->getID($Discussion->InsertUserID); // userBuilder($Discussion, 'Insert');
+$category = CategoryModel::categories($Discussion->CategoryID);
 
 // Prep event args.
 $CssClass = cssClass($Discussion, false);
@@ -48,6 +82,7 @@ $this->fireEvent('BeforeDiscussionDisplay');
             </span>
             <span class="AuthorInfo">
                 <?php
+                echo "<a class='DiscussionHeader_category' href='/categories/".$category["UrlCode"]."'>".$category["Name"]."</a>";
                 echo wrapIf(htmlspecialchars(val('Title', $Author)), 'span', ['class' => 'MItem AuthorTitle']);
                 echo wrapIf(htmlspecialchars(val('Location', $Author)), 'span', ['class' => 'MItem AuthorLocation']);
                 $this->fireEvent('AuthorInfo');
@@ -57,7 +92,7 @@ $this->fireEvent('BeforeDiscussionDisplay');
             <div class="Meta DiscussionMeta">
                 <span class="MItem TimeAgo">
                     <?php
-                        // echo 'Secondaire 1' . '  ' . timeElapsedString($Discussion->LastDate, false);
+                        echo 'Secondaire 1 • ' . timeElapsedString($Discussion->LastDate, false);
                     ?>
                 </span>
                 <span class="MItem DateCreated">

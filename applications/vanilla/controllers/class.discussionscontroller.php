@@ -573,8 +573,14 @@ class DiscussionsController extends VanillaController {
      * @param int $offset Number of discussions to skip.
      */
     public function mine($page = 'p1') {
+        $this->getUserInfo();
         $this->permission('Garden.SignIn.Allow');
         Gdn_Theme::section('DiscussionList');
+
+        // add profile filter and photo
+        $this->addModule('UserPhotoModule');
+        $this->fireEvent('AddProfileTabsInfo');
+        $this->addModule('ProfileFilterModule');
 
         // Set criteria & get discussions data
         list($offset, $limit) = offsetLimit($page, c('Vanilla.Discussions.PerPage', 30));

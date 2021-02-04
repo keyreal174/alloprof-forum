@@ -4975,10 +4975,10 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
 
 .MessageList .ItemComment .Item-Header .PhotoWrap,
 .MessageList .ItemDiscussion .Item-Header .PhotoWrap {
-    left: 8px;
+    /* left: 8px;
     margin: 0;
     position: absolute;
-    top: 16px
+    top: 16px */
 }
 
 .MessageList .ItemComment .MItem.RoleTracker,
