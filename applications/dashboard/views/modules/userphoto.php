@@ -32,6 +32,8 @@ if ($IsProfilePage) {
     $AllowEditClass = "";
 }
 
+$UserMetaData = Gdn::userModel()->getMeta($User->UserID, 'Profile.%', 'Profile.');
+
 if ($Photo) : ?>
     <div class="Photo PhotoWrap PhotoWrapLarge <?php echo val('_CssClass', $User); ?>">
         <?php
@@ -55,5 +57,5 @@ endif;
 ?>
 <div class="userphoto-personalinfo">
     <h5 class="userphoto-personalinfo__name"><?php echo $User->Name ?></h5>
-    <p class="userphoto-personalinfo__secondary"><?php echo $User->Email ?></p>
+    <p class="userphoto-personalinfo__secondary"><?php echo $UserMetaData["Graduation"] ?></p>
 </div>
