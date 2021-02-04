@@ -162,7 +162,7 @@ class DiscussionsController extends VanillaController {
         $this->addModule('CategoriesModule');
 
 
-       // Make sure the userphoto module gets added to the page
+        // Make sure the userphoto module gets added to the page
         $this->addModule('UserPhotoModule');
 
         // And add the filter menu module
