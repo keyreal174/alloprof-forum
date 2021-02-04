@@ -191,19 +191,32 @@
     position: relative;
 }
 
+.CommentPostForm .CommentFormWrap {
+    margin-top: 40px;
+}
+
 .CommentPostForm.open {
     display: block;
 }
 
 .CommentPostForm .close-icon {
     position: absolute;
-    top: 50px;
-    right: 35px;
+    top: 40px;
+    right: 40px;
     cursor: pointer;
     display: block;
 }
 
-.CommentPostForm .richEditor-frame {
-    border: none;
+.CommentPostForm .richEditor-frame,
+.CommentPostForm .richEditor-frame.InputBox:focus,
+.CommentPostForm .richEditor-frame.InputBox:active {
+    border: none !important;
     background: #f2f2f2;
+    position: initial;
+}
+
+.CommentPostForm .richEditor-frame .richEditor-embedBar {
+    position: absolute;
+    left: -10px;
+    bottom: -53px;
 }

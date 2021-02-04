@@ -103,6 +103,7 @@ select {
     font-size: 18px;
     white-space: nowrap;
     display: block;
+    cursor: pointer;
 }
 
 .btn-shadow {

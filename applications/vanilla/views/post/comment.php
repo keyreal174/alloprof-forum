@@ -6,7 +6,6 @@ $Editing = isset($this->Comment);
 $formCssClass = 'BoxButtons BoxNewDiscussion MessageForm CommentPostForm FormTitleWrapper';
 $this->EventArguments['FormCssClass'] = &$formCssClass;
 $this->fireEvent('BeforeCommentForm');
-// print_r ($this);
 ?>
 <div class="<?php echo $formCssClass; ?>">
     <h2 class="H"><?php echo t($Editing ? 'Edit Comment' : 'Leave a Comment'); ?></h2>
