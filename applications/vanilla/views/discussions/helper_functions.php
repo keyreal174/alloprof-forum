@@ -307,6 +307,7 @@ endif;
 if (!function_exists('writeDiscussionDetail')) :
     function writeDiscussionDetail($Discussion, $sender, $session) {
         $Author = Gdn::userModel()->getID($Discussion->InsertUserID); // userBuilder($Discussion, 'Insert');
+        $AuthorMetaData = Gdn::userModel()->getMeta($Author->UserID, 'Profile.%', 'Profile.');
         $cssClass = cssClass($Discussion);
         $category = CategoryModel::categories($Discussion->CategoryID);
         $discussionUrl = $Discussion->Url;
@@ -378,7 +379,7 @@ if (!function_exists('writeDiscussionDetail')) :
                     <div class="Meta DiscussionMeta">
                         <span class="MItem TimeAgo">
                             <?php
-                                echo 'Secondaire 1 • ' . timeElapsedString($Discussion->LastDate, false);
+                                echo $AuthorMetaData["Grade"] . ' • ' . timeElapsedString($Discussion->LastDate, false);
                             ?>
                         </span>
                         <?php

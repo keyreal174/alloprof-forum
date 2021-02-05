@@ -19,6 +19,7 @@ $UserPhotoFirst = c('Vanilla.Comment.UserPhotoFirst', true);
 
 $Discussion = $this->data('Discussion');
 $Author = Gdn::userModel()->getID($Discussion->InsertUserID); // userBuilder($Discussion, 'Insert');
+$AuthorMetaData = Gdn::userModel()->getMeta($Author->UserID, 'Profile.%', 'Profile.');
 $category = CategoryModel::categories($Discussion->CategoryID);
 
 // Prep event args.
@@ -62,7 +63,7 @@ $this->fireEvent('BeforeDiscussionDisplay');
             <div class="Meta DiscussionMeta">
                 <span class="MItem TimeAgo">
                     <?php
-                        echo 'Secondaire 1 • ' . timeElapsedString($Discussion->LastDate, false);
+                        echo $AuthorMetaData["Grade"] . ' • ' . timeElapsedString($Discussion->LastDate, false);
                     ?>
                 </span>
                 <?php
