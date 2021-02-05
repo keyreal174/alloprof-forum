@@ -242,12 +242,12 @@
 .CommentPostForm .richEditor-frame.InputBox:active {
     border: none !important;
     background: #f2f2f2;
-    position: initial;
+    position: relative;
 }
 
-.CommentPostForm .richEditor-frame .richEditor-embedBar {
+/* .CommentPostForm .richEditor-frame .richEditor-embedBar {
     position: absolute;
     left: -10px;
     bottom: -60px;
     width: initial;
-}
+} */

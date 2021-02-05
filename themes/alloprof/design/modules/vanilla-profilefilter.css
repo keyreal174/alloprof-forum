@@ -45,5 +45,9 @@
 }
 
 .BoxProfileInfo .BoxProfileInfo_detailbox a span.category-icon {
-    min-width: 39px;
+    min-width: 0px !important;
+}
+
+.BoxProfileInfo .BoxProfileInfo_detailbox a.ItemLink {
+    justify-content: center;
 }
