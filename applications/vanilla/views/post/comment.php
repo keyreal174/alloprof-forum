@@ -1,4 +1,15 @@
 <?php if (!defined('APPLICATION')) exit();
+$dataDriven = \Gdn::themeFeatures()->useDataDrivenTheme();
+$User = val('User', Gdn::controller());
+$IsProfilePage = val('IsProfilePage', Gdn::controller());
+if (!$User && Gdn::session()->isValid()) {
+    $User = Gdn::session()->User;
+}
+
+if (!$User) {
+    return;
+}
+$UserMetaData = Gdn::userModel()->getMeta($User->UserID, 'Profile.%', 'Profile.');
 
 $Session = Gdn::session();
 $NewOrDraft = !isset($this->Comment) || property_exists($this->Comment, 'DraftID') ? true : false;
@@ -8,7 +19,21 @@ $this->EventArguments['FormCssClass'] = &$formCssClass;
 $this->fireEvent('BeforeCommentForm');
 ?>
 <div class="<?php echo $formCssClass; ?>">
-    <h2 class="H"><?php echo t($Editing ? 'Edit Comment' : 'Leave a Comment'); ?></h2>
+    <?php
+        if ($Editing) {
+            ?>
+            <h2 class="H"><?php echo t('Edit Comment'); ?></h2>
+            <?php
+        } else {
+            echo '<div class="UserInfo">';
+            echo "<a class='UserPhoto' href='/profile/picture?userid=".$User->UserID."'><img src='".$User->PhotoUrl."' class='PhotoWrap' alt='Photo'/></a>";
+            echo '<div class="UserAuthor">';
+            echo '<span class="UserAuthorName">'.$User->Name.'</span>';
+            echo '<span class="UserAuthorGrade">'.$UserMetaData["Graduation"].'</span>';
+            echo '</div>';
+            echo '</div>';
+        }
+    ?>
     <div class="close-icon">
         <img src="/themes/alloprof/design/images/icons/close.svg" />
     </div>
@@ -39,32 +64,10 @@ $this->fireEvent('BeforeCommentForm');
                     echo "<div class=\"Buttons\">\n";
                     $this->fireEvent('BeforeFormButtons');
 
-                    $CancelText = t('Home');
-                    $CancelClass = 'Back';
-                    if (!$NewOrDraft || $Editing) {
-                        $CancelText = t('Cancel');
-                        $CancelClass = 'Cancel';
-                    }
-
-                    echo '<span class="'.$CancelClass.'">';
-                    echo anchor($CancelText, '/');
-                    if ($this->data('Editor.BackLink')) {
-                        echo ' <span class="Bullet">•</span> '.$this->data('Editor.BackLink') ;
-                    }
-                    echo '</span>';
-
-                    $ButtonOptions = ['class' => 'Button Primary CommentButton'];
-
-                    if (!$Editing && $Session->isValid()) {
-                        echo ' '.anchor(t('Preview'), '#', 'Button PreviewButton')."\n";
-                        echo ' '.anchor(t('Edit'), '#', 'Button WriteButton Hidden')."\n";
-                        if ($NewOrDraft) {
-                            echo ' '.anchor(t('Save Draft'), '#', 'Button DraftButton')."\n";
-                        }
-                    }
+                    $ButtonOptions = ['class' => 'btn-default btn-shadow btn-m-l-auto'];
 
                     if ($Session->isValid()) {
-                        echo $this->Form->button($Editing ? 'Save Comment' : 'Post Comment', $ButtonOptions);
+                        echo $this->Form->button($Editing ? 'Save Comment' : t('Reply'), $ButtonOptions);
                     } else {
                         $AllowSigninPopup = c('Garden.SignIn.Popup');
                         $Attributes = ['tabindex' => '-1'];

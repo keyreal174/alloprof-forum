@@ -110,6 +110,10 @@ select {
     box-shadow: 3px 5px 0px #1A1919;
 }
 
+.btn-m-l-auto {
+    margin-left: auto;
+}
+
 .rich-select {
     min-height: 44px;
     border-radius: 38px;

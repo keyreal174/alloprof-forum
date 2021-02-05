@@ -123,31 +123,31 @@ if (!function_exists('writeComment')) :
                 <?php $sender->fireEvent('BeforeCommentMeta'); ?>
                 <div class="Item-Header CommentHeader">
                     <div class="AuthorWrap">
-            <span class="Author">
-               <?php
-               if ($userPhotoFirst) {
-                   echo userPhoto($author);
-                   echo userAnchor($author, 'Username');
-               } else {
-                   echo userAnchor($author, 'Username');
-                   echo userPhoto($author);
-               }
-               echo formatMeAction($comment);
-               $sender->fireEvent('AuthorPhoto');
-               ?>
-            </span>
-            <span class="AuthorInfo">
-               <?php
-               echo ' '.wrapIf(htmlspecialchars(val('Title', $author)), 'span', ['class' => 'MItem AuthorTitle']);
-               echo ' '.wrapIf(htmlspecialchars(val('Location', $author)), 'span', ['class' => 'MItem AuthorLocation']);
-               $sender->fireEvent('AuthorInfo');
-               ?>
-            </span>
+                        <span class="Author">
+                        <?php
+                        if ($userPhotoFirst) {
+                            echo userPhoto($author);
+                            echo userAnchor($author, 'Username');
+                        } else {
+                            echo userAnchor($author, 'Username');
+                            echo userPhoto($author);
+                        }
+                        echo formatMeAction($comment);
+                        $sender->fireEvent('AuthorPhoto');
+                        ?>
+                        </span>
+                        <span class="AuthorInfo">
+                        <?php
+                        echo ' '.wrapIf(htmlspecialchars(val('Title', $author)), 'span', ['class' => 'MItem AuthorTitle']);
+                        echo ' '.wrapIf(htmlspecialchars(val('Location', $author)), 'span', ['class' => 'MItem AuthorLocation']);
+                        $sender->fireEvent('AuthorInfo');
+                        ?>
+                        </span>
                     </div>
                     <div class="Meta CommentMeta CommentInfo">
-            <span class="MItem DateCreated">
-               <?php echo anchor(Gdn_Format::date($comment->DateInserted, 'html'), $permalink, 'Permalink', ['name' => 'Item_'.($currentOffset), 'rel' => 'nofollow']); ?>
-            </span>
+                        <span class="MItem DateCreated">
+                        <?php echo anchor(Gdn_Format::date($comment->DateInserted, 'html'), $permalink, 'Permalink', ['name' => 'Item_'.($currentOffset), 'rel' => 'nofollow']); ?>
+                        </span>
                         <?php
                         echo dateUpdated($comment, ['<span class="MItem">', '</span>']);
                         ?>
@@ -155,11 +155,6 @@ if (!function_exists('writeComment')) :
                         // Include source if one was set
                         if ($source = val('Source', $comment)) {
                             echo wrap(sprintf(t('via %s'), t($source.' Source', $source)), 'span', ['class' => 'MItem Source']);
-                        }
-
-                        // Include IP Address if we have permission
-                        if ($session->checkPermission('Garden.PersonalInfo.View')) {
-                            echo wrap(ipAnchor($comment->InsertIPAddress), 'span', ['class' => 'MItem IPAddress']);
                         }
 
                         $sender->fireEvent('CommentInfo');
@@ -177,7 +172,6 @@ if (!function_exists('writeComment')) :
                         </div>
                         <?php
                         $sender->fireEvent('AfterCommentBody');
-                        writeReactions($comment);
                         if (val('Attachments', $comment)) {
                             writeAttachments($comment->Attachments);
                         }
