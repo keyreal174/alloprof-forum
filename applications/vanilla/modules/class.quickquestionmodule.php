@@ -1,6 +1,6 @@
 <?php
 /**
- * Profile filter module.
+ * Quick question module.
  *
  * @copyright 2009-2019 Vanilla Forums Inc.
  * @license GPL-2.0-only
@@ -14,7 +14,7 @@
 class QuickQuestionModule extends Gdn_Module {
 
     public function assetTarget() {
-        return 'LeftPanel';
+        return 'Panel';
     }
 
     public function toString() {

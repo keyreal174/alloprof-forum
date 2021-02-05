@@ -770,7 +770,7 @@ if (!function_exists('writeDiscussionFooter')) :
             <div>
                 <?php
                     if (!$sender->data('IsAnswer')) {
-                        echo '<a class="btn-default" href="'.$discussionUrl.'">See</a>';
+                        echo '<a class="btn-default" href="'.$discussionUrl.'">'.t('See').'</a>';
                     } else {
                         echo '<div class="ReplyQuestionButton">';
 

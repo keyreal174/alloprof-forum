@@ -57,5 +57,5 @@ endif;
 ?>
 <div class="userphoto-personalinfo">
     <h5 class="userphoto-personalinfo__name"><?php echo $User->Name ?></h5>
-    <p class="userphoto-personalinfo__secondary"><?php echo $UserMetaData["Graduation"] ?></p>
+    <p class="userphoto-personalinfo__secondary"><?php echo $UserMetaData["Grade"] ?></p>
 </div>

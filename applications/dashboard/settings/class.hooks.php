@@ -1045,5 +1045,4 @@ class DashboardHooks extends Gdn_Plugin implements LoggerAwareInterface {
             \Vanilla\Utility\SqlUtils::keepTextFieldLengths($structure);
         }
     }
-
 }
