@@ -1,6 +1,7 @@
 <?php if (!defined('APPLICATION')) exit();
 $dataDriven = \Gdn::themeFeatures()->useDataDrivenTheme();
 $User = val('User', Gdn::controller());
+$Discussion = val('Discussion', Gdn::controller());
 $IsProfilePage = val('IsProfilePage', Gdn::controller());
 if (!$User && Gdn::session()->isValid()) {
     $User = Gdn::session()->User;

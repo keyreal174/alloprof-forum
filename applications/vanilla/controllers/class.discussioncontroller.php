@@ -17,10 +17,13 @@ use Vanilla\Message;
 class DiscussionController extends VanillaController {
 
     /** @var array Models to include. */
-    public $Uses = ['DiscussionModel', 'CommentModel', 'Form', 'UserModel'];
+    public $Uses = ['DiscussionModel', 'CategoryModel', 'CommentModel', 'Form', 'UserModel'];
 
     /** @var array Unique identifier. */
     public $CategoryID;
+
+    /** @var array Unique identifier. */
+    public $Category;
 
     /**  @var CommentModel */
     public $CommentModel;
@@ -105,16 +108,14 @@ class DiscussionController extends VanillaController {
      */
     public function index($DiscussionID = 0, $DiscussionStub = '', $Page = '') {
         // Setup head
-        $this->getUserInfo();
+
 
         $Session = Gdn::session();
         $this->addJsFile('jquery.autosize.min.js');
         $this->addJsFile('autosave.js');
         $this->addJsFile('discussion.js');
         $this->addJsFile('replyQuestion.js');
-        $this->addModule('UserPhotoModule');
-        $this->addModule('ProfileFilterModule');
-        $this->fireEvent('AddProfileInfo');
+
 
         Gdn_Theme::section('Discussion');
 
@@ -360,6 +361,13 @@ class DiscussionController extends VanillaController {
             $this->DiscussionModel->structuredData((array)$this->Discussion)
         );
         $this->setData('IsAnswer', true);
+
+        $this->getUserInfo('', '', $this->Discussion->InsertUserID);
+
+        $this->addModule('UserPhotoModule');
+        $this->addModule('ProfileFilterModule');
+        $this->fireEvent('AddProfileInfo');
+
         $this->render();
     }
 
