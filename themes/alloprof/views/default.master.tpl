@@ -211,6 +211,12 @@
                                             {/if}
                                             {asset name="Panel"}
                                         </aside>
+                                        {if $User.SignedIn}
+                                            <div class="scroll-top">
+                                                <h2>Can't find answers?</h2>
+                                                <button id="scrollTop" class="btn-default btn-shadow">Ask a question</button>
+                                            </dv>
+                                        {/if}
                                     </div>
                                 </div>
                             </div>

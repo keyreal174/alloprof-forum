@@ -168,3 +168,17 @@ select {
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
 }
+
+.scroll-top {
+    text-align: center;
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.scroll-top button {
+    margin-top: 30px;
+    width: max-content;
+}
