@@ -42,7 +42,6 @@ if ($this->data('_PagerUrl'))
 
 echo '<div class="PageControls Top">';
 PagerModule::write($PagerOptions);
-echo Gdn_Theme::module('NewDiscussionModule', $this->data('_NewDiscussionProperties', ['CssClass' => 'Button Action Primary']));
 // Avoid displaying in a category's list of discussions.
 if ($this->data('EnableFollowingFilter')) {
     echo discussionFilters();
@@ -58,11 +57,6 @@ if ($this->DiscussionData->numRows() > 0 || (isset($this->AnnounceData) && is_ob
     </ul>
     <?php $this->fireEvent('AfterDiscussionsList'); ?>
     <?php
-
-    echo '<div class="PageControls Bottom">';
-    PagerModule::write($PagerOptions);
-    echo Gdn_Theme::module('NewDiscussionModule', $this->data('_NewDiscussionProperties', ['CssClass' => 'Button Action Primary']));
-    echo '</div>';
 
 } else {
     ?>

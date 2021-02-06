@@ -511,9 +511,9 @@ if (!function_exists('followButton')) :
                 </svg>
 EOT;
 
-            $text = $following ? t('Following') : t('Follow');
+            $text = $following ? t('Unfollow Subject') : t('Follow Subject');
             $output .= anchor(
-                $icon.$text,
+                $text,
                 "/category/followed/{$categoryID}/".Gdn::session()->transientKey(),
                 'Hijack followButton'.($following ? ' TextColor isFollowing' : ''),
                 ['title' => $text, 'aria-pressed' => $following ? 'true' : 'false', 'role' => 'button', 'tabindex' => '0']
