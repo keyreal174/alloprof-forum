@@ -1,6 +1,6 @@
 .BoxProfileInfo .BoxProfileInfo_detailbox {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     border-top: 1px solid #E0E0E0;
     border-bottom: 1px solid #E0E0E0;
     padding-top: 28px;
@@ -9,8 +9,6 @@
 
 .BoxProfileInfo .BoxProfileInfo_detailbox .BoxProfileInfo_detailbox__item {
     text-align: center;
-    padding-left: 44px;
-    padding-right: 44px;
 }
 
 .BoxProfileInfo .BoxProfileInfo_detailbox .BoxProfileInfo_detailbox__item img {

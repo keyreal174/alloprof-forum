@@ -18,6 +18,15 @@
     display: none
 }
 
+.PanelInfo li.Active {
+    background: #05BF8E;
+    border-radius: 12px;
+}
+
+.PanelInfo li.Active * {
+    color: white !important;
+}
+
 @media screen and (max-width:768px) {
 
     .flyoutIsOpen,
@@ -9347,7 +9356,7 @@ screen and (-ms-high-contrast:none) {
 .BoxCategories.BoxCategories .PanelCategories li,
 .BoxFilter:not(.BoxBestOfFilter) .PanelCategories li,
 body.Section-EditProfile .Box .PanelCategories li {
-    padding: 0
+    padding: 5px 10px;
 }
 
 .BoxCategories.BoxCategories .PanelCategories li.Depth2,
@@ -9471,6 +9480,7 @@ body.Section-EditProfile .Box a {
 
 .BoxCategories.BoxCategories a span.category-icon {
     min-width: 39px;
+    display: flex;
 }
 
 .BoxCategories.BoxCategories a span img {

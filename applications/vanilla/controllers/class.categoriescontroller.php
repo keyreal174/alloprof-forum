@@ -20,7 +20,7 @@ use Vanilla\Site\SiteSectionModel;
 class CategoriesController extends VanillaController {
 
     /** @var array Models to include.*/
-    public $Uses = ['Database', 'Form', 'CategoryModel'];
+    public $Uses = ['Database', 'Form', 'CategoryModel', 'UserModel'];
 
     /** @var CategoryModel */
     public $CategoryModel;
@@ -37,6 +37,8 @@ class CategoriesController extends VanillaController {
     /** @var bool Value indicating if the category-following filter should be displayed when rendering a view */
     public $enableFollowingFilter = false;
 
+    /** @var array List of available tabs. */
+    public $ProfileTabs;
 
     /**
      * @var \Closure $categoriesCompatibilityCallback A backwards-compatible callback to get `$this->data('Categories')`.
@@ -274,6 +276,110 @@ class CategoriesController extends VanillaController {
         return [$categoryIdentifier, $page];
     }
 
+
+    /**
+     * Retrieve the user to be manipulated. Defaults to current user.
+     *
+     * @since 2.0.0
+     * @access public
+     * @param mixed $User Unique identifier, possibly username or ID.
+     * @param string $username .
+     * @param int $userID Unique ID.
+     * @param bool $checkPermissions Whether or not to check user permissions.
+     * @return bool Always true.
+     */
+    public function getUserInfo($userReference = '', $username = '', $userID = '', $checkPermissions = false) {
+        if ($this->_UserInfoRetrieved) {
+            return;
+        }
+
+        if (!c('Garden.Profile.Public') && !Gdn::session()->isValid()) {
+            throw permissionException();
+        }
+
+        // If a UserID was provided as a querystring parameter, use it over anything else:
+        if ($userID) {
+            $userReference = $userID;
+            $username = 'Unknown'; // Fill this with a value so the $UserReference is assumed to be an integer/userid.
+        }
+
+        $this->Roles = [];
+        if ($userReference == '') {
+            if ($username) {
+                $this->User = $this->UserModel->getByUsername($username);
+            } else {
+                $this->User = $this->UserModel->getID(Gdn::session()->UserID);
+            }
+        } elseif (is_numeric($userReference) && $username != '') {
+            $this->User = $this->UserModel->getID($userReference);
+        } else {
+            $this->User = $this->UserModel->getByUsername($userReference);
+        }
+
+        $this->fireEvent('UserLoaded');
+
+        if ($this->User === false) {
+            throw notFoundException('User');
+        } elseif ($this->User->Deleted == 1) {
+            redirectTo('dashboard/home/deleted');
+        } else {
+            $this->RoleData = $this->UserModel->getRoles($this->User->UserID);
+            if ($this->RoleData !== false && $this->RoleData->numRows(DATASET_TYPE_ARRAY) > 0) {
+                $this->Roles = array_column($this->RoleData->resultArray(), 'Name');
+            }
+
+            // Hide personal info roles
+            if (!checkPermission('Garden.PersonalInfo.View')) {
+                $this->Roles = array_filter($this->Roles, 'RoleModel::FilterPersonalInfo');
+            }
+
+            $this->setData('Profile', $this->User);
+            $this->setData('UserRoles', $this->Roles);
+            if ($cssClass = val('_CssClass', $this->User)) {
+                $this->CssClass .= ' '.$cssClass;
+            }
+        }
+
+        if ($checkPermissions && Gdn::session()->UserID != $this->User->UserID) {
+            $this->permission(['Garden.Users.Edit', 'Moderation.Profiles.Edit'], false);
+        }
+
+        // $this->addSideMenu();
+        $this->_UserInfoRetrieved = true;
+        return true;
+    }
+
+
+    /**
+     * Adds a tab (or array of tabs) to the profile tab collection ($this->ProfileTabs).
+     *
+     * @since 2.0.0
+     * @access public
+     * @param mixed $tabName Tab name (or array of tab names) to add to the profile tab collection.
+     * @param string $tabUrl URL the tab should point to.
+     * @param string $cssClass Class property to apply to tab.
+     * @param string $tabHtml Overrides tab's HTML.
+     */
+    public function addProfileTab($tabName, $tabUrl = '', $cssClass = '', $tabHtml = '') {
+        if (!is_array($tabName)) {
+            if ($tabHtml == '') {
+                $tabHtml = $tabName;
+            }
+
+            $tabName = [$tabName => ['TabUrl' => $tabUrl, 'CssClass' => $cssClass, 'TabHtml' => $tabHtml]];
+        }
+
+        foreach ($tabName as $name => $tabInfo) {
+            $url = val('TabUrl', $tabInfo, '');
+            if ($url == '') {
+                $tabInfo['TabUrl'] = userUrl($this->User, '', strtolower($name));
+            }
+
+            $this->ProfileTabs[$name] = $tabInfo;
+            $this->_ProfileTabs[$name] = $tabInfo; // Backwards Compatibility
+        }
+    }
+
     /**
      * Show all discussions in a particular category.
      *
@@ -284,6 +390,7 @@ class CategoriesController extends VanillaController {
      * @param int $offset Number of discussions to skip.
      */
     public function index($categoryIdentifier = '', $page = '0') {
+        $this->getUserInfo();
         [$categoryIdentifier, $page] = $this->validatePagination($categoryIdentifier, $page);
         if (!$categoryIdentifier) {
             /** @var SiteSectionInterface $siteSection */
@@ -292,6 +399,9 @@ class CategoriesController extends VanillaController {
                 $categoryIdentifier = $siteSection->getAttributes()['categoryID'] ?? '';
             }
         }
+
+
+        $this->addJsFile('askquestion.js');
 
         // Figure out which category layout to choose (Defined on "Homepage" settings page).
         $layout = c('Vanilla.Categories.Layout');
@@ -354,6 +464,12 @@ class CategoriesController extends VanillaController {
 
             $this->setData('Category', $category, true);
 
+            $this->setData('BannerImage', val('BannerImage', $category));
+
+            $this->setData('CountAllDiscussions', val('CountAllDiscussions', $category));
+
+            $this->setData('CountAllComments', val('CountAllComments', $category));
+
             $this->title(Gdn::formatService()->renderPlainText(val('Name', $category, ''), HtmlFormat::FORMAT_KEY));
 
             $this->description(val('Description', $category), false);
@@ -397,7 +513,7 @@ class CategoriesController extends VanillaController {
                     }
                     break;
                 default:
-                    // $this->View = 'index';
+                    $this->View = 'index';
                     break;
             }
 
@@ -423,11 +539,19 @@ class CategoriesController extends VanillaController {
             $this->setData('CategoryID', $categoryID, true);
 
             // Add modules
-            // $this->addModule('NewDiscussionModule');
-            $this->addModule('DiscussionFilterModule');
+            // $this->addModule('DiscussionFilterModule');
+            $this->addModule('AskQuestionModule');
             $this->addModule('CategoriesModule');
-            $this->addModule('BookmarkedModule');
-            $this->addModule('TagModule');
+            // $this->addModule('BookmarkedModule');
+            // $this->addModule('TagModule');
+
+            // Make sure the userphoto module gets added to the page
+            $this->addModule('UserPhotoModule');
+
+            // Add discussion and question count on the profile block
+            $this->fireEvent('AddProfileTabsInfo');
+            $this->addModule('ProfileFilterModule');
+
 
             // Get a DiscussionModel
             $discussionModel = new DiscussionModel();
@@ -522,7 +646,7 @@ class CategoriesController extends VanillaController {
             $this->canonicalUrl(categoryUrl($category, pageNumber($offset, $limit)));
 
             // Change the controller name so that it knows to grab the discussion views
-            $this->ControllerName = 'DiscussionsController';
+            // $this->ControllerName = 'DiscussionsController';
             // Pick up the discussions class
             $this->CssClass = 'Discussions Category-'.val('UrlCode', $category);
 
@@ -612,11 +736,18 @@ class CategoriesController extends VanillaController {
 
         // Add modules
         // $this->addModule('NewDiscussionModule');
-        $this->addModule('DiscussionFilterModule');
-        $this->addModule('BookmarkedModule');
+        // $this->addModule('DiscussionFilterModule');
+        // $this->addModule('BookmarkedModule');
         $this->addModule('CategoriesModule');
         $this->addModule($CategoryFollowToggleModule);
-        $this->addModule('TagModule');
+        // $this->addModule('TagModule');
+
+        // Make sure the userphoto module gets added to the page
+        $this->addModule('UserPhotoModule');
+
+        // Add discussion and question count on the profile block
+        $this->fireEvent('AddProfileTabsInfo');
+        $this->addModule('ProfileFilterModule');
 
         $canonicalUrl = $this->calculateCanonicalUrl($this->Data);
         $this->canonicalUrl($canonicalUrl);

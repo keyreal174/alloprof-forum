@@ -12,8 +12,13 @@ jQuery(document).ready(function($) {
         $('.AskQuestionForm .placeholder').removeClass('close')
     })
 
-    $('#scrollTop').click(function(){
-        window.scrollTo({top: 0, behavior: 'smooth'});
+    $('.scrollToAskQuestionForm').click(function(){
+        $('.AskQuestionForm').css('display', 'block');
         $('.AskQuestionForm .placeholder').trigger('click');
+        console.log($(".AskQuestionForm .ql-editor"))
+        $(".AskQuestionForm .ql-editor").focus();
+        $([document.documentElement, document.body]).animate({
+            scrollTop: $(".AskQuestionForm").offset().top - 220
+        }, 500);
     })
 });

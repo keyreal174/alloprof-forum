@@ -24,3 +24,105 @@
     margin: auto;
     margin-top: 50px;
 }
+
+.CategoryDetail .Card {
+    background-color: #fff;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    padding: 40px;
+}
+
+.CategoryDetail .Card .banner {
+    position: relative;
+    min-height: 150px;
+}
+
+.CategoryDetail .Card .banner .category-title {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+.CategoryDetail .Card .banner img {
+    width: 100%;
+    border-radius: 5px;
+}
+
+.CategoryDetail .Card .banner .PageDescription {
+    font-size: 18px;
+}
+
+.CategoryDetail .Card h1 {
+    font-size: 40px;
+}
+
+.CategoryDetail .Card h2 {
+    font-size: 21px;
+}
+
+.CategoryDetail .Card .category-info {
+    margin: 20px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.CategoryDetail .Card .category-info > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+    flex-direction: column;
+}
+
+.CategoryDetail .Card .buttons {
+    display: flex;
+    justify-content: center;
+}
+
+.CategoryDetail .Card .buttons button {
+    margin: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.CategoryDetail .Card .buttons button span:before {
+    font-size: 17px;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.CategoryDetail .Card .buttons button a {
+    color: #1A1919;
+    font-weight: bold;
+    font-size: 18px;
+    text-transform: none;
+    display: flex;
+    align-items: center;
+}
+
+.CategoryDetail .Card .buttons button a svg {
+    margin-right: 10px;
+    width: 15px;
+}
+
+.CategoryDetail .FilterBar {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0px;
+}
+
+.CategoryDetail .FilterBar > div {
+    flex: 1;
+}
+
+.CategoryDetail .FilterBar nav {
+    margin-top: 0;
+    border: none !important;
+    justify-content: flex-start;
+}
+
+.CategoryDetail .FilterBar nav .Navigation-linkContainer {
+    margin: 0 15px 0 0;
+}

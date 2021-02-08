@@ -106,8 +106,6 @@ class DiscussionsController extends VanillaController {
         $this->addJsFile('post.js');
         $this->addJsFile('askquestion.js');
 
-
-
         // Remove score sort
         DiscussionModel::removeSort('top');
 
@@ -158,7 +156,7 @@ class DiscussionsController extends VanillaController {
         // Add modules
         // $this->addModule('DiscussionFilterModule');
         $this->addModule('NewDiscussionModule');
-        // $this->addModule('AskQuestionModule');
+        $this->addModule('AskQuestionModule');
         $this->addModule('CategoriesModule');
 
 
@@ -172,7 +170,6 @@ class DiscussionsController extends VanillaController {
         $this->fireEvent('AddProfileTabsInfo');
         $this->addModule('ProfileFilterModule');
 
-        $this->addModule('QuickQuestionModule');
         // $this->addModule('BookmarkedModule');
         // $this->addModule('TagModule');
 
