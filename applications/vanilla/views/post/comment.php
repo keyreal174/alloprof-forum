@@ -1,14 +1,13 @@
 <?php if (!defined('APPLICATION')) exit();
 $dataDriven = \Gdn::themeFeatures()->useDataDrivenTheme();
-$User = val('User', Gdn::controller());
-$IsProfilePage = val('IsProfilePage', Gdn::controller());
-if (!$User && Gdn::session()->isValid()) {
+if (Gdn::session()->isValid()) {
     $User = Gdn::session()->User;
 }
-
 if (!$User) {
     return;
 }
+
+$IsProfilePage = val('IsProfilePage', Gdn::controller());
 $UserMetaData = Gdn::userModel()->getMeta($User->UserID, 'Profile.%', 'Profile.');
 
 $Session = Gdn::session();

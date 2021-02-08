@@ -106,7 +106,7 @@ class DiscussionController extends VanillaController {
      * @param string $DiscussionStub URL-safe title slug
      * @param string $Page The current page of comments
      */
-    public function index($DiscussionID = 0, $DiscussionStub = '', $Page = '') {
+    public function index($DiscussionID = 0, $DiscussionStub = '', $Page = '', $Order = '') {
         // Setup head
 
 
@@ -115,7 +115,7 @@ class DiscussionController extends VanillaController {
         $this->addJsFile('autosave.js');
         $this->addJsFile('discussion.js');
         $this->addJsFile('replyQuestion.js');
-
+        $Order = Gdn::request()->get('order');
 
         Gdn_Theme::section('Discussion');
 
@@ -229,7 +229,15 @@ class DiscussionController extends VanillaController {
         $this->checkPageRange($this->Offset, $ActualResponses);
 
         // Load the comments
-        $this->setData('Comments', $this->CommentModel->getByDiscussion($DiscussionID, $Limit, $this->Offset));
+        if ($Order == 'asc') {
+            $this->CommentModel->orderBy('c.DateInserted asc');
+            $this->setData('SortComments', 'asc');
+            $this->setData('Comments', $this->CommentModel->getByDiscussion($DiscussionID, $Limit, $this->Offset), true);
+        } else {
+            $this->CommentModel->orderBy('c.DateInserted desc');
+            $this->setData('SortComments', 'desc');
+            $this->setData('Comments', $this->CommentModel->getByDiscussion($DiscussionID, $Limit, $this->Offset), true);
+        }
 
         $LatestItem = $this->Discussion->CountCommentWatch;
         if ($LatestItem === null) {

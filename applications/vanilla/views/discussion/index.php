@@ -46,17 +46,21 @@ echo '</span>';
 
 echo '<div class="DataBox DataBox-Comments">';
 if ($this->data('Comments')->numRows() > 0)
-    $options = array_map(
+echo $this->Form->open();
+$options = array_map(
         't',
         explode(',', 'Most Recent, Earlier')
     );
+    $Options = ['desc' => 'Most recent first', 'asc' => 'Most recent last'];
+    $discussionUrl = $this->data('Discussion')->Url;
     echo '<div class="CommentHeadingWrapper">';
     echo '<h2 class="CommentHeading">'.$this->data('_CommentsHeader', t('Answers')).'('.$this->data('_LatestItem').')</h2>';
-    echo '<div class="Category rich-select bg-transparent">';
+    echo '<div class="Category CommentSort rich-select bg-transparent">';
     echo '<img src="/themes/alloprof/design/images/icons/sort.svg"/>';
-    echo $this->Form->dropDown('SortComments', $options);
+    echo commentSort($discussionUrl);
     echo '</div>';
     echo '</div>';
+    echo $this->Form->close();
 ?>
     <ul class="MessageList DataList Comments">
         <?php include $this->fetchViewLocation('comments'); ?>

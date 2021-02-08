@@ -164,6 +164,8 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 24px;
+    position: relative;
+    z-index: 1;
 }
 
 .CommentHeading {
@@ -243,6 +245,40 @@
     border: none !important;
     background: #f2f2f2;
     position: relative;
+}
+
+.rich-select.CommentSort {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: visible;
+}
+
+.rich-select.CommentSort .selectBox {
+    display: flex;
+}
+
+.rich-select.CommentSort .selectBox,
+.rich-select.CommentSort .selectBox .selectBox-main,
+.rich-select.CommentSort .selectBox .selectBox-main .selectBox-toggle {
+    position: initial;
+}
+
+.rich-select.CommentSort .selectBox-toggle {
+    font-size: 16px;
+    color: #1A1919;
+}
+
+.rich-select.CommentSort .selectBox-toggle .vanillaDropDown-arrow {
+    position: absolute;
+    right: 15px;
+}
+
+.rich-select.CommentSort .selectBox-content {
+    left: 0;
+    min-width: 200px;
 }
 
 /* .CommentPostForm .richEditor-frame .richEditor-embedBar {

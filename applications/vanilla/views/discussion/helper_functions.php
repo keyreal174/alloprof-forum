@@ -108,7 +108,7 @@ if (!function_exists('writeComment')) :
 
         // First comment template event
         $sender->fireEvent('BeforeCommentDisplay'); ?>
-        <li class="<?php echo $cssClass.' blue-border'; ?>" id="<?php echo 'Comment_'.$comment->CommentID; ?>">
+        <li class="<?php echo $cssClass; ?>" id="<?php echo 'Comment_'.$comment->CommentID; ?>">
             <div class="Comment">
 
                 <?php
@@ -777,5 +777,111 @@ if (!function_exists('writeDiscussionFooter')) :
             </div>
         </div>
         <?php
+    }
+endif;
+
+if (!function_exists('commentSort')) :
+    /**
+     * Returns discussions filtering.
+     *
+     * @param string $extraClasses any extra classes you add to the drop down
+     * @return string
+     */
+    function commentSort($baseUrl) {
+        if (!Gdn::session()->isValid()) {
+            return;
+        }
+
+        if (!$baseUrl) {
+            $baseUrl = 'discussions';
+        }
+        $transientKey = Gdn::session()->transientKey();
+        $filters = [
+            [
+                'name' => t('Most Recent'),
+                'param' => 'desc',
+            ],
+            [
+                'name' => t('Earlier'),
+                'param' => 'asc',
+            ]
+        ];
+
+        if (Gdn::request()->get('desc')) {
+            $defaultParams['order'] = 'desc';
+        }
+
+        if (!empty($defaultParams)) {
+            $defaultUrl = url($baseUrl.'?'.http_build_query($defaultParams));
+        } else {
+            $defaultUrl = url($baseUrl);
+        }
+
+        return commentSorttDropDown(
+            $baseUrl,
+            $filters,
+            $extraClasses,
+            null,
+            $defaultUrl,
+            'View'
+        );
+    }
+endif;
+
+if (!function_exists('commentSorttDropDown')) :
+    /**
+     * Returns a filtering drop-down menu.
+     *
+     * @param string $baseUrl Target URL with no query string applied.
+     * @param array $filters A multidimensional array of rows with the following properties:
+     *     ** 'name': Friendly name for the filter.
+     *     ** 'param': URL parameter associated with the filter.
+     *     ** 'value': A value for the URL parameter.
+     * @param string $extraClasses any extra classes you add to the drop down
+     * @param string|null $default The default label for when no filter is active. If `null`, the default label is "All".
+     * @param string|null $defaultURL URL override to return to the default, unfiltered state.
+     * @param string $label Text for the label to attach to the cont
+     * @return string
+     */
+    function commentSorttDropDown($baseUrl, array $filters = [], $extraClasses = '', $default = null, $defaultUrl = null, $label = 'View') {
+        if ($default === null) {
+            $default = t('Most Recent');
+        }
+        $output = '';
+
+        $links = [];
+        $active = null;
+        // Translate filters into links.
+        foreach ($filters as $filter) {
+            // Make sure we have the bare minimum: a label and a URL parameter.
+            if (!array_key_exists('name', $filter)) {
+                throw new InvalidArgumentException('Filter does not have a name field.');
+            }
+            if (!array_key_exists('param', $filter)) {
+                throw new InvalidArgumentException('Filter does not have a param field.');
+            }
+
+            // Prepare for consumption by linkDropDown.
+            $query = ['order' => $filter['param']];
+            $url = url($baseUrl.'?'.http_build_query($query));
+            $link = [
+                'name' => $filter['name'],
+                'url' => $url
+            ];
+
+            // If we don't already have an active link, and this parameter and value match, this is the active link.
+            if ($active === null && Gdn::request()->get('order') == $filter['param']) {
+                $active = $filter['name'];
+                $link['active'] = true;
+            }
+
+            // Queue up another filter link.
+            $links[] = $link;
+        }
+
+        // Generate the markup for the drop down menu.
+        $output .= linkDropDown($links, 'selectBox-following '.trim($extraClasses), '');
+
+        return $output;
     }
 endif;
