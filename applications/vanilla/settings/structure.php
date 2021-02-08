@@ -157,6 +157,7 @@ $Construct
     ->column('Tags', 'text', null)
     ->column('CountComments', 'int', '0')
     ->column('CountBookmarks', 'int', null)
+    ->column('CountFavourites', 'int', null)
     ->column('CountViews', 'int', '1')
     ->column('Closed', 'tinyint(1)', '0')
     ->column('Announce', 'tinyint(1)', '0', 'index')
@@ -205,6 +206,7 @@ $Construct->column('UserID', 'int', false, 'primary')
     ->column('DateLastViewed', 'datetime', null)// null signals never
     ->column('Dismissed', 'tinyint(1)', '0')// relates to dismissed announcements
     ->column('Bookmarked', 'tinyint(1)', '0')
+    ->column('Favourite', 'tinyint(1)', '0')
     ->column('Participated', 'tinyint(1)', '0')// whether or not the user has participated in the discussion.
     ->set($Explicit, $Drop);
 

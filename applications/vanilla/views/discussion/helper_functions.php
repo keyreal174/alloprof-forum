@@ -746,6 +746,7 @@ if (!function_exists('writeDiscussionFooter')) :
         <div class="Item-Footer">
             <div class="Item-Footer-Icons">
                 <?php
+                echo '<span>'.property_exists($Discussion, 'CountFavourites')."</span><span>".$Discussion->CountFavourites."</span>";
                 if (!Gdn::themeFeatures()->get('EnhancedAccessibility')) {
                         echo '<span class="Options">';
                         echo '<span class="Notifications-Icon"></span>';
