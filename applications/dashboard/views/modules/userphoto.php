@@ -1,6 +1,7 @@
 <?php if (!defined('APPLICATION')) exit();
 $dataDriven = \Gdn::themeFeatures()->useDataDrivenTheme();
 $User = val('User', Gdn::controller());
+$Discussion = val('Discussion', Gdn::controller());
 $IsProfilePage = val('IsProfilePage', Gdn::controller());
 if (!$User && Gdn::session()->isValid()) {
     $User = Gdn::session()->User;
@@ -32,6 +33,8 @@ if ($IsProfilePage) {
     $AllowEditClass = "";
 }
 
+$UserMetaData = Gdn::userModel()->getMeta($User->UserID, 'Profile.%', 'Profile.');
+
 if ($Photo) : ?>
     <div class="Photo PhotoWrap PhotoWrapLarge <?php echo val('_CssClass', $User); ?>">
         <?php
@@ -55,5 +58,5 @@ endif;
 ?>
 <div class="userphoto-personalinfo">
     <h5 class="userphoto-personalinfo__name"><?php echo $User->Name ?></h5>
-    <p class="userphoto-personalinfo__secondary"><?php echo $User->Email ?></p>
+    <p class="userphoto-personalinfo__secondary"><?php echo $UserMetaData["Grade"] ?></p>
 </div>

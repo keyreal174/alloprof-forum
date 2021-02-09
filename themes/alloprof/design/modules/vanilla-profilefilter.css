@@ -1,6 +1,6 @@
 .BoxProfileInfo .BoxProfileInfo_detailbox {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     border-top: 1px solid #E0E0E0;
     border-bottom: 1px solid #E0E0E0;
     padding-top: 28px;
@@ -9,8 +9,6 @@
 
 .BoxProfileInfo .BoxProfileInfo_detailbox .BoxProfileInfo_detailbox__item {
     text-align: center;
-    padding-left: 44px;
-    padding-right: 44px;
 }
 
 .BoxProfileInfo .BoxProfileInfo_detailbox .BoxProfileInfo_detailbox__item img {
@@ -42,4 +40,12 @@
     margin-right: 12px;
     width: 19.5px;
     height: 19.5px;
+}
+
+.BoxProfileInfo .BoxProfileInfo_detailbox a span.category-icon {
+    min-width: 0px !important;
+}
+
+.BoxProfileInfo .BoxProfileInfo_detailbox a.ItemLink {
+    justify-content: center;
 }

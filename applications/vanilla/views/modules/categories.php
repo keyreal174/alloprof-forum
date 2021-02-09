@@ -12,7 +12,7 @@ if ($this->Data !== FALSE && $displayModule) {
     }
     ?>
     <div class="Box BoxCategories vanilla-categories">
-        <?php echo panelHeading(t('Subjects monitored')); ?>
+        <?php echo panelHeading(t('Subjects followed')); ?>
         <ul class="PanelInfo PanelCategories">
             <?php
             $MaxDepth = c('Vanilla.Categories.MaxDisplayDepth');
@@ -44,16 +44,22 @@ if ($this->Data !== FALSE && $displayModule) {
                     $CountText = '';
                 }
 
+                $photoUrl = val('PhotoUrl', $Category);
+
+                if($photoUrl)
+                    $photo = '<span class="category-icon"><img src="'.$photoUrl.'" class="CategoryPhoto" /></span>';
+                else $photo = '<span class="category-icon"></span>';
+
                 if ($Category->DisplayAs === 'Heading') {
                     echo $CountText.' '.htmlspecialchars($Category->Name);
                 } else {
-                    echo anchor($CountText.' '.htmlspecialchars($Category->Name), categoryUrl($Category), 'ItemLink');
+                    echo anchor($photo.''.$CountText.' '.htmlspecialchars($Category->Name), categoryUrl($Category), 'ItemLink');
                 }
                 echo "</li>\n";
             }
             ?>
         </ul>
-        <a href="" class="vanilla-categories__viewall">See all subjects</a>
+        <a href="/categories" class="vanilla-categories__viewall"><?php echo t('See all subjects'); ?></a>
     </div>
 <?php
 }

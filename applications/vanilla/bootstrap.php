@@ -47,8 +47,8 @@ Gdn::getContainer()
 
     ->rule(WidgetService::class)
     ->addCall('registerWidget', [\Vanilla\Community\CategoriesModule::class])
-    ->rule(QuickLinksVariableProvider::class)
-    ->addCall('addQuickLinkProvider', [new Reference(ForumQuickLinksProvider::class)])
+    // ->rule(QuickLinksVariableProvider::class)
+    // ->addCall('addQuickLinkProvider', [new Reference(ForumQuickLinksProvider::class)])
 ;
 
 

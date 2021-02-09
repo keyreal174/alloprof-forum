@@ -307,8 +307,9 @@ endif;
 if (!function_exists('writeDiscussionDetail')) :
     function writeDiscussionDetail($Discussion, $sender, $session) {
         $Author = Gdn::userModel()->getID($Discussion->InsertUserID); // userBuilder($Discussion, 'Insert');
+        $AuthorMetaData = Gdn::userModel()->getMeta($Author->UserID, 'Profile.%', 'Profile.');
         $cssClass = cssClass($Discussion);
-        $category = CategoryModel::categories($discussion->CategoryID);
+        $category = CategoryModel::categories($Discussion->CategoryID);
         $discussionUrl = $Discussion->Url;
 
         $dateTimeFormatter = Gdn::getContainer()->get(\Vanilla\Formatting\DateTimeFormatter::class);
@@ -352,6 +353,7 @@ if (!function_exists('writeDiscussionDetail')) :
                         </span>
                         <span class="AuthorInfo">
                             <?php
+                            echo "<a class='DiscussionHeader_category' href='/categories/".$category["UrlCode"]."'>".$category["Name"]."</a>";
                             echo wrapIf(htmlspecialchars(val('Title', $Author)), 'span', ['class' => 'MItem AuthorTitle']);
                             echo wrapIf(htmlspecialchars(val('Location', $Author)), 'span', ['class' => 'MItem AuthorLocation']);
                             $sender->fireEvent('AuthorInfo');
@@ -377,28 +379,10 @@ if (!function_exists('writeDiscussionDetail')) :
                     <div class="Meta DiscussionMeta">
                         <span class="MItem TimeAgo">
                             <?php
-                                echo 'Secondaire 1' . '  ' . timeElapsedString($Discussion->LastDate, false);
+                                echo $AuthorMetaData["Grade"] . ' • ' . timeElapsedString($Discussion->LastDate, false);
                             ?>
                         </span>
                         <?php
-                            // // Include source if one was set
-                            // if ($Source = val('Source', $Discussion)) {
-                            //     echo ' '.wrap(sprintf(t('via %s'), t($Source.' Source', $Source)), 'span', ['class' => 'MItem MItem-Source']).' ';
-                            // }
-                            // // Category
-                            // if (c('Vanilla.Categories.Use')) {
-                            //     $accessibleLabel = HtmlUtils::accessibleLabel('Category: "%s"', [$sender->data('Discussion.Category')]);
-                            //     echo ' <span class="MItem Category">';
-                            //     echo ' '.t('in').' ';
-                            //     echo anchor(htmlspecialchars($sender->data('Discussion.Category')), categoryUrl($sender->data('Discussion.CategoryUrlCode')), ["aria-label" => $accessibleLabel]);
-                            //     echo '</span> ';
-                            // }
-
-                            // Include IP Address if we have permission
-                            // if ($session->checkPermission('Garden.PersonalInfo.View')) {
-                            //     echo wrap(ipAnchor($Discussion->InsertIPAddress), 'span', ['class' => 'MItem IPAddress']);
-                            // }
-
                             $sender->fireEvent('DiscussionInfo');
                             $sender->fireEvent('AfterDiscussionMeta'); // DEPRECATED
                         ?>
@@ -420,30 +404,9 @@ if (!function_exists('writeDiscussionDetail')) :
                         }
                         ?>
                     </div>
-                    <div class="Item-Footer">
-                        <div class="Item-Footer-Icons">
-                            <?php
-                            // render legacy options
-                            if (!Gdn::themeFeatures()->get('EnhancedAccessibility')) {
-                                    echo '<span class="Options">';
-                                    echo '<span class="Notifications-Icon"></span>';
-                                    echo '<span class="Favorite-Icon"></span>';
-                                    echo '<span class="Back-Icon"></span>';
-                                    // echo bookmarkButton($discussion);
-                                    echo '</span>';
-                                }
-                            ?>
-                            <div class="Separator"></div>
-                            <span class="Response">
-                                <?php
-                                    echo $Discussion->CountComments . ' ' . 'réponses';
-                                ?>
-                            </span>
-                        </div>
-                        <div>
-                            <a class="btn-default" href="<?php echo $discussionUrl; ?>">Voir</a>
-                        </div>
-                    </div>
+                    <?php
+                        writeDiscussionFooter($Discussion, $sender);
+                    ?>
                 </div>
             </div>
         </li>

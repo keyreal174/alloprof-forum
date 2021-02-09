@@ -2,7 +2,9 @@
 
 $Controller = Gdn::controller();
 $Session = Gdn::session();
-
+$User = val('User', Gdn::controller());
+$Discussion = val('Discussion', Gdn::controller());
+$Category = CategoryModel::categories($Discussion->CategoryID);
 // Get the tab sort order from the user-prefs.
 //$SortOrder = FALSE;
 //$SortOrder = val('ProfileTabOrder', $Controller->User->Preferences, false);
@@ -23,19 +25,35 @@ foreach ($Controller->ProfileTabs as $TabCode => $TabInfo) {
     <div class="BoxProfileInfo_detailbox">
         <?php
         // Get sorted filter links
-        foreach ($SortOrder as $TabCode) {
-            $CssClass = $TabCode == $Controller->CurrentTab ? 'Active ' : '';
-            // array_key_exists: Just in case a method was removed but is still present in sortorder
-            if (array_key_exists($TabCode, $Controller->ProfileTabs)) {
-                $TabInfo = val($TabCode, $Controller->ProfileTabs, []);
-                $CssClass .= val('CssClass', $TabInfo, '');
-                echo '<div class="BoxProfileInfo_detailbox__item"><img src="/themes/alloprof/design/images/icons/'.$TabCode.'.svg"/>'.anchor(val('TabHtml', $TabInfo, $TabCode), val('TabUrl', $TabInfo))."</div>";
+        if (Gdn::session()->UserID == $User->UserID) {
+            foreach ($SortOrder as $TabCode) {
+                $CssClass = $TabCode == $Controller->CurrentTab ? 'Active ' : '';
+                // array_key_exists: Just in case a method was removed but is still present in sortorder
+                if (array_key_exists($TabCode, $Controller->ProfileTabs)) {
+                    $TabInfo = val($TabCode, $Controller->ProfileTabs, []);
+                    $CssClass .= val('CssClass', $TabInfo, '');
+                    echo '<div class="BoxProfileInfo_detailbox__item"><img src="/themes/alloprof/design/images/icons/'.$TabCode.'.svg"/>'.anchor(val('TabHtml', $TabInfo, $TabCode), val('TabUrl', $TabInfo))."</div>";
+                }
+            }
+        } else {
+            $photoUrl = val('PhotoUrl', $Category);
+
+            if($photoUrl)
+                $photo = '<span class="category-icon"><img src="'.$photoUrl.'" class="CategoryPhoto" /></span>';
+            else $photo = '<span class="category-icon"></span>';
+
+            if ($Category["DisplayAs"] === 'Heading') {
+                echo $CountText.' '.htmlspecialchars($Category["Name"]);
+            } else {
+                echo anchor($photo.''.$CountText.' '.htmlspecialchars($Category["Name"]), categoryUrl($Category), 'ItemLink');
             }
         }
 
         ?>
     </div>
+    <?php if (Gdn::session()->UserID == $User->UserID) { ?>
     <div class="BoxProfileInfo_viewprofile">
         <a href="/profile" class="BoxProfileInfo_viewprofile__btn"><img src="/themes/alloprof/design/images/icons/emoticon.svg"/>View Profile</a>
     </div>
+    <?php } ?>
 </div>

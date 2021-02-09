@@ -12,9 +12,12 @@
 .Panel {
     padding: 30px 25px;
     border-radius: 5px;
-    position: sticky;
-    top: 194px;
-    width: 20%;
+    width: 100%;
+}
+
+.Content.MainContent {
+    position: relative;
+    z-index: 0;
 }
 
 .Panel::before {

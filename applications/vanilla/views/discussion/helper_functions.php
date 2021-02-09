@@ -123,31 +123,31 @@ if (!function_exists('writeComment')) :
                 <?php $sender->fireEvent('BeforeCommentMeta'); ?>
                 <div class="Item-Header CommentHeader">
                     <div class="AuthorWrap">
-            <span class="Author">
-               <?php
-               if ($userPhotoFirst) {
-                   echo userPhoto($author);
-                   echo userAnchor($author, 'Username');
-               } else {
-                   echo userAnchor($author, 'Username');
-                   echo userPhoto($author);
-               }
-               echo formatMeAction($comment);
-               $sender->fireEvent('AuthorPhoto');
-               ?>
-            </span>
-            <span class="AuthorInfo">
-               <?php
-               echo ' '.wrapIf(htmlspecialchars(val('Title', $author)), 'span', ['class' => 'MItem AuthorTitle']);
-               echo ' '.wrapIf(htmlspecialchars(val('Location', $author)), 'span', ['class' => 'MItem AuthorLocation']);
-               $sender->fireEvent('AuthorInfo');
-               ?>
-            </span>
+                        <span class="Author">
+                        <?php
+                        if ($userPhotoFirst) {
+                            echo userPhoto($author);
+                            echo userAnchor($author, 'Username');
+                        } else {
+                            echo userAnchor($author, 'Username');
+                            echo userPhoto($author);
+                        }
+                        echo formatMeAction($comment);
+                        $sender->fireEvent('AuthorPhoto');
+                        ?>
+                        </span>
+                        <span class="AuthorInfo">
+                        <?php
+                        echo ' '.wrapIf(htmlspecialchars(val('Title', $author)), 'span', ['class' => 'MItem AuthorTitle']);
+                        echo ' '.wrapIf(htmlspecialchars(val('Location', $author)), 'span', ['class' => 'MItem AuthorLocation']);
+                        $sender->fireEvent('AuthorInfo');
+                        ?>
+                        </span>
                     </div>
                     <div class="Meta CommentMeta CommentInfo">
-            <span class="MItem DateCreated">
-               <?php echo anchor(Gdn_Format::date($comment->DateInserted, 'html'), $permalink, 'Permalink', ['name' => 'Item_'.($currentOffset), 'rel' => 'nofollow']); ?>
-            </span>
+                        <span class="MItem DateCreated">
+                        <?php echo anchor(Gdn_Format::date($comment->DateInserted, 'html'), $permalink, 'Permalink', ['name' => 'Item_'.($currentOffset), 'rel' => 'nofollow']); ?>
+                        </span>
                         <?php
                         echo dateUpdated($comment, ['<span class="MItem">', '</span>']);
                         ?>
@@ -155,11 +155,6 @@ if (!function_exists('writeComment')) :
                         // Include source if one was set
                         if ($source = val('Source', $comment)) {
                             echo wrap(sprintf(t('via %s'), t($source.' Source', $source)), 'span', ['class' => 'MItem Source']);
-                        }
-
-                        // Include IP Address if we have permission
-                        if ($session->checkPermission('Garden.PersonalInfo.View')) {
-                            echo wrap(ipAnchor($comment->InsertIPAddress), 'span', ['class' => 'MItem IPAddress']);
                         }
 
                         $sender->fireEvent('CommentInfo');
@@ -177,7 +172,6 @@ if (!function_exists('writeComment')) :
                         </div>
                         <?php
                         $sender->fireEvent('AfterCommentBody');
-                        writeReactions($comment);
                         if (val('Attachments', $comment)) {
                             writeAttachments($comment->Attachments);
                         }
@@ -616,7 +610,7 @@ if (!function_exists('writeCommentForm')) :
         }
 
         if (($discussion->Closed == '1' && $userCanClose) || ($discussion->Closed == '0' && $userCanComment)) {
-            // echo $controller->fetchView('comment', 'post', 'vanilla');
+            echo $controller->fetchView('comment', 'post', 'vanilla');
         }
     }
 endif;
@@ -742,5 +736,153 @@ if (!function_exists('formatMeAction')) :
         }
 
         return '<div class="AuthorAction">'.$body.'</div>';
+    }
+endif;
+
+if (!function_exists('writeDiscussionFooter')) :
+    function writeDiscussionFooter($Discussion, $sender) {
+        $discussionUrl = $Discussion->Url;
+        ?>
+        <div class="Item-Footer">
+            <div class="Item-Footer-Icons">
+                <?php
+                echo '<span>'.property_exists($Discussion, 'CountFavourites')."</span><span>".$Discussion->CountFavourites."</span>";
+                if (!Gdn::themeFeatures()->get('EnhancedAccessibility')) {
+                        echo '<span class="Options">';
+                        echo '<span class="Notifications-Icon"></span>';
+                        echo '<span class="Favorite-Icon"></span>';
+                        echo '<span class="Back-Icon"></span>';
+                        echo '</span>';
+                    }
+                ?>
+                <div class="Separator"></div>
+                <span class="Response">
+                    <?php
+                        echo $Discussion->CountComments . ' ' . 'réponses';
+                    ?>
+                </span>
+            </div>
+            <div>
+                <?php
+                    if (!$sender->data('IsAnswer')) {
+                        echo '<a class="btn-default" href="'.$discussionUrl.'">'.t('See').'</a>';
+                    } else {
+                        echo '<div class="ReplyQuestionButton">';
+
+                        $sender->fireEvent('BeforeFormButtons');
+                        echo $sender->Form->button('Reply', ['class' => 'btn-default btn-shadow']);
+                        $sender->fireEvent('AfterFormButtons');
+                        echo '</div>';
+                    }
+                ?>
+            </div>
+        </div>
+        <?php
+    }
+endif;
+
+if (!function_exists('commentSort')) :
+    /**
+     * Returns discussions filtering.
+     *
+     * @param string $extraClasses any extra classes you add to the drop down
+     * @return string
+     */
+    function commentSort($baseUrl) {
+        if (!Gdn::session()->isValid()) {
+            return;
+        }
+
+        if (!$baseUrl) {
+            $baseUrl = 'discussions';
+        }
+        $transientKey = Gdn::session()->transientKey();
+        $filters = [
+            [
+                'name' => t('Most Recent'),
+                'param' => 'desc',
+            ],
+            [
+                'name' => t('Earlier'),
+                'param' => 'asc',
+            ]
+        ];
+
+        if (Gdn::request()->get('desc')) {
+            $defaultParams['order'] = 'desc';
+        }
+
+        if (!empty($defaultParams)) {
+            $defaultUrl = url($baseUrl.'?'.http_build_query($defaultParams));
+        } else {
+            $defaultUrl = url($baseUrl);
+        }
+
+        return commentSorttDropDown(
+            $baseUrl,
+            $filters,
+            $extraClasses,
+            null,
+            $defaultUrl,
+            'View'
+        );
+    }
+endif;
+
+if (!function_exists('commentSorttDropDown')) :
+    /**
+     * Returns a filtering drop-down menu.
+     *
+     * @param string $baseUrl Target URL with no query string applied.
+     * @param array $filters A multidimensional array of rows with the following properties:
+     *     ** 'name': Friendly name for the filter.
+     *     ** 'param': URL parameter associated with the filter.
+     *     ** 'value': A value for the URL parameter.
+     * @param string $extraClasses any extra classes you add to the drop down
+     * @param string|null $default The default label for when no filter is active. If `null`, the default label is "All".
+     * @param string|null $defaultURL URL override to return to the default, unfiltered state.
+     * @param string $label Text for the label to attach to the cont
+     * @return string
+     */
+    function commentSorttDropDown($baseUrl, array $filters = [], $extraClasses = '', $default = null, $defaultUrl = null, $label = 'View') {
+        if ($default === null) {
+            $default = t('Most Recent');
+        }
+        $output = '';
+
+        $links = [];
+        $active = null;
+        // Translate filters into links.
+        foreach ($filters as $filter) {
+            // Make sure we have the bare minimum: a label and a URL parameter.
+            if (!array_key_exists('name', $filter)) {
+                throw new InvalidArgumentException('Filter does not have a name field.');
+            }
+            if (!array_key_exists('param', $filter)) {
+                throw new InvalidArgumentException('Filter does not have a param field.');
+            }
+
+            // Prepare for consumption by linkDropDown.
+            $query = ['order' => $filter['param']];
+            $url = url($baseUrl.'?'.http_build_query($query));
+            $link = [
+                'name' => $filter['name'],
+                'url' => $url
+            ];
+
+            // If we don't already have an active link, and this parameter and value match, this is the active link.
+            if ($active === null && Gdn::request()->get('order') == $filter['param']) {
+                $active = $filter['name'];
+                $link['active'] = true;
+            }
+
+            // Queue up another filter link.
+            $links[] = $link;
+        }
+
+        // Generate the markup for the drop down menu.
+        $output .= linkDropDown($links, 'selectBox-following '.trim($extraClasses), '');
+
+        return $output;
     }
 endif;

@@ -787,8 +787,9 @@ class CommentModel extends Gdn_Model implements FormatFieldInterface, EventFromR
             foreach ($value as $part) {
                 if (stringEndsWith($part, ' desc', true)) {
                     $orderBy[] = [substr($part, 0, -5), 'desc'];
-                } elseif (stringEndsWith($part, ' asc', true))
+                } elseif (stringEndsWith($part, ' asc', true)) {
                     $orderBy[] = [substr($part, 0, -4), 'asc'];
+                }
                 else {
                     $orderBy[] = [$part, 'asc'];
                 }

@@ -1,3 +1,7 @@
+.MessageList {
+    position: relative;
+}
+
 .DataList .ItemDiscussion,
 .MessageList .ItemComment.ItemComment,
 .MessageList .ItemDiscussion.ItemDiscussion {
@@ -8,17 +12,39 @@
 
 /* Discussion Detail */
 .DataList .PhotoWrap,
-.MessageList .PhotoWrap {
+.MessageList .PhotoWrap,
+.PhotoWrap {
     height: 64px;
     width: 64px;
 }
 
-.Item-Header.DiscussionHeader {
+.Item-Header.DiscussionHeader,
+.MessageList .Item-Header.DiscussionHeader {
     height: 64px;
     margin-bottom: 40px;
+    padding: 0;
 }
 
-.ItemDiscussion .Author a.Username {
+.MessageList .ItemComment .Item-BodyWrap,
+.MessageList .ItemDiscussion .Item-BodyWrap {
+    padding: 0;
+}
+
+.MessageList .Item-Header.DiscussionHeader .DiscussionHeader_category,
+.Item-Header.DiscussionHeader .DiscussionHeader_category {
+    font-size: 12px;
+    line-height: 14px;
+    color: #1A1919;
+    padding: 4.5px 16px;
+    border: 1px solid #1A1919;
+    box-sizing: border-box;
+    border-radius: 43px;
+    margin-left: 10px;
+}
+
+.MessageList .Author a.Username,
+.DataList .Author a.Username,
+.Author a.Username {
     color: #1A1919;
     font-size: 21px;
     line-height: 25px;
@@ -27,6 +53,7 @@
     padding-top: 10px;
 }
 
+.MessageList .MItem.TimeAgo,
 .DataList .MItem.TimeAgo {
     font-size: 14px;
     line-height: 16px;
@@ -34,7 +61,8 @@
     margin: 0;
 }
 
-.DataList.Discussions .Discussion .Item-BodyWrap .Message.userContent {
+.MessageList .Item-BodyWrap .Message.userContent,
+.DataList.Discussions .Item-BodyWrap .Message.userContent {
     display: flex;
     flex-direction: column;
     background-color: #f2f2f2;
@@ -122,3 +150,140 @@
     background-color: #1A1919;
     margin: 0 20px;
 }
+
+.MessageList .ItemComment .AuthorWrap,
+.MessageList .ItemComment .Meta,
+.MessageList .ItemDiscussion .AuthorWrap,
+.MessageList .ItemDiscussion .Meta {
+    padding-left: 0;
+    display: block;
+}
+
+.CommentHeadingWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    position: relative;
+    z-index: 1;
+}
+
+.CommentHeading {
+    font-size: 28px;
+    line-height: 33px;
+    color: #1A1919;
+}
+
+.Discussion .PageTitle {
+    position: absolute;
+    right: 45px;
+    top: 55px;
+}
+
+.Discussion .PageTitle .Options {
+    float: none;
+}
+
+.MessageList .ItemDiscussion {
+    position: initial;
+}
+
+/* Comment Post Box */
+.CommentPostForm {
+    display: none;
+    border-radius: 8px;
+    position: relative;
+}
+
+.CommentPostForm .CommentFormWrap {
+    margin-top: 40px;
+}
+
+.CommentPostForm.open {
+    display: block;
+}
+
+.CommentPostForm .close-icon {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    cursor: pointer;
+    display: block;
+}
+
+.CommentPostForm .UserInfo {
+    display: flex;
+    align-items: center;
+}
+
+.CommentPostForm .UserInfo .UserPhoto {
+    margin-right: 12px;
+}
+
+.CommentPostForm .UserInfo .UserAuthor {
+    display: flex;
+    flex-direction: column;
+}
+
+.CommentPostForm .UserInfo .UserAuthor .UserAuthorName {
+    color: #1A1919;
+    font-size: 21px;
+    line-height: 25px;
+    font-weight: 600;
+    margin-bottom: 9px;
+}
+
+.CommentPostForm .UserInfo .UserAuthor .UserAuthorGrade {
+    font-size: 14px;
+    line-height: 16px;
+    color: #676767;
+}
+
+.CommentPostForm .richEditor-frame,
+.CommentPostForm .richEditor-frame.InputBox:focus,
+.CommentPostForm .richEditor-frame.InputBox:active {
+    border: none !important;
+    background: #f2f2f2;
+    position: relative;
+}
+
+.rich-select.CommentSort {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: visible;
+}
+
+.rich-select.CommentSort .selectBox {
+    display: flex;
+}
+
+.rich-select.CommentSort .selectBox,
+.rich-select.CommentSort .selectBox .selectBox-main,
+.rich-select.CommentSort .selectBox .selectBox-main .selectBox-toggle {
+    position: initial;
+}
+
+.rich-select.CommentSort .selectBox-toggle {
+    font-size: 16px;
+    color: #1A1919;
+}
+
+.rich-select.CommentSort .selectBox-toggle .vanillaDropDown-arrow {
+    position: absolute;
+    right: 15px;
+}
+
+.rich-select.CommentSort .selectBox-content {
+    left: 0;
+    min-width: 200px;
+}
+
+/* .CommentPostForm .richEditor-frame .richEditor-embedBar {
+    position: absolute;
+    left: -10px;
+    bottom: -60px;
+    width: initial;
+} */

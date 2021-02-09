@@ -18,6 +18,15 @@
     display: none
 }
 
+.PanelInfo li.Active {
+    background: #05BF8E;
+    border-radius: 12px;
+}
+
+.PanelInfo li.Active * {
+    color: white !important;
+}
+
 @media screen and (max-width:768px) {
 
     .flyoutIsOpen,
@@ -109,11 +118,12 @@ h6 {
     font-size: 16px;
     font-weight: 700;
     line-height: 1.25;
-    margin: 0
+    margin: 0;
+    color: #1A1919;
 }
 
 h1 {
-    font-size: 32px;
+    font-size: 24px;
     font-weight: 700
 }
 
@@ -322,6 +332,22 @@ abbr {
     width: 57%
 }
 
+.sidebar {
+    width: 20%;
+    position: sticky;
+    top: 220px;
+}
+
+.sidebar.left {
+    margin-left: 0 !important;
+    margin-right: auto !important;
+}
+
+.sidebar.right {
+    margin-left: auto !important;
+    margin-right: 0 !important;
+}
+
 @media screen and (max-width:992px) {
     .MainContent.Content {
         -ms-flex-order: 0;
@@ -374,7 +400,8 @@ html {
 
 body {
     -webkit-box-sizing: border-box;
-    box-sizing: border-box
+    box-sizing: border-box;
+    visibility: visible !important;
 }
 
 * {
@@ -4957,10 +4984,10 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
 
 .MessageList .ItemComment .Item-Header .PhotoWrap,
 .MessageList .ItemDiscussion .Item-Header .PhotoWrap {
-    left: 8px;
+    /* left: 8px;
     margin: 0;
     position: absolute;
-    top: 16px
+    top: 16px */
 }
 
 .MessageList .ItemComment .MItem.RoleTracker,
@@ -8841,13 +8868,13 @@ screen and (-ms-high-contrast:none) {
 }
 
 .Navigation-link {
-    color: #555a62;
+    color: #1A1919;
+    font-weight: bold;
     display: block;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     font-size: 16px;
-    font-weight: 400;
     min-height: 32px;
     padding: 0 18px;
     width: 100%
@@ -9329,7 +9356,7 @@ screen and (-ms-high-contrast:none) {
 .BoxCategories.BoxCategories .PanelCategories li,
 .BoxFilter:not(.BoxBestOfFilter) .PanelCategories li,
 body.Section-EditProfile .Box .PanelCategories li {
-    padding: 0
+    padding: 5px 10px;
 }
 
 .BoxCategories.BoxCategories .PanelCategories li.Depth2,
@@ -9437,13 +9464,28 @@ body.Section-EditProfile .Box a {
     background-color: rgba(0, 0, 0, 0);
     border: none;
     border-radius: 6px;
-    color: #555a62;
+    font-size: 21px;
+    color: #1A1919;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     padding: 5px;
     transition: color .35s ease-out, background-color .35s ease-out;
     width: 100%
+}
+
+.BoxCategories.BoxCategories a span {
+    font-size: 21px;
+}
+
+.BoxCategories.BoxCategories a span.category-icon {
+    min-width: 39px;
+    display: flex;
+}
+
+.BoxCategories.BoxCategories a span img {
+    max-width: 29px;
+    margin-right: 10px;
 }
 
 .BoxCategories.BoxCategories a:active,

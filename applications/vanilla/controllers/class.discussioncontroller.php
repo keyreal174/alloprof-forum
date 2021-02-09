@@ -17,10 +17,13 @@ use Vanilla\Message;
 class DiscussionController extends VanillaController {
 
     /** @var array Models to include. */
-    public $Uses = ['DiscussionModel', 'CommentModel', 'Form'];
+    public $Uses = ['DiscussionModel', 'CategoryModel', 'CommentModel', 'Form', 'UserModel'];
 
     /** @var array Unique identifier. */
     public $CategoryID;
+
+    /** @var array Unique identifier. */
+    public $Category;
 
     /**  @var CommentModel */
     public $CommentModel;
@@ -30,6 +33,26 @@ class DiscussionController extends VanillaController {
 
     /** @var Message[] */
     private $messages = [];
+
+    public $User;
+
+    /** @var bool Whether data has been stored in $this->User yet. */
+    protected $_UserInfoRetrieved = false;
+
+    /** @var array List of available tabs. */
+    public $ProfileTabs;
+
+    /**
+     * Prep properties.
+     *
+     * @since 2.0.0
+     * @access public
+     */
+    public function __construct() {
+        $this->User = false;
+        $this->ProfileTabs = [];
+        parent::__construct();
+    }
 
     /**
      *
@@ -83,12 +106,16 @@ class DiscussionController extends VanillaController {
      * @param string $DiscussionStub URL-safe title slug
      * @param string $Page The current page of comments
      */
-    public function index($DiscussionID = 0, $DiscussionStub = '', $Page = '') {
+    public function index($DiscussionID = 0, $DiscussionStub = '', $Page = '', $Order = '') {
         // Setup head
+
+
         $Session = Gdn::session();
         $this->addJsFile('jquery.autosize.min.js');
         $this->addJsFile('autosave.js');
         $this->addJsFile('discussion.js');
+        $this->addJsFile('replyQuestion.js');
+        $Order = Gdn::request()->get('order');
 
         Gdn_Theme::section('Discussion');
 
@@ -202,7 +229,15 @@ class DiscussionController extends VanillaController {
         $this->checkPageRange($this->Offset, $ActualResponses);
 
         // Load the comments
-        $this->setData('Comments', $this->CommentModel->getByDiscussion($DiscussionID, $Limit, $this->Offset));
+        if ($Order == 'asc') {
+            $this->CommentModel->orderBy('c.DateInserted asc');
+            $this->setData('SortComments', 'asc');
+            $this->setData('Comments', $this->CommentModel->getByDiscussion($DiscussionID, $Limit, $this->Offset), true);
+        } else {
+            $this->CommentModel->orderBy('c.DateInserted desc');
+            $this->setData('SortComments', 'desc');
+            $this->setData('Comments', $this->CommentModel->getByDiscussion($DiscussionID, $Limit, $this->Offset), true);
+        }
 
         $LatestItem = $this->Discussion->CountCommentWatch;
         if ($LatestItem === null) {
@@ -307,7 +342,7 @@ class DiscussionController extends VanillaController {
 
         // Add modules
         $this->addModule('DiscussionFilterModule');
-        $this->addModule('NewDiscussionModule');
+        // $this->addModule('NewDiscussionModule');
         $this->addModule('CategoriesModule');
         $this->addModule('BookmarkedModule');
 
@@ -333,6 +368,14 @@ class DiscussionController extends VanillaController {
             'DiscussionForumPosting',
             $this->DiscussionModel->structuredData((array)$this->Discussion)
         );
+        $this->setData('IsAnswer', true);
+
+        $this->getUserInfo('', '', $this->Discussion->InsertUserID);
+
+        $this->addModule('UserPhotoModule');
+        $this->addModule('ProfileFilterModule');
+        $this->fireEvent('AddProfileInfo');
+
         $this->render();
     }
 
@@ -1109,5 +1152,107 @@ body { background: transparent !important; }
             return;
         }
         $this->Head->addTag('meta', ['property' => 'og:type', 'content' => 'article']);
+    }
+
+    /**
+     * Adds a tab (or array of tabs) to the profile tab collection ($this->ProfileTabs).
+     *
+     * @since 2.0.0
+     * @access public
+     * @param mixed $tabName Tab name (or array of tab names) to add to the profile tab collection.
+     * @param string $tabUrl URL the tab should point to.
+     * @param string $cssClass Class property to apply to tab.
+     * @param string $tabHtml Overrides tab's HTML.
+     */
+    public function addProfileTab($tabName, $tabUrl = '', $cssClass = '', $tabHtml = '') {
+        if (!is_array($tabName)) {
+            if ($tabHtml == '') {
+                $tabHtml = $tabName;
+            }
+
+            $tabName = [$tabName => ['TabUrl' => $tabUrl, 'CssClass' => $cssClass, 'TabHtml' => $tabHtml]];
+        }
+
+        foreach ($tabName as $name => $tabInfo) {
+            $url = val('TabUrl', $tabInfo, '');
+            if ($url == '') {
+                $tabInfo['TabUrl'] = userUrl($this->User, '', strtolower($name));
+            }
+
+            $this->ProfileTabs[$name] = $tabInfo;
+            $this->_ProfileTabs[$name] = $tabInfo; // Backwards Compatibility
+        }
+    }
+
+    /**
+     * Retrieve the user to be manipulated. Defaults to current user.
+     *
+     * @since 2.0.0
+     * @access public
+     * @param mixed $User Unique identifier, possibly username or ID.
+     * @param string $username .
+     * @param int $userID Unique ID.
+     * @param bool $checkPermissions Whether or not to check user permissions.
+     * @return bool Always true.
+     */
+    public function getUserInfo($userReference = '', $username = '', $userID = '', $checkPermissions = false) {
+        if ($this->_UserInfoRetrieved) {
+            return;
+        }
+
+        if (!c('Garden.Profile.Public') && !Gdn::session()->isValid()) {
+            throw permissionException();
+        }
+
+        // If a UserID was provided as a querystring parameter, use it over anything else:
+        if ($userID) {
+            $userReference = $userID;
+            $username = 'Unknown'; // Fill this with a value so the $UserReference is assumed to be an integer/userid.
+        }
+
+        $this->Roles = [];
+        if ($userReference == '') {
+            if ($username) {
+                $this->User = $this->UserModel->getByUsername($username);
+            } else {
+                $this->User = $this->UserModel->getID(Gdn::session()->UserID);
+            }
+        } elseif (is_numeric($userReference) && $username != '') {
+            $this->User = $this->UserModel->getID($userReference);
+        } else {
+            $this->User = $this->UserModel->getByUsername($userReference);
+        }
+
+        $this->fireEvent('UserLoaded');
+
+        if ($this->User === false) {
+            throw notFoundException('User');
+        } elseif ($this->User->Deleted == 1) {
+            redirectTo('dashboard/home/deleted');
+        } else {
+            $this->RoleData = $this->UserModel->getRoles($this->User->UserID);
+            if ($this->RoleData !== false && $this->RoleData->numRows(DATASET_TYPE_ARRAY) > 0) {
+                $this->Roles = array_column($this->RoleData->resultArray(), 'Name');
+            }
+
+            // Hide personal info roles
+            if (!checkPermission('Garden.PersonalInfo.View')) {
+                $this->Roles = array_filter($this->Roles, 'RoleModel::FilterPersonalInfo');
+            }
+
+            $this->setData('Profile', $this->User);
+            $this->setData('UserRoles', $this->Roles);
+            if ($cssClass = val('_CssClass', $this->User)) {
+                $this->CssClass .= ' '.$cssClass;
+            }
+        }
+
+        if ($checkPermissions && Gdn::session()->UserID != $this->User->UserID) {
+            $this->permission(['Garden.Users.Edit', 'Moderation.Profiles.Edit'], false);
+        }
+
+        // $this->addSideMenu();
+        $this->_UserInfoRetrieved = true;
+        return true;
     }
 }

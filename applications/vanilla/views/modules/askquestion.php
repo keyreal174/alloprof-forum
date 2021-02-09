@@ -1,5 +1,4 @@
-<div class="AskQuestion">
-<h1>
-    <?php echo t('Ask a question'); ?>
-</h1>
+<div class="scroll-top">
+    <h2>Can't find answers?</h2>
+    <button class="btn-default btn-shadow scrollToAskQuestionForm">Ask a question</button>
 </div>

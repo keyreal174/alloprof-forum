@@ -106,8 +106,6 @@ class DiscussionsController extends VanillaController {
         $this->addJsFile('post.js');
         $this->addJsFile('askquestion.js');
 
-
-
         // Remove score sort
         DiscussionModel::removeSort('top');
 
@@ -158,11 +156,11 @@ class DiscussionsController extends VanillaController {
         // Add modules
         // $this->addModule('DiscussionFilterModule');
         $this->addModule('NewDiscussionModule');
-        // $this->addModule('AskQuestionModule');
+        $this->addModule('AskQuestionModule');
         $this->addModule('CategoriesModule');
 
 
-       // Make sure the userphoto module gets added to the page
+        // Make sure the userphoto module gets added to the page
         $this->addModule('UserPhotoModule');
 
         // And add the filter menu module
@@ -172,7 +170,6 @@ class DiscussionsController extends VanillaController {
         $this->fireEvent('AddProfileTabsInfo');
         $this->addModule('ProfileFilterModule');
 
-        // $this->addModule('QuickQuestionModule');
         // $this->addModule('BookmarkedModule');
         // $this->addModule('TagModule');
 
@@ -348,7 +345,7 @@ class DiscussionsController extends VanillaController {
 
         // Add modules
         $this->addModule('DiscussionFilterModule');
-        $this->addModule('NewDiscussionModule');
+        // $this->addModule('NewDiscussionModule');
         $this->addModule('CategoriesModule');
         $this->addModule('BookmarkedModule');
         $this->addModule('TagModule');
@@ -525,7 +522,7 @@ class DiscussionsController extends VanillaController {
 
         // Add modules
         $this->addModule('DiscussionFilterModule');
-        $this->addModule('NewDiscussionModule');
+        // $this->addModule('NewDiscussionModule');
         $this->addModule('CategoriesModule');
         $this->addModule('TagModule');
 
@@ -573,8 +570,14 @@ class DiscussionsController extends VanillaController {
      * @param int $offset Number of discussions to skip.
      */
     public function mine($page = 'p1') {
+        $this->getUserInfo();
         $this->permission('Garden.SignIn.Allow');
         Gdn_Theme::section('DiscussionList');
+
+        // add profile filter and photo
+        $this->addModule('UserPhotoModule');
+        $this->fireEvent('AddProfileTabsInfo');
+        $this->addModule('ProfileFilterModule');
 
         // Set criteria & get discussions data
         list($offset, $limit) = offsetLimit($page, c('Vanilla.Discussions.PerPage', 30));
@@ -626,7 +629,7 @@ class DiscussionsController extends VanillaController {
 
         // Add modules
         $this->addModule('DiscussionFilterModule');
-        $this->addModule('NewDiscussionModule');
+        // $this->addModule('NewDiscussionModule');
         $this->addModule('CategoriesModule');
         $this->addModule('BookmarkedModule');
         $this->addModule('TagModule');
@@ -877,7 +880,7 @@ class DiscussionsController extends VanillaController {
         }
 
         // Add Modules
-        $this->addModule('NewDiscussionModule');
+        // $this->addModule('NewDiscussionModule');
         $this->addModule('DiscussionFilterModule');
         $this->addModule('BookmarkedModule');
 
@@ -1014,5 +1017,84 @@ class DiscussionsController extends VanillaController {
         // $this->addSideMenu();
         $this->_UserInfoRetrieved = true;
         return true;
+    }
+
+    /**
+     * Display discussions followed by the user.
+     *
+     * @since 2.0.0
+     * @access public
+     *
+     * @param int $offset Number of discussions to skip.
+     */
+    public function followed($page = 'p1') {
+        $this->getUserInfo();
+        $this->permission('Garden.SignIn.Allow');
+        Gdn_Theme::section('DiscussionList');
+
+        // add profile filter and photo
+        $this->addModule('UserPhotoModule');
+        $this->fireEvent('AddProfileTabsInfo');
+        $this->addModule('ProfileFilterModule');
+
+        // Set criteria & get discussions data
+        list($offset, $limit) = offsetLimit($page, c('Vanilla.Discussions.PerPage', 30));
+        $session = Gdn::session();
+        $wheres = ['d.InsertUserID' => $session->UserID];
+
+        $discussionModel = new DiscussionModel();
+        $discussionModel->setSort(Gdn::request()->get());
+        $discussionModel->setFilters(Gdn::request()->get());
+        $this->setData('Sort', $discussionModel->getSort());
+        $this->setData('Filters', $discussionModel->getFilters());
+
+        $this->DiscussionData = $discussionModel->get($offset, $limit, $wheres);
+        $this->setData('Discussions', $this->DiscussionData);
+        $countDiscussions = $this->setData('CountDiscussions', $discussionModel->getCount($wheres));
+
+        $this->View = 'index';
+        if (c('Vanilla.Discussions.Layout') === 'table') {
+            $this->View = 'table';
+        }
+
+        // Build a pager
+        $pagerFactory = new Gdn_PagerFactory();
+        $this->EventArguments['PagerType'] = 'MorePager';
+        $this->fireEvent('BeforeBuildMinePager');
+        $this->Pager = $pagerFactory->getPager($this->EventArguments['PagerType'], $this);
+        $this->Pager->MoreCode = 'More Discussions';
+        $this->Pager->LessCode = 'Newer Discussions';
+        $this->Pager->ClientID = 'Pager';
+        $this->Pager->configure(
+            $offset,
+            $limit,
+            $countDiscussions,
+            'discussions/mine/%1$s'
+        );
+
+        $this->setData('_PagerUrl', 'discussions/followed/{Page}');
+        $this->setData('_Page', $page);
+        $this->setData('_Limit', $limit);
+
+        $this->fireEvent('AfterBuildMinePager');
+
+        // Deliver JSON data if necessary
+        if ($this->_DeliveryType != DELIVERY_TYPE_ALL) {
+            $this->setJson('LessRow', $this->Pager->toString('less'));
+            $this->setJson('MoreRow', $this->Pager->toString('more'));
+            $this->View = 'discussions';
+        }
+
+        // Add modules
+        $this->addModule('DiscussionFilterModule');
+        $this->addModule('NewDiscussionModule');
+        $this->addModule('CategoriesModule');
+        $this->addModule('BookmarkedModule');
+        $this->addModule('TagModule');
+
+        // Render view
+        // $this->setData('Title', t('My Discussions'));
+        $this->setData('Breadcrumbs', [['Name' => t('Questions followed'), 'Url' => '/discussions/followed']]);
+        $this->render();
     }
 }
