@@ -490,7 +490,7 @@ if (!function_exists('followButton')) :
      * @return string
      */
     function followButton($categoryID) {
-        $output = ' ';
+        $output = '';
         if (!is_numeric($categoryID)) {
             return $output;
         }

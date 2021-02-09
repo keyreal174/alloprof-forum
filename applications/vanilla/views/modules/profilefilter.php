@@ -15,12 +15,14 @@ $SortOrder = c('Garden.ProfileTabOrder');
 if (!is_array($SortOrder))
     $SortOrder = [];
 
+if($Session->isValid()) {
 // Make sure that all tabs are present in $SortOrder
 foreach ($Controller->ProfileTabs as $TabCode => $TabInfo) {
     if (!in_array($TabCode, $SortOrder))
         $SortOrder[] = $TabCode;
 }
 ?>
+
 <div class="BoxFilter BoxProfileInfo">
     <div class="BoxProfileInfo_detailbox">
         <?php
@@ -57,3 +59,5 @@ foreach ($Controller->ProfileTabs as $TabCode => $TabInfo) {
     </div>
     <?php } ?>
 </div>
+<?php } ?>
+

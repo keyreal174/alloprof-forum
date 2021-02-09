@@ -59,7 +59,7 @@ if ($this->Data !== FALSE && $displayModule) {
             }
             ?>
         </ul>
-        <a href="/categories" class="vanilla-categories__viewall"><?php echo t('See all subjects'); ?></a>
+        <a href="/categories" class="vanilla-categories__viewall btn-default"><?php echo t('See all subjects'); ?></a>
     </div>
 <?php
 }

@@ -131,7 +131,7 @@ class NewDiscussionModule extends Gdn_Module {
 
         // No module for you!
         if (!$hasPermission && !$privilegedGuest) {
-            return '';
+            $this->invalid = true;
         }
 
         // Grab the allowed discussion types.

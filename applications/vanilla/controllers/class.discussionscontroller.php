@@ -963,9 +963,9 @@ class DiscussionsController extends VanillaController {
             return;
         }
 
-        if (!c('Garden.Profile.Public') && !Gdn::session()->isValid()) {
-            throw permissionException();
-        }
+        // if (!c('Garden.Profile.Public') && !Gdn::session()->isValid()) {
+        //     throw permissionException();
+        // }
 
         // If a UserID was provided as a querystring parameter, use it over anything else:
         if ($userID) {
@@ -989,7 +989,7 @@ class DiscussionsController extends VanillaController {
         $this->fireEvent('UserLoaded');
 
         if ($this->User === false) {
-            throw notFoundException('User');
+            // throw notFoundException('User');
         } elseif ($this->User->Deleted == 1) {
             redirectTo('dashboard/home/deleted');
         } else {

@@ -30,7 +30,8 @@ echo '<div class="item"><h1>'.$this->data('CountAllDiscussions').'</h1><h2>'.t('
 echo '</div>';
 
 echo '<div class="buttons">';
-echo '<button class="btn-default">'.followButton($this->data('Category.CategoryID')).'</button>';
+if(followButton($this->data('Category.CategoryID')) != '')
+    echo '<button class="btn-default">'.followButton($this->data('Category.CategoryID')).'</button>';
 echo '<button class="btn-default btn-shadow scrollToAskQuestionForm">'.t('Ask a question').'</button>';
 echo '</div>';
 

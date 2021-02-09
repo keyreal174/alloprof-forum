@@ -79,4 +79,3 @@ echo '<div class="P PagerWrap">';
 $this->Pager->Wrapper = '<div %1$s>%2$s</div>';
 echo $this->Pager->toString('more');
 echo '</div>';
-echo '</div>';

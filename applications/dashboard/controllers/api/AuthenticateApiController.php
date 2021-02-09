@@ -10,7 +10,7 @@ use Garden\Schema\ValidationField;
 use Garden\Web\Data;
 use Garden\Web\Exception\ClientException;
 use Garden\Web\Exception\HttpException;
-use Garden\Web\Exception\NotFoundException;
+use Garden\Web\Exception\;
 use Garden\Web\Exception\ServerException;
 use Garden\Web\RequestInterface;
 use Vanilla\Authenticator\Authenticator;

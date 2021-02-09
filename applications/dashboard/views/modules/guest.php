@@ -3,7 +3,7 @@
 ?>
 <div class="Box GuestBox">
     <h4 class="GuestBox-title">
-        <?php echo t('Howdy, Stranger!'); ?>
+        <img src="/themes/alloprof/design/images/Anonymous_PP.svg"/>
     </h4>
     <p class="GuestBox-message">
         <?php echo t($this->MessageCode, $this->MessageDefault); ?>
@@ -15,13 +15,13 @@
 
     <?php
     if ($this->data('signInUrl')) {
-        echo '<div class="P">';
-        echo anchor(t('Sign In'), $this->data('signInUrl'), 'Button Primary'.(signInPopup() ? ' SignInPopup' : ''), ['rel' => 'nofollow', 'aria-label' => t("Sign In Now")]);
-
+        echo '<div class="Buttons">';
         if ($this->data('registerUrl')) {
-            echo ' '.anchor(t('Register', t('Apply for Membership', 'Register')), $this->data('registerUrl'), 'Button ApplyButton', ['rel' => 'nofollow', 'aria-label' => t("Register Now")]);
+            echo ' '.anchor(t('Register', t('Apply for Membership', 'Register')), $this->data('registerUrl'), 'btn-default btn-shadow', ['rel' => 'nofollow', 'aria-label' => t("Register Now")]);
         }
-
+        echo '<p>'.t('Do you already have an account?');
+        echo anchor(t('To Sign In'), $this->data('signInUrl'), 'link'.(signInPopup() ? ' SignInPopup' : ''), ['rel' => 'nofollow', 'aria-label' => t("Sign In Now")]);
+        echo '</p>';
         echo '</div>';
     }
     ?>
