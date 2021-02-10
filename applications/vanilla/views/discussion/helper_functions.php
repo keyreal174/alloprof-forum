@@ -749,9 +749,9 @@ if (!function_exists('writeDiscussionFooter')) :
                 echo '<span>'.property_exists($Discussion, 'CountFavourites')."</span><span>".$Discussion->CountFavourites."</span>";
                 if (!Gdn::themeFeatures()->get('EnhancedAccessibility')) {
                         echo '<span class="Options">';
-                        echo '<span class="Notifications-Icon"></span>';
-                        echo '<span class="Favorite-Icon"></span>';
-                        echo '<span class="Back-Icon"></span>';
+                        echo bookmarkButton($Discussion);
+                        echo '<a class="Favorite-Icon Option-Icon"></a>';
+                        echo '<a class="Back-Icon Option-Icon"></a>';
                         echo '</span>';
                     }
                 ?>

@@ -90,7 +90,7 @@ function reactionCount($row, $urlCodes) {
      return $count;
 }
 
-if (!function_exists('ReactionButton')) {
+if (!function_exists('reactionButton')) {
     /**
      * Builds and returns the formated reaction button.
      *
