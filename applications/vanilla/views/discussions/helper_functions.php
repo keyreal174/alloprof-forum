@@ -419,13 +419,13 @@ if (!function_exists('writeDiscussionDetail')) :
                         </div>
                         <?php
                         $sender->fireEvent('AfterDiscussionBody');
-                        // writeReactions($Discussion);
                         if (val('Attachments', $Discussion)) {
                             writeAttachments($Discussion->Attachments);
                         }
                         ?>
                     </div>
                     <?php
+
                         writeDiscussionFooter($Discussion, $sender);
                     ?>
                 </div>

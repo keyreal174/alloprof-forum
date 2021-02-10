@@ -1,0 +1,16 @@
+.ReactButtons a.ReactButton, span.FlagMenu a.ReactButton {
+    display: none!important;
+}
+
+.Reactions a.Popup.ReactButton {
+    display: none!important;
+}
+
+span.ReactButtons a.ReactButton.ReactButton-Like {
+    display: inline-block!important;
+    width: 40px;
+}
+
+span.ReactButtons a.ReactButton.ReactButton-Like .Count {
+    margin-left: 24px;
+}

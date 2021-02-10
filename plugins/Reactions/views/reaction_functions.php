@@ -194,11 +194,11 @@ if (!function_exists('reactionButton')) {
 
         if ($permissionClass && $permissionClass !== 'Positive' && !checkPermission('Garden.Moderation.Manage')) {
             $result = <<<EOT
-<a class="Hijack ReactButton $linkClass" href="$url" tabindex="0" aria-label="$upAccessibleLabel" title="$label" rel="nofollow" role="button"><span class="ReactSprite $spriteClass"></span> $countHtml<span class="ReactLabel">$label</span></a>
+<a class="Hijack Favorite-Icon Option-Icon ReactButton $linkClass" href="$url" tabindex="0" aria-label="$upAccessibleLabel" title="$label" rel="nofollow" role="button">$countHtml</a>
 EOT;
         } else {
             $result = <<<EOT
-<a class="Hijack ReactButton $linkClass" href="$url" tabindex="0" aria-label="$downAccessibleLabel" title="$label" $dataAttr rel="nofollow" role="button"><span class="ReactSprite $spriteClass"></span> $countHtml<span class="ReactLabel">$label</span></a>
+<a class="Hijack Favorite-Icon Option-Icon ReactButton $linkClass" href="$url" tabindex="0" aria-label="$downAccessibleLabel" title="$label" $dataAttr rel="nofollow" role="button">$countHtml</a>
 
 EOT;
         }

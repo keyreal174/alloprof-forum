@@ -750,7 +750,7 @@ if (!function_exists('writeDiscussionFooter')) :
                 if (!Gdn::themeFeatures()->get('EnhancedAccessibility')) {
                         echo '<span class="Options">';
                         echo bookmarkButton($Discussion);
-                        echo '<a class="Favorite-Icon Option-Icon"></a>';
+                        writeReactions($Discussion);
                         echo '<a class="Back-Icon Option-Icon"></a>';
                         echo '</span>';
                     }
