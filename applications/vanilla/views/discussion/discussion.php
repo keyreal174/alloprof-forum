@@ -82,7 +82,7 @@ $this->fireEvent('BeforeDiscussionDisplay');
                 </div>
                 <?php
                 $this->fireEvent('AfterDiscussionBody');
-                writeReactions($Discussion);
+                // writeReactions($Discussion);
                 if (val('Attachments', $Discussion)) {
                     writeAttachments($Discussion->Attachments);
                 }

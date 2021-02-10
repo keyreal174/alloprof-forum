@@ -15,7 +15,7 @@
  */
 function smarty_function_followed_link($params, &$smarty) {
       $wrap = val('wrap', $params, 'li');
-      return Gdn_Theme::link('discussions/followed',
+      return Gdn_Theme::link('discussions/bookmarked',
          val('text', $params, t('Questions followed')),
          val('format', $params, wrap('<a href="%url" class="%class">%text</a>', $wrap)));
 }
