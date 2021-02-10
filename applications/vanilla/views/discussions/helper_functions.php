@@ -71,14 +71,17 @@ if (!function_exists('BookmarkButton')) {
 
         // Bookmark link
         $isBookmarked = $discussion->Bookmarked == '1';
+
+        // Bookmark link
         $title = t($isBookmarked ? 'Unbookmark' : 'Bookmark');
+
         $accessibleLabel= HtmlUtils::accessibleLabel('%s for discussion: "%s"', [t($isBookmarked? 'Unbookmark' : 'Bookmark'), is_array($discussion) ? $discussion["Name"] : $discussion->Name]);
 
-        return anchor(
+        echo anchor(
             $title,
-            '/discussion/bookmark/'.$discussion->DiscussionID.'/'.Gdn::session()->transientKey(),
-            'Hijack Bookmark'.($discussion->Bookmarked == '1' ? ' Bookmarked' : ''),
-            ['title' => $title, 'role' => "button", 'aria-label' => $accessibleLabel, 'aria-pressed' => $isBookmarked ? "true" : "false"]
+            '/discussion/bookmark/'.$discussion->DiscussionID.'/'.Gdn::session()->transientKey().'?Target='.urlencode(Gdn::controller()->SelfUrl),
+            'Hijack Bookmark'.($isBookmarked ? ' Bookmarked' : ''),
+            ['title' => $title, 'aria-label' => $accessibleLabel]
         );
     }
 }
