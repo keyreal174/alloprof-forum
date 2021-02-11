@@ -44,7 +44,8 @@ echo '<div class="PageControls Top">';
 PagerModule::write($PagerOptions);
 // Avoid displaying in a category's list of discussions.
 if ($this->data('EnableFollowingFilter')) {
-    echo discussionFilters();
+    // comment out to avoid display filter dropdown in discussions page
+    // echo discussionFilters();
 }
 $this->fireEvent('PageControls');
 echo '</div>';

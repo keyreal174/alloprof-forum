@@ -73,15 +73,33 @@ if (!function_exists('BookmarkButton')) {
         $isBookmarked = $discussion->Bookmarked == '1';
 
         // Bookmark link
-        $title = t($isBookmarked ? 'Unbookmark' : 'Bookmark');
+        $title = t($isBookmarked ? 'UnFollow' : 'Follow');
 
-        $accessibleLabel= HtmlUtils::accessibleLabel('%s for discussion: "%s"', [t($isBookmarked? 'Unbookmark' : 'Bookmark'), is_array($discussion) ? $discussion["Name"] : $discussion->Name]);
+        $accessibleLabel= HtmlUtils::accessibleLabel('%s for discussion: "%s"', [t($isBookmarked? 'UnFollow' : 'Follow'), is_array($discussion) ? $discussion["Name"] : $discussion->Name]);
 
-        echo anchor(
-            $title,
-            '/discussion/bookmark/'.$discussion->DiscussionID.'/'.Gdn::session()->transientKey().'?Target='.urlencode(Gdn::controller()->SelfUrl),
-            'Hijack Bookmark'.($isBookmarked ? ' Bookmarked' : ''),
-            ['title' => $title, 'aria-label' => $accessibleLabel]
+        $icon_following = <<<EOT
+        <svg width="19" height="24" viewBox="0 0 19 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.47376 0.75C10.1278 0.75 10.658 1.28019 10.658 1.93421V2.72368C10.658 3.37771 10.1278 3.9079 9.47376 3.9079C8.81974 3.9079 8.28955 3.37771 8.28955 2.72368V1.93421C8.28955 1.28019 8.81974 0.75 9.47376 0.75Z" fill="#2F80ED"/>
+            <path d="M17.1467 18.8096C18.4114 18.8096 19.1103 17.3289 18.3115 16.3193L17.1467 14.9059C16.2814 13.829 15.8155 12.5166 15.8155 11.1368V8.51191C15.8155 5.34857 13.6189 2.72367 10.6902 2.08428C9.82488 1.89537 8.85659 1.87425 7.89459 2.08428C4.96587 2.72369 2.76933 5.34857 2.76933 8.51191V11.1368C2.76933 12.5166 2.3034 13.829 1.43809 14.9059L0.339822 16.3193C-0.45892 17.3289 0.239979 18.8096 1.50465 18.8096H17.1467Z" fill="#2F80ED"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M5.84412 19.6937C6.31516 19.4195 6.91927 19.5791 7.19342 20.0502C7.40906 20.4207 7.71752 20.7286 8.0884 20.9436C8.45928 21.1586 8.87978 21.2732 9.30846 21.2762C9.73714 21.2792 10.1592 21.1705 10.533 20.9607C10.9069 20.7509 11.2196 20.4473 11.4404 20.0798C11.7211 19.6127 12.3274 19.4615 12.7946 19.7422C13.2617 20.0229 13.4129 20.6292 13.1322 21.0963C12.7348 21.7578 12.1719 22.3042 11.4989 22.6818C10.826 23.0595 10.0663 23.2552 9.29468 23.2499C8.52306 23.2445 7.76616 23.0381 7.09858 22.6511C6.43099 22.2641 5.87577 21.7099 5.48762 21.043C5.21346 20.5719 5.37307 19.9678 5.84412 19.6937Z" fill="#2F80ED"/>
+        </svg>
+        EOT;
+
+        $icon_follow = <<<EOT
+        <svg width="19" height="24" viewBox="0 0 19 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.47376 0.75C10.1278 0.75 10.658 1.28019 10.658 1.93421V2.72368C10.658 3.37771 10.1278 3.9079 9.47376 3.9079C8.81974 3.9079 8.28955 3.37771 8.28955 2.72368V1.93421C8.28955 1.28019 8.81974 0.75 9.47376 0.75Z" fill="#1A1919"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M15.3096 16.4009L15.3004 16.3894C14.1003 14.8958 13.447 13.0611 13.447 11.1368V8.51191C13.447 6.47072 12.0346 4.80199 10.185 4.3982C9.63462 4.27804 9.01141 4.26466 8.39978 4.39819C6.5502 4.802 5.13775 6.47073 5.13775 8.51191V11.1368C5.13775 13.0541 4.48919 14.8825 3.29736 16.3732L3.24451 16.4412H15.3429L15.3096 16.4009ZM18.3115 16.3193C19.1103 17.3289 18.4114 18.8096 17.1467 18.8096H1.50465C0.239979 18.8096 -0.45892 17.3289 0.339822 16.3193L1.43809 14.9059C2.3034 13.829 2.76933 12.5166 2.76933 11.1368V8.51191C2.76933 5.34857 4.96587 2.72369 7.89459 2.08428C8.85659 1.87425 9.82488 1.89537 10.6902 2.08428C13.6189 2.72367 15.8155 5.34857 15.8155 8.51191V11.1368C15.8155 12.5166 16.2814 13.829 17.1467 14.9059L18.3115 16.3193Z" fill="#1A1919"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M5.84412 19.6937C6.31516 19.4195 6.91927 19.5791 7.19342 20.0502C7.40906 20.4207 7.71752 20.7286 8.0884 20.9436C8.45928 21.1586 8.87978 21.2732 9.30846 21.2762C9.73714 21.2792 10.1592 21.1705 10.533 20.9607C10.9069 20.7509 11.2196 20.4473 11.4404 20.0798C11.7211 19.6127 12.3274 19.4615 12.7946 19.7422C13.2617 20.0229 13.4129 20.6292 13.1322 21.0963C12.7348 21.7578 12.1719 22.3042 11.4989 22.6818C10.826 23.0595 10.0663 23.2552 9.29468 23.2499C8.52306 23.2445 7.76616 23.0381 7.09858 22.6511C6.43099 22.2641 5.87577 21.7099 5.48762 21.043C5.21346 20.5719 5.37307 19.9678 5.84412 19.6937Z" fill="#1A1919"/>
+        </svg>
+        EOT;
+
+        $icon = $isBookmarked ? $icon_following : $icon_follow;
+
+        return anchor(
+            $icon,
+            '/discussion/bookmark/'.$discussion->DiscussionID.'/'.Gdn::session()->transientKey(),
+            'Hijack followButton Option-Icon'.($isBookmarked ? ' TextColor isFollowing' : ''),
+            ['title' => $title, 'aria-pressed' => $isBookmarked ? 'true' : 'false', 'role' => 'button', 'aria-label' => $accessibleLabel]
         );
     }
 }
@@ -407,7 +425,6 @@ if (!function_exists('writeDiscussionDetail')) :
                         ?>
                     </div>
                     <?php
-
                         writeDiscussionFooter($Discussion, $sender);
                     ?>
                 </div>

@@ -961,6 +961,26 @@ class ReactionModel extends Gdn_Model implements EventFromRowInterface {
      *
      *
      * @param string $recordType
+     * @param int $tagID
+     * @param int $recordID
+     * @param int $userID
+     */
+    public function getCurrentStatus($recordType, $tagID, $recordID) {
+        $userID = Gdn::session()->UserID;
+        $data = Gdn::sql()
+                    ->getWhere('UserTag', ['RecordType' => $recordType, 'RecordID' => $recordID, 'TagID' => $tagID, 'userID' => $userID])
+                    ->resultArray();
+        $isLiked = false;
+        if (count($data) > 0) {
+            $isLiked = true;
+        }
+        return $isLiked;
+    }
+
+    /**
+     *
+     *
+     * @param string $recordType
      * @param int $iD
      * @param string $reactionUrlCode
      * @param bool $selfReact Whether a user can react to their own post
