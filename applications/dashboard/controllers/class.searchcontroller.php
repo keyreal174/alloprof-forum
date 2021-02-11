@@ -72,6 +72,17 @@ class SearchController extends Gdn_Controller {
         $this->addJsFile('search.js');
         $this->title(t('Search'));
 
+        // Add New Modules
+        $this->addModule('CategoriesModule');
+
+
+        // Make sure the userphoto module gets added to the page
+        $this->addModule('UserPhotoModule');
+
+        // Add discussion and question count on the profile block
+        $this->fireEvent('AddProfileTabsInfo');
+        $this->addModule('ProfileFilterModule');
+
         saveToConfig('Garden.Format.EmbedSize', '160x90', false);
         Gdn_Theme::section('SearchResults');
 

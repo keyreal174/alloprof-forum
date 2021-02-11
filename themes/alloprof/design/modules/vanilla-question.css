@@ -3,6 +3,7 @@
 }
 
 .DataList .ItemDiscussion,
+.DataList .Item,
 .MessageList .ItemComment.ItemComment,
 .MessageList .ItemDiscussion.ItemDiscussion {
     border-radius: 5px;

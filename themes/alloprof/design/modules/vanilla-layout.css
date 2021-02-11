@@ -65,3 +65,7 @@
     box-sizing: border-box;
     padding-top: 18px;
 }
+
+.DataList-Search {
+    margin-top: 0;
+}

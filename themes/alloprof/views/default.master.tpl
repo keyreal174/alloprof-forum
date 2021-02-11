@@ -121,6 +121,11 @@
                                 <div class="Header-right">
                                     {community_chooser buttonType='titleBarLink' buttonClass='Header-desktopCommunityChooser'}
                                     <div class="MeBox-header">
+                                        {if !$SectionGroups && !$DataDrivenTitleBar}
+                                            <div class="SearchBox js-sphinxAutoComplete" role="search">
+                                                {searchbox}
+                                            </div>
+                                        {/if}
                                         {module name="MeModule" CssClass="FlyoutRight"}
                                     </div>
                                     {if $User.SignedIn}
@@ -206,11 +211,11 @@
                                     </main>
                                     <div class="sidebar right">
                                         <aside class="Panel Panel-main">
-                                            {if !$SectionGroups && !$DataDrivenTitleBar}
-                                                <!-- <div class="SearchBox js-sphinxAutoComplete" role="search">
+                                            <!-- {if !$SectionGroups && !$DataDrivenTitleBar}
+                                                <div class="SearchBox js-sphinxAutoComplete" role="search">
                                                     {searchbox}
-                                                </div> -->
-                                            {/if}
+                                                </div>
+                                            {/if} -->
                                             {asset name="Panel"}
                                         </aside>
                                         <div class="Extra">

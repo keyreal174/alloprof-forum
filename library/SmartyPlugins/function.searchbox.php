@@ -27,7 +27,7 @@ function smarty_function_searchbox($params, &$smarty) {
             'role' => 'searchbox',
             'class' => 'InputBox js-search'
         ]).
-        $form->button('Go', ['Name' => '', 'aria-label' => t('Search')]).
+        // $form->button('Go', ['Name' => '', 'aria-label' => t('Search')]).
         $form->close();
 
     return $result;
