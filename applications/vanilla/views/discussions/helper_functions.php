@@ -425,7 +425,6 @@ if (!function_exists('writeDiscussionDetail')) :
                         ?>
                     </div>
                     <?php
-
                         writeDiscussionFooter($Discussion, $sender);
                     ?>
                 </div>

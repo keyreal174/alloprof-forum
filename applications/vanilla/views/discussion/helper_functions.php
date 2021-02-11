@@ -175,6 +175,7 @@ if (!function_exists('writeComment')) :
                         if (val('Attachments', $comment)) {
                             writeAttachments($comment->Attachments);
                         }
+                        writeReactions($comment);
                         ?>
                     </div>
                 </div>
@@ -746,7 +747,6 @@ if (!function_exists('writeDiscussionFooter')) :
         <div class="Item-Footer">
             <div class="Item-Footer-Icons">
                 <?php
-                echo '<span>'.property_exists($Discussion, 'CountFavourites')."</span><span>".$Discussion->CountFavourites."</span>";
                 if (!Gdn::themeFeatures()->get('EnhancedAccessibility')) {
                         echo '<span class="Options">';
                         echo bookmarkButton($Discussion);

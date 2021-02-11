@@ -2,6 +2,10 @@
     display: none!important;
 }
 
+.Reactions a.ReactButton {
+    display: none!important;
+}
+
 .Reactions a.Popup.ReactButton {
     display: none!important;
 }
@@ -9,8 +13,34 @@
 span.ReactButtons a.ReactButton.ReactButton-Like {
     display: inline-block!important;
     width: 40px;
+    /* margin-top: 0; */
 }
 
 span.ReactButtons a.ReactButton.ReactButton-Like .Count {
     margin-left: 24px;
+    font-size: 21px;
+    line-height: 21px;
+    color: #1A1919;
+}
+
+.Comment .Reactions {
+    margin-top: 42px!important;
+}
+
+.Comment span.ReactButtons a.ReactButton.ReactButton-Like {
+    width: max-content;
+}
+
+.Comment span.ReactButtons a.ReactButton.ReactButton-Like .Count {
+    margin-left: 24px;
+    margin-right: 0;
+    font-size: 17px;
+    line-height: 20px;
+    color: #6C6767;
+}
+
+span.ReactButtons a.ReactButton.ReactButton-Like .additional-label {
+    font-size: 17px;
+    line-height: 20px;
+    color: #6C6767;
 }
