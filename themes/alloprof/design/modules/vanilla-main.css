@@ -27,6 +27,55 @@
     color: white !important;
 }
 
+.Panel .GuestBox {
+    margin: 0;
+}
+
+.Panel .GuestBox-title {
+    text-align: center;
+    padding-bottom: 40px;
+    border-bottom: 1px solid #E0E0E0;
+}
+
+.Panel .GuestBox-title img {
+    margin: 0 auto;
+}
+
+.Panel p {
+    font-size: 18px;
+    color: #1A1919;
+}
+
+.Panel .GuestBox-message {
+    font-size: 18px;
+    color: #1A1919;
+    margin: 40px 0;
+}
+
+.Panel .Buttons {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.Panel .Buttons a {
+    text-align: center;
+    display: block;
+    font-size: 18px;
+    color: #33c233;
+    font-weight: bold;
+    line-height: 30px;
+    text-decoration: underline;
+}
+
+.Panel .Buttons .btn-default {
+    color: #1A1919 !important;
+    margin-bottom: 30px;
+    text-decoration: none !important;
+}
+
 @media screen and (max-width:768px) {
 
     .flyoutIsOpen,
@@ -338,6 +387,10 @@ abbr {
     top: 220px;
 }
 
+.UserLoggedOut .sidebar {
+    top: 150px;
+}
+
 .sidebar.left {
     margin-left: 0 !important;
     margin-right: auto !important;
@@ -430,7 +483,8 @@ body {
 }
 
 .PhotoWrap img {
-    height: auto;
+    height: 100%;
+    object-fit: cover;
     margin: 0;
     width: 100%
 }
@@ -8462,38 +8516,43 @@ table.PreferenceGroup tbody tr:hover td {
     color: #fff
 }
 
+.Header .SignInLinks {
+    display: flex;
+    align-items: center;
+}
+
 .Header .SignInLinks a {
     -o-transition: background .1s ease, border .1s ease;
     -webkit-appearance: none;
     -webkit-transition: background .1s ease, border .1s ease;
-    background: rgba(0, 0, 0, 0);
-    border: 1px solid #fff;
     border-radius: 6px;
-    color: #fff;
+    color: #1A1919;
     display: inline-block;
     font-family: Open Sans, HelveticaNeue-Light, Segoe UI, Helvetica Neue, Helvetica, Raleway, Arial, sans-serif;
-    font-size: 14px;
-    font-weight: 400;
+    font-size: 18px;
     line-height: 36px;
     min-height: 36px;
     min-width: 36px;
     padding: 0 12px;
     text-decoration: none;
+    margin: 0 20px;
     transition: background .1s ease, border .1s ease
+}
+
+.Header .SignInLinks a:first-child {
+    font-weight: bold;
+}
+
+.Header .MenuDivider {
+    width: 1px;
+    height: 20px;
+    background-color: #1A1919;
 }
 
 @media screen and (max-width:768px) {
     .Header .SignInLinks a {
         max-width: 100%
     }
-}
-
-.Header .SignInLinks a:active,
-.Header .SignInLinks a:focus,
-.Header .SignInLinks a:hover {
-    background: #209edf;
-    border-color: #fff;
-    color: #fff
 }
 
 .Header-logo {
@@ -8909,7 +8968,6 @@ screen and (-ms-high-contrast:none) {
 }
 
 .Navigation-linkContainer:after {
-    background: #ebebeb;
     content: "";
     display: block;
     height: 1px;
@@ -9548,7 +9606,8 @@ body.Section-EditProfile .Box .Active a {
 }
 
 .WhosOnline.Box .PhotoWrap.PhotoWrap img {
-    height: auto;
+    height: 100%;
+    object-fit: cover;
     margin: 0;
     width: 100%
 }

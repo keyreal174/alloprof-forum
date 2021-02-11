@@ -125,12 +125,12 @@
     height: 24px;
 }
 
-.Options>span {
+.Options>a.Option-Icon {
     margin-left: 0 !important;
     margin-right: 27px;
 }
 
-.Options>span:last-child {
+.Options>a.Option-Icon:last-child {
     margin-right: 0;
 }
 

@@ -45,13 +45,8 @@ echo $this->Pager->toString('less');
 echo '</span>';
 
 echo '<div class="DataBox DataBox-Comments">';
-if ($this->data('Comments')->numRows() > 0)
-echo $this->Form->open();
-$options = array_map(
-        't',
-        explode(',', 'Most Recent, Earlier')
-    );
-    $Options = ['desc' => 'Most recent first', 'asc' => 'Most recent last'];
+if ($this->data('Comments')->numRows() > 0) {
+    echo $this->Form->open();
     $discussionUrl = $this->data('Discussion')->Url;
     echo '<div class="CommentHeadingWrapper">';
     echo '<h2 class="CommentHeading">'.$this->data('_CommentsHeader', t('Answers')).'('.$this->data('_LatestItem').')</h2>';
@@ -61,6 +56,7 @@ $options = array_map(
     echo '</div>';
     echo '</div>';
     echo $this->Form->close();
+}
 ?>
     <ul class="MessageList DataList Comments">
         <?php include $this->fetchViewLocation('comments'); ?>

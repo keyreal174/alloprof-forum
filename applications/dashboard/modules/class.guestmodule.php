@@ -17,7 +17,7 @@ class GuestModule extends Gdn_Module {
     public $MessageCode = 'GuestModule.Message';
 
     /** @var string  */
-    public $MessageDefault = "It looks like you're new here. If you want to get involved, click one of these buttons!";
+    public $MessageDefault = "Join the Alloprof community and find answers to your questions!";
 
     /**
      *
@@ -40,7 +40,7 @@ class GuestModule extends Gdn_Module {
      * @return string
      */
     public function assetTarget() {
-        return 'Panel';
+        return 'LeftPanel';
     }
 
     /**
