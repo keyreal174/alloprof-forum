@@ -186,3 +186,7 @@ select {
 .scroll-top h2 {
     margin-bottom: 30px;
 }
+
+.DataList.Discussions .embedExternal.embedImage {
+    display: none;
+}
