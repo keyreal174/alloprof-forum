@@ -126,13 +126,20 @@
     height: 24px;
 }
 
+.Favorite-Icon.isLiked {
+    background: url("../images/Heart.png") no-repeat !important;
+    width: 24px;
+    height: 24px;
+}
+
 .Options>a.Option-Icon {
     margin-left: 0 !important;
-    margin-right: 27px;
+    margin-right: 17px;
 }
 
 .Options>a.Option-Icon:last-child {
     margin-right: 0;
+    margin-left: 15px!important;
 }
 
 .Item-Footer-Icons {
