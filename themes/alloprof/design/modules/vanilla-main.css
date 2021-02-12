@@ -4524,7 +4524,8 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
 .MessageList .Options {
     display: -webkit-box;
     display: -ms-flexbox;
-    display: flex
+    display: flex;
+    align-items: center;
 }
 
 .DataList .Bookmark:before,
