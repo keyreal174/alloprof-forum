@@ -175,30 +175,48 @@ if (!function_exists('reactionButton')) {
         }
 
         $template = '%s for discussion: "%s"';
+        $additionalLabel = "";
 
         // Defaults to discussion type
         if ($recordType === "comment") {
+            // people found the explanation helpful
             $template = t('%s comment by user: "%s"');
             $targetName = "";
+            $isLiked = ReactionModel::getCurrentStatus($recordType, 9, $iD);
+            $label = "Like";
+            if ($count) {
+                $additionalLabel = "people found the explanation helpful";
+            }
+            if ($isLiked) {
+                $linkClass = $linkClass . " isLiked";
+                $label = "Dislike";
+            }
         } elseif ($recordType === "activity") {
             $discussionModel = Gdn::getContainer()->get(DiscussionModel::class);
             $discussion = $discussionModel->getID(is_array($row) ? $row["DiscussionID"] : $row->DiscussionID, DATASET_TYPE_ARRAY);
             $targetName = $discussion["Name"];
         } else {
             $targetName = is_array($row) ? $row["Name"] : $row->Name;
+            $isLiked = ReactionModel::getCurrentStatus($recordType, 9, $iD);
+            $label = "Like";
+            if ($isLiked) {
+                $linkClass = $linkClass . " isLiked";
+                $label = "Dislike";
+            }
         }
 
-        $upAccessibleLabel= HtmlUtils::accessibleLabel($template, [$label, $targetName]);
-        $downAccessibleLabel= HtmlUtils::accessibleLabel($template, [$label, $targetName]);
+        // $upAccessibleLabel= HtmlUtils::accessibleLabel($template, [$label, $targetName]);
+        // $downAccessibleLabel= HtmlUtils::accessibleLabel($template, [$label, $targetName]);
+
 
 
         if ($permissionClass && $permissionClass !== 'Positive' && !checkPermission('Garden.Moderation.Manage')) {
             $result = <<<EOT
-<a class="Hijack ReactButton $linkClass" href="$url" tabindex="0" aria-label="$upAccessibleLabel" title="$label" rel="nofollow" role="button"><span class="ReactSprite $spriteClass"></span> $countHtml<span class="ReactLabel">$label</span></a>
+<a class="Hijack Favorite-Icon Option-Icon ReactButton $linkClass" href="$url" tabindex="0" aria-label="$upAccessibleLabel" title="$label" rel="nofollow" role="button">$countHtml <span class="additional-label">$additionalLabel</span></a>
 EOT;
         } else {
             $result = <<<EOT
-<a class="Hijack ReactButton $linkClass" href="$url" tabindex="0" aria-label="$downAccessibleLabel" title="$label" $dataAttr rel="nofollow" role="button"><span class="ReactSprite $spriteClass"></span> $countHtml<span class="ReactLabel">$label</span></a>
+<a class="Hijack Favorite-Icon Option-Icon ReactButton $linkClass" href="$url" tabindex="0" aria-label="$downAccessibleLabel" title="$label" $dataAttr rel="nofollow" role="button">$countHtml <span class="additional-label">$additionalLabel</span></a>
 
 EOT;
         }

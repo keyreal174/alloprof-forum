@@ -23,6 +23,8 @@ use Vanilla\Theme\VariableProviders\QuickLinkProviderInterface;
 use Gdn_Session as SessionInterface;
 use Vanilla\Theme\VariableProviders\QuickLinksVariableProvider;
 
+require 'views/reaction_functions.php';
+
 /**
  * Class ReactionsPlugin
  */
