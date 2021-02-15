@@ -63,6 +63,17 @@
                         $options['DraftID'] = $this->Draft->DraftID;
                     }
 
+                    $fields = c('ProfileExtender.Fields', []);
+                    if (!is_array($fields)) {
+                        $fields = [];
+                    }
+                    foreach ($fields as $k => $field) {
+                        if ($field['Label'] == "Grade") {
+                            $GradeOption = $field['Options'];
+                            array_unshift($GradeOption, t("Grade"));
+                        }
+                    }
+
                     echo '<div>';
                     echo '<div class="Category rich-select">';
                     echo '<img src="/themes/alloprof/design/images/icons/subject.svg"/>';
@@ -70,7 +81,10 @@
                     echo '</div>';
                     echo '</div>';
                     echo '<span class="space"></span>';
-                    echo '<div><div class="Category rich-select"><select></select></div></div>';
+                    echo '<div class="Category rich-select">';
+                    echo '<img src="/themes/alloprof/design/images/icons/grade.svg"/>';
+                    echo $this->Form->dropDown('GradeID', $GradeOption);
+                    echo '</div>';
                 }
                 echo '</div>';
                 echo '<div class="Buttons">';
