@@ -640,6 +640,83 @@ class DiscussionsController extends VanillaController {
         $this->render();
     }
 
+
+    /**
+     * Display discussions started by the user.
+     *
+     * @since 2.0.0
+     * @access public
+     *
+     * @param int $offset Number of discussions to skip.
+     */
+    public function waiting($page = 'p1') {
+        $this->getUserInfo();
+        $this->permission('Garden.SignIn.Allow');
+        Gdn_Theme::section('DiscussionList');
+
+        // add profile filter and photo
+        $this->addModule('UserPhotoModule');
+        $this->fireEvent('AddProfileTabsInfo');
+        $this->addModule('ProfileFilterModule');
+
+        // Set criteria & get discussions data
+        list($offset, $limit) = offsetLimit($page, c('Vanilla.Discussions.PerPage', 30));
+        $session = Gdn::session();
+        $wheres = ['d.CountComments' => 0];
+
+        $discussionModel = new DiscussionModel();
+        $discussionModel->setSort(Gdn::request()->get());
+        $discussionModel->setFilters(Gdn::request()->get());
+        $this->setData('Sort', $discussionModel->getSort());
+        $this->setData('Filters', $discussionModel->getFilters());
+
+        $this->DiscussionData = $discussionModel->get($offset, $limit, $wheres);
+        $this->setData('Discussions', $this->DiscussionData);
+        $countDiscussions = $this->setData('CountDiscussions', $discussionModel->getCount($wheres));
+
+        $this->View = 'index';
+        if (c('Vanilla.Discussions.Layout') === 'table') {
+            $this->View = 'table';
+        }
+
+        // Build a pager
+        $pagerFactory = new Gdn_PagerFactory();
+        $this->EventArguments['PagerType'] = 'MorePager';
+        $this->fireEvent('BeforeBuildMinePager');
+        $this->Pager = $pagerFactory->getPager($this->EventArguments['PagerType'], $this);
+        $this->Pager->MoreCode = 'More Discussions';
+        $this->Pager->LessCode = 'Newer Discussions';
+        $this->Pager->ClientID = 'Pager';
+        $this->Pager->configure(
+            $offset,
+            $limit,
+            $countDiscussions,
+            'discussions/waiting/%1$s'
+        );
+
+        $this->setData('_PagerUrl', 'discussions/waiting/{Page}');
+        $this->setData('_Page', $page);
+        $this->setData('_Limit', $limit);
+
+        $this->fireEvent('AfterBuildMinePager');
+
+        // Deliver JSON data if necessary
+        if ($this->_DeliveryType != DELIVERY_TYPE_ALL) {
+            $this->setJson('LessRow', $this->Pager->toString('less'));
+            $this->setJson('MoreRow', $this->Pager->toString('more'));
+            $this->View = 'discussions';
+        }
+
+        // Add modules
+        $this->addModule('CategoriesModule');
+        $this->addModule('BookmarkedModule');
+        $this->addModule('TagModule');
+
+        // Render view
+        $this->setData('Breadcrumbs', [['Name' => t('My Discussions'), 'Url' => '/discussions/waiting']]);
+        $this->render();
+    }
+
     public function userBookmarkCount($userID = false) {
         if ($userID === false) {
             $userID = Gdn::session()->UserID;
@@ -962,10 +1039,6 @@ class DiscussionsController extends VanillaController {
         if ($this->_UserInfoRetrieved) {
             return;
         }
-
-        // if (!c('Garden.Profile.Public') && !Gdn::session()->isValid()) {
-        //     throw permissionException();
-        // }
 
         // If a UserID was provided as a querystring parameter, use it over anything else:
         if ($userID) {

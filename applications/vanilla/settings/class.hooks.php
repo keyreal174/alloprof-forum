@@ -531,6 +531,7 @@ class VanillaHooks extends Gdn_Plugin {
             [
                 'Vanilla.Discussions.Add' => 1,
                 'Vanilla.Discussions.View' => 1,
+                'Vanilla.Discussions.Delete' => 1,
                 'Vanilla.Comments.Add' => 1
             ],
             'Category',

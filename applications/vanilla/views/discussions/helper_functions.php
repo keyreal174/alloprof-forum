@@ -758,3 +758,33 @@ if (!function_exists('writeOptions')) :
         echo '</span>';
     }
 endif;
+
+if (!function_exists('userRoleCheck')) :
+    /**
+     * User Role check
+     */
+    function userRoleCheck() {
+        $userModel = new UserModel();
+        $User = $userModel->getID(Gdn::session()->UserID);
+
+        if($User) {
+            $RoleData = $userModel->getRoles($User->UserID);
+
+            $RoleData = $userModel->getRoles($User->UserID);
+            if ($RoleData !== false) {
+                $Roles = array_column($RoleData->resultArray(), 'Name');
+            }
+
+            // Hide personal info roles
+            if (!checkPermission('Garden.PersonalInfo.View')) {
+                $Roles = array_filter($Roles, 'RoleModel::FilterPersonalInfo');
+            }
+
+            if(in_array(Gdn::config('Vanilla.ExtraRoles.Teacher'), $Roles))
+                $UserRole = Gdn::config('Vanilla.ExtraRoles.Teacher') ?? 'Teacher';
+            else $UserRole = RoleModel::TYPE_MEMBER ?? 'student';
+
+            return $UserRole;
+        } else return null;
+    }
+endif;
