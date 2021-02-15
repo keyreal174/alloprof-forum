@@ -345,7 +345,7 @@ if (!function_exists('writeDiscussionDetail')) :
 
         $sender->fireEvent('BeforeDiscussionDisplay');
         ?>
-        <li id="Discussion_<?php echo $discussion->DiscussionID; ?>" class="<?php echo $cssClass; ?>">
+        <li id="Discussion_<?php echo $Discussion->DiscussionID; ?>" class="<?php echo $cssClass; ?>">
             <div class="Discussion">
                 <div class="Item-Header DiscussionHeader">
                     <?php
@@ -353,7 +353,7 @@ if (!function_exists('writeDiscussionDetail')) :
                         ?>
                         <span class="Options-Icon">
                         <?php
-                            echo optionsList($discussion);
+                            echo optionsList($Discussion);
                         ?>
                         </span>
                         <?php
