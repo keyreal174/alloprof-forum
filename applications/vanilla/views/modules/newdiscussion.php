@@ -1,3 +1,8 @@
+<?php
+    require_once Gdn::controller()->fetchViewLocation('helper_functions', 'Discussions', 'Vanilla');
+    if(userRoleCheck() != Gdn::config('Vanilla.ExtraRoles.Teacher')) {
+?>
+
 <div class="BoxButtons BoxNewDiscussion AskQuestionForm">
     <h1>
         <?php echo t('Ask a question'); ?>
@@ -8,10 +13,9 @@
 
     <div id="DiscussionForm" class="FormTitleWrapper DiscussionForm">
         <?php
-
-        echo '<div class="FormWrapper">';
-        echo $this->Form->open();
-        echo $this->Form->errors();
+            echo '<div class="FormWrapper">';
+            echo $this->Form->open();
+            echo $this->Form->errors();
         ?>
 
         <div class="content">
@@ -87,3 +91,4 @@
     </div>
 
 </div>
+<?php } ?>

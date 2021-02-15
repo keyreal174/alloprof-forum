@@ -57,3 +57,7 @@ $Configuration['Vanilla']['EnableCategoryFollowing'] = true;
 
 // Save user preferences when they filter categories or recent discussions by their "followed" status.
 $Configuration['Vanilla']['SaveFollowingPreference'] = true;
+
+
+// Define Extra Role Name
+$Configuration['Vanilla']['ExtraRoles']['Teacher'] = 'Teacher';
