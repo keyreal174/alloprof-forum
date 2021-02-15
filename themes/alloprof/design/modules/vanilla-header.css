@@ -8,9 +8,8 @@
 }
 
 .MeBox-header .SearchBox input[type=text] {
-    width: 130px;
+    width: 0px;
     box-sizing: border-box;
-    border: 2px solid #ccc;
     border-radius: 4px;
     font-size: 16px;
     background-color: white;
@@ -21,8 +20,10 @@
     -webkit-transition: left width 0.4s ease-in-out;
     transition: left width 0.4s ease-in-out;
     border-radius: 100px;
+    border: none;
 }
 
 .MeBox-header .SearchBox input[type=text]:focus {
     width: 500px;
+    border: 2px solid #ccc;
 }

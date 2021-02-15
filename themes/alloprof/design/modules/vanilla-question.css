@@ -63,7 +63,8 @@
 }
 
 .MessageList .Item-BodyWrap .Message.userContent,
-.DataList.Discussions .Item-BodyWrap .Message.userContent {
+.DataList.Discussions .Item-BodyWrap .Message.userContent,
+.Item-Search .Item-Body .Summary {
     display: flex;
     flex-direction: column;
     background-color: #f2f2f2;
@@ -139,7 +140,7 @@
 
 .Options>a.Option-Icon:last-child {
     margin-right: 0;
-    margin-left: 15px!important;
+    margin-left: 15px !important;
 }
 
 .Item-Footer-Icons {
@@ -295,3 +296,22 @@
     bottom: -60px;
     width: initial;
 } */
+
+/* Search Media */
+.Item-Search .Item-Body .AuthWrapper {
+    display: flex;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.Item-Search .Item-Body .AuthWrapper img {
+    width: 64px;
+    height: 64px;
+    margin-right: 20px;
+    border-radius: 100%;
+}
+
+.Item-Search .Item-Body .AuthWrapper .AuthDate {
+    display: flex;
+    flex-direction: column;
+}

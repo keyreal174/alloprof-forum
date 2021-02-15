@@ -1,10 +1,10 @@
 {
-    "allowDisable": false,
+    "allowDisable": true,
     "description": "Vanilla is the sweetest discussion forum on the web.",
     "setupController": "setup",
     "url": "https://open.vanillaforums.com",
     "license": "GPL v2",
-    "hidden": true,
+    "hidden": false,
     "icon": "vanilla.png",
     "key": "vanilla",
     "type": "addon",

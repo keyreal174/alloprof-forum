@@ -6,63 +6,22 @@
     <ol id="search-results" class="DataList DataList-Search" start="<?php echo $this->data('From'); ?>">
         <?php foreach ($this->data('SearchResults') as $Row): ?>
             <li class="Item Item-Search">
-                <h3 aria-level="2"><?php echo anchor(htmlspecialchars($Row['Title']), $Row['Url']); ?></h3>
-
                 <div class="Item-Body Media">
-                    <?php
-                    $Photo = userPhoto($Row, ['LinkClass' => 'Img']);
-                    if ($Photo) {
-                        echo $Photo;
-                    }
-                    ?>
-                    <div class="Media-Body">
-                        <div class="Meta">
-                            <?php
-                            echo ' <span class="MItem-Author">'.
-                                sprintf(t('by %s'), userAnchor($Row)).
-                                '</span>';
-
-                            echo bullet(' ');
-                            echo ' <span class="MItem-DateInserted">'.
+                    <div class="AuthWrapper">
+                        <?php echo "<img src='".$Row['Photo']."' alt='photo' />" ?>
+                        <div class="AuthDate">
+                            <span><?php echo $Row['Name'] ?></span>
+                            <?php echo ' <span class="MItem-DateInserted">'.
                                 Gdn_Format::date($Row['DateInserted'], 'html').
-                                '</span> ';
-
-
-                            if (isset($Row['Breadcrumbs'])) {
-                                echo bullet(' ');
-                                echo ' <span class="MItem-Location">'.Gdn_Theme::breadcrumbs($Row['Breadcrumbs'], false).'</span> ';
-                            }
-
-                            if (isset($Row['Notes'])) {
-                                echo ' <span class="Aside Debug">debug('.$Row['Notes'].')</span>';
-                            }
-                            ?>
+                                '</span> '; ?>
                         </div>
+                    </div>
+                    <div class="Media-Body">
                         <div class="Summary">
                             <?php echo $Row['Summary']; ?>
                         </div>
                         <?php
                         $Count = val('Count', $Row);
-                        //            $i = 0;
-                        //            if (isset($Row['Children'])) {
-                        //               echo '<ul>';
-                        //
-                        //               foreach($Row['Children'] as $child) {
-                        //                  if ($child['PrimaryID'] == $Row['PrimaryID'])
-                        //                     continue;
-                        //
-                        //                  $i++;
-                        //                  $Count--;
-                        //
-                        //                  echo "\n<li>".
-                        //                     anchor($child['Summary'], $child['Url']);
-                        //                     '</li>';
-                        //
-                        //                  if ($i >= 3)
-                        //                     break;
-                        //               }
-                        //               echo '</ul>';
-                        //            }
 
                         if (($Count) > 1) {
                             $url = $this->data('SearchUrl').'&discussionid='.urlencode($Row['DiscussionID']).'#search-results';
