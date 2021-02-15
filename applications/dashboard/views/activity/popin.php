@@ -5,7 +5,7 @@
         ?>
         <li class="Item Title"><?php
             echo anchor(t('Notification Preferences'), 'profile/preferences');
-            echo wrap(t('Notifications'), 'strong');
+            echo wrap(t('Notifications (').count($this->data('Activities')).')', 'strong');
             ?></li>
         <?php foreach ($this->data('Activities') as $Activity): ?>
         <?php
