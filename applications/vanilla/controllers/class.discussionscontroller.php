@@ -452,6 +452,12 @@ class DiscussionsController extends VanillaController {
         $this->permission('Garden.SignIn.Allow');
         Gdn_Theme::section('DiscussionList');
 
+        // Add js
+        $this->addJsFile('jquery.autosize.min.js');
+        $this->addJsFile('autosave.js');
+        $this->addJsFile('post.js');
+        $this->addJsFile('askquestion.js');
+
         // Figure out which discussions layout to choose (Defined on "Homepage" settings page).
         $layout = c('Vanilla.Discussions.Layout');
         switch ($layout) {
@@ -522,7 +528,7 @@ class DiscussionsController extends VanillaController {
 
         // Add modules
         $this->addModule('DiscussionFilterModule');
-        // $this->addModule('NewDiscussionModule');
+        $this->addModule('NewDiscussionModule');
         $this->addModule('CategoriesModule');
         $this->addModule('TagModule');
 
