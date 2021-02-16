@@ -449,6 +449,7 @@ class DiscussionsController extends VanillaController {
      * @param int $Offset Number of discussions to skip.
      */
     public function bookmarked($page = '0') {
+        $this->getUserInfo();
         $this->permission('Garden.SignIn.Allow');
         Gdn_Theme::section('DiscussionList');
 
@@ -525,6 +526,16 @@ class DiscussionsController extends VanillaController {
             $this->setJson('MoreRow', $this->Pager->toString('more'));
             $this->View = 'discussions';
         }
+
+        // Make sure the userphoto module gets added to the page
+        $this->addModule('UserPhotoModule');
+
+        // And add the filter menu module
+        $this->fireEvent('AfterAddSideMenu');
+
+        // Add discussion and question count on the profile block
+        $this->fireEvent('AddProfileTabsInfo');
+        $this->addModule('ProfileFilterModule');
 
         // Add modules
         $this->addModule('DiscussionFilterModule');
