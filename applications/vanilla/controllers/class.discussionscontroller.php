@@ -574,6 +574,12 @@ class DiscussionsController extends VanillaController {
         $this->permission('Garden.SignIn.Allow');
         Gdn_Theme::section('DiscussionList');
 
+        // Add js
+        $this->addJsFile('jquery.autosize.min.js');
+        $this->addJsFile('autosave.js');
+        $this->addJsFile('post.js');
+        $this->addJsFile('askquestion.js');
+
         // add profile filter and photo
         $this->addModule('UserPhotoModule');
         $this->fireEvent('AddProfileTabsInfo');
@@ -629,7 +635,7 @@ class DiscussionsController extends VanillaController {
 
         // Add modules
         $this->addModule('DiscussionFilterModule');
-        // $this->addModule('NewDiscussionModule');
+        $this->addModule('NewDiscussionModule');
         $this->addModule('CategoriesModule');
         $this->addModule('BookmarkedModule');
         $this->addModule('TagModule');
@@ -1104,6 +1110,12 @@ class DiscussionsController extends VanillaController {
         $this->getUserInfo();
         $this->permission('Garden.SignIn.Allow');
         Gdn_Theme::section('DiscussionList');
+
+        // Add js
+        $this->addJsFile('jquery.autosize.min.js');
+        $this->addJsFile('autosave.js');
+        $this->addJsFile('post.js');
+        $this->addJsFile('askquestion.js');
 
         // add profile filter and photo
         $this->addModule('UserPhotoModule');
