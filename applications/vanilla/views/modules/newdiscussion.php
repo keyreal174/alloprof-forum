@@ -29,7 +29,7 @@
         ?>
         <h1>
             <?php
-                echo t('Ask a question');
+                echo t('New question');
             ?>
         </h1>
     </div>

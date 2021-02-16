@@ -527,21 +527,14 @@ class DiscussionsController extends VanillaController {
             $this->View = 'discussions';
         }
 
-        // Make sure the userphoto module gets added to the page
-        $this->addModule('UserPhotoModule');
-
-        // And add the filter menu module
-        $this->fireEvent('AfterAddSideMenu');
-
-        // Add discussion and question count on the profile block
-        $this->fireEvent('AddProfileTabsInfo');
-        $this->addModule('ProfileFilterModule');
-
         // Add modules
-        $this->addModule('DiscussionFilterModule');
         $this->addModule('NewDiscussionModule');
+        $this->addModule('AskQuestionModule');
         $this->addModule('CategoriesModule');
-        $this->addModule('TagModule');
+        $this->addModule('UserPhotoModule');
+        $this->addModule('ProfileFilterModule');
+        $this->fireEvent('AfterAddSideMenu');
+        $this->fireEvent('AddProfileTabsInfo');
 
         // Render default view (discussions/bookmarked.php)
         $this->setData('Title', t('My Bookmarks'));
@@ -597,11 +590,6 @@ class DiscussionsController extends VanillaController {
         $this->addJsFile('post.js');
         $this->addJsFile('askquestion.js');
 
-        // add profile filter and photo
-        $this->addModule('UserPhotoModule');
-        $this->fireEvent('AddProfileTabsInfo');
-        $this->addModule('ProfileFilterModule');
-
         // Set criteria & get discussions data
         list($offset, $limit) = offsetLimit($page, c('Vanilla.Discussions.PerPage', 30));
         $session = Gdn::session();
@@ -651,15 +639,17 @@ class DiscussionsController extends VanillaController {
         }
 
         // Add modules
-        $this->addModule('DiscussionFilterModule');
         $this->addModule('NewDiscussionModule');
+        $this->addModule('AskQuestionModule');
         $this->addModule('CategoriesModule');
-        $this->addModule('BookmarkedModule');
-        $this->addModule('TagModule');
+        $this->addModule('UserPhotoModule');
+        $this->addModule('ProfileFilterModule');
+        $this->fireEvent('AfterAddSideMenu');
+        $this->fireEvent('AddProfileTabsInfo');
 
         // Render view
-        $this->setData('Title', t('My Discussions'));
-        $this->setData('Breadcrumbs', [['Name' => t('My Discussions'), 'Url' => '/discussions/mine']]);
+        $this->setData('Title', t('My Questions'));
+        $this->setData('Breadcrumbs', [['Name' => t('My Questions'), 'Url' => '/discussions/mine']]);
         $this->render();
     }
 
