@@ -333,6 +333,8 @@ if (!function_exists('writeDiscussionDetail')) :
         $category = CategoryModel::categories($Discussion->CategoryID);
         $discussionUrl = $Discussion->Url;
 
+        $grade = getGrade($Discussion->GradeID);
+
         $dateTimeFormatter = Gdn::getContainer()->get(\Vanilla\Formatting\DateTimeFormatter::class);
 
         $sender->EventArguments['Discussion'] = &$DiscussionDiscussion;
@@ -375,8 +377,6 @@ if (!function_exists('writeDiscussionDetail')) :
                         <span class="AuthorInfo">
                             <?php
                             echo "<a class='DiscussionHeader_category' href='/categories/".$category["UrlCode"]."'>".$category["Name"]."</a>";
-                            echo wrapIf(htmlspecialchars(val('Title', $Author)), 'span', ['class' => 'MItem AuthorTitle']);
-                            echo wrapIf(htmlspecialchars(val('Location', $Author)), 'span', ['class' => 'MItem AuthorLocation']);
                             $sender->fireEvent('AuthorInfo');
                             ?>
                         </span>
@@ -400,7 +400,11 @@ if (!function_exists('writeDiscussionDetail')) :
                     <div class="Meta DiscussionMeta">
                         <span class="MItem TimeAgo">
                             <?php
-                                echo $AuthorMetaData["Grade"] . ' • ' . timeElapsedString($Discussion->LastDate, false);
+                                if ($grade) {
+                                    echo $grade . ' • ' . timeElapsedString($Discussion->LastDate, false);
+                                } else {
+                                    echo timeElapsedString($Discussion->LastDate, false);
+                                }
                             ?>
                         </span>
                         <?php

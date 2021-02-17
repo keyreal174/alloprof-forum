@@ -137,6 +137,10 @@ class DiscussionController extends VanillaController {
         $OffsetProvided = $Page != '';
         list($Offset, $Limit) = offsetLimit($Page, $Limit);
 
+        // set GradeID
+        $this->GradeID = $this->Discussion->GradeID;
+        $this->setData('GradeID', $this->GradeID);
+
         // Check permissions.
         $Category = CategoryModel::categories($this->Discussion->CategoryID);
         $this->categoryPermission($Category, 'Vanilla.Discussions.View');

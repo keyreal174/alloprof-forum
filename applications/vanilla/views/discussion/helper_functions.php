@@ -886,3 +886,21 @@ if (!function_exists('commentSorttDropDown')) :
         return $output;
     }
 endif;
+
+if (!function_exists('getGrade')) :
+
+    function getGrade($GradeID) {
+        $fields = c('ProfileExtender.Fields', []);
+        if (!is_array($fields)) {
+            $fields = [];
+        }
+        $GradeOption = [];
+        foreach ($fields as $k => $field) {
+            if ($field['Label'] == "Grade") {
+                $GradeOption = $field['Options'];
+                array_unshift($GradeOption, t("Grade"));
+            }
+        }
+        return $GradeOption[$GradeID];
+    }
+endif;
