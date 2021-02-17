@@ -1,17 +1,47 @@
+<?php
+    require_once Gdn::controller()->fetchViewLocation('helper_functions', 'Discussions', 'Vanilla');
+    $User = val('User', Gdn::controller());
+    if (!$User && Gdn::session()->isValid()) {
+        $User = Gdn::session()->User;
+    }
+    $Photo = $User->Photo;
+    if ($Photo) {
+        $Photo = (isUrl($Photo)) ? $Photo : Gdn_Upload::url(changeBasename($Photo, 'p%s'));
+        $PhotoAlt = t('Avatar');
+    } else {
+        $Photo = UserModel::getDefaultAvatarUrl($User, 'profile');
+        $PhotoAlt = t('Default Avatar');
+    }
+
+    if ($User->Banned) {
+        $BannedPhoto = c('Garden.BannedPhoto', 'https://images.v-cdn.net/banned_large.png');
+        if ($BannedPhoto) {
+            $Photo = Gdn_Upload::url($BannedPhoto);
+        }
+    }
+    if(userRoleCheck() != Gdn::config('Vanilla.ExtraRoles.Teacher')) {
+?>
+
 <div class="BoxButtons BoxNewDiscussion AskQuestionForm">
-    <h1>
-        <?php echo t('Ask a question'); ?>
-    </h1>
+    <div class="BoxNewDiscussion-header">
+        <?php
+            echo img($Photo, ['class' => 'user-avatar', 'alt' => $PhotoAlt]);
+        ?>
+        <h1>
+            <?php
+                echo t('New question');
+            ?>
+        </h1>
+    </div>
     <div class="close-icon">
         <img src="/themes/alloprof/design/images/icons/close.svg" />
     </div>
 
     <div id="DiscussionForm" class="FormTitleWrapper DiscussionForm">
         <?php
-
-        echo '<div class="FormWrapper">';
-        echo $this->Form->open();
-        echo $this->Form->errors();
+            echo '<div class="FormWrapper">';
+            echo $this->Form->open();
+            echo $this->Form->errors();
         ?>
 
         <div class="content">
@@ -110,3 +140,4 @@
     </div>
 
 </div>
+<?php } ?>

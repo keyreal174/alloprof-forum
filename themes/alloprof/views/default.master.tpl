@@ -158,9 +158,7 @@
                         <div class="Frame-contentWrap">
                             <div class="Frame-menubar">
                                 {if $User.SignedIn}
-                                    <nav class="Question-submenu">
-                                        {$smarty.capture.submenuLinks}
-                                    </nav>
+                                        {module name="SubMenuModule"}
                                 {/if}
                             </div>
 

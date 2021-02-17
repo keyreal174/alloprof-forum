@@ -508,3 +508,19 @@ foreach ($users as $user) {
             ->put();
     }
 }
+
+
+// Insert Extra Roles
+
+$userTeacherRole = [
+    'Name' => Gdn::config('Vanilla.ExtraRoles.Teacher') ?? 'Teacher',
+    'Description' => 'Teacher Role',
+    'Type' => RoleModel::TYPE_MEMBER,
+    'Sync' => 1,
+    'Sort' => 1,
+    'Deletable' => 1,
+    'CanSession' => 1,
+    'PersonalInfo' => 1
+];
+
+$SQL->insert('Role', $userTeacherRole);

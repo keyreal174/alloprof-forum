@@ -2,7 +2,6 @@
     display: flex;
     justify-content: space-around;
     border-top: 1px solid #E0E0E0;
-    border-bottom: 1px solid #E0E0E0;
     padding-top: 28px;
     padding-bottom: 24px;
 }
@@ -22,7 +21,8 @@
 }
 
 .BoxProfileInfo .BoxProfileInfo_viewprofile {
-    padding-top: 48px;
+    border-top: 1px solid #E0E0E0;
+    padding-top: 28px;
 }
 
 .BoxProfileInfo .BoxProfileInfo_viewprofile .BoxProfileInfo_viewprofile__btn {
