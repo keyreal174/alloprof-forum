@@ -105,6 +105,7 @@ class DiscussionsController extends VanillaController {
         $this->addJsFile('autosave.js');
         $this->addJsFile('post.js');
         $this->addJsFile('askquestion.js');
+        $this->addJsFile('filter.js');
 
         // Remove score sort
         DiscussionModel::removeSort('top');
@@ -199,6 +200,7 @@ class DiscussionsController extends VanillaController {
         } else {
             $followed = false;
         }
+
         $this->setData('EnableFollowingFilter', $this->enableFollowingFilter);
         if ($this->enableFollowingFilter) {
             $this->setData('Followed', $followed);
@@ -212,6 +214,7 @@ class DiscussionsController extends VanillaController {
         }
         $DiscussionModel->setSort(Gdn::request()->get());
         $DiscussionModel->setFilters(Gdn::request()->get());
+        print_r($DiscussionModel->setFilters(Gdn::request()->get()));
         $this->setData('Sort', $DiscussionModel->getSort());
         $this->setData('Filters', $DiscussionModel->getFilters());
 
@@ -237,6 +240,16 @@ class DiscussionsController extends VanillaController {
             if ($visibleCategoriesResult !== true) {
                 $where['d.CategoryID'] = $visibleCategoriesResult;
             }
+        }
+
+        // set grade filter
+        $gradeFilterOption = strval((int)(Gdn::request()->get('grade')) - 1);
+        if (($gradeFilterOption || $gradeFilterOption === '0') && $gradeFilterOption !== '-1') {
+            $where['d.GradeID'] = $gradeFilterOption;
+            $announcementsWhere['d.GradeID'] = $gradeFilterOption;
+        } else {
+            unset($where['d.GradeID']);
+            unset($announcementsWhere['d.GradeID']);
         }
 
         // Get Discussion Count

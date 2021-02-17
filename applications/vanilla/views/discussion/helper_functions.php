@@ -818,7 +818,7 @@ if (!function_exists('commentSort')) :
             $defaultUrl = url($baseUrl);
         }
 
-        return commentSorttDropDown(
+        return commentSortDropDown(
             $baseUrl,
             $filters,
             $extraClasses,
@@ -829,7 +829,7 @@ if (!function_exists('commentSort')) :
     }
 endif;
 
-if (!function_exists('commentSorttDropDown')) :
+if (!function_exists('commentSortDropDown')) :
     /**
      * Returns a filtering drop-down menu.
      *
@@ -844,7 +844,7 @@ if (!function_exists('commentSorttDropDown')) :
      * @param string $label Text for the label to attach to the cont
      * @return string
      */
-    function commentSorttDropDown($baseUrl, array $filters = [], $extraClasses = '', $default = null, $defaultUrl = null, $label = 'View') {
+    function commentSortDropDown($baseUrl, array $filters = [], $extraClasses = '', $default = null, $defaultUrl = null, $label = 'View') {
         if ($default === null) {
             $default = t('Most Recent');
         }
