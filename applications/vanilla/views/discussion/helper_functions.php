@@ -900,6 +900,6 @@ if (!function_exists('getGrade')) :
                 $GradeOption = $field['Options'];
             }
         }
-        return !$GradeID ? $GradeOption[$GradeID] : "";
+        return ($GradeID || $GradeID === 0) ? $GradeOption[$GradeID] : "";
     }
 endif;
