@@ -449,8 +449,15 @@ class DiscussionsController extends VanillaController {
      * @param int $Offset Number of discussions to skip.
      */
     public function bookmarked($page = '0') {
+        $this->getUserInfo();
         $this->permission('Garden.SignIn.Allow');
         Gdn_Theme::section('DiscussionList');
+
+        // Add js
+        $this->addJsFile('jquery.autosize.min.js');
+        $this->addJsFile('autosave.js');
+        $this->addJsFile('post.js');
+        $this->addJsFile('askquestion.js');
 
         // Figure out which discussions layout to choose (Defined on "Homepage" settings page).
         $layout = c('Vanilla.Discussions.Layout');
@@ -521,10 +528,13 @@ class DiscussionsController extends VanillaController {
         }
 
         // Add modules
-        $this->addModule('DiscussionFilterModule');
-        // $this->addModule('NewDiscussionModule');
+        $this->addModule('NewDiscussionModule');
+        $this->addModule('AskQuestionModule');
         $this->addModule('CategoriesModule');
-        $this->addModule('TagModule');
+        $this->addModule('UserPhotoModule');
+        $this->addModule('ProfileFilterModule');
+        $this->fireEvent('AfterAddSideMenu');
+        $this->fireEvent('AddProfileTabsInfo');
 
         // Render default view (discussions/bookmarked.php)
         $this->setData('Title', t('My Bookmarks'));
@@ -574,10 +584,11 @@ class DiscussionsController extends VanillaController {
         $this->permission('Garden.SignIn.Allow');
         Gdn_Theme::section('DiscussionList');
 
-        // add profile filter and photo
-        $this->addModule('UserPhotoModule');
-        $this->fireEvent('AddProfileTabsInfo');
-        $this->addModule('ProfileFilterModule');
+        // Add js
+        $this->addJsFile('jquery.autosize.min.js');
+        $this->addJsFile('autosave.js');
+        $this->addJsFile('post.js');
+        $this->addJsFile('askquestion.js');
 
         // Set criteria & get discussions data
         list($offset, $limit) = offsetLimit($page, c('Vanilla.Discussions.PerPage', 30));
@@ -628,15 +639,17 @@ class DiscussionsController extends VanillaController {
         }
 
         // Add modules
-        $this->addModule('DiscussionFilterModule');
-        // $this->addModule('NewDiscussionModule');
+        $this->addModule('NewDiscussionModule');
+        $this->addModule('AskQuestionModule');
         $this->addModule('CategoriesModule');
-        $this->addModule('BookmarkedModule');
-        $this->addModule('TagModule');
+        $this->addModule('UserPhotoModule');
+        $this->addModule('ProfileFilterModule');
+        $this->fireEvent('AfterAddSideMenu');
+        $this->fireEvent('AddProfileTabsInfo');
 
         // Render view
-        $this->setData('Title', t('My Discussions'));
-        $this->setData('Breadcrumbs', [['Name' => t('My Discussions'), 'Url' => '/discussions/mine']]);
+        $this->setData('Title', t('My Questions'));
+        $this->setData('Breadcrumbs', [['Name' => t('My Questions'), 'Url' => '/discussions/mine']]);
         $this->render();
     }
 
@@ -1104,6 +1117,12 @@ class DiscussionsController extends VanillaController {
         $this->getUserInfo();
         $this->permission('Garden.SignIn.Allow');
         Gdn_Theme::section('DiscussionList');
+
+        // Add js
+        $this->addJsFile('jquery.autosize.min.js');
+        $this->addJsFile('autosave.js');
+        $this->addJsFile('post.js');
+        $this->addJsFile('askquestion.js');
 
         // add profile filter and photo
         $this->addModule('UserPhotoModule');
