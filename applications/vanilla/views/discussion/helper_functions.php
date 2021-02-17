@@ -881,7 +881,7 @@ if (!function_exists('commentSortDropDown')) :
         }
 
         // Generate the markup for the drop down menu.
-        $output .= linkDropDown($links, 'selectBox-following '.trim($extraClasses), '');
+        $output .= linkDropDown($links, 'selectBox-following '.trim($extraClasses), '', 'sort.svg');
 
         return $output;
     }

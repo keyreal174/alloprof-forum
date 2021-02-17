@@ -1123,7 +1123,7 @@ if (!function_exists('linkDropDown')) {
      * @param string $label the label of the drop down
      *
      */
-    function linkDropDown($links, $extraClasses = '', $label, $icon) {
+    function linkDropDown($links, $extraClasses = '', $label, $icon = 'grade.svg') {
         $output = '';
         $selectedKey = 0;
         foreach($links as $i => $link) {

@@ -50,10 +50,7 @@ if ($this->data('Comments')->numRows() > 0) {
     $discussionUrl = $this->data('Discussion')->Url;
     echo '<div class="CommentHeadingWrapper">';
     echo '<h2 class="CommentHeading">'.$this->data('_CommentsHeader', t('Answers')).'('.$this->data('_LatestItem').')</h2>';
-    echo '<div class="Category CommentSort rich-select bg-transparent">';
-    echo '<img src="/themes/alloprof/design/images/icons/sort.svg"/>';
     echo commentSort($discussionUrl);
-    echo '</div>';
     echo '</div>';
     echo $this->Form->close();
 }
