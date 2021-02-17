@@ -192,3 +192,7 @@ select {
 .richEditor button[title="Insert Media"] {
     display: none !important;
 }
+
+.MeBox-header {
+    display: flex;
+}

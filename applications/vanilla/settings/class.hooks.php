@@ -806,8 +806,8 @@ class VanillaHooks extends Gdn_Plugin {
                 $discussionsLabel .= $discussionsCount;
                 $commentsLabel .= $commentsCount;
             }
-            $sender->addProfileTab(t('Questions'), userUrl($sender->User, '', 'discussions'), 'Questions', $discussionsLabel);
-            $sender->addProfileTab(t('Comments'), userUrl($sender->User, '', 'comments'), 'Comments', $commentsLabel);
+            $sender->addProfileTab('Questions', userUrl($sender->User, '', 'discussions'), 'Questions', $discussionsLabel);
+            $sender->addProfileTab('Comments', userUrl($sender->User, '', 'comments'), 'Comments', $commentsLabel);
             // Add the discussion tab's CSS and Javascript.
             $sender->addJsFile('jquery.gardenmorepager.js');
             $sender->addJsFile('discussions.js', 'vanilla');
@@ -836,8 +836,8 @@ class VanillaHooks extends Gdn_Plugin {
                 $discussionsLabel .= $discussionsCount;
                 $commentsLabel .= $commentsCount;
             }
-            $sender->addProfileTab(t('Questions'), userUrl($sender->User, '', 'discussions'), 'Questions', $discussionsLabel);
-            $sender->addProfileTab(t('Comments'), userUrl($sender->User, '', 'comments'), 'Comments', $commentsLabel);
+            $sender->addProfileTab('Questions', userUrl($sender->User, '', 'discussions'), 'Questions', $discussionsLabel);
+            $sender->addProfileTab('Comments', userUrl($sender->User, '', 'comments'), 'Comments', $commentsLabel);
             // Add the discussion tab's CSS and Javascript.
             $sender->addJsFile('jquery.gardenmorepager.js');
             $sender->addJsFile('discussions.js', 'vanilla');
@@ -858,8 +858,8 @@ class VanillaHooks extends Gdn_Plugin {
                 $discussionsLabel .= $discussionsCount;
                 $commentsLabel .= $commentsCount;
             }
-            $sender->addProfileTab(t('Questions'), userUrl($sender->User, '', 'discussions'), 'Questions', $discussionsLabel);
-            $sender->addProfileTab(t('Comments'), userUrl($sender->User, '', 'comments'), 'Comments', $commentsLabel);
+            $sender->addProfileTab('Questions', userUrl($sender->User, '', 'discussions'), 'Questions', $discussionsLabel);
+            $sender->addProfileTab('Comments', userUrl($sender->User, '', 'comments'), 'Comments', $commentsLabel);
             // Add the discussion tab's CSS and Javascript.
             $sender->addJsFile('jquery.gardenmorepager.js');
             $sender->addJsFile('discussions.js', 'vanilla');

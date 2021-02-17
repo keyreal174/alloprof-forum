@@ -121,6 +121,7 @@
                                 <div class="Header-right">
                                     {community_chooser buttonType='titleBarLink' buttonClass='Header-desktopCommunityChooser'}
                                     <div class="MeBox-header">
+                                        {module name="SetLocaleModule"}
                                         {module name="MeModule" CssClass="FlyoutRight"}
                                     </div>
                                     {if $User.SignedIn}
