@@ -792,3 +792,20 @@ if (!function_exists('userRoleCheck')) :
         } else return null;
     }
 endif;
+
+if (!function_exists('writeGradeFilterDropdown')) :
+
+    function writeGradeFilterDropdown() {
+        $fields = c('ProfileExtender.Fields', []);
+        if (!is_array($fields)) {
+            $fields = [];
+        }
+        $GradeOption = [];
+        foreach ($fields as $k => $field) {
+            if ($field['Label'] == "Grade") {
+                $GradeOption = $field['Options'];
+            }
+        }
+        return $GradeID ? $GradeOption[$GradeID] : "";
+    }
+endif;

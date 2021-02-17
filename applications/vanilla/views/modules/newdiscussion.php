@@ -98,7 +98,9 @@
                     if ($Session) {
                         $UserID = $Session->UserID;
                         $AuthorMetaData = Gdn::userModel()->getMeta($UserID, 'Profile.%', 'Profile.');
-                        $DefaultGrade = $AuthorMetaData['Grade'];
+                        if ($AuthorMetaData['Grade']) {
+                            $DefaultGrade = $AuthorMetaData['Grade'];
+                        }
                     }
 
                     $fields = c('ProfileExtender.Fields', []);
@@ -108,8 +110,10 @@
                     foreach ($fields as $k => $field) {
                         if ($field['Label'] == "Grade") {
                             $GradeOption = $field['Options'];
-                            array_unshift($GradeOption, t("Grade"));
-                            $DefaultGrade = array_search($DefaultGrade, $GradeOption);
+
+                            if ($DefaultGrade && $DefaultGrade !== 0) {
+                                $DefaultGrade = array_search($DefaultGrade, $GradeOption);
+                            }
                         }
                     }
 
@@ -122,7 +126,7 @@
                     echo '<span class="space"></span>';
                     echo '<div class="Category rich-select">';
                     echo '<img src="/themes/alloprof/design/images/icons/grade.svg"/>';
-                    echo $this->Form->dropDown('GradeID', $GradeOption, array('Default' => $DefaultGrade));
+                    echo $this->Form->dropDown('GradeID', $GradeOption, array('Default' => $DefaultGrade, 'IncludeNull' => 'Grade', 'IsDisabled' => TRUE));
                     echo '</div>';
                 }
                 echo '</div>';

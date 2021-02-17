@@ -898,9 +898,8 @@ if (!function_exists('getGrade')) :
         foreach ($fields as $k => $field) {
             if ($field['Label'] == "Grade") {
                 $GradeOption = $field['Options'];
-                array_unshift($GradeOption, t("Grade"));
             }
         }
-        return $GradeOption[$GradeID];
+        return !$GradeID ? $GradeOption[$GradeID] : "";
     }
 endif;

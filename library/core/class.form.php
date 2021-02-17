@@ -1510,10 +1510,20 @@ class Gdn_Form extends Gdn_Pluggable {
 
         // Start with null option?
         $includeNull = arrayValueI('IncludeNull', $attributes, false);
-        if ($includeNull === true) {
-            $return .= "<option value=\"\"></option>\n";
-        } elseif ($includeNull) {
-            $return .= "<option value=\"\">$includeNull</option>\n";
+        $Disabled = val('IsDisabled', $attributes);
+
+        if ($Disabled) {
+            if ($includeNull === true) {
+                $return .= "<option disabled value=\"\"></option>\n";
+            } elseif ($includeNull) {
+                $return .= "<option disabled value=\"\">$includeNull</option>\n";
+            }
+        } else {
+            if ($includeNull === true) {
+                $return .= "<option value=\"\"></option>\n";
+            } elseif ($includeNull) {
+                $return .= "<option value=\"\">$includeNull</option>\n";
+            }
         }
 
         if (is_object($dataSet)) {
