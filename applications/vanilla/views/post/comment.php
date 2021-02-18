@@ -28,7 +28,7 @@ $this->fireEvent('BeforeCommentForm');
             echo "<a class='UserPhoto' href='/profile/picture?userid=".$User->UserID."'><img src='".$User->PhotoUrl."' class='PhotoWrap' alt='Photo'/></a>";
             echo '<div class="UserAuthor">';
             echo '<span class="UserAuthorName">'.$User->Name.'</span>';
-            echo '<span class="UserAuthorGrade">'.$UserMetaData["Graduation"].'</span>';
+            echo '<span class="UserAuthorGrade">'.$UserMetaData["Grade"].'</span>';
             echo '</div>';
             echo '</div>';
         }
@@ -55,7 +55,6 @@ $this->fireEvent('BeforeCommentForm');
                     $this->fireEvent('BeforeBodyField');
 
                     echo $this->Form->bodyBox('Body', ['Table' => 'Comment', 'FileUpload' => true, 'placeholder' => t('Type your comment'), 'title' => t('Type your comment')]);
-
                     echo '<div class="CommentOptions List Inline">';
                     $this->fireEvent('AfterBodyField');
                     echo '</div>';

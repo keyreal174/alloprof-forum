@@ -145,8 +145,15 @@ if (!function_exists('writeComment')) :
                         </span>
                     </div>
                     <div class="Meta CommentMeta CommentInfo">
-                        <span class="MItem DateCreated">
-                        <?php echo anchor(Gdn_Format::date($comment->DateInserted, 'html'), $permalink, 'Permalink', ['name' => 'Item_'.($currentOffset), 'rel' => 'nofollow']); ?>
+                        <span class="MItem TimeAgo">
+                        <?php
+                            $grade = getGrade($comment->GradeID);
+                            if ($grade) {
+                                echo $grade . ' • ' . timeElapsedString($comment->DateInserted, false);
+                            } else {
+                                echo timeElapsedString($comment->DateInserted, false);
+                            }
+                        ?>
                         </span>
                         <?php
                         echo dateUpdated($comment, ['<span class="MItem">', '</span>']);

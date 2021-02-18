@@ -311,6 +311,20 @@ class DiscussionController extends VanillaController {
         $this->Form->Action = url('/post/comment/');
         $this->DiscussionID = $this->Discussion->DiscussionID;
         $this->Form->addHidden('DiscussionID', $this->DiscussionID);
+        $UserMetaData = Gdn::userModel()->getMeta($Session->UserID, 'Profile.%', 'Profile.');
+        if ($UserMetaData && $UserMetaData['Grade']) {
+            $fields = c('ProfileExtender.Fields', []);
+            if (!is_array($fields)) {
+                $fields = [];
+            }
+            $GradeOption = [];
+            foreach ($fields as $k => $field) {
+                if ($field['Label'] == "Grade") {
+                    $GradeOption = $field['Options'];
+                }
+            }
+            $this->Form->addHidden('GradeID', array_search($UserMetaData['Grade'],  $GradeOption));
+        }
         $this->Form->addHidden('CommentID', '');
 
         // Look in the session stash for a comment
