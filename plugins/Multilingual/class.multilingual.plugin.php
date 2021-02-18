@@ -137,7 +137,7 @@ class MultilingualPlugin extends Gdn_Plugin {
             throw permissionException('Garden.SignIn.Allow');
         }
         $redirectURL = $_SERVER['HTTP_REFERER'] ?? url('/');
-        if ($sender->Form->authenticatedPostBack()) {
+        // if ($sender->Form->authenticatedPostBack()) {
             // If we got a valid locale, save their preference
             if (isset($locale)) {
                 $locale = $this->validateLocale($locale);
@@ -152,7 +152,7 @@ class MultilingualPlugin extends Gdn_Plugin {
             }
             // Back from whence we came.
             redirectTo($redirectURL);
-        }
+        // }
 
         redirectTo($redirectURL);
     }

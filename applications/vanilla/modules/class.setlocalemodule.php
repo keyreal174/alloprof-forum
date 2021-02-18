@@ -12,9 +12,9 @@ class SetLocaleModule extends Gdn_Module {
      * Build footer link to change locale.
      */
     public function buildLocaleLink($name, $urlCode) {
-        $url = 'profile/setlocale/'.$urlCode;
+        $url = '/profile/setlocale/'.$urlCode;
 
-        return wrap(anchor($name, $url, 'js-hijack'), 'span', ['class' => 'LocaleOption '.$name.'Locale']);
+        return wrap(anchor($name, $url, 'js-hijack'), 'option', ['class' => 'LocaleOption '.$name.'Locale', 'data-url' => $url, 'value' => $urlCode]);
     }
 
     /**
@@ -34,6 +34,46 @@ class SetLocaleModule extends Gdn_Module {
     }
 
     /**
+     * Confirm selected locale is valid and available.
+     *
+     * @param string $locale Locale code.
+     * @return string Returns the canonical version of the locale on success or an empty string otherwise.
+     */
+    protected function validateLocale($locale) {
+        $canonicalLocale = Gdn_Locale::canonicalize($locale);
+        $locales = static::enabledLocales();
+
+        $result = isset($locales[$canonicalLocale]) ? $canonicalLocale : '';
+        return $result;
+    }
+
+    /**
+     * Get user preference or queried locale.
+     */
+    public function getAlternateLocale() {
+        $locale = false;
+
+        // User preference
+        if (Gdn::session()->isValid()) {
+            $locale = Gdn::userMetaModel()->getUserMeta(Gdn::session()->UserID, 'Plugin.Multilingual.Locale', false);
+            $locale = $locale["Plugin.Multilingual.Locale"];
+        }
+        // Query string
+        if (!$locale) {
+            $locale = $this->validateLocale(Gdn::request()->get('locale'));
+            if ($locale) {
+                Gdn::session()->stash('Locale', $locale);
+            }
+        }
+        // Session
+        if (!$locale) {
+            $locale = Gdn::session()->stash('Locale', '', false);
+        }
+
+        return $locale;
+    }
+
+    /**
      * Output locale links.
      *
      * @return string|void
@@ -42,6 +82,10 @@ class SetLocaleModule extends Gdn_Module {
         if (!$this->Links)
             $this->Links = $this->buildLocales();
 
-        echo wrap($this->Links, 'div', ['class' => 'LocaleOptions']);
+        $currentLocale = $this->getAlternateLocale();
+
+        $select = wrap($this->Links, 'select', ['class' => 'LocaleSelect', 'value' => $currentLocale]);
+
+        echo wrap($select, 'form', ['id' => 'LocaleSelectForm', 'method' => 'POST']);
     }
 }

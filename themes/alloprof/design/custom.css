@@ -28,6 +28,7 @@
 @import url("./modules/vanilla-askquestion.css");
 @import url("./modules/vanilla-category.css");
 @import url("./modules/vanilla-discussion.css");
+@import url("./modules/vanilla-setlocale.css");
 
 .BoxNewDiscussion {
     -webkit-box-shadow: none;

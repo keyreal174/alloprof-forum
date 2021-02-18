@@ -679,6 +679,8 @@ class VanillaHooks extends Gdn_Plugin {
             $sender->Menu->addLink('Discussions', t('Discussions'), '/discussions', false, ['Standard' => true]);
         }
 
+        $sender->addJsFile('setlocale.js', 'vanilla');
+
         if (!inSection('Dashboard')) {
             // Spoilers assets
             $sender->addJsFile('spoilers.js', 'vanilla');
