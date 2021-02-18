@@ -59,12 +59,12 @@ class SetLocaleModule extends Gdn_Module {
             $locale = $locale["Plugin.Multilingual.Locale"];
         }
         // Query string
-        if (!$locale) {
-            $locale = $this->validateLocale(Gdn::request()->get('locale'));
-            if ($locale) {
-                Gdn::session()->stash('Locale', $locale);
-            }
-        }
+        // if (!$locale) {
+        //     $locale = $this->validateLocale(Gdn::request()->get('locale'));
+        //     if ($locale) {
+        //         Gdn::session()->stash('Locale', $locale);
+        //     }
+        // }
         // Session
         if (!$locale) {
             $locale = Gdn::session()->stash('Locale', '', false);
