@@ -214,7 +214,6 @@ class DiscussionsController extends VanillaController {
         }
         $DiscussionModel->setSort(Gdn::request()->get());
         $DiscussionModel->setFilters(Gdn::request()->get());
-        print_r($DiscussionModel->setFilters(Gdn::request()->get()));
         $this->setData('Sort', $DiscussionModel->getSort());
         $this->setData('Filters', $DiscussionModel->getFilters());
 
