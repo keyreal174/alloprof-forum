@@ -28,6 +28,7 @@
 @import url("./modules/vanilla-askquestion.css");
 @import url("./modules/vanilla-category.css");
 @import url("./modules/vanilla-discussion.css");
+@import url("./modules/vanilla-setlocale.css");
 
 .BoxNewDiscussion {
     -webkit-box-shadow: none;
@@ -252,4 +253,8 @@ select {
 .richEditor button[title="Upload File"],
 .richEditor button[title="Insert Media"] {
     display: none !important;
+}
+
+.MeBox-header {
+    display: flex;
 }
