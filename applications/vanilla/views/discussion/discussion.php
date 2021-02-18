@@ -22,6 +22,8 @@ $Author = Gdn::userModel()->getID($Discussion->InsertUserID); // userBuilder($Di
 $AuthorMetaData = Gdn::userModel()->getMeta($Author->UserID, 'Profile.%', 'Profile.');
 $category = CategoryModel::categories($Discussion->CategoryID);
 
+$Grade = getGrade($Discussion->GradeID);
+
 // Prep event args.
 $CssClass = cssClass($Discussion, false);
 $this->EventArguments['Discussion'] = &$Discussion;
@@ -63,7 +65,11 @@ $this->fireEvent('BeforeDiscussionDisplay');
             <div class="Meta DiscussionMeta">
                 <span class="MItem TimeAgo">
                     <?php
-                        echo $AuthorMetaData["Grade"] . ' • ' . timeElapsedString($Discussion->LastDate, false);
+                        if ($Grade) {
+                            echo $Grade . ' • ' . timeElapsedString($Discussion->LastDate, false);
+                        } else {
+                            echo timeElapsedString($Discussion->LastDate, false);
+                        }
                     ?>
                 </span>
                 <?php

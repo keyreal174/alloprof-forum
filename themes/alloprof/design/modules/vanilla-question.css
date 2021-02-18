@@ -138,7 +138,7 @@
 
 .Options>a.Option-Icon:last-child {
     margin-right: 0;
-    margin-left: 15px!important;
+    margin-left: 15px !important;
 }
 
 .Item-Footer-Icons {
@@ -261,31 +261,6 @@
     justify-content: center;
     position: relative;
     overflow: visible;
-}
-
-.rich-select.CommentSort .selectBox {
-    display: flex;
-}
-
-.rich-select.CommentSort .selectBox,
-.rich-select.CommentSort .selectBox .selectBox-main,
-.rich-select.CommentSort .selectBox .selectBox-main .selectBox-toggle {
-    position: initial;
-}
-
-.rich-select.CommentSort .selectBox-toggle {
-    font-size: 16px;
-    color: #1A1919;
-}
-
-.rich-select.CommentSort .selectBox-toggle .vanillaDropDown-arrow {
-    position: absolute;
-    right: 15px;
-}
-
-.rich-select.CommentSort .selectBox-content {
-    left: 0;
-    min-width: 200px;
 }
 
 /* .CommentPostForm .richEditor-frame .richEditor-embedBar {
