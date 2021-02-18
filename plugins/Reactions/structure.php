@@ -39,6 +39,10 @@ $St->table('Discussion')
     ->column('GradeID', 'int', true)
     ->set();
 
+$St->table('Comment')
+    ->column('GradeID', 'int', true)
+    ->set();
+
 $Rm = new ReactionModel();
 
 // Insert some default tags.
