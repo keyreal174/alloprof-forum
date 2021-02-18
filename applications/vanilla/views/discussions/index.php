@@ -5,12 +5,15 @@ include_once $this->fetchViewLocation('helper_functions', 'discussions', 'vanill
 include_once $this->fetchViewLocation('helper_functions', 'categories', 'vanilla');
 
 $checkMark = !$isDataDrivenTheme ? adminCheck(NULL, ['', ' ']) : '';
+echo '<div class="FilterBanner">';
 if($this->data('Title'))
 echo '<h1 class="H HomepageTitle">'.
     $checkMark.
     $this->data('Title').
     followButton($this->data('Category.CategoryID')).
     '</h1>';
+echo writeGradeFilter(null);
+echo '</div>';
 
 /** @var $htmlSanitizer */
 $htmlSanitizer = Gdn::getContainer()->get(\Vanilla\Formatting\Html\HtmlSanitizer::class);

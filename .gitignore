@@ -75,6 +75,7 @@
 !/plugins/VanillaStats/
 !/plugins/VanillaInThisDiscussion/
 !/plugins/vanillicon/
+!/plugins/MathJax/
 /themes/*
 !/themes/2011Compatibility/
 !/themes/EmbedFriendly/

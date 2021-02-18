@@ -159,6 +159,67 @@ select {
     color: #1A1919;
 }
 
+/* customize selectbox */
+.selectBox {
+    display: flex;
+}
+
+.selectBox,
+.selectBox .selectBox-main,
+.selectBox .selectBox-main .selectBox-toggle {
+    position: initial;
+}
+
+.selectBox-toggle {
+    font-size: 16px;
+    color: #1A1919;
+    min-width: 200px;
+    display: flex;
+    align-items: center;
+    border: 1px solid #1A202C;
+    padding: 14.5px 17.5px;
+    border-radius: 100px;
+}
+
+.selectBox-toggle img {
+    margin-right: 10px;
+}
+
+.selectBox-toggle .vanillaDropDown-arrow {
+    position: absolute;
+    right: 15px;
+}
+
+.selectBox-content {
+    right: 0;
+    left: auto;
+    min-width: 200px;
+}
+
+/* Grade Filter Dropdown */
+.FilterBanner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    position: relative;
+}
+
+.FilterBanner .HomepageTitle {
+    margin-bottom: 0;
+}
+
+.CustomSelect {
+    min-width: 200px;
+    border: 1px solid #1A202C !important;
+    background: transparent;
+}
+
+.CustomSelect select {
+    background: transparent !important;
+    border: none !important;
+}
+
 /* common */
 .blue-border::before {
     content: "";
