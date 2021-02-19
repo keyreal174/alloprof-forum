@@ -680,6 +680,8 @@ class VanillaHooks extends Gdn_Plugin {
         }
 
         $sender->addJsFile('setlocale.js', 'vanilla');
+        $sender->addJsFile('slick.js', 'vanilla');
+        $sender->addJsFile('slickcarousel.js', 'vanilla');
 
         if (!inSection('Dashboard')) {
             // Spoilers assets

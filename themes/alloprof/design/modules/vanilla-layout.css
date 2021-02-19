@@ -47,7 +47,7 @@
 }
 
 .Frame-body {
-    padding-top: 96px;
+    padding-top: 0;
 }
 
 .Frame-contentWrap {
@@ -58,7 +58,7 @@
     padding-bottom: 40px;
     background-color: #f5f3ef;
     position: sticky;
-    top: 96px;
+    top: 95px;
     z-index: 1;
     box-sizing: border-box;
 }

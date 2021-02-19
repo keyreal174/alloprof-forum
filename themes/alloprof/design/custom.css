@@ -29,6 +29,8 @@
 @import url("./modules/vanilla-category.css");
 @import url("./modules/vanilla-discussion.css");
 @import url("./modules/vanilla-setlocale.css");
+@import url("./modules/slick/slick-theme.css");
+@import url("./modules/slick/slick.css");
 
 .BoxNewDiscussion {
     -webkit-box-shadow: none;
@@ -79,6 +81,15 @@
 
 .Question-submenu a.Selected {
     color: #05BF8E;
+}
+
+.Question-submenu a.Selected svg {
+    fill: #05BF8E;
+}
+
+.Question-submenu a.Selected svg path {
+    stroke: #05BF8E;
+    fill: #05BF8E;
 }
 
 /* Basic inputs */
@@ -265,11 +276,12 @@ select {
     display: flex;
     justify-content: space-between;
     margin-bottom: 16px;
-    align-items: flex-end;
+    align-items: center;
 }
 
 .sidebar.left .ProfileEdit a {
     font-size: 18px;
     line-height: 21px;
     color: #000000;
+    font-weight: bold;
 }

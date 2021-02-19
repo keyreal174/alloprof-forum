@@ -1,8 +1,14 @@
 .BoxCategories.vanilla-categories h4 {
-    font-size: 24px;
-    line-height: 28px;
+    font-size: 18px;
+    margin-top: 0;
     color: #1A1919;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
+    display: block;
+    padding: 0;
+}
+
+.BoxCategories {
+    margin: 0 !important;
 }
 
 .BoxCategories.vanilla-categories .vanilla-categories__viewall {
@@ -23,6 +29,32 @@
     width: max-content;
     margin: auto;
     margin-top: 50px;
+}
+
+.PanelCategories {
+    background-color: white;
+    border-radius: 5px;
+    padding: 20px 10px;
+    display: flex;
+    position: relative;
+}
+
+.PanelCategories .slick-prev-arrow,
+.PanelCategories .slick-next-arrow {
+    position: absolute;
+    top: -33px;
+}
+
+.PanelCategories .slick-prev-arrow {
+    right: 40px;
+}
+
+.PanelCategories .slick-next-arrow {
+    right: 0;
+}
+
+.PanelCategories .slick-disabled {
+    opacity: 0.3;
 }
 
 .CategoryDetail .Card {
