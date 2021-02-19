@@ -12,7 +12,7 @@ echo '<h1 class="H HomepageTitle">'.
     $this->data('Title').
     followButton($this->data('Category.CategoryID')).
     '</h1>';
-echo writeGradeFilter(null);
+// echo writeGradeFilter(null);
 echo '</div>';
 
 /** @var $htmlSanitizer */

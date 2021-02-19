@@ -160,7 +160,6 @@ class DiscussionsController extends VanillaController {
         $this->addModule('AskQuestionModule');
         $this->addModule('CategoriesModule');
 
-
         // Make sure the userphoto module gets added to the page
         $this->addModule('UserPhotoModule');
 
@@ -170,6 +169,8 @@ class DiscussionsController extends VanillaController {
         // Add discussion and question count on the profile block
         $this->fireEvent('AddProfileTabsInfo');
         $this->addModule('ProfileFilterModule');
+
+        $this->addModule('DiscussionsBannerModule');
 
         // $this->addModule('BookmarkedModule');
         // $this->addModule('TagModule');

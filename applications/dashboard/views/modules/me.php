@@ -52,23 +52,23 @@ if ($Session->isValid()):
     echo sprite('SpFlyoutHandle', 'Arrow');
     echo '<div class="Flyout FlyoutMenu Flyout-withFrame"></div></span>';
 
-    // Inbox
-    if (Gdn::addonManager()->isEnabled('conversations', \Vanilla\Addon::TYPE_ADDON)) {
-        $CountInbox = val('CountUnreadConversations', Gdn::session()->User);
-        $CInbox = is_numeric($CountInbox) && $CountInbox > 0 ? ' <span class="Alert">'.$CountInbox.'</span>' : '';
-        echo '<span class="ToggleFlyout" rel="/messages/popin">';
-        echo anchor(sprite('SpInbox', 'Sprite Sprite16', t('Inbox')).$CInbox, '/messages/all', 'MeButton FlyoutButton', ['title' => t('Inbox'), 'tabindex' => '0', "role" => "button", "aria-haspopup" => "true"]);
-        echo sprite('SpFlyoutHandle', 'Arrow');
-        echo '<div class="Flyout FlyoutMenu Flyout-withFrame"></div></span>';
-    }
+    // // Inbox
+    // if (Gdn::addonManager()->isEnabled('conversations', \Vanilla\Addon::TYPE_ADDON)) {
+    //     $CountInbox = val('CountUnreadConversations', Gdn::session()->User);
+    //     $CInbox = is_numeric($CountInbox) && $CountInbox > 0 ? ' <span class="Alert">'.$CountInbox.'</span>' : '';
+    //     echo '<span class="ToggleFlyout" rel="/messages/popin">';
+    //     echo anchor(sprite('SpInbox', 'Sprite Sprite16', t('Inbox')).$CInbox, '/messages/all', 'MeButton FlyoutButton', ['title' => t('Inbox'), 'tabindex' => '0', "role" => "button", "aria-haspopup" => "true"]);
+    //     echo sprite('SpFlyoutHandle', 'Arrow');
+    //     echo '<div class="Flyout FlyoutMenu Flyout-withFrame"></div></span>';
+    // }
 
-    // Bookmarks
-    if (Gdn::addonManager()->lookupAddon('Vanilla')) {
-        echo '<span class="ToggleFlyout" rel="/discussions/bookmarkedpopin">';
-        echo anchor(sprite('SpBookmarks', 'Sprite Sprite16', t('Bookmarks')), '/discussions/bookmarked', 'MeButton FlyoutButton', ['title' => t('Bookmarks'), 'tabindex' => '0', "role" => "button", "aria-haspopup" => "true"]);
-        echo sprite('SpFlyoutHandle', 'Arrow');
-        echo '<div class="Flyout FlyoutMenu Flyout-withFrame"></div></span>';
-    }
+    // // Bookmarks
+    // if (Gdn::addonManager()->lookupAddon('Vanilla')) {
+    //     echo '<span class="ToggleFlyout" rel="/discussions/bookmarkedpopin">';
+    //     echo anchor(sprite('SpBookmarks', 'Sprite Sprite16', t('Bookmarks')), '/discussions/bookmarked', 'MeButton FlyoutButton', ['title' => t('Bookmarks'), 'tabindex' => '0', "role" => "button", "aria-haspopup" => "true"]);
+    //     echo sprite('SpFlyoutHandle', 'Arrow');
+    //     echo '<div class="Flyout FlyoutMenu Flyout-withFrame"></div></span>';
+    // }
 
     // Profile Settings & Logout
     $dropdown = new DropdownModule();

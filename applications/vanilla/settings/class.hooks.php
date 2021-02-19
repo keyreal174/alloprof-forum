@@ -680,6 +680,8 @@ class VanillaHooks extends Gdn_Plugin {
         }
 
         $sender->addJsFile('setlocale.js', 'vanilla');
+        $sender->addJsFile('slick.js', 'vanilla');
+        $sender->addJsFile('slickcarousel.js', 'vanilla');
 
         if (!inSection('Dashboard')) {
             // Spoilers assets
@@ -808,8 +810,8 @@ class VanillaHooks extends Gdn_Plugin {
                 $discussionsLabel .= $discussionsCount;
                 $commentsLabel .= $commentsCount;
             }
-            $sender->addProfileTab('Questions', userUrl($sender->User, '', 'discussions'), 'Questions', $discussionsLabel);
-            $sender->addProfileTab('Comments', userUrl($sender->User, '', 'comments'), 'Comments', $commentsLabel);
+            $sender->addProfileTab(t('Questions asked'), userUrl($sender->User, '', 'discussions'), 'Questions', $discussionsLabel);
+            $sender->addProfileTab(t('Explanations received'), userUrl($sender->User, '', 'comments'), 'Comments', $commentsLabel);
             // Add the discussion tab's CSS and Javascript.
             $sender->addJsFile('jquery.gardenmorepager.js');
             $sender->addJsFile('discussions.js', 'vanilla');
@@ -838,8 +840,8 @@ class VanillaHooks extends Gdn_Plugin {
                 $discussionsLabel .= $discussionsCount;
                 $commentsLabel .= $commentsCount;
             }
-            $sender->addProfileTab('Questions', userUrl($sender->User, '', 'discussions'), 'Questions', $discussionsLabel);
-            $sender->addProfileTab('Comments', userUrl($sender->User, '', 'comments'), 'Comments', $commentsLabel);
+            $sender->addProfileTab(t('Questions asked'), userUrl($sender->User, '', 'discussions'), 'Questions', $discussionsLabel);
+            $sender->addProfileTab(t('Explanations received'), userUrl($sender->User, '', 'comments'), 'Comments', $commentsLabel);
             // Add the discussion tab's CSS and Javascript.
             $sender->addJsFile('jquery.gardenmorepager.js');
             $sender->addJsFile('discussions.js', 'vanilla');
@@ -860,8 +862,8 @@ class VanillaHooks extends Gdn_Plugin {
                 $discussionsLabel .= $discussionsCount;
                 $commentsLabel .= $commentsCount;
             }
-            $sender->addProfileTab('Questions', userUrl($sender->User, '', 'discussions'), 'Questions', $discussionsLabel);
-            $sender->addProfileTab('Comments', userUrl($sender->User, '', 'comments'), 'Comments', $commentsLabel);
+            $sender->addProfileTab(t('Questions asked'), userUrl($sender->User, '', 'discussions'), 'Questions', $discussionsLabel);
+            $sender->addProfileTab(t('Explanations received'), userUrl($sender->User, '', 'comments'), 'Comments', $commentsLabel);
             // Add the discussion tab's CSS and Javascript.
             $sender->addJsFile('jquery.gardenmorepager.js');
             $sender->addJsFile('discussions.js', 'vanilla');
