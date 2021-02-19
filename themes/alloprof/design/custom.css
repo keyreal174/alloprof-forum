@@ -29,6 +29,7 @@
 @import url("./modules/vanilla-category.css");
 @import url("./modules/vanilla-discussion.css");
 @import url("./modules/vanilla-setlocale.css");
+@import url("./modules/vanilla-footer.css");
 
 .BoxNewDiscussion {
     -webkit-box-shadow: none;
