@@ -18,16 +18,14 @@
         </div>
     <?php } else { ?>
         <div class='Navigation-linkContainer'>
-            <?php echo Gdn_Theme::link('discussions', sprite('Home').' '.t('Home'), '<a href="%url" class="%class Navigation-link">%text</a>'); ?>
+            <?php echo Gdn_Theme::link('discussions', sprite('Home').' '.t('Home'), '<a href="%url" class="%class Navigation-link"><img class="nav-link-icon" src="/themes/alloprof/design/images/icons/home.svg">%text</a>'); ?>
         </div>
         <div class='Navigation-linkContainer'>
-            <?php echo Gdn_Theme::link('discussions/mine', sprite('Home').' '.t('My Questions'), '<a href="%url" class="%class Navigation-link">%text</a>'); ?>
+            <?php echo Gdn_Theme::link('discussions/mine', sprite('Home').' '.t('My Questions'), '<a href="%url" class="%class Navigation-link"><img class="nav-link-icon" src="/themes/alloprof/design/images/icons/myquestions.svg">%text</a>'); ?>
         </div>
         <div class='Navigation-linkContainer'>
-            <?php echo Gdn_Theme::link('discussions/bookmarked', sprite('Home').' '.t('Question followed'), '<a href="%url" class="%class Navigation-link">%text</a>'); ?>
+            <?php echo Gdn_Theme::link('discussions/bookmarked', sprite('Home').' '.t('Question followed'), '<a href="%url" class="%class Navigation-link"><img class="nav-link-icon" src="/themes/alloprof/design/images/icons/questionfollowed.svg">%text</a>'); ?>
         </div>
-        <div class='Navigation-linkContainer'>
-            <?php echo Gdn_Theme::link('profile', sprite('Home').' '.t('Resources'), '<a href="%url" class="%class Navigation-link">%text</a>'); ?>
-        </div>
+
     <?php } ?>
 </nav>

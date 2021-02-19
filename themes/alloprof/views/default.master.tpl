@@ -179,6 +179,7 @@
                                 {/if}
                                 <div class="Frame-row">
                                     <div class="sidebar left">
+                                        {module name="ProfileEditModule"}
                                         <aside class="Panel Panel-main left LeftPanel">
                                             {asset name="LeftPanel"}
                                         </aside>

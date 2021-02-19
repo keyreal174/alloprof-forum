@@ -160,7 +160,6 @@ class DiscussionsController extends VanillaController {
         $this->addModule('AskQuestionModule');
         $this->addModule('CategoriesModule');
 
-
         // Make sure the userphoto module gets added to the page
         $this->addModule('UserPhotoModule');
 

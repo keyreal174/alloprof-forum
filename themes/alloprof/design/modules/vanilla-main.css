@@ -8464,7 +8464,7 @@ table.PreferenceGroup tbody tr:hover td {
  */
 .Header {
     -webkit-box-shadow: none;
-    background-color: #ffffff;
+    background-color: #CAEDF9;
     border-bottom: 0;
     box-shadow: none;
     color: #1A1919;
@@ -8934,13 +8934,13 @@ screen and (-ms-high-contrast:none) {
 }
 
 .Navigation-link {
-    color: #1A1919;
-    font-weight: bold;
+    color: #000;
     display: block;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    font-size: 16px;
+    font-size: 21px;
+    line-height: 36px;
     min-height: 32px;
     padding: 0 18px;
     width: 100%
@@ -8964,6 +8964,10 @@ screen and (-ms-high-contrast:none) {
     flex-direction: column;
     padding: 0;
     position: relative
+}
+
+.Navigation-linkContainer img {
+    margin-right: 10px;
 }
 
 .Navigation-linkContainer a {

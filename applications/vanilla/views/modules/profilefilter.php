@@ -37,7 +37,7 @@ foreach ($Controller->ProfileTabs as $TabCode => $TabInfo) {
                 if (array_key_exists($TabCode, $Controller->ProfileTabs)) {
                     $TabInfo = val($TabCode, $Controller->ProfileTabs, []);
                     $CssClass .= val('CssClass', $TabInfo, '');
-                    echo '<div class="BoxProfileInfo_detailbox__item"><img src="/themes/alloprof/design/images/icons/'.$TabCode.'.svg"/>'.anchor(val('TabHtml', $TabInfo, $TabCode), val('TabUrl', $TabInfo))."</div>";
+                    echo '<div class="BoxProfileInfo_detailbox__item">'.anchor(val('TabHtml', $TabInfo, $TabCode), val('TabUrl', $TabInfo)).$TabCode."</div>";
                 }
             }
             echo "</div>";
@@ -60,9 +60,9 @@ foreach ($Controller->ProfileTabs as $TabCode => $TabInfo) {
 
         ?>
     <?php if (Gdn::session()->UserID == $User->UserID) { ?>
-    <div class="BoxProfileInfo_viewprofile">
+    <!-- <div class="BoxProfileInfo_viewprofile">
         <a href="/profile" class="BoxProfileInfo_viewprofile__btn"><img src="/themes/alloprof/design/images/icons/emoticon.svg"/><?php echo t('View Profile') ?></a>
-    </div>
+    </div> -->
     <?php } ?>
 </div>
 <?php } ?>

@@ -20,7 +20,7 @@
     z-index: 0;
 }
 
-.Panel::before {
+/* .Panel::before {
     content: "";
     position: absolute;
     background-color: #05BF8E;
@@ -30,16 +30,14 @@
     left: 0;
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
-}
+} */
 
 .Panel.left {
     text-align: center;
     margin-left: 0 !important;
     margin-right: auto !important;
     margin-bottom: 40px;
-    padding-top: 50px !important;
-    padding-left: 22px !important;
-    padding-right: 22px !important;
+    padding: 32px !important;
 }
 
 .Frame-header {
@@ -57,11 +55,10 @@
 }
 
 .Frame-menubar {
-    padding-bottom: 30px;
+    padding-bottom: 40px;
     background-color: #f5f3ef;
     position: sticky;
     top: 96px;
     z-index: 1;
     box-sizing: border-box;
-    padding-top: 18px;
 }
