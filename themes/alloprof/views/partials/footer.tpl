@@ -49,42 +49,42 @@
             </div>
             <div class="Footer-Center">
                 <div class="footer__newsletter">
-                    <h2 class="title title--h1alt"> {t c="Receive all news and tips from Alloprof by email."} </h2>
-                    <p >{t c="It will help you, promise!"}</p>
+                    <h2 class="title title--h1alt"> {t c="Receive all of Alloprof's infos and tips by email."} </h2>
+                    <p >{t c="It'll help you, promise!"}</p>
                     <div class="form__top">
                         <a target="_blank" class="btn btn--sm btn--footer-donate" href="https://app.dialoginsight.com/T/WF/10181/gABhqf/Optin/fr-CA/Form.ofsys">{t c="Subscribe here!"}</a>
                     </div>
                 </div>
                 <div class="footer__links">
                     <a data-test="footer-donate" target="_blank" class="link subtitle--two" href="https://www.canadahelps.org/fr/dn/3322">
-                        <span class="link__text">{t c="Make a donation"}</span>
+                        <span class="link__text">{t c="Make a Donation"}</span>
                     </a>
                     <a data-test="footer-about" class="link subtitle--two" href="https://www.alloprof.qc.ca/fr/pages/a-propos">
                         <span class="link__text">{t c="About"}</span>
                     </a>
                     <a data-test="footer-team" class="link subtitle--two" href="https://www.alloprof.qc.ca/fr/pages/notre-equipe">
-                        <span class="link__text">{t c="Our team"}</span>
+                        <span class="link__text">{t c="Our Team"}</span>
                     </a>
                     <a data-test="footer-contact" target="_blank" class="link subtitle--two" href="https://alloprof-ti.atlassian.net/servicedesk/customer/portal/6">
-                        <span class="link__text">{t c="Contact us"}</span>
+                        <span class="link__text">{t c="Contact Us"}</span>
                     </a>
                     <a data-test="footer-news" target="_blank" class="link subtitle--two" href="https://www.alloprof.qc.ca/fr/nouvelles">
                         <span class="link__text">{t c="News"}</span>
                     </a>
                     <a data-test="footer-contests" class="link subtitle--two" href="https://www.alloprof.qc.ca/fr/concours">
-                        <span class="link__text">{t c="Contests and surveys"}</span>
+                        <span class="link__text">{t c="Contests and Surveys"}</span>
                     </a>
                     <a data-test="footer-partners" class="link subtitle--two" href="https://www.alloprof.qc.ca/fr/pages/partenaires">
-                        <span class="link__text">{t c="Our partners"}</span>
+                        <span class="link__text">{t c="Our Partners"}</span>
                     </a>
                     <a data-test="footer-media" class="link subtitle--two" href="https://www.alloprof.qc.ca/fr/pages/salle-de-presse">
                         <span class="link__text">{t c="Media"}</span>
                     </a>
                     <a data-test="footer-legal-terms" class="link subtitle--two" href="https://www.alloprof.qc.ca/fr/pages/conditions-d-utilisation-et-vie-privee">
-                        <span class="link__text">{t c="Terms of use and privacy"}</span>
+                        <span class="link__text">{t c="Terms of Use and Privacy"}</span>
                     </a>
                     <a data-test="footer-legal-promo" target="_blank" class="link subtitle--two" href="https://docs.google.com/forms/d/e/1FAIpQLSfyb_FFvjcJHqEb03tkquwpN4x4ppwHOtJnGWQrAFsFHK7_8g/viewform">
-                        <span class="link__text">{t c="Promotional material"}</span>
+                        <span class="link__text">{t c="Promotional Material"}</span>
                     </a>
                 </div>
             </div>
