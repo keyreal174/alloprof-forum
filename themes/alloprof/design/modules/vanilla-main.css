@@ -384,7 +384,7 @@ abbr {
 .sidebar {
     width: 20%;
     position: sticky;
-    top: 220px;
+    top: 240px;
 }
 
 .UserLoggedOut .sidebar {
@@ -394,6 +394,7 @@ abbr {
 .sidebar.left {
     margin-left: 0 !important;
     margin-right: auto !important;
+    max-width: 280px;
 }
 
 .sidebar.right {
@@ -4385,7 +4386,7 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
 .MessageList .Item {
     -webkit-box-shadow: none;
     background: #fff;
-    border-top: 1px solid #d6d7d9;
+    /* border-top: 1px solid #d6d7d9; */
     box-shadow: none;
     padding: 16px 8px
 }

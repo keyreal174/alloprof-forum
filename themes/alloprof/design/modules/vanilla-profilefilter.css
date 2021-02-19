@@ -1,23 +1,27 @@
 .BoxProfileInfo .BoxProfileInfo_detailbox {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     border-top: 1px solid #E0E0E0;
     padding-top: 28px;
-    padding-bottom: 24px;
 }
 
 .BoxProfileInfo .BoxProfileInfo_detailbox .BoxProfileInfo_detailbox__item {
     text-align: center;
-}
-
-.BoxProfileInfo .BoxProfileInfo_detailbox .BoxProfileInfo_detailbox__item img {
-    width: 32px;
+    max-width: 104px;
+    background-color: #F3F5F7;
+    height: 80px;
+    font-size: 12px;
+    line-height: 14px;
+    padding-right: 10px;
+    padding-left: 10px;
+    color: black;
 }
 
 .BoxProfileInfo .BoxProfileInfo_detailbox .BoxProfileInfo_detailbox__item a {
     justify-content: center;
-    font-size: 21px;
-    font-weight: bold;
+    font-size: 28px;
+    line-height: 33px;
+    color: black;
 }
 
 .BoxProfileInfo .BoxProfileInfo_viewprofile {

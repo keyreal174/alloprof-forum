@@ -1666,3 +1666,6 @@ $Definition['See all subjects'] = 'Voir toutes les matières';
 $Definition['Can\'t find answers?'] = 'Tu ne trouves pas de réponses ?';
 $Definition['Ask a question'] = 'Pose ta question';
 $Definition['View Profile'] = 'Voir mon profil';
+$Definition['My Profile'] = 'Mon profil';
+$Definition['Questions asked'] = 'Questions posées';
+$Definition['Explanations received'] = 'Explications reçues';
