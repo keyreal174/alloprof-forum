@@ -269,3 +269,8 @@
     bottom: -60px;
     width: initial;
 } */
+
+.MessageList .ItemComment .Item-Header,
+.MessageList .ItemDiscussion .Item-Header {
+    margin-bottom: 40px;
+}

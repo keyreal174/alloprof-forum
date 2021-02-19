@@ -49,42 +49,42 @@
             </div>
             <div class="Footer-Center">
                 <div class="footer__newsletter">
-                    <h2 class="title title--h1alt"> Reçois toutes les infos et astuces d’Alloprof par courriel. </h2>
-                    <p >Ça va t’aider, promis!</p>
+                    <h2 class="title title--h1alt"> {t c="Receive all news and tips from Alloprof by email."} </h2>
+                    <p >{t c="It will help you, promise!"}</p>
                     <div class="form__top">
-                        <a target="_blank" class="btn btn--sm btn--footer-donate" href="https://app.dialoginsight.com/T/WF/10181/gABhqf/Optin/fr-CA/Form.ofsys">Abonne-toi ici!</a>
+                        <a target="_blank" class="btn btn--sm btn--footer-donate" href="https://app.dialoginsight.com/T/WF/10181/gABhqf/Optin/fr-CA/Form.ofsys">{t c="Subscribe here!"}</a>
                     </div>
                 </div>
                 <div class="footer__links">
                     <a data-test="footer-donate" target="_blank" class="link subtitle--two" href="https://www.canadahelps.org/fr/dn/3322">
-                        <span class="link__text">Faire un don</span>
+                        <span class="link__text">{t c="Make a donation"}</span>
                     </a>
                     <a data-test="footer-about" class="link subtitle--two" href="https://www.alloprof.qc.ca/fr/pages/a-propos">
-                        <span class="link__text">À propos</span>
+                        <span class="link__text">{t c="About"}</span>
                     </a>
                     <a data-test="footer-team" class="link subtitle--two" href="https://www.alloprof.qc.ca/fr/pages/notre-equipe">
-                        <span class="link__text">Notre équipe</span>
+                        <span class="link__text">{t c="Our team"}</span>
                     </a>
                     <a data-test="footer-contact" target="_blank" class="link subtitle--two" href="https://alloprof-ti.atlassian.net/servicedesk/customer/portal/6">
-                        <span class="link__text">Nous contacter</span>
+                        <span class="link__text">{t c="Contact us"}</span>
                     </a>
                     <a data-test="footer-news" target="_blank" class="link subtitle--two" href="https://www.alloprof.qc.ca/fr/nouvelles">
-                        <span class="link__text">Nouvelles</span>
+                        <span class="link__text">{t c="News"}</span>
                     </a>
                     <a data-test="footer-contests" class="link subtitle--two" href="https://www.alloprof.qc.ca/fr/concours">
-                        <span class="link__text">Concours et sondages</span>
+                        <span class="link__text">{t c="Contests and surveys"}</span>
                     </a>
                     <a data-test="footer-partners" class="link subtitle--two" href="https://www.alloprof.qc.ca/fr/pages/partenaires">
-                        <span class="link__text">Nos partenaires</span>
+                        <span class="link__text">{t c="Our partners"}</span>
                     </a>
                     <a data-test="footer-media" class="link subtitle--two" href="https://www.alloprof.qc.ca/fr/pages/salle-de-presse">
-                        <span class="link__text">Médias</span>
+                        <span class="link__text">{t c="Media"}</span>
                     </a>
                     <a data-test="footer-legal-terms" class="link subtitle--two" href="https://www.alloprof.qc.ca/fr/pages/conditions-d-utilisation-et-vie-privee">
-                        <span class="link__text">Conditions d’utilisation et vie privée</span>
+                        <span class="link__text">{t c="Terms of use and privacy"}</span>
                     </a>
                     <a data-test="footer-legal-promo" target="_blank" class="link subtitle--two" href="https://docs.google.com/forms/d/e/1FAIpQLSfyb_FFvjcJHqEb03tkquwpN4x4ppwHOtJnGWQrAFsFHK7_8g/viewform">
-                        <span class="link__text">Matériel promotionnel</span>
+                        <span class="link__text">{t c="Promotional material"}</span>
                     </a>
                 </div>
             </div>

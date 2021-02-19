@@ -1,24 +1,24 @@
 .LeftPanel.Panel .PhotoWrapLarge {
     border-radius: 50%;
-    width: 140px;
-    height: 140px;
+    width: 128px;
+    height: 128px;
     margin-bottom: 16px;
 }
 
 .userphoto-personalinfo {
-    margin-bottom: 48px;
+    margin-bottom: 32px;
 }
 
 .userphoto-personalinfo .userphoto-personalinfo__name {
-    font-size: 21px;
-    line-height: 25px;
+    font-size: 18px;
+    line-height: 21px;
     text-align: center;
-    color: #1A1919;
+    color: black;
 }
 
 .userphoto-personalinfo .userphoto-personalinfo__secondary {
-    font-size: 16px;
-    line-height: 19px;
+    font-size: 14px;
+    line-height: 16px;
     text-align: center;
     color: #6C6767;
 }
