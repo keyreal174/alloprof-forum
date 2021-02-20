@@ -62,7 +62,7 @@ class ForumQuickLinksProvider implements QuickLinkProviderInterface {
             );
 
             $result[] = new QuickLink(
-                t('My Discussions'),
+                t('My Questions'),
                 '/discussions/mine',
                 $this->session->User->CountDiscussions ?? 0,
                 -1

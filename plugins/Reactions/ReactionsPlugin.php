@@ -764,6 +764,40 @@ class ReactionsPlugin extends Gdn_Plugin {
     /**
      *
      *
+     * @param Gdn_Controller $Sender
+     */
+    public function discussionsController_render_before($Sender) {
+        $Sender->ReactionsVersion = 2;
+
+        $OrderBy = self::commentOrder();
+        [$OrderColumn, $OrderDirection] = explode(' ', val('0', $OrderBy));
+        $OrderColumn = stringBeginsWith($OrderColumn, 'c.', true, true);
+
+        // Send back comment order for non-api calls.
+        if ($Sender->deliveryType() !== DELIVERY_TYPE_DATA) {
+            $Sender->setData('CommentOrder', ['Column' => $OrderColumn, 'Direction' => $OrderDirection]);
+        }
+
+        if ($Sender->ReactionsVersion != 1) {
+            $this->addJs($Sender);
+        }
+
+        $ReactionModel = new ReactionModel();
+        if (c('Plugins.Reactions.ShowUserReactions', ReactionsPlugin::RECORD_REACTIONS_DEFAULT) == 'avatars') {
+            $ReactionModel->joinUserTags($Sender->Data['Discussion'], 'Discussion');
+            $ReactionModel->joinUserTags($Sender->Data['Comments'], 'Comment');
+
+            if (isset($Sender->Data['Answers'])) {
+                $ReactionModel->joinUserTags($Sender->Data['Answers'], 'Comment');
+            }
+        }
+
+        include_once $Sender->fetchViewLocation('reaction_functions', '', 'plugins/Reactions');
+    }
+
+    /**
+     *
+     *
      * @param $sender
      * @param $args
      */

@@ -378,13 +378,13 @@ abbr {
     border: none;
     border-radius: 0;
     padding: 0;
-    width: 57%
+    width: 52%
 }
 
 .sidebar {
     width: 20%;
     position: sticky;
-    top: 220px;
+    top: 240px;
 }
 
 .UserLoggedOut .sidebar {
@@ -394,11 +394,13 @@ abbr {
 .sidebar.left {
     margin-left: 0 !important;
     margin-right: auto !important;
+    max-width: 280px;
 }
 
 .sidebar.right {
     margin-left: auto !important;
     margin-right: 0 !important;
+    width: 26%;
 }
 
 @media screen and (max-width:992px) {
@@ -3250,8 +3252,8 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
     border-radius: 6px;
     box-shadow: 0 5px 10px 0 rgba(0, 0, 0, .3);
     color: #555a62;
-    min-width: 250px;
-    padding: 6px 0;
+    min-width: 400px;
+    padding: 15px 20px !important;
     position: absolute;
     z-index: 1
 }
@@ -3452,9 +3454,10 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
 .Flyout.Flyout strong,
 .MenuItems strong {
     font-family: Open Sans, HelveticaNeue-Light, Segoe UI, Helvetica Neue, Helvetica, Raleway, Arial, sans-serif;
-    font-size: 16px;
+    font-size: 21px;
     font-weight: 600;
     line-height: 1.25;
+    color: #1A1919;
     margin: 0
 }
 
@@ -3525,7 +3528,6 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
     padding: 12px
 }
 
-.Flyout .Item+.Item,
 .richEditorFlyout .Item+.Item {
     border-top: 1px solid #d6d7d9
 }
@@ -3547,6 +3549,10 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
     position: relative;
     width: 100%;
     z-index: 1
+}
+
+.Flyout .Item.Title {
+    border-bottom: 1px solid #E0E0E0;
 }
 
 .Flyout .Item.Title:active,
@@ -3779,12 +3785,12 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
 }
 
 .PopList.PopList .Item {
-    padding: 8px
+    padding: 30px 8px
 }
 
 .PopList.PopList .PhotoWrap {
-    height: 38px;
-    width: 38px
+    height: 56px;
+    width: 56px
 }
 
 .PopList.Activities .Item.Title a:before {
@@ -4381,7 +4387,7 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
 .MessageList .Item {
     -webkit-box-shadow: none;
     background: #fff;
-    border-top: 1px solid #d6d7d9;
+    /* border-top: 1px solid #d6d7d9; */
     box-shadow: none;
     padding: 16px 8px
 }
@@ -4524,7 +4530,8 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
 .MessageList .Options {
     display: -webkit-box;
     display: -ms-flexbox;
-    display: flex
+    display: flex;
+    align-items: center;
 }
 
 .DataList .Bookmark:before,
@@ -5239,7 +5246,7 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
 }
 
 .Activities .ItemContent {
-    margin-left: 50px
+    margin-left: 20px
 }
 
 @media screen and (max-width:768px) {
@@ -5511,17 +5518,17 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
 
 .SpNotifications:before {
     content: "";
-    font-size: 24px
+    font-size: 32px
 }
 
 .SpInbox:before {
     content: "";
-    font-size: 24px
+    font-size: 32px
 }
 
 .SpBookmarks:before {
     content: "";
-    font-size: 22px
+    font-size: 32px
 }
 
 .Open .SpNotifications:before {
@@ -5548,6 +5555,7 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
     font-size: 20px;
     height: 32px;
     padding: 0;
+    margin: 0 10px;
     width: 32px
 }
 
@@ -5565,14 +5573,13 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
 }
 
 .MeBox .MeButton .Alert {
-    border-radius: 18px;
-    border-style: solid;
-    border-width: 1px;
-    height: 18px;
-    line-height: 18px;
-    min-width: 18px;
-    right: -8px;
-    top: -9px
+    border-radius: 50%;
+    background-color: #EB5757;
+    height: 14px;
+    line-height: 14px;
+    min-width: 14px;
+    right: 0px;
+    top: 0px
 }
 
 @media screen and (max-width:768px) {
@@ -5614,7 +5621,9 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
 }
 
 .MeBox.FlyoutRight .Flyout {
-    right: 0
+    top: 80px;
+    right: 0;
+    border-top: 7px solid #05BF8E;
 }
 
 .SignInIcons {
@@ -8457,10 +8466,47 @@ table.PreferenceGroup tbody tr:hover td {
  */
 .Header {
     -webkit-box-shadow: none;
-    background-color: #ffffff;
+    background-color: #CAEDF9;
     border-bottom: 0;
     box-shadow: none;
     color: #1A1919;
+}
+
+.Frame-banner {
+    background-color: #CAEDF9;
+    background-image: url('../images/flo_bot.svg');
+    background-repeat: no-repeat;
+    height: 550px;
+    background-position-y: bottom;
+    background-position-x: calc(100% - 100px);
+    margin-top: 50px;
+}
+
+.Banner-content {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.Frame-banner .Container {
+    height: 100%;
+}
+
+.Banner-content__pagename {
+    font-size: 21px;
+    color: black;
+}
+
+.Banner-content h1 {
+    font-size: 70px;
+    font-weight: lighter;
+}
+
+.Banner-content__description {
+    font-size: 24px;
+    color: black;
+    margin-top: 20px;
 }
 
 .Header .row {
@@ -8476,6 +8522,39 @@ table.PreferenceGroup tbody tr:hover td {
 .Header .Hamburger,
 .Header .mobileMeBox-button {
     display: none
+}
+
+.Header-left {
+    margin-right: auto;
+    width: 20%;
+}
+
+.Header-left__search {
+    background-image: url('../images/icons/search.svg');
+    background-repeat: no-repeat;
+    background-position-y: center;
+    background-position-x: calc(100% - 20px);
+}
+
+.Header-left__search #Form_Go {
+    display: none;
+}
+
+.Header-left__search input {
+    background: transparent !important;
+    border: 0.15em solid black !important;
+    border-radius: 22px;
+    height: 45px;
+    padding-right: 40px;
+}
+
+.Header-right {
+    width: 20%;
+    justify-content: flex-end !important;
+}
+
+.Header-logo {
+    margin: 0 auto;
 }
 
 @media screen and (max-width:768px) {
@@ -8927,16 +9006,21 @@ screen and (-ms-high-contrast:none) {
 }
 
 .Navigation-link {
-    color: #1A1919;
-    font-weight: bold;
+    color: #000;
     display: block;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    font-size: 16px;
+    font-size: 21px;
+    line-height: 36px;
     min-height: 32px;
     padding: 0 18px;
+    font-weight: bold;
     width: 100%
+}
+
+.Navigation-link svg {
+    margin-right: 10px;
 }
 
 .Navigation-link:focus,
@@ -8957,6 +9041,10 @@ screen and (-ms-high-contrast:none) {
     flex-direction: column;
     padding: 0;
     position: relative
+}
+
+.Navigation-linkContainer img {
+    margin-right: 10px;
 }
 
 .Navigation-linkContainer a {
@@ -9130,7 +9218,12 @@ screen and (-ms-high-contrast:none) {
  * @license GPL-2.0-only
  */
 .Panel-main {
-    line-height: 1.25
+    line-height: 1.25;
+}
+
+.RightPanel {
+    background-color: transparent !important;
+    padding: 0 !important;
 }
 
 @media screen and (max-width:992px) {
@@ -9522,28 +9615,36 @@ body.Section-EditProfile .Box a {
     background-color: rgba(0, 0, 0, 0);
     border: none;
     border-radius: 6px;
-    font-size: 21px;
+    font-size: 15px;
     color: #1A1919;
+    font-weight: 600;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
+    flex-direction: column;
     padding: 5px;
     transition: color .35s ease-out, background-color .35s ease-out;
     width: 100%
 }
 
 .BoxCategories.BoxCategories a span {
-    font-size: 21px;
+    font-size: 15px;
 }
 
 .BoxCategories.BoxCategories a span.category-icon {
-    min-width: 39px;
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background-color: #eee;
     display: flex;
+    overflow: hidden;
+    margin-bottom: 10px;
 }
 
 .BoxCategories.BoxCategories a span img {
-    max-width: 29px;
-    margin-right: 10px;
+    width: 100%;
+    max-height: 100% !important;
+    height: 100%;
 }
 
 .BoxCategories.BoxCategories a:active,

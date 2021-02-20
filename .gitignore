@@ -27,7 +27,6 @@
 !/conf/constants.php
 !/conf/readme.txt
 /dist/*
-/locales/*
 !/locales/.gitkeep
 /plugins/*
 !/plugins/AllViewed/
@@ -75,6 +74,7 @@
 !/plugins/VanillaStats/
 !/plugins/VanillaInThisDiscussion/
 !/plugins/vanillicon/
+!/plugins/MathJax/
 /themes/*
 !/themes/2011Compatibility/
 !/themes/EmbedFriendly/

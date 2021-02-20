@@ -1,17 +1,47 @@
+<?php
+    require_once Gdn::controller()->fetchViewLocation('helper_functions', 'Discussions', 'Vanilla');
+    $User = val('User', Gdn::controller());
+    if (!$User && Gdn::session()->isValid()) {
+        $User = Gdn::session()->User;
+    }
+    $Photo = $User->Photo;
+    if ($Photo) {
+        $Photo = (isUrl($Photo)) ? $Photo : Gdn_Upload::url(changeBasename($Photo, 'p%s'));
+        $PhotoAlt = t('Avatar');
+    } else {
+        $Photo = UserModel::getDefaultAvatarUrl($User, 'profile');
+        $PhotoAlt = t('Default Avatar');
+    }
+
+    if ($User->Banned) {
+        $BannedPhoto = c('Garden.BannedPhoto', 'https://images.v-cdn.net/banned_large.png');
+        if ($BannedPhoto) {
+            $Photo = Gdn_Upload::url($BannedPhoto);
+        }
+    }
+    if(userRoleCheck() != Gdn::config('Vanilla.ExtraRoles.Teacher')) {
+?>
+
 <div class="BoxButtons BoxNewDiscussion AskQuestionForm">
-    <h1>
-        <?php echo t('Ask a question'); ?>
-    </h1>
+    <div class="BoxNewDiscussion-header">
+        <?php
+            echo img($Photo, ['class' => 'user-avatar', 'alt' => $PhotoAlt]);
+        ?>
+        <h1>
+            <?php
+                echo t('New question');
+            ?>
+        </h1>
+    </div>
     <div class="close-icon">
         <img src="/themes/alloprof/design/images/icons/close.svg" />
     </div>
 
     <div id="DiscussionForm" class="FormTitleWrapper DiscussionForm">
         <?php
-
-        echo '<div class="FormWrapper">';
-        echo $this->Form->open();
-        echo $this->Form->errors();
+            echo '<div class="FormWrapper">';
+            echo $this->Form->open();
+            echo $this->Form->errors();
         ?>
 
         <div class="content">
@@ -63,6 +93,30 @@
                         $options['DraftID'] = $this->Draft->DraftID;
                     }
 
+                    $Session = Gdn::session();
+                    $DefaultGrade = 0;
+                    if ($Session) {
+                        $UserID = $Session->UserID;
+                        $AuthorMetaData = Gdn::userModel()->getMeta($UserID, 'Profile.%', 'Profile.');
+                        if ($AuthorMetaData['Grade']) {
+                            $DefaultGrade = $AuthorMetaData['Grade'];
+                        }
+                    }
+
+                    $fields = c('ProfileExtender.Fields', []);
+                    if (!is_array($fields)) {
+                        $fields = [];
+                    }
+                    foreach ($fields as $k => $field) {
+                        if ($field['Label'] == "Grade") {
+                            $GradeOption = $field['Options'];
+
+                            if ($DefaultGrade && $DefaultGrade !== 0) {
+                                $DefaultGrade = array_search($DefaultGrade, $GradeOption);
+                            }
+                        }
+                    }
+
                     echo '<div>';
                     echo '<div class="Category rich-select">';
                     echo '<img src="/themes/alloprof/design/images/icons/subject.svg"/>';
@@ -70,7 +124,10 @@
                     echo '</div>';
                     echo '</div>';
                     echo '<span class="space"></span>';
-                    echo '<div><div class="Category rich-select"><select></select></div></div>';
+                    echo '<div class="Category rich-select">';
+                    echo '<img src="/themes/alloprof/design/images/icons/grade.svg"/>';
+                    echo $this->Form->dropDown('GradeID', $GradeOption, array('Default' => $DefaultGrade, 'IncludeNull' => 'Grade', 'IsDisabled' => TRUE));
+                    echo '</div>';
                 }
                 echo '</div>';
                 echo '<div class="Buttons">';
@@ -87,3 +144,4 @@
     </div>
 
 </div>
+<?php } ?>

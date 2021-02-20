@@ -35,6 +35,14 @@ $St->table('UserTag')
     ->column('Total', 'int', 0, ['index.combined'])
     ->set();
 
+$St->table('Discussion')
+    ->column('GradeID', 'int', true)
+    ->set();
+
+$St->table('Comment')
+    ->column('GradeID', 'int', true)
+    ->set();
+
 $Rm = new ReactionModel();
 
 // Insert some default tags.

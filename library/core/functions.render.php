@@ -1123,7 +1123,7 @@ if (!function_exists('linkDropDown')) {
      * @param string $label the label of the drop down
      *
      */
-    function linkDropDown($links, $extraClasses = '', $label) {
+    function linkDropDown($links, $extraClasses = '', $label, $icon = 'grade.svg') {
         $output = '';
         $selectedKey = 0;
         foreach($links as $i => $link) {
@@ -1142,6 +1142,7 @@ if (!function_exists('linkDropDown')) {
           <span class="selectBox-label">{$label}</span>
           <span class="selectBox-main">
               <a href="#" role="button" rel="nofollow" class="FlyoutButton selectBox-toggle" tabindex="0">
+                <img src="/themes/alloprof/design/images/icons/{$icon}" />
                 <span class="selectBox-selected">{$linkName}</span>
                 <span class="vanillaDropDown-arrow" aria-label="{$downChevronLabel}">▾</span>
               </a>

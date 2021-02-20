@@ -145,8 +145,15 @@ if (!function_exists('writeComment')) :
                         </span>
                     </div>
                     <div class="Meta CommentMeta CommentInfo">
-                        <span class="MItem DateCreated">
-                        <?php echo anchor(Gdn_Format::date($comment->DateInserted, 'html'), $permalink, 'Permalink', ['name' => 'Item_'.($currentOffset), 'rel' => 'nofollow']); ?>
+                        <span class="MItem TimeAgo">
+                        <?php
+                            $grade = getGrade($comment->GradeID);
+                            if ($grade) {
+                                echo $grade . ' • ' . timeElapsedString($comment->DateInserted, false);
+                            } else {
+                                echo timeElapsedString($comment->DateInserted, false);
+                            }
+                        ?>
                         </span>
                         <?php
                         echo dateUpdated($comment, ['<span class="MItem">', '</span>']);
@@ -818,7 +825,7 @@ if (!function_exists('commentSort')) :
             $defaultUrl = url($baseUrl);
         }
 
-        return commentSorttDropDown(
+        return commentSortDropDown(
             $baseUrl,
             $filters,
             $extraClasses,
@@ -829,7 +836,7 @@ if (!function_exists('commentSort')) :
     }
 endif;
 
-if (!function_exists('commentSorttDropDown')) :
+if (!function_exists('commentSortDropDown')) :
     /**
      * Returns a filtering drop-down menu.
      *
@@ -844,7 +851,7 @@ if (!function_exists('commentSorttDropDown')) :
      * @param string $label Text for the label to attach to the cont
      * @return string
      */
-    function commentSorttDropDown($baseUrl, array $filters = [], $extraClasses = '', $default = null, $defaultUrl = null, $label = 'View') {
+    function commentSortDropDown($baseUrl, array $filters = [], $extraClasses = '', $default = null, $defaultUrl = null, $label = 'View') {
         if ($default === null) {
             $default = t('Most Recent');
         }
@@ -881,8 +888,25 @@ if (!function_exists('commentSorttDropDown')) :
         }
 
         // Generate the markup for the drop down menu.
-        $output .= linkDropDown($links, 'selectBox-following '.trim($extraClasses), '');
+        $output .= linkDropDown($links, 'selectBox-following '.trim($extraClasses), '', 'sort.svg');
 
         return $output;
+    }
+endif;
+
+if (!function_exists('getGrade')) :
+
+    function getGrade($GradeID) {
+        $fields = c('ProfileExtender.Fields', []);
+        if (!is_array($fields)) {
+            $fields = [];
+        }
+        $GradeOption = [];
+        foreach ($fields as $k => $field) {
+            if ($field['Label'] == "Grade") {
+                $GradeOption = $field['Options'];
+            }
+        }
+        return ($GradeID || $GradeID === 0) ? $GradeOption[$GradeID] : "";
     }
 endif;
