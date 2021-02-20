@@ -8465,7 +8465,6 @@ table.PreferenceGroup tbody tr:hover td {
  */
 .Header {
     -webkit-box-shadow: none;
-    background-color: #CAEDF9;
     border-bottom: 0;
     box-shadow: none;
     color: #1A1919;
@@ -8473,23 +8472,47 @@ table.PreferenceGroup tbody tr:hover td {
 
 .Frame-banner {
     background-color: #CAEDF9;
-    background-image: url('../images/flo_bot.svg');
-    background-repeat: no-repeat;
     height: 550px;
-    background-position-y: bottom;
-    background-position-x: calc(100% - 100px);
-    margin-top: 50px;
 }
 
 .Banner-content {
     height: 100%;
+    position: relative;
+}
+
+.Banner-content.General {
+    background-image: url('../images/flo_bot.svg');
+    background-repeat: no-repeat;
+    background-position-y: bottom;
+    background-color: #CAEDF9;
+    background-position-x: calc(100% - 100px);
+}
+
+.Banner-content.Categories {
+    background-image: url('../images/categories_banner.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-y: -200px;
+}
+
+.Banner-content__background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
+
+.Banner-content .Container {
+    width: 100%;
+    height: 100%;
     display: flex;
     justify-content: center;
     flex-direction: column;
-}
-
-.Frame-banner .Container {
-    height: 100%;
+    position: relative;
+    z-index: 1;
 }
 
 .Banner-content__pagename {
@@ -10687,7 +10710,7 @@ body.noGroupIcon .Group-Header-Info {
     overflow: hidden;
     text-overflow: ellipsis;
     vertical-align: bottom;
-    white-space: nowrap
+    white-space: nowrap;
 }
 
 .Group-Header.Group-Header.Group-Header.NoBanner {
