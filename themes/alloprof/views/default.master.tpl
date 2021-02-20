@@ -236,8 +236,9 @@
                 </div>
             </div>
         </div>
-        <!-- <div class="Frame-footer">
-        </div> -->
+        <div class="Frame-footer">
+            {include file="partials/footer.tpl"}
+        </div>
     </div>
     <div id="modals"></div>
     {event name="AfterBody"}

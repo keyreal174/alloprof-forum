@@ -1669,3 +1669,17 @@ $Definition['View Profile'] = 'Voir mon profil';
 $Definition['My Profile'] = 'Mon profil';
 $Definition['Questions asked'] = 'Questions posées';
 $Definition['Explanations received'] = 'Explications reçues';
+
+$Definition["Receive all of Alloprof's infos and tips by email."]='Reçois toutes les infos et astuces d’Alloprof par courriel.';
+$Definition["It'll help you, promise!"] = 'Ça va t’aider, promis!';
+$Definition['Subscribe here!'] = 'Abonne-toi ici!';
+$Definition['Make a Donation'] = 'Faire un don';
+$Definition['About'] = 'À propos';
+$Definition['Our Team'] = 'Notre équipe';
+$Definition['Contact Us'] = 'Nous contacter';
+$Definition['News'] = 'Nouvelles';
+$Definition['Contests and Surveys'] = 'Concours et sondages';
+$Definition['Our Partners'] = 'Nos partenaires';
+$Definition['Media'] = 'Médias';
+$Definition['Terms of Use and Privacy'] = 'Conditions d’utilisation et vie privée';
+$Definition['Promotional Material'] = 'Matériel promotionnel';
