@@ -7,33 +7,33 @@ include_once $this->fetchViewLocation('helper_functions', 'categories', 'vanilla
 $checkMark = !$isDataDrivenTheme ? adminCheck(NULL, ['', ' ']) : '';
 echo '<div class="CategoryDetail">';
 echo '<div class="Card">';
-echo '<div class="banner">';
-if($this->data('BannerImage'))
-    echo '<img src="'.$this->data('BannerImage').'"/>';
-echo '<div class="category-title">';
-echo '<h1 class="H HomepageTitle">'.
-    $checkMark.
-    $this->data('Title').
-    '</h1>';
-/** @var $htmlSanitizer */
-$htmlSanitizer = Gdn::getContainer()->get(\Vanilla\Formatting\Html\HtmlSanitizer::class);
-$Description = $htmlSanitizer->filter($this->data('Category.Description', $this->description()));
-echo wrapIf($Description, 'div', ['class' => 'P PageDescription']);
+// echo '<div class="banner">';
+// if($this->data('BannerImage'))
+//     echo '<img src="'.$this->data('BannerImage').'"/>';
+// echo '<div class="category-title">';
+// echo '<h1 class="H HomepageTitle">'.
+//     $checkMark.
+//     $this->data('Title').
+//     '</h1>';
+// /** @var $htmlSanitizer */
+// $htmlSanitizer = Gdn::getContainer()->get(\Vanilla\Formatting\Html\HtmlSanitizer::class);
+// $Description = $htmlSanitizer->filter($this->data('Category.Description', $this->description()));
+// echo wrapIf($Description, 'div', ['class' => 'P PageDescription']);
 
-$this->fireEvent('AfterPageTitle');
-echo '</div>';
-echo '</div>';
+// $this->fireEvent('AfterPageTitle');
+// echo '</div>';
+// echo '</div>';
 echo '<div class="category-info">';
 echo '<div class="item"><h1>'.$this->data('CountAllDiscussions').'</h1><h2>'.t('Questions').'</h2></div>';
 echo '<div class="item"><h1>'.$this->data('CountAllComments').'</h1><h2>'.t('Answers').'</h2></div>';
-echo '<div class="item"><h1>'.$this->data('CountAllDiscussions').'</h1><h2>'.t('Resources').'</h2></div>';
+// echo '<div class="item"><h1>'.$this->data('CountAllDiscussions').'</h1><h2>'.t('Resources').'</h2></div>';
 echo '</div>';
 
-echo '<div class="buttons">';
-if(followButton($this->data('Category.CategoryID')) != '')
-    echo '<button class="btn-default">'.followButton($this->data('Category.CategoryID')).'</button>';
-echo '<button class="btn-default btn-shadow scrollToAskQuestionForm">'.t('Ask a question').'</button>';
-echo '</div>';
+// echo '<div class="buttons">';
+// if(followButton($this->data('Category.CategoryID')) != '')
+//     echo '<button class="btn-default">'.followButton($this->data('Category.CategoryID')).'</button>';
+// echo '<button class="btn-default btn-shadow scrollToAskQuestionForm">'.t('Ask a question').'</button>';
+// echo '</div>';
 
 $subtreeView = $this->fetchViewLocation('subtree', 'categories', 'vanilla', false);
 if ($subtreeView) {
@@ -70,19 +70,7 @@ echo '</div>';
 if ($this->DiscussionData->numRows() > 0 || (isset($this->AnnounceData) && is_object($this->AnnounceData) && $this->AnnounceData->numRows() > 0)) {
     ?>
     <h2 class="sr-only"><?php echo t('Discussion List'); ?></h2>
-    <div class="FilterBar">
-        <div class="filters">
-            <nav class="Question-submenu" style="margin-top: 0; margin-bottom: 20px">
-                <div class="Navigation-linkContainer">
-                    <a href="" class="Navigation-link Selected"><?php echo t('Questions')?></a>
-                </div>
-                <div class="Navigation-linkContainer">
-                    <a href="" class="Navigation-link"><?php echo t('Resources')?></a>
-                </div>
-            </ul>
-        </div>
-        <div class="sorts"></div>
-    </div>
+
     <ul class="DataList Discussions">
         <?php include($this->fetchViewLocation('discussions', 'Discussions', 'Vanilla')); ?>
     </ul>

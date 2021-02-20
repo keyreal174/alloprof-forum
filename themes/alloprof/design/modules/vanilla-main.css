@@ -5869,7 +5869,6 @@ a.Dismiss.Dismiss:hover {
 
 .PageControls {
     margin: initial;
-    margin-bottom: 14px;
     min-height: 0
 }
 
@@ -6155,10 +6154,10 @@ a.MoreWrap:hover {
     }
 }
 
-.PageControls.PageControls .BoxNewConversation,
+/* .PageControls.PageControls .BoxNewConversation,
 .PageControls.PageControls .BoxNewDiscussion {
     display: none
-}
+} */
 
 .PageControls.PageControls .discussion-sort-filter-module {
     display: -webkit-inline-box;

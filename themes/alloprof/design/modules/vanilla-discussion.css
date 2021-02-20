@@ -13,7 +13,7 @@
 span.ReactButtons a.ReactButton.ReactButton-Like {
     display: inline-block!important;
     width: 40px;
-    /* margin-top: 0; */
+    margin-top: 0;
 }
 
 span.ReactButtons a.ReactButton.ReactButton-Like .Count {

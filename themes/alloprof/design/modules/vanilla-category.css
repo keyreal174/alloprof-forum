@@ -60,8 +60,8 @@
 .CategoryDetail .Card {
     background-color: #fff;
     border-radius: 5px;
-    margin-bottom: 20px;
-    padding: 40px;
+    margin-bottom: 40px;
+    padding: 11px;
 }
 
 .CategoryDetail .Card .banner {
@@ -85,11 +85,17 @@
 }
 
 .CategoryDetail .Card h1 {
-    font-size: 40px;
+    font-size: 36px;
+    line-height: 42px;
+    color: #1A1919;
+    font-weight: normal;
 }
 
 .CategoryDetail .Card h2 {
     font-size: 21px;
+    line-height: 25px;
+    color: #1A1919;
+    font-weight: normal;
 }
 
 .CategoryDetail .Card .category-info {
