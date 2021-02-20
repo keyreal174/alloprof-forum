@@ -29,7 +29,15 @@
         ?>
         <h1>
             <?php
-                echo t('New question');
+                if ($this->CategoryID) {
+                    $category = CategoryModel::categories($this->CategoryID);
+                    $hasPermission = CategoryModel::checkPermission($this->CategoryID, 'Vanilla.Discussions.Add');
+                    echo sprintf(t('ConnectNewQuestionLabel', 'New question in %s'), htmlspecialchars($category["Name"]));
+                    // sprintf(t('ConnectRegisteredName', 'Your registered username: <strong>%s</strong>'), htmlspecialchars($Row['Name'])
+                } else {
+                    $hasPermission = Gdn::session()->checkPermission('Vanilla.Discussions.Add', true, 'Category', 'any');
+                    echo t('New question');
+                }
             ?>
         </h1>
     </div>
