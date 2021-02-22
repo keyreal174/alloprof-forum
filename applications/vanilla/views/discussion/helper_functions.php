@@ -748,12 +748,13 @@ if (!function_exists('formatMeAction')) :
 endif;
 
 if (!function_exists('writeDiscussionFooter')) :
-    function writeDiscussionFooter($Discussion, $sender) {
+    function writeDiscussionFooter($Discussion, $sender ,$page='') {
         $discussionUrl = $Discussion->Url;
         ?>
         <div class="Item-Footer">
             <div class="Item-Footer-Icons">
                 <?php
+                include($sender->fetchViewLocation('helper_functions', 'discussions', 'vanilla'));
                 if (!Gdn::themeFeatures()->get('EnhancedAccessibility')) {
                         echo '<span class="Options">';
                         echo bookmarkButton($Discussion);
@@ -762,12 +763,16 @@ if (!function_exists('writeDiscussionFooter')) :
                         echo '</span>';
                     }
                 ?>
+                <?php
+                    if ($page !== 'search') {
+                ?>
                 <div class="Separator"></div>
                 <span class="Response">
                     <?php
                         echo $Discussion->CountComments . ' ' . 'réponses';
                     ?>
                 </span>
+                <?php } ?>
             </div>
             <div>
                 <?php

@@ -77,7 +77,7 @@
 }
 
 .Item-Body {
-    margin-bottom: 55px;
+    margin-bottom: 45px;
 }
 
 .Item-Footer {
@@ -291,7 +291,26 @@
     flex-direction: column;
 }
 
+.Item-Search .Item-Body .AuthWrapper .AuthDate .UserName {
+    color: #1A1919;
+    font-size: 21px;
+    line-height: 25px;
+    font-weight: 600;
+    margin-bottom: 9px;
+    padding-top: 10px;
+}
+
+.DataList-Search .Item-Body {
+    padding-left: 0;
+}
+
 .MessageList .ItemComment .Item-Header,
 .MessageList .ItemDiscussion .Item-Header {
     margin-bottom: 40px;
+}
+
+.MItem-Grade {
+    color: #6C6767;
+    font-weight: bold;
+    font-size: 13px
 }

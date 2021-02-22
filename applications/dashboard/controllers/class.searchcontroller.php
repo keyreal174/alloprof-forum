@@ -25,14 +25,17 @@ class SearchController extends Gdn_Controller {
     /** @var LegacySearchAdapter */
     private $searchAdapter;
 
+    public $ShowOptions;
+
     /**
      * Object instantiation & form prep.
      *
      * @param LegacySearchAdapter $searchAdapter
      */
-    public function __construct(LegacySearchAdapter $searchAdapter) {
+    public function __construct(LegacySearchAdapter $searchAdapter,\DiscussionsApiController $discussionApi) {
         parent::__construct();
         $this->searchAdapter = $searchAdapter;
+        $this->discussionApi = $discussionApi;
         $form = Gdn::factory('Form');
 
         // Form prep
@@ -69,12 +72,14 @@ class SearchController extends Gdn_Controller {
      * @param string $page Page number.
      */
     public function index($search = '', $page = '') {
+        $this->ShowOptions = true;
         $this->addJsFile('search.js');
+        $this->addJsFile('askquestion.js', 'vanilla');
         $this->title(t('Search'));
 
         // Add New Modules
         $this->addModule('CategoriesModule');
-
+        $this->addModule('AskQuestionModule');
 
         // Make sure the userphoto module gets added to the page
         $this->addModule('UserPhotoModule');
@@ -82,6 +87,14 @@ class SearchController extends Gdn_Controller {
         // Add discussion and question count on the profile block
         $this->fireEvent('AddProfileTabsInfo');
         $this->addModule('ProfileFilterModule');
+
+        $bannerModule = new BannerModule(
+            'Search',
+            'Home',
+            t('Search for'),
+            t('Cartesian plane')
+        );
+        $this->addModule($bannerModule);
 
         saveToConfig('Garden.Format.EmbedSize', '160x90', false);
         Gdn_Theme::section('SearchResults');
@@ -108,5 +121,10 @@ class SearchController extends Gdn_Controller {
 
         $this->canonicalUrl(url('search', true));
         $this->render();
+    }
+
+    public function getDiscusson($id) {
+        $discussion = $this->discussionApi->discussionByID($id);
+        return $discussion;
     }
 }
