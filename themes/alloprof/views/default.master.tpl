@@ -157,12 +157,8 @@
                         </nav>
                     </header>
                 </div>
-                <div class="Frame-banner">
-                    <div class="Container">
-                        <div class="Banner-content Banner">
-                            {asset name="Banner"}
-                        </div>
-                    </div>
+                <div class="Frame-banner Banner">
+                    {asset name="Banner"}
                 </div>
             {/if}
             <div class="Frame-body">

@@ -122,13 +122,13 @@
 }
 
 .Favorite-Icon {
-    background: url("../images/Path.png") no-repeat !important;
+    background: url("../images/icons/like.svg") no-repeat !important;
     width: 24px;
     height: 24px;
 }
 
 .Favorite-Icon.isLiked {
-    background: url("../images/Heart.png") no-repeat !important;
+    background: url("../images/icons/like.svg") no-repeat !important;
     width: 24px;
     height: 24px;
 }
