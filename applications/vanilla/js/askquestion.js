@@ -18,8 +18,16 @@ jQuery(document).ready(function($) {
         $('.AskQuestionForm .OpenAskQuestionForm').trigger('click');
         console.log($(".AskQuestionForm .ql-editor"))
         $(".AskQuestionForm .ql-editor").focus();
-        $([document.documentElement, document.body]).animate({
-            scrollTop: $(".AskQuestionForm").offset().top - 220
-        }, 500);
+        if ($(".AskQuestionForm").offset()) {
+            $([document.documentElement, document.body]).animate({
+                scrollTop: $(".AskQuestionForm").offset().top - 220
+            }, 500);
+        }
+
+        if ($("#MainContent").offset()) {
+            $([document.documentElement, document.body]).animate({
+                scrollTop: $("#MainContent").offset().top - 235
+            }, 500);
+        }
     })
 });

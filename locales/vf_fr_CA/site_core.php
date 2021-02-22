@@ -1685,3 +1685,6 @@ $Definition['Media'] = 'Médias';
 $Definition['Terms of Use and Privacy'] = 'Conditions d’utilisation et vie privée';
 $Definition['Promotional Material'] = 'Matériel promotionnel';
 $Definition['General'] = 'Générale';
+
+$Definition['Search for'] = 'Rechercher pour';
+$Definition['Results (%d)'] = 'Résultats (%d)';

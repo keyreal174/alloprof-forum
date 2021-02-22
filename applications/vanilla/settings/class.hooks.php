@@ -820,6 +820,36 @@ class VanillaHooks extends Gdn_Plugin {
     }
 
     /**
+     * Adds 'Search' tab to profiles and adds CSS & JS files to their head.
+     *
+     * @since 2.0.0
+     * @package Vanilla
+     *
+     * @param SearchController $sender
+     */
+    public function searchController_addProfileTabsInfo_handler($sender) {
+        if (is_object($sender->User) && $sender->User->UserID > 0) {
+            $userID = $sender->User->UserID;
+            // Add the discussion tab
+            // $discussionsLabel = sprite('SpDiscussions').' '.t('Questions');
+            // $commentsLabel = sprite('SpComments').' '.t('Comments');
+            $discussionsLabel = "";
+            $commentsLabel = "";
+            if (c('Vanilla.Profile.ShowCounts', true)) {
+                $discussionsCount = getValueR('User.CountDiscussions', $sender, null);
+                $commentsCount = getValueR('User.CountComments', $sender, "0");
+                $discussionsLabel .= $discussionsCount;
+                $commentsLabel .= $commentsCount;
+            }
+            $sender->addProfileTab(t('Questions asked'), userUrl($sender->User, '', 'discussions'), 'Questions', $discussionsLabel);
+            $sender->addProfileTab(t('Explanations received'), userUrl($sender->User, '', 'comments'), 'Comments', $commentsLabel);
+            // Add the discussion tab's CSS and Javascript.
+            $sender->addJsFile('jquery.gardenmorepager.js');
+            $sender->addJsFile('discussions.js', 'vanilla');
+        }
+    }
+
+    /**
      * Adds 'Categories' tab to profiles and adds CSS & JS files to their head.
      *
      * @since 2.0.0

@@ -11907,16 +11907,16 @@ body.Section-EditProfile #CategoryNotificationHeader {
  * @license GPL-2.0-only
  */
 body.Section-SearchResults .Frame-content>.Container {
-    max-width: 800px
+    /* max-width: 800px */
 }
 
 body.Section-SearchResults .Frame-content .Content {
-    width: 100%
+    /* width: 100% */
 }
 
 body.Section-SearchResults .Frame-content .Panel,
 body.Section-SearchResults .SearchBox {
-    display: none
+    /* display: none */
 }
 
 body.Section-SearchResults .SearchForm {

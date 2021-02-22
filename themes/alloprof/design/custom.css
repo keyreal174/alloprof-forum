@@ -286,3 +286,19 @@ select {
     color: #000000;
     font-weight: bold;
 }
+
+/* Search */
+.SearchResult {
+    color: #1A1919;
+    font-size: 21px;
+    font-weight: bold;
+    line-height: 25px;
+    margin-bottom: 24px;
+}
+
+.NoResults {
+    color: #1A1919;
+    font-size: 21px;
+    line-height: 25px;
+    margin-bottom: 24px;
+}

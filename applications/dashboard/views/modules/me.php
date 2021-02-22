@@ -43,6 +43,7 @@ if ($Session->isValid()):
         echo userAnchor($User, 'Username');
     }
     echo '<div class="MeMenu">';
+
     // Notifications
     $CountNotifications = $User->CountNotifications;
     $CNotifications = is_numeric($CountNotifications) && $CountNotifications > 0 ? '<span class="Alert NotificationsAlert"></span>' : '';
