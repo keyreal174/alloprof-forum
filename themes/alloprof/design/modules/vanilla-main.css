@@ -5869,17 +5869,18 @@ a.Dismiss.Dismiss:hover {
 
 .PageControls {
     margin: initial;
-    min-height: 0
+    min-height: 0;
+    display: none;
 }
 
 .PageControls:after {
     clear: both;
     content: "";
-    display: table
+    display: table;
 }
 
 .PageControls .H {
-    margin-bottom: 14px
+    margin-bottom: 14px;
 }
 
 .QuickSearch .MenuItems {
