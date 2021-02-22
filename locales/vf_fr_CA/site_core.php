@@ -1687,5 +1687,4 @@ $Definition['Promotional Material'] = 'Matériel promotionnel';
 $Definition['General'] = 'Générale';
 
 $Definition['Search for'] = 'Rechercher pour';
-$Definition['Cartesian plane'] = 'plan cartésien';
 $Definition['Results (%d)'] = 'Résultats (%d)';
