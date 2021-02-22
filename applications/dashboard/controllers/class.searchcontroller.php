@@ -96,7 +96,7 @@ class SearchController extends Gdn_Controller {
             'Search',
             'Home',
             t('Search for'),
-            t('Cartesian plane')
+            t(Gdn_Format::text($search).',')
         );
         $this->addModule($bannerModule);
 
