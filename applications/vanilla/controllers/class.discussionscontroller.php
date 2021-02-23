@@ -170,7 +170,8 @@ class DiscussionsController extends VanillaController {
         $this->fireEvent('AddProfileTabsInfo');
         $this->addModule('ProfileFilterModule');
 
-        $this->addModule('DiscussionsBannerModule');
+        $bannerModule = new BannerModule('Home', 'Home', 'Welcome in', 'the Mutual Aid Zone,', 'Do you have a question? Here are the explanations!');
+        $this->addModule($bannerModule);
 
         // $this->addModule('BookmarkedModule');
         // $this->addModule('TagModule');
