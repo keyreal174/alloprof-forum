@@ -1,0 +1,89 @@
+.BoxCheckAnswer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 32px;
+    height: 193px;
+    background: #FFFFFF;
+    border-radius: 8px;
+}
+
+.BoxCheckAnswer h2 {
+    font-size: 21px;
+    line-height: 25px;
+    color: #000000;
+}
+
+.BoxCheckAnswer .BoxCheckAnswer-answers {
+    display: flex;
+    justify-content: space-around;
+    width: 60%;
+}
+
+.BoxCheckAnswer .BoxCheckAnswer-answers a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+
+.BoxCheckAnswer .BoxCheckAnswer-answers a span {
+    font-size: 16px;
+    line-height: 19px;
+    color: #6C6767;
+    margin-top: 8px;
+}
+
+.BoxLookForSolution {
+    text-align: center;
+    width: 819px;
+    height: 623px;
+    /* left: 550px; */
+    /* top: 229px; */
+    background: #FFFFFF;
+    border: 1px solid #DDDDDD;
+    box-sizing: border-box;
+    box-shadow: 0px 16px 40px -5px rgba(108, 103, 103, 0.05);
+    border-radius: 24px;
+    padding: 80px;
+    position: relative;
+}
+
+.BoxLookForSolution h3 {
+    font-size: 28px;
+    line-height: 31px;
+    text-align: center;
+    color: #000000;
+    margin-bottom: 40px;
+}
+
+.BoxLookForSolution h4 {
+    font-size: 18px;
+    line-height: 31px;
+    text-align: center;
+    color: #000000;
+}
+
+.BoxLookForSolution a {
+    display: inline-block;
+    font-size: 21px;
+    line-height: 25px;
+    text-align: center;
+    color: #000000;
+    padding: 23px 32px;
+    background: #FFFFFF;
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    box-shadow: 3px 5px 0px #1A1919;
+    border-radius: 38px;
+    margin-top: 40px;
+}
+
+.BoxLookForSolution .close-icon {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    right: 32px;
+    top: 32px;
+}

@@ -661,6 +661,9 @@ class DiscussionsController extends VanillaController {
         $this->fireEvent('AfterAddSideMenu');
         $this->fireEvent('AddProfileTabsInfo');
 
+        $bannerModule = new BannerModule('My Questions', 'Home / My Questions', 'All my <b>questions,</b>', '', 'Find here all the questions you have asked to the community!');
+        $this->addModule($bannerModule);
+
         // Render view
         $this->setData('Title', t('My Questions'));
         $this->setData('Breadcrumbs', [['Name' => t('My Questions'), 'Url' => '/discussions/mine']]);
