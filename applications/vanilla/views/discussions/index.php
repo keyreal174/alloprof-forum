@@ -10,14 +10,26 @@ if($this->data('Title'))
 echo '<h1 class="H HomepageTitle">'.
     $checkMark.
     $this->data('Title').
-    followButton($this->data('Category.CategoryID')).
+    // followButton($this->data('Category.CategoryID')).
     '</h1>';
 // echo writeGradeFilter(null);
 echo '</div>';
 
+if($this->data('Category.CountAllDiscussions')) {
+    echo '<div class="CategoryDetail">';
+    echo '<div class="Card">';
+    echo '<div class="category-info">';
+    echo '<div class="item"><h1>'.$this->data('CountAllDiscussions').'</h1><h2>'.t('Questions').'</h2></div>';
+    echo '<div class="item"><h1>'.$this->data('CountAllComments').'</h1><h2>'.t('Answers').'</h2></div>';
+    echo '</div>';
+    echo '</div>';
+    echo Gdn_Theme::module('NewDiscussionModule', $this->data('_NewDiscussionProperties', ['CssClass' => 'Button Action Primary']));
+}
+
+
 /** @var $htmlSanitizer */
 $htmlSanitizer = Gdn::getContainer()->get(\Vanilla\Formatting\Html\HtmlSanitizer::class);
-$Description = $htmlSanitizer->filter($this->data('Category.Description', $this->description()));
+// $Description = $htmlSanitizer->filter($this->data('Category.Description', $this->description()));
 echo wrapIf($Description, 'div', ['class' => 'P PageDescription']);
 
 $this->fireEvent('AfterPageTitle');

@@ -62,10 +62,11 @@ if ($this->data('_PagerUrl'))
 
 echo '<div class="PageControls Top">';
 PagerModule::write($PagerOptions);
-echo Gdn_Theme::module('NewDiscussionModule', $this->data('_NewDiscussionProperties', ['CssClass' => 'Button Action Primary']));
 // Avoid displaying in a category's list of discussions.
 $this->fireEvent('PageControls');
 echo '</div>';
+
+echo Gdn_Theme::module('NewDiscussionModule', $this->data('_NewDiscussionProperties', ['CssClass' => 'Button Action Primary']));
 
 if ($this->DiscussionData->numRows() > 0 || (isset($this->AnnounceData) && is_object($this->AnnounceData) && $this->AnnounceData->numRows() > 0)) {
     ?>
