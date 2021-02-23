@@ -470,7 +470,7 @@ class CategoriesController extends VanillaController {
 
             $this->setData('CountAllComments', val('CountAllComments', $category));
 
-            $this->title(Gdn::formatService()->renderPlainText(val('Name', $category, ''), HtmlFormat::FORMAT_KEY));
+            // $this->title(Gdn::formatService()->renderPlainText(val('Name', $category, ''), HtmlFormat::FORMAT_KEY));
 
             $this->description(val('Description', $category), false);
 
@@ -648,7 +648,7 @@ class CategoriesController extends VanillaController {
             $this->canonicalUrl(categoryUrl($category, pageNumber($offset, $limit)));
 
             // Change the controller name so that it knows to grab the discussion views
-            // $this->ControllerName = 'DiscussionsController';
+            $this->ControllerName = 'DiscussionsController';
             // Pick up the discussions class
             $this->CssClass = 'Discussions Category-'.val('UrlCode', $category);
 
