@@ -66,3 +66,7 @@ header.not-transparent {
     z-index: 1;
     box-sizing: border-box;
 }
+
+.DataList-Search {
+    margin-top: 0;
+}

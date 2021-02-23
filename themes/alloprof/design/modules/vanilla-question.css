@@ -3,6 +3,7 @@
 }
 
 .DataList .ItemDiscussion,
+.DataList .Item,
 .MessageList .ItemComment.ItemComment,
 .MessageList .ItemDiscussion.ItemDiscussion {
     border-radius: 5px;
@@ -62,7 +63,8 @@
 }
 
 .MessageList .Item-BodyWrap .Message.userContent,
-.DataList.Discussions .Item-BodyWrap .Message.userContent {
+.DataList.Discussions .Item-BodyWrap .Message.userContent,
+.Item-Search .Item-Body .Summary {
     display: flex;
     flex-direction: column;
     background-color: #f2f2f2;
@@ -75,7 +77,7 @@
 }
 
 .Item-Body {
-    margin-bottom: 55px;
+    margin-bottom: 45px;
 }
 
 .Item-Footer {
@@ -270,7 +272,45 @@
     width: initial;
 } */
 
+/* Search Media */
+.Item-Search .Item-Body .AuthWrapper {
+    display: flex;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.Item-Search .Item-Body .AuthWrapper img {
+    width: 64px;
+    height: 64px;
+    margin-right: 20px;
+    border-radius: 100%;
+}
+
+.Item-Search .Item-Body .AuthWrapper .AuthDate {
+    display: flex;
+    flex-direction: column;
+}
+
+.Item-Search .Item-Body .AuthWrapper .AuthDate .UserName {
+    color: #1A1919;
+    font-size: 21px;
+    line-height: 25px;
+    font-weight: 600;
+    margin-bottom: 9px;
+    padding-top: 10px;
+}
+
+.DataList-Search .Item-Body {
+    padding-left: 0;
+}
+
 .MessageList .ItemComment .Item-Header,
 .MessageList .ItemDiscussion .Item-Header {
     margin-bottom: 40px;
+}
+
+.MItem-Grade {
+    color: #6C6767;
+    font-weight: bold;
+    font-size: 13px
 }
