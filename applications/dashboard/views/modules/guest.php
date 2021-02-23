@@ -20,7 +20,7 @@
             echo ' '.anchor(t('Register', t('Apply for Membership', 'Register')), $this->data('registerUrl'), 'btn-default btn-shadow', ['rel' => 'nofollow', 'aria-label' => t("Register Now")]);
         }
         echo '<p>'.t('Do you already have an account?');
-        echo anchor(t('To Sign In'), $this->data('signInUrl'), 'link'.(signInPopup() ? ' SignInPopup' : ''), ['rel' => 'nofollow', 'aria-label' => t("Sign In Now")]);
+        echo anchor(t('Sign In'), $this->data('signInUrl'), 'link'.(signInPopup() ? ' SignInPopup' : ''), ['rel' => 'nofollow', 'aria-label' => t("Sign In Now")]);
         echo '</p>';
         echo '</div>';
     }
