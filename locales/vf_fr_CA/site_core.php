@@ -1688,3 +1688,9 @@ $Definition['General'] = 'Générale';
 
 $Definition['Search for'] = 'Rechercher pour';
 $Definition['Results (%d)'] = 'Résultats (%d)';
+$Definition['Report post'] = 'Signaler la publication';
+$Definition['Report'] = 'Signaler';
+$Definition["What's wrong?"] = 'Qu’est-ce qui ne va pas?';
+$Definition['The words are offensive or inappropriate'] = 'Les propos sont offensant ou innapropriés';
+$Definition['The author posts spam'] = 'L’auteur publie du spam';
+$Definition['The post contains an unapproved photo'] = 'La publication contient une photo innaproriée';

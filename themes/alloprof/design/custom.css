@@ -32,6 +32,7 @@
 @import url("./modules/vanilla-footer.css");
 @import url("./modules/slick/slick-theme.css");
 @import url("./modules/slick/slick.css");
+@import url("./modules/vanilla-flag.css");
 
 .BoxNewDiscussion {
     -webkit-box-shadow: none;

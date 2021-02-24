@@ -3,30 +3,33 @@
 $UcContext = htmlspecialchars(ucfirst($this->data('Plugin.Flagging.Data.Context')));
 $ElementID = htmlspecialchars($this->data('Plugin.Flagging.Data.ElementID'));
 $URL = $this->data('Plugin.Flagging.Data.URL');
-$Title = sprintf("Flag this %s", $UcContext);
+$Title = sprintf("What's wrong?");
 ?>
+    <div>
+    <img src='/themes/alloprof/design/images/flagAvatar.svg' alt='image' class='FlagAvatar' />
+    </div>
     <h2><?php echo t($Title); ?></h2>
 <?php
 echo $this->Form->open();
 echo $this->Form->errors();
 ?>
-    <ul>
-        <li>
-            <div class="Warning">
-                <?php echo t('FlagForReview', "You are about to flag this for moderator review. If you're sure you want to do this,
-         please enter a brief reason below, then press 'Flag this!'."); ?>
-            </div>
-            <?php echo t('FlagLinkContent', 'Link to content:').' '.anchor(t('FlagLinkFormat', "{$UcContext} #{$ElementID}"), $URL, "", ["WithDomain" => "/"]); ?> &ndash;
-            <?php echo htmlspecialchars($this->data('Plugin.Flagging.Data.ElementAuthor')); ?>
-        </li>
-        <li>
-            <?php
-            echo $this->Form->label('Reason', 'Plugin.Flagging.Reason');
-            echo $this->Form->textBox('Plugin.Flagging.Reason', ['MultiLine' => TRUE]);
-            ?>
-        </li>
+    <div class='FlagWarningList'>
         <?php
-        $this->fireEvent('FlagContentAfter');
+            echo $this->Form->radioList(
+                'FlagWarning',
+                [
+                    0 => 'The words are offensive or inappropriate',
+                    1 => 'The author posts spam',
+                    2 => 'The post contains an unapproved photo',
+                ]
+                , ['list' => true]
+            );
+            $this->fireEvent('FlagContentAfter');
         ?>
-    </ul>
-<?php echo $this->Form->close('Flag this!');
+    </div>
+<?php
+echo '<div class="FlatReportButton">',
+    $this->Form->button(t('Report'), ['type' => 'button', 'class' => 'btn btn-default btn-shadow']),
+    '</div>';
+echo $this->Form->close();
+?>

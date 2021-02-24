@@ -473,6 +473,10 @@ jQuery(document).ready(function($) {
             }
         });
 
+    // This turns SignInPopup anchors into in-page popups
+    if ($.fn.popup)
+        $('a.FlagContentPopup').popup({containerCssClass: 'FlagContentPopup'});
+
     // Make sure that message dismissalls are ajax'd
     $(document).delegate('a.Dismiss', 'click', function() {
         var anchor = this;
@@ -983,7 +987,7 @@ jQuery(document).ready(function($) {
             try {
                 var message = response.InformMessages[i].Message;
                 var emptyMessage = message === '';
-                
+
                 message = '<span class="InformMessageBody">' + message + '</span>';
 
                 // Is there a sprite?

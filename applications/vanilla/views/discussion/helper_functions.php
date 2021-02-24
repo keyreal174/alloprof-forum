@@ -314,6 +314,36 @@ if (!function_exists('getDiscussionOptions')) :
     }
 endif;
 
+if (!function_exists('addFlagButtonToDropdown')):
+    function addFlagButtonToDropdown($data, $context = 'comment') {
+        if (!in_array($context, ["comment", "discussion"])) {
+            return;
+        }
+
+        $elementID = ($context == 'comment') ? $data->CommentID : $data->DiscussionID;
+
+        if (!isset(Gdn::session()->UserID)) {
+            $elementAuthorID = 0;
+            $elementAuthor = 'Unknown';
+            $isAllowed = false;
+        } else {
+            $elementAuthorID = $data->InsertUserID;
+            $User = Gdn::userModel()->getID($elementAuthorID);
+            $elementAuthor = $User->Name;
+            $isAllowed = true;
+        }
+
+        $flagLink = [
+            isAllowed => $isAllowed,
+            name => t('Report post'),
+            url => "discussion/flag/{$context}/{$elementID}/{$elementAuthorID}/".Gdn_Format::url($elementAuthor),
+            type => 'FlagContent FlagContentPopup'
+        ];
+        // echo wrap($flagLink, 'span', ['class' => 'MItem CommentFlag']);
+        return $flagLink;
+    }
+endif;
+
 
 if (!function_exists('getDiscussionOptionsDropdown')):
     /**
@@ -360,7 +390,10 @@ if (!function_exists('getDiscussionOptionsDropdown')):
             $timeLeft = ' ('.Gdn_Format::seconds($timeLeft).')';
         }
 
-        $dropdown->addLinkIf($canDismiss, t('Dismiss'), "vanilla/discussion/dismissannouncement?discussionid={$discussionID}", 'dismiss', 'DismissAnnouncement Hijack')
+        $flagLink = addFlagButtonToDropdown($discussion, 'discussion');
+
+        $dropdown->addLInkIf($flagLink['isAllowed'], $flagLink['name'], $flagLink['url'], 'FlagMenuItem', $flagLink['type'])
+            ->addLinkIf($canDismiss, t('Dismiss'), "vanilla/discussion/dismissannouncement?discussionid={$discussionID}", 'dismiss', 'DismissAnnouncement Hijack')
             ->addLinkIf($canEdit, t('Edit').$timeLeft, '/post/editdiscussion/'.$discussionID, 'edit')
             ->addLinkIf($canTag, t('Tag'), '/discussion/tag?discussionid='.$discussionID, 'tag', 'TagDiscussion Popup');
 
