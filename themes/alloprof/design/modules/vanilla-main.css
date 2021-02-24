@@ -8469,6 +8469,7 @@ table.PreferenceGroup tbody tr:hover td {
     border-bottom: 0;
     box-shadow: none;
     color: #1A1919;
+    backdrop-filter: blur(6px);
 }
 
 .Frame-banner {
