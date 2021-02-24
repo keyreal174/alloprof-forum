@@ -8532,6 +8532,17 @@ table.PreferenceGroup tbody tr:hover td {
     margin-top: 20px;
 }
 
+.Banner-content__description a {
+    padding: 12px 24px;
+    font-size: 15px;
+    line-height: 18px;
+    color: #000000;
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    border-radius: 43px;
+    margin-right: 16px;
+}
+
 .Header .row {
     -ms-flex-align: center;
     -webkit-box-align: center;

@@ -683,6 +683,7 @@ class VanillaHooks extends Gdn_Plugin {
         $sender->addJsFile('slick.js', 'vanilla');
         $sender->addJsFile('slickcarousel.js', 'vanilla');
         $sender->addJsFile('basic.js', 'vanilla');
+        $sender->addJsFile('jquery.popup.js');
 
         if (!inSection('Dashboard')) {
             // Spoilers assets
@@ -806,7 +807,7 @@ class VanillaHooks extends Gdn_Plugin {
             $discussionsLabel = "";
             $commentsLabel = "";
             if (c('Vanilla.Profile.ShowCounts', true)) {
-                $discussionsCount = getValueR('User.CountDiscussions', $sender, null);
+                $discussionsCount = getValueR('User.CountDiscussions', $sender, "0");
                 $commentsCount = getValueR('User.CountComments', $sender, "0");
                 $discussionsLabel .= $discussionsCount;
                 $commentsLabel .= $commentsCount;
@@ -836,7 +837,7 @@ class VanillaHooks extends Gdn_Plugin {
             $discussionsLabel = "";
             $commentsLabel = "";
             if (c('Vanilla.Profile.ShowCounts', true)) {
-                $discussionsCount = getValueR('User.CountDiscussions', $sender, null);
+                $discussionsCount = getValueR('User.CountDiscussions', $sender, "0");
                 $commentsCount = getValueR('User.CountComments', $sender, "0");
                 $discussionsLabel .= $discussionsCount;
                 $commentsLabel .= $commentsCount;
@@ -866,7 +867,7 @@ class VanillaHooks extends Gdn_Plugin {
             $discussionsLabel = "";
             $commentsLabel = "";
             if (c('Vanilla.Profile.ShowCounts', true)) {
-                $discussionsCount = getValueR('User.CountDiscussions', $sender, null);
+                $discussionsCount = getValueR('User.CountDiscussions', $sender, "0");
                 $commentsCount = getValueR('User.CountComments', $sender, "0");
                 $discussionsLabel .= $discussionsCount;
                 $commentsLabel .= $commentsCount;
@@ -888,7 +889,7 @@ class VanillaHooks extends Gdn_Plugin {
             $discussionsLabel = "";
             $commentsLabel = "";
             if (c('Vanilla.Profile.ShowCounts', true)) {
-                $discussionsCount = getValueR('User.CountDiscussions', $sender, null);
+                $discussionsCount = getValueR('User.CountDiscussions', $sender, "0");
                 $commentsCount = getValueR('User.CountComments', $sender, "0");
                 $discussionsLabel .= $discussionsCount;
                 $commentsLabel .= $commentsCount;

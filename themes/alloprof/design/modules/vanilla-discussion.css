@@ -45,3 +45,15 @@ span.ReactButtons a.ReactButton.ReactButton-Like .additional-label {
     line-height: 20px;
     color: #6C6767;
 }
+
+.discussion-list-footer {
+    text-align: center;
+    font-size: 18px;
+    line-height: 21px;
+    color: #4F4F4F;
+}
+
+.discussion-list-footer img {
+    padding-top: 4px;
+    margin-bottom: 16px;
+}
