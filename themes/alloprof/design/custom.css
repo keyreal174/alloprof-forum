@@ -30,6 +30,7 @@
 @import url("./modules/vanilla-discussion.css");
 @import url("./modules/vanilla-setlocale.css");
 @import url("./modules/vanilla-footer.css");
+@import url("./modules/vanilla-checkanswer.css");
 @import url("./modules/slick/slick-theme.css");
 @import url("./modules/slick/slick.css");
 @import url("./modules/vanilla-flag.css");
@@ -302,4 +303,25 @@ select {
     font-size: 21px;
     line-height: 25px;
     margin-bottom: 24px;
+}
+
+
+/* Modal  */
+
+div.Popup .Body {
+    border-radius: 24px;
+}
+
+div.Popup .Footer {
+    height: 0 !important;
+}
+
+div.Popup .Footer .Close span {
+    font-size: 45px;
+    font-weight: 100;
+}
+
+div.Popup .Border {
+    min-width: 400px;
+    width: auto;
 }

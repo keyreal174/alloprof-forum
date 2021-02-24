@@ -78,7 +78,6 @@ if ($this->DiscussionData->numRows() > 0 || (isset($this->AnnounceData) && is_ob
 
 } else {
     ?>
-    <div class="Empty"><?php echo t('No discussions were found.'); ?></div>
     <?php $this->fireEvent('AfterDiscussionsList'); ?>
 <?php
 }

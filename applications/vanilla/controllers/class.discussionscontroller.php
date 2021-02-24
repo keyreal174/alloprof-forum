@@ -170,7 +170,7 @@ class DiscussionsController extends VanillaController {
         $this->fireEvent('AddProfileTabsInfo');
         $this->addModule('ProfileFilterModule');
 
-        $bannerModule = new BannerModule('Home', 'Home', 'Welcome in', 'the Mutual Aid Zone,', 'Do you have a question? Here are the explanations!');
+        $bannerModule = new BannerModule('Home', 'Home', 'Welcome to', 'the Mutual Aid Zone', 'Do you have a question? Here are the explanations!');
         $this->addModule($bannerModule);
 
         // $this->addModule('BookmarkedModule');
@@ -660,6 +660,16 @@ class DiscussionsController extends VanillaController {
         $this->addModule('ProfileFilterModule');
         $this->fireEvent('AfterAddSideMenu');
         $this->fireEvent('AddProfileTabsInfo');
+        $DiscussionEmpty = true;
+        if ($this->DiscussionData->numRows() > 0 || (isset($this->AnnounceData) && is_object($this->AnnounceData) && $this->AnnounceData->numRows() > 0)) {
+            $DiscussionEmpty = false;
+        }
+
+        $discussionsFooterModule = new DiscussionsFooterModule($DiscussionEmpty);
+        $this->addModule($discussionsFooterModule);
+
+        $bannerModule = new BannerModule('My Questions', 'Home / My Questions', 'All my <b>questions,</b>', '', 'Find here all the questions you have asked to the community!');
+        $this->addModule($bannerModule);
 
         // Render view
         $this->setData('Title', t('My Questions'));

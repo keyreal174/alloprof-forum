@@ -389,9 +389,15 @@ class DiscussionController extends VanillaController {
 
         $this->getUserInfo('', '', $this->Discussion->InsertUserID);
 
+        $DiscussionMeta = Gdn::userModel()->getMeta($this->Discussion->InsertUserID, 'Profile.%', 'Profile.');
+
+        $bannerModule = new BannerModule('My Questions', 'Home / My Questions / Question', t('Question by').' <b>'. $this->User->Name .',</b>', '', '<a>'.$Category["Name"].'</a><a>'.$DiscussionMeta["Grade"].'</a>');
+        $this->addModule($bannerModule);
+
         $this->addModule('UserPhotoModule');
         $this->addModule('ProfileFilterModule');
         $this->fireEvent('AddProfileInfo');
+        $this->addModule('CheckAnswerModule');
 
         $this->render();
     }
@@ -1271,5 +1277,14 @@ body { background: transparent !important; }
         // $this->addSideMenu();
         $this->_UserInfoRetrieved = true;
         return true;
+    }
+
+    /**
+     * Display modal
+     *
+     */
+    public function bad() {
+        $this->View = 'bad';
+        $this->render();
     }
 }
