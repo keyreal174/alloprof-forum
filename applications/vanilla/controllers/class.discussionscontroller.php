@@ -550,7 +550,7 @@ class DiscussionsController extends VanillaController {
         $this->fireEvent('AfterAddSideMenu');
         $this->fireEvent('AddProfileTabsInfo');
 
-        $bannerModule = new BannerModule('Question followed', 'Home / Question follwed', 'You ask yourself the same', 'questions,', 'Find here all the questions you\'re following!');
+        $bannerModule = new BannerModule('Question followed', 'Home / Question followed', 'You ask yourself the same', 'questions,', 'Find here all the questions you\'re following!');
         $this->addModule($bannerModule);
 
         $DiscussionEmpty = true;
