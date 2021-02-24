@@ -50,6 +50,9 @@ class DiscussionsController extends VanillaController {
     /** @var array List of available tabs. */
     public $ProfileTabs;
 
+    /** @var string UserRole 'Teacher' or 'Student' */
+    public $UserRole;
+
     /**
      * Prep properties.
      *
@@ -60,6 +63,7 @@ class DiscussionsController extends VanillaController {
         $this->User = false;
         $this->ProfileTabs = [];
         parent::__construct();
+        $this->UserRole = $this->getUserRole();
     }
 
     /**
@@ -144,7 +148,11 @@ class DiscussionsController extends VanillaController {
             if ($Title && ($DefaultControllerRoute == 'discussions')) {
                 $this->title($Title, '');
             } else {
-                $this->title(t('Popular questions'));
+                if ($this->UserRole == "Teacher") {
+                    $this->title(t('Recommended for you'));
+                } else {
+                    $this->title(t('Popular questions'));
+                }
             }
         }
         if (!$this->description()) {
@@ -154,9 +162,18 @@ class DiscussionsController extends VanillaController {
             $this->Head->addRss(url('/discussions/feed.rss', true), $this->Head->title());
         }
 
+        if ($this->UserRole == "Teacher") {
+            $bannerModule = new BannerModule('Home', 'Home', 'Welcome to', 'the Mutual Aid Zone', 'Want to help students? Explain away!', "", "/themes/alloprof/design/images/teacher-banner.svg", "#0C6B52");
+        } else {
+            $this->addModule('NewDiscussionModule');
+            $bannerModule = new BannerModule('Home', 'Home', 'Welcome to', 'the Mutual Aid Zone', 'Do you have a question? Here are the explanations!');
+            $this->addModule('ProfileFilterModule');
+        }
+
+        $this->addModule($bannerModule);
+
         // Add modules
         // $this->addModule('DiscussionFilterModule');
-        $this->addModule('NewDiscussionModule');
         $this->addModule('AskQuestionModule');
         $this->addModule('CategoriesModule');
 
@@ -168,10 +185,6 @@ class DiscussionsController extends VanillaController {
 
         // Add discussion and question count on the profile block
         $this->fireEvent('AddProfileTabsInfo');
-        $this->addModule('ProfileFilterModule');
-
-        $bannerModule = new BannerModule('Home', 'Home', 'Welcome to', 'the Mutual Aid Zone', 'Do you have a question? Here are the explanations!');
-        $this->addModule($bannerModule);
 
         // $this->addModule('BookmarkedModule');
         // $this->addModule('TagModule');
@@ -550,10 +563,43 @@ class DiscussionsController extends VanillaController {
         $this->fireEvent('AfterAddSideMenu');
         $this->fireEvent('AddProfileTabsInfo');
 
+        if ($this->UserRole == "Teacher") {
+            $bannerModule = new BannerModule('Home', 'Home', 'Welcome to', 'the Mutual Aid Zone', 'Want to help students? Explain away!', "", "/themes/alloprof/design/images/teacher-banner.svg", "#0C6B52");
+        } else {
+            $this->addModule('NewDiscussionModule');
+            $bannerModule = new BannerModule('Home', 'Home', 'Welcome to', 'the Mutual Aid Zone', 'Do you have a question? Here are the explanations!');
+            $this->addModule('ProfileFilterModule');
+        }
+
         // Render default view (discussions/bookmarked.php)
         $this->setData('Title', t('My Bookmarks'));
         $this->setData('Breadcrumbs', [['Name' => t('My Bookmarks'), 'Url' => '/discussions/bookmarked']]);
         $this->render();
+    }
+
+    public function getUserRole() {
+        $userModel = new UserModel();
+        $User = $userModel->getID(Gdn::session()->UserID);
+
+        if($User) {
+            $RoleData = $userModel->getRoles($User->UserID);
+
+            $RoleData = $userModel->getRoles($User->UserID);
+            if ($RoleData !== false) {
+                $Roles = array_column($RoleData->resultArray(), 'Name');
+            }
+
+            // Hide personal info roles
+            if (!checkPermission('Garden.PersonalInfo.View')) {
+                $Roles = array_filter($Roles, 'RoleModel::FilterPersonalInfo');
+            }
+
+            if(in_array(Gdn::config('Vanilla.ExtraRoles.Teacher'), $Roles))
+                $UserRole = Gdn::config('Vanilla.ExtraRoles.Teacher') ?? 'Teacher';
+            else $UserRole = RoleModel::TYPE_MEMBER ?? 'Student';
+
+            return $UserRole;
+        } else return null;
     }
 
     public function bookmarkedPopin() {

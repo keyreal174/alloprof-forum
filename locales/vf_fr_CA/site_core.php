@@ -1708,3 +1708,5 @@ $Definition['View Profile'] = 'Voir mon profil';
 $Definition['Welcome to'] = 'Bienvenue à';
 $Definition['What is your question?'] = 'Quelle est ta question?';
 $Definition['With Alloprof 100% solutions communicate freely with teachers by phone, SMS or chat!'] = 'Avec Alloprof 100% solutions communique gratuitement avec des enseignants par téléphone, textos ou clavardage!';
+$Definition['Want to help students? Explain away!'] = 'Envie d’aider les élèves? Par ici les explications!';
+$Definition['Recommended for you'] = 'Recommandés pour vous';

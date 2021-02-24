@@ -19,7 +19,6 @@
             $Photo = Gdn_Upload::url($BannedPhoto);
         }
     }
-    if(userRoleCheck() != Gdn::config('Vanilla.ExtraRoles.Teacher')) {
 ?>
 
 <div class="BoxButtons BoxNewDiscussion AskQuestionForm">
@@ -152,4 +151,3 @@
     </div>
 
 </div>
-<?php } ?>

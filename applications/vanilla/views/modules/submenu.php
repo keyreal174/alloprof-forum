@@ -12,9 +12,9 @@
                 $discussionModel = new DiscussionModel();
                 $wheres = ['d.CountComments' => 0];
                 if ($discussionModel->getCount($wheres)) {
-                    $text = t('Waiting for a response').' <span class="Count">'.htmlspecialchars($discussionModel->getCount($wheres)).'</span>';
+                    $text = t('Question followed').' <span class="Count">'.htmlspecialchars($discussionModel->getCount($wheres)).'</span>';
                 }
-                echo Gdn_Theme::link('discussions/waiting', sprite('Home').' '.$text, '<a href="%url" class="%class Navigation-link HasCount">%text</a>'); ?>
+                echo Gdn_Theme::link('discussions/bookmarked', sprite('Home').' '.$text, '<a href="%url" class="%class Navigation-link HasCount">%text</a>'); ?>
         </div>
     <?php } else { ?>
         <div class='Navigation-linkContainer'>
