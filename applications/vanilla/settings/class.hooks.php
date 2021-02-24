@@ -807,7 +807,7 @@ class VanillaHooks extends Gdn_Plugin {
             $discussionsLabel = "";
             $commentsLabel = "";
             if (c('Vanilla.Profile.ShowCounts', true)) {
-                $discussionsCount = getValueR('User.CountDiscussions', $sender, null);
+                $discussionsCount = getValueR('User.CountDiscussions', $sender, "0");
                 $commentsCount = getValueR('User.CountComments', $sender, "0");
                 $discussionsLabel .= $discussionsCount;
                 $commentsLabel .= $commentsCount;
@@ -837,7 +837,7 @@ class VanillaHooks extends Gdn_Plugin {
             $discussionsLabel = "";
             $commentsLabel = "";
             if (c('Vanilla.Profile.ShowCounts', true)) {
-                $discussionsCount = getValueR('User.CountDiscussions', $sender, null);
+                $discussionsCount = getValueR('User.CountDiscussions', $sender, "0");
                 $commentsCount = getValueR('User.CountComments', $sender, "0");
                 $discussionsLabel .= $discussionsCount;
                 $commentsLabel .= $commentsCount;
@@ -867,7 +867,7 @@ class VanillaHooks extends Gdn_Plugin {
             $discussionsLabel = "";
             $commentsLabel = "";
             if (c('Vanilla.Profile.ShowCounts', true)) {
-                $discussionsCount = getValueR('User.CountDiscussions', $sender, null);
+                $discussionsCount = getValueR('User.CountDiscussions', $sender, "0");
                 $commentsCount = getValueR('User.CountComments', $sender, "0");
                 $discussionsLabel .= $discussionsCount;
                 $commentsLabel .= $commentsCount;
@@ -889,7 +889,7 @@ class VanillaHooks extends Gdn_Plugin {
             $discussionsLabel = "";
             $commentsLabel = "";
             if (c('Vanilla.Profile.ShowCounts', true)) {
-                $discussionsCount = getValueR('User.CountDiscussions', $sender, null);
+                $discussionsCount = getValueR('User.CountDiscussions', $sender, "0");
                 $commentsCount = getValueR('User.CountComments', $sender, "0");
                 $discussionsLabel .= $discussionsCount;
                 $commentsLabel .= $commentsCount;
