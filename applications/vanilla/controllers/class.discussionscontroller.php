@@ -162,16 +162,6 @@ class DiscussionsController extends VanillaController {
             $this->Head->addRss(url('/discussions/feed.rss', true), $this->Head->title());
         }
 
-        if ($this->UserRole == "Teacher") {
-            $bannerModule = new BannerModule('Home', 'Home', 'Welcome to', 'the Mutual Aid Zone', 'Want to help students? Explain away!', "", "/themes/alloprof/design/images/teacher-banner.svg", "#0C6B52");
-        } else {
-            $this->addModule('NewDiscussionModule');
-            $bannerModule = new BannerModule('Home', 'Home', 'Welcome to', 'the Mutual Aid Zone', 'Do you have a question? Here are the explanations!');
-            $this->addModule('ProfileFilterModule');
-        }
-
-        $this->addModule($bannerModule);
-
         // Add modules
         // $this->addModule('DiscussionFilterModule');
         $this->addModule('AskQuestionModule');
@@ -185,6 +175,16 @@ class DiscussionsController extends VanillaController {
 
         // Add discussion and question count on the profile block
         $this->fireEvent('AddProfileTabsInfo');
+
+        if ($this->UserRole == "Teacher") {
+            $bannerModule = new BannerModule('Home', 'Home', 'Welcome to', 'the Mutual Aid Zone', 'Want to help students? Explain away!', "", "/themes/alloprof/design/images/teacher-banner.svg", "#0C6B52");
+        } else {
+            $this->addModule('NewDiscussionModule');
+            $bannerModule = new BannerModule('Home', 'Home', 'Welcome to', 'the Mutual Aid Zone', 'Do you have a question? Here are the explanations!');
+            $this->addModule('ProfileFilterModule');
+        }
+
+        $this->addModule($bannerModule);
 
         // $this->addModule('BookmarkedModule');
         // $this->addModule('TagModule');
@@ -555,24 +555,38 @@ class DiscussionsController extends VanillaController {
         }
 
         // Add modules
-        $this->addModule('NewDiscussionModule');
+        // $this->addModule('NewDiscussionModule');
         $this->addModule('AskQuestionModule');
         $this->addModule('CategoriesModule');
         $this->addModule('UserPhotoModule');
-        $this->addModule('ProfileFilterModule');
         $this->fireEvent('AfterAddSideMenu');
         $this->fireEvent('AddProfileTabsInfo');
 
         if ($this->UserRole == "Teacher") {
-            $bannerModule = new BannerModule('Home', 'Home', 'Welcome to', 'the Mutual Aid Zone', 'Want to help students? Explain away!', "", "/themes/alloprof/design/images/teacher-banner.svg", "#0C6B52");
+            $bannerModule = new BannerModule('Question followed', 'Home / Question followed', 'They are waiting', 'for you!', 'Here you\'ll find questions from your subjects awaiting explanation.', "", "/themes/alloprof/design/images/teacher-banner.svg", "#0C6B52");
         } else {
-            $this->addModule('NewDiscussionModule');
-            $bannerModule = new BannerModule('Home', 'Home', 'Welcome to', 'the Mutual Aid Zone', 'Do you have a question? Here are the explanations!');
+            $bannerModule = new BannerModule('Question followed', 'Home / Question followed', 'You ask yourself the same', 'questions,', 'Find here all the questions you\'re following!');
             $this->addModule('ProfileFilterModule');
         }
 
+        $this->addModule($bannerModule);
+
+        $DiscussionEmpty = true;
+        if ($this->DiscussionData->numRows() > 0 || (isset($this->AnnounceData) && is_object($this->AnnounceData) && $this->AnnounceData->numRows() > 0)) {
+            $DiscussionEmpty = false;
+            if ($this->UserRole == "Teacher") {
+                $discussionsFooterModule = new DiscussionsFooterModule($DiscussionEmpty, "That's it for now!", "Follow new questions and you'll find them here!");
+            } else {
+                $discussionsFooterModule = new DiscussionsFooterModule($DiscussionEmpty, "That's all for now!", "If you have other questions, don't hesitate to ask😉");
+            }
+        } else {
+            $discussionsFooterModule = new DiscussionsFooterModule($DiscussionEmpty, "It seems there's nothing here at the moment!", "Don't hesitate ask if you have a question.");
+        }
+
+        $this->addModule($discussionsFooterModule);
+
         // Render default view (discussions/bookmarked.php)
-        $this->setData('Title', t('My Bookmarks'));
+        // $this->setData('Title', t('My Bookmarks'));
         $this->setData('Breadcrumbs', [['Name' => t('My Bookmarks'), 'Url' => '/discussions/bookmarked']]);
         $this->render();
     }
@@ -706,12 +720,15 @@ class DiscussionsController extends VanillaController {
         $this->addModule('ProfileFilterModule');
         $this->fireEvent('AfterAddSideMenu');
         $this->fireEvent('AddProfileTabsInfo');
+
         $DiscussionEmpty = true;
         if ($this->DiscussionData->numRows() > 0 || (isset($this->AnnounceData) && is_object($this->AnnounceData) && $this->AnnounceData->numRows() > 0)) {
             $DiscussionEmpty = false;
+            $discussionsFooterModule = new DiscussionsFooterModule($DiscussionEmpty, "That's all for now!", "If you have other questions, don't hesitate to ask😉");
+        } else {
+            $discussionsFooterModule = new DiscussionsFooterModule($DiscussionEmpty, "It seems there's nothing here at the moment!", "Don't hesitate ask if you have a question.");
         }
 
-        $discussionsFooterModule = new DiscussionsFooterModule($DiscussionEmpty);
         $this->addModule($discussionsFooterModule);
 
         $bannerModule = new BannerModule('My Questions', 'Home / My Questions', 'All my <b>questions,</b>', '', 'Find here all the questions you have asked to the community!');

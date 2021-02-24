@@ -217,11 +217,11 @@ select {
 }
 
 .FilterBanner .HomepageTitle {
-    margin-bottom: 0;
     font-size: 21px;
     line-height: 25px;
     margin-bottom: 10px;
     color: #1A1919;
+    margin-bottom: 10px;
 }
 
 .CustomSelect {

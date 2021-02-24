@@ -42,6 +42,9 @@ class DiscussionController extends VanillaController {
     /** @var array List of available tabs. */
     public $ProfileTabs;
 
+    /** @var string UserRole 'Teacher' or 'Student' */
+    public $UserRole;
+
     /**
      * Prep properties.
      *
@@ -52,6 +55,7 @@ class DiscussionController extends VanillaController {
         $this->User = false;
         $this->ProfileTabs = [];
         parent::__construct();
+        $this->UserRole = $this->getUserRole();
     }
 
     /**
@@ -389,15 +393,22 @@ class DiscussionController extends VanillaController {
 
         $this->getUserInfo('', '', $this->Discussion->InsertUserID);
 
+        $this->addModule('UserPhotoModule');
+        $this->fireEvent('AddProfileInfo');
+
         $DiscussionMeta = Gdn::userModel()->getMeta($this->Discussion->InsertUserID, 'Profile.%', 'Profile.');
 
-        $bannerModule = new BannerModule('My Questions', 'Home / My Questions / Question', t('Question by').' <b>'. $this->User->Name .',</b>', '', '<a>'.$Category["Name"].'</a><a>'.$DiscussionMeta["Grade"].'</a>');
-        $this->addModule($bannerModule);
+        if ($this->UserRole == "Teacher") {
+            $bannerModule = new BannerModule('Question', 'Home / '.t('Student Question'), t('Question by').' <b>'. $this->User->Name .',</b>', '', '<a>'.$Category["Name"].'</a><a>'.$DiscussionMeta["Grade"].'</a>', "", "/themes/alloprof/design/images/teacher-banner.svg", "#0C6B52");
+            $discussionsFooterModule = new DiscussionsFooterModule(false, "You have the same problem and the explanations don't help?");
+            $this->addModule($discussionsFooterModule);
+        } else {
+            $bannerModule = new BannerModule('Question', 'Home / My Questions / Question', t('Question by').' <b>'. $this->User->Name .',</b>', '', '<a>'.$Category["Name"].'</a><a>'.$DiscussionMeta["Grade"].'</a>');
+            $this->addModule('ProfileFilterModule');
+            $this->addModule('CheckAnswerModule');
+        }
 
-        $this->addModule('UserPhotoModule');
-        $this->addModule('ProfileFilterModule');
-        $this->fireEvent('AddProfileInfo');
-        $this->addModule('CheckAnswerModule');
+        $this->addModule($bannerModule);
 
         $this->render();
     }
@@ -451,6 +462,31 @@ class DiscussionController extends VanillaController {
 
         $this->View = 'comments';
         $this->render();
+    }
+
+    public function getUserRole() {
+        $userModel = new UserModel();
+        $User = $userModel->getID(Gdn::session()->UserID);
+
+        if($User) {
+            $RoleData = $userModel->getRoles($User->UserID);
+
+            $RoleData = $userModel->getRoles($User->UserID);
+            if ($RoleData !== false) {
+                $Roles = array_column($RoleData->resultArray(), 'Name');
+            }
+
+            // Hide personal info roles
+            if (!checkPermission('Garden.PersonalInfo.View')) {
+                $Roles = array_filter($Roles, 'RoleModel::FilterPersonalInfo');
+            }
+
+            if(in_array(Gdn::config('Vanilla.ExtraRoles.Teacher'), $Roles))
+                $UserRole = Gdn::config('Vanilla.ExtraRoles.Teacher') ?? 'Teacher';
+            else $UserRole = RoleModel::TYPE_MEMBER ?? 'Student';
+
+            return $UserRole;
+        } else return null;
     }
 
     /**
