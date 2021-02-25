@@ -473,7 +473,7 @@ jQuery(document).ready(function($) {
             }
         });
 
-    // This turns SignInPopup anchors into in-page popups
+    // This turns FlagContentPopup anchors into in-page popups
     if ($.fn.popup)
         $('a.FlagContentPopup').popup({containerCssClass: 'FlagContentPopup'});
 

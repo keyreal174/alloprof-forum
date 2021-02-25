@@ -16,12 +16,12 @@ echo $this->Form->errors();
     <div class='FlagWarningList'>
         <?php
             echo $this->Form->radioList(
-                'FlagWarning',
-                [
-                    0 => 'The words are offensive or inappropriate',
-                    1 => 'The author posts spam',
-                    2 => 'The post contains an unapproved photo',
-                ]
+                'Plugin.Flagging.Reason',
+                Array(
+                    t('The words are offensive or inappropriate'),
+                    t('The author posts spam'),
+                    t('The post contains an unapproved photo'),
+                )
                 , ['list' => true]
             );
             $this->fireEvent('FlagContentAfter');
@@ -29,7 +29,7 @@ echo $this->Form->errors();
     </div>
 <?php
 echo '<div class="FlatReportButton">',
-    $this->Form->button(t('Report'), ['type' => 'button', 'class' => 'btn btn-default btn-shadow']),
+    $this->Form->button(t('Report'), ['class' => 'btn btn-default btn-shadow']),
     '</div>';
 echo $this->Form->close();
 ?>
