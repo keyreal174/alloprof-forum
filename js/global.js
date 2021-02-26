@@ -464,6 +464,15 @@ jQuery(document).ready(function($) {
     if ($.fn.popup)
         $('a.SignInPopup').popup({containerCssClass: 'SignInPopup'});
 
+    // CustomPopup
+    // This turns FlagContentPopup anchors into in-page popups
+    if ($.fn.popup)
+        $('a.FlagContentPopup').popup({containerCssClass: 'FlagContentPopup'});
+
+    // This turns DeleteDiscussionPopup anchors into in-page popups
+    if ($.fn.popup)
+        $('a.DeleteDiscussionPopup').popup({containerCssClass: 'DeleteDiscussionPopup'});
+
     if ($.fn.popup)
         $(document).delegate('.PopupClose', 'click', function(event) {
             var Popup = $(event.target).parents('.Popup');
@@ -983,7 +992,7 @@ jQuery(document).ready(function($) {
             try {
                 var message = response.InformMessages[i].Message;
                 var emptyMessage = message === '';
-                
+
                 message = '<span class="InformMessageBody">' + message + '</span>';
 
                 // Is there a sprite?

@@ -44,10 +44,13 @@ class FlaggingPlugin extends Gdn_Plugin {
      * Let users with permission choose to receive Flagging emails.
      */
     public function profileController_afterPreferencesDefined_handler($sender) {
-        if (Gdn::session()->checkPermission('Plugins.Flagging.Notify')) {
-            $sender->Preferences['Notifications']['Email.Flag'] = t('Notify me when a comment is flagged.');
-            $sender->Preferences['Notifications']['Popup.Flag'] = t('Notify me when a comment is flagged.');
-        }
+        // For only admin/moderater
+        // if (Gdn::session()->checkPermission('Plugins.Flagging.Notify')) {
+        //     $sender->Preferences['Notifications']['Email.Flag'] = t('Notify me when a comment is flagged.');
+        //     $sender->Preferences['Notifications']['Popup.Flag'] = t('Notify me when a comment is flagged.');
+        //     $sender->Preferences['Notifications']['Email.FlagDiscussion'] = t('Notify me when a discussion is flagged.');
+        //     $sender->Preferences['Notifications']['Popup.FlagDiscussion'] = t('Notify me when a discussion is flagged.');
+        // }
     }
 
     /**
@@ -205,7 +208,8 @@ class FlaggingPlugin extends Gdn_Plugin {
         $flagLink = anchor(
             t('Flag'),
             "discussion/flag/{$context}/{$elementID}/{$elementAuthorID}/".Gdn_Format::url($elementAuthor),
-            'FlagContent Popup'
+            'FlagContent FlagContentPopup'
+            // 'FlagContent Popup'
         );
         echo wrap($flagLink, 'span', ['class' => 'MItem CommentFlag']);
     }
@@ -257,7 +261,12 @@ class FlaggingPlugin extends Gdn_Plugin {
             $sender->Form->setFormValue("FlaggedUrl", $url);
             $sQL = Gdn::sql();
             $comment = $sender->Form->getValue('Plugin.Flagging.Reason');
-            $sender->setData('Plugin.Flagging.Reason', $comment);
+            $reasons = Array(
+                t('The words are offensive or inappropriate'),
+                t('The author posts spam'),
+                t('The post contains an unapproved photo'),
+            );
+            $sender->setData('Plugin.Flagging.Reason', $reasons[$comment]);
             $createDiscussion = c('Plugins.Flagging.UseDiscussions');
 
             if ($createDiscussion) {
@@ -344,7 +353,7 @@ class FlaggingPlugin extends Gdn_Plugin {
                     'ForeignID' => $elementID,
                     'ForeignType' => $context,
                     'ForeignURL' => $url,
-                    'Comment' => $comment,
+                    'Comment' => $reasons[$comment],
                     'DateInserted' => date('Y-m-d H:i:s')
                 ]);
             } catch (Exception $e) {
@@ -362,12 +371,61 @@ class FlaggingPlugin extends Gdn_Plugin {
                 $userModel = new UserModel();
                 foreach ($notifyUsers as $userID) {
                     $user = $userModel->getID($userID);
-                    $email = new Gdn_Email();
+                    $email = Gdn::getContainer()->get(Gdn_Email::class);
                     $email->to($user->Email)
                         ->subject(sprintf(t('[%1$s] %2$s'), Gdn::config('Garden.Title'), $subject))
                         ->message($emailBody);
 
                     try {
+                        $headlineFormat = sprintf(t('Your content has been flagged for moderation %s', 'Your content has been flagged for moderation <b>%s</b>'), $reasons[$comment]);
+                        if ($context === "comment") {
+                            \Gdn::config()->touch([
+                                'Preferences.Email.Flag' => 2,
+                                'Preferences.Popup.Flag' => 2,
+                            ]);
+
+                            $activity = [
+                                'ActivityType' => 'Flag',
+                                'NotifyUserID' => (int)($row->InsertUserID),
+                                'HeadlineFormat' => $headlineFormat,
+                                'RecordType' => 'Flag',
+                                'RecordID' => $row->CommentID,
+                                'Route' => commentUrl($row, '/'),
+                                'Data' => [
+                                    'Name' => 'Flag'
+                                ]
+                            ];
+
+                            $ActivityModel = new ActivityModel();
+                            $ActivityModel->queue($activity, 'Flag');
+                            $ActivityModel->saveQueue();
+                        } else {
+                            \Gdn::config()->touch([
+                                'Preferences.Email.FlagDiscussion' => 2,
+                                'Preferences.Popup.FlagDiscussion' => 2,
+                            ]);
+                            $activity = [
+                                'ActivityType' => 'FlagDiscussion',
+                                'NotifyUserID' => (int)($row->InsertUserID),
+                                'HeadlineFormat' => $headlineFormat,
+                                'RecordType' => 'FlagDiscussion',
+                                'RecordID' => $row->DiscussionID,
+                                'Route' => discussionUrl($row, '/'),
+                                'Data' => [
+                                    'Name' => $row->Name
+                                ]
+                            ];
+
+                            $ActivityModel = new ActivityModel();
+                            $ActivityModel->queue($activity, 'FlagDiscussion');
+                            $ActivityModel->saveQueue();
+                        }
+
+
+                        $this->EventArguments['Activity'] =& $activity;
+
+                        $this->fireEvent('AfterAccepted');
+
                         $email->send();
                     } catch (Exception $e) {
                         if (debug()) {

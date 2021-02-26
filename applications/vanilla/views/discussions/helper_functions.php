@@ -404,7 +404,6 @@ if (!function_exists('writeDiscussionDetail')) :
                             ?>
                         </span>
                         <?php
-                            $sender->fireEvent('DiscussionInfo');
                             $sender->fireEvent('AfterDiscussionMeta'); // DEPRECATED
                         ?>
                     </div>

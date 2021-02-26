@@ -810,13 +810,34 @@ class DiscussionController extends VanillaController {
         }
 
         $this->categoryPermission($discussion->CategoryID, 'Vanilla.Discussions.Delete');
-
         if ($this->Form->authenticatedPostBack()) {
             if (!$this->DiscussionModel->deleteID($discussionID)) {
                 $this->Form->addError('Failed to delete discussion');
             }
 
             if ($this->Form->errorCount() == 0) {
+                \Gdn::config()->touch([
+                    'Preferences.Email.Delete' => 2,
+                    'Preferences.Popup.Delete' => 2,
+                ]);
+                $headlineFormat = sprintf(t('Your content has been deleted by a moderator %s.', 'Your content has been deleted by a moderator <b>%s</b>.'), $this->Form->getFormValue('DeleteMessage'));
+                $data = [
+                    "ActivityType" => "Delete",
+                    "NotifyUserID" => $discussion->InsertUserID,
+                    "HeadlineFormat" => $headlineFormat,
+                    "RecordType" => "Delete",
+                    "RecordID" => $discussionID,
+                    "Route" => discussionUrl($discussion, "", "/"),
+                    "Data" => [
+                        "Name" => $discussion->Name,
+                        "Category" => $discussion->Category,
+                    ],
+                ];
+
+                $ActivityModel = new ActivityModel();
+                $ActivityModel->queue($data, 'Delete');
+                $ActivityModel->saveQueue();
+
                 if ($this->_DeliveryType === DELIVERY_TYPE_ALL) {
                     redirectTo($target);
                 }
@@ -897,6 +918,27 @@ class DiscussionController extends VanillaController {
         if ($this->Form->errorCount() > 0) {
             $this->setJson('ErrorMessage', $this->Form->errors());
         } else {
+            \Gdn::config()->touch([
+                'Preferences.Email.Delete' => 2,
+                'Preferences.Popup.Delete' => 2,
+            ]);
+            $headlineFormat = sprintf(t('Your content has been deleted by a moderator %s', 'Your content has been deleted by a moderator <b>%s</b>'), $this->Form->getFormValue('DeleteMessage'));
+            $data = [
+                "ActivityType" => "Delete",
+                "NotifyUserID" => $comment->InsertUserID,
+                "HeadlineFormat" => $headlineFormat,
+                "RecordType" => "Delete",
+                "RecordID" => $commentID,
+                "Route" => commentUrl($comment, "", "/"),
+                "Data" => [
+                    "Name" => 'comment',
+                ],
+            ];
+
+            $ActivityModel = new ActivityModel();
+            $ActivityModel->queue($data, 'Delete');
+            $ActivityModel->saveQueue();
+
             $this->jsonTarget("#Comment_$commentID", '', 'SlideUp');
         }
 
