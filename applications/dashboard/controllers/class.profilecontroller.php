@@ -1705,7 +1705,7 @@ EOT;
 
             // And add the filter menu module
             $this->fireEvent('AfterAddSideMenu');
-            $this->addModule('ProfileFilterModule');
+            $this->addModule('AdminProfileFilterModule');
         }
     }
 

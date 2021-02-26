@@ -766,8 +766,8 @@ class VanillaHooks extends Gdn_Plugin {
             $discussionsLabel = sprite('SpDiscussions').' '.t('Discussions');
             $commentsLabel = sprite('SpComments').' '.t('Comments');
             if (c('Vanilla.Profile.ShowCounts', true)) {
-                $discussionsCount = getValueR('User.CountDiscussions', $sender, null);
-                $commentsCount = getValueR('User.CountComments', $sender, null);
+                $discussionsCount = getValueR('User.CountDiscussions', $sender, "0");
+                $commentsCount = getValueR('User.CountComments', $sender, "0");
 
                 if (!is_null($discussionsCount) && !empty($discussionsCount)) {
                     $discussionsLabel .=

@@ -220,6 +220,7 @@ select {
 .FilterBanner .HomepageTitle {
     font-size: 21px;
     line-height: 25px;
+    margin-bottom: 10px;
     color: #1A1919;
     margin-bottom: 10px;
 }
@@ -277,7 +278,7 @@ select {
 .sidebar.left .ProfileEdit {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 16px;
+    margin-bottom: 6px;
     align-items: center;
 }
 
