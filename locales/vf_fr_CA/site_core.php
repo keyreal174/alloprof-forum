@@ -1718,3 +1718,5 @@ $Definition['Your content has been flagged for moderation'] = 'Ton contenu a ét
 $Definition['Your content has been flagged for moderation %s'] = 'Ton contenu a été signalé pour modération <b>%s</b>';
 $Definition['Your content has been deleted by a moderator'] = 'Ton contenu a été effacé par un modérateur';
 $Definition['Your content has been deleted by a moderator %s'] = 'Ton contenu a été effacé par un modérateur %s';
+$Definition['You ask yourself the same'] = 'Tu te pose les mêmes';
+$Definition['Find here all the questions you\'re following!'] = 'Retrouve ici toutes les questions que tu suis!';
