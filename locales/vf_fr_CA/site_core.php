@@ -1714,3 +1714,7 @@ $Definition['View Profile'] = 'Voir mon profil';
 $Definition['Welcome to'] = 'Bienvenue à';
 $Definition['What is your question?'] = 'Quelle est ta question?';
 $Definition['With Alloprof 100% solutions communicate freely with teachers by phone, SMS or chat!'] = 'Avec Alloprof 100% solutions communique gratuitement avec des enseignants par téléphone, textos ou clavardage!';
+$Definition['Your content has been flagged for moderation'] = 'Ton contenu a été signalé pour modération';
+$Definition['Your content has been flagged for moderation %s'] = 'Ton contenu a été signalé pour modération <b>%s</b>';
+$Definition['Your content has been deleted by a moderator'] = 'Ton contenu a été effacé par un modérateur';
+$Definition['Your content has been deleted by a moderator %s'] = 'Ton contenu a été effacé par un modérateur %s';

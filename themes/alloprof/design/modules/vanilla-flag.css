@@ -1,5 +1,5 @@
 /* Report post(Flag) */
-.dropdown-menu-link-FlagMenuItem:before {
+a.FlagContentPopup:before {
     content: '';
     background: url("/themes/alloprof/design/images/icons/flag.svg");
     width: 13.5px;

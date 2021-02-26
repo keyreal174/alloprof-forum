@@ -164,7 +164,7 @@ if (!function_exists('writeComment')) :
                             echo wrap(sprintf(t('via %s'), t($source.' Source', $source)), 'span', ['class' => 'MItem Source']);
                         }
 
-                        $sender->fireEvent('CommentInfo');
+                        // $sender->fireEvent('CommentInfo');
                         $sender->fireEvent('InsideCommentMeta'); // DEPRECATED
                         $sender->fireEvent('AfterCommentMeta'); // DEPRECATED
                         ?>
@@ -298,7 +298,7 @@ if (!function_exists('getDiscussionOptions')) :
             $options['DeleteDiscussion'] = [
                 'Label' => t('Delete Discussion'),
                 'Url' => '/discussion/delete?discussionid='.$discussion->DiscussionID.'&target='.urlencode(categoryUrl($category)),
-                'Class' => 'DeleteDiscussion Popup'
+                'Class' => 'DeleteDiscussion DeleteDiscussionPopup'
             ];
         }
 
@@ -511,6 +511,13 @@ if (!function_exists('getCommentOptions')) :
             return $options;
         }
 
+        $flagLink = addFlagButtonToDropdown($comment, 'comment');
+        $options['FlagComment'] = [
+            'Label' => t($flagLink['name']),
+            'Url' => $flagLink['url'],
+            'Class' => $flagLink['type']
+        ];
+
         $sender = Gdn::controller();
         $session = Gdn::session();
         $discussion = Gdn::controller()->data('Discussion');
@@ -579,16 +586,16 @@ if (!function_exists('writeCommentOptions')) :
 
         $id = $comment->CommentID;
         $options = getCommentOptions($comment);
-        if (empty($options)) {
-            return;
-        }
 
         echo '<span class="ToggleFlyout OptionsMenu">';
         echo '<span class="OptionsTitle" title="'.t('Options').'">'.t('Options').'</span>';
         echo sprite('SpFlyoutHandle', 'Arrow');
         echo '<ul class="Flyout MenuItems">';
-        foreach ($options as $code => $option) {
-            echo wrap(anchor($option['Label'], $option['Url'], val('Class', $option, $code)), 'li');
+
+        if (!empty($options)) {
+            foreach ($options as $code => $option) {
+                echo wrap(anchor($option['Label'], $option['Url'], val('Class', $option, $code)), 'li');
+            }
         }
         echo '</ul>';
         echo '</span>';
@@ -603,6 +610,7 @@ if (!function_exists('writeCommentOptions')) :
                 echo '<span class="AdminCheck"><input type="checkbox" aria-label="'.t("Select Discussion").'" name="'.'Comment'.'ID[]" value="'.$id.'"'.($itemSelected ? ' checked="checked"' : '').' /></span>';
             }
         }
+
     }
 endif;
 

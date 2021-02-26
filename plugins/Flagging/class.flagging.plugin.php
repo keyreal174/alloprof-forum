@@ -44,13 +44,13 @@ class FlaggingPlugin extends Gdn_Plugin {
      * Let users with permission choose to receive Flagging emails.
      */
     public function profileController_afterPreferencesDefined_handler($sender) {
-        if (Gdn::session()->checkPermission('Plugins.Flagging.Notify')) {
-            $sender->Preferences['Notifications']['Email.Flag'] = t('Notify me when a comment is flagged.');
-            $sender->Preferences['Notifications']['Popup.Flag'] = t('Notify me when a comment is flagged.');
-
-            $sender->Preferences['Notifications']['Email.FlagDiscussion'] = t('Notify me when a discussion is flagged.');
-            $sender->Preferences['Notifications']['Popup.FlagDiscussion'] = t('Notify me when a discussion is flagged.');
-        }
+        // For only admin/moderater
+        // if (Gdn::session()->checkPermission('Plugins.Flagging.Notify')) {
+        //     $sender->Preferences['Notifications']['Email.Flag'] = t('Notify me when a comment is flagged.');
+        //     $sender->Preferences['Notifications']['Popup.Flag'] = t('Notify me when a comment is flagged.');
+        //     $sender->Preferences['Notifications']['Email.FlagDiscussion'] = t('Notify me when a discussion is flagged.');
+        //     $sender->Preferences['Notifications']['Popup.FlagDiscussion'] = t('Notify me when a discussion is flagged.');
+        // }
     }
 
     /**
@@ -377,48 +377,54 @@ class FlaggingPlugin extends Gdn_Plugin {
                         ->message($emailBody);
 
                     try {
-                        // $headlineFormat = sprintf(t('Your content has been flagged for moderation. \r\n %s', $reasons[$comment]));
-                        // if ($context === "comment") {
-                        //     // $headlineFormat = t('HeadlineFormat.Flag', '{ActivityUserID,user} flagged your answer: <a href="{Url,html}">{Data.Name,text}</a>');
+                        $headlineFormat = sprintf(t('Your content has been flagged for moderation %s', 'Your content has been flagged for moderation <b>%s</b>'), $reasons[$comment]);
+                        if ($context === "comment") {
+                            \Gdn::config()->touch([
+                                'Preferences.Email.Flag' => 2,
+                                'Preferences.Popup.Flag' => 2,
+                            ]);
 
-                        //     $activity = [
-                        //         'ActivityType' => 'Flag',
-                        //         'NotifyUserID' => (int)($row->InsertUserID),
-                        //         'HeadlineFormat' => $headlineFormat,
-                        //         'RecordType' => 'Flag',
-                        //         'RecordID' => $row->CommentID,
-                        //         'Route' => commentUrl($row, '/'),
-                        //         'Data' => [
-                        //             'Name' => 'Flag'
-                        //         ]
-                        //     ];
+                            $activity = [
+                                'ActivityType' => 'Flag',
+                                'NotifyUserID' => (int)($row->InsertUserID),
+                                'HeadlineFormat' => $headlineFormat,
+                                'RecordType' => 'Flag',
+                                'RecordID' => $row->CommentID,
+                                'Route' => commentUrl($row, '/'),
+                                'Data' => [
+                                    'Name' => 'Flag'
+                                ]
+                            ];
 
-                        //     $ActivityModel = new ActivityModel();
-                        //     $ActivityModel->queue($activity, 'Flag');
-                        //     $ActivityModel->saveQueue();
-                        // } else {
-                        //     // $headlineFormat = t('HeadlineFormat.FlagDiscussion', '{ActivityUserID,user} flagged your question: <a href="{Url,html}">{Data.Name,text}</a>');
-                        //     $activity = [
-                        //         'ActivityType' => 'FlagDiscussion',
-                        //         'NotifyUserID' => (int)($row->InsertUserID),
-                        //         'HeadlineFormat' => $headlineFormat,
-                        //         'RecordType' => 'FlagDiscussion',
-                        //         'RecordID' => $row->DiscussionID,
-                        //         'Route' => discussionUrl($row, '/'),
-                        //         'Data' => [
-                        //             'Name' => $row->Name
-                        //         ]
-                        //     ];
+                            $ActivityModel = new ActivityModel();
+                            $ActivityModel->queue($activity, 'Flag');
+                            $ActivityModel->saveQueue();
+                        } else {
+                            \Gdn::config()->touch([
+                                'Preferences.Email.FlagDiscussion' => 2,
+                                'Preferences.Popup.FlagDiscussion' => 2,
+                            ]);
+                            $activity = [
+                                'ActivityType' => 'FlagDiscussion',
+                                'NotifyUserID' => (int)($row->InsertUserID),
+                                'HeadlineFormat' => $headlineFormat,
+                                'RecordType' => 'FlagDiscussion',
+                                'RecordID' => $row->DiscussionID,
+                                'Route' => discussionUrl($row, '/'),
+                                'Data' => [
+                                    'Name' => $row->Name
+                                ]
+                            ];
 
-                        //     $ActivityModel = new ActivityModel();
-                        //     $ActivityModel->queue($activity, 'FlagDiscussion');
-                        //     $ActivityModel->saveQueue();
-                        // }
+                            $ActivityModel = new ActivityModel();
+                            $ActivityModel->queue($activity, 'FlagDiscussion');
+                            $ActivityModel->saveQueue();
+                        }
 
 
-                        // $this->EventArguments['Activity'] =& $activity;
+                        $this->EventArguments['Activity'] =& $activity;
 
-                        // $this->fireEvent('AfterAccepted');
+                        $this->fireEvent('AfterAccepted');
 
                         $email->send();
                     } catch (Exception $e) {

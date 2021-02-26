@@ -464,6 +464,15 @@ jQuery(document).ready(function($) {
     if ($.fn.popup)
         $('a.SignInPopup').popup({containerCssClass: 'SignInPopup'});
 
+    // CustomPopup
+    // This turns FlagContentPopup anchors into in-page popups
+    if ($.fn.popup)
+        $('a.FlagContentPopup').popup({containerCssClass: 'FlagContentPopup'});
+
+    // This turns DeleteDiscussionPopup anchors into in-page popups
+    if ($.fn.popup)
+        $('a.DeleteDiscussionPopup').popup({containerCssClass: 'DeleteDiscussionPopup'});
+
     if ($.fn.popup)
         $(document).delegate('.PopupClose', 'click', function(event) {
             var Popup = $(event.target).parents('.Popup');
@@ -472,10 +481,6 @@ jQuery(document).ready(function($) {
                 $.popup.close({popupId: PopupID});
             }
         });
-
-    // This turns FlagContentPopup anchors into in-page popups
-    if ($.fn.popup)
-        $('a.FlagContentPopup').popup({containerCssClass: 'FlagContentPopup'});
 
     // Make sure that message dismissalls are ajax'd
     $(document).delegate('a.Dismiss', 'click', function() {
