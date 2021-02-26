@@ -33,6 +33,7 @@
 @import url("./modules/vanilla-checkanswer.css");
 @import url("./modules/slick/slick-theme.css");
 @import url("./modules/slick/slick.css");
+@import url("./modules/vanilla-flag.css");
 
 .BoxNewDiscussion {
     -webkit-box-shadow: none;
@@ -213,15 +214,15 @@ select {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 10px;
     position: relative;
 }
 
 .FilterBanner .HomepageTitle {
-    margin-bottom: 0;
     font-size: 21px;
     line-height: 25px;
+    margin-bottom: 10px;
     color: #1A1919;
+    margin-bottom: 10px;
 }
 
 .CustomSelect {
@@ -277,7 +278,7 @@ select {
 .sidebar.left .ProfileEdit {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 16px;
+    margin-bottom: 6px;
     align-items: center;
 }
 

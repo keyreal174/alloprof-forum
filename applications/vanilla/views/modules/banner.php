@@ -11,7 +11,10 @@
 <?php }
     else {
 ?>
-    <div class="Banner-content General">
+    <div class="Banner-content General" style="<?php
+        if ($this->BackgroundImage) echo 'background-image: url('.$this->BackgroundImage.');';
+        if ($this->BackgroundColor) echo 'background-color: '.$this->BackgroundColor.';';
+     ?>">
         <div class="Container">
             <p class="Banner-content__pagename"><?php echo t($this->breadcrumb); ?></p>
             <h1><?php echo t($this->title1); ?></h1>

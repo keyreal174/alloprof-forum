@@ -177,7 +177,7 @@ if (!function_exists('writeComment')) :
                             echo wrap(sprintf(t('via %s'), t($source.' Source', $source)), 'span', ['class' => 'MItem Source']);
                         }
 
-                        $sender->fireEvent('CommentInfo');
+                        // $sender->fireEvent('CommentInfo');
                         $sender->fireEvent('InsideCommentMeta'); // DEPRECATED
                         $sender->fireEvent('AfterCommentMeta'); // DEPRECATED
                         ?>
@@ -312,7 +312,7 @@ if (!function_exists('getDiscussionOptions')) :
             $options['DeleteDiscussion'] = [
                 'Label' => t('Delete Discussion'),
                 'Url' => '/discussion/delete?discussionid='.$discussion->DiscussionID.'&target='.urlencode(categoryUrl($category)),
-                'Class' => 'DeleteDiscussion Popup'
+                'Class' => 'DeleteDiscussion DeleteDiscussionPopup'
             ];
         }
 
@@ -325,6 +325,36 @@ if (!function_exists('getDiscussionOptions')) :
         $sender->fireEvent('DiscussionOptions');
 
         return $options;
+    }
+endif;
+
+if (!function_exists('addFlagButtonToDropdown')):
+    function addFlagButtonToDropdown($data, $context = 'comment') {
+        if (!in_array($context, ["comment", "discussion"])) {
+            return;
+        }
+
+        $elementID = ($context == 'comment') ? $data->CommentID : $data->DiscussionID;
+
+        if (!isset(Gdn::session()->UserID)) {
+            $elementAuthorID = 0;
+            $elementAuthor = 'Unknown';
+            $isAllowed = false;
+        } else {
+            $elementAuthorID = $data->InsertUserID;
+            $User = Gdn::userModel()->getID($elementAuthorID);
+            $elementAuthor = $User->Name;
+            $isAllowed = true;
+        }
+
+        $flagLink = [
+            isAllowed => $isAllowed,
+            name => t('Report post'),
+            url => "discussion/flag/{$context}/{$elementID}/{$elementAuthorID}/".Gdn_Format::url($elementAuthor),
+            type => 'FlagContent FlagContentPopup'
+        ];
+        // echo wrap($flagLink, 'span', ['class' => 'MItem CommentFlag']);
+        return $flagLink;
     }
 endif;
 
@@ -374,7 +404,10 @@ if (!function_exists('getDiscussionOptionsDropdown')):
             $timeLeft = ' ('.Gdn_Format::seconds($timeLeft).')';
         }
 
-        $dropdown->addLinkIf($canDismiss, t('Dismiss'), "vanilla/discussion/dismissannouncement?discussionid={$discussionID}", 'dismiss', 'DismissAnnouncement Hijack')
+        $flagLink = addFlagButtonToDropdown($discussion, 'discussion');
+
+        $dropdown->addLInkIf($flagLink['isAllowed'], $flagLink['name'], $flagLink['url'], 'FlagMenuItem', $flagLink['type'])
+            ->addLinkIf($canDismiss, t('Dismiss'), "vanilla/discussion/dismissannouncement?discussionid={$discussionID}", 'dismiss', 'DismissAnnouncement Hijack')
             ->addLinkIf($canEdit, t('Edit').$timeLeft, '/post/editdiscussion/'.$discussionID, 'edit')
             ->addLinkIf($canTag, t('Tag'), '/discussion/tag?discussionid='.$discussionID, 'tag', 'TagDiscussion Popup');
 
@@ -492,6 +525,13 @@ if (!function_exists('getCommentOptions')) :
             return $options;
         }
 
+        $flagLink = addFlagButtonToDropdown($comment, 'comment');
+        $options['FlagComment'] = [
+            'Label' => t($flagLink['name']),
+            'Url' => $flagLink['url'],
+            'Class' => $flagLink['type']
+        ];
+
         $sender = Gdn::controller();
         $session = Gdn::session();
         $discussion = Gdn::controller()->data('Discussion');
@@ -560,16 +600,16 @@ if (!function_exists('writeCommentOptions')) :
 
         $id = $comment->CommentID;
         $options = getCommentOptions($comment);
-        if (empty($options)) {
-            return;
-        }
 
         echo '<span class="ToggleFlyout OptionsMenu">';
         echo '<span class="OptionsTitle" title="'.t('Options').'">'.t('Options').'</span>';
         echo sprite('SpFlyoutHandle', 'Arrow');
         echo '<ul class="Flyout MenuItems">';
-        foreach ($options as $code => $option) {
-            echo wrap(anchor($option['Label'], $option['Url'], val('Class', $option, $code)), 'li');
+
+        if (!empty($options)) {
+            foreach ($options as $code => $option) {
+                echo wrap(anchor($option['Label'], $option['Url'], val('Class', $option, $code)), 'li');
+            }
         }
         echo '</ul>';
         echo '</span>';
@@ -584,6 +624,7 @@ if (!function_exists('writeCommentOptions')) :
                 echo '<span class="AdminCheck"><input type="checkbox" aria-label="'.t("Select Discussion").'" name="'.'Comment'.'ID[]" value="'.$id.'"'.($itemSelected ? ' checked="checked"' : '').' /></span>';
             }
         }
+
     }
 endif;
 

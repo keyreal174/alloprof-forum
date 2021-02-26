@@ -81,7 +81,6 @@ $this->fireEvent('BeforeDiscussionDisplay');
                     ?>
                 </span>
                 <?php
-                $this->fireEvent('DiscussionInfo');
                 $this->fireEvent('AfterDiscussionMeta'); // DEPRECATED
                 ?>
             </div>

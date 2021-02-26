@@ -1,0 +1,96 @@
+/* Report post(Flag) */
+a.FlagContentPopup:before {
+    content: '';
+    background: url("/themes/alloprof/design/images/icons/flag.svg");
+    width: 13.5px;
+    height: 19.5px;
+    background-repeat: no-repeat;
+    margin-right: 15px;
+}
+
+/* div.Popup.FlagContentPopup {
+    transform: none !important;
+    -webkit-transform: none !important;
+    left: initial !important;
+    top: calc(50% - 360px) !important;
+} */
+
+div.Popup.FlagContentPopup .Border {
+    width: 720px;
+}
+
+div.Popup.FlagContentPopup .Body {
+    max-height: 700px !important;
+    overflow: initial !important;
+    padding: 80px !important;
+
+    box-shadow: 0px 16px 40px -5px rgba(108, 103, 103, 0.05);
+    border-radius: 24px;
+    border: 1px solid #DDDDDD;
+}
+
+div.Popup.FlagContentPopup .Body .Content {
+    text-align: center;
+}
+
+div.Popup.FlagContentPopup .Body .Content img.FlagAvatar {
+    margin-bottom: 16px;
+}
+
+div.Popup.FlagContentPopup .Body .Content h2 {
+    color: black;
+    font-size: 28px;
+    line-height: 31px;
+}
+
+div.Popup.FlagContentPopup .Body .Content .FlagWarningList {
+    text-align: left;
+}
+
+div.Popup.FlagContentPopup .Body .Content .FlagWarningList li label {
+    font-size: 18px;
+    line-height: 21px;
+    color: black;
+    font-weight: 600;
+    margin-top: 42px;
+    position: relative;
+}
+
+div.Popup.FlagContentPopup .Body .Content .FlagWarningList li label input[type='radio'] {
+    visibility: hidden;
+    margin-right: 16px;
+}
+
+div.Popup.FlagContentPopup .Body .Content .FlagWarningList li label input[type='radio']:after {
+    width: 15px;
+    height: 15px;
+    border-radius: 15px;
+    top: -3px;
+    left: -3px;
+    position: relative;
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 2px solid black;
+}
+
+div.Popup.FlagContentPopup .Body .Content .FlagWarningList li label input[type='radio']:checked:before {
+    width: 11px;
+    height: 11px;
+    border-radius: 11px;
+    top: 5px;
+    left: 6.5px;
+    position: absolute;
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    background: black;
+}
+
+div.Popup.FlagContentPopup .Body .Content .FlatReportButton {
+    margin-top: 40px;
+}
+
+div.Popup.FlagContentPopup .Body .Content .FlatReportButton input {
+    margin: 0 auto;
+}

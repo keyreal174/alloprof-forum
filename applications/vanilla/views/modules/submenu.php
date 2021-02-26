@@ -5,16 +5,16 @@
     <?php if(userRoleCheck() == Gdn::config('Vanilla.ExtraRoles.Teacher')) {
     ?>
         <div class='Navigation-linkContainer'>
-            <?php echo Gdn_Theme::link('discussions', sprite('Home').' '.t('Home'), '<a href="%url" class="%class Navigation-link">%text</a>'); ?>
+        <?php echo Gdn_Theme::link('discussions', sprite('Home').' '.t('Home'), '<a href="%url" class="%class Navigation-link"><svg width="21" height="22" viewBox="0 0 21 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M1.25 11.5178L10.5 2.26777L19.75 11.5178V20.25H13.146V16.3809C13.146 15.4144 12.3625 14.6309 11.396 14.6309H9.6665C8.70001 14.6309 7.9165 15.4144 7.9165 16.3809V20.25H1.25V11.5178Z" stroke="black" stroke-width="2.5"/>
+</svg>
+%text</a>'); ?>
         </div>
         <div class='Navigation-linkContainer'>
-            <?php
-                $discussionModel = new DiscussionModel();
-                $wheres = ['d.CountComments' => 0];
-                if ($discussionModel->getCount($wheres)) {
-                    $text = t('Waiting for a response').' <span class="Count">'.htmlspecialchars($discussionModel->getCount($wheres)).'</span>';
-                }
-                echo Gdn_Theme::link('discussions/waiting', sprite('Home').' '.$text, '<a href="%url" class="%class Navigation-link HasCount">%text</a>'); ?>
+            <?php echo Gdn_Theme::link('discussions/bookmarked', sprite('Home').' '.t('Question followed'), '<a href="%url" class="%class Navigation-link"><svg width="19" height="21" viewBox="0 0 19 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M1.75049 3.5C1.75049 2.5335 2.53399 1.75 3.50049 1.75H15.2697C16.2362 1.75 17.0197 2.5335 17.0197 3.5V18.6743L10.5623 12.8039C9.89479 12.1971 8.87541 12.1971 8.20792 12.8039L1.75049 18.6743V3.5Z" stroke="black" stroke-width="2.5"/>
+</svg>
+%text</a>'); ?>
         </div>
     <?php } else { ?>
         <div class='Navigation-linkContainer'>

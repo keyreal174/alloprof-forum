@@ -1,3 +1,7 @@
+.BoxProfileInfo {
+    margin-top: 32px;
+}
+
 .BoxProfileInfo .BoxProfileInfo_detailbox {
     display: flex;
     flex-wrap: wrap;

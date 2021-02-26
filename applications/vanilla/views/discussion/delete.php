@@ -7,7 +7,10 @@ echo $this->Form->open();
 echo $this->Form->errors();
 
 echo '<div class="P">'.sprintf(t('Are you sure you want to delete this %s?'), t('discussion')).'</div>';
-
+echo '<div class="DeleteTextBox">';
+echo $this->Form->label('Leave the message', 'DeleteMessage');
+echo $this->Form->textBox('DeleteMessage', ['MultiLine' => TRUE]);
+echo '</div>';
 echo '<div class="Buttons Buttons-Confirm">';
 echo $this->Form->button('OK', ['class' => 'Button Primary']);
 echo $this->Form->button('Cancel', ['type' => 'button', 'class' => 'Button Close']);
