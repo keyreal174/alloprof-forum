@@ -214,15 +214,14 @@ select {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 10px;
     position: relative;
 }
 
 .FilterBanner .HomepageTitle {
-    margin-bottom: 0;
     font-size: 21px;
     line-height: 25px;
     color: #1A1919;
+    margin-bottom: 10px;
 }
 
 .CustomSelect {

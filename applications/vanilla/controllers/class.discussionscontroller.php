@@ -542,7 +542,7 @@ class DiscussionsController extends VanillaController {
         }
 
         // Add modules
-        $this->addModule('NewDiscussionModule');
+        // $this->addModule('NewDiscussionModule');
         $this->addModule('AskQuestionModule');
         $this->addModule('CategoriesModule');
         $this->addModule('UserPhotoModule');
@@ -550,8 +550,19 @@ class DiscussionsController extends VanillaController {
         $this->fireEvent('AfterAddSideMenu');
         $this->fireEvent('AddProfileTabsInfo');
 
+        $bannerModule = new BannerModule('Question followed', 'Home / Question followed', 'You ask yourself the same', 'questions,', 'Find here all the questions you\'re following!');
+        $this->addModule($bannerModule);
+
+        $DiscussionEmpty = true;
+        if ($this->DiscussionData->numRows() > 0 || (isset($this->AnnounceData) && is_object($this->AnnounceData) && $this->AnnounceData->numRows() > 0)) {
+            $DiscussionEmpty = false;
+        }
+
+        $discussionsFooterModule = new DiscussionsFooterModule($DiscussionEmpty);
+        $this->addModule($discussionsFooterModule);
+
         // Render default view (discussions/bookmarked.php)
-        $this->setData('Title', t('My Bookmarks'));
+        // $this->setData('Title', t('My Bookmarks'));
         $this->setData('Breadcrumbs', [['Name' => t('My Bookmarks'), 'Url' => '/discussions/bookmarked']]);
         $this->render();
     }
