@@ -2411,12 +2411,6 @@ class DiscussionModel extends Gdn_Model implements FormatFieldInterface, EventFr
                 // Get all fields on the form that relate to the schema
                 $fields = $validation->schemaValidationFields();
 
-                // Check for spam.
-                $spam = SpamModel::isSpam('Discussion', $fields);
-                if ($spam) {
-                    return SPAM;
-                }
-
                 // Get DiscussionID if one was sent
                 $discussionID = intval(val('DiscussionID', $fields, 0));
 
@@ -2493,11 +2487,21 @@ class DiscussionModel extends Gdn_Model implements FormatFieldInterface, EventFr
                             : c('Garden.InputFormatter', '');
                     }
 
+
+                    $fields['Published'] = true;
+
+                    // Check for spam.
+                    $spam = SpamModel::isSpam('Discussion', $fields);
+                    if ($spam) {
+                        $fields['Published'] = false;
+                        // return SPAM;
+                    }
+
                     // Check for approval
                     $approvalRequired = checkRestriction('Vanilla.Approval.Require');
                     if ($approvalRequired && !val('Verified', Gdn::session()->User)) {
-                        LogModel::insert('Pending', 'Discussion', $fields);
-                        return UNAPPROVED;
+                        $fields['Published'] = false;
+                        // return UNAPPROVED;
                     }
 
                     $isValid = true;
@@ -2515,6 +2519,12 @@ class DiscussionModel extends Gdn_Model implements FormatFieldInterface, EventFr
                     $this->serializeRow($fields);
                     $discussionID = $this->SQL->insert($this->Name, $fields);
                     $fields['DiscussionID'] = $discussionID;
+
+                    if (!$fields['Published']) {
+                        // Insert Moderation Queue
+                        LogModel::insert('Pending', 'Discussion', $fields);
+                        // return UNAPPROVED;
+                    }
 
                     // Update cached last post info for a category.
                     CategoryModel::updateLastPost($fields);

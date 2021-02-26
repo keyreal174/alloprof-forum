@@ -109,7 +109,6 @@ class DiscussionController extends VanillaController {
     public function index($DiscussionID = 0, $DiscussionStub = '', $Page = '', $Order = '') {
         // Setup head
 
-
         $Session = Gdn::session();
         $this->addJsFile('jquery.autosize.min.js');
         $this->addJsFile('autosave.js');
@@ -397,7 +396,6 @@ class DiscussionController extends VanillaController {
         $this->addModule('UserPhotoModule');
         $this->addModule('ProfileFilterModule');
         $this->fireEvent('AddProfileInfo');
-        $this->addModule('CheckAnswerModule');
 
         $this->render();
     }

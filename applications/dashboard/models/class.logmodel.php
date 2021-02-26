@@ -845,6 +845,27 @@ class LogModel extends Gdn_Pluggable {
         }
     }
 
+
+    private function publishQuestionOrExplanation($table, $ID, $notifyUser, $notifyString) {
+        // Publish
+        Gdn::sql()->update($table)
+        ->set('Published', true)
+        ->where($table.'ID', $ID)
+        ->put();
+
+        // Notify
+        $activity = [
+            'ActivityType' => 'Default',
+            'NotifyUserID' => $notifyUser,
+            'ActivityUser' => null,
+            'HeadlineFormat' => $notifyString,
+            'Notified' => $notifyUser,
+            'Emailed' => $notifyUser];
+
+        $activityModel = new ActivityModel();
+        $activityModel->save($activity);
+    }
+
     /**
      * Restores a single entry from the log.
      *
@@ -979,6 +1000,7 @@ class LogModel extends Gdn_Pluggable {
                     $iD = Gdn::sql()
                         ->options('Replace', true)
                         ->insert($tableName, $set);
+
                     if (!$iD && isset($log['RecordID'])) {
                         $iD = $log['RecordID'];
                     }
@@ -1007,6 +1029,14 @@ class LogModel extends Gdn_Pluggable {
                                 } else {
                                     $this->recalcIDs['UserDiscussion'][$log['RecordUserID']] = 1;
                                 }
+
+                                $this->publishQuestionOrExplanation(
+                                    'Discussion',
+                                    $log['RecordID'],
+                                    $log['RecordUserID'],
+                                    t('HeadlineFormat.Approve', 'Your question has been published.')
+                                );
+
                                 break;
                             case 'Comment':
                                 if (val('UserComment', $this->recalcIDs) && val($log['RecordUserID'], $this->recalcIDs['UserComment'])) {
@@ -1014,6 +1044,14 @@ class LogModel extends Gdn_Pluggable {
                                 } else {
                                     $this->recalcIDs['UserComment'][$log['RecordUserID']] = 1;
                                 }
+
+                                $this->publishQuestionOrExplanation(
+                                    'Comment',
+                                    $log['RecordID'],
+                                    $log['RecordUserID'],
+                                    t('HeadlineFormat.Approve', 'Your explanation has been published.')
+                                );
+
                                 break;
                         }
                     }

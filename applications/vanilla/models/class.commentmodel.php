@@ -1238,11 +1238,6 @@ class CommentModel extends Gdn_Model implements FormatFieldInterface, EventFromR
                 $commentData = $commentID ?
                     array_merge($fields, ['CommentID' => $commentID, 'InsertUserID' => $insertUserID, 'DateInserted' => $dateInserted]) :
                     $fields;
-                // Check for spam
-                $spam = SpamModel::isSpam('Comment', $commentData);
-                if ($spam) {
-                    return SPAM;
-                }
 
                 $isValid = true;
                 $invalidReturnType = false;
@@ -1272,19 +1267,37 @@ class CommentModel extends Gdn_Model implements FormatFieldInterface, EventFromR
                         $fields['Format'] = Gdn::config('Garden.InputFormatter', '');
                     }
 
+
+                    $fields['Published'] = true;
+
+                    // Check for spam
+                    $spam = SpamModel::isSpam('Comment', $commentData);
+                    if ($spam) {
+                        $fields['Published'] = false;
+                        // return SPAM;
+                    }
+
                     // Check for approval
                     $approvalRequired = checkRestriction('Vanilla.Approval.Require');
                     if ($approvalRequired && !val('Verified', Gdn::session()->User)) {
-                        $discussionModel = $this->discussionModel;
-                        $discussion = $discussionModel->getID(val('DiscussionID', $fields));
-                        $fields['CategoryID'] = val('CategoryID', $discussion);
-                        LogModel::insert('Pending', 'Comment', $fields);
-                        return UNAPPROVED;
+                        $fields['Published'] = false;
+                        // return UNAPPROVED;
                     }
 
                     // Create comment.
                     $this->serializeRow($fields);
                     $commentID = $this->SQL->insert($this->Name, $fields);
+
+                    if (!$fields['Published']) {
+                        // Insert Moderation Queue
+                        $discussionModel = $this->discussionModel;
+                        $discussion = $discussionModel->getID(val('DiscussionID', $fields));
+                        $fields['CategoryID'] = val('CategoryID', $discussion);
+                        $fields['CommentID'] = $commentID;
+                        LogModel::insert('Pending', 'Comment', $fields);
+
+                        // return UNAPPROVED;
+                    }
                 }
                 if ($commentID) {
                     $bodyValue = $fields["Body"] ?? null;

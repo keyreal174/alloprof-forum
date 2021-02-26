@@ -329,15 +329,15 @@ class PostController extends VanillaController {
                                 $this->DraftModel->deleteID($draftID);
                             }
                         }
-                        if ($discussionID == SPAM || $discussionID == UNAPPROVED) {
-                            $this->StatusMessage = t("Your discussion will appear after it is approved.");
+                        // if ($discussionID == SPAM || $discussionID == UNAPPROVED) {
+                            // $this->StatusMessage = t("Your discussion will appear after it is approved.");
 
                             // Clear out the form so that a draft won't save.
-                            $this->Form->formValues([]);
+                            // $this->Form->formValues([]);
 
-                            $this->render('Spam');
-                            return;
-                        }
+                            // $this->render('Spam');
+                            // return;
+                        // }
                     }
                 }
             } else {
@@ -385,6 +385,18 @@ class PostController extends VanillaController {
                         } else {
                             $this->setRedirectTo(discussionUrl($discussion, 1, true).'?new=1');
                         }
+
+                        // If question is not approved, notify toast
+                        if(!$discussion->Published) {
+                            $this->informMessage(
+                                '<div class="toast-container"><div class="toast-title">'.t("Question pending approval").'</div>'.
+                                '<p>'.t("Your question will be reviewed by a moderator.").'</p>'.
+                                '<p>'.t("You will be notified once it is published!").'</p>'.
+                                '<button class="btn-default" onclick="return false;">'.t('See').'</button></div>',
+                                'Dismissable'
+                            );
+                        }
+
                     } else {
                         // If this was a draft save, notify the user about the save
                         $this->informMessage(sprintf(t('Draft saved at %s'), Gdn_Format::date()));
@@ -734,7 +746,14 @@ class PostController extends VanillaController {
                     $this->EventArguments['Comment'] = $Comment;
                     $this->fireEvent('AfterCommentSave');
                 } elseif ($CommentID === SPAM || $CommentID === UNAPPROVED) {
-                    $this->StatusMessage = t('Your comment will appear after it is approved.');
+                    $this->informMessage(
+                        '<div class="toast-container"><div class="toast-title">'.t("Explanation pending approval").'</div>'.
+                        '<p>'.t("Your explanation will be reviewed by a moderator.").'</p>'.
+                        '<p>'.t("You will be notified once it is published!").'</p>'.
+                        '<button class="btn-default" onclick="return false;">'.t('See').'</button></div>',
+                        'Dismissable'
+                    );
+                    // $this->StatusMessage = t('Your comment will appear after it is approved.');
                 }
 
                 $this->Form->setValidationResults($this->CommentModel->validationResults());

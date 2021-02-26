@@ -40,6 +40,14 @@ $this->fireEvent('BeforeDiscussionDisplay');
 <div id="<?php echo 'Discussion_'.$Discussion->DiscussionID; ?>" class="<?php echo $CssClass; ?>">
     <div class="Discussion">
         <div class="Item-Header DiscussionHeader">
+            <?php
+                if(!$Discussion->Published) {
+                    echo '<div class="not-published-badge">';
+                    echo '<img src="/themes/alloprof/design/images/icons/eyebreak.svg"/>';
+                    echo t('Awaiting publication');
+                    echo '</div>';
+                }
+            ?>
             <div class="AuthorWrap">
             <span class="Author">
                 <?php
