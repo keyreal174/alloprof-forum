@@ -846,12 +846,15 @@ class LogModel extends Gdn_Pluggable {
     }
 
 
-    private function publishQuestionOrExplanation($table, $ID, $notifyUser, $notifyString) {
+    private function publishQuestionOrExplanation($table, $ID, $notifyUser, $categoryID, $discussionID, $notifyString) {
         // Publish
         Gdn::sql()->update($table)
         ->set('Published', true)
         ->where($table.'ID', $ID)
         ->put();
+
+        // CommentModel::updateCommentCount($discussionID, ['Slave' => false]);
+        // CategoryModel::updateDiscussionCount($categoryID);
 
         // Notify
         $activity = [
@@ -1034,6 +1037,8 @@ class LogModel extends Gdn_Pluggable {
                                     'Discussion',
                                     $log['RecordID'],
                                     $log['RecordUserID'],
+                                    $set['CategoryID'],
+                                    $set['DiscussionID'],
                                     t('HeadlineFormat.Approve', 'Your question has been published.')
                                 );
 
@@ -1049,6 +1054,8 @@ class LogModel extends Gdn_Pluggable {
                                     'Comment',
                                     $log['RecordID'],
                                     $log['RecordUserID'],
+                                    $set['CategoryID'],
+                                    $set['DiscussionID'],
                                     t('HeadlineFormat.Approve', 'Your explanation has been published.')
                                 );
 

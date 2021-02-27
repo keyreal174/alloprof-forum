@@ -111,7 +111,6 @@ if (!function_exists('writeComment')) :
         // First comment template event
         $sender->fireEvent('BeforeCommentDisplay');
 
-        if($comment->Published || (!$comment->Published && $userId== $author->UserID)) {
         ?>
         <li class="<?php echo $cssClass; ?>" id="<?php echo 'Comment_'.$comment->CommentID; ?>">
             <div class="Comment">
@@ -202,7 +201,6 @@ if (!function_exists('writeComment')) :
             </div>
         </li>
         <?php
-        }
         $sender->fireEvent('AfterComment');
     }
 endif;

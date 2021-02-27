@@ -324,6 +324,14 @@ class CommentModel extends Gdn_Model implements FormatFieldInterface, EventFromR
             $this->SQL
                 ->where('c.DiscussionID', $discussionID);
 
+            $approvalRequired = checkRestriction('Vanilla.Approval.Require');
+            if ($approvalRequired && !val('Verified', Gdn::session()->User)) {
+                $this->SQL->beginWhereGroup()
+                ->where('c.Published', 1)
+                ->orWhere('c.InsertUserID', Gdn::session()->UserID)
+                ->endWhereGroup();
+            }
+
             $this->SQL->where($pageWhere)->limit($limit + 10);
             $this->orderBy($this->SQL);
         } else {
@@ -344,6 +352,7 @@ class CommentModel extends Gdn_Model implements FormatFieldInterface, EventFromR
                 ->from('Comment c')
                 ->where($where, null, true, false)
                 ->limit($limit, $offset);
+
             $this->orderBy($sql2);
             $select = $sql2->getSelect();
 
@@ -355,6 +364,14 @@ class CommentModel extends Gdn_Model implements FormatFieldInterface, EventFromR
         }
 
         $this->where($this->SQL);
+
+        $approvalRequired = checkRestriction('Vanilla.Approval.Require');
+        if ($approvalRequired && !val('Verified', Gdn::session()->User)) {
+            $this->SQL->beginWhereGroup()
+            ->where('c.Published', 1)
+            ->orWhere('c.InsertUserID', Gdn::session()->UserID)
+            ->endWhereGroup();
+        }
 
         $result = $this->SQL->get();
 
@@ -1314,6 +1331,7 @@ class CommentModel extends Gdn_Model implements FormatFieldInterface, EventFromR
                 }
             }
 
+
             // Update discussion's comment count.
             if (isset($formPostValues['DiscussionID']) && $isValidUser) {
                 $this->updateCommentCount($formPostValues['DiscussionID'], ['Slave' => false]);
@@ -1567,13 +1585,24 @@ class CommentModel extends Gdn_Model implements FormatFieldInterface, EventFromR
         $this->fireEvent('BeforeUpdateCommentCountQuery');
 
         $this->options($options);
-        $data = $this->SQL
-            ->select('c.CommentID', 'min', 'FirstCommentID')
+
+        $sql = $this->SQL;
+
+        $sql->select('c.CommentID', 'min', 'FirstCommentID')
             ->select('c.CommentID', 'max', 'LastCommentID')
             ->select('c.DateInserted', 'max', 'DateLastComment')
             ->select('c.CommentID', 'count', 'CountComments')
-            ->from('Comment c')
-            ->where('c.DiscussionID', $discussionID)
+            ->from('Comment c');
+
+        $approvalRequired = checkRestriction('Vanilla.Approval.Require');
+        if ($approvalRequired && !val('Verified', Gdn::session()->User)) {
+            $sql->beginWhereGroup()
+                ->where('c.Published', 1)
+                ->orWhere('c.InsertUserID', Gdn::session()->UserID)
+                ->endWhereGroup();
+        }
+
+        $data = $sql->where('c.DiscussionID', $discussionID)
             ->get()->firstRow(DATASET_TYPE_ARRAY);
 
         $this->EventArguments['Discussion'] =& $discussion;

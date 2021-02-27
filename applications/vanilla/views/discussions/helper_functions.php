@@ -344,8 +344,6 @@ if (!function_exists('writeDiscussionDetail')) :
         $userId = Gdn::session()->UserID;
 
         $sender->fireEvent('BeforeDiscussionDisplay');
-
-        if($Discussion->Published || (!$Discussion->Published && $userId== $Author->UserID)) {
         ?>
         <li id="Discussion_<?php echo $Discussion->DiscussionID; ?>" class="<?php echo $cssClass; ?>">
             <div class="Discussion">
@@ -416,6 +414,7 @@ if (!function_exists('writeDiscussionDetail')) :
                             ?>
                         </span>
                         <?php
+                            $sender->fireEvent('DiscussionInfo');
                             $sender->fireEvent('AfterDiscussionMeta'); // DEPRECATED
                         ?>
                     </div>
@@ -442,7 +441,6 @@ if (!function_exists('writeDiscussionDetail')) :
             </div>
         </li>
         <?php
-        }
     }
 endif;
 

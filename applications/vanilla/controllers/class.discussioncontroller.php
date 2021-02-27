@@ -404,7 +404,6 @@ class DiscussionController extends VanillaController {
         } else {
             $bannerModule = new BannerModule('Question', 'Home / My Questions / Question', t('Question by').' <b>'. $this->User->Name .',</b>', '', '<a>'.$Category["Name"].'</a><a>'.$DiscussionMeta["Grade"].'</a>');
             $this->addModule('ProfileFilterModule');
-            $this->addModule('CheckAnswerModule');
         }
 
         $this->addModule($bannerModule);

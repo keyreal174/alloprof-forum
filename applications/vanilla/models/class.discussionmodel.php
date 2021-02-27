@@ -895,8 +895,19 @@ class DiscussionModel extends Gdn_Model implements FormatFieldInterface, EventFr
 
         // Build up the base query. Self-join for optimization.
         $sql->select('d.DiscussionID')
-            ->from('Discussion d')
-            ->limit($limit, $offset);
+            ->from('Discussion d');
+
+        // Check Approval
+        $approvalRequired = checkRestriction('Vanilla.Approval.Require');
+        if ($approvalRequired && !val('Verified', Gdn::session()->User)) {
+            // Get Published Question
+            $sql->beginWhereGroup()
+            ->where('d.Published', 1)
+            ->orWhere('d.InsertUserID', Gdn::session()->UserID)
+            ->endWhereGroup();
+        }
+
+        $sql->limit($limit, $offset);
 
         foreach ($orderBy as $field => $direction) {
             $sql->orderBy($this->addFieldPrefix($field), $direction);
@@ -1899,13 +1910,24 @@ class DiscussionModel extends Gdn_Model implements FormatFieldInterface, EventFr
             $this->applyDirtyWheres('d');
         }
 
-        return $this->SQL
+        $sql = $this->SQL
             ->select('d.DiscussionID', 'count', 'CountDiscussions')
             ->from('Discussion d')
             ->join('Category c', 'd.CategoryID = c.CategoryID')
             ->join('UserDiscussion w', 'd.DiscussionID = w.DiscussionID and w.UserID = '.Gdn::session()->UserID, 'left')
-            ->where($wheres)
-            ->get()
+            ->where($wheres);
+
+        // Check Approval
+        $approvalRequired = checkRestriction('Vanilla.Approval.Require');
+        if ($approvalRequired && !val('Verified', Gdn::session()->User)) {
+            // Get Published Question
+            $sql->beginWhereGroup()
+            ->where('d.Published', 1)
+            ->orWhere('d.InsertUserID', Gdn::session()->UserID)
+            ->endWhereGroup();
+        }
+
+        return $sql->get()
             ->firstRow()
             ->CountDiscussions;
     }
