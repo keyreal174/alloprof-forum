@@ -107,6 +107,7 @@
 .Options-Icon {
     position: absolute;
     right: 40px;
+    z-index: 1;
 }
 
 .Back-Icon {
