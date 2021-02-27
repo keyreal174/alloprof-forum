@@ -8,8 +8,10 @@
  * @since 2.0
  */
 
+use Garden\Schema\Schema;
 use Vanilla\Formatting\DateTimeFormatter;
 use Vanilla\Message;
+use Vanilla\SchemaFactory;
 
 /**
  * Handles accessing & displaying a single discussion via /discussion endpoint.
@@ -1364,5 +1366,69 @@ body { background: transparent !important; }
     public function bad() {
         $this->View = 'bad';
         $this->render();
+    }
+
+
+    /**
+     * Verify a comment.
+     *
+     * @throws Exception If the user cannot view the discussion.
+     * @throws ServerException If the comment could not be created.
+     */
+    public function verify($commentID) {
+        $this->permission('Garden.SignIn.Allow');
+
+        $comment = $this->CommentModel->setVerified($commentID, Gdn::session()->UserID);
+        if ($comment) {
+            $this->View = 'verified';
+        } else {
+
+        }
+
+        $this->render();
+    }
+
+    /**
+     * Remove verification
+     *
+     * @throws Exception If the user cannot view the discussion.
+     * @throws ServerException If the comment could not be created.
+     */
+    public function unverify($commentID) {
+        $this->permission('Garden.SignIn.Allow');
+
+        $comment = $this->CommentModel->removeVerification($commentID, Gdn::session()->UserID);
+        $this->View = '';
+        $this->render();
+    }
+
+    /**
+     * Get a comment by its numeric ID.
+     *
+     * @param int $id The comment ID.
+     * @throws NotFoundException if the comment could not be found.
+     * @return array
+     */
+    public function commentByID($id) {
+        $row = $this->CommentModel->getID($id, DATASET_TYPE_ARRAY);
+        if (!$row) {
+            throw new NotFoundException('Comment');
+        }
+        return $row;
+    }
+
+    /**
+     * Get a discussion by its numeric ID.
+     *
+     * @param int $id The discussion ID.
+     * @throws NotFoundException if the discussion could not be found.
+     * @return array
+     */
+    public function discussionByID($id) {
+        $row = $this->DiscussionModel->getID($id, DATASET_TYPE_ARRAY);
+        if (!$row) {
+            throw new NotFoundException('Discussion');
+        }
+        return $row;
     }
 }

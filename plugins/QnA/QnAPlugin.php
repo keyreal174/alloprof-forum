@@ -338,16 +338,22 @@ class QnAPlugin extends Gdn_Plugin implements LoggerAwareInterface {
         }
         $discussion = Gdn::controller()->data('Discussion');
 
-        if (val('Type', $discussion) != 'Question') {
-            return;
-        }
+        // if (val('Type', $discussion) != 'Question') {
+        //     return;
+        // }
 
         $permissionDiscussion = Gdn::session()->checkPermission('Vanilla.Discussions.Edit', true, 'Category', $discussion->PermissionCategoryID);
         $permissionCuration = Gdn::session()->checkRankedPermission('Garden.Curation.Manage');
         if (!($permissionDiscussion || $permissionCuration)) {
             return;
         }
-        $args['CommentOptions']['QnA'] = ['Label' => t('Q&A').'...', 'Url' => '/discussion/qnaoptions?commentid='.$comment->CommentID, 'Class' => 'Popup'];
+
+        // if ($sender->getUserRole() === 'Teacher') {
+        //     $args['CommentOptions']['QnA'] = ['Label' => '<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        //     <path d="M1.29492 12C1.29492 5.92487 6.21979 1 12.2949 1C15.2123 1 18.0102 2.15893 20.0731 4.22183C22.136 6.28473 23.2949 9.08262 23.2949 12C23.2949 18.0751 18.3701 23 12.2949 23C6.21979 23 1.29492 18.0751 1.29492 12Z" fill="#05BF8E" stroke="#05BF8E" stroke-width="2"/>
+        //     <path d="M7.79492 12L10.9769 15.182L17.3409 8.81802" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        //     </svg><span>'.t('Mark as verified').'</span>', 'Url' => 'javascript:;', 'Class' => 'mark-verify', 'Id' => '/discussion/verify?commentid='.$comment->CommentID];
+        // }
     }
 
     /**
@@ -363,11 +369,13 @@ class QnAPlugin extends Gdn_Plugin implements LoggerAwareInterface {
             return;
         }
 
-        if (isset($args['DiscussionOptions'])) {
-            $args['DiscussionOptions']['QnA'] = ['Label' => t('Q&A').'...', 'Url' => '/discussion/qnaoptions?discussionid='.$discussion->DiscussionID, 'Class' => 'Popup'];
-        } elseif (isset($sender->Options)) {
-            $sender->Options .= '<li>'.anchor(t('Q&A').'...', '/discussion/qnaoptions?discussionid='.$discussion->DiscussionID, 'Popup QnAOptions') . '</li>';
-        }
+        // if (strtolower($sender->ControllerName) === 'discussionscontroller' && $sender->getUserRole() === 'Teacher') {
+        //     if (isset($args['DiscussionOptions'])) {
+        //         $args['DiscussionOptions']['QnA'] = ['Label' => t('Mark as verified'), 'Url' => '/discussion/verify?discussionid='.$discussion->DiscussionID, 'Class' => 'Hijack'];
+        //     } elseif (isset($sender->Options)) {
+        //         $sender->Options .= '<li>'.anchor(t('Mark as verified'), '/discussion/verify?discussionid='.$discussion->DiscussionID, 'Hijack') . '</li>';
+        //     }
+        // }
 
         // add option for follow up notification endpoint manual trigger
         if (strtolower($sender->ControllerName) === 'discussioncontroller' && $this->isFollowUpOptionAvailable($discussion)) {
@@ -1159,6 +1167,8 @@ class QnAPlugin extends Gdn_Plugin implements LoggerAwareInterface {
         if ($sender->data('Discussion.QnA')) {
             $sender->CssClass .= ' Question';
         }
+
+        $sender->addJsFile('verify.js', 'plugins/QnA');
     }
 
     /**

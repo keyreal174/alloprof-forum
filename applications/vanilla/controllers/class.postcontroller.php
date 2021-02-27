@@ -39,6 +39,9 @@ class PostController extends VanillaController {
     /** @var null|array */
     public $Context = null;
 
+    /** @var string UserRole 'Teacher' or 'Student' */
+    public $UserRole;
+
     /**
      * General "post" form, allows posting of any kind of form. Attach to PostController_AfterFormCollection_Handler.
      *
@@ -99,6 +102,31 @@ class PostController extends VanillaController {
         }
 
         return $result;
+    }
+
+    public function getUserRole() {
+        $userModel = new UserModel();
+        $User = $userModel->getID(Gdn::session()->UserID);
+
+        if($User) {
+            $RoleData = $userModel->getRoles($User->UserID);
+
+            $RoleData = $userModel->getRoles($User->UserID);
+            if ($RoleData !== false) {
+                $Roles = array_column($RoleData->resultArray(), 'Name');
+            }
+
+            // Hide personal info roles
+            if (!checkPermission('Garden.PersonalInfo.View')) {
+                $Roles = array_filter($Roles, 'RoleModel::FilterPersonalInfo');
+            }
+
+            if(in_array(Gdn::config('Vanilla.ExtraRoles.Teacher'), $Roles))
+                $UserRole = Gdn::config('Vanilla.ExtraRoles.Teacher') ?? 'Teacher';
+            else $UserRole = RoleModel::TYPE_MEMBER ?? 'Student';
+
+            return $UserRole;
+        } else return null;
     }
 
     /**
@@ -471,6 +499,7 @@ class PostController extends VanillaController {
      * @throws Gdn_UserException Invalid draftID provided.
      */
     public function comment($DiscussionID = '') {
+        $this->UserRole = $this->getUserRole();
         // Get $DiscussionID from RequestArgs if valid
         if ($DiscussionID == '' && count($this->RequestArgs)) {
             if (is_numeric($this->RequestArgs[0])) {
@@ -718,6 +747,10 @@ class PostController extends VanillaController {
 
                 $Inserted = !$CommentID;
                 $CommentID = $this->CommentModel->save($FormValues);
+
+                if ($this->getUserRole() == 'Teacher') {
+                    $comment = $this->CommentModel->setVerified($CommentID, Gdn::session()->UserID);
+                }
 
                 // The comment is now half-saved.
                 if (is_numeric($CommentID) && $CommentID > 0) {

@@ -8,6 +8,12 @@ a.FlagContentPopup:before {
     margin-right: 15px;
 }
 
+.Comment a.FlagContentPopup:before {
+    background: none;
+    display: none;
+    content: none;
+}
+
 /* div.Popup.FlagContentPopup {
     transform: none !important;
     -webkit-transform: none !important;
