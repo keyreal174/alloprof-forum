@@ -1902,6 +1902,26 @@ class CommentModel extends Gdn_Model implements FormatFieldInterface, EventFromR
     }
 
     /**
+     * Check UserComment if verified.
+     *
+     * @since 2.0.0
+     * @access public
+     *
+     * @param int $commentID Unique ID of comment we're setting as verified.
+     * @param int $userID Unique ID of user.
+     */
+    public function isVerified($commentID, $userID) {
+        $status = $this->SQL->select('*')
+            ->from('Comment')
+            ->where('CommentID', $commentID)
+            ->get()
+            ->firstRow()
+            ->DateAccepted;
+
+        return $status;
+    }
+
+    /**
      * Sets the UserComment as verified.
      *
      * @since 2.0.0
@@ -1919,18 +1939,70 @@ class CommentModel extends Gdn_Model implements FormatFieldInterface, EventFromR
             ->firstRow()
             ->DiscussionID;
 
-        $now = new DateTime();
+        $count = $this->SQL->select('CommentID', 'count', 'CountComments')
+            ->from('Comment')
+            ->where('DiscussionID', $discussionID)
+            ->where('DateAccepted is not null')
+            ->get()
+            ->firstRow()
+            ->CountComments;
+
+        if ($count > 0) {
+            $comment = Null;
+        } else {
+            $now = new DateTime();
+
+            // Update the comment's cached version
+            $this->SQL->update('Comment')
+                ->set('DateAccepted', $now->format('Y-m-d H:i:s'))
+                ->set('AcceptedUserID', $userID)
+                ->where('CommentID', $commentID)
+                ->put();
+
+            $this->SQL->update('Discussion')
+                ->set('DateAccepted', $now->format('Y-m-d H:i:s'))
+                ->set('AcceptedUserID', $userID)
+                ->where('DiscussionID', $discussionID)
+                ->put();
+
+            $comment = $this->SQL->select('*')
+                ->from('Comment')
+                ->where('CommentID', $commentID)
+                ->get()
+                ->firstRow();
+        }
+
+        return $comment;
+    }
+
+    /**
+     * Remove verification
+     *
+     * @since 2.0.0
+     * @access public
+     *
+     * @param int $commentID Unique ID of comment we're setting as verified.
+     * @param int $userID Unique ID of user.
+     */
+    public function removeVerification($commentID, $userID) {
+        // Get the discussion
+        $discussionID = $this->SQL->select('*')
+            ->from('Comment')
+            ->where('CommentID', $commentID)
+            ->get()
+            ->firstRow()
+            ->DiscussionID;
 
         // Update the comment's cached version
         $this->SQL->update('Comment')
-            ->set('DateAccepted', $now->format('Y-m-d H:i:s'))
-            ->set('AcceptedUserID', $userID)
+            ->set('DateAccepted', Null)
+            ->set('AcceptedUserID', Null)
             ->where('CommentID', $commentID)
             ->put();
 
         $this->SQL->update('Discussion')
-            ->set('DateAccepted', $now->format('Y-m-d H:i:s'))
-            ->set('AcceptedUserID', $userID)
+            ->set('DateAccepted', Null)
+            ->set('AcceptedUserID', Null)
             ->where('DiscussionID', $discussionID)
             ->put();
 

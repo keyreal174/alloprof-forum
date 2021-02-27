@@ -1372,8 +1372,6 @@ body { background: transparent !important; }
     /**
      * Verify a comment.
      *
-     * @param array $body The request body.
-     * @return array
      * @throws Exception If the user cannot view the discussion.
      * @throws ServerException If the comment could not be created.
      */
@@ -1381,7 +1379,26 @@ body { background: transparent !important; }
         $this->permission('Garden.SignIn.Allow');
 
         $comment = $this->CommentModel->setVerified($commentID, Gdn::session()->UserID);
-        $this->View = 'verified';
+        if ($comment) {
+            $this->View = 'verified';
+        } else {
+
+        }
+
+        $this->render();
+    }
+
+    /**
+     * Remove verification
+     *
+     * @throws Exception If the user cannot view the discussion.
+     * @throws ServerException If the comment could not be created.
+     */
+    public function unverify($commentID) {
+        $this->permission('Garden.SignIn.Allow');
+
+        $comment = $this->CommentModel->removeVerification($commentID, Gdn::session()->UserID);
+        $this->View = '';
         $this->render();
     }
 

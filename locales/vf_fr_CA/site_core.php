@@ -1731,3 +1731,4 @@ $Definition['Explanation verified by Alloprof'] = 'Explication vérifiée par Al
 $Definition['Verified by Alloprof'] = 'Vérifiée par Alloprof';
 $Definition['Edit the post'] = 'Éditer la publication';
 $Definition['Publish my explanation'] = 'Publier mon explication';
+$Definition['Remove verification'] = 'Enlever vérification';

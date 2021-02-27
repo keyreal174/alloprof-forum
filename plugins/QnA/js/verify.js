@@ -11,11 +11,20 @@ jQuery(document).ready(function ($) {
             url: gdn.url(url),
             data: { DeliveryType: 'VIEW' },
             success: (data) => {
-                console.log(data);
-                $(this).closest(".Comment").prepend(data);
+                if (item.find("a").attr("id").indexOf("unverify") > -1) {
+                    $(this).closest(".Comment").find(".verfied-info").css("display", "none");
+                } else {
+                    $(this).closest(".Comment").prepend(data);
+                }
+                location.reload();
             },
-            error: function (e) {
-                console.log(e);
+            error: (e) => {
+                if (item.find("a").attr("id").indexOf("unverify") > -1) {
+                    $(this).closest(".Comment").find(".verfied-info").css("display", "none");
+                    location.reload();
+                } else {
+
+                }
             }
         });
     })

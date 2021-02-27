@@ -748,6 +748,10 @@ class PostController extends VanillaController {
                 $Inserted = !$CommentID;
                 $CommentID = $this->CommentModel->save($FormValues);
 
+                if ($this->getUserRole() == 'Teacher') {
+                    $comment = $this->CommentModel->setVerified($CommentID, Gdn::session()->UserID);
+                }
+
                 // The comment is now half-saved.
                 if (is_numeric($CommentID) && $CommentID > 0) {
                     if (in_array($this->deliveryType(), [DELIVERY_TYPE_ALL, DELIVERY_TYPE_DATA])) {

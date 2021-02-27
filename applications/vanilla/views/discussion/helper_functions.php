@@ -110,7 +110,14 @@ if (!function_exists('writeComment')) :
         $sender->fireEvent('BeforeCommentDisplay'); ?>
         <li class="<?php echo $cssClass; ?>" id="<?php echo 'Comment_'.$comment->CommentID; ?>">
             <div class="Comment">
-
+                <?php
+                    if ($comment->DateAccepted) {
+                        echo '<div class="verfied-info">
+                                <img src="/themes/alloprof/design/images/icons/verifiedbadge.svg"/>
+                                <span>'.t("Explanation verified by Alloprof").'</span>
+                            </div>';
+                    }
+                ?>
                 <?php
                 // Write a stub for the latest comment so it's easy to link to it from outside.
                 if ($currentOffset == Gdn::controller()->data('_LatestItem') && Gdn::config('Vanilla.Comments.AutoOffset')) {
@@ -511,13 +518,26 @@ if (!function_exists('getCommentOptions')) :
             return $options;
         }
 
-
-
         $sender = Gdn::controller();
         $session = Gdn::session();
         $discussion = Gdn::controller()->data('Discussion');
 
         $categoryID = val('CategoryID', $discussion);
+
+        if ($sender->getUserRole() === 'Teacher') {
+            if ($comment->DateAccepted) {
+                $options['QnA'] = ['Label' => '<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1.29492 12C1.29492 5.92487 6.21979 1 12.2949 1C15.2123 1 18.0102 2.15893 20.0731 4.22183C22.136 6.28473 23.2949 9.08262 23.2949 12C23.2949 18.0751 18.3701 23 12.2949 23C6.21979 23 1.29492 18.0751 1.29492 12Z" fill="#05BF8E" stroke="#05BF8E" stroke-width="2"/>
+            <path d="M7.79492 12L10.9769 15.182L17.3409 8.81802" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg><span>'.t('Remove verification').'</span>', 'Url' => 'javascript:;', 'Class' => 'mark-verify', 'Id' => '/discussion/unverify?commentid='.$comment->CommentID];
+            } else {
+                $options['QnA'] = ['Label' => '<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1.29492 12C1.29492 5.92487 6.21979 1 12.2949 1C15.2123 1 18.0102 2.15893 20.0731 4.22183C22.136 6.28473 23.2949 9.08262 23.2949 12C23.2949 18.0751 18.3701 23 12.2949 23C6.21979 23 1.29492 18.0751 1.29492 12Z" fill="#05BF8E" stroke="#05BF8E" stroke-width="2"/>
+            <path d="M7.79492 12L10.9769 15.182L17.3409 8.81802" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg><span>'.t('Mark as verified').'</span>', 'Url' => 'javascript:;', 'Class' => 'mark-verify', 'Id' => '/discussion/verify?commentid='.$comment->CommentID];
+            }
+
+        }
 
         // Can the user edit the comment?
         $canEdit = CommentModel::canEdit($comment, $timeLeft, $discussion);
