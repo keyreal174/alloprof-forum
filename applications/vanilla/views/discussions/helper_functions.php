@@ -392,6 +392,14 @@ if (!function_exists('writeDiscussionDetail')) :
                                 );
                             }
                         ?>
+                        <?php
+                            if ($Discussion->DateAccepted) {
+                                echo "<div class='verfied-badge'>
+                                        <img src='/themes/alloprof/design/images/icons/verifiedbadge.svg'/>
+                                        <span>". t('Verified by Alloprof') ."</span>
+                                    </div>";
+                            }
+                        ?>
                     </div>
                     <div class="Meta DiscussionMeta">
                         <span class="MItem TimeAgo">

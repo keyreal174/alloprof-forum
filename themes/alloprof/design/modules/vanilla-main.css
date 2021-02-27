@@ -4545,7 +4545,7 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
 .DataList .OptionsMenu .Arrow:before,
 .MessageList .OptionsMenu .Arrow:before {
     font-size: 18px;
-    margin-top: -1px
+    margin-top: 16px
 }
 
 .DataList .LatestPostTitle,

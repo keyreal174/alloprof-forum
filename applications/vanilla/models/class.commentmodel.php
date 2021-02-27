@@ -8,6 +8,7 @@
  * @since 2.0
  */
 
+use \Datetime;
 use Garden\Events\ResourceEvent;
 use Garden\Events\EventFromRowInterface;
 use Garden\Schema\Schema;
@@ -1898,5 +1899,47 @@ class CommentModel extends Gdn_Model implements FormatFieldInterface, EventFromR
         $comment = (object)$comment;
         $result = "/discussion/comment/{$comment->CommentID}#Comment_{$comment->CommentID}";
         return url($result, $withDomain);
+    }
+
+    /**
+     * Sets the UserComment as verified.
+     *
+     * @since 2.0.0
+     * @access public
+     *
+     * @param int $commentID Unique ID of comment we're setting as verified.
+     * @param int $userID Unique ID of user.
+     */
+    public function setVerified($commentID, $userID) {
+        // Get the discussion
+        $discussionID = $this->SQL->select('*')
+            ->from('Comment')
+            ->where('CommentID', $commentID)
+            ->get()
+            ->firstRow()
+            ->DiscussionID;
+
+        $now = new DateTime();
+
+        // Update the comment's cached version
+        $this->SQL->update('Comment')
+            ->set('DateAccepted', $now->format('Y-m-d H:i:s'))
+            ->set('AcceptedUserID', $userID)
+            ->where('CommentID', $commentID)
+            ->put();
+
+        $this->SQL->update('Discussion')
+            ->set('DateAccepted', $now->format('Y-m-d H:i:s'))
+            ->set('AcceptedUserID', $userID)
+            ->where('DiscussionID', $discussionID)
+            ->put();
+
+        $comment = $this->SQL->select('*')
+            ->from('Comment')
+            ->where('CommentID', $commentID)
+            ->get()
+            ->firstRow();
+
+        return $comment;
     }
 }

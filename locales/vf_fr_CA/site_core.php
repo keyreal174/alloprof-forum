@@ -1727,3 +1727,7 @@ $Definition['Follow new questions and you\'ll find them here!'] = 'Suis les nouv
 $Definition['Student Question'] = 'Question d’élève';
 $Definition['You have the same problem and the explanations don\'t help?'] = 'Tu as le même problème et les explications ne t’aident pas ?';
 $Definition['Explanations'] = 'Explications';
+$Definition['Explanation verified by Alloprof'] = 'Explication vérifiée par Alloprof';
+$Definition['Verified by Alloprof'] = 'Vérifiée par Alloprof';
+$Definition['Edit the post'] = 'Éditer la publication';
+$Definition['Publish my explanation'] = 'Publier mon explication';

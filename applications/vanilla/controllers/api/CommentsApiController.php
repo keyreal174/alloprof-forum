@@ -485,12 +485,17 @@ class CommentsApiController extends AbstractApiController {
         $this->discussionModel->categoryPermission('Vanilla.Comments.Add', $discussion['CategoryID']);
         $session = $this->getSession();
         $sessionUser = $session->UserID;
+
         $isAdmin = $session->checkRankedPermission('Garden.Moderation.Manage');
         $canView = $this->discussionModel->canView($discussion, $sessionUser);
         if (!$canView && !$isAdmin) {
             throw permissionException('Vanilla.Discussions.View');
         }
         $id = $this->commentModel->save($commentData);
+        if ($this->getUserRole() == 'Teacher') {
+            $comment = $this->commentModel->setVerified($id, Gdn::session()->UserID);
+        }
+
         $this->validateModel($this->commentModel);
         if (!$id) {
             throw new ServerException('Unable to insert comment.', 500);
@@ -501,6 +506,31 @@ class CommentsApiController extends AbstractApiController {
 
         $result = $out->validate($row);
         return $result;
+    }
+
+    public function getUserRole() {
+        $userModel = new UserModel();
+        $User = $userModel->getID(Gdn::session()->UserID);
+
+        if($User) {
+            $RoleData = $userModel->getRoles($User->UserID);
+
+            $RoleData = $userModel->getRoles($User->UserID);
+            if ($RoleData !== false) {
+                $Roles = array_column($RoleData->resultArray(), 'Name');
+            }
+
+            // Hide personal info roles
+            if (!checkPermission('Garden.PersonalInfo.View')) {
+                $Roles = array_filter($Roles, 'RoleModel::FilterPersonalInfo');
+            }
+
+            if(in_array(Gdn::config('Vanilla.ExtraRoles.Teacher'), $Roles))
+                $UserRole = Gdn::config('Vanilla.ExtraRoles.Teacher') ?? 'Teacher';
+            else $UserRole = RoleModel::TYPE_MEMBER ?? 'Student';
+
+            return $UserRole;
+        } else return null;
     }
 
     /**
@@ -545,4 +575,5 @@ class CommentsApiController extends AbstractApiController {
             'limit' => $query['limit'] ?? null,
         ]);
     }
+
 }
