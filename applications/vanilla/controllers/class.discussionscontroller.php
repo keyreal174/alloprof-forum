@@ -87,6 +87,7 @@ class DiscussionsController extends VanillaController {
      * @param string|false $Page Multiplied by PerPage option to determine offset.
      */
     public function index($Page = false) {
+
         $this->getUserInfo();
         $this->allowJSONP(true);
         // Figure out which discussions layout to choose (Defined on "Homepage" settings page).
@@ -273,7 +274,7 @@ class DiscussionsController extends VanillaController {
         }
 
         // ============================== SET CUSTOM GRADE FILTER
-        if (($gradeFilterOption || $gradeFilterOption === '0') && $gradeFilterOption !== -1) {
+        if (($gradeFilterOption || $gradeFilterOption === '0') && $gradeFilterOption != -1) {
             $where['d.GradeID'] = $gradeFilterOption;
             $announcementsWhere['d.GradeID'] = $gradeFilterOption;
         } else {
@@ -283,7 +284,7 @@ class DiscussionsController extends VanillaController {
         // ============================== SET CUSTOM GRADE FILTER END
 
         // ============================== SET CUSTOM HAS EXPLANATION FILTER
-        if ($explanation) {
+        if ($explanation == 'true') {
             $where['d.CountComments >'] = 0;
             $announcementsWhere['d.CountComments >'] = 0;
         } else {
@@ -293,9 +294,9 @@ class DiscussionsController extends VanillaController {
         // ============================== SET CUSTOM HAS EXPLANATION FILTER END
 
         // ============================== SET CUSTOM IS VERIFIED FILTER
-        if ($verified) {
-            $where['d.DateAccepted'] = null;
-            $announcementsWhere['d.DateAccepted'] = null;
+        if ($verified == 'true') {
+            $where['d.DateAccepted <>'] = '';
+            $announcementsWhere['d.DateAccepted <>'] = '';
         } else {
             unset($where['d.DateAccepted']);
             unset($announcementsWhere['d.DateAccepted']);
@@ -318,7 +319,7 @@ class DiscussionsController extends VanillaController {
         $this->setData('Announcements', $this->AnnounceData !== false ? $this->AnnounceData : [], true);
 
         // Get Discussions
-        $this->DiscussionData = $DiscussionModel->getWhereWithOrder($where, 'DateLastComment', $sort, $Limit, $Offset);
+        $this->DiscussionData = $DiscussionModel->getWhereWithOrder($where, 'DateInserted', $sort, $Limit, $Offset);
 
         $this->setData('Discussions', $this->DiscussionData, true);
         $this->setJson('Loading', $Offset.' to '.$Limit);

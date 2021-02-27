@@ -1738,3 +1738,4 @@ $Definition['Verified by Alloprof'] = 'Vérifiée par Alloprof';
 $Definition['Edit the post'] = 'Éditer la publication';
 $Definition['Publish my explanation'] = 'Publier mon explication';
 $Definition['Remove verification'] = 'Enlever vérification';
+$Definition['Mark as verified'] = 'Marquer comme vérifiée';
