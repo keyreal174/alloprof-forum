@@ -87,7 +87,6 @@ class DiscussionsController extends VanillaController {
      * @param string|false $Page Multiplied by PerPage option to determine offset.
      */
     public function index($Page = false) {
-
         $this->getUserInfo();
         $this->allowJSONP(true);
         // Figure out which discussions layout to choose (Defined on "Homepage" settings page).
@@ -109,7 +108,6 @@ class DiscussionsController extends VanillaController {
         $this->addJsFile('autosave.js');
         $this->addJsFile('post.js');
         $this->addJsFile('askquestion.js');
-        $this->addJsFile('filter.js');
 
         // Remove score sort
         DiscussionModel::removeSort('top');
@@ -163,9 +161,27 @@ class DiscussionsController extends VanillaController {
         }
 
         // Add modules
-        // $this->addModule('DiscussionFilterModule');
         $this->addModule('AskQuestionModule');
         $this->addModule('CategoriesModule');
+        // Filtering and Sorter Module
+        $gradeFilterOption = Gdn::request()->get('grade') ? strval((int)(Gdn::request()->get('grade'))) : -1;
+        $this->GradeID = $gradeFilterOption;
+
+        $explanation = Gdn::request()->get('explanation') ?? false;
+        $this->IsExplanation = $explanation;
+
+        $verified = Gdn::request()->get('verifiedBy') ?? false;
+        $this->IsVerifiedBy = $verified;
+
+        $sort = Gdn::request()->get('sort') ?? 'DateInserted';
+        $this->Sort = $sort;
+
+        $this->setData('SortDirection', 'desc');
+
+        $discussionFilterModule = new DiscussionFilterModule($gradeFilterOption, $sort, $explanation, $verified);
+        $this->addModule($discussionFilterModule);
+        $this->addJsFile('filter.js');
+
 
         // Make sure the userphoto module gets added to the page
         $this->addModule('UserPhotoModule');
@@ -227,7 +243,7 @@ class DiscussionsController extends VanillaController {
         if ($this->data('ApplyRestrictions') === true) {
             $DiscussionModel->setOption('ApplyRestrictions', true);
         }
-        $DiscussionModel->setSort(Gdn::request()->get());
+        $DiscussionModel->setSort($sort);
         $DiscussionModel->setFilters(Gdn::request()->get());
         $this->setData('Sort', $DiscussionModel->getSort());
         $this->setData('Filters', $DiscussionModel->getFilters());
@@ -256,15 +272,35 @@ class DiscussionsController extends VanillaController {
             }
         }
 
-        // set grade filter
-        $gradeFilterOption = strval((int)(Gdn::request()->get('grade')) - 1);
-        if (($gradeFilterOption || $gradeFilterOption === '0') && $gradeFilterOption !== '-1') {
+        // ============================== SET CUSTOM GRADE FILTER
+        if (($gradeFilterOption || $gradeFilterOption === '0') && $gradeFilterOption !== -1) {
             $where['d.GradeID'] = $gradeFilterOption;
             $announcementsWhere['d.GradeID'] = $gradeFilterOption;
         } else {
             unset($where['d.GradeID']);
             unset($announcementsWhere['d.GradeID']);
         }
+        // ============================== SET CUSTOM GRADE FILTER END
+
+        // ============================== SET CUSTOM HAS EXPLANATION FILTER
+        if ($explanation) {
+            $where['d.CountComments >'] = 0;
+            $announcementsWhere['d.CountComments >'] = 0;
+        } else {
+            unset($where['d.CountComments >']);
+            unset($announcementsWhere['d.CountComments >']);
+        }
+        // ============================== SET CUSTOM HAS EXPLANATION FILTER END
+
+        // ============================== SET CUSTOM IS VERIFIED FILTER
+        if ($verified) {
+            $where['d.DateAccepted'] = null;
+            $announcementsWhere['d.DateAccepted'] = null;
+        } else {
+            unset($where['d.DateAccepted']);
+            unset($announcementsWhere['d.DateAccepted']);
+        }
+        // ============================== SET CUSTOM IS VERIFIED FILTER END
 
         // Get Discussion Count
         $CountDiscussions = $DiscussionModel->getCount($where);
@@ -282,7 +318,7 @@ class DiscussionsController extends VanillaController {
         $this->setData('Announcements', $this->AnnounceData !== false ? $this->AnnounceData : [], true);
 
         // Get Discussions
-        $this->DiscussionData = $DiscussionModel->getWhereRecent($where, $Limit, $Offset);
+        $this->DiscussionData = $DiscussionModel->getWhereWithOrder($where, 'DateLastComment', $sort, $Limit, $Offset);
 
         $this->setData('Discussions', $this->DiscussionData, true);
         $this->setJson('Loading', $Offset.' to '.$Limit);
@@ -1275,5 +1311,12 @@ class DiscussionsController extends VanillaController {
         // $this->setData('Title', t('My Discussions'));
         $this->setData('Breadcrumbs', [['Name' => t('Questions followed'), 'Url' => '/discussions/followed']]);
         $this->render();
+    }
+
+    // Filter Discussion Function
+    public function filterDiscussion() {
+        $parameter = $_POST['parameter'];
+
+        echo '/discussions/index?'.$parameter;
     }
 }

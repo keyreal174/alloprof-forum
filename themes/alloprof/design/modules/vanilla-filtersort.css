@@ -1,0 +1,113 @@
+.BoxFilter-Heading {
+    margin-bottom: 12px;
+}
+
+.BoxDiscussionFilter {
+    margin-top: 40px;
+}
+
+.FilterMenu__Dropdown {
+    position: relative;
+    /* height: 44px; */
+}
+
+.FilterMenu__Dropdown .SelectWrapper:after {
+    content: "";
+    background: url('/themes/alloprof/design/images/icons/arrowDown.svg');
+    width: 14px;
+    height: 16px;
+    background-repeat: no-repeat;
+    top: 60%;
+}
+
+.FilterMenu__Dropdown img {
+    position: absolute;
+    top: 29px;
+    left: 10px;
+    z-index: 1;
+    width: 16px;
+    height: 16px;
+}
+
+.FilterMenu__Dropdown select {
+    border: none;
+    border-color: initial !important;
+    border-bottom: 1px solid;
+    border-radius: 0;
+    background: transparent !important;
+    padding-bottom: 6px;
+    padding-top: 20px;
+    height: 60px;
+    font-size: 18px;
+    line-height: 21px;
+}
+
+.FilterMenu .form-group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 24px;
+}
+
+.FilterMenu .toggle-wrap {
+    display: block;
+    position: relative;
+    width: 44px;
+    height: 24px;
+}
+
+.FilterMenu .toggle-wrap label {
+    display: inline;
+}
+
+.FilterMenu .toggle-wrap input[type=checkbox] {
+    position: absolute;
+    margin-left: -9999px;
+    visibility: hidden;
+}
+
+.FilterMenu .toggle-wrap input[type=checkbox] + label::before,
+.FilterMenu .toggle-wrap input[type=checkbox] + label::after {
+    content: "";
+}
+
+.FilterMenu .toggle-wrap input[type=checkbox] + label::before {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 44px;
+    height: 24px;
+    background-color: #fff;
+    border-radius: 18px;
+    border: 1px solid black;
+    transition: background 0.4s;
+    cursor: pointer;
+}
+
+.FilterMenu .toggle-wrap input[type=checkbox] + label::after {
+    display: block;
+    position: absolute;
+    top: 4.5px;
+    left: 4.5px;
+    width: 16px;
+    height: 16px;
+    border-radius: 17px;
+    background-color: black;
+    outline: 0;
+    transition: left 0.4s;
+    cursor: pointer;
+}
+
+.FilterMenu .toggle-wrap input[type=checkbox]:checked + label::after {
+    left: 26px;
+    border: 0;
+}
+
+.FilterMenu .label {
+    font-size: 16px;
+    line-height: 19px;
+    color: black;
+    max-width: 150px;
+    margin-right: 20px;
+}
