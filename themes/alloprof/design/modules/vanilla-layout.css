@@ -14,8 +14,8 @@ header.not-transparent {
 }
 
 .Panel {
-    padding: 30px 25px;
-    border-radius: 5px;
+    padding: 32px;
+    border-radius: 8px;
     width: 100%;
 }
 

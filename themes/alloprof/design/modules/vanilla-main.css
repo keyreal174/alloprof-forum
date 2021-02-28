@@ -6598,7 +6598,7 @@ body.hasRichEditor .richEditor-frame {
 }
 
 body.hasRichEditor .CommentOptions {
-    display: block
+    /* display: block */
 }
 
 body.hasRichEditor .bodybox-wrap,

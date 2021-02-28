@@ -1,12 +1,13 @@
 <?php
 if (!defined('APPLICATION')) exit();
+require_once $this->fetchViewLocation('helper_functions');
 
 use Vanilla\Utility\HtmlUtils;
 
-if (\Gdn::themeFeatures()->useNewQuickLinks()) {
-    echo \Gdn_Theme::module(\Vanilla\Theme\VariableProviders\QuickLinksModule::class);
-    return;
-}
+// if (\Gdn::themeFeatures()->useNewQuickLinks()) {
+//     echo \Gdn_Theme::module(\Vanilla\Theme\VariableProviders\QuickLinksModule::class);
+//     return;
+// }
 
 $Controller = Gdn::controller();
 $Session = Gdn::session();
@@ -44,42 +45,15 @@ $titleClasses = HtmlUtils::classNames(
 );
 $titleID = "BoxFilterTitle";
 ?>
-<div class="BoxFilter BoxDiscussionFilter" role="navigation" aria-labelledby="<?php echo $titleID ?>">
-    <span class="<?php echo $titleClasses ?>">
-        <h2 id="<?php echo $titleID ?>" class="BoxFilter-Heading">
-            <?php echo t('Quick Links'); ?>
-        </h2>
-    </span>
-    <ul class="FilterMenu">
+<div class="BoxDiscussionFilter Panel" role="navigation" aria-labelledby="<?php echo $titleID ?>">
+    <h2 id="<?php echo $titleID ?>" class="BoxFilter-Heading">
+        <?php echo t('Filter'); ?>
+    </h2>
+    <div class="FilterMenu">
         <?php
-        $Controller->fireEvent('BeforeDiscussionFilters');
-        //      if (c('Vanilla.Categories.ShowTabs')) {
-        if (c('Vanilla.Categories.Use')) {
-            $CssClass = 'AllCategories';
-            if (strtolower($Controller->ControllerName) == 'categoriescontroller' && in_array(strtolower($Controller->RequestMethod), ['index', 'all'])) {
-                $CssClass .= ' Active';
-            }
-
-            echo '<li class="'.$CssClass.'">'.anchor(sprite('SpAllCategories').' '.t('All Categories', 'Categories'), '/categories').'</li> ';
-        }
+            echo writeGradeFilter($this->GradeID);
+            echo writeDiscussionSort($this->Sort);
+            echo writeFilterToggle($this->IsExplanation, $this->IsVerified);
         ?>
-        <li class="Discussions<?php echo strtolower($Controller->ControllerName) == 'discussionscontroller' && strtolower($Controller->RequestMethod) == 'index' ? ' Active' : ''; ?>"><?php echo Gdn_Theme::link('forumroot', sprite('SpDiscussions').' '.t('Recent Questions')); ?></li>
-        <?php echo Gdn_Theme::link('activity', sprite('SpActivity').' '.t('Activity'), '<li class="Activities"><a href="%url" class="%class">%text</a></li>'); ?>
-        <?php if ($CountBookmarks > 0 || $Controller->RequestMethod == 'bookmarked') { ?>
-            <li class="MyBookmarks<?php echo $Controller->RequestMethod == 'bookmarked' ? ' Active' : ''; ?>"><?php echo anchor(sprite('SpBookmarks').' '.$Bookmarked, '/discussions/bookmarked'); ?></li>
-        <?php
-        }
-        if (($CountDiscussions > 0 || $Controller->RequestMethod == 'mine') && c('Vanilla.Discussions.ShowMineTab', true)) {
-            ?>
-            <li class="MyDiscussions<?php echo $Controller->RequestMethod == 'mine' ? ' Active' : ''; ?>"><?php echo anchor(sprite('SpMyDiscussions').' '.$MyDiscussions, '/discussions/mine'); ?></li>
-        <?php
-        }
-        if ($CountDrafts > 0 || $Controller->ControllerName == 'draftscontroller') {
-            ?>
-            <li class="MyDrafts<?php echo $Controller->ControllerName == 'draftscontroller' ? ' Active' : ''; ?>"><?php echo anchor(sprite('SpMyDrafts').' '.$MyDrafts, '/drafts'); ?></li>
-        <?php
-        }
-        $Controller->fireEvent('AfterDiscussionFilters');
-        ?>
-    </ul>
+    </div>
 </div>
