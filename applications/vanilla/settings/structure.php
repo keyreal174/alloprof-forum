@@ -170,7 +170,8 @@ $Construct
     ->column('LastCommentUserID', 'int', true)
     ->column('Score', 'float', null)
     ->column('Attributes', 'text', true)
-    ->column('RegardingID', 'int(11)', true, 'index');
+    ->column('RegardingID', 'int(11)', true, 'index')
+    ->column('Published', 'tinyint(1)', '0');
 //->column('Source', 'varchar(20)', true)
 
 $Construct
@@ -207,8 +208,8 @@ $Construct->column('UserID', 'int', false, 'primary')
     ->column('Dismissed', 'tinyint(1)', '0')// relates to dismissed announcements
     ->column('Bookmarked', 'tinyint(1)', '0')
     ->column('Favourite', 'tinyint(1)', '0')
-    ->column('Participated', 'tinyint(1)', '0')// whether or not the user has participated in the discussion.
-    ->set($Explicit, $Drop);
+    ->column('Participated', 'tinyint(1)', '0')
+    ->set($Explicit, $Drop); // whether or not the user has participated in the discussion.
 
 $Construct->table('Comment');
 
@@ -237,6 +238,7 @@ $Construct
     ->column('Flag', 'tinyint', 0)
     ->column('Score', 'float', null, ['index'])
     ->column('Attributes', 'text', true)
+    ->column('Published', 'tinyint(1)', '0')
     //->column('Source', 'varchar(20)', true)
     ->set($Explicit, $Drop);
 

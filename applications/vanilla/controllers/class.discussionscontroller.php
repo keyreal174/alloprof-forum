@@ -254,6 +254,7 @@ class DiscussionsController extends VanillaController {
         // Fix to segregate announcement conditions until announcement caching has been reworked.
         // See https://github.com/vanilla/vanilla/issues/7241
         $where = $announcementsWhere = [];
+
         if ($this->data('Followed')) {
             $followedCategories = array_keys($categoryModel->getFollowed(Gdn::session()->UserID));
             $visibleCategoriesResult = CategoryModel::instance()->getVisibleCategoryIDs(['filterHideDiscussions' => true]);

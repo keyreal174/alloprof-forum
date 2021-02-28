@@ -341,6 +341,8 @@ if (!function_exists('writeDiscussionDetail')) :
         $sender->EventArguments['Object'] = &$Discussion;
         $sender->EventArguments['Type'] = 'Discussion';
 
+        $userId = Gdn::session()->UserID;
+
         $sender->fireEvent('BeforeDiscussionDisplay');
         ?>
         <li id="Discussion_<?php echo $Discussion->DiscussionID; ?>" class="<?php echo $cssClass; ?>">
@@ -356,6 +358,14 @@ if (!function_exists('writeDiscussionDetail')) :
                         </span>
                         <?php
                     }
+                    ?>
+                    <?php
+                        if(!$Discussion->Published) {
+                            echo '<div class="not-published-badge">';
+                            echo '<img src="/themes/alloprof/design/images/icons/eyebreak.svg"/>';
+                            echo t('Awaiting publication');
+                            echo '</div>';
+                        }
                     ?>
                     <div class="AuthorWrap">
                         <span class="Author">
@@ -412,6 +422,7 @@ if (!function_exists('writeDiscussionDetail')) :
                             ?>
                         </span>
                         <?php
+                            $sender->fireEvent('DiscussionInfo');
                             $sender->fireEvent('AfterDiscussionMeta'); // DEPRECATED
                         ?>
                     </div>
