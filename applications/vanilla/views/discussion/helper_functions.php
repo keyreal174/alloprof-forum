@@ -106,8 +106,12 @@ if (!function_exists('writeComment')) :
         $sender->EventArguments['Object'] = &$comment;
         $sender->EventArguments['Type'] = 'Comment';
 
+        $userId = Gdn::session()->UserID;
+
         // First comment template event
-        $sender->fireEvent('BeforeCommentDisplay'); ?>
+        $sender->fireEvent('BeforeCommentDisplay');
+
+        ?>
         <li class="<?php echo $cssClass; ?>" id="<?php echo 'Comment_'.$comment->CommentID; ?>">
             <div class="Comment">
 
@@ -120,6 +124,14 @@ if (!function_exists('writeComment')) :
                 <div class="Options">
                     <?php writeCommentOptions($comment); ?>
                 </div>
+                <?php
+                    if(!$comment->Published) {
+                        echo '<div class="not-published-badge">';
+                        echo '<img src="/themes/alloprof/design/images/icons/eyebreak.svg"/>';
+                        echo t('Awaiting publication');
+                        echo '</div>';
+                    }
+                ?>
                 <?php $sender->fireEvent('BeforeCommentMeta'); ?>
                 <div class="Item-Header CommentHeader">
                     <div class="AuthorWrap">

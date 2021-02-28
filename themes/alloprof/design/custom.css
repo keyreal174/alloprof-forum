@@ -325,3 +325,85 @@ div.Popup .Border {
     min-width: 400px;
     width: auto;
 }
+
+/* Customize Toast */
+
+.InformMessages {
+    left: auto;
+    right: 0;
+    top: 70px;
+}
+
+.InformMessages .InformMessage, .InformMessages .InformMessage:hover {
+    max-width: 600px;
+}
+
+.InformMessage .toast-container {
+    padding: 20px 30px;
+}
+
+.InformMessages .toast-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.InformMessages .InformMessage .Close, .InformMessages .InformMessage:hover .Close {
+    margin: 15px;
+}
+
+.InformMessages .InformMessage .Close span {
+    font-size: 35px;
+    font-weight: 100;
+}
+
+.InformMessages p {
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.InformMessages button {
+    font-size: 14px;
+    margin-top: 20px;
+    height: 41px;
+    margin-left: auto;
+}
+
+
+
+/* Not approved question box */
+
+.question-not-published {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.question-not-published img {
+    margin-bottom: 20px;
+}
+
+.question-not-published p {
+    font-size: 18px;
+    margin: 0;
+}
+
+.not-published-badge {
+    width: max-content;
+    display: flex;
+    align-items: center;
+    height: 40px;
+    justify-content: center;
+    font-size: 13px;
+    padding: 10px 20px;
+    background: #F2F2F2;
+    border-radius: 8px;
+    position: absolute;
+    right: 95px;
+    color: black;
+    top: 50px;
+}
+
+.not-published-badge img {
+    margin-right: 15px;
+}
+

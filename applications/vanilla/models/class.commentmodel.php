@@ -324,6 +324,14 @@ class CommentModel extends Gdn_Model implements FormatFieldInterface, EventFromR
             $this->SQL
                 ->where('c.DiscussionID', $discussionID);
 
+            $approvalRequired = checkRestriction('Vanilla.Approval.Require');
+            if ($approvalRequired && !val('Verified', Gdn::session()->User)) {
+                $this->SQL->beginWhereGroup()
+                ->where('c.Published', 1)
+                ->orWhere('c.InsertUserID', Gdn::session()->UserID)
+                ->endWhereGroup();
+            }
+
             $this->SQL->where($pageWhere)->limit($limit + 10);
             $this->orderBy($this->SQL);
         } else {
@@ -344,6 +352,7 @@ class CommentModel extends Gdn_Model implements FormatFieldInterface, EventFromR
                 ->from('Comment c')
                 ->where($where, null, true, false)
                 ->limit($limit, $offset);
+
             $this->orderBy($sql2);
             $select = $sql2->getSelect();
 
@@ -355,6 +364,14 @@ class CommentModel extends Gdn_Model implements FormatFieldInterface, EventFromR
         }
 
         $this->where($this->SQL);
+
+        $approvalRequired = checkRestriction('Vanilla.Approval.Require');
+        if ($approvalRequired && !val('Verified', Gdn::session()->User)) {
+            $this->SQL->beginWhereGroup()
+            ->where('c.Published', 1)
+            ->orWhere('c.InsertUserID', Gdn::session()->UserID)
+            ->endWhereGroup();
+        }
 
         $result = $this->SQL->get();
 
@@ -1238,11 +1255,6 @@ class CommentModel extends Gdn_Model implements FormatFieldInterface, EventFromR
                 $commentData = $commentID ?
                     array_merge($fields, ['CommentID' => $commentID, 'InsertUserID' => $insertUserID, 'DateInserted' => $dateInserted]) :
                     $fields;
-                // Check for spam
-                $spam = SpamModel::isSpam('Comment', $commentData);
-                if ($spam) {
-                    return SPAM;
-                }
 
                 $isValid = true;
                 $invalidReturnType = false;
@@ -1272,19 +1284,37 @@ class CommentModel extends Gdn_Model implements FormatFieldInterface, EventFromR
                         $fields['Format'] = Gdn::config('Garden.InputFormatter', '');
                     }
 
+
+                    $fields['Published'] = true;
+
+                    // Check for spam
+                    $spam = SpamModel::isSpam('Comment', $commentData);
+                    if ($spam) {
+                        $fields['Published'] = false;
+                        // return SPAM;
+                    }
+
                     // Check for approval
                     $approvalRequired = checkRestriction('Vanilla.Approval.Require');
                     if ($approvalRequired && !val('Verified', Gdn::session()->User)) {
-                        $discussionModel = $this->discussionModel;
-                        $discussion = $discussionModel->getID(val('DiscussionID', $fields));
-                        $fields['CategoryID'] = val('CategoryID', $discussion);
-                        LogModel::insert('Pending', 'Comment', $fields);
-                        return UNAPPROVED;
+                        $fields['Published'] = false;
+                        // return UNAPPROVED;
                     }
 
                     // Create comment.
                     $this->serializeRow($fields);
                     $commentID = $this->SQL->insert($this->Name, $fields);
+
+                    if (!$fields['Published']) {
+                        // Insert Moderation Queue
+                        $discussionModel = $this->discussionModel;
+                        $discussion = $discussionModel->getID(val('DiscussionID', $fields));
+                        $fields['CategoryID'] = val('CategoryID', $discussion);
+                        $fields['CommentID'] = $commentID;
+                        LogModel::insert('Pending', 'Comment', $fields);
+
+                        // return UNAPPROVED;
+                    }
                 }
                 if ($commentID) {
                     $bodyValue = $fields["Body"] ?? null;
@@ -1300,6 +1330,7 @@ class CommentModel extends Gdn_Model implements FormatFieldInterface, EventFromR
                     $this->fireEvent('AfterSaveComment');
                 }
             }
+
 
             // Update discussion's comment count.
             if (isset($formPostValues['DiscussionID']) && $isValidUser) {
@@ -1554,13 +1585,24 @@ class CommentModel extends Gdn_Model implements FormatFieldInterface, EventFromR
         $this->fireEvent('BeforeUpdateCommentCountQuery');
 
         $this->options($options);
-        $data = $this->SQL
-            ->select('c.CommentID', 'min', 'FirstCommentID')
+
+        $sql = $this->SQL;
+
+        $sql->select('c.CommentID', 'min', 'FirstCommentID')
             ->select('c.CommentID', 'max', 'LastCommentID')
             ->select('c.DateInserted', 'max', 'DateLastComment')
             ->select('c.CommentID', 'count', 'CountComments')
-            ->from('Comment c')
-            ->where('c.DiscussionID', $discussionID)
+            ->from('Comment c');
+
+        $approvalRequired = checkRestriction('Vanilla.Approval.Require');
+        if ($approvalRequired && !val('Verified', Gdn::session()->User)) {
+            $sql->beginWhereGroup()
+                ->where('c.Published', 1)
+                ->orWhere('c.InsertUserID', Gdn::session()->UserID)
+                ->endWhereGroup();
+        }
+
+        $data = $sql->where('c.DiscussionID', $discussionID)
             ->get()->firstRow(DATASET_TYPE_ARRAY);
 
         $this->EventArguments['Discussion'] =& $discussion;
