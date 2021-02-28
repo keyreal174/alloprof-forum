@@ -247,9 +247,11 @@
     margin-bottom: 9px;
 }
 
-.CommentPostForm .UserInfo .UserAuthor .UserAuthorName svg {
+.UserInfo .UserAuthor .UserAuthorName svg,
+.AuthorWrap .Author svg {
     margin-left: 10px;
 }
+
 
 .CommentPostForm .UserInfo .UserAuthor .UserAuthorGrade {
     font-size: 14px;
