@@ -9,6 +9,7 @@ Gdn::structure()
     ->column('QnA', ['Unanswered', 'Answered', 'Accepted', 'Rejected'], null, 'index')
     ->column('DateAccepted', 'datetime', true) // The
     ->column('DateOfAnswer', 'datetime', true) // The time to answer an accepted question.
+    ->column('AcceptedUserID', 'int', true)
     ->set();
 
 Gdn::structure()

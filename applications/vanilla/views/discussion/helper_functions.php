@@ -114,7 +114,14 @@ if (!function_exists('writeComment')) :
         ?>
         <li class="<?php echo $cssClass; ?>" id="<?php echo 'Comment_'.$comment->CommentID; ?>">
             <div class="Comment">
-
+                <?php
+                    if ($comment->DateAccepted) {
+                        echo '<div class="verfied-info">
+                                <img src="/themes/alloprof/design/images/icons/verifiedbadge.svg"/>
+                                <span>'.t("Explanation verified by Alloprof").'</span>
+                            </div>';
+                    }
+                ?>
                 <?php
                 // Write a stub for the latest comment so it's easy to link to it from outside.
                 if ($currentOffset == Gdn::controller()->data('_LatestItem') && Gdn::config('Vanilla.Comments.AutoOffset')) {
@@ -139,7 +146,14 @@ if (!function_exists('writeComment')) :
                         <?php
                         if ($userPhotoFirst) {
                             echo userPhoto($author);
-                            echo userAnchor($author, 'Username');
+                            if ($sender->UserRole == "Teacher") {
+                                echo '<a href="/profile/"'.$author->Name.' class="Username js-userCard" data-userid="'.$author->UserID.'">'.$author->Name.'<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M8.64495 0.776516C9.40048 0.0744949 10.5995 0.0744944 11.3551 0.776516L12.0133 1.38817C12.4454 1.78962 13.0461 1.9771 13.6413 1.89624L14.5482 1.77303C15.589 1.63163 16.5591 2.30857 16.7407 3.30306L16.8989 4.16953C17.0028 4.73822 17.3741 5.22906 17.9051 5.49967L18.7142 5.91197C19.6428 6.3852 20.0133 7.4805 19.5516 8.3876L19.1494 9.17793C18.8854 9.69665 18.8854 10.3034 19.1494 10.8221L19.5516 11.6124C20.0133 12.5195 19.6428 13.6148 18.7142 14.088L17.9051 14.5003C17.3741 14.7709 17.0028 15.2618 16.8989 15.8305L16.7407 16.6969C16.5591 17.6914 15.589 18.3684 14.5482 18.227L13.6413 18.1038C13.0461 18.0229 12.4454 18.2104 12.0133 18.6118L11.3551 19.2235C10.5995 19.9255 9.40048 19.9255 8.64495 19.2235L7.98668 18.6118C7.55463 18.2104 6.95389 18.0229 6.35868 18.1038L5.45182 18.227C4.41097 18.3684 3.44092 17.6914 3.2593 16.6969L3.10106 15.8305C2.9972 15.2618 2.62591 14.7709 2.0949 14.5003L1.28584 14.088C0.357241 13.6148 -0.0132854 12.5195 0.44837 11.6124L0.850598 10.8221C1.11459 10.3034 1.11459 9.69665 0.850598 9.17793L0.448371 8.3876C-0.0132849 7.4805 0.357241 6.3852 1.28584 5.91197L2.0949 5.49967C2.62591 5.22906 2.9972 4.73822 3.10106 4.16953L3.2593 3.30306C3.44092 2.30857 4.41097 1.63163 5.45182 1.77303L6.35868 1.89624C6.95388 1.9771 7.55463 1.78962 7.98668 1.38817L8.64495 0.776516Z" fill="#05BF8E"/>
+                                <path d="M6.25 10L8.75 12.25L13.75 7.75" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg></a>';
+                            } else {
+                                echo userAnchor($author, 'Username');
+                            }
                         } else {
                             echo userAnchor($author, 'Username');
                             echo userPhoto($author);
@@ -160,10 +174,14 @@ if (!function_exists('writeComment')) :
                         <span class="MItem TimeAgo">
                         <?php
                             $grade = getGrade($comment->GradeID);
-                            if ($grade) {
-                                echo $grade . ' • ' . timeElapsedString($comment->DateInserted, false);
+                            if ($sender->getUserRole() === 'Teacher') {
+                                echo t("Alloprof Teacher") . ' • ' . timeElapsedString($comment->DateInserted, false);
                             } else {
-                                echo timeElapsedString($comment->DateInserted, false);
+                                if ($grade) {
+                                    echo $grade . ' • ' . timeElapsedString($comment->DateInserted, false);
+                                } else {
+                                    echo timeElapsedString($comment->DateInserted, false);
+                                }
                             }
                         ?>
                         </span>
@@ -523,18 +541,26 @@ if (!function_exists('getCommentOptions')) :
             return $options;
         }
 
-        $flagLink = addFlagButtonToDropdown($comment, 'comment');
-        $options['FlagComment'] = [
-            'Label' => t($flagLink['name']),
-            'Url' => $flagLink['url'],
-            'Class' => $flagLink['type']
-        ];
-
         $sender = Gdn::controller();
         $session = Gdn::session();
         $discussion = Gdn::controller()->data('Discussion');
 
         $categoryID = val('CategoryID', $discussion);
+
+        if ($sender->getUserRole() === 'Teacher') {
+            if ($comment->DateAccepted) {
+                $options['QnA'] = ['Label' => '<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1.29492 12C1.29492 5.92487 6.21979 1 12.2949 1C15.2123 1 18.0102 2.15893 20.0731 4.22183C22.136 6.28473 23.2949 9.08262 23.2949 12C23.2949 18.0751 18.3701 23 12.2949 23C6.21979 23 1.29492 18.0751 1.29492 12Z" fill="#05BF8E" stroke="#05BF8E" stroke-width="2"/>
+            <path d="M7.79492 12L10.9769 15.182L17.3409 8.81802" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg><span>'.t('Remove verification').'</span>', 'Url' => 'javascript:;', 'Class' => 'mark-verify', 'Id' => '/discussion/unverify?commentid='.$comment->CommentID];
+            } else {
+                $options['QnA'] = ['Label' => '<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1.29492 12C1.29492 5.92487 6.21979 1 12.2949 1C15.2123 1 18.0102 2.15893 20.0731 4.22183C22.136 6.28473 23.2949 9.08262 23.2949 12C23.2949 18.0751 18.3701 23 12.2949 23C6.21979 23 1.29492 18.0751 1.29492 12Z" fill="#05BF8E" stroke="#05BF8E" stroke-width="2"/>
+            <path d="M7.79492 12L10.9769 15.182L17.3409 8.81802" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg><span>'.t('Mark as verified').'</span>', 'Url' => 'javascript:;', 'Class' => 'mark-verify', 'Id' => '/discussion/verify?commentid='.$comment->CommentID];
+            }
+
+        }
 
         // Can the user edit the comment?
         $canEdit = CommentModel::canEdit($comment, $timeLeft, $discussion);
@@ -543,7 +569,9 @@ if (!function_exists('getCommentOptions')) :
                 $timeLeft = ' ('.Gdn_Format::seconds($timeLeft).')';
             }
             $options['EditComment'] = [
-                'Label' => t('Edit').$timeLeft,
+                'Label' => '<svg width="21" height="22" viewBox="0 0 21 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M14.5853 3.61017C15.1032 3.90423 15.7614 3.72517 16.0589 3.20926C16.3022 2.77995 16.8048 2.56923 17.2815 2.69669C17.7582 2.82415 18.0886 3.2576 18.0851 3.75103C18.0851 4.34945 17.6 4.83457 17.0016 4.83457C16.4032 4.83457 15.9181 5.31969 15.9181 5.91811C15.9181 6.51653 16.4032 7.00165 17.0016 7.00165C18.5788 7.00063 19.9278 5.86752 20.201 4.31413C20.4742 2.76073 19.5929 1.23535 18.1106 0.696217C16.6284 0.157085 14.973 0.759795 14.1844 2.12572C14.0397 2.37551 14.0006 2.6727 14.0759 2.95138C14.1512 3.23007 14.3345 3.4672 14.5853 3.61017ZM19.2446 11.3356C18.6524 11.2588 18.1096 11.6755 18.031 12.2675C17.5605 16.0683 14.3303 18.9221 10.5004 18.9204H4.44342L5.14772 18.2161C5.56783 17.7935 5.56783 17.1109 5.14772 16.6883C2.98737 14.5195 2.34256 11.2646 3.51288 8.43589C4.6832 5.60722 7.4392 3.75936 10.5004 3.75086C11.0988 3.75086 11.5839 3.26574 11.5839 2.66732C11.5839 2.0689 11.0988 1.58378 10.5004 1.58378C6.76216 1.59937 3.36183 3.75059 1.74656 7.12188C0.131296 10.4932 0.585408 14.4911 2.91563 17.4143L1.06278 19.2346C0.755331 19.5462 0.665557 20.0122 0.835236 20.4157C1.00145 20.8203 1.39466 21.0853 1.83209 21.0875H10.5004C15.4133 21.0881 19.5596 17.434 20.1764 12.56C20.2164 12.2739 20.1405 11.9836 19.9655 11.7537C19.7906 11.5238 19.531 11.3733 19.2446 11.3356ZM17.4133 8.16115C17.216 8.07388 16.9972 8.04747 16.7849 8.08531L16.5898 8.15032L16.3948 8.24784L16.2322 8.3887C16.1348 8.48854 16.0575 8.60628 16.0047 8.73543C15.9406 8.87058 15.9109 9.01945 15.918 9.16885C15.9149 9.31335 15.9407 9.45703 15.9939 9.59143C16.0499 9.72147 16.1309 9.83927 16.2322 9.93816C16.4367 10.141 16.7136 10.2541 17.0016 10.2524C17.6 10.2524 18.0851 9.76727 18.0851 9.16885C18.0888 9.02671 18.0591 8.88569 17.9984 8.7571C17.882 8.49673 17.6737 8.28842 17.4133 8.17199V8.16115Z" fill="black"/>
+                </svg><span>'.t('Edit the post').$timeLeft.'</span>',
                 'Url' => '/post/editcomment/'.$comment->CommentID,
                 'EditComment'
             ];
@@ -571,7 +599,14 @@ if (!function_exists('getCommentOptions')) :
             ];
         }
 
-
+        $flagLink = addFlagButtonToDropdown($comment, 'comment');
+        $options['FlagComment'] = [
+            'Label' => '<svg width="15" height="20" viewBox="0 0 15 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M13.2979 3.175L5.41992 2.52175L2.49492 2.278V1.225C2.49492 0.686522 2.0584 0.25 1.51992 0.25C0.981444 0.25 0.544922 0.686522 0.544922 1.225V18.775C0.544922 19.3135 0.981444 19.75 1.51992 19.75C2.0584 19.75 2.49492 19.3135 2.49492 18.775V11.872L5.41992 11.6283L13.2979 10.975C13.8057 10.9342 14.1966 10.5094 14.1949 10V4.15C14.1966 3.64057 13.8057 3.21575 13.2979 3.175ZM4.44489 9.75602L2.49489 9.91201V4.23752L4.44489 4.39352V9.75602ZM8.34493 9.42452L6.39493 9.59027V4.55926L8.34493 4.72501V9.42452ZM12.245 9.10276L10.2949 9.26851V4.88101L12.245 5.04676V9.10276Z" fill="#EB5757"/>
+            </svg><span>'.t($flagLink['name']).'</span>',
+            'Url' => $flagLink['url'],
+            'Class' => $flagLink['type']
+        ];
 
         // DEPRECATED (as of 2.1)
         $sender->EventArguments['Type'] = 'Comment';
@@ -602,11 +637,12 @@ if (!function_exists('writeCommentOptions')) :
         echo '<span class="ToggleFlyout OptionsMenu">';
         echo '<span class="OptionsTitle" title="'.t('Options').'">'.t('Options').'</span>';
         echo sprite('SpFlyoutHandle', 'Arrow');
-        echo '<ul class="Flyout MenuItems">';
+        echo '<ul class="Flyout MenuItems CommentOptions">';
 
         if (!empty($options)) {
             foreach ($options as $code => $option) {
-                echo wrap(anchor($option['Label'], $option['Url'], val('Class', $option, $code)), 'li');
+                echo wrap("<a href='". $option['Url'] . "' class='" . val('Class', $option, $code) . "' id='". val('Id', $option, $code) ."'>" . $option['Label'] ."</a>", 'li');
+                // anchor($option['Label'], $option['Url'], val('Class', $option, $code), val('Id', $option, $code))
             }
         }
         echo '</ul>';

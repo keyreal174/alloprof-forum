@@ -726,6 +726,21 @@ class DiscussionModel extends Gdn_Model implements FormatFieldInterface, EventFr
     }
 
     /**
+     * Get a list of the most recent discussions.
+     *
+     * @param array|false $where The where condition of the get.
+     * @param bool|false|int $limit The number of discussion to return.
+     * @param int|false $offset The offset within the total set.
+     * @param bool $expand Expand relevant related records (e.g. category, users).
+     * @return Gdn_DataSet Returns a <a href='psi_element://Gdn_DataSet'>Gdn_DataSet</a> of discussions.
+     * of discussions.
+     */
+    public function getWhereWithOrder($where = [], $sortField, $sortDirection, $limit = false, $offset = false, $expand = true) {
+        $result = $this->getWhere($where, $sortField, $sortDirection, $limit, $offset, $expand);
+        return $result;
+    }
+
+    /**
      * Returns an array in the format [field => direction]. You can safely use return values from this function
      * in the orderBy() SQL function.
      *
