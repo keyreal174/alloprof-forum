@@ -1750,3 +1750,5 @@ $Definition['Edit the post'] = 'Éditer la publication';
 $Definition['Publish my explanation'] = 'Publier mon explication';
 $Definition['Remove verification'] = 'Enlever vérification';
 $Definition['Mark as verified'] = 'Marquer comme vérifiée';
+$Definition['Share your question!'] = 'Partage la question!';
+$Definition['Asking yourself the same question? Share it with your friends, they may have the explanation!'] = 'Partage la question à tes amis, ils ont peut-être l’explication !';

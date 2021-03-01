@@ -21,11 +21,11 @@ a.FlagContentPopup:before {
     top: calc(50% - 360px) !important;
 } */
 
-div.Popup.FlagContentPopup .Border {
+div.Popup.CustomPopup .Border {
     width: 720px;
 }
 
-div.Popup.FlagContentPopup .Body {
+div.Popup.CustomPopup .Body {
     max-height: 700px !important;
     overflow: initial !important;
     padding: 80px !important;
@@ -35,7 +35,7 @@ div.Popup.FlagContentPopup .Body {
     border: 1px solid #DDDDDD;
 }
 
-div.Popup.FlagContentPopup .Body .Content {
+div.Popup.CustomPopup .Body .Content {
     text-align: center;
 }
 
@@ -99,4 +99,18 @@ div.Popup.FlagContentPopup .Body .Content .FlatReportButton {
 
 div.Popup.FlagContentPopup .Body .Content .FlatReportButton input {
     margin: 0 auto;
+}
+
+/* Social Sharing Popup */
+div.Popup.SocialPopup h2 {
+    font-size: 28px;
+    line-height: 31px;
+    color: black;
+    margin-bottom: 40px;
+}
+
+div.Popup.SocialPopup h4 {
+    font-size: 21px;
+    line-height: 31px;
+    color: #4F4F4F;
 }

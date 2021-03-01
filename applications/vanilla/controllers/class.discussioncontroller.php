@@ -1429,4 +1429,9 @@ body { background: transparent !important; }
         }
         return $row;
     }
+
+    // Social Sharing
+    public function social($DiscussionID) {
+        $this->render($this->fetchViewLocation('socialsharing', 'discussion'));
+    }
 }

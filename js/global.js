@@ -467,7 +467,11 @@ jQuery(document).ready(function($) {
     // CustomPopup
     // This turns FlagContentPopup anchors into in-page popups
     if ($.fn.popup)
-        $('a.FlagContentPopup').popup({containerCssClass: 'FlagContentPopup'});
+        $('a.FlagContentPopup').popup({containerCssClass: 'FlagContentPopup CustomPopup'});
+
+    // This turns Social Sharing Popup anchors into in-page popups
+    if ($.fn.popup)
+        $('a.SocialPopup').popup({containerCssClass: 'SocialPopup CustomPopup'});
 
     // This turns DeleteDiscussionPopup anchors into in-page popups
     if ($.fn.popup)
@@ -1580,3 +1584,17 @@ if (typeof String.prototype.trim !== 'function') {
 });
 
 })(jQuery);
+
+jQuery(window).load(function() {
+    // <script>
+    //     window.fbAsyncInit = function() {
+    //         FB.init({
+    //         appId            : 'your-app-id',
+    //         autoLogAppEvents : true,
+    //         xfbml            : true,
+    //         version          : 'v10.0'
+    //         });
+    //     };
+    // </script>
+    // <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+});
