@@ -165,7 +165,7 @@ class DiscussionsController extends VanillaController {
         $this->addModule('AskQuestionModule');
         $this->addModule('CategoriesModule');
         // Filtering and Sorter Module
-        $gradeFilterOption = Gdn::request()->get('grade') ? strval((int)(Gdn::request()->get('grade'))) : -1;
+        $gradeFilterOption = (Gdn::request()->get('grade') || Gdn::request()->get('grade') == '0') ? strval((int)(Gdn::request()->get('grade'))) : -1;
         $this->GradeID = $gradeFilterOption;
 
         $explanation = Gdn::request()->get('explanation') ?? false;
@@ -174,7 +174,7 @@ class DiscussionsController extends VanillaController {
         $verified = Gdn::request()->get('verifiedBy') ?? false;
         $this->IsVerifiedBy = $verified;
 
-        $sort = Gdn::request()->get('sort') ?? 'DateInserted';
+        $sort = Gdn::request()->get('sort') ?? 'desc';
         $this->Sort = $sort;
 
         $this->setData('SortDirection', 'desc');
@@ -320,7 +320,7 @@ class DiscussionsController extends VanillaController {
         $this->setData('Announcements', $this->AnnounceData !== false ? $this->AnnounceData : [], true);
 
         // Get Discussions
-        $this->DiscussionData = $DiscussionModel->getWhereWithOrder($where, 'DateInserted', $sort, $Limit, $Offset);
+        $this->DiscussionData = $DiscussionModel->getWhereWithOrder($where, 'DateLastComment', $sort, $Limit, $Offset);
 
         $this->setData('Discussions', $this->DiscussionData, true);
         $this->setJson('Loading', $Offset.' to '.$Limit);
