@@ -44,8 +44,8 @@ jQuery(document).ready(function($) {
         //     explanation: explanation,
         //     verifiedBy: verifiedBy
         // };
-        grade = !grade ? 0 : grade;
-        var parameter = 'grade=' + (parseInt(grade)-1) + '&sort=' + sort + '&explanation=' + explanation + '&verifiedBy=' + verifiedBy;
+        grade = !grade ? -1 : grade;
+        var parameter = 'grade=' + parseInt(grade) + '&sort=' + sort + '&explanation=' + explanation + '&verifiedBy=' + verifiedBy;
 
         $.ajax({
             type: "POST",
