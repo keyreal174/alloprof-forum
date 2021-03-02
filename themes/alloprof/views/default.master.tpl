@@ -187,10 +187,12 @@
                                 {/if}
                                 <div class="Frame-row">
                                     <div class="sidebar left">
-                                        {module name="ProfileEditModule"}
-                                        <aside class="Panel Panel-main left LeftPanel">
-                                            {asset name="LeftPanel"}
+                                        <aside class="Panel Panel-main RightPanel">
+                                            {asset name="Panel"}
                                         </aside>
+                                        <div class="Extra">
+                                            {asset name="Extra"}
+                                        </div>
                                     </div>
                                     <main id="MainContent" class="Content MainContent">
                                         {if inSection("Profile")}
@@ -213,17 +215,10 @@
                                         {asset name="Content"}
                                     </main>
                                     <div class="sidebar right">
-                                        <aside class="Panel Panel-main RightPanel">
-                                            {if !$SectionGroups && !$DataDrivenTitleBar}
-                                                <!-- <div class="SearchBox js-sphinxAutoComplete" role="search">
-                                                    {searchbox}
-                                                </div> -->
-                                            {/if}
-                                            {asset name="Panel"}
+                                        <!-- {module name="ProfileEditModule"} -->
+                                        <aside class="Panel Panel-main left LeftPanel">
+                                            {asset name="LeftPanel"}
                                         </aside>
-                                        <div class="Extra">
-                                            {asset name="Extra"}
-                                        </div>
                                     </div>
                                 </div>
                             </div>

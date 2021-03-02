@@ -394,13 +394,13 @@ abbr {
 .sidebar.left {
     margin-left: 0 !important;
     margin-right: auto !important;
-    max-width: 280px;
+    max-width: 300px;
 }
 
 .sidebar.right {
     margin-left: auto !important;
     margin-right: 0 !important;
-    width: 26%;
+    max-width: 300px;
 }
 
 @media screen and (max-width:992px) {

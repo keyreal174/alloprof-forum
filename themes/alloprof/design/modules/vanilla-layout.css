@@ -2,7 +2,7 @@
 /*# sourceMappingURL=custom.css.map */
 
 .Container {
-    max-width: 1596px !important;
+    max-width: 1440px !important;
 }
 
 .Header .MeButton {
@@ -69,4 +69,19 @@ header.not-transparent {
 
 .DataList-Search {
     margin-top: 0;
+}
+
+.sidebar {
+    width: 22%;
+    height: 100%;
+    padding-bottom: 20px;
+}
+
+.sidebar:hover {
+    overflow-y: auto;
+    height: calc(100vh - 240px);
+}
+
+.sidebar::-webkit-scrollbar {
+    width: 1px;
 }

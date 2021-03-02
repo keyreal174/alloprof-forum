@@ -10,8 +10,8 @@ jQuery(document).ready(function($) {
                         <path d="M1.50049 7.36377H22.5005" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         <path d="M16.1146 13.7277L22.4785 7.36377L16.1146 0.999809" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg></span>`,
-        slidesToShow: 4,
-        slidesToScroll: 4,
+        slidesToShow: 3,
+        slidesToScroll: 3,
         responsive: [
             {
               breakpoint: 1300,
