@@ -1750,3 +1750,5 @@ $Definition['Edit the post'] = 'Éditer la publication';
 $Definition['Publish my explanation'] = 'Publier mon explication';
 $Definition['Remove verification'] = 'Enlever vérification';
 $Definition['Mark as verified'] = 'Marquer comme vérifiée';
+$Definition['Explanations given'] = 'Explications données';
+$Definition['Modify my profile on Alloprof'] = 'Modifier mon profil sur Alloprof';

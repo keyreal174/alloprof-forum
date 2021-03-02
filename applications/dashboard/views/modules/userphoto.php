@@ -29,13 +29,14 @@ if ($User->Banned) {
 }
 
 if ($IsProfilePage) {
-    $AllowEditClass = "ChangePicture Popup";
+    // $AllowEditClass = "ChangePicture Popup";
+    $AllowEditClass = "";
 } else {
     $AllowEditClass = "";
 }
 
 $UserMetaData = Gdn::userModel()->getMeta($User->UserID, 'Profile.%', 'Profile.');
-
+echo "<div class='Boxuserphoto'>";
 if ($Photo) : ?>
     <div class="Photo PhotoWrap PhotoWrapLarge <?php echo val('_CssClass', $User); ?>">
         <?php
@@ -58,7 +59,7 @@ if ($Photo) : ?>
 endif;
 ?>
 <div class="userphoto-personalinfo">
-    <h5 class="userphoto-personalinfo__name"><?php echo $User->Name ?></h5>
+    <h5 class="userphoto-personalinfo__name"><?php echo $User->Name; ?></h5>
     <p class="userphoto-personalinfo__secondary">
         <?php
             if(userRoleCheck() == Gdn::config('Vanilla.ExtraRoles.Teacher')) {
@@ -71,4 +72,5 @@ endif;
             }
         ?>
     </p>
+</div>
 </div>
