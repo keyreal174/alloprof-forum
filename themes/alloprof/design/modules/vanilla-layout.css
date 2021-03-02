@@ -83,5 +83,5 @@ header.not-transparent {
 }
 
 .sidebar::-webkit-scrollbar {
-    width: 1px;
+    width: 0px;
 }

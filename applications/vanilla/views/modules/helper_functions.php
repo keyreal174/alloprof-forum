@@ -284,7 +284,7 @@ if (!function_exists('writeGradeFilter')) :
 
         echo '<div class="FilterMenu__Dropdown">';
         echo '<img src="/themes/alloprof/design/images/icons/grade.svg"/>';
-        echo Gdn::controller()->Form->dropDown('GradeID', $GradeOption, array('IncludeNull' => t('Grade'), 'Value' => $gradeID));
+        echo Gdn::controller()->Form->dropDown('GradeDropdown', $GradeOption, array('IncludeNull' => t('Grade'), 'Value' => $gradeID));
         echo '</div>';
     }
 endif;
