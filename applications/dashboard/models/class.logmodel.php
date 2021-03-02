@@ -846,7 +846,7 @@ class LogModel extends Gdn_Pluggable {
     }
 
 
-    private function publishQuestionOrExplanation($table, $ID, $notifyUser, $categoryID, $discussionID, $notifyString) {
+    private function publishQuestionOrExplanation($table, $ID, $notifyUser, $data, $title) {
         // Publish
         Gdn::sql()->update($table)
         ->set('Published', true)
@@ -860,10 +860,19 @@ class LogModel extends Gdn_Pluggable {
         $activity = [
             'ActivityType' => 'Default',
             'NotifyUserID' => $notifyUser,
-            'ActivityUser' => null,
-            'HeadlineFormat' => $notifyString,
-            'Notified' => $notifyUser,
-            'Emailed' => $notifyUser];
+            'ActivityUserID' => null,
+            'HeadlineFormat' => "popup",
+            'Story' => Gdn_Format::to($data['Body'], $data['Format']),
+            "RecordType" => "Comment",
+            "RecordID" => $table=='Discussion'?$data->DiscussionID:$data->CommentID,
+            "Route" => $table=='Discussion'?DiscussionModel::discussionUrl($data, "", "/"):CommentModel::commentUrl($data),
+            'Notified' => ActivityModel::SENT_POPUP,
+            'Emailed' => ActivityModel::SENT_POPUP,
+            'Data' => [
+                'Title' => $title,
+                'Text' => '<span>"</span>'.Gdn_Format::to($data['Body'], $data['Format']).'<span>..." </span> <strong>has been published.</strong>'
+            ]
+        ];
 
         $activityModel = new ActivityModel();
         $activityModel->save($activity);
@@ -1037,9 +1046,8 @@ class LogModel extends Gdn_Pluggable {
                                     'Discussion',
                                     $log['RecordID'],
                                     $log['RecordUserID'],
-                                    $set['CategoryID'],
-                                    $set['DiscussionID'],
-                                    t('HeadlineFormat.Approve', 'Your question has been published.')
+                                    $set,
+                                    'Question published!'
                                 );
 
                                 break;
@@ -1054,9 +1062,8 @@ class LogModel extends Gdn_Pluggable {
                                     'Comment',
                                     $log['RecordID'],
                                     $log['RecordUserID'],
-                                    $set['CategoryID'],
-                                    $set['DiscussionID'],
-                                    t('HeadlineFormat.Approve', 'Your explanation has been published.')
+                                    $set,
+                                    'Explanation published!'
                                 );
 
                                 break;

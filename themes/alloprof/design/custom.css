@@ -363,13 +363,19 @@ div.Popup .Border {
     line-height: 24px;
 }
 
-.InformMessages button {
+.InformMessage .toast-text,
+.InformMessage .toast-text * {
+    display: inline-block;
+    font-size: 16px !important;
+}
+
+.InformMessage a {
     font-size: 14px;
     margin-top: 20px;
     height: 41px;
     margin-left: auto;
+    text-decoration: none !important;
 }
-
 
 
 /* Not approved question box */
