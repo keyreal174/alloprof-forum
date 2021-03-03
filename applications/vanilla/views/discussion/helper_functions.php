@@ -139,17 +139,17 @@ if (!function_exists('writeComment')) :
                 <div class="Options">
                     <?php writeCommentOptions($comment); ?>
                 </div>
-                <?php
-                    if(!$comment->Published) {
-                        echo '<div class="not-published-badge">';
-                        echo '<img src="/themes/alloprof/design/images/icons/eyebreak.svg"/>';
-                        echo t('Awaiting publication');
-                        echo '</div>';
-                    }
-                ?>
                 <?php $sender->fireEvent('BeforeCommentMeta'); ?>
                 <div class="Item-Header CommentHeader">
                     <div class="AuthorWrap">
+                        <?php
+                            if(!$comment->Published) {
+                                echo '<div class="not-published-badge">';
+                                echo '<img src="/themes/alloprof/design/images/icons/eyebreak.svg"/>';
+                                echo t('Awaiting publication');
+                                echo '</div>';
+                            }
+                        ?>
                         <span class="Author">
                         <?php
                         if ($userPhotoFirst) {

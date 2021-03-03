@@ -113,7 +113,8 @@ class LogController extends DashboardController {
         }
         $this->permission(['Garden.Moderation.Manage', 'Moderation.ModerationQueue.Manage'], false);
         $logIDs = Gdn::request()->post('LogIDs');
-        $this->LogModel->deleteIDs($logIDs);
+        $deleteMessage = Gdn::request()->post('DeleteMessage');
+        $this->LogModel->deleteIDs($logIDs, $deleteMessage);
         $this->render('Blank', 'Utility');
     }
 

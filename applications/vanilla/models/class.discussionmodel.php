@@ -918,9 +918,9 @@ class DiscussionModel extends Gdn_Model implements FormatFieldInterface, EventFr
         $sql->select('d.DiscussionID')
             ->from('Discussion d');
 
-        // Check Approval
+        // Check Approval or Authenticaion
         $approvalRequired = checkRestriction('Vanilla.Approval.Require');
-        if ($approvalRequired && !val('Verified', Gdn::session()->User)) {
+        if (($approvalRequired && !val('Verified', Gdn::session()->User)) || !Gdn::session()->User) {
             // Get Published Question
             $sql->beginWhereGroup()
             ->where('d.Published', 1)
@@ -1940,7 +1940,7 @@ class DiscussionModel extends Gdn_Model implements FormatFieldInterface, EventFr
 
         // Check Approval
         $approvalRequired = checkRestriction('Vanilla.Approval.Require');
-        if ($approvalRequired && !val('Verified', Gdn::session()->User)) {
+        if (($approvalRequired && !val('Verified', Gdn::session()->User)) || !Gdn::session()->User) {
             // Get Published Question
             $sql->beginWhereGroup()
             ->where('d.Published', 1)

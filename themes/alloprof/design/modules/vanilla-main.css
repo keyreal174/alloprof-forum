@@ -5142,7 +5142,8 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
 
 .MessageList .ItemComment .AuthorWrap,
 .MessageList .ItemDiscussion .AuthorWrap {
-    max-width: calc(100% - 45px)
+    max-width: 100%;
+    position: relative;
 }
 
 .MessageList .ItemComment .MItem.Category,
