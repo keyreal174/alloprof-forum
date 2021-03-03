@@ -380,6 +380,45 @@ class CategoriesController extends VanillaController {
         }
     }
 
+    public function writeFilter() {
+        $gradeFilterOption = (Gdn::request()->get('grade') || Gdn::request()->get('grade') == '0') ? strval((int)(Gdn::request()->get('grade'))) : -1;
+        $this->GradeID = $gradeFilterOption;
+
+        $explanation = Gdn::request()->get('explanation') ?? false;
+        $this->IsExplanation = $explanation;
+
+        $verified = Gdn::request()->get('verifiedBy') ?? false;
+        $this->IsVerifiedBy = $verified;
+
+        $sort = Gdn::request()->get('sort') ?? 'desc';
+        $this->SortDirection = $sort;
+
+        $discussionFilterModule = new DiscussionFilterModule($gradeFilterOption, $sort, $explanation, $verified);
+        $this->addModule($discussionFilterModule);
+        $this->addJsFile('filterInCategory.js');
+        $wheres = [];
+
+        if (($this->GradeID || $this->GradeID === '0') && $this->GradeID != -1) {
+            $wheres['d.GradeID'] = $this->GradeID;
+        } else {
+            unset($wheres['d.GradeID']);
+        }
+
+        if ($this->IsExplanation == 'true') {
+            $wheres['d.CountComments >'] = 0;
+        } else {
+            unset($wheres['d.CountComments >']);
+        }
+
+        if ($this->IsVerifiedBy == 'true') {
+            $wheres['d.DateAccepted <>'] = '';
+        } else {
+            unset($wheres['d.DateAccepted <>']);
+        }
+
+        $this->WhereClause = $wheres;
+    }
+
     /**
      * Show all discussions in a particular category.
      *
@@ -542,6 +581,7 @@ class CategoriesController extends VanillaController {
             // $this->addModule('DiscussionFilterModule');
             $this->addModule('AskQuestionModule');
             $this->addModule('CategoriesModule');
+            $this->writeFilter();
             // $this->addModule('BookmarkedModule');
             // $this->addModule('TagModule');
 
@@ -557,9 +597,8 @@ class CategoriesController extends VanillaController {
 
             // Get a DiscussionModel
             $discussionModel = new DiscussionModel();
-            $discussionModel->setSort(Gdn::request()->get());
+            $discussionModel->setSort($this->SortDirection);
             $discussionModel->setFilters(Gdn::request()->get());
-            $this->setData('Sort', $discussionModel->getSort());
             $this->setData('Filters', $discussionModel->getFilters());
 
             $categoryIDs = [$categoryID];
@@ -567,6 +606,7 @@ class CategoriesController extends VanillaController {
                 $categoryIDs = array_merge($categoryIDs, array_column($this->data('Categories'), 'CategoryID'));
             }
             $wheres = ['d.CategoryID' => $categoryIDs];
+            $wheres = array_merge($wheres, $this->WhereClause);
             $this->setData('_ShowCategoryLink', count($categoryIDs) > 1);
 
             // Check permission.
@@ -615,7 +655,7 @@ class CategoriesController extends VanillaController {
                 $wheres['Announce'] = 'all';
             }
 
-            $this->DiscussionData = $this->setData('Discussions', $discussionModel->getWhereRecent($wheres, $limit, $offset));
+            $this->DiscussionData = $this->setData('Discussions', $discussionModel->getWhereWithOrder($wheres, 'DateLastComment', $this->SortDirection, $Limit, $Offset));
 
             // Build a pager
             $pagerFactory = new Gdn_PagerFactory();
@@ -966,5 +1006,11 @@ class CategoriesController extends VanillaController {
      */
     private function calculateCanonicalUrl($data) {
         return empty($data['isHomepage']) ? url(Gdn::request()->path(), true) : url('/', true);
+    }
+
+    public function filterDiscussion() {
+        $parameter = $_POST['parameter'];
+
+        echo $this->_PagerUrl.'?'.$parameter;
     }
 }

@@ -78,6 +78,45 @@ class DiscussionsController extends VanillaController {
         $this->index($page);
     }
 
+    public function writeFilter() {
+        $gradeFilterOption = (Gdn::request()->get('grade') || Gdn::request()->get('grade') == '0') ? strval((int)(Gdn::request()->get('grade'))) : -1;
+        $this->GradeID = $gradeFilterOption;
+
+        $explanation = Gdn::request()->get('explanation') ?? false;
+        $this->IsExplanation = $explanation;
+
+        $verified = Gdn::request()->get('verifiedBy') ?? false;
+        $this->IsVerifiedBy = $verified;
+
+        $sort = Gdn::request()->get('sort') ?? 'desc';
+        $this->SortDirection = $sort;
+
+        $discussionFilterModule = new DiscussionFilterModule($gradeFilterOption, $sort, $explanation, $verified);
+        $this->addModule($discussionFilterModule);
+        $this->addJsFile('filter.js');
+        $wheres = [];
+
+        if (($this->GradeID || $this->GradeID === '0') && $this->GradeID != -1) {
+            $wheres['d.GradeID'] = $this->GradeID;
+        } else {
+            unset($wheres['d.GradeID']);
+        }
+
+        if ($this->IsExplanation == 'true') {
+            $wheres['d.CountComments >'] = 0;
+        } else {
+            unset($wheres['d.CountComments >']);
+        }
+
+        if ($this->IsVerifiedBy == 'true') {
+            $wheres['d.DateAccepted <>'] = '';
+        } else {
+            unset($wheres['d.DateAccepted <>']);
+        }
+
+        $this->WhereClause = $wheres;
+    }
+
     /**
      * Check New Popup Notification
      */
@@ -189,24 +228,7 @@ class DiscussionsController extends VanillaController {
         $this->addModule('AskQuestionModule');
         $this->addModule('CategoriesModule');
         // Filtering and Sorter Module
-        $gradeFilterOption = (Gdn::request()->get('grade') || Gdn::request()->get('grade') == '0') ? strval((int)(Gdn::request()->get('grade'))) : -1;
-        $this->GradeID = $gradeFilterOption;
-
-        $explanation = Gdn::request()->get('explanation') ?? false;
-        $this->IsExplanation = $explanation;
-
-        $verified = Gdn::request()->get('verifiedBy') ?? false;
-        $this->IsVerifiedBy = $verified;
-
-        $sort = Gdn::request()->get('sort') ?? 'desc';
-        $this->Sort = $sort;
-
-        $this->setData('SortDirection', 'desc');
-
-        $discussionFilterModule = new DiscussionFilterModule($gradeFilterOption, $sort, $explanation, $verified);
-        $this->addModule($discussionFilterModule);
-        $this->addJsFile('filter.js');
-
+        $this->writeFilter();
 
         // Make sure the userphoto module gets added to the page
         $this->addModule('UserPhotoModule');
@@ -268,7 +290,7 @@ class DiscussionsController extends VanillaController {
         if ($this->data('ApplyRestrictions') === true) {
             $DiscussionModel->setOption('ApplyRestrictions', true);
         }
-        $DiscussionModel->setSort($sort);
+        $DiscussionModel->setSort($this->SortDirection);
         $DiscussionModel->setFilters(Gdn::request()->get());
         $this->setData('Sort', $DiscussionModel->getSort());
         $this->setData('Filters', $DiscussionModel->getFilters());
@@ -298,35 +320,7 @@ class DiscussionsController extends VanillaController {
             }
         }
 
-        // ============================== SET CUSTOM GRADE FILTER
-        if (($gradeFilterOption || $gradeFilterOption === '0') && $gradeFilterOption != -1) {
-            $where['d.GradeID'] = $gradeFilterOption;
-            $announcementsWhere['d.GradeID'] = $gradeFilterOption;
-        } else {
-            unset($where['d.GradeID']);
-            unset($announcementsWhere['d.GradeID']);
-        }
-        // ============================== SET CUSTOM GRADE FILTER END
-
-        // ============================== SET CUSTOM HAS EXPLANATION FILTER
-        if ($explanation == 'true') {
-            $where['d.CountComments >'] = 0;
-            $announcementsWhere['d.CountComments >'] = 0;
-        } else {
-            unset($where['d.CountComments >']);
-            unset($announcementsWhere['d.CountComments >']);
-        }
-        // ============================== SET CUSTOM HAS EXPLANATION FILTER END
-
-        // ============================== SET CUSTOM IS VERIFIED FILTER
-        if ($verified == 'true') {
-            $where['d.DateAccepted <>'] = '';
-            $announcementsWhere['d.DateAccepted <>'] = '';
-        } else {
-            unset($where['d.DateAccepted']);
-            unset($announcementsWhere['d.DateAccepted']);
-        }
-        // ============================== SET CUSTOM IS VERIFIED FILTER END
+        $where = array_merge($where, $this->WhereClause);
 
         // Get Discussion Count
         $CountDiscussions = $DiscussionModel->getCount($where);
@@ -344,7 +338,7 @@ class DiscussionsController extends VanillaController {
         $this->setData('Announcements', $this->AnnounceData !== false ? $this->AnnounceData : [], true);
 
         // Get Discussions
-        $this->DiscussionData = $DiscussionModel->getWhereWithOrder($where, 'DateLastComment', $sort, $Limit, $Offset);
+        $this->DiscussionData = $DiscussionModel->getWhereWithOrder($where, 'DateLastComment', $this->SortDirection, $Limit, $Offset);
 
         $this->setData('Discussions', $this->DiscussionData, true);
         $this->setJson('Loading', $Offset.' to '.$Limit);
@@ -572,10 +566,12 @@ class DiscussionsController extends VanillaController {
             $page = 0;
         }
 
+        // Filter Discussion Module
+        $this->writeFilter();
+
         $discussionModel = new DiscussionModel();
-        $discussionModel->setSort(Gdn::request()->get());
+        $discussionModel->setSort($this->SortDirection);
         $discussionModel->setFilters(Gdn::request()->get());
-        $this->setData('Sort', $discussionModel->getSort());
         $this->setData('Filters', $discussionModel->getFilters());
 
         $wheres = [
@@ -583,7 +579,9 @@ class DiscussionsController extends VanillaController {
             'w.UserID' => Gdn::session()->UserID
         ];
 
-        $this->DiscussionData = $discussionModel->get($page, $limit, $wheres);
+        $wheres = array_merge($wheres, $this->WhereClause);
+
+        $this->DiscussionData = $discussionModel->get($offset, $limit, $wheres, [$this->SortDirection => 'DateLastComment']);
         $this->setData('Discussions', $this->DiscussionData);
         $countDiscussions = $discussionModel->getCount($wheres);
         $this->setData('CountDiscussions', $countDiscussions);
@@ -735,21 +733,24 @@ class DiscussionsController extends VanillaController {
         $session = Gdn::session();
         $wheres = ['d.InsertUserID' => $session->UserID];
 
-        $discussionModel = new DiscussionModel();
-        $discussionModel->setSort(Gdn::request()->get());
-        $discussionModel->setFilters(Gdn::request()->get());
-        $this->setData('Sort', $discussionModel->getSort());
-        $this->setData('Filters', $discussionModel->getFilters());
-
-        $this->DiscussionData = $discussionModel->get($offset, $limit, $wheres);
-        $this->setData('Discussions', $this->DiscussionData);
-        $countDiscussions = $this->setData('CountDiscussions', $discussionModel->getCount($wheres));
-
         $this->View = 'index';
         if (c('Vanilla.Discussions.Layout') === 'table') {
             $this->View = 'table';
         }
 
+        // Filter Discussion Module
+        $this->writeFilter();
+        $wheres = array_merge($wheres, $this->WhereClause);
+
+        $discussionModel = new DiscussionModel();
+        $discussionModel->setSort($this->SortDirection);
+        $discussionModel->setFilters(Gdn::request()->get());
+        $this->setData('Sort', $discussionModel->getSort());
+        $this->setData('Filters', $discussionModel->getFilters());
+
+        $this->DiscussionData = $discussionModel->get($offset, $limit, $wheres, [$this->SortDirection => 'DateLastComment']);
+        $this->setData('Discussions', $this->DiscussionData);
+        $countDiscussions = $this->setData('CountDiscussions', $discussionModel->getCount($wheres));
         // Build a pager
         $pagerFactory = new Gdn_PagerFactory();
         $this->EventArguments['PagerType'] = 'MorePager';
@@ -1347,6 +1348,6 @@ class DiscussionsController extends VanillaController {
     public function filterDiscussion() {
         $parameter = $_POST['parameter'];
 
-        echo '/discussions/index?'.$parameter;
+        echo $this->_PagerUrl.'?'.$parameter;
     }
 }
