@@ -781,9 +781,13 @@ if (!function_exists('userRoleCheck')) :
     /**
      * User Role check
      */
-    function userRoleCheck() {
+    function userRoleCheck($UserID = NULL) {
         $userModel = new UserModel();
-        $User = $userModel->getID(Gdn::session()->UserID);
+        if ($UserID) {
+            $User = $userModel->getID($UserID);
+        } else {
+            $User = $userModel->getID(Gdn::session()->UserID);
+        }
 
         if($User) {
             $RoleData = $userModel->getRoles($User->UserID);
