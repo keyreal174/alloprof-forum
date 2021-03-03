@@ -102,6 +102,10 @@ if (!function_exists('writeComment')) :
             $cssClass .= ' isOriginalPoster';
         }
 
+        if ($comment->DateAccepted) {
+            $cssClass .= ' accepted';
+        }
+
         // DEPRECATED ARGUMENTS (as of 2.1)
         $sender->EventArguments['Object'] = &$comment;
         $sender->EventArguments['Type'] = 'Comment';
@@ -113,15 +117,15 @@ if (!function_exists('writeComment')) :
 
         ?>
         <li class="<?php echo $cssClass; ?>" id="<?php echo 'Comment_'.$comment->CommentID; ?>">
+            <?php
+                if ($comment->DateAccepted) {
+                    echo '<div class="verfied-info">
+                            <img src="/themes/alloprof/design/images/icons/verifiedbadge.svg"/>
+                            <span>'.t("Explanation verified by Alloprof").'</span>
+                        </div>';
+                }
+            ?>
             <div class="Comment">
-                <?php
-                    if ($comment->DateAccepted) {
-                        echo '<div class="verfied-info">
-                                <img src="/themes/alloprof/design/images/icons/verifiedbadge.svg"/>
-                                <span>'.t("Explanation verified by Alloprof").'</span>
-                            </div>';
-                    }
-                ?>
                 <?php
                 // Write a stub for the latest comment so it's easy to link to it from outside.
                 if ($currentOffset == Gdn::controller()->data('_LatestItem') && Gdn::config('Vanilla.Comments.AutoOffset')) {
@@ -174,7 +178,7 @@ if (!function_exists('writeComment')) :
                         <span class="MItem TimeAgo">
                         <?php
                             $grade = getGrade($comment->GradeID);
-                            if ($sender->getUserRole() === 'Teacher') {
+                            if ($sender->getUserRole($comment->InsertUserID) === 'Teacher') {
                                 echo t("Alloprof Teacher") . ' • ' . timeElapsedString($comment->DateInserted, false);
                             } else {
                                 if ($grade) {
