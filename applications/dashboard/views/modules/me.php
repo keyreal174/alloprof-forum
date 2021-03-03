@@ -130,7 +130,7 @@ else:
     echo '<div class="MenuDivider"></div>';
     $Url = registerUrl($this->_Sender->SelfUrl);
     if (!empty($Url))
-        echo bullet(' ').anchor(t('Register'), $Url, 'ApplyButton', ['rel' => 'nofollow']).' ';
+        echo bullet(' ').anchor(t('Register'), $Url, 'SignInPopup', ['rel' => 'nofollow']).' ';
     echo '</div>';
 
     echo ' <div class="SignInIcons">';
