@@ -464,9 +464,13 @@ class DiscussionController extends VanillaController {
         $this->render();
     }
 
-    public function getUserRole() {
+    public function getUserRole($UserID = null) {
         $userModel = new UserModel();
-        $User = $userModel->getID(Gdn::session()->UserID);
+        if ($UserID) {
+            $User = $userModel->getID($UserID);
+        } else {
+            $User = $userModel->getID(Gdn::session()->UserID);
+        }
 
         if($User) {
             $RoleData = $userModel->getRoles($User->UserID);
