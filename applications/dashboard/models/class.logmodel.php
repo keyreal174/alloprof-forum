@@ -193,7 +193,7 @@ class LogModel extends Gdn_Pluggable {
      *
      * @param int[]|string $logIDs
      */
-    public function deleteIDs($logIDs) {
+    public function deleteIDs($logIDs, $deleteMessage='') {
         if (is_string($logIDs)) {
             $logIDs = explode(',', $logIDs);
         }
@@ -206,7 +206,7 @@ class LogModel extends Gdn_Pluggable {
 
         foreach ($logs as $log) {
             $recordType = $log['RecordType'];
-            if (in_array($log['Operation'], ['Spam', 'Moderate']) && array_key_exists($recordType, $models)) {
+            if (in_array($log['Operation'], ['Spam', 'Moderate', 'Pending']) && array_key_exists($recordType, $models)) {
                 /** @var Gdn_Model $model */
                 $model = $models[$recordType];
                 $recordID = $log['RecordID'];
@@ -225,6 +225,26 @@ class LogModel extends Gdn_Pluggable {
                     if ($deleteRecord) {
                         $model->deleteID($recordID, ['Log' => false]);
                     }
+                }
+
+                if($log['Operation'] === 'Pending') {
+                    \Gdn::config()->touch([
+                        'Preferences.Email.Delete' => 2,
+                        'Preferences.Popup.Delete' => 2,
+                    ]);
+                    $headlineFormat = sprintf(t('Your content has been deleted by a moderator %s.', 'Your content has been deleted by a moderator <b>%s</b>.'), $deleteMessage);
+                    $data = [
+                        "ActivityType" => "Delete",
+                        "NotifyUserID" => $log['InsertUserID'],
+                        "HeadlineFormat" => $headlineFormat,
+                        "RecordType" => "Delete",
+                        "RecordID" => $log['RecordID'],
+                        "Route" => $recordType=='Discussion'?DiscussionModel::discussionUrl($log['Data'], "", "/"):CommentModel::commentUrl($log['Data'])
+                    ];
+
+                    $ActivityModel = new ActivityModel();
+                    $ActivityModel->queue($data, 'Delete');
+                    $ActivityModel->saveQueue();
                 }
 
             }
@@ -856,12 +876,18 @@ class LogModel extends Gdn_Pluggable {
         // CommentModel::updateCommentCount($discussionID, ['Slave' => false]);
         // CategoryModel::updateDiscussionCount($categoryID);
 
+        $textstring = strip_tags(Gdn_Format::to($data['Body'], $data['Format']));
+
+        if(strlen($textstring) > Gdn::config('Vanilla.Notify.TextLength')) {
+            $textstring = substr($textstring, 0, Gdn::config('Vanilla.Notify.TextLength')).'...';
+        }
+
         // Notify
         $activity = [
             'ActivityType' => 'Default',
             'NotifyUserID' => $notifyUser,
-            'ActivityUserID' => null,
-            'HeadlineFormat' => "popup",
+            'ActivityUserID' => Gdn::session()->UserID,
+            'HeadlineFormat' => '<span>"'.$textstring.'<span>" </span> <b>has been published.</b>',
             'Story' => Gdn_Format::to($data['Body'], $data['Format']),
             "RecordType" => "Comment",
             "RecordID" => $table=='Discussion'?$data->DiscussionID:$data->CommentID,
@@ -870,7 +896,7 @@ class LogModel extends Gdn_Pluggable {
             'Emailed' => ActivityModel::SENT_POPUP,
             'Data' => [
                 'Title' => $title,
-                'Text' => '<span>"</span>'.Gdn_Format::to($data['Body'], $data['Format']).'<span>..." </span> <strong>has been published.</strong>'
+                'Text' => '<span>"'.$textstring.'<span>" </span> <b>has been published.</b>'
             ]
         ];
 

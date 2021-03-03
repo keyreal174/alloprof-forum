@@ -421,8 +421,8 @@ class PostController extends VanillaController {
                             $activity = [
                                 'ActivityType' => 'Default',
                                 'NotifyUserID' => $discussion->InsertUserID,
-                                'ActivityUserID' => null,
-                                'HeadlineFormat' => "popup",
+                                'ActivityUserID' => Gdn::session()->UserID,
+                                'HeadlineFormat' => t('Your question will be reviewed by a moderator. You will be notified once it is published!'),
                                 "RecordType" => "Discussion",
                                 "RecordID" => $discussion->DiscussionID,
                                 "Route" => DiscussionModel::discussionUrl($discussion, "", "/"),
@@ -798,8 +798,8 @@ class PostController extends VanillaController {
                         $activity = [
                             'ActivityType' => 'Default',
                             'NotifyUserID' => $Comment->InsertUserID,
-                            'ActivityUserID' => null,
-                            'HeadlineFormat' => "popup",
+                            'ActivityUserID' =>  Gdn::session()->UserID,
+                            'HeadlineFormat' => t('Your explanation will be reviewed by a moderator. You will be notified once it is published!'),
                             "RecordType" => "Comment",
                             "RecordID" => $Comment->CommentID,
                             "Route" => CommentModel::commentUrl($Comment),

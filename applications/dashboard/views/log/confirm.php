@@ -90,7 +90,13 @@
                     <?php echo '</div>';
                 }
 
-                echo '<div class="ConfirmText">'.$AfterHtml.'</div>'; ?>
+                echo '<div class="ConfirmText">'.$AfterHtml.'</div><br/>';
+
+                if(strtolower($this->data('Action')) == 'delete') {
+                    echo $this->Form->label('Leave the message', 'DeleteMessage');
+                    echo $this->Form->textBox('DeleteMessage', ['MultiLine' => TRUE]);
+                }
+            ?>
             </div>
             <div class="modal-footer">
                 <?php

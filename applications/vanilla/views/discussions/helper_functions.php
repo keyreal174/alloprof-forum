@@ -359,15 +359,15 @@ if (!function_exists('writeDiscussionDetail')) :
                         <?php
                     }
                     ?>
-                    <?php
-                        if(!$Discussion->Published) {
-                            echo '<div class="not-published-badge">';
-                            echo '<img src="/themes/alloprof/design/images/icons/eyebreak.svg"/>';
-                            echo t('Awaiting publication');
-                            echo '</div>';
-                        }
-                    ?>
                     <div class="AuthorWrap">
+                        <?php
+                            if(!$Discussion->Published) {
+                                echo '<div class="not-published-badge">';
+                                echo '<img src="/themes/alloprof/design/images/icons/eyebreak.svg"/>';
+                                echo t('Awaiting publication');
+                                echo '</div>';
+                            }
+                        ?>
                         <span class="Author">
                             <?php
                             if ($UserPhotoFirst) {

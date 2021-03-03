@@ -366,10 +366,11 @@ div.Popup .Border {
 .InformMessage .toast-text,
 .InformMessage .toast-text * {
     display: inline-block;
+    word-break: break-all;
     font-size: 16px !important;
 }
 
-.InformMessage a {
+.InformMessage a.btn-default {
     font-size: 14px;
     margin-top: 20px;
     height: 41px;
@@ -396,18 +397,18 @@ div.Popup .Border {
 
 .not-published-badge {
     width: max-content;
-    display: flex;
+    display: flex !important;
     align-items: center;
     height: 40px;
     justify-content: center;
-    font-size: 13px;
+    font-size: 13px !important;
     padding: 10px 20px;
     background: #F2F2F2;
     border-radius: 8px;
     position: absolute;
-    right: 95px;
+    right: 50px;
     color: black;
-    top: 50px;
+    top: 0;
 }
 
 .not-published-badge img {
