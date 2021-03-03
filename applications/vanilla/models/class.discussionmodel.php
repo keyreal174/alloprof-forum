@@ -671,8 +671,10 @@ class DiscussionModel extends Gdn_Model implements FormatFieldInterface, EventFr
             $this->SQL->where($wheres);
         }
 
-        if ($additionalFields['sortfield']) {
-            $this->SQL->orderBy($this->addFieldPrefix($additionalFields['sortfield']), $additionalFields['direction']);
+        if (is_array($additionalFields)) {
+            foreach ($additionalFields as $direction => $field) {
+                $this->SQL->orderBy($this->addFieldPrefix($field), $direction);
+            }
         } else {
             foreach ($orderBy as $orderField => $direction) {
                 $this->SQL->orderBy($this->addFieldPrefix($orderField), $direction);

@@ -266,7 +266,7 @@ class DiscussionsController extends VanillaController {
         if ($this->data('ApplyRestrictions') === true) {
             $DiscussionModel->setOption('ApplyRestrictions', true);
         }
-        $DiscussionModel->setSort($sort);
+        $DiscussionModel->setSort($this->SortDirection);
         $DiscussionModel->setFilters(Gdn::request()->get());
         $this->setData('Sort', $DiscussionModel->getSort());
         $this->setData('Filters', $DiscussionModel->getFilters());
@@ -555,7 +555,7 @@ class DiscussionsController extends VanillaController {
 
         $wheres = array_merge($wheres, $this->WhereClause);
 
-        $this->DiscussionData = $discussionModel->get($page, $limit, $wheres, ['sortfield' => 'DateInserted', 'direction' => $this->SortDirection]);
+        $this->DiscussionData = $discussionModel->get($offset, $limit, $wheres, [$this->SortDirection => 'DateLastComment']);
         $this->setData('Discussions', $this->DiscussionData);
         $countDiscussions = $discussionModel->getCount($wheres);
         $this->setData('CountDiscussions', $countDiscussions);
@@ -717,10 +717,10 @@ class DiscussionsController extends VanillaController {
         $discussionModel = new DiscussionModel();
         $discussionModel->setSort($this->SortDirection);
         $discussionModel->setFilters(Gdn::request()->get());
-        // $this->setData('Sort', $discussionModel->getSort());
+        $this->setData('Sort', $discussionModel->getSort());
         $this->setData('Filters', $discussionModel->getFilters());
 
-        $this->DiscussionData = $discussionModel->get($offset, $limit, $wheres, ['sortfield' => 'DateInserted', 'direction' => $this->SortDirection]);
+        $this->DiscussionData = $discussionModel->get($offset, $limit, $wheres, [$this->SortDirection => 'DateLastComment']);
         $this->setData('Discussions', $this->DiscussionData);
         $countDiscussions = $this->setData('CountDiscussions', $discussionModel->getCount($wheres));
         // Build a pager
