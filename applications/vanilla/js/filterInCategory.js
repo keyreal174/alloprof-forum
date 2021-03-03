@@ -38,18 +38,12 @@ jQuery(document).ready(function($) {
         var explanation = $('.FilterMenu #Form_Explanation').is(":checked");
         var verifiedBy = $('.FilterMenu #Form_VerifiedBy').is(":checked");
 
-        // var postValues = {
-        //     grade: grade,
-        //     sort: sort,
-        //     explanation: explanation,
-        //     verifiedBy: verifiedBy
-        // };
         grade = !grade ? -1 : grade;
         var parameter = 'grade=' + parseInt(grade) + '&sort=' + sort + '&explanation=' + explanation + '&verifiedBy=' + verifiedBy;
 
         $.ajax({
             type: "POST",
-            url: '/discussions/filterDiscussion',
+            url: '/categories/filterDiscussion',
             data: {
                 parameter
             },
