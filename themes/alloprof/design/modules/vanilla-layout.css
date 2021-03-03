@@ -36,7 +36,7 @@ header.not-transparent {
     border-top-left-radius: 5px;
 } */
 
-.Panel.left {
+.Panel.ProfilePanel {
     text-align: center;
     margin-left: 0 !important;
     margin-right: auto !important;

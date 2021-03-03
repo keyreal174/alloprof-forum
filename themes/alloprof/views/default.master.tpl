@@ -187,7 +187,7 @@
                                 {/if}
                                 <div class="Frame-row">
                                     <div class="sidebar left">
-                                        <aside class="Panel Panel-main RightPanel">
+                                        <aside class="Panel Panel-main LeftPanel">
                                             {asset name="Panel"}
                                         </aside>
                                         <div class="Extra">
@@ -216,7 +216,7 @@
                                     </main>
                                     <div class="sidebar right">
                                         <!-- {module name="ProfileEditModule"} -->
-                                        <aside class="Panel Panel-main left LeftPanel">
+                                        <aside class="Panel Panel-main ProfilePanel">
                                             {asset name="LeftPanel"}
                                         </aside>
                                     </div>

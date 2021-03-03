@@ -9256,7 +9256,7 @@ screen and (-ms-high-contrast:none) {
     line-height: 1.25;
 }
 
-.RightPanel {
+.LeftPanel {
     background-color: transparent !important;
     padding: 0 !important;
 }
