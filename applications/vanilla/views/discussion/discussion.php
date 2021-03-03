@@ -40,6 +40,7 @@ $this->fireEvent('BeforeDiscussionDisplay');
 <div id="<?php echo 'Discussion_'.$Discussion->DiscussionID; ?>" class="<?php echo $CssClass; ?>">
     <div class="Discussion">
         <div class="Item-Header DiscussionHeader">
+            <div class="AuthorWrap">
             <?php
                 if(!$Discussion->Published) {
                     echo '<div class="not-published-badge">';
@@ -48,7 +49,6 @@ $this->fireEvent('BeforeDiscussionDisplay');
                     echo '</div>';
                 }
             ?>
-            <div class="AuthorWrap">
             <span class="Author">
                 <?php
                 if ($UserPhotoFirst) {

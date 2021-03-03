@@ -5043,6 +5043,10 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
     width: 100%
 }
 
+.MessageList .ItemComment .Item-Header {
+    padding-top: 0;
+}
+
 .MessageList .ItemComment .Item-Header .PhotoWrap,
 .MessageList .ItemDiscussion .Item-Header .PhotoWrap {
     /* left: 8px;
@@ -5138,7 +5142,8 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
 
 .MessageList .ItemComment .AuthorWrap,
 .MessageList .ItemDiscussion .AuthorWrap {
-    max-width: calc(100% - 45px)
+    max-width: 100%;
+    position: relative;
 }
 
 .MessageList .ItemComment .MItem.Category,

@@ -359,15 +359,15 @@ if (!function_exists('writeDiscussionDetail')) :
                         <?php
                     }
                     ?>
-                    <?php
-                        if(!$Discussion->Published) {
-                            echo '<div class="not-published-badge">';
-                            echo '<img src="/themes/alloprof/design/images/icons/eyebreak.svg"/>';
-                            echo t('Awaiting publication');
-                            echo '</div>';
-                        }
-                    ?>
                     <div class="AuthorWrap">
+                        <?php
+                            if(!$Discussion->Published) {
+                                echo '<div class="not-published-badge">';
+                                echo '<img src="/themes/alloprof/design/images/icons/eyebreak.svg"/>';
+                                echo t('Awaiting publication');
+                                echo '</div>';
+                            }
+                        ?>
                         <span class="Author">
                             <?php
                             if ($UserPhotoFirst) {
@@ -781,9 +781,13 @@ if (!function_exists('userRoleCheck')) :
     /**
      * User Role check
      */
-    function userRoleCheck() {
+    function userRoleCheck($UserID = NULL) {
         $userModel = new UserModel();
-        $User = $userModel->getID(Gdn::session()->UserID);
+        if ($UserID) {
+            $User = $userModel->getID($UserID);
+        } else {
+            $User = $userModel->getID(Gdn::session()->UserID);
+        }
 
         if($User) {
             $RoleData = $userModel->getRoles($User->UserID);

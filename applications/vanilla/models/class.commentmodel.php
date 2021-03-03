@@ -326,7 +326,7 @@ class CommentModel extends Gdn_Model implements FormatFieldInterface, EventFromR
                 ->where('c.DiscussionID', $discussionID);
 
             $approvalRequired = checkRestriction('Vanilla.Approval.Require');
-            if ($approvalRequired && !val('Verified', Gdn::session()->User)) {
+            if (($approvalRequired && !val('Verified', Gdn::session()->User)) || !Gdn::session()->User) {
                 $this->SQL->beginWhereGroup()
                 ->where('c.Published', 1)
                 ->orWhere('c.InsertUserID', Gdn::session()->UserID)
@@ -367,7 +367,7 @@ class CommentModel extends Gdn_Model implements FormatFieldInterface, EventFromR
         $this->where($this->SQL);
 
         $approvalRequired = checkRestriction('Vanilla.Approval.Require');
-        if ($approvalRequired && !val('Verified', Gdn::session()->User)) {
+        if (($approvalRequired && !val('Verified', Gdn::session()->User)) || !Gdn::session()->User) {
             $this->SQL->beginWhereGroup()
             ->where('c.Published', 1)
             ->orWhere('c.InsertUserID', Gdn::session()->UserID)
@@ -1297,7 +1297,7 @@ class CommentModel extends Gdn_Model implements FormatFieldInterface, EventFromR
 
                     // Check for approval
                     $approvalRequired = checkRestriction('Vanilla.Approval.Require');
-                    if ($approvalRequired && !val('Verified', Gdn::session()->User)) {
+                    if (($approvalRequired && !val('Verified', Gdn::session()->User)) || !Gdn::session()->User) {
                         $fields['Published'] = false;
                         // return UNAPPROVED;
                     }
@@ -1596,7 +1596,7 @@ class CommentModel extends Gdn_Model implements FormatFieldInterface, EventFromR
             ->from('Comment c');
 
         $approvalRequired = checkRestriction('Vanilla.Approval.Require');
-        if ($approvalRequired && !val('Verified', Gdn::session()->User)) {
+        if (($approvalRequired && !val('Verified', Gdn::session()->User)) || !Gdn::session()->User) {
             $sql->beginWhereGroup()
                 ->where('c.Published', 1)
                 ->orWhere('c.InsertUserID', Gdn::session()->UserID)

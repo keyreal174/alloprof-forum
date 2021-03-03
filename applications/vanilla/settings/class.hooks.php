@@ -763,27 +763,21 @@ class VanillaHooks extends Gdn_Plugin {
         if (is_object($sender->User) && $sender->User->UserID > 0) {
             $userID = $sender->User->UserID;
             // Add the discussion tab
-            $discussionsLabel = sprite('SpDiscussions').' '.t('Discussions');
-            $commentsLabel = sprite('SpComments').' '.t('Comments');
+            $discussionsLabel = "";
+            $commentsLabel = "";
+            $commentsGivenLabel = "";
             if (c('Vanilla.Profile.ShowCounts', true)) {
                 $discussionsCount = getValueR('User.CountDiscussions', $sender, "0");
                 $commentsCount = getValueR('User.CountComments', $sender, "0");
-
-                if (!is_null($discussionsCount) && !empty($discussionsCount)) {
-                    $discussionsLabel .=
-                        '<span class="Aside">' .
-                        countString(bigPlural($discussionsCount, '%s discussion'), "/profile/count/discussions?userid=$userID")
-                        . '</span>';
-                }
-                if (!is_null($commentsCount)  && !empty($commentsCount)) {
-                    $commentsLabel .=
-                        '<span class="Aside">' .
-                        countString(bigPlural($commentsCount, '%s comment'), "/profile/count/comments?userid=$userID") .
-                        '</span>';
-                }
+                $commentsGivenCount = $sender->CommentModel->getCount(["InsertUserID" => $userID]);
+                // getValueR('User.CountComments', $sender, "0");
+                $discussionsLabel .= $discussionsCount;
+                $commentsLabel .= $commentsCount;
+                $commentsGivenLabel .= $commentsGivenCount;
             }
-            $sender->addProfileTab(t('Discussions'), userUrl($sender->User, '', 'discussions'), 'Discussions', $discussionsLabel);
-            $sender->addProfileTab(t('Comments'), userUrl($sender->User, '', 'comments'), 'Comments', $commentsLabel);
+            $sender->addProfileTab(t('Questions asked'), userUrl($sender->User, '', 'discussions'), 'Questions', $discussionsLabel);
+            $sender->addProfileTab(t('Explanations given'), userUrl($sender->User, '', 'comments'), 'Comments', $commentsGivenLabel);
+            $sender->addProfileTab(t('Explanations received'), userUrl($sender->User, '', 'comments'), 'Comments', $commentsLabel);
             // Add the discussion tab's CSS and Javascript.
             $sender->addJsFile('jquery.gardenmorepager.js');
             $sender->addJsFile('discussions.js', 'vanilla');

@@ -19,7 +19,7 @@ use Vanilla\SchemaFactory;
 class DiscussionController extends VanillaController {
 
     /** @var array Models to include. */
-    public $Uses = ['DiscussionModel', 'CategoryModel', 'CommentModel', 'Form', 'UserModel'];
+    public $Uses = ['DiscussionModel', 'CategoryModel', 'CommentModel', 'Form', 'UserModel', 'ActivityModel'];
 
     /** @var array Unique identifier. */
     public $CategoryID;
@@ -106,6 +106,30 @@ class DiscussionController extends VanillaController {
     }
 
     /**
+     * Check New Popup Notification
+     */
+
+    public function checkNewPopup() {
+        $activities = $this->ActivityModel->getWhere(['NotifyUserID' => Gdn::session()->UserID, 'Notified' => ActivityModel::SENT_POPUP])->resultArray();
+        $ids = [];
+
+        for($i = 0; $i < count($activities); ++$i) {
+            array_push($ids, $activities[$i]['ActivityID']);
+            $data = $activities[$i]['Data'];
+            $link = $activities[$i]['Route'];
+
+            $this->informMessage(
+                '<div class="toast-container"><div class="toast-title">'.t($data['Title']).'</div>'.
+                '<div class="toast-text">'.t($data['Text']).'</div>'.
+                '<a href="'.$link.'" class="btn-default">'.t('See').'</a></div>',
+                'Dismissable'
+            );
+        }
+
+        $this->ActivityModel->setReadPopup($ids);
+    }
+
+    /**
      * Default single discussion display.
      *
      * @param int $DiscussionID Unique discussion ID
@@ -114,7 +138,6 @@ class DiscussionController extends VanillaController {
      */
     public function index($DiscussionID = 0, $DiscussionStub = '', $Page = '', $Order = '') {
         // Setup head
-
         $Session = Gdn::session();
         $this->addJsFile('jquery.autosize.min.js');
         $this->addJsFile('autosave.js');
@@ -123,6 +146,8 @@ class DiscussionController extends VanillaController {
         $Order = Gdn::request()->get('order');
 
         Gdn_Theme::section('Discussion');
+
+        $this->checkNewPopup();
 
         // Load the discussion record
         $DiscussionID = (is_numeric($DiscussionID) && $DiscussionID > 0) ? $DiscussionID : 0;
@@ -464,9 +489,13 @@ class DiscussionController extends VanillaController {
         $this->render();
     }
 
-    public function getUserRole() {
+    public function getUserRole($UserID = null) {
         $userModel = new UserModel();
-        $User = $userModel->getID(Gdn::session()->UserID);
+        if ($UserID) {
+            $User = $userModel->getID($UserID);
+        } else {
+            $User = $userModel->getID(Gdn::session()->UserID);
+        }
 
         if($User) {
             $RoleData = $userModel->getRoles($User->UserID);

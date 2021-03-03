@@ -69,6 +69,12 @@ class ActivityModel extends Gdn_Model {
     /** Activity status: Sending is in progress. */
     const SENT_INPROGRESS = 31;
 
+    /** Activity status: Awaiting for Popup notificaion open. */
+    const SENT_POPUP = 11;
+
+    /** Activity status: Popup notificaiton read */
+    const SENT_POPUP_READ = 12;
+
     /** @var array|null Allowed activity types. */
     public static $ActivityTypes = null;
 
@@ -1414,6 +1420,17 @@ class ActivityModel extends Gdn_Model {
             ->put();
     }
 
+
+    public function setReadPopup($activityIDs) {
+        if (!is_array($activityIDs) || count($activityIDs) == 0) {
+            return;
+        }
+
+        $this->SQL->update('Activity')
+            ->set('Notified', self::SENT_POPUP_READ)
+            ->whereIn('ActivityID', $activityIDs)
+            ->put();
+    }
     /**
      *
      *
@@ -1596,11 +1613,11 @@ class ActivityModel extends Gdn_Model {
         unset($data["Ext"]);
         $emailFields = $extraFields["Email"] ?? [];
 
-        if ($activity['ActivityUserID'] == $activity['NotifyUserID'] && !val('Force', $options)) {
-            trace('Skipping activity because it would notify the user of something they did.');
+        // if ($activity['ActivityUserID'] == $activity['NotifyUserID'] && !val('Force', $options)) {
+        //     trace('Skipping activity because it would notify the user of something they did.');
 
-            return null; // don't notify users of something they did.
-        }
+        //     return null; // don't notify users of something they did.
+        // }
 
         // Check the user's preference.
         if ($preference) {

@@ -1,0 +1,84 @@
+.sidebar.left, .sidebar.right {
+    display: none;
+}
+
+.Frame-row {
+    display: flex;
+    justify-content: center;
+}
+
+.Frame-row .MainContent {
+    width: 580px;
+}
+
+.profile-content {
+    height: 481px;
+    background-color: white;
+    padding: 40px;
+    text-align: center;
+}
+
+.profile-content .Photo {
+    width: 140px;
+    height: 140px;
+}
+
+.profile-content .userphoto-personalinfo {
+    margin-top: 6px;
+}
+
+.profile-content .userphoto-personalinfo__name {
+    font-size: 21px;
+    line-height: 25px;
+    text-align: center;
+    color: #000000;
+}
+
+.profile-content .userphoto-personalinfo__secondary {
+    font-size: 16px;
+    line-height: 19px;
+    text-align: center;
+    color: #6C6767;
+}
+
+.profile-content .BoxProfileInfo {
+    margin-top: 0;
+}
+
+.profile-content .BoxProfileInfo_detailbox {
+    border-top: 0;
+    padding-top: 16px;
+}
+
+.profile-content .BoxProfileInfo_detailbox .BoxProfileInfo_detailbox__item {
+    max-width: 125px;
+    flex: 1;
+}
+
+.profile-content .BoxProfileInfo_detailbox .BoxProfileInfo_detailbox__item a {
+    font-size: 28px;
+    line-height: 33px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #000000;
+}
+
+.profile-content .modify-btn {
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.back-btn {
+    font-size: 21px;
+    line-height: 25px;
+    display: flex;
+    align-items: center;
+    color: #1A1919;
+    margin-bottom: 24px;
+}
+
+.back-btn svg {
+    margin-right: 17px;
+}

@@ -18,7 +18,7 @@ use Vanilla\Formatting\Formats\HtmlFormat;
 class DiscussionsController extends VanillaController {
 
     /** @var array Models to include. */
-    public $Uses = ['Database', 'DiscussionModel', 'Form', 'UserModel'];
+    public $Uses = ['Database', 'DiscussionModel', 'Form', 'UserModel', 'ActivityModel'];
 
     /** @var boolean Value indicating if discussion options should be displayed when rendering the discussion view.*/
     public $ShowOptions;
@@ -118,6 +118,30 @@ class DiscussionsController extends VanillaController {
     }
 
     /**
+     * Check New Popup Notification
+     */
+
+    public function checkNewPopup() {
+        $activities = $this->ActivityModel->getWhere(['NotifyUserID' => Gdn::session()->UserID, 'Notified' => ActivityModel::SENT_POPUP])->resultArray();
+        $ids = [];
+
+        for($i = 0; $i < count($activities); ++$i) {
+            array_push($ids, $activities[$i]['ActivityID']);
+            $data = $activities[$i]['Data'];
+            $link = $activities[$i]['Route'];
+
+            $this->informMessage(
+                '<div class="toast-container"><div class="toast-title">'.t($data['Title']).'</div>'.
+                '<div class="toast-text">'.t($data['Text']).'</div>'.
+                '<a href="'.$link.'" class="btn-default">'.t('See').'</a></div>',
+                'Dismissable'
+            );
+        }
+
+        $this->ActivityModel->setReadPopup($ids);
+    }
+
+    /**
      * Default all discussions view: chronological by most recent comment.
      *
      * @since 2.0.0
@@ -126,7 +150,6 @@ class DiscussionsController extends VanillaController {
      * @param string|false $Page Multiplied by PerPage option to determine offset.
      */
     public function index($Page = false) {
-
         $this->getUserInfo();
         $this->allowJSONP(true);
         // Figure out which discussions layout to choose (Defined on "Homepage" settings page).
@@ -143,6 +166,7 @@ class DiscussionsController extends VanillaController {
         }
         Gdn_Theme::section('DiscussionList');
 
+        $this->checkNewPopup();
 
         $this->addJsFile('jquery.autosize.min.js');
         $this->addJsFile('autosave.js');
@@ -512,6 +536,8 @@ class DiscussionsController extends VanillaController {
         $this->permission('Garden.SignIn.Allow');
         Gdn_Theme::section('DiscussionList');
 
+        $this->checkNewPopup();
+
         // Add js
         $this->addJsFile('jquery.autosize.min.js');
         $this->addJsFile('autosave.js');
@@ -627,9 +653,13 @@ class DiscussionsController extends VanillaController {
         $this->render();
     }
 
-    public function getUserRole() {
+    public function getUserRole($UserID = null) {
         $userModel = new UserModel();
-        $User = $userModel->getID(Gdn::session()->UserID);
+        if ($UserID) {
+            $User = $userModel->getID($UserID);
+        } else {
+            $User = $userModel->getID(Gdn::session()->UserID);
+        }
 
         if($User) {
             $RoleData = $userModel->getRoles($User->UserID);
@@ -693,6 +723,8 @@ class DiscussionsController extends VanillaController {
         $this->getUserInfo();
         $this->permission('Garden.SignIn.Allow');
         Gdn_Theme::section('DiscussionList');
+
+        $this->checkNewPopup();
 
         // Add js
         $this->addJsFile('jquery.autosize.min.js');
