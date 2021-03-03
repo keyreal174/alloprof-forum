@@ -18,8 +18,8 @@
 .DataList .PhotoWrap,
 .MessageList .PhotoWrap,
 .PhotoWrap {
-    height: 64px;
-    width: 64px;
+    height: 44px;
+    width: 44px;
 }
 
 .Item-Header.DiscussionHeader,
@@ -50,17 +50,17 @@
 .DataList .Author a.Username,
 .Author a.Username {
     color: #1A1919;
-    font-size: 21px;
-    line-height: 25px;
+    font-size: 15px;
+    line-height: 18px;
     font-weight: 600;
-    margin-bottom: 9px;
-    padding-top: 10px;
+    margin-bottom: 0px;
+    padding-top: 5px;
 }
 
 .MessageList .MItem.TimeAgo,
 .DataList .MItem.TimeAgo {
-    font-size: 14px;
-    line-height: 16px;
+    font-size: 12px;
+    line-height: 14px;
     color: #676767;
     margin: 0;
 }
@@ -411,11 +411,32 @@
     padding: 32px;
 }
 
-.MessageList .ItemComment.accepted {
+.MessageList .ItemComment.Accepted {
     border: 2px solid #05BF8E!important;
     border-radius: 8px;
 }
 
-.MessageList .ItemComment.accepted .not-published-badge {
+.MessageList .ItemComment.Accepted .not-published-badge {
     top: 100px;
+}
+
+.MessageList .ItemComment.Accepted {
+    border: 2px solid #05BF8E!important;
+    border-radius: 8px;
+}
+
+.MessageList .ItemComment.Accepted.TeacherComment .verfied-info {
+    display: none;
+}
+
+.MessageList .ItemComment.Accepted.TeacherComment .not-published-badge {
+    top: 50px;
+}
+
+.MessageList .ItemComment.Accepted.TeacherComment .Username {
+    color: #05BF8E;
+}
+
+.MessageList .ItemComment .Username {
+
 }
