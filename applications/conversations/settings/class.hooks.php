@@ -115,10 +115,10 @@ class ConversationsHooks implements Gdn_IPlugin {
                 $countUnread = Gdn::session()->User->CountUnreadConversations;
             }
 
-            if (is_numeric($countUnread) && $countUnread > 0) {
-                $inboxHtml .= ' <span class="Aside"><span class="Count">'.$countUnread.'</span></span>';
-            }
-            $sender->addProfileTab($inbox, $inboxLink, 'Inbox', $inboxHtml);
+            // if (is_numeric($countUnread) && $countUnread > 0) {
+            //     $inboxHtml .= ' <span class="Aside"><span class="Count">'.$countUnread.'</span></span>';
+            // }
+            // $sender->addProfileTab($inbox, $inboxLink, 'Inbox', $inboxHtml);
         }
     }
 
