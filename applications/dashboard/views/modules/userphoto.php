@@ -42,13 +42,13 @@ if ($Photo) : ?>
         <?php
         $canEditPhotos = Gdn::session()->checkRankedPermission(c('Garden.Profile.EditPhotos', true)) || checkPermission('Garden.Users.Edit');
 
-        if (!$User->Banned && $canEditPhotos && (Gdn::session()->UserID == $User->UserID || checkPermission('Garden.Users.Edit'))) {
-            $contents = ($dataDriven ? '<span class="icon icon-camera"></span>' : '').t('Change Icon');
-            echo "<a href='/profile/picture?userid=".$User->UserID."' class='".$AllowEditClass."'><img src='".$Photo."' class='ProfilePhotoLarge' alt='".$PhotoAlt."'/></a>";
+        // if (!$User->Banned && $canEditPhotos && (Gdn::session()->UserID == $User->UserID || checkPermission('Garden.Users.Edit'))) {
+            // $contents = ($dataDriven ? '<span class="icon icon-camera"></span>' : '').t('Change Icon');
+            echo "<a ".($IsProfilePage ? '' : 'href="/profile/edit"')." class='ProfilePhotoLarge'><img src='".$Photo."' class='ProfilePhotoLarge' alt='".$PhotoAlt."'/></a>";
             // echo anchor(wrap($contents, "span", ["class" => "ChangePicture-Text"]), '/profile/picture?userid='.$User->UserID, 'ChangePicture Popup', ["aria-label" => t("Change Picture")]);
-        }
+        // }
 
-        echo img($Photo, ['class' => 'ProfilePhotoLarge', 'alt' => $PhotoAlt]);
+        // echo img($Photo, ['class' => 'ProfilePhotoLarge', 'alt' => $PhotoAlt]);
         ?>
     </div>
 <?php elseif ($User->UserID == Gdn::session()->UserID || Gdn::session()->checkPermission('Garden.Users.Edit')) : ?>
@@ -59,8 +59,8 @@ if ($Photo) : ?>
 endif;
 ?>
 <div class="userphoto-personalinfo">
-    <h5 class="userphoto-personalinfo__name"><?php echo $User->Name; ?></h5>
-    <p class="userphoto-personalinfo__secondary">
+    <a <?php echo $IsProfilePage ? '' : 'href="/profile/edit"' ?> class="userphoto-personalinfo__name"><?php echo $User->Name ?></a>
+    <a <?php echo $IsProfilePage ? '' : 'href="/profile/edit"' ?> class="userphoto-personalinfo__secondary">
         <?php
             if(userRoleCheck() == Gdn::config('Vanilla.ExtraRoles.Teacher')) {
                 echo t('Alloprof Teacher').'<svg width="15" height="15" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -71,6 +71,6 @@ endif;
                 echo $UserMetaData["Grade"];
             }
         ?>
-    </p>
+    </a>
 </div>
 </div>
