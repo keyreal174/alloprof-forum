@@ -35,6 +35,7 @@
 @import url("./modules/slick/slick.css");
 @import url("./modules/vanilla-flag.css");
 @import url("./modules/vanilla-filtersort.css");
+@import url("./modules/vanilla-auth.css");
 
 .BoxNewDiscussion {
     -webkit-box-shadow: none;
