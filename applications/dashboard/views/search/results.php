@@ -9,7 +9,7 @@ if (!function_exists('writeDiscussionFooter')) {
 if (!count($this->data('SearchResults')) && $this->data('SearchTerm'))
     echo '<p class="NoResults">', sprintf(t('No results for %s.', 'No results for <b>%s</b>.'), $this->data('SearchTerm')), '</p>';
 else
-    echo '<p class="SearchResult">', sprintf(t('Results (%d)'), count($this->data('SearchResults'))), '</p>';
+    echo '<p class="SearchResult">', sprintf(t('%d results for "%s"'), count($this->data('SearchResults')), $this->data('SearchTerm')), '</p>';
 ?>
     <ol id="search-results" class="DataList DataList-Search" start="<?php echo $this->data('From'); ?>">
         <?php foreach ($this->data('SearchResults') as $Row): ?>

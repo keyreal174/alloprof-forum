@@ -1,0 +1,8 @@
+.Frame-banner {
+    height: 0;
+}
+
+header.Header,
+header.not-transparent {
+    background-color: white;
+}
