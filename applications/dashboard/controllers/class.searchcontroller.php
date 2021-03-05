@@ -17,7 +17,7 @@ use Vanilla\Search\SearchResults;
 class SearchController extends Gdn_Controller {
 
     /** @var array Models to automatically instantiate. */
-    public $Uses = ['Database', 'UserModel'];
+    public $Uses = ['Database', 'UserModel', 'DiscussionModel'];
 
     /**  @var Gdn_Form */
     public $Form;
@@ -36,6 +36,7 @@ class SearchController extends Gdn_Controller {
         parent::__construct();
         $this->searchAdapter = $searchAdapter;
         $this->discussionApi = $discussionApi;
+        $this->
         $form = Gdn::factory('Form');
 
         // Form prep
@@ -63,6 +64,50 @@ class SearchController extends Gdn_Controller {
         $this->addModule('GuestModule');
         parent::initialize();
         $this->setData('Breadcrumbs', [['Name' => t('Search'), 'Url' => '/search']]);
+    }
+
+    /**
+     * Filter Functionality.
+     *
+     */
+
+    public function writeFilter() {
+        $gradeFilterOption = (Gdn::request()->get('grade') || Gdn::request()->get('grade') == '0') ? strval((int)(Gdn::request()->get('grade'))) : -1;
+        $this->GradeID = $gradeFilterOption;
+
+        $explanation = Gdn::request()->get('explanation') ?? false;
+        $this->IsExplanation = $explanation;
+
+        $verified = Gdn::request()->get('verifiedBy') ?? false;
+        $this->IsVerifiedBy = $verified;
+
+        $sort = Gdn::request()->get('sort') ?? 'desc';
+        $this->SortDirection = $sort;
+
+        $discussionFilterModule = new DiscussionFilterModule($gradeFilterOption, $sort, $explanation, $verified);
+        $this->addModule($discussionFilterModule);
+        $this->addJsFile('filter.js');
+        $wheres = [];
+
+        if (($this->GradeID || $this->GradeID === '0') && $this->GradeID != -1) {
+            $wheres['d.GradeID'] = $this->GradeID;
+        } else {
+            unset($wheres['d.GradeID']);
+        }
+
+        if ($this->IsExplanation == 'true') {
+            $wheres['d.CountComments >'] = 0;
+        } else {
+            unset($wheres['d.CountComments >']);
+        }
+
+        if ($this->IsVerifiedBy == 'true') {
+            $wheres['d.DateAccepted <>'] = '';
+        } else {
+            unset($wheres['d.DateAccepted <>']);
+        }
+
+        $this->WhereClause = $wheres;
     }
 
     /**
@@ -103,8 +148,12 @@ class SearchController extends Gdn_Controller {
         saveToConfig('Garden.Format.EmbedSize', '160x90', false);
         Gdn_Theme::section('SearchResults');
 
+        $this->writeFilter();
+
         [$offset, $limit] = offsetLimit($page, c('Garden.Search.PerPage', 20));
         $this->setData('_Limit', $limit);
+        $DiscussionModel = new DiscussionModel();
+        $this->DiscussionData = $DiscussionModel->getWhereWithOrder($this->WhereClause, 'DateLastComment', 'desc', $limit, $offset, true);
 
         try {
             $results = $this->searchAdapter->search(['search' => $search], $offset, $limit);
@@ -120,6 +169,7 @@ class SearchController extends Gdn_Controller {
         $legacyResults = $results->asLegacyResults();
         $this->setData('SearchResults', $results->asLegacyResults(), true);
         $this->setData('SearchTerm', Gdn_Format::text($search), true);
+        $this->setData('searchResultCount', $CountDiscussions);
 
         $this->setData('_CurrentRecords', count($legacyResults));
 

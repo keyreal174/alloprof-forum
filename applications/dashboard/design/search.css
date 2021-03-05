@@ -2,6 +2,14 @@
     height: 0;
 }
 
+.Frame-row {
+    margin-top: 100px;
+}
+
+.BoxDiscussionFilter {
+    margin-top: 0;
+}
+
 header.Header,
 header.not-transparent {
     background-color: white;
