@@ -34,6 +34,12 @@ class AlloprofPlugin extends Gdn_Plugin {
         $St = Gdn::structure();
         $Sql = Gdn::sql();
 
+        /**
+         * Add grade to discussion and comment
+         * Add publish feature
+         * Add verify feature
+         */
+
         $St->table('Discussion')
             ->column('GradeID', 'int', true)
             ->column('Published', 'tinyint(1)', '0')
