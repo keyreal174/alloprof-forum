@@ -646,20 +646,30 @@ class CommentModel extends Gdn_Model implements FormatFieldInterface, EventFromR
         $discussionUserID = $discussion["InsertUserID"] ?? null;
         $format = $comment["Format"] ?? null;
 
+
+        // Notification String
+        $textstring = strip_tags(Gdn_Format::to($comment["Body"], $comment["Format"]));
+        if(strlen($textstring) > Gdn::config('Vanilla.Notify.TextLength')) {
+            $textstring = substr($textstring, 0, Gdn::config('Vanilla.Notify.TextLength')).'...';
+        }
+
         // Prepare the notification queue.
         $data = [
             "ActivityType" => "Comment",
+            'ActivityTypeID' => 99,
             "ActivityUserID" => $comment["InsertUserID"] ?? null,
             "HeadlineFormat" => t(
                 "HeadlineFormat.Comment",
-                '{ActivityUserID,user} commented on <a href="{Url,html}">{Data.Name,text}</a>'
+                'Response from {ActivityUserID,user}'
             ),
             "RecordType" => "Comment",
             "RecordID" => $commentID,
             "Route" => "/discussion/comment/{$commentID}#Comment_{$commentID}",
+            "Notified" => ActivityModel::SENT_PENDING,
+            "Story" => $textstring,
             "Data" => [
                 "Name" => $discussion["Name"] ?? null,
-                "Category" => $category["Name"] ?? null,
+                "Category" => $category["Name"] ?? null
             ],
             "Ext" => [
                 "Email" => [

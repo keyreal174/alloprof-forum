@@ -120,9 +120,9 @@ Follow the link below to check it out:
 %2$s
 
 Have a great day!';
-$Definition['HeadlineFormat.Discussion'] = '{ActivityUserID,user} Started a new discussion. <a href="{Url,html}">{Data.Name,text}</a>';
+$Definition['HeadlineFormat.Discussion'] = 'Question from {ActivityUserID,user}';
 $Definition['HeadlineFormat.Discussion.Poll'] = '{ActivityUserID,user} started a new poll in {Data.Category}: <a href="{Url,html}">{Data.Name,text}</a>';
-$Definition['HeadlineFormat.Discussion.Question'] = '{ActivityUserID,user} posted a new question in {Data.Category}: <a href="{Url,html}">{Data.Name,text}</a>';
+$Definition['HeadlineFormat.Discussion.Question'] = 'Question from {ActivityUserID,user}';
 $Definition['permissions.member'] = 'Member';
 $Definition['permissions.moderator'] = 'Moderator';
 $Definition['permissions.communityManager'] = 'Community Manager';

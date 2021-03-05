@@ -21,4 +21,8 @@ jQuery(document).ready(function($) {
 
     $(ContentSelector).prepend("<div id='PagerBefore'></div>");
     $(ContentSelector).append("<div id='PagerAfter'></div>");
+
+    $('.notification-settings').click(function() {
+        alert();
+    })
 });

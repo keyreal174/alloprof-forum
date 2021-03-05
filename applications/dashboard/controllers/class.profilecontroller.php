@@ -800,7 +800,7 @@ class ProfileController extends Gdn_Controller {
         $this->ActivityModel = new ActivityModel();
 
         // Drop notification count back to zero.
-        $this->ActivityModel->markRead($session->UserID);
+        // $this->ActivityModel->markRead($session->UserID);
 
         // Get notifications data.
         $activities = $this->ActivityModel->getNotifications($session->UserID, $offset, $limit)->resultArray();
@@ -846,9 +846,9 @@ class ProfileController extends Gdn_Controller {
         ];
 
         $this->ActivityModel = new ActivityModel();
-        $activities = $this->ActivityModel->getWhere($where, '', '', 5, 0)->resultArray();
+        $activities = $this->ActivityModel->getWhere($where, '', '', c('Vanilla.Discussions.PerPage', 5), 0)->resultArray();
         $this->setData('Activities', $activities);
-        $this->ActivityModel->markRead(Gdn::session()->UserID);
+        // $this->ActivityModel->markRead(Gdn::session()->UserID);
 
         $this->setData('Title', t('Notifications'));
         $this->render('Popin', 'Activity', 'Dashboard');

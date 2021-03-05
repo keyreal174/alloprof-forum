@@ -3785,7 +3785,7 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
 }
 
 .PopList.PopList .Item {
-    padding: 30px 8px
+    padding: 10px 8px
 }
 
 .PopList.PopList .PhotoWrap {
@@ -3794,7 +3794,7 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
 }
 
 .PopList.Activities .Item.Title a:before {
-    content: ""
+    /* content: "" */
 }
 
 .PopList.Conversations .Item.Title a:before {
