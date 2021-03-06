@@ -197,3 +197,7 @@ div.Popup.SignInPopup .EyeIcon {
 div.Popup.SignInPopup input[type=password] {
     padding-right: 32px;
 }
+
+.Errors ul li {
+    margin-bottom: 0 !important;
+}

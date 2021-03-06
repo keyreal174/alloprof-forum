@@ -121,4 +121,26 @@ class NotificationsController extends Gdn_Controller {
             );
         }
     }
+
+
+    // Mark as Read Ajax methods
+
+    public function markAllAsRead() {
+        $this->ActivityModel = new ActivityModel();
+        $this->ActivityModel->markRead(Gdn::session()->UserID);
+        echo 'success';
+    }
+
+    public function markSingleRead($ID = 0) {
+        $this->ActivityModel = new ActivityModel();
+        $this->ActivityModel->markSingleRead($ID);
+
+        $this->userModel = new UserModel();
+        $user = $this->userModel->getID(Gdn::session()->UserID);
+        if (val('CountNotifications', $user) != 0) {
+            $this->userModel->setField(Gdn::session()->UserID, 'CountNotifications', val('CountNotifications', $user) -1);
+        }
+
+        echo 'success';
+    }
 }

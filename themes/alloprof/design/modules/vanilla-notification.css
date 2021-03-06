@@ -1,3 +1,7 @@
+.notification-settings {
+    cursor: pointer;
+}
+
 .notification-settings-content {
     flex-wrap: wrap !important;
     padding: 10px 0;
@@ -76,7 +80,7 @@
     margin-left: 10px;
 }
 
-.Flyout .Item.Title a.all-read
+.Flyout .Item.Title a.notification-all-read
 {
     display: block;
     color: black;
@@ -172,4 +176,13 @@
     height: 41px;
     margin-left: auto;
     text-decoration: none !important;
+}
+
+
+.Flayout-notification {
+    display: none !important;
+}
+
+.Flayout-notification.open {
+    display: block !important;
 }
