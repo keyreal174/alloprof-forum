@@ -3,6 +3,29 @@ if (!defined('APPLICATION')) exit();
 
 use Vanilla\Utility\HtmlUtils;
 
+if (!function_exists('writeSubjectFilter')) :
+    /**
+     * Returns discussions subject filtering.
+     *
+     * @param string $extraClasses any extra classes you add to the drop down
+     * @return string
+     */
+    function writeSubjectFilter($subject) {
+        $Session = Gdn::session();
+        $form = new Gdn_Form();
+        $options = [];
+        $Categories = CategoryModel::instance()->getFull()->resultArray();
+        foreach ($Categories as $category) {
+            $options[$category['CategoryID']] = $category['Name'];
+        }
+
+        echo '<div class="FilterMenu__Dropdown">';
+        echo '<img src="/themes/alloprof/design/images/icons/subject.svg"/>';
+        echo $form->dropDown('SubjectDropdown', $options, array('IncludeNull' => t('Material'), 'Value' => $subject));
+        echo '</div>';
+    }
+endif;
+
 if (!function_exists('writeGradeFilter')) :
     /**
      * Returns discussions grade filtering.
@@ -76,11 +99,9 @@ if (!function_exists('writeFilterToggle')) :
         echo '<ul>';
         echo '<li class="form-group">';
         if ($explanation == 'true') {
-            // echo $form>toggle('Explanation', t('With explanations only'), [ 'checked' => $explanation ]);
             echo $form->toggle('Explanation', t('With explanations only'), [ 'checked' => $explanation ]);
         } else {
-            // echo $form>toggle('Explanation', t('With explanations only'));
-            echo $form->toggle('Explanation', t('With explanations only'), [ 'checked' => $explanation ]);
+            echo $form->toggle('Explanation', t('With explanations only'));
         }
         echo '</li>';
         echo '<li class="form-group">';

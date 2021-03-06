@@ -51,6 +51,7 @@ $titleID = "BoxFilterTitle";
     </h2>
     <div class="FilterMenu">
         <?php
+            echo writeSubjectFilter($this->SubjectID);
             echo writeGradeFilter($this->GradeID);
             echo writeDiscussionSort($this->Sort);
             echo writeFilterToggle($this, $this->IsExplanation, $this->IsVerified);

@@ -11,14 +11,17 @@
 /**
  * Renders the discussion filter menu.
  */
-class DiscussionFilterModule extends Gdn_Module {
+class DashboardDiscussionFilterModule extends Gdn_Module {
 
-    public function __construct($grade=-1, $sort='desc', $explanation=false, $verified=false) {
-        parent::__construct();
+    public function __construct($grade=-1, $sort='desc', $explanation=false, $verified=false, $subject=-1) {
+        $this->_ApplicationFolder = 'dashboard';
+        $this->SubjectID = $subject;
         $this->GradeID = $grade;
         $this->Sort = $sort;
         $this->IsExplanation = $explanation;
         $this->IsVerified = $verified;
+
+        parent::__construct();
     }
 
     public function assetTarget() {
