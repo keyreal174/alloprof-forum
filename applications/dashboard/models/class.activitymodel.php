@@ -229,13 +229,23 @@ class ActivityModel extends Gdn_Model {
             $row['Data'] = dbdecode($row['Data']);
         }
 
+        $user = $this->userModel->getID($row['ActivityUserID'], DATASET_TYPE_ARRAY);
+        if($user) {
+            $RoleData = $this->userModel->getRoles($user['UserID']);
+            if ($RoleData !== false) {
+                $Roles = array_column($RoleData->resultArray(), 'Name');
+            }
+            if(in_array(Gdn::config('Vanilla.ExtraRoles.Teacher'), $Roles))
+                $row['Verified'] = true;
+        }
+
         $row['PhotoUrl'] = url($row['Route'], true);
         if (!$row['Photo']) {
             if (isset($row['ActivityPhoto'])) {
                 $row['Photo'] = $row['ActivityPhoto'];
                 $row['PhotoUrl'] = userUrl($row, 'Activity');
             } else {
-                $user = $this->userModel->getID($row['ActivityUserID'], DATASET_TYPE_ARRAY);
+                // $user = $this->userModel->getID($row['ActivityUserID'], DATASET_TYPE_ARRAY);
                 if ($user) {
                     $photo = $user['Photo'];
                     $row['PhotoUrl'] = userUrl($user);

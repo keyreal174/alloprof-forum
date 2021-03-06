@@ -421,18 +421,13 @@ class PostController extends VanillaController {
                             $activity = [
                                 'ActivityType' => 'Default',
                                 'NotifyUserID' => $discussion->InsertUserID,
-                                'ActivityUserID' => Gdn::session()->UserID,
-                                'HeadlineFormat' => t('Your question will be reviewed by a moderator. You will be notified once it is published!'),
+                                'HeadlineFormat' => 'Question pending approval',
                                 "RecordType" => "Discussion",
                                 "RecordID" => $discussion->DiscussionID,
                                 "Route" => DiscussionModel::discussionUrl($discussion, "", "/"),
-                                'Story' => Gdn_Format::to($discussion->Body, $discussion->Format),
-                                'Notified' => ActivityModel::SENT_POPUP,
-                                'Emailed' => ActivityModel::SENT_POPUP,
-                                'Data' => [
-                                    'Title' => 'Question pending approval',
-                                    'Text' => 'Your question will be reviewed by a moderator. <br/> You will be notified once it is published!'
-                                ]
+                                'Story' => 'Your question will be reviewed by a moderator. <br/> You will be notified once it is published!',
+                                'Notified' => ActivityModel::SENT_PENDING,
+                                'Emailed' => ActivityModel::SENT_PENDING
                             ];
 
                             $activityModel = new ActivityModel();
@@ -796,20 +791,15 @@ class PostController extends VanillaController {
                     if(!$Comment->Published) {
                         // Add Notification Popup
                         $activity = [
-                            'ActivityType' => 'Default',
+                            'ActivityType' => 'NewDiscussion',
                             'NotifyUserID' => $Comment->InsertUserID,
-                            'ActivityUserID' =>  Gdn::session()->UserID,
-                            'HeadlineFormat' => t('Your explanation will be reviewed by a moderator. You will be notified once it is published!'),
+                            'HeadlineFormat' => 'Explanation pending approval',
                             "RecordType" => "Comment",
                             "RecordID" => $Comment->CommentID,
                             "Route" => CommentModel::commentUrl($Comment),
-                            'Story' => Gdn_Format::to($Comment->Body, $Comment->Format),
-                            'Notified' => ActivityModel::SENT_POPUP,
-                            'Emailed' => ActivityModel::SENT_POPUP,
-                            'Data' => [
-                                'Title' => 'Explanation pending approval',
-                                'Text' => 'Your explanation will be reviewed by a moderator. <br/> You will be notified once it is published!'
-                            ]
+                            'Story' => 'Your explanation will be reviewed by a moderator. <br/> You will be notified once it is published!',
+                            'Notified' => ActivityModel::SENT_PENDING,
+                            'Emailed' => ActivityModel::SENT_PENDING
                         ];
 
                         $activityModel = new ActivityModel();

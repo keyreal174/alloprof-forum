@@ -75,6 +75,7 @@ class SearchController extends Gdn_Controller {
         $this->getUserInfo();
         $this->ShowOptions = true;
         $this->addJsFile('search.js');
+        $this->addCssFile('search.css');
         $this->addJsFile('askquestion.js', 'vanilla');
         $this->title(t('Search'));
 
@@ -92,13 +93,13 @@ class SearchController extends Gdn_Controller {
         $this->fireEvent('AddProfileTabsInfo');
         $this->addModule('ProfileFilterModule');
 
-        $bannerModule = new BannerModule(
-            'Search',
-            'Home',
-            t('Search for'),
-            t(Gdn_Format::text($search).',')
-        );
-        $this->addModule($bannerModule);
+        // $bannerModule = new BannerModule(
+        //     'Search',
+        //     'Home',
+        //     t('Search for'),
+        //     t(Gdn_Format::text($search).',')
+        // );
+        // $this->addModule($bannerModule);
 
         saveToConfig('Garden.Format.EmbedSize', '160x90', false);
         Gdn_Theme::section('SearchResults');

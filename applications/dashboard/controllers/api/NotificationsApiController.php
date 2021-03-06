@@ -211,7 +211,7 @@ class NotificationsApiController extends AbstractApiController {
         $this->notificationPermission($row);
 
         if (array_key_exists("read", $body)) {
-            $this->activityModel->markSingleRead($id);
+            // $this->activityModel->markSingleRead($id);
         }
 
         $row = $this->notificationByID($id);
@@ -243,7 +243,7 @@ class NotificationsApiController extends AbstractApiController {
         $body = $in->validate($body);
 
         if (array_key_exists("read", $body)) {
-            $this->activityModel->markRead($this->getSession()->UserID);
+            // $this->activityModel->markRead($this->getSession()->UserID);
         }
 
         return new Data(null, ["status" => 204]);
