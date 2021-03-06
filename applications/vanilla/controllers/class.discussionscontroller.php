@@ -232,7 +232,6 @@ class DiscussionsController extends VanillaController {
         $categoryModel = new CategoryModel();
         $followingEnabled = $categoryModel->followingEnabled();
         if ($followingEnabled) {
-
             // some other controller has already set this value, so just take what's there
             if (array_key_exists('EnableFollowingFilter', $this->Data)) {
                 $this->enableFollowingFilter = $this->data('EnableFollowingFilter');
@@ -245,6 +244,8 @@ class DiscussionsController extends VanillaController {
                     null,
                     $saveFollowing
                 );
+                $followedCategories = array_keys($categoryModel->getFollowed(Gdn::session()->UserID));
+                $followed = count($followedCategories) > 0 ? true : false;
                 if (strpos($this->SelfUrl, "discussions") !== false) {
                     $this->enableFollowingFilter = true;
                 }
