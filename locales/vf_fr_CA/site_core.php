@@ -1766,3 +1766,5 @@ $Definition['I accept the <a href="https://www.alloprof.qc.ca/fr/pages/condition
 $Definition['Explanations given'] = 'Explications données';
 $Definition['Modify my profile on Alloprof'] = 'Modifier mon profil sur Alloprof';
 $Definition['Material'] = 'Matière';
+$Definition['Follow this subject'] = 'Suivre la matière';
+$Definition['Stop following this subject'] = 'Ne plus suivre la matière';

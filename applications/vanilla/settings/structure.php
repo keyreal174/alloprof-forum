@@ -171,7 +171,6 @@ $Construct
     ->column('Score', 'float', null)
     ->column('Attributes', 'text', true)
     ->column('RegardingID', 'int(11)', true, 'index')
-    ->column('Published', 'tinyint(1)', '0');
 //->column('Source', 'varchar(20)', true)
 
 $Construct
@@ -238,7 +237,6 @@ $Construct
     ->column('Flag', 'tinyint', 0)
     ->column('Score', 'float', null, ['index'])
     ->column('Attributes', 'text', true)
-    ->column('Published', 'tinyint(1)', '0')
     //->column('Source', 'varchar(20)', true)
     ->set($Explicit, $Drop);
 

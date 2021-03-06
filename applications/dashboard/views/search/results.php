@@ -33,7 +33,7 @@ else
                             <span class="UserName"><?php echo $Row->FirstName ?></span>
                             <div>
                             <?php
-                                if ($Row->GradeID) {
+                                if (getGrade($Row->GradeID)) {
                                     echo ' <span class="MItem-Grade">'.
                                     t(getGrade($Row->GradeID)).
                                     ' • </span> ';

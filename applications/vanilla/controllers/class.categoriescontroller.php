@@ -704,6 +704,35 @@ class CategoriesController extends VanillaController {
         }
     }
 
+    public function getUserRole($UserID = null) {
+        $userModel = new UserModel();
+        if ($UserID) {
+            $User = $userModel->getID($UserID);
+        } else {
+            $User = $userModel->getID(Gdn::session()->UserID);
+        }
+
+        if($User) {
+            $RoleData = $userModel->getRoles($User->UserID);
+
+            $RoleData = $userModel->getRoles($User->UserID);
+            if ($RoleData !== false) {
+                $Roles = array_column($RoleData->resultArray(), 'Name');
+            }
+
+            // Hide personal info roles
+            if (!checkPermission('Garden.PersonalInfo.View')) {
+                $Roles = array_filter($Roles, 'RoleModel::FilterPersonalInfo');
+            }
+
+            if(in_array(Gdn::config('Vanilla.ExtraRoles.Teacher'), $Roles))
+                $UserRole = Gdn::config('Vanilla.ExtraRoles.Teacher') ?? 'Teacher';
+            else $UserRole = RoleModel::TYPE_MEMBER ?? 'Student';
+
+            return $UserRole;
+        } else return null;
+    }
+
     /**
      * Show all (nested) categories.
      *

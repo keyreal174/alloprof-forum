@@ -30,6 +30,7 @@
 !/locales/.gitkeep
 /plugins/*
 !/plugins/AllViewed/
+!/plugins/alloprof/
 !/plugins/ButtonBar/
 !/plugins/categoryaslink/
 !/plugins/CivilTongueEx/
