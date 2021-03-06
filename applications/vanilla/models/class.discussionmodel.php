@@ -2697,19 +2697,28 @@ class DiscussionModel extends Gdn_Model implements FormatFieldInterface, EventFr
             $code = "HeadlineFormat.Discussion";
         }
 
+
+        // Notification String
+        $textstring = strip_tags(Gdn_Format::to($discussion["Body"], $discussion["Format"]));
+        if(strlen($textstring) > Gdn::config('Vanilla.Notify.TextLength')) {
+            $textstring = substr($textstring, 0, Gdn::config('Vanilla.Notify.TextLength')).'...';
+        }
+
         $data = [
             "ActivityType" => "Discussion",
             "ActivityUserID" => $insertUserID,
             "HeadlineFormat" => t(
                 $code,
-                '{ActivityUserID,user} started a new discussion: <a href="{Url,html}">{Data.Name,text}</a>'
+                'Question from {ActivityUserID,user}'
             ),
             "RecordType" => "Discussion",
             "RecordID" => $discussionID,
             "Route" => discussionUrl($discussion, "", "/"),
+            "Notified" => ActivityModel::SENT_PENDING,
+            "Story" => $textstring,
             "Data" => [
                 "Name" => $name,
-                "Category" => $categoryName,
+                "Category" => $categoryName
             ],
             "Ext" => [
                 "Email" => [

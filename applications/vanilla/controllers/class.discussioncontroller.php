@@ -106,30 +106,6 @@ class DiscussionController extends VanillaController {
     }
 
     /**
-     * Check New Popup Notification
-     */
-
-    public function checkNewPopup() {
-        $activities = $this->ActivityModel->getWhere(['NotifyUserID' => Gdn::session()->UserID, 'Notified' => ActivityModel::SENT_POPUP])->resultArray();
-        $ids = [];
-
-        for($i = 0; $i < count($activities); ++$i) {
-            array_push($ids, $activities[$i]['ActivityID']);
-            $data = $activities[$i]['Data'];
-            $link = $activities[$i]['Route'];
-
-            $this->informMessage(
-                '<div class="toast-container"><div class="toast-title">'.t($data['Title']).'</div>'.
-                '<div class="toast-text">'.t($data['Text']).'</div>'.
-                '<a href="'.$link.'" class="btn-default">'.t('See').'</a></div>',
-                'Dismissable'
-            );
-        }
-
-        $this->ActivityModel->setReadPopup($ids);
-    }
-
-    /**
      * Default single discussion display.
      *
      * @param int $DiscussionID Unique discussion ID
@@ -146,8 +122,6 @@ class DiscussionController extends VanillaController {
         $Order = Gdn::request()->get('order');
 
         Gdn_Theme::section('Discussion');
-
-        $this->checkNewPopup();
 
         // Load the discussion record
         $DiscussionID = (is_numeric($DiscussionID) && $DiscussionID > 0) ? $DiscussionID : 0;
@@ -602,9 +576,9 @@ class DiscussionController extends VanillaController {
      */
     public function bookmark($DiscussionID = null) {
         // Make sure we are posting back.
-        if (!$this->Request->isAuthenticatedPostBack()) {
-            throw permissionException('Javascript');
-        }
+        // if (!$this->Request->isAuthenticatedPostBack()) {
+        //     throw permissionException('Javascript');
+        // }
 
         $Session = Gdn::session();
 
@@ -885,17 +859,19 @@ class DiscussionController extends VanillaController {
                     'Preferences.Email.Delete' => 2,
                     'Preferences.Popup.Delete' => 2,
                 ]);
-                $headlineFormat = sprintf(t('Your content has been deleted by a moderator %s.', 'Your content has been deleted by a moderator <b>%s</b>.'), $this->Form->getFormValue('DeleteMessage'));
+                $text = sprintf(t('Your question has been deleted by a moderator %s.',
+                    'Your question has been deleted by a moderator <b>"%s"</b>.'), $this->Form->getFormValue('DeleteMessage'));
                 $data = [
                     "ActivityType" => "Delete",
                     "NotifyUserID" => $discussion->InsertUserID,
-                    "HeadlineFormat" => $headlineFormat,
+                    "HeadlineFormat" => 'Question deleted!',
                     "RecordType" => "Delete",
                     "RecordID" => $discussionID,
                     "Route" => discussionUrl($discussion, "", "/"),
                     "Data" => [
                         "Name" => $discussion->Name,
                         "Category" => $discussion->Category,
+                        "Text" => $text
                     ],
                 ];
 
@@ -1395,6 +1371,16 @@ body { background: transparent !important; }
         $this->render();
     }
 
+    /**
+     * Display modal
+     *
+     */
+    public function confirmFollow($DiscussionID) {
+        $this->setData('Discussion', $this->DiscussionModel->getID($DiscussionID), true);
+        $this->View = 'confirmfollow';
+        $this->addJsFile('confirmfollow.js');
+        $this->render();
+    }
 
     /**
      * Verify a comment.
