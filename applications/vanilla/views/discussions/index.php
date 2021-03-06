@@ -14,7 +14,7 @@ echo '<h1 class="H HomepageTitle">'.
     '</h1>';
 echo '</div>';
 
-if($this->data('Category.CountAllDiscussions')) {
+if($this->data('Category')) {
     echo '<div class="CategoryDetail">';
     echo '<div class="Card">';
     echo '<div class="category-info">';
@@ -27,6 +27,9 @@ if($this->data('Category.CountAllDiscussions')) {
     // echo '<button class="btn-default btn-shadow scrollToAskQuestionForm">'.t('Ask a question').'</button>';
     echo '</div>';
     echo '</div>';
+}
+
+if($this->data('Category') && $this->getUserRole() != 'Teacher') {
     echo Gdn_Theme::module('NewDiscussionModule', $this->data('_NewDiscussionProperties', ['CssClass' => 'Button Action Primary']));
 }
 
