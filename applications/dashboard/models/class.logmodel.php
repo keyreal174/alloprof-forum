@@ -232,14 +232,17 @@ class LogModel extends Gdn_Pluggable {
                         'Preferences.Email.Delete' => 2,
                         'Preferences.Popup.Delete' => 2,
                     ]);
-                    $headlineFormat = sprintf(t('Your content has been deleted by a moderator %s.', 'Your content has been deleted by a moderator <b>%s</b>.'), $deleteMessage);
+                    $text = sprintf(t('Your '.($recordType=='Discussion'?'question':'explanation').' has been deleted by a moderator %s.',
+                        'Your '.($recordType=='Discussion'?'question':'explanation').' has been deleted by a moderator <b>"%s"</b>.'), $deleteMessage);
                     $data = [
                         "ActivityType" => "Delete",
                         "NotifyUserID" => $log['InsertUserID'],
-                        "HeadlineFormat" => $headlineFormat,
+                        "HeadlineFormat" => ($recordType=='Discussion'?'Question':'Explanation').' deleted!',
                         "RecordType" => "Delete",
                         "RecordID" => $log['RecordID'],
-                        "Route" => $recordType=='Discussion'?DiscussionModel::discussionUrl($log['Data'], "", "/"):CommentModel::commentUrl($log['Data'])
+                        "Story" => $text,
+                        "Route" => $recordType=='Discussion'?DiscussionModel::discussionUrl($log['Data'], "", "/"):CommentModel::commentUrl($log['Data']),
+                        "Notified" => ActivityModel::SENT_PENDING
                     ];
 
                     $ActivityModel = new ActivityModel();
@@ -887,17 +890,12 @@ class LogModel extends Gdn_Pluggable {
             'ActivityType' => 'Default',
             'NotifyUserID' => $notifyUser,
             'ActivityUserID' => Gdn::session()->UserID,
-            'HeadlineFormat' => '<span>"'.$textstring.'<span>" </span> <b>has been published.</b>',
-            'Story' => Gdn_Format::to($data['Body'], $data['Format']),
+            'HeadlineFormat' => ($table=='Discussion'?'Question':'Explanation').' published!',
+            'Story' => '<span>"'.$textstring.'<span>" </span> <b>has been published.</b>',
             "RecordType" => "Comment",
             "RecordID" => $table=='Discussion'?$data->DiscussionID:$data->CommentID,
             "Route" => $table=='Discussion'?DiscussionModel::discussionUrl($data, "", "/"):CommentModel::commentUrl($data),
-            'Notified' => ActivityModel::SENT_POPUP,
-            'Emailed' => ActivityModel::SENT_POPUP,
-            'Data' => [
-                'Title' => $title,
-                'Text' => '<span>"'.$textstring.'<span>" </span> <b>has been published.</b>'
-            ]
+            "Notified" => ActivityModel::SENT_PENDING
         ];
 
         $activityModel = new ActivityModel();

@@ -202,8 +202,8 @@
 
 .Discussion .PageTitle {
     position: absolute;
-    right: 45px;
-    top: 55px;
+    right: 40px;
+    top: 30px;
 }
 
 .Discussion .PageTitle .Options {
@@ -439,13 +439,9 @@
 }
 
 .MessageList .ItemComment.Accepted.TeacherComment .not-published-badge {
-    top: 50px;
+    top: 0px;
 }
 
 .MessageList .ItemComment.Accepted.TeacherComment .Username {
     color: #05BF8E;
-}
-
-.MessageList .ItemComment .Username {
-
 }

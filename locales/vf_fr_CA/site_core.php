@@ -654,7 +654,7 @@ $Definition['HeadlineFormat.AcceptAnswer'] = '{ActivityUserID,You} a accepté {N
 $Definition['HeadlineFormat.Answer'] = '{ActivityUserID,user} a répondu à votre question : <a href="{Url,html}">{Data.Name,text}</a>';
 $Definition['HeadlineFormat.Badge'] = '{ActivityUserID,You} avez gagné le badge <a href="{Url,html}">{Data.Name,text}</a> .';
 $Definition['HeadlineFormat.Ban'] = '{RegardingUserID,You} banni {ActivityUserID,you}.';
-$Definition['HeadlineFormat.Comment'] = '{ActivityUserID,user} a publié une réponse sur <a href="{Url,html}">{Data.Name,text}</a>';
+$Definition['HeadlineFormat.Comment'] = 'Réponse de {ActivityUserID,user}';
 $Definition['HeadlineFormat.ConversationMessage'] = '{ActivityUserID,User} vous a envoyé un <a href="{Url,html}">message</a>';
 $Definition['HeadlineFormat.Discussion'] = '{ActivityUserID,user} a crée une nouvelle discussion. <a href="{Url,html}">{Data.Name,text}</a>';
 $Definition['HeadlineFormat.Mention'] = '{ActivityUserID,user} vous a mentionné dans <a href="{Url,html}">{Data.Name,text}</a>';
@@ -1655,6 +1655,8 @@ $Definition['You wrote:'] = 'Vous avez écrit :';
 // Custom Definitions
 
 $Definition['About'] = 'À propos';
+$Definition['Notifications'] = 'Notifications';
+$Definition['Mark all as read'] = 'Marquer tout comme lu';
 $Definition['Access Alloprof 100% solutions'] = 'Accéder à Alloprof 100% solutions';
 $Definition['All my <b>questions,</b>'] = 'Toutes mes <b>questions,</b>';
 $Definition['Ask a question'] = 'Pose ta question';
@@ -1717,13 +1719,13 @@ $Definition['With Alloprof 100% solutions communicate freely with teachers by ph
 $Definition['Question pending approval'] = 'Question en attente d’approbation';
 $Definition['Your question will be reviewed by a moderator.'] = 'Ta question va être examinée par un modérateur.';
 $Definition['You will be notified once it is published!'] = 'Tu seras averti dès sa publication !';
-$Definition['has been published.'] = 'a été publiée.';
 $Definition['Question published!'] = 'Question publiée!';
 
 $Definition['Explanation pending approval'] = "Explication en attente d'approbation";
-$Definition['Your explanation will be reviewed by a moderator.'] = 'Ton explication va être examinée par un modérateur.';
-$Definition['You will be notified once it is published!'] = 'Tu seras averti dès sa publication !';
+$Definition['Your explanation will be reviewed by a moderator. You will be notified once it is published!'] = 'Ton explication va être examinée par un modérateur. Tu seras averti dès sa publication!';
 $Definition['has been published.'] = 'a été publiée.';
+$Definition['has been published.'] = 'a été publiée.';
+$Definition['Awaiting publication'] = 'En attente de publication';
 $Definition['Explanation published!'] = 'Explication publiée!';
 $Definition['Your content has been flagged for moderation'] = 'Ton contenu a été signalé pour modération';
 $Definition['Your content has been flagged for moderation %s'] = 'Ton contenu a été signalé pour modération <b>%s</b>';
