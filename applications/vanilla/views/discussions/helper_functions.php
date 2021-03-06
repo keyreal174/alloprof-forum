@@ -69,6 +69,32 @@ if (!function_exists('BookmarkButton')) {
             return '';
         }
 
+        $popupClass = "";
+        $popupLink = "/discussion/confirmFollow/".$discussion->DiscussionID;
+
+        $hasFollowedTeacher = false;
+        if (userRoleCheck() == 'Teacher' && $discussion->Bookmarked != '1') {
+            $data = Gdn::sql()
+                    ->select('*')
+                    ->from('UserDiscussion')
+                    ->where('DiscussionID', $discussion->DiscussionID)
+                    ->where('Bookmarked', 1)
+                    ->get();
+            foreach ($data as $row) {
+                $followedUserID = val('UserID', $row);
+                if ($followedUserID != Gdn::session()->UserID) {
+                    if (userRoleCheck($followedUserID) == 'Teacher') {
+                        $hasFollowedTeacher = true;
+                        break;
+                    }
+                }
+            }
+
+            if ($hasFollowedTeacher) {
+                $popupClass = " OptionsLink Popup";
+            }
+        }
+
         // Bookmark link
         $isBookmarked = $discussion->Bookmarked == '1';
 
@@ -90,6 +116,15 @@ if (!function_exists('BookmarkButton')) {
         EOT;
 
         $icon = $isBookmarked ? $icon_following : $icon_follow;
+
+        if ($hasFollowedTeacher) {
+            return anchor(
+                $icon,
+                $popupLink,
+                'followButton Option-Icon Popup'.($isBookmarked ? ' TextColor isFollowing' : ''),
+                ['title' => $title, 'aria-pressed' => $isBookmarked ? 'true' : 'false', 'role' => 'button', 'aria-label' => $accessibleLabel]
+            );
+        }
 
         return anchor(
             $icon,

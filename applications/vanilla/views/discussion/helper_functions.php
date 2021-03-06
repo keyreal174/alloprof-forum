@@ -852,6 +852,7 @@ if (!function_exists('writeDiscussionFooter')) :
             <div class="Item-Footer-Icons">
                 <?php
                 include($sender->fetchViewLocation('helper_functions', 'discussions', 'vanilla'));
+
                 if (!Gdn::themeFeatures()->get('EnhancedAccessibility')) {
                         echo '<span class="Options">';
                         echo bookmarkButton($Discussion);

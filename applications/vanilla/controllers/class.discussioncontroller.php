@@ -602,9 +602,9 @@ class DiscussionController extends VanillaController {
      */
     public function bookmark($DiscussionID = null) {
         // Make sure we are posting back.
-        if (!$this->Request->isAuthenticatedPostBack()) {
-            throw permissionException('Javascript');
-        }
+        // if (!$this->Request->isAuthenticatedPostBack()) {
+        //     throw permissionException('Javascript');
+        // }
 
         $Session = Gdn::session();
 
@@ -1395,6 +1395,16 @@ body { background: transparent !important; }
         $this->render();
     }
 
+    /**
+     * Display modal
+     *
+     */
+    public function confirmFollow($DiscussionID) {
+        $this->setData('Discussion', $this->DiscussionModel->getID($DiscussionID), true);
+        $this->View = 'confirmfollow';
+        $this->addJsFile('confirmfollow.js');
+        $this->render();
+    }
 
     /**
      * Verify a comment.
