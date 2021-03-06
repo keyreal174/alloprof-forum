@@ -121,8 +121,8 @@ if (!function_exists('BookmarkButton')) {
             return anchor(
                 $icon,
                 $popupLink,
-                'followButton Option-Icon Popup'.($isBookmarked ? ' TextColor isFollowing' : ''),
-                ['title' => $title, 'aria-pressed' => $isBookmarked ? 'true' : 'false', 'role' => 'button', 'aria-label' => $accessibleLabel]
+                'Hijack followButton Option-Icon Popup'.($isBookmarked ? ' TextColor isFollowing' : ''),
+                ['title' => $title, 'id' => 'followButton'.$discussion->DiscussionID, 'aria-pressed' => $isBookmarked ? 'true' : 'false', 'role' => 'button', 'aria-label' => $accessibleLabel]
             );
         }
 
@@ -130,7 +130,7 @@ if (!function_exists('BookmarkButton')) {
             $icon,
             '/discussion/bookmark/'.$discussion->DiscussionID.'/'.Gdn::session()->transientKey(),
             'Hijack followButton Option-Icon'.($isBookmarked ? ' TextColor isFollowing' : ''),
-            ['title' => $title, 'aria-pressed' => $isBookmarked ? 'true' : 'false', 'role' => 'button', 'aria-label' => $accessibleLabel]
+            ['title' => $title, 'id' => 'followButton'.$discussion->DiscussionID, 'aria-pressed' => $isBookmarked ? 'true' : 'false', 'role' => 'button', 'aria-label' => $accessibleLabel]
         );
     }
 }

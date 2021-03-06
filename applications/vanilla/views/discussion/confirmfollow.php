@@ -67,9 +67,9 @@
 
     <div class="BoxConfirmFollow-options">
         <?php
-            echo '<button class="btn-default followButton Option-Icon '.($isBookmarked ? ' TextColor isFollowing' : '').'" title="'.$title.'" data-url="'.'/discussion/bookmark/'.$discussion->DiscussionID.'/'.Gdn::session()->transientKey().'">'.t("Add to my list")."</button>";
+            echo '<button id="'.$discussion->DiscussionID.'" after-title="'.t('UnFollow').'" class="btn-default followButton Option-Icon'.($isBookmarked ? ' TextColor isFollowing' : '').'" title="'.$title.'" data-url="'.'/discussion/bookmark/'.$discussion->DiscussionID.'/'.Gdn::session()->transientKey().'">'.t("Add to my list")."</button>";
         ?>
-        <a class="btn-default btn-shadow close-link">
+        <a class="btn-default btn-shadow close-link Close">
             <span> <?php echo t("Cancel") ?> </span>
         </a>
     </div>

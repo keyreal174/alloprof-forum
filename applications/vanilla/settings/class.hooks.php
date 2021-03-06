@@ -684,6 +684,7 @@ class VanillaHooks extends Gdn_Plugin {
         $sender->addJsFile('slickcarousel.js', 'vanilla');
         $sender->addJsFile('basic.js', 'vanilla');
         $sender->addJsFile('jquery.popup.js');
+        $sender->addJsFile('confirmfollow.js');
 
         if (!inSection('Dashboard')) {
             // Spoilers assets

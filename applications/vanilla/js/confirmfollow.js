@@ -1,6 +1,6 @@
 
 jQuery(document).ready(function ($) {
-    $(".BoxConfirmFollow-options .followButton").click(function (e) {
+    $(document).on('click', ".BoxConfirmFollow-options .followButton", function(e) {
         e.preventDefault();
         var $button = $(this);
 
@@ -10,7 +10,11 @@ jQuery(document).ready(function ($) {
         $.ajax({
             url: gdn.url(url),
             success: (data) => {
-                location.reload();
+                $('.BoxConfirmFollow .Close').trigger('click');
+                $('#followButton'+$(this).attr('id')).addClass('isFollowing');
+                $('#followButton'+$(this).attr('id')).removeClass('Popup');
+                $('#followButton'+$(this).attr('id')).attr('href', api_url);
+                $('#followButton'+$(this).attr('id')).attr('title', $(this).attr('after-title'));
             },
             error: (e) => {
                 console.log(e);

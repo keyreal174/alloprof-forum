@@ -50,7 +50,7 @@ if (!function_exists('writeBookmarkLink')) :
             $title,
             '/discussion/bookmark/'.$discussion->DiscussionID.'/'.Gdn::session()->transientKey().'?Target='.urlencode(Gdn::controller()->SelfUrl),
             'Hijack Bookmark'.($isBookmarked ? ' Bookmarked' : ''),
-            ['title' => $title, 'aria-label' => $accessibleLabel]
+            ['title' => $title, 'aria-label' => $accessibleLabel, 'id' => 'followButton'.$discussion->DiscussionID]
         );
     }
 endif;
