@@ -142,6 +142,15 @@
     margin-right: 17px;
 }
 
+.followButton.isFollowing svg {
+    width: 21px;
+    height: 24px;
+}
+
+.followButton.isFollowing svg path {
+    fill: black;
+}
+
 .Options>a.Option-Icon:last-child {
     margin-right: 0;
     margin-left: 15px !important;

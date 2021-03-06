@@ -1,5 +1,4 @@
 jQuery(document).ready(function ($) {
-
     $(".Flyout.MenuItems .mark-verify").click(function (e) {
         e.preventDefault();
         var $button = $(this);
