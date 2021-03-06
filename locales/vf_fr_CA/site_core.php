@@ -1695,7 +1695,7 @@ $Definition['Question followed'] = 'Questions suivies';
 $Definition['Questions asked'] = 'Questions posées';
 $Definition['Receive all of Alloprof\'s infos and tips by email.'] = 'Reçois toutes les infos et astuces d\'Alloprof par courriel.';
 $Definition['Resources'] = 'Ressources';
-$Definition['Results (%d)'] = 'Résultats (%d)';
+$Definition['%d results for "%s"'] = '%d résultats pour "%s"';
 $Definition['Search for'] = 'Rechercher pour';
 $Definition['Report post'] = 'Signaler la publication';
 $Definition['Report'] = 'Signaler';
@@ -1767,6 +1767,7 @@ $Definition['I confirm that I am 14 years of age or older. If I am 13 years of a
 $Definition['I accept the <a href="https://www.alloprof.qc.ca/fr/pages/conditions-d-utilisation-et-vie-privee">Terms of Service and the Privacy Policy</a>, as well as the creation of a personal file in which notes can be added by the Alloprof teachers with whom I communicate.'] = 'J’accepte les <a href="https://www.alloprof.qc.ca/fr/pages/conditions-d-utilisation-et-vie-privee">Conditions d’utilisation et la Politique sur la protection des renseignements personnels</a>, ainsi que la création d’un dossier personnel dans lequel des notes pourront être ajoutées par les enseignants d’Alloprof avec lesquels je communique.';
 $Definition['Explanations given'] = 'Explications données';
 $Definition['Modify my profile on Alloprof'] = 'Modifier mon profil sur Alloprof';
+$Definition['Material'] = 'Matière';
 $Definition['Follow this subject'] = 'Suivre la matière';
 $Definition['Stop following this subject'] = 'Ne plus suivre la matière';
 $Definition['Oops! The question is already followed'] = 'Oups! La question est déjà suivie';
