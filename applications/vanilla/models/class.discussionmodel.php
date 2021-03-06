@@ -2714,7 +2714,6 @@ class DiscussionModel extends Gdn_Model implements FormatFieldInterface, EventFr
             "RecordType" => "Discussion",
             "RecordID" => $discussionID,
             "Route" => discussionUrl($discussion, "", "/"),
-            "Notified" => ActivityModel::SENT_PENDING,
             "Story" => $textstring,
             "Data" => [
                 "Name" => $name,

@@ -12,12 +12,12 @@
                 </a>
             ';
             echo '<a class="notification-all-read">'.t('Mark all as read').'</a>';
-            echo '<strong>'.t('Notifications').' (<span class="notification-count">'.count($this->data('UnreadNotifications')).'</span>)</strong>';
+            echo '<strong>'.t('Notifications').' (<span class="notification-count">'.($this->data('UnreadNotifications')).'</span>)</strong>';
             ?></li>
-        <li class="notification-settings-content">
-            <div><?php echo t('Activate all notifications') ?> <input type="checkbox"/></div>
-            <div><?php echo t('Explanation notifications') ?> <input type="checkbox"/></div>
-            <div><?php echo t('Moderation notifications') ?> <input type="checkbox"/></div>
+        <li class="notification-settings-content FilterMenu">
+            <div><?php echo Gdn::controller()->Form->toggle('ToggleAll', t('Activate all notifications'), [ 'checked' => $explanation ]); ?></div>
+            <div><?php echo Gdn::controller()->Form->toggle('ToggleExplanation', t('Explanation notifications'), [ 'checked' => $explanation ]); ?></div>
+            <div><?php echo Gdn::controller()->Form->toggle('ToggleModeration', t('Moderation notifications'), [ 'checked' => $explanation ]); ?></div>
         </li>
         <div class="notification-list">
             <?php foreach ($this->data('Activities') as $Activity): ?>
@@ -57,7 +57,7 @@
                             $format = $Activity['Format'] ?? Vanilla\Formatting\Formats\HtmlFormat::FORMAT_KEY;
                             $excerpt = htmlspecialchars($story ? Gdn::formatService()->renderExcerpt($story, $format) : $excerpt);
 
-                            echo t($excerpt); ?>
+                            echo t(trim($excerpt)); ?>
                     </p>
                     <div class="Meta">
                         <span class="MItem DateCreated"><?php echo Gdn_Format::date($Activity['DateUpdated']); ?></span>

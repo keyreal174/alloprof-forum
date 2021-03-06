@@ -847,11 +847,7 @@ class ProfileController extends Gdn_Controller {
 
         $this->ActivityModel = new ActivityModel();
         $activities = $this->ActivityModel->getWhere($where, '', '', c('Vanilla.Discussions.PerPage', 5), 0)->resultArray();
-
-        $UnreadNotifications = array_column($activities, 'Notified');
-        $UnreadNotifications = array_filter($UnreadNotifications, function($value) {
-            return $value == ActivityModel::SENT_PENDING;
-        });
+        $UnreadNotifications = $this->ActivityModel->getUserTotalUnread(Gdn::session()->UserID);
 
         $user = Gdn::userModel()->getID(Gdn::session()->UserID);
         if (val('CountNotifications', $user) != 0) {

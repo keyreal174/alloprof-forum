@@ -195,6 +195,7 @@
     position: absolute;
     right: 40px;
     top: 30px;
+    z-index: 99;
 }
 
 .Discussion .PageTitle .Options {

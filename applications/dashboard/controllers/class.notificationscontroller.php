@@ -114,8 +114,8 @@ class NotificationsController extends Gdn_Controller {
 
             $sender->informMessage(
                 '<div class="toast-container">'.$userPhoto.'<div>'
-                .wrap($activity['Headline'].$verifiedIcon, 'div', ['class' => 'toast-title'.($verified?' verified':'')])
-                .wrap($story, 'div', ['class' => 'toast-text'])
+                .wrap(t($activity['Headline']).$verifiedIcon, 'div', ['class' => 'toast-title'.($verified?' verified':'')])
+                .wrap(t($story), 'div', ['class' => 'toast-text'])
                 .'<a href="'.$link.'" class="btn-default">'.t('See').'</a></div></div>',
                 'Dismissable AutoDismiss'.$activityClass.($userPhoto == '' ? '' : ' HasIcon')
             );
