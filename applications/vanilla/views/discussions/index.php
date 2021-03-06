@@ -27,6 +27,9 @@ if($this->data('Category.CountAllDiscussions')) {
     // echo '<button class="btn-default btn-shadow scrollToAskQuestionForm">'.t('Ask a question').'</button>';
     echo '</div>';
     echo '</div>';
+}
+
+if($this->data('Category') && $this->getUserRole() != 'Teacher') {
     echo Gdn_Theme::module('NewDiscussionModule', $this->data('_NewDiscussionProperties', ['CssClass' => 'Button Action Primary']));
 }
 
