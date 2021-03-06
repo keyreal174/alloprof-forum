@@ -14,7 +14,7 @@ echo '<h1 class="H HomepageTitle">'.
     '</h1>';
 echo '</div>';
 
-if($this->data('Category.CountAllDiscussions')) {
+if($this->data('Category')) {
     echo '<div class="CategoryDetail">';
     echo '<div class="Card">';
     echo '<div class="category-info">';
