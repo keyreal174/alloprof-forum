@@ -36,7 +36,6 @@ class SearchController extends Gdn_Controller {
         parent::__construct();
         $this->searchAdapter = $searchAdapter;
         $this->discussionApi = $discussionApi;
-        $this->
         $form = Gdn::factory('Form');
 
         // Form prep
