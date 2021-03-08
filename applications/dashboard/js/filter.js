@@ -35,11 +35,12 @@ jQuery(document).ready(function($) {
         var newUrl = '';
         if (url.includes('search?')) {
             var base_url = url.split("search?")[0];
-            if (url.split("search?")[0].startsWith('grade')) {
-                newUrl = base_url + 'search?' + parameter;
+            var required_uri = url.split("search?")[1].split("Search=");
+
+            if (required_uri[1]) {
+                newUrl = base_url + 'search?' + parameter + '&Search=' + required_uri[1];
             } else {
-                var searchParams = url.split("search?")[1].split('&grade')[0];
-                newUrl = base_url + 'search?' + searchParams + '&' + parameter;
+                newUrl = base_url + 'search?' + parameter;
             }
         } else {
             newUrl = url + '?' + parameter;
