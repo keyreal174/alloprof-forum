@@ -73,16 +73,18 @@ jQuery(document).ready(function($) {
 
         var url = document.location.href;
         var newUrl = '';
+        var anchor = url.split("#");
         if (url.includes('commentverifiedby')) {
             var base_url = url.split("commentverifiedby")[0];
             newUrl = base_url + parameter;
         } else {
             if (url.includes('?')) {
-                newUrl = url + '&' + parameter;
+                newUrl = anchor[0] + '&' + parameter;
             } else {
-                newUrl = url + '?' + parameter;
+                newUrl = anchor[0] + '?' + parameter;
             }
         }
+        newUrl = anchor[1] ? newUrl + '#' + anchor[1] : newUrl;
 
         document.location = newUrl;
         return false;

@@ -271,6 +271,10 @@ class DiscussionController extends VanillaController {
             $this->setData('Comments', $this->CommentModel->getByDiscussion($DiscussionID, $Limit, $this->Offset, $this->WhereClause), true);
         }
 
+        $where['DiscussionID'] = $DiscussionID;
+        $where = array_merge($where, $this->WhereClause);
+        $this->setData('CommentCount', $this->CommentModel->getCount($where));
+
         $LatestItem = $this->Discussion->CountCommentWatch;
         if ($LatestItem === null) {
             $LatestItem = 0;
