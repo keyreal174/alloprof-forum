@@ -36,6 +36,7 @@
 @import url("./modules/vanilla-flag.css");
 @import url("./modules/vanilla-filtersort.css");
 @import url("./modules/vanilla-auth.css");
+@import url("./modules/vanilla-confirmfollow.css");
 @import url("./modules/vanilla-notification.css");
 
 .BoxNewDiscussion {
@@ -364,4 +365,3 @@ div.Popup .Border {
 .not-published-badge img {
     margin-right: 15px;
 }
-

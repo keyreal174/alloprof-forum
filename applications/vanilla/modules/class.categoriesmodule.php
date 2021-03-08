@@ -84,7 +84,9 @@ class CategoriesModule extends Gdn_Module {
         function cmp($a, $b) {
             if ($a["isFollowing"] > $b["isFollowing"]) {
                 return -1;
-            } else return 1;
+            } else if ($a["isFollowing"] < $b["isFollowing"]) {
+                return 1;
+            } else return 0;
         }
 
         usort($categories, "cmp");
