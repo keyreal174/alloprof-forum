@@ -102,10 +102,12 @@ class DiscussionsController extends VanillaController {
             unset($wheres['d.GradeID']);
         }
 
+        $role = $this->getUserRole(Gdn::session()->UserID);
+        $role_where = $role === 'Teacher' ? 'd.CountComments' : 'd.CountComments >';
         if ($this->IsExplanation == 'true') {
-            $wheres['d.CountComments >'] = 0;
+            $wheres[$role_where] = 0;
         } else {
-            unset($wheres['d.CountComments >']);
+            unset($wheres[$role_where]);
         }
 
         if ($this->IsVerifiedBy == 'true') {

@@ -309,6 +309,37 @@ if (!function_exists('writeDiscussionSort')) :
     }
 endif;
 
+if (!function_exists('getUserRole')) :
+    function getUserRole($UserID = null) {
+        $userModel = Gdn::userModel();
+        if ($UserID) {
+            $User = $userModel->getID($UserID);
+        } else {
+            $User = $userModel->getID(Gdn::session()->UserID);
+        }
+
+        if($User) {
+            $RoleData = $userModel->getRoles($User->UserID);
+
+            $RoleData = $userModel->getRoles($User->UserID);
+            if ($RoleData !== false) {
+                $Roles = array_column($RoleData->resultArray(), 'Name');
+            }
+
+            // Hide personal info roles
+            if (!checkPermission('Garden.PersonalInfo.View')) {
+                $Roles = array_filter($Roles, 'RoleModel::FilterPersonalInfo');
+            }
+
+            if(in_array(Gdn::config('Vanilla.ExtraRoles.Teacher'), $Roles))
+                $UserRole = Gdn::config('Vanilla.ExtraRoles.Teacher') ?? 'Teacher';
+            else $UserRole = RoleModel::TYPE_MEMBER ?? 'Student';
+
+            return $UserRole;
+        } else return null;
+    }
+endif;
+
 if (!function_exists('writeFilterToggle')) :
     /**
      * Returns discussions grade filtering.
@@ -317,12 +348,14 @@ if (!function_exists('writeFilterToggle')) :
      * @return string
      */
     function writeFilterToggle($explanation, $verified) {
+        $role = getUserRole(Gdn::session()->User->UserID);
         echo '<ul>';
         echo '<li class="form-group">';
+        $text = $role === 'Teacher' ? t('Without explanations only') : t('With explanations only');
         if ($explanation == 'true') {
-            echo Gdn::controller()->Form->toggle('Explanation', t('With explanations only'), [ 'checked' => $explanation ]);
+            echo Gdn::controller()->Form->toggle('Explanation', $text, [ 'checked' => $explanation ]);
         } else {
-            echo Gdn::controller()->Form->toggle('Explanation', t('With explanations only'));
+            echo Gdn::controller()->Form->toggle('Explanation', $text);
         }
         echo '</li>';
         echo '<li class="form-group">';
@@ -330,6 +363,48 @@ if (!function_exists('writeFilterToggle')) :
             echo Gdn::controller()->Form->toggle('VerifiedBy', t('Verified by Alloprof only'), [ 'checked' => $verified ]);
         } else {
             echo Gdn::controller()->Form->toggle('VerifiedBy', t('Verified by Alloprof only'));
+        }
+        echo '</li>';
+        echo '</ul>';
+    }
+endif;
+
+
+// comment filter and sort
+if (!function_exists('writeCommentSort')) :
+    /**
+     * Returns discussions grade filtering.
+     *
+     * @param string $extraClasses any extra classes you add to the drop down
+     * @return string
+     */
+    function writeCommentSort($sort) {
+        $options = [
+            'desc' => t('Recent'),
+            'asc' => t('Oldest')
+        ];
+
+        echo '<div class="FilterMenu__Dropdown">';
+        echo '<img src="/themes/alloprof/design/images/icons/sort.svg"/>';
+        echo Gdn::controller()->Form->dropDown('CommentSort', $options, [ 'Value' => $sort ]);
+        echo '</div>';
+    }
+endif;
+
+if (!function_exists('writeCommentVerifiedToggle')) :
+    /**
+     * Sort comments
+     *
+     * @param string $extraClasses any extra classes you add to the drop down
+     * @return string
+     */
+    function writeCommentVerifiedToggle($verified) {
+        echo '<ul>';
+        echo '<li class="form-group">';
+        if ($verified == 'true') {
+            echo Gdn::controller()->Form->toggle('CommentVerifiedBy', t('Verified by Alloprof only'), [ 'checked' => $verified ]);
+        } else {
+            echo Gdn::controller()->Form->toggle('CommentVerifiedBy', t('Verified by Alloprof only'));
         }
         echo '</li>';
         echo '</ul>';
