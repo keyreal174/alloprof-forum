@@ -156,8 +156,6 @@ class SearchController extends Gdn_Controller {
         saveToConfig('Garden.Format.EmbedSize', '160x90', false);
         Gdn_Theme::section('SearchResults');
 
-        $this->setData('_PagerUrl', 'search?Search='.$search);
-
         $this->writeFilter();
         $where['Body like'] = '%'.str_replace(['%', '_'], ['\%', '\_'], $search).'%';
         [$offset, $limit] = offsetLimit($page, c('Garden.Search.PerPage', 20));
@@ -278,11 +276,5 @@ class SearchController extends Gdn_Controller {
         // $this->addSideMenu();
         $this->_UserInfoRetrieved = true;
         return true;
-    }
-
-    public function filterDiscussion() {
-        $parameter = $_POST['parameter'];
-
-        echo $this->_PagerUrl.'?'.$parameter;
     }
 }

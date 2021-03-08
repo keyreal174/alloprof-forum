@@ -309,6 +309,10 @@ select {
     margin-bottom: 24px;
 }
 
+.DataList-Search .embedExternal.embedImage {
+    display: none;
+}
+
 
 /* Modal  */
 
