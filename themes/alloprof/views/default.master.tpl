@@ -97,7 +97,6 @@
                                 <div class="Header-left">
                                     <div class="Header-left__search">
                                         {searchbox}
-                                        {module name="AdvancedSearchModule"}
                                     </div>
                                 </div>
                                 <div class="Header-logo">
