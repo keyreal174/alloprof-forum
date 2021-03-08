@@ -335,3 +335,45 @@ if (!function_exists('writeFilterToggle')) :
         echo '</ul>';
     }
 endif;
+
+
+// comment filter and sort
+if (!function_exists('writeCommentSort')) :
+    /**
+     * Returns discussions grade filtering.
+     *
+     * @param string $extraClasses any extra classes you add to the drop down
+     * @return string
+     */
+    function writeCommentSort($sort) {
+        $options = [
+            'desc' => t('Recent'),
+            'asc' => t('Oldest')
+        ];
+
+        echo '<div class="FilterMenu__Dropdown">';
+        echo '<img src="/themes/alloprof/design/images/icons/sort.svg"/>';
+        echo Gdn::controller()->Form->dropDown('CommentSort', $options, [ 'Value' => $sort ]);
+        echo '</div>';
+    }
+endif;
+
+if (!function_exists('writeCommentVerifiedToggle')) :
+    /**
+     * Sort comments
+     *
+     * @param string $extraClasses any extra classes you add to the drop down
+     * @return string
+     */
+    function writeCommentVerifiedToggle($verified) {
+        echo '<ul>';
+        echo '<li class="form-group">';
+        if ($verified == 'true') {
+            echo Gdn::controller()->Form->toggle('CommentVerifiedBy', t('Verified by Alloprof only'), [ 'checked' => $verified ]);
+        } else {
+            echo Gdn::controller()->Form->toggle('CommentVerifiedBy', t('Verified by Alloprof only'));
+        }
+        echo '</li>';
+        echo '</ul>';
+    }
+endif;
