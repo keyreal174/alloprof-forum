@@ -45,6 +45,13 @@ jQuery(document).ready(function($) {
     }
 
     function updateNotificationSettings() {
+
+        // var data = {
+        //     'All': $('.notification-settings-content #Form_ToggleAll').is(":checked"),
+        //     ''
+        // }
+
+
         $.ajax({
             type: "POST",
             url: '/notifications/markSingleRead/'+$id,

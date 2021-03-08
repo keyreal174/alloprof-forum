@@ -5237,6 +5237,8 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
 .MessageList .ItemComment .Options {
     margin-right: 8px;
     margin-top: 0;
+    position: relative;
+    z-index: 2;
 }
 
 .MessageList.AcceptedAnswers .Item:first-child,

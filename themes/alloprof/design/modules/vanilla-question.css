@@ -322,6 +322,8 @@
 .MessageList .ItemComment .Item-Header,
 .MessageList .ItemDiscussion .Item-Header {
     margin-bottom: 40px;
+    position: relative;
+    z-index: 1;
 }
 
 .MItem-Grade {
