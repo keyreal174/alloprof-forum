@@ -26,8 +26,13 @@ function smarty_function_searchbox($params, &$smarty) {
         $actual_link = str_replace('Search='.$search, '', $link);
         $actual_link = str_replace('Search='.$search.'&', '', $actual_link);
     } else {
-        $actual_link = $link;
+        if (strpos($link, '/search')) {
+            $actual_link = $link;
+        } else {
+            $actual_link = '/search';
+        }
     }
+
     $result =
         $form->open(['action' => url($actual_link), 'method' => 'get']).
         $form->textBox('Search', [
