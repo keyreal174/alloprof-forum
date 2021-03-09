@@ -1743,6 +1743,7 @@ $Definition['Explanations'] = 'Explications';
 $Definition['Recent'] = 'Récents';
 $Definition['Oldest'] = 'Anciens';
 $Definition['With explanations only'] = 'Avec explications seulement';
+$Definition['Without explanations only'] = 'Sans explications seulement';
 $Definition['Verified by Alloprof only'] = 'Vérifiée par Alloprof seulement';
 $Definition['Grade'] = 'Niveau';
 $Definition['Filter'] = 'Filtres';
