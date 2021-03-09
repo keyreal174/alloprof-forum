@@ -45,16 +45,36 @@ jQuery(document).ready(function($) {
     }
 
     function updateNotificationSettings() {
+        var formData = new FormData()
 
-        // var data = {
-        //     'All': $('.notification-settings-content #Form_ToggleAll').is(":checked"),
-        //     ''
-        // }
+        const preferences = {
+            'All': ['Popup.DiscussionComment', 'Popup.Moderation'],
+            'ToggleEmail': ['Email.DiscussionComment', 'Email.Moderation'],
+            'ToggleExplanation': ['Popup.DiscussionComment'],
+            'ToggleModeration': ['Popup.Moderation']
+        }
 
+        var settings = {
+            'All': $('.notification-settings-content #Form_ToggleAll').is(":checked"),
+            'ToggleEmail': $('.notification-settings-content #Form_ToggleEmail').is(":checked"),
+            'ToggleExplanation': $('.notification-settings-content #Form_ToggleExplanation').is(":checked"),
+            'ToggleModeration': $('.notification-settings-content #Form_ToggleModeration').is(":checked")
+        }
+
+        Object.entries(settings).forEach(([key, value]) => {
+            preferences[key].map(preference => {
+                formData.append('Checkboxes[]', preference);
+                if(value)
+                    formData.append(preference.replace('.', '-dot-'), 1);
+            })
+        });
 
         $.ajax({
             type: "POST",
-            url: '/notifications/markSingleRead/'+$id,
+            url: '/profile/preferencesByAjax',
+            data: formData,
+            processData: false,
+            contentType: false,
             error: function(XMLHttpRequest, textStatus, errorThrown) {
                 alert(errorThrown);
             },

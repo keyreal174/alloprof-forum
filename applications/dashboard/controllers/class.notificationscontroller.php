@@ -140,7 +140,6 @@ class NotificationsController extends Gdn_Controller {
         if (val('CountNotifications', $user) != 0) {
             $this->userModel->setField(Gdn::session()->UserID, 'CountNotifications', val('CountNotifications', $user) -1);
         }
-
         echo 'success';
     }
 }
