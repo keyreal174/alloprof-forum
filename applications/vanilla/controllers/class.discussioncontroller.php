@@ -105,6 +105,27 @@ class DiscussionController extends VanillaController {
         return $maxDate;
     }
 
+    public function writeCommentFilter() {
+        $verified = Gdn::request()->get('commentverifiedby') ?? false;
+        $this->IsVerifiedBy = $verified;
+
+        $sort = Gdn::request()->get('sort') ?? 'desc';
+        $this->SortDirection = $sort;
+
+        $commentFilterModule = new CommentFilterModule($sort, $verified);
+        $this->addModule($commentFilterModule);
+        $this->addJsFile('filter.js');
+        $wheres = [];
+
+        if ($this->IsVerifiedBy == 'true') {
+            $wheres['DateAccepted <>'] = '';
+        } else {
+            unset($wheres['DateAccepted <>']);
+        }
+
+        $this->WhereClause = $wheres;
+    }
+
     /**
      * Default single discussion display.
      *
@@ -119,7 +140,10 @@ class DiscussionController extends VanillaController {
         $this->addJsFile('autosave.js');
         $this->addJsFile('discussion.js');
         $this->addJsFile('replyQuestion.js');
-        $Order = Gdn::request()->get('order');
+
+        // write comment filter
+        $this->writeCommentFilter();
+        $Order = $this->SortDirection;
 
         Gdn_Theme::section('Discussion');
 
@@ -240,12 +264,16 @@ class DiscussionController extends VanillaController {
         if ($Order == 'asc') {
             $this->CommentModel->orderBy('c.DateInserted asc');
             $this->setData('SortComments', 'asc');
-            $this->setData('Comments', $this->CommentModel->getByDiscussion($DiscussionID, $Limit, $this->Offset), true);
+            $this->setData('Comments', $this->CommentModel->getByDiscussion($DiscussionID, $Limit, $this->Offset, $this->WhereClause), true);
         } else {
             $this->CommentModel->orderBy('c.DateInserted desc');
             $this->setData('SortComments', 'desc');
-            $this->setData('Comments', $this->CommentModel->getByDiscussion($DiscussionID, $Limit, $this->Offset), true);
+            $this->setData('Comments', $this->CommentModel->getByDiscussion($DiscussionID, $Limit, $this->Offset, $this->WhereClause), true);
         }
+
+        $where['DiscussionID'] = $DiscussionID;
+        $where = array_merge($where, $this->WhereClause);
+        $this->setData('CommentCount', $this->CommentModel->getCount($where));
 
         $LatestItem = $this->Discussion->CountCommentWatch;
         if ($LatestItem === null) {

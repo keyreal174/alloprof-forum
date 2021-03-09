@@ -32,18 +32,20 @@ jQuery(document).ready(function($) {
         filterDiscussion();
     });
 
+    $(document).on('change', '.FilterMenu #Form_CommentSort', function() {
+        filterComment();
+    });
+
+    $(document).on('change', '.FilterMenu #Form_CommentVerifiedBy', function() {
+        filterComment();
+    });
+
     function filterDiscussion() {
         var grade = $('.FilterMenu #Form_GradeDropdown').val();
         var sort = $('.FilterMenu #Form_DiscussionSort').val();
         var explanation = $('.FilterMenu #Form_Explanation').is(":checked");
         var verifiedBy = $('.FilterMenu #Form_VerifiedBy').is(":checked");
 
-        // var postValues = {
-        //     grade: grade,
-        //     sort: sort,
-        //     explanation: explanation,
-        //     verifiedBy: verifiedBy
-        // };
         grade = !grade ? -1 : grade;
         var parameter = 'grade=' + parseInt(grade) + '&sort=' + sort + '&explanation=' + explanation + '&verifiedBy=' + verifiedBy;
 
@@ -63,12 +65,28 @@ jQuery(document).ready(function($) {
         return false;
     }
 
-    function clean(obj) {
-        for (var propName in obj) {
-            if (obj[propName] === null || obj[propName] === undefined) {
-                delete obj[propName];
+    function filterComment() {
+        var sort = $('.FilterMenu #Form_CommentSort').val();
+        var commentVerifiedBy = $('.FilterMenu #Form_CommentVerifiedBy').is(":checked");
+
+        var parameter = 'commentverifiedby=' + commentVerifiedBy + '&sort=' + sort;
+
+        var url = document.location.href;
+        var newUrl = '';
+        var anchor = url.split("#");
+        if (url.includes('commentverifiedby')) {
+            var base_url = url.split("commentverifiedby")[0];
+            newUrl = base_url + parameter;
+        } else {
+            if (url.includes('?')) {
+                newUrl = anchor[0] + '&' + parameter;
+            } else {
+                newUrl = anchor[0] + '?' + parameter;
             }
         }
-        return obj
+        newUrl = anchor[1] ? newUrl + '#' + anchor[1] : newUrl;
+
+        document.location = newUrl;
+        return false;
     }
 });

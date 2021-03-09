@@ -52,8 +52,7 @@ if ($this->data('Comments')->numRows() > 0) {
     echo $this->Form->open();
     $discussionUrl = $this->data('Discussion')->Url;
     echo '<div class="CommentHeadingWrapper">';
-    echo '<h2 class="CommentHeading">'.$this->data('_CommentsHeader', t('Explanations')).'('.$this->data('_LatestItem').')</h2>';
-    echo commentSort($discussionUrl);
+    echo '<h2 class="CommentHeading">'.$this->data('_CommentsHeader', t('Explanations')).'('.$this->data('CommentCount').')</h2>';
     echo '</div>';
     echo $this->Form->close();
 }
