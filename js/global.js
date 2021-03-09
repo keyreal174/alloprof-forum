@@ -487,8 +487,19 @@ jQuery(document).ready(function($) {
         $('a.FlagContentPopup').popup({containerCssClass: 'FlagContentPopup CustomPopup'});
 
     // This turns Social Sharing Popup anchors into in-page popups
-    if ($.fn.popup)
-        $('a.SocialPopup').popup({containerCssClass: 'SocialPopup CustomPopup'});
+    if ($.fn.popup) {
+        $('a.SocialPopup').popup({containerCssClass: 'SocialPopup CustomPopup', afterLoad: function() {
+            (function(d) {
+                var f = d.getElementsByTagName('SCRIPT')[0], p = d.createElement('SCRIPT');
+                p.type = 'text/javascript';
+                p.async = true;
+                p.defer = true;
+                p.crossorigin = "anonymous";
+                p.src = '//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v10.0&appId=1361538587516643&autoLogAppEvents=1';
+                f.parentNode.insertBefore(p, f);
+            }(document));
+        }});
+    }
 
     // This turns DeleteDiscussionPopup anchors into in-page popups
     if ($.fn.popup)
@@ -1601,17 +1612,3 @@ if (typeof String.prototype.trim !== 'function') {
 });
 
 })(jQuery);
-
-jQuery(window).load(function() {
-    // <script>
-    //     window.fbAsyncInit = function() {
-    //         FB.init({
-    //         appId            : 'your-app-id',
-    //         autoLogAppEvents : true,
-    //         xfbml            : true,
-    //         version          : 'v10.0'
-    //         });
-    //     };
-    // </script>
-    // <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
-});

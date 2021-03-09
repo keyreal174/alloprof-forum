@@ -1,5 +1,6 @@
 <?php if (!defined('APPLICATION')) exit(); ?>
 <?php
+print_R($this->data('Discussion'));
 $Title = sprintf("Share your question!");
 $SubTitle = sprintf("Asking yourself the same question? Share it with your friends, they may have the explanation!");
 ?>
@@ -7,7 +8,7 @@ $SubTitle = sprintf("Asking yourself the same question? Share it with your frien
     <img src='/themes/alloprof/design/images/sharingAvatar.svg' alt='image' class='FlagAvatar' />
     </div>
     <h2><?php echo t($Title); ?></h2>
-    <h4><?php echo t($SubTitle); ?></h4>
+    <p><?php echo t($SubTitle); ?></p>
 <?php
 echo $this->Form->open();
 echo $this->Form->errors();

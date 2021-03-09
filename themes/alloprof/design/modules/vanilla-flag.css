@@ -106,11 +106,12 @@ div.Popup.SocialPopup h2 {
     font-size: 28px;
     line-height: 31px;
     color: black;
-    margin-bottom: 40px;
+    margin-bottom: 32px;
 }
 
-div.Popup.SocialPopup h4 {
-    font-size: 21px;
+div.Popup.SocialPopup p {
+    font-size: 18px;
     line-height: 31px;
     color: #4F4F4F;
+    margin-bottom: 32px;
 }

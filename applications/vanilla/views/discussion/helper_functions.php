@@ -852,7 +852,8 @@ if (!function_exists('writeSocialSharing')) :
                 <path d="M9.35449 14.6455L15.4737 8.52631" stroke="black" stroke-width="2" stroke-linecap="round"/>
             </svg>',
             'discussion/social/'.$Discussion->DiscussionID,
-            'SocialIcon SocialPopup'
+            'SocialIcon SocialPopup',
+            ['rel' => 'nofollow']
         );
 
         echo wrap($socialLink, 'span', ['class' => 'MItem SocialLink']);

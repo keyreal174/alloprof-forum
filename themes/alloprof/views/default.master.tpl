@@ -233,17 +233,7 @@
     </div>
     <div id="modals"></div>
     {event name="AfterBody"}
-    <script>
-        window.fbAsyncInit = function() {
-            FB.init({
-                appId            : '1361538587516643',
-                autoLogAppEvents : true,
-                xfbml            : true,
-                version          : 'v10.0'
-            });
-        };
-    </script>
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+    <div id="fb-root"></div>
 </body>
 
 </html>
