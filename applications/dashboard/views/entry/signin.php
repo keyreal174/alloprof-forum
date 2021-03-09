@@ -4,7 +4,12 @@ $SelectedMethod = $this->data('SelectedMethod', []);
 $CssClass = count($Methods) > 0 ? ' MultipleEntryMethods' : ' SingleEntryMethod';
 
 echo '<div class="FormTitleWrapper AjaxForm">';
-echo '<h1>'.$this->data('Title').'</h1>';
+?>
+<div class='FormSummary'>
+    <h1 class='Title'><?php echo $this->data('Title'); ?></h1>
+    <img src='/themes/alloprof/design/images/authAvatar.svg' alt='image' class='AuthAvatar' />
+</div>
+<?php
 echo '<div class="FormWrapper">';
 // Make sure to force this form to post to the correct place in case the view is
 // rendered within another view (ie. /dashboard/entry/index/):
@@ -19,16 +24,15 @@ echo '<div class="MainForm">';
     <ul role="presentation">
         <li role="presentation">
             <?php
-            echo $this->Form->label('Email/Username', 'Email');
-            echo $this->Form->textBox('Email', ['id' => 'Form_Email', 'autocorrect' => 'off', 'autocapitalize' => 'off', 'Wrap' => TRUE]);
+            echo $this->Form->textBox('Email', ['id' => 'Form_Email', 'class' => 'InputBox', 'autocorrect' => 'off', 'autocapitalize' => 'off', 'Wrap' => TRUE, 'placeholder' => t('Email address or nickname')]);
             ?>
         </li>
         <li role="presentation">
             <?php
-            echo $this->Form->label('Password', 'Password');
-            echo $this->Form->input('Password', 'password', ['class' => 'InputBox Password']);
-            echo anchor(t('Forgot?'), '/entry/passwordrequest', 'ForgotPassword', ['title' => t('Forgot your password?')]);
+            echo $this->Form->input('Password', 'password', ['class' => 'InputBox Password', 'placeholder' => t('Password')]);
+            echo '<span class="EyeIcon EyeIconPassword"><img src="/themes/alloprof/design/images/icons/eye.svg" alt="image" /></span>';
             ?>
+            <!-- echo anchor(t('Forgot?'), '/entry/passwordrequest', 'ForgotPassword', ['title' => t('Forgot your password?')]); -->
         </li>
     </ul>
 <?php
@@ -57,8 +61,8 @@ echo '</div>';
     <div class="Buttons">
         <?php
         $this->fireEvent('AfterPassword');
-        echo $this->Form->button('Sign In', ['class' => 'Button Primary']);
-        echo $this->Form->checkBox('RememberMe', t('Keep me signed in'), ['value' => '1', 'id' => 'SignInRememberMe']);
+        echo $this->Form->button(t('Sign in'), ['class' => 'btn btn-default btn-shadow']);
+        // echo $this->Form->checkBox('RememberMe', t('Keep me signed in'), ['value' => '1', 'id' => 'SignInRememberMe']);
         ?>
         <?php if (strcasecmp(c('Garden.Registration.Method'), 'Connect') != 0): ?>
             <div class="CreateAccount">
@@ -69,12 +73,14 @@ echo '</div>';
                 }
 
                 if (c('Garden.Registration.Method') != 'Invitation') {
-                    printf(t("Don't have an account? %s"), anchor(t('Create One.'), '/entry/register'.$Target, '', ['title' => t('Create an Account')]));
+                    printf(t("Don't have an account yet? %s"), anchor(t('Sign up!'), '/entry/register'.$Target, '', ['title' => t('Create an Account')]));
                 }
                 ?>
             </div>
         <?php endif; ?>
-
+        <div>
+            <img src='/themes/alloprof/design/images/icons/help.svg' alt='image' class='HelpIcon' />
+        </div>
     </div>
 
 <?php

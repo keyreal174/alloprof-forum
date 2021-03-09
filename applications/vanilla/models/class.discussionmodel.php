@@ -671,8 +671,14 @@ class DiscussionModel extends Gdn_Model implements FormatFieldInterface, EventFr
             $this->SQL->where($wheres);
         }
 
-        foreach ($orderBy as $orderField => $direction) {
-            $this->SQL->orderBy($this->addFieldPrefix($orderField), $direction);
+        if (is_array($additionalFields)) {
+            foreach ($additionalFields as $direction => $field) {
+                $this->SQL->orderBy($this->addFieldPrefix($field), $direction);
+            }
+        } else {
+            foreach ($orderBy as $orderField => $direction) {
+                $this->SQL->orderBy($this->addFieldPrefix($orderField), $direction);
+            }
         }
 
         // Set range and fetch
@@ -912,9 +918,9 @@ class DiscussionModel extends Gdn_Model implements FormatFieldInterface, EventFr
         $sql->select('d.DiscussionID')
             ->from('Discussion d');
 
-        // Check Approval
+        // Check Approval or Authenticaion
         $approvalRequired = checkRestriction('Vanilla.Approval.Require');
-        if ($approvalRequired && !val('Verified', Gdn::session()->User)) {
+        if (($approvalRequired && !val('Verified', Gdn::session()->User)) || !Gdn::session()->User) {
             // Get Published Question
             $sql->beginWhereGroup()
             ->where('d.Published', 1)
@@ -1934,7 +1940,7 @@ class DiscussionModel extends Gdn_Model implements FormatFieldInterface, EventFr
 
         // Check Approval
         $approvalRequired = checkRestriction('Vanilla.Approval.Require');
-        if ($approvalRequired && !val('Verified', Gdn::session()->User)) {
+        if (($approvalRequired && !val('Verified', Gdn::session()->User)) || !Gdn::session()->User) {
             // Get Published Question
             $sql->beginWhereGroup()
             ->where('d.Published', 1)
@@ -2691,19 +2697,28 @@ class DiscussionModel extends Gdn_Model implements FormatFieldInterface, EventFr
             $code = "HeadlineFormat.Discussion";
         }
 
+
+        // Notification String
+        $textstring = strip_tags(Gdn_Format::to($discussion["Body"], $discussion["Format"]));
+        if(strlen($textstring) > Gdn::config('Vanilla.Notify.TextLength')) {
+            $textstring = substr($textstring, 0, Gdn::config('Vanilla.Notify.TextLength')).'...';
+        }
+
         $data = [
             "ActivityType" => "Discussion",
             "ActivityUserID" => $insertUserID,
             "HeadlineFormat" => t(
                 $code,
-                '{ActivityUserID,user} started a new discussion: <a href="{Url,html}">{Data.Name,text}</a>'
+                'Question from {ActivityUserID,user}'
             ),
             "RecordType" => "Discussion",
             "RecordID" => $discussionID,
             "Route" => discussionUrl($discussion, "", "/"),
+            "Notified" => ActivityModel::SENT_PENDING,
+            "Story" => $textstring,
             "Data" => [
                 "Name" => $name,
-                "Category" => $categoryName,
+                "Category" => $categoryName
             ],
             "Ext" => [
                 "Email" => [

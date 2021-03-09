@@ -1,0 +1,18 @@
+{
+    "name": "alloprof",
+    "description": "Extend DB for Alloprof Forum",
+    "version": "1.0.0",
+    "mobileFriendly": true,
+    "icon": "alloprof.png",
+    "key": "alloprof",
+    "type": "addon",
+    "authors": [
+        {
+            "name": "Peter Asaro",
+            "email": "peter@bbox.digital"
+        }
+    ],
+    "require": {
+        "vanilla": ">=2.4"
+    }
+}

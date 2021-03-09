@@ -1,0 +1,203 @@
+.Header .SignInLinks {
+    white-space: nowrap;
+}
+
+div.Popup.SignInPopup .Body {
+    padding: 80px 130px;
+    max-height: none !important;
+}
+
+div.Popup.SignInPopup .AjaxForm {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+div.Popup.SignInPopup .AjaxForm .FormSummary {
+    margin-right: 64px;
+}
+
+div.Popup.SignInPopup .AjaxForm .Title {
+    margin-bottom: 40px;
+    font-size: 50px;
+    line-height: 59px;
+    max-width: 400px;
+}
+
+div.Popup.SignInPopup .AjaxForm img.AuthAvatar {
+    width: 400px;
+    height: 400px;
+}
+
+div.Popup.SignInPopup .AjaxForm .FormWrapper {
+    width: 480px;
+}
+
+div.Popup.SignInPopup .AjaxForm .FormWrapper ul li {
+    margin-bottom: 35px;
+    position: relative;
+}
+
+div.Popup.SignInPopup .InputBox {
+    border: none;
+    border-bottom: 1px solid;
+    border-radius: 0;
+    max-width: none;
+    background: transparent;
+    width: 100%;
+    font-size: 15px;
+    line-height: 18px;
+    color: black;
+    padding-left: 2px;
+    padding-right: 2px;
+    border-color: black !important;
+}
+
+div.Popup.SignInPopup .InputBox::placeholder {
+    color: black;
+    font-size: 15px;
+    line-height: 18px;
+}
+
+div.Popup.SignInPopup .Buttons {
+    margin-top: 0;
+}
+
+div.Popup.SignInPopup .Buttons .CreateAccount {
+    margin-top: 40px;
+}
+
+div.Popup.SignInPopup .Buttons .CreateAccount,
+div.Popup.SignInPopup .Buttons .CreateAccount a {
+    font-size: 18px;
+    line-height: 21px;
+    color: black;
+    text-decoration: underline;
+    font-weight: 600;
+}
+
+div.Popup.SignInPopup img.HelpIcon {
+    margin-top: 40px;
+    cursor: pointer;
+}
+
+div.Popup.SignInPopup li.form-group {
+    position: relative;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+div.Popup.SignInPopup li.form-group select {
+    border: none;
+    border-color: initial !important;
+    border-bottom: 1px solid;
+    border-radius: 0;
+    background: transparent !important;
+    font-size: 15px;
+    line-height: 18px;
+    padding-left: 0;
+    color: black;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+div.Popup.SignInPopup li.form-group:after {
+    content: "";
+    background: url('/themes/alloprof/design/images/icons/arrowDown.svg');
+    width: 14px;
+    height: 16px;
+    background-repeat: no-repeat;
+    top: 10px;
+    right: 0px;
+    position: absolute;
+}
+
+div.Popup.SignInPopup .PasswordStrength  {
+    width: 100% !important;
+}
+
+div.Popup.SignInPopup .Buttons.SignUpButtons {
+    display: flex;
+    align-items: center;
+}
+
+div.Popup.SignInPopup .Buttons.SignUpButtons input[type=submit] {
+    margin-right: 40px;
+}
+
+div.Popup.SignInPopup .Buttons.SignUpButtons a {
+    font-size: 18px;
+    line-height: 21px;
+    color: black;
+    border-bottom: 1px solid black;
+    font-weight: 600;
+}
+
+div.Popup.SignInPopup .validators {
+    display: flex;
+    flex-direction: column;
+}
+
+div.Popup.SignInPopup .validators .CheckBoxLabel {
+    position: relative;
+    margin: 0;
+    padding-left: 40px;
+    padding-top: 0;
+    font-size: 15px !important;
+    line-height: 18px;
+    color: black;
+    margin-bottom: 24px;
+}
+
+div.Popup.SignInPopup .validators .CheckBoxLabel a {
+    color: black;
+    border-bottom: 1px solid black;
+}
+
+div.Popup.SignInPopup .validators .CheckBoxLabel input[type=checkbox] {
+    position: absolute;
+    left: 0;
+    visibility: hidden;
+    margin-left: 0;
+}
+
+div.Popup.SignInPopup .validators .CheckBoxLabel input[type=checkbox]:checked:before {
+    content: '';
+    background: url(/themes/alloprof/design/images/icons/tick.svg);
+    width: 16px;
+    height: 11px;
+    background-repeat: no-repeat;
+    position: absolute;
+    left: 4px;
+    top: 6px;
+    visibility: visible;
+}
+
+div.Popup.SignInPopup .validators .CheckBoxLabel input[type=checkbox]:after {
+    width: 20px;
+    height: 20px;
+    position: relative;
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 2px solid black;
+}
+
+.SignUpForm .Buttons {
+    margin-bottom: 0 !important;
+}
+
+div.Popup.SignInPopup .EyeIcon {
+    position: absolute;
+    right: 0;
+    top: 12px;
+    cursor: pointer;
+}
+
+div.Popup.SignInPopup input[type=password] {
+    padding-right: 32px;
+}
+
+.Errors ul li {
+    margin-bottom: 0 !important;
+}

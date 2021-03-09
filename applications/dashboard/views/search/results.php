@@ -9,56 +9,81 @@ if (!function_exists('writeDiscussionFooter')) {
 if (!count($this->data('SearchResults')) && $this->data('SearchTerm'))
     echo '<p class="NoResults">', sprintf(t('No results for %s.', 'No results for <b>%s</b>.'), $this->data('SearchTerm')), '</p>';
 else
-    echo '<p class="SearchResult">', sprintf(t('Results (%d)'), count($this->data('SearchResults'))), '</p>';
+    echo '<p class="SearchResult">', sprintf(t('%d results for "%s"'), count($this->data('SearchResults')), $this->data('SearchTerm')), '</p>';
 ?>
     <ol id="search-results" class="DataList DataList-Search" start="<?php echo $this->data('From'); ?>">
         <?php foreach ($this->data('SearchResults') as $Row): ?>
-            <?php $dis = $this->getDiscusson($Row['DiscussionID']); ?>
             <li class="Item Item-Search">
                 <div class="Item-Body Media">
                     <?php
+                    $category = CategoryModel::categories($Row->CategoryID);
                     if (!Gdn::themeFeatures()->get('EnhancedAccessibility')) {
                         ?>
                         <span class="Options-Icon">
                         <?php
-                            echo optionsList($dis);
+                            echo optionsList($Row);
                         ?>
                         </span>
                         <?php
                     }
                     ?>
                     <div class="AuthWrapper">
-                        <?php echo "<img src='".$Row['Photo']."' alt='photo' />" ?>
+                        <?php echo "<img src='".$Row->FirstPhoto."' alt='photo' />" ?>
                         <div class="AuthDate">
-                            <span class="UserName"><?php echo $Row['Name'] ?></span>
+                            <span class="UserName"><?php echo $Row->FirstName ?></span>
                             <div>
                             <?php
-                                echo ' <span class="MItem-Grade">'.
-                                t(getGrade($dis['GradeID'])).
-                                ' • </span> ';
-                                echo ' <span class="MItem-DateInserted">'.
-                                t(timeElapsedString($Row['DateInserted'])).
-                                '</span> ';
+                                if (getGrade($Row->GradeID)) {
+                                    echo ' <span class="MItem-Grade">'.
+                                    t(getGrade($Row->GradeID)).
+                                    ' • </span> ';
+                                    echo ' <span class="MItem-DateInserted">'.
+                                    t(timeElapsedString($Row->DateInserted)).
+                                    '</span> ';
+                                } else {
+                                    echo ' <span class="MItem-DateInserted">'.
+                                    t(timeElapsedString($Row->DateInserted)).
+                                    '</span> ';
+                                }
                             ?>
                             </div>
                         </div>
+                        <?php
+                            if ($Row->DateAccepted) {
+                                echo "<div class='verfied-badge'>
+                                        <img src='/themes/alloprof/design/images/icons/verifiedbadge.svg'/>
+                                        <span>". t('Verified by Alloprof') ."</span>
+                                    </div>";
+                            }
+                        ?>
                     </div>
                     <div class="Media-Body">
                         <div class="Summary">
-                            <?php echo $Row['Summary']; ?>
+                            <?php echo formatBody($Row); ?>
                         </div>
+                        <?php
+                            $this->fireEvent('AfterDiscussionBody');
+                            if (val('Attachments', $Row)) {
+                                writeAttachments($Row->Attachments);
+                            }
+                        ?>
                         <?php
                         $Count = val('Count', $Row);
 
                         if (($Count) > 1) {
-                            $url = $this->data('SearchUrl').'&discussionid='.urlencode($Row['DiscussionID']).'#search-results';
+                            $url = $this->data('SearchUrl').'&discussionid='.urlencode($Row->DiscussionID).'#search-results';
                             echo '<div>'.anchor(plural($Count, '%s result', '%s results'), $url).'</div>';
                         }
                         ?>
                     </div>
                 </div>
+                <div class='SearchResultCategory'>
+                    <?php
+                        echo "<a class='DiscussionHeader_category' href='/categories/".$category["UrlCode"]."'>".$category["Name"]."</a>";
+                    ?>
+                </div>
                 <?php
-                    writeDiscussionFooter($dis, $this, 'search');
+                    writeDiscussionFooter($Row, $this, 'search');
                 ?>
             </li>
         <?php endforeach; ?>

@@ -164,3 +164,13 @@
 .CategoryDetail .FilterBar nav .Navigation-linkContainer {
     margin: 0 15px 0 0;
 }
+
+.PanelCategories li {
+    position: relative;
+}
+
+.PanelCategories li svg {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}

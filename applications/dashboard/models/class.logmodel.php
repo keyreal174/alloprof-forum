@@ -193,7 +193,7 @@ class LogModel extends Gdn_Pluggable {
      *
      * @param int[]|string $logIDs
      */
-    public function deleteIDs($logIDs) {
+    public function deleteIDs($logIDs, $deleteMessage='') {
         if (is_string($logIDs)) {
             $logIDs = explode(',', $logIDs);
         }
@@ -206,7 +206,7 @@ class LogModel extends Gdn_Pluggable {
 
         foreach ($logs as $log) {
             $recordType = $log['RecordType'];
-            if (in_array($log['Operation'], ['Spam', 'Moderate']) && array_key_exists($recordType, $models)) {
+            if (in_array($log['Operation'], ['Spam', 'Moderate', 'Pending']) && array_key_exists($recordType, $models)) {
                 /** @var Gdn_Model $model */
                 $model = $models[$recordType];
                 $recordID = $log['RecordID'];
@@ -225,6 +225,29 @@ class LogModel extends Gdn_Pluggable {
                     if ($deleteRecord) {
                         $model->deleteID($recordID, ['Log' => false]);
                     }
+                }
+
+                if($log['Operation'] === 'Pending') {
+                    \Gdn::config()->touch([
+                        'Preferences.Email.Delete' => 2,
+                        'Preferences.Popup.Delete' => 2,
+                    ]);
+                    $text = sprintf(t('Your '.($recordType=='Discussion'?'question':'explanation').' has been deleted by a moderator %s.',
+                        'Your '.($recordType=='Discussion'?'question':'explanation').' has been deleted by a moderator <b>"%s"</b>.'), $deleteMessage);
+                    $data = [
+                        "ActivityType" => "Delete",
+                        "NotifyUserID" => $log['InsertUserID'],
+                        "HeadlineFormat" => ($recordType=='Discussion'?'Question':'Explanation').' deleted!',
+                        "RecordType" => "Delete",
+                        "RecordID" => $log['RecordID'],
+                        "Story" => $text,
+                        "Route" => $recordType=='Discussion'?DiscussionModel::discussionUrl($log['Data'], "", "/"):CommentModel::commentUrl($log['Data']),
+                        "Notified" => ActivityModel::SENT_PENDING
+                    ];
+
+                    $ActivityModel = new ActivityModel();
+                    $ActivityModel->queue($data, 'Delete');
+                    $ActivityModel->saveQueue();
                 }
 
             }
@@ -846,7 +869,7 @@ class LogModel extends Gdn_Pluggable {
     }
 
 
-    private function publishQuestionOrExplanation($table, $ID, $notifyUser, $categoryID, $discussionID, $notifyString) {
+    private function publishQuestionOrExplanation($table, $ID, $notifyUser, $data, $title) {
         // Publish
         Gdn::sql()->update($table)
         ->set('Published', true)
@@ -856,14 +879,24 @@ class LogModel extends Gdn_Pluggable {
         // CommentModel::updateCommentCount($discussionID, ['Slave' => false]);
         // CategoryModel::updateDiscussionCount($categoryID);
 
+        $textstring = strip_tags(Gdn_Format::to($data['Body'], $data['Format']));
+
+        if(strlen($textstring) > Gdn::config('Vanilla.Notify.TextLength')) {
+            $textstring = substr($textstring, 0, Gdn::config('Vanilla.Notify.TextLength')).'...';
+        }
+
         // Notify
         $activity = [
             'ActivityType' => 'Default',
             'NotifyUserID' => $notifyUser,
-            'ActivityUser' => null,
-            'HeadlineFormat' => $notifyString,
-            'Notified' => $notifyUser,
-            'Emailed' => $notifyUser];
+            'ActivityUserID' => Gdn::session()->UserID,
+            'HeadlineFormat' => ($table=='Discussion'?'Question':'Explanation').' published!',
+            'Story' => '<span>"'.$textstring.'<span>" </span> <b>has been published.</b>',
+            "RecordType" => "Comment",
+            "RecordID" => $table=='Discussion'?$data->DiscussionID:$data->CommentID,
+            "Route" => $table=='Discussion'?DiscussionModel::discussionUrl($data, "", "/"):CommentModel::commentUrl($data),
+            "Notified" => ActivityModel::SENT_PENDING
+        ];
 
         $activityModel = new ActivityModel();
         $activityModel->save($activity);
@@ -1037,9 +1070,8 @@ class LogModel extends Gdn_Pluggable {
                                     'Discussion',
                                     $log['RecordID'],
                                     $log['RecordUserID'],
-                                    $set['CategoryID'],
-                                    $set['DiscussionID'],
-                                    t('HeadlineFormat.Approve', 'Your question has been published.')
+                                    $set,
+                                    'Question published!'
                                 );
 
                                 break;
@@ -1054,9 +1086,8 @@ class LogModel extends Gdn_Pluggable {
                                     'Comment',
                                     $log['RecordID'],
                                     $log['RecordUserID'],
-                                    $set['CategoryID'],
-                                    $set['DiscussionID'],
-                                    t('HeadlineFormat.Approve', 'Your explanation has been published.')
+                                    $set,
+                                    'Explanation published!'
                                 );
 
                                 break;

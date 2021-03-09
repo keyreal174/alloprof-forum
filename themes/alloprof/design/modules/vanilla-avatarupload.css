@@ -1,4 +1,4 @@
-.LeftPanel.Panel .PhotoWrapLarge {
+.ProfilePanel.Panel .PhotoWrapLarge {
     border-radius: 50%;
     width: 128px;
     height: 128px;
@@ -8,6 +8,7 @@
 .userphoto-personalinfo .userphoto-personalinfo__name {
     font-size: 18px;
     line-height: 21px;
+    font-weight: bold;
     text-align: center;
     color: black;
 }
@@ -20,6 +21,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: 4px;
 }
 
 .userphoto-personalinfo .userphoto-personalinfo__secondary svg {

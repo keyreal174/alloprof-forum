@@ -41,6 +41,15 @@ class CategoriesModule extends Gdn_Module {
         return 'Panel';
     }
 
+    public function isFollowingCategory($followingCategories, $category) {
+        foreach ($followingCategories as $element) {
+            if ($element["CategoryID"] == $category["CategoryID"]) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * Get the data for this module.
      */
@@ -60,6 +69,27 @@ class CategoriesModule extends Gdn_Module {
         $categories = array_filter($categories, function ($category) {
             return val('PermsDiscussionsView', $category) && val('Following', $category);
         });
+
+        $userCategories = $categoryModel->getFollowed(Gdn::session()->UserID);
+
+        foreach ($categories as $key => $value) {
+            # code...
+            if ($this->isFollowingCategory($userCategories, $value)) {
+                $categories[$key]["isFollowing"] = 1;
+            } else {
+                $categories[$key]["isFollowing"] = 0;
+            }
+        }
+
+        function cmp($a, $b) {
+            if ($a["isFollowing"] > $b["isFollowing"]) {
+                return -1;
+            } else if ($a["isFollowing"] < $b["isFollowing"]) {
+                return 1;
+            } else return 0;
+        }
+
+        usort($categories, "cmp");
 
         $data = new Gdn_DataSet($categories, DATASET_TYPE_ARRAY);
         $data->datasetType(DATASET_TYPE_OBJECT);

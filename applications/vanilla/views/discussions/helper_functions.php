@@ -69,6 +69,32 @@ if (!function_exists('BookmarkButton')) {
             return '';
         }
 
+        $popupClass = "";
+        $popupLink = "/discussion/confirmFollow/".$discussion->DiscussionID;
+
+        $hasFollowedTeacher = false;
+        if (userRoleCheck() == 'Teacher' && $discussion->Bookmarked != '1') {
+            $data = Gdn::sql()
+                    ->select('*')
+                    ->from('UserDiscussion')
+                    ->where('DiscussionID', $discussion->DiscussionID)
+                    ->where('Bookmarked', 1)
+                    ->get();
+            foreach ($data as $row) {
+                $followedUserID = val('UserID', $row);
+                if ($followedUserID != Gdn::session()->UserID) {
+                    if (userRoleCheck($followedUserID) == 'Teacher') {
+                        $hasFollowedTeacher = true;
+                        break;
+                    }
+                }
+            }
+
+            if ($hasFollowedTeacher) {
+                $popupClass = " OptionsLink Popup";
+            }
+        }
+
         // Bookmark link
         $isBookmarked = $discussion->Bookmarked == '1';
 
@@ -91,11 +117,20 @@ if (!function_exists('BookmarkButton')) {
 
         $icon = $isBookmarked ? $icon_following : $icon_follow;
 
+        if ($hasFollowedTeacher) {
+            return anchor(
+                $icon,
+                $popupLink,
+                'Hijack followButton Option-Icon Popup'.($isBookmarked ? ' TextColor isFollowing' : ''),
+                ['title' => $title, 'id' => 'followButton'.$discussion->DiscussionID, 'aria-pressed' => $isBookmarked ? 'true' : 'false', 'role' => 'button', 'aria-label' => $accessibleLabel]
+            );
+        }
+
         return anchor(
             $icon,
             '/discussion/bookmark/'.$discussion->DiscussionID.'/'.Gdn::session()->transientKey(),
             'Hijack followButton Option-Icon'.($isBookmarked ? ' TextColor isFollowing' : ''),
-            ['title' => $title, 'aria-pressed' => $isBookmarked ? 'true' : 'false', 'role' => 'button', 'aria-label' => $accessibleLabel]
+            ['title' => $title, 'id' => 'followButton'.$discussion->DiscussionID, 'aria-pressed' => $isBookmarked ? 'true' : 'false', 'role' => 'button', 'aria-label' => $accessibleLabel]
         );
     }
 }
@@ -359,15 +394,15 @@ if (!function_exists('writeDiscussionDetail')) :
                         <?php
                     }
                     ?>
-                    <?php
-                        if(!$Discussion->Published) {
-                            echo '<div class="not-published-badge">';
-                            echo '<img src="/themes/alloprof/design/images/icons/eyebreak.svg"/>';
-                            echo t('Awaiting publication');
-                            echo '</div>';
-                        }
-                    ?>
                     <div class="AuthorWrap">
+                        <?php
+                            if(!$Discussion->Published) {
+                                echo '<div class="not-published-badge">';
+                                echo '<img src="/themes/alloprof/design/images/icons/eyebreak.svg"/>';
+                                echo t('Awaiting publication');
+                                echo '</div>';
+                            }
+                        ?>
                         <span class="Author">
                             <?php
                             if ($UserPhotoFirst) {
@@ -781,9 +816,13 @@ if (!function_exists('userRoleCheck')) :
     /**
      * User Role check
      */
-    function userRoleCheck() {
+    function userRoleCheck($UserID = NULL) {
         $userModel = new UserModel();
-        $User = $userModel->getID(Gdn::session()->UserID);
+        if ($UserID) {
+            $User = $userModel->getID($UserID);
+        } else {
+            $User = $userModel->getID(Gdn::session()->UserID);
+        }
 
         if($User) {
             $RoleData = $userModel->getRoles($User->UserID);

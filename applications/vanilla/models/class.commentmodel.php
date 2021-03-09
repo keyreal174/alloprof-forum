@@ -326,7 +326,7 @@ class CommentModel extends Gdn_Model implements FormatFieldInterface, EventFromR
                 ->where('c.DiscussionID', $discussionID);
 
             $approvalRequired = checkRestriction('Vanilla.Approval.Require');
-            if ($approvalRequired && !val('Verified', Gdn::session()->User)) {
+            if (($approvalRequired && !val('Verified', Gdn::session()->User)) || !Gdn::session()->User) {
                 $this->SQL->beginWhereGroup()
                 ->where('c.Published', 1)
                 ->orWhere('c.InsertUserID', Gdn::session()->UserID)
@@ -367,7 +367,7 @@ class CommentModel extends Gdn_Model implements FormatFieldInterface, EventFromR
         $this->where($this->SQL);
 
         $approvalRequired = checkRestriction('Vanilla.Approval.Require');
-        if ($approvalRequired && !val('Verified', Gdn::session()->User)) {
+        if (($approvalRequired && !val('Verified', Gdn::session()->User)) || !Gdn::session()->User) {
             $this->SQL->beginWhereGroup()
             ->where('c.Published', 1)
             ->orWhere('c.InsertUserID', Gdn::session()->UserID)
@@ -646,20 +646,30 @@ class CommentModel extends Gdn_Model implements FormatFieldInterface, EventFromR
         $discussionUserID = $discussion["InsertUserID"] ?? null;
         $format = $comment["Format"] ?? null;
 
+
+        // Notification String
+        $textstring = strip_tags(Gdn_Format::to($comment["Body"], $comment["Format"]));
+        if(strlen($textstring) > Gdn::config('Vanilla.Notify.TextLength')) {
+            $textstring = substr($textstring, 0, Gdn::config('Vanilla.Notify.TextLength')).'...';
+        }
+
         // Prepare the notification queue.
         $data = [
             "ActivityType" => "Comment",
+            'ActivityTypeID' => 99,
             "ActivityUserID" => $comment["InsertUserID"] ?? null,
             "HeadlineFormat" => t(
                 "HeadlineFormat.Comment",
-                '{ActivityUserID,user} commented on <a href="{Url,html}">{Data.Name,text}</a>'
+                'Response from {ActivityUserID,user}'
             ),
             "RecordType" => "Comment",
             "RecordID" => $commentID,
             "Route" => "/discussion/comment/{$commentID}#Comment_{$commentID}",
+            "Notified" => ActivityModel::SENT_PENDING,
+            "Story" => $textstring,
             "Data" => [
                 "Name" => $discussion["Name"] ?? null,
-                "Category" => $category["Name"] ?? null,
+                "Category" => $category["Name"] ?? null
             ],
             "Ext" => [
                 "Email" => [
@@ -1297,7 +1307,7 @@ class CommentModel extends Gdn_Model implements FormatFieldInterface, EventFromR
 
                     // Check for approval
                     $approvalRequired = checkRestriction('Vanilla.Approval.Require');
-                    if ($approvalRequired && !val('Verified', Gdn::session()->User)) {
+                    if (($approvalRequired && !val('Verified', Gdn::session()->User)) || !Gdn::session()->User) {
                         $fields['Published'] = false;
                         // return UNAPPROVED;
                     }
@@ -1596,7 +1606,7 @@ class CommentModel extends Gdn_Model implements FormatFieldInterface, EventFromR
             ->from('Comment c');
 
         $approvalRequired = checkRestriction('Vanilla.Approval.Require');
-        if ($approvalRequired && !val('Verified', Gdn::session()->User)) {
+        if (($approvalRequired && !val('Verified', Gdn::session()->User)) || !Gdn::session()->User) {
             $sql->beginWhereGroup()
                 ->where('c.Published', 1)
                 ->orWhere('c.InsertUserID', Gdn::session()->UserID)

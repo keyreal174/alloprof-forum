@@ -416,13 +416,22 @@ class PostController extends VanillaController {
 
                         // If question is not approved, notify toast
                         if(!$discussion->Published) {
-                            $this->informMessage(
-                                '<div class="toast-container"><div class="toast-title">'.t("Question pending approval").'</div>'.
-                                '<p>'.t("Your question will be reviewed by a moderator.").'</p>'.
-                                '<p>'.t("You will be notified once it is published!").'</p>'.
-                                '<button class="btn-default" onclick="return false;">'.t('See').'</button></div>',
-                                'Dismissable'
-                            );
+
+                            // Add Notification Popup
+                            $activity = [
+                                'ActivityType' => 'Default',
+                                'NotifyUserID' => $discussion->InsertUserID,
+                                'HeadlineFormat' => 'Question pending approval',
+                                "RecordType" => "Discussion",
+                                "RecordID" => $discussion->DiscussionID,
+                                "Route" => DiscussionModel::discussionUrl($discussion, "", "/"),
+                                'Story' => 'Your question will be reviewed by a moderator. <br/> You will be notified once it is published!',
+                                'Notified' => ActivityModel::SENT_PENDING,
+                                'Emailed' => ActivityModel::SENT_PENDING
+                            ];
+
+                            $activityModel = new ActivityModel();
+                            $activityModel->save($activity);
                         }
 
                     } else {
@@ -778,14 +787,25 @@ class PostController extends VanillaController {
                     $this->EventArguments['Discussion'] = $Discussion;
                     $this->EventArguments['Comment'] = $Comment;
                     $this->fireEvent('AfterCommentSave');
+
+                    if(!$Comment->Published) {
+                        // Add Notification Popup
+                        $activity = [
+                            'ActivityType' => 'NewDiscussion',
+                            'NotifyUserID' => $Comment->InsertUserID,
+                            'HeadlineFormat' => 'Explanation pending approval',
+                            "RecordType" => "Comment",
+                            "RecordID" => $Comment->CommentID,
+                            "Route" => CommentModel::commentUrl($Comment),
+                            'Story' => 'Your explanation will be reviewed by a moderator. <br/> You will be notified once it is published!',
+                            'Notified' => ActivityModel::SENT_PENDING,
+                            'Emailed' => ActivityModel::SENT_PENDING
+                        ];
+
+                        $activityModel = new ActivityModel();
+                        $activityModel->save($activity);
+                    }
                 } elseif ($CommentID === SPAM || $CommentID === UNAPPROVED) {
-                    $this->informMessage(
-                        '<div class="toast-container"><div class="toast-title">'.t("Explanation pending approval").'</div>'.
-                        '<p>'.t("Your explanation will be reviewed by a moderator.").'</p>'.
-                        '<p>'.t("You will be notified once it is published!").'</p>'.
-                        '<button class="btn-default" onclick="return false;">'.t('See').'</button></div>',
-                        'Dismissable'
-                    );
                     // $this->StatusMessage = t('Your comment will appear after it is approved.');
                 }
 

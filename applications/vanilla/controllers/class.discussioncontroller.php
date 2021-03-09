@@ -19,7 +19,7 @@ use Vanilla\SchemaFactory;
 class DiscussionController extends VanillaController {
 
     /** @var array Models to include. */
-    public $Uses = ['DiscussionModel', 'CategoryModel', 'CommentModel', 'Form', 'UserModel'];
+    public $Uses = ['DiscussionModel', 'CategoryModel', 'CommentModel', 'Form', 'UserModel', 'ActivityModel'];
 
     /** @var array Unique identifier. */
     public $CategoryID;
@@ -105,6 +105,27 @@ class DiscussionController extends VanillaController {
         return $maxDate;
     }
 
+    public function writeCommentFilter() {
+        $verified = Gdn::request()->get('commentverifiedby') ?? false;
+        $this->IsVerifiedBy = $verified;
+
+        $sort = Gdn::request()->get('sort') ?? 'desc';
+        $this->SortDirection = $sort;
+
+        $commentFilterModule = new CommentFilterModule($sort, $verified);
+        $this->addModule($commentFilterModule);
+        $this->addJsFile('filter.js');
+        $wheres = [];
+
+        if ($this->IsVerifiedBy == 'true') {
+            $wheres['DateAccepted <>'] = '';
+        } else {
+            unset($wheres['DateAccepted <>']);
+        }
+
+        $this->WhereClause = $wheres;
+    }
+
     /**
      * Default single discussion display.
      *
@@ -114,13 +135,15 @@ class DiscussionController extends VanillaController {
      */
     public function index($DiscussionID = 0, $DiscussionStub = '', $Page = '', $Order = '') {
         // Setup head
-
         $Session = Gdn::session();
         $this->addJsFile('jquery.autosize.min.js');
         $this->addJsFile('autosave.js');
         $this->addJsFile('discussion.js');
         $this->addJsFile('replyQuestion.js');
-        $Order = Gdn::request()->get('order');
+
+        // write comment filter
+        $this->writeCommentFilter();
+        $Order = $this->SortDirection;
 
         Gdn_Theme::section('Discussion');
 
@@ -241,12 +264,16 @@ class DiscussionController extends VanillaController {
         if ($Order == 'asc') {
             $this->CommentModel->orderBy('c.DateInserted asc');
             $this->setData('SortComments', 'asc');
-            $this->setData('Comments', $this->CommentModel->getByDiscussion($DiscussionID, $Limit, $this->Offset), true);
+            $this->setData('Comments', $this->CommentModel->getByDiscussion($DiscussionID, $Limit, $this->Offset, $this->WhereClause), true);
         } else {
             $this->CommentModel->orderBy('c.DateInserted desc');
             $this->setData('SortComments', 'desc');
-            $this->setData('Comments', $this->CommentModel->getByDiscussion($DiscussionID, $Limit, $this->Offset), true);
+            $this->setData('Comments', $this->CommentModel->getByDiscussion($DiscussionID, $Limit, $this->Offset, $this->WhereClause), true);
         }
+
+        $where['DiscussionID'] = $DiscussionID;
+        $where = array_merge($where, $this->WhereClause);
+        $this->setData('CommentCount', $this->CommentModel->getCount($where));
 
         $LatestItem = $this->Discussion->CountCommentWatch;
         if ($LatestItem === null) {
@@ -464,9 +491,13 @@ class DiscussionController extends VanillaController {
         $this->render();
     }
 
-    public function getUserRole() {
+    public function getUserRole($UserID = null) {
         $userModel = new UserModel();
-        $User = $userModel->getID(Gdn::session()->UserID);
+        if ($UserID) {
+            $User = $userModel->getID($UserID);
+        } else {
+            $User = $userModel->getID(Gdn::session()->UserID);
+        }
 
         if($User) {
             $RoleData = $userModel->getRoles($User->UserID);
@@ -573,9 +604,9 @@ class DiscussionController extends VanillaController {
      */
     public function bookmark($DiscussionID = null) {
         // Make sure we are posting back.
-        if (!$this->Request->isAuthenticatedPostBack()) {
-            throw permissionException('Javascript');
-        }
+        // if (!$this->Request->isAuthenticatedPostBack()) {
+        //     throw permissionException('Javascript');
+        // }
 
         $Session = Gdn::session();
 
@@ -856,17 +887,19 @@ class DiscussionController extends VanillaController {
                     'Preferences.Email.Delete' => 2,
                     'Preferences.Popup.Delete' => 2,
                 ]);
-                $headlineFormat = sprintf(t('Your content has been deleted by a moderator %s.', 'Your content has been deleted by a moderator <b>%s</b>.'), $this->Form->getFormValue('DeleteMessage'));
+                $text = sprintf(t('Your question has been deleted by a moderator %s.',
+                    'Your question has been deleted by a moderator <b>"%s"</b>.'), $this->Form->getFormValue('DeleteMessage'));
                 $data = [
                     "ActivityType" => "Delete",
                     "NotifyUserID" => $discussion->InsertUserID,
-                    "HeadlineFormat" => $headlineFormat,
+                    "HeadlineFormat" => 'Question deleted!',
                     "RecordType" => "Delete",
                     "RecordID" => $discussionID,
                     "Route" => discussionUrl($discussion, "", "/"),
                     "Data" => [
                         "Name" => $discussion->Name,
                         "Category" => $discussion->Category,
+                        "Text" => $text
                     ],
                 ];
 
@@ -1366,6 +1399,16 @@ body { background: transparent !important; }
         $this->render();
     }
 
+    /**
+     * Display modal
+     *
+     */
+    public function confirmFollow($DiscussionID) {
+        $this->setData('Discussion', $this->DiscussionModel->getID($DiscussionID), true);
+        $this->View = 'confirmfollow';
+        $this->addJsFile('confirmfollow.js');
+        $this->render();
+    }
 
     /**
      * Verify a comment.

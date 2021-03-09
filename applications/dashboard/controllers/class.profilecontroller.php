@@ -20,7 +20,7 @@ class ProfileController extends Gdn_Controller {
     const AVATAR_FOLDER = 'userpics';
 
     /** @var array Models to automatically instantiate. */
-    public $Uses = ['Form', 'UserModel'];
+    public $Uses = ['Form', 'UserModel', 'CommentModel'];
 
     /** @var object User data to use in building profile. */
     public $User;
@@ -378,7 +378,7 @@ class ProfileController extends Gdn_Controller {
         $userID = valr('User.UserID', $this);
         $settings = [];
 
-        $this->buildProfile();
+        $this->buildEditProfile();
 
         // Set up form
         $user = Gdn::userModel()->getID($userID, DATASET_TYPE_ARRAY);
@@ -800,7 +800,7 @@ class ProfileController extends Gdn_Controller {
         $this->ActivityModel = new ActivityModel();
 
         // Drop notification count back to zero.
-        $this->ActivityModel->markRead($session->UserID);
+        // $this->ActivityModel->markRead($session->UserID);
 
         // Get notifications data.
         $activities = $this->ActivityModel->getNotifications($session->UserID, $offset, $limit)->resultArray();
@@ -846,9 +846,21 @@ class ProfileController extends Gdn_Controller {
         ];
 
         $this->ActivityModel = new ActivityModel();
-        $activities = $this->ActivityModel->getWhere($where, '', '', 5, 0)->resultArray();
+        $activities = $this->ActivityModel->getWhere($where, '', '', c('Vanilla.Discussions.PerPage', 5), 0)->resultArray();
+
+        $UnreadNotifications = array_column($activities, 'Notified');
+        $UnreadNotifications = array_filter($UnreadNotifications, function($value) {
+            return $value == ActivityModel::SENT_PENDING;
+        });
+
+        $user = Gdn::userModel()->getID(Gdn::session()->UserID);
+        if (val('CountNotifications', $user) != 0) {
+            Gdn::userModel()->setField(Gdn::session()->UserID, 'CountNotifications', 0);
+        }
+
         $this->setData('Activities', $activities);
-        $this->ActivityModel->markRead(Gdn::session()->UserID);
+        $this->setData('UnreadNotifications', $UnreadNotifications);
+        // $this->ActivityModel->markRead(Gdn::session()->UserID);
 
         $this->setData('Title', t('Notifications'));
         $this->render('Popin', 'Activity', 'Dashboard');
@@ -1687,7 +1699,7 @@ EOT;
 
         if (!\Gdn::themeFeatures()->useProfileHeader() || $this->isEditMode()) {
             // Make sure to add the "Edit Profile" buttons if it's not provided through the new profile header.
-            $this->addModule('ProfileOptionsModule');
+            // $this->addModule('ProfileOptionsModule');
         }
 
         // Show edit menu if in edit mode
@@ -1695,14 +1707,15 @@ EOT;
         $sideMenu = new SideMenuModule($this);
         $this->EventArguments['SideMenu'] = &$sideMenu; // Doing this out here for backwards compatibility.
         if ($this->EditMode) {
-            $this->addModule('UserBoxModule');
-            $this->buildEditMenu($sideMenu, $currentUrl);
-            $this->fireEvent('AfterAddSideMenu');
-            $this->addModule($sideMenu, 'Panel');
+            // $this->addModule('UserPhotoModule', 'Content');
+            // $this->addModule('ProfileFilterModule', 'Content');
+            $this->addCssFile('editprofile.css');
+            // $this->buildEditMenu($sideMenu, $currentUrl);
+            // $this->fireEvent('AfterAddSideMenu');
+            // $this->addModule($sideMenu, 'Panel');
         } else {
             // Make sure the userphoto module gets added to the page
             $this->addModule('UserPhotoModule');
-
             // And add the filter menu module
             $this->fireEvent('AfterAddSideMenu');
             $this->addModule('AdminProfileFilterModule');
@@ -1794,6 +1807,41 @@ EOT;
         }
 
         $module->addLink('Options', t('Access Tokens'), '/profile/tokens', 'Garden.Tokens.Add', ['class' => 'link-tokens']);
+    }
+
+
+    /**
+     * Build the user profile for edit page.
+     *
+     * Set the page title, add data to page modules, add modules to assets,
+     * add tabs to tab menu. $this->User must be defined, or this method will throw an exception.
+     *
+     * @since 2.0.0
+     * @access public
+     * @return bool Always true.
+     */
+    public function buildEditProfile() {
+        if (!is_object($this->User)) {
+            throw new Exception(t('Cannot build profile information if user is not defined.'));
+        }
+
+        $session = Gdn::session();
+        if (strpos($this->CssClass, 'Profile') === false) {
+            $this->CssClass .= ' Profile';
+        }
+        $this->title(Gdn_Format::text($this->User->Name));
+
+        if ($this->_DeliveryType != DELIVERY_TYPE_VIEW) {
+            // Javascript needed
+            // see note above about jcrop
+            $this->addJsFile('jquery.jcrop.min.js');
+            $this->addJsFile('profile.js');
+            $this->addJsFile('jquery.gardenmorepager.js');
+            $this->addJsFile('activity.js');
+
+            $this->fireEvent('AddProfileTabs');
+        }
+        return true;
     }
 
     /**

@@ -394,13 +394,13 @@ abbr {
 .sidebar.left {
     margin-left: 0 !important;
     margin-right: auto !important;
-    max-width: 280px;
+    max-width: 300px;
 }
 
 .sidebar.right {
     margin-left: auto !important;
     margin-right: 0 !important;
-    width: 26%;
+    max-width: 300px;
 }
 
 @media screen and (max-width:992px) {
@@ -3785,7 +3785,7 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
 }
 
 .PopList.PopList .Item {
-    padding: 30px 8px
+    padding: 10px 8px
 }
 
 .PopList.PopList .PhotoWrap {
@@ -3794,7 +3794,7 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
 }
 
 .PopList.Activities .Item.Title a:before {
-    content: ""
+    /* content: "" */
 }
 
 .PopList.Conversations .Item.Title a:before {
@@ -5043,6 +5043,10 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
     width: 100%
 }
 
+.MessageList .ItemComment .Item-Header {
+    padding-top: 0;
+}
+
 .MessageList .ItemComment .Item-Header .PhotoWrap,
 .MessageList .ItemDiscussion .Item-Header .PhotoWrap {
     /* left: 8px;
@@ -5138,7 +5142,8 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
 
 .MessageList .ItemComment .AuthorWrap,
 .MessageList .ItemDiscussion .AuthorWrap {
-    max-width: calc(100% - 45px)
+    max-width: 100%;
+    position: relative;
 }
 
 .MessageList .ItemComment .MItem.Category,
@@ -5231,7 +5236,7 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
 
 .MessageList .ItemComment .Options {
     margin-right: 8px;
-    margin-top: 16px
+    margin-top: 0;
 }
 
 .MessageList.AcceptedAnswers .Item:first-child,
@@ -9256,7 +9261,7 @@ screen and (-ms-high-contrast:none) {
     line-height: 1.25;
 }
 
-.RightPanel {
+.LeftPanel {
     background-color: transparent !important;
     padding: 0 !important;
 }
@@ -9669,7 +9674,7 @@ body.Section-EditProfile .Box a {
 .BoxCategories.BoxCategories a span.category-icon {
     width: 72px;
     height: 72px;
-    border-radius: 50%;
+    border-radius: 12px;
     background-color: #eee;
     display: flex;
     overflow: hidden;

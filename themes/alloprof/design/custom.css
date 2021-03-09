@@ -35,6 +35,9 @@
 @import url("./modules/slick/slick.css");
 @import url("./modules/vanilla-flag.css");
 @import url("./modules/vanilla-filtersort.css");
+@import url("./modules/vanilla-auth.css");
+@import url("./modules/vanilla-confirmfollow.css");
+@import url("./modules/vanilla-notification.css");
 
 .BoxNewDiscussion {
     -webkit-box-shadow: none;
@@ -191,7 +194,7 @@ select {
     display: flex;
     align-items: center;
     border: 1px solid #1A202C;
-    padding: 14.5px 17.5px;
+    padding: 10px 17.5px;
     border-radius: 100px;
 }
 
@@ -306,6 +309,10 @@ select {
     margin-bottom: 24px;
 }
 
+.DataList-Search .embedExternal.embedImage {
+    display: none;
+}
+
 
 /* Modal  */
 
@@ -327,51 +334,6 @@ div.Popup .Border {
     width: auto;
 }
 
-/* Customize Toast */
-
-.InformMessages {
-    left: auto;
-    right: 0;
-    top: 70px;
-}
-
-.InformMessages .InformMessage, .InformMessages .InformMessage:hover {
-    max-width: 600px;
-}
-
-.InformMessage .toast-container {
-    padding: 20px 30px;
-}
-
-.InformMessages .toast-title {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 15px;
-}
-
-.InformMessages .InformMessage .Close, .InformMessages .InformMessage:hover .Close {
-    margin: 15px;
-}
-
-.InformMessages .InformMessage .Close span {
-    font-size: 35px;
-    font-weight: 100;
-}
-
-.InformMessages p {
-    font-size: 16px;
-    line-height: 24px;
-}
-
-.InformMessages button {
-    font-size: 14px;
-    margin-top: 20px;
-    height: 41px;
-    margin-left: auto;
-}
-
-
-
 /* Not approved question box */
 
 .question-not-published {
@@ -390,21 +352,20 @@ div.Popup .Border {
 
 .not-published-badge {
     width: max-content;
-    display: flex;
+    display: flex !important;
     align-items: center;
     height: 40px;
     justify-content: center;
-    font-size: 13px;
+    font-size: 13px !important;
     padding: 10px 20px;
     background: #F2F2F2;
     border-radius: 8px;
     position: absolute;
-    right: 95px;
+    right: 50px;
     color: black;
-    top: 50px;
+    top: 0;
 }
 
 .not-published-badge img {
     margin-right: 15px;
 }
-

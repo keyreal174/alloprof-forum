@@ -17,7 +17,7 @@ use Vanilla\Search\SearchResults;
 class SearchController extends Gdn_Controller {
 
     /** @var array Models to automatically instantiate. */
-    public $Uses = ['Database', 'UserModel'];
+    public $Uses = ['Database', 'UserModel', 'DiscussionModel'];
 
     /**  @var Gdn_Form */
     public $Form;
@@ -66,6 +66,90 @@ class SearchController extends Gdn_Controller {
     }
 
     /**
+     * Filter Functionality.
+     *
+     */
+
+    public function writeFilter() {
+        $gradeFilterOption = (Gdn::request()->get('grade') || Gdn::request()->get('grade') == '0') ? strval((int)(Gdn::request()->get('grade'))) : -1;
+        $this->GradeID = $gradeFilterOption;
+
+        $subject = (Gdn::request()->get('subject') || Gdn::request()->get('subject') == '0') ? strval((int)(Gdn::request()->get('subject'))) : -1;
+        $this->SubjectID = $subject;
+
+        $explanation = Gdn::request()->get('explanation') ?? false;
+        $this->IsExplanation = $explanation;
+
+        $verified = Gdn::request()->get('verifiedBy') ?? false;
+        $this->IsVerifiedBy = $verified;
+
+        $sort = Gdn::request()->get('sort') ?? 'desc';
+        $this->SortDirection = $sort;
+
+        $dashboardDiscussionFilterModule = new DashboardDiscussionFilterModule($gradeFilterOption, $sort, $explanation, $verified, $subject);
+        $this->addModule($dashboardDiscussionFilterModule);
+        $this->addJsFile('filter.js');
+        $wheres = [];
+
+        if (($this->GradeID || $this->GradeID === '0') && $this->GradeID != -1) {
+            $wheres['d.GradeID'] = $this->GradeID;
+        } else {
+            unset($wheres['d.GradeID']);
+        }
+
+        if (($this->SubjectID || $this->SubjectID === '0') && $this->SubjectID != -1) {
+            $wheres['d.CategoryID'] = $this->SubjectID;
+        } else {
+            unset($wheres['d.CategoryID']);
+        }
+
+        $role = $this->getUserRole(Gdn::session()->UserID);
+        $role_where = $role === 'Teacher' ? 'd.CountComments' : 'd.CountComments >';
+        if ($this->IsExplanation == 'true') {
+            $wheres[$role_where] = 0;
+        } else {
+            unset($wheres[$role_where]);
+        }
+
+        $verify_where = $role === 'Teacher' ? 'd.DateAccepted =' : 'd.DateAccepted <>';
+        $verify_value = $role === 'Teacher' ? NULL : '';
+        if ($this->IsVerifiedBy == 'true') {
+            $wheres[$verify_where] = $verify_value;
+        } else {
+            unset($wheres[$verify_where]);
+        }
+
+        $this->WhereClause = $wheres;
+    }
+
+    public function getUserRole($UserID = null) {
+        $userModel = new UserModel();
+        if ($UserID) {
+            $User = $userModel->getID($UserID);
+        } else {
+            $User = $userModel->getID(Gdn::session()->UserID);
+        }
+
+        if($User) {
+            $RoleData = $userModel->getRoles($User->UserID);
+            if ($RoleData !== false) {
+                $Roles = array_column($RoleData->resultArray(), 'Name');
+            }
+
+            // Hide personal info roles
+            if (!checkPermission('Garden.PersonalInfo.View')) {
+                $Roles = array_filter($Roles, 'RoleModel::FilterPersonalInfo');
+            }
+
+            if(in_array(Gdn::config('Vanilla.ExtraRoles.Teacher'), $Roles))
+                $UserRole = Gdn::config('Vanilla.ExtraRoles.Teacher') ?? 'Teacher';
+            else $UserRole = RoleModel::TYPE_MEMBER ?? 'Student';
+
+            return $UserRole;
+        } else return null;
+    }
+
+    /**
      * Default search functionality.
      *
      * @param string $search The search string.
@@ -75,11 +159,11 @@ class SearchController extends Gdn_Controller {
         $this->getUserInfo();
         $this->ShowOptions = true;
         $this->addJsFile('search.js');
+        $this->addCssFile('search.css');
         $this->addJsFile('askquestion.js', 'vanilla');
         $this->title(t('Search'));
 
         // Add New Modules
-        $this->addModule('CategoriesModule');
         $this->addModule('AskQuestionModule');
 
         // Make sure the userphoto module gets added to the page
@@ -92,36 +176,31 @@ class SearchController extends Gdn_Controller {
         $this->fireEvent('AddProfileTabsInfo');
         $this->addModule('ProfileFilterModule');
 
-        $bannerModule = new BannerModule(
-            'Search',
-            'Home',
-            t('Search for'),
-            t(Gdn_Format::text($search).',')
-        );
-        $this->addModule($bannerModule);
+        // $bannerModule = new BannerModule(
+        //     'Search',
+        //     'Home',
+        //     t('Search for'),
+        //     t(Gdn_Format::text($search).',')
+        // );
+        // $this->addModule($bannerModule);
 
         saveToConfig('Garden.Format.EmbedSize', '160x90', false);
         Gdn_Theme::section('SearchResults');
 
+        $this->writeFilter();
+        $where['Body like'] = '%'.str_replace(['%', '_'], ['\%', '\_'], $search).'%';
         [$offset, $limit] = offsetLimit($page, c('Garden.Search.PerPage', 20));
         $this->setData('_Limit', $limit);
+        $DiscussionModel = new DiscussionModel();
+        $where = array_merge($where, $this->WhereClause);
+        $CountDiscussions = $DiscussionModel->getCount($where);
+        $this->DiscussionData = $DiscussionModel->getWhereWithOrder($where, 'DateLastComment', $this->SortDirection, $limit, $offset, true);
 
-        try {
-            $results = $this->searchAdapter->search(['search' => $search], $offset, $limit);
-        } catch (Gdn_UserException $ex) {
-            $this->Form->addError($ex);
-            $results = new SearchResults([], 0, $offset, $limit);
-        } catch (Exception $ex) {
-            logException($ex);
-            $this->Form->addError($ex);
-            $results = new SearchResults([], 0, $offset, $limit);
-        }
-
-        $legacyResults = $results->asLegacyResults();
-        $this->setData('SearchResults', $results->asLegacyResults(), true);
+        $this->setData('SearchResults', $this->DiscussionData, true);
         $this->setData('SearchTerm', Gdn_Format::text($search), true);
+        $this->setData('searchResultCount', $CountDiscussions);
 
-        $this->setData('_CurrentRecords', count($legacyResults));
+        $this->setData('_CurrentRecords', count($this->DiscussionData));
 
         $this->canonicalUrl(url('search', true));
         $this->render();

@@ -7,6 +7,23 @@
 
 // Global vanilla library function.
 (function(window, $) {
+    $(document).on('click', '.EyeIconPassword', function() {
+        var type = $('#Form_Password').attr('type');
+        if (type == 'password') {
+            $('#Form_Password').clone().attr('type','text').insertAfter('#Form_Password').prev().remove();
+        } else {
+            $('#Form_Password').clone().attr('type','password').insertAfter('#Form_Password').prev().remove();
+        }
+    });
+
+    $(document).on('click', '.EyeIconConfirmPassword', function() {
+        var type = $('#Form_PasswordMatch').attr('type');
+        if (type == 'password') {
+            $('#Form_PasswordMatch').clone().attr('type','text').insertAfter('#Form_PasswordMatch').prev().remove();
+        } else {
+            $('#Form_PasswordMatch').clone().attr('type','password').insertAfter('#Form_PasswordMatch').prev().remove();
+        }
+    });
 
     // Prevent auto-execution of scripts when no explicit dataType was provided
     // See https://github.com/jquery/jquery/issues/2432#issuecomment-403761229

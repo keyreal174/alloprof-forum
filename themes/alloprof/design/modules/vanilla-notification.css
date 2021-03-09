@@ -1,0 +1,188 @@
+.notification-settings {
+    cursor: pointer;
+}
+
+.notification-settings-content {
+    flex-wrap: wrap !important;
+    padding: 10px 0;
+    overflow: hidden;
+    height: 0;
+    transition: 0.3s all;
+}
+
+.notification-settings-content.open {
+    height: auto;
+}
+
+.notification-settings-content > div {
+    width: 100%;
+    font-size: 16px;
+    padding: 6px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.NotificationsAlert {
+    width: 11px;
+    height: 11px;
+    border-radius: 50% !important;
+    position: absolute;
+    right: 0px;
+    top: -3px;
+    background-color: #d00 !important;
+}
+
+.SpNotifications:before {
+    content: none !important;
+}
+
+.Flyout.Flyout, .MenuItems {
+    min-width: 480px !important;
+}
+
+.Activities .ItemContent {
+    position: relative;
+}
+
+.Activities .ItemContent .mark-not-read {
+    width: 16px;
+    height: 16px;
+    background-color: #2F80ED;
+    border-radius: 50%;
+    position: absolute;
+    right: 0;
+    top: 2px;
+}
+
+.Activities .ItemContent p {
+    color: black !important;
+    font-size: 15px !important;
+}
+
+.Activities .ItemContent h6,
+.Activities .ItemContent h6 a {
+    font-size: 16px;
+}
+
+.Activities .ItemContent h6 {
+    display: flex;
+    align-items: center;
+    padding-right: 30px;
+}
+
+.Activities .ItemContent h6.verified *,
+.Activities .ItemContent h6.verified {
+    color: #05BF8E;
+}
+
+.Activities .ItemContent h6 svg {
+    margin-left: 10px;
+}
+
+.Flyout .Item.Title a.notification-all-read
+{
+    display: block;
+    color: black;
+    width: max-content;
+    right: 43px;
+    font-size: 14px;
+    text-decoration: underline;
+    top: 9px;
+    cursor: pointer;
+}
+
+.Activities .notification-list {
+    overflow: auto;
+    max-height: 50vh;
+}
+
+/* Customize Toast */
+
+.InformMessages {
+    left: auto;
+    right: 0;
+    top: 70px;
+}
+
+.InformMessages .InformWrapper.HasIcon .InformMessage {
+    padding-left: 0 !important;
+}
+
+.InformMessages .InformMessage a.Icon {
+    position: relative;
+    left: 0;
+    width: 56px;
+    height: 56px;
+    margin-right: 15px;
+}
+
+.InformMessages .InformMessage a.Icon img {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+}
+
+.InformMessages .InformMessage, .InformMessages .InformMessage:hover {
+    max-width: 600px;
+}
+
+.InformMessage .toast-container {
+    padding: 20px;
+    display: flex;
+}
+
+.InformMessages .toast-title *,
+.InformMessages .toast-title {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.InformMessages .toast-title {
+    margin-bottom: 12px;
+}
+
+.InformMessages .toast-title.verified {
+    color: #05BF8E;
+}
+
+.InformMessages .toast-title.verified svg {
+    margin-left: 10px;
+}
+
+.InformMessages .InformMessage .Close, .InformMessages .InformMessage:hover .Close {
+    margin: 15px;
+}
+
+.InformMessages .InformMessage .Close span {
+    font-size: 35px;
+    font-weight: 100;
+}
+
+.InformMessages p {
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.InformMessage .toast-text,
+.InformMessage .toast-text * {
+    display: inline-block;
+    font-size: 16px !important;
+}
+
+.InformMessage a.btn-default {
+    font-size: 14px;
+    margin-top: 20px;
+    height: 41px;
+    margin-left: auto;
+    text-decoration: none !important;
+}
+
+
+.Flayout-notification {
+    display: none !important;
+}
+
+.Flayout-notification.open {
+    display: block !important;
+}
