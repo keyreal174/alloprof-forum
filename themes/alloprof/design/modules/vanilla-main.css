@@ -9672,8 +9672,8 @@ body.Section-EditProfile .Box a {
 }
 
 .BoxCategories.BoxCategories a span.category-icon {
-    width: 72px;
-    height: 72px;
+    width: 64px;
+    height: 64px;
     border-radius: 12px;
     background-color: #eee;
     display: flex;

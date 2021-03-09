@@ -91,7 +91,25 @@ class CategoriesModule extends Gdn_Module {
 
         usort($categories, "cmp");
 
-        $data = new Gdn_DataSet($categories, DATASET_TYPE_ARRAY);
+        $nextButton = array('0' => array('PhotoUrl' => "/themes/alloprof/design/images/icons/next-slide.png", 'CategoryID' => 0, 'Name' => 'next'));
+        $prevButton = array('0' => array('PhotoUrl' => "/themes/alloprof/design/images/icons/prev-slide.png", 'CategoryID' => 0, 'Name' => 'prev'));
+
+        $index = 5;
+
+        while ($index <= count($categories)) {
+            # code...
+            array_splice( $categories, $index, 0, $nextButton );
+            $index += 1;
+            if ($index <= count($categories)) {
+                array_splice( $categories, $index, 0, $prevButton );
+                $index += 5;
+            }
+        }
+
+        $newCategorySet = array();
+        $newCategorySet = array_chunk($categories, 6);
+
+        $data = new Gdn_DataSet($newCategorySet, DATASET_TYPE_ARRAY);
         $data->datasetType(DATASET_TYPE_OBJECT);
         $this->Data = $data;
     }
