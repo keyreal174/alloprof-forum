@@ -96,21 +96,56 @@ if (!function_exists('writeFilterToggle')) :
      */
     function writeFilterToggle($sender, $explanation, $verified) {
         $form  = new Gdn_Form();
+        $role = getUserRole(Gdn::session()->User->UserID);
+        $text = $role === 'Teacher' ? t('Without explanations only') : t('With explanations only');
+        $verifiedText = $role === 'Teacher' ? t('Not Verified by Alloprof only') : t('Verified by Alloprof only');
+
         echo '<ul>';
         echo '<li class="form-group">';
         if ($explanation == 'true') {
-            echo $form->toggle('Explanation', t('With explanations only'), [ 'checked' => $explanation ]);
+            echo $form->toggle('Explanation', $text, [ 'checked' => $explanation ]);
         } else {
-            echo $form->toggle('Explanation', t('With explanations only'));
+            echo $form->toggle('Explanation', $text);
         }
         echo '</li>';
         echo '<li class="form-group">';
         if ($verified == 'true') {
-            echo $form->toggle('VerifiedBy', t('Verified by Alloprof only'), [ 'checked' => $verified ]);
+            echo $form->toggle('VerifiedBy', $verifiedText, [ 'checked' => $verified ]);
         } else {
-            echo $form->toggle('VerifiedBy', t('Verified by Alloprof only'));
+            echo $form->toggle('VerifiedBy', $verifiedText);
         }
         echo '</li>';
         echo '</ul>';
+    }
+endif;
+
+if (!function_exists('getUserRole')) :
+    function getUserRole($UserID = null) {
+        $userModel = Gdn::userModel();
+        if ($UserID) {
+            $User = $userModel->getID($UserID);
+        } else {
+            $User = $userModel->getID(Gdn::session()->UserID);
+        }
+
+        if($User) {
+            $RoleData = $userModel->getRoles($User->UserID);
+
+            $RoleData = $userModel->getRoles($User->UserID);
+            if ($RoleData !== false) {
+                $Roles = array_column($RoleData->resultArray(), 'Name');
+            }
+
+            // Hide personal info roles
+            if (!checkPermission('Garden.PersonalInfo.View')) {
+                $Roles = array_filter($Roles, 'RoleModel::FilterPersonalInfo');
+            }
+
+            if(in_array(Gdn::config('Vanilla.ExtraRoles.Teacher'), $Roles))
+                $UserRole = Gdn::config('Vanilla.ExtraRoles.Teacher') ?? 'Teacher';
+            else $UserRole = RoleModel::TYPE_MEMBER ?? 'Student';
+
+            return $UserRole;
+        } else return null;
     }
 endif;

@@ -352,6 +352,7 @@ if (!function_exists('writeFilterToggle')) :
         echo '<ul>';
         echo '<li class="form-group">';
         $text = $role === 'Teacher' ? t('Without explanations only') : t('With explanations only');
+        $verifiedText = $role === 'Teacher' ? t('Not Verified by Alloprof only') : t('Verified by Alloprof only');
         if ($explanation == 'true') {
             echo Gdn::controller()->Form->toggle('Explanation', $text, [ 'checked' => $explanation ]);
         } else {
@@ -360,9 +361,9 @@ if (!function_exists('writeFilterToggle')) :
         echo '</li>';
         echo '<li class="form-group">';
         if ($verified == 'true') {
-            echo Gdn::controller()->Form->toggle('VerifiedBy', t('Verified by Alloprof only'), [ 'checked' => $verified ]);
+            echo Gdn::controller()->Form->toggle('VerifiedBy', $verifiedText, [ 'checked' => $verified ]);
         } else {
-            echo Gdn::controller()->Form->toggle('VerifiedBy', t('Verified by Alloprof only'));
+            echo Gdn::controller()->Form->toggle('VerifiedBy', $verifiedText);
         }
         echo '</li>';
         echo '</ul>';

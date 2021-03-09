@@ -1745,6 +1745,7 @@ $Definition['Oldest'] = 'Anciens';
 $Definition['With explanations only'] = 'Avec explications seulement';
 $Definition['Without explanations only'] = 'Sans explications seulement';
 $Definition['Verified by Alloprof only'] = 'Vérifiée par Alloprof seulement';
+$Definition['Not Verified by Alloprof only'] = 'Non vérifiée seulement';
 $Definition['Grade'] = 'Niveau';
 $Definition['Filter'] = 'Filtres';
 $Definition['Explanation verified by Alloprof'] = 'Explication vérifiée par Alloprof';

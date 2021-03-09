@@ -110,10 +110,12 @@ class DiscussionsController extends VanillaController {
             unset($wheres[$role_where]);
         }
 
+        $verify_where = $role === 'Teacher' ? 'd.DateAccepted =' : 'd.DateAccepted <>';
+        $verify_value = $role === 'Teacher' ? NULL : '';
         if ($this->IsVerifiedBy == 'true') {
-            $wheres['d.DateAccepted <>'] = '';
+            $wheres[$verify_where] = $verify_value;
         } else {
-            unset($wheres['d.DateAccepted <>']);
+            unset($wheres[$verify_where]);
         }
 
         $this->WhereClause = $wheres;
