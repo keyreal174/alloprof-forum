@@ -869,7 +869,11 @@ if (!function_exists('writeDiscussionFooter')) :
             <div>
                 <?php
                     if (!$sender->data('IsAnswer')) {
-                        echo '<a class="btn-default" href="'.$discussionUrl.'">'.$Discussion->CountComments.' '.t('explanations').'</a>';
+                        if ($Discussion->InsertUserID === Gdn::session()->UserID) {
+                            echo '<a class="btn-default" disabled href="'.$discussionUrl.'">'.$Discussion->CountComments.' '.t('explanations').'</a>';
+                        } else {
+                            echo '<a class="btn-default" href="'.$discussionUrl.'">'.$Discussion->CountComments.' '.t('explanations').'</a>';
+                        }
                     } else {
                         echo '<div class="ReplyQuestionButton">';
 
