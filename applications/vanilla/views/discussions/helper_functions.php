@@ -417,8 +417,7 @@ if (!function_exists('writeDiscussionDetail')) :
                         </span>
                         <span class="AuthorInfo">
                             <?php
-                            echo "<a class='DiscussionHeader_category' href='/categories/".$category["UrlCode"]."'>".$category["Name"]."</a>";
-                            $sender->fireEvent('AuthorInfo');
+                                $sender->fireEvent('AuthorInfo');
                             ?>
                         </span>
                         <?php
@@ -476,6 +475,7 @@ if (!function_exists('writeDiscussionDetail')) :
                             writeAttachments($Discussion->Attachments);
                         }
                         ?>
+                        <?php  echo "<a class='QuestionCategory' style='background: ".$category["Color"]."' href='/categories/".$category["UrlCode"]."'>".$category["Name"]."</a>"; ?>
                     </div>
                     <?php
                         writeDiscussionFooter($Discussion, $sender);

@@ -54,6 +54,9 @@ class AlloprofPlugin extends Gdn_Plugin {
             ->column('AcceptedUserID', 'int', true)
             ->set();
 
+        $St->table('Category')
+            ->column('Color', 'varchar(50)', null)
+            ->set();
     }
 
 }

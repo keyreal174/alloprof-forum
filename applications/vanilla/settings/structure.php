@@ -94,6 +94,7 @@ $Construct->primaryKey('CategoryID')
     ->column('AllowedDiscussionTypes', 'varchar(255)', null)
     ->column('DefaultDiscussionType', 'varchar(10)', null)
     ->column('Featured', 'tinyint', '0')
+    ->column('Color', 'varchar(50)', null)
     ->set($Explicit, $Drop);
 
 $RootCategoryInserted = false;
@@ -170,7 +171,7 @@ $Construct
     ->column('LastCommentUserID', 'int', true)
     ->column('Score', 'float', null)
     ->column('Attributes', 'text', true)
-    ->column('RegardingID', 'int(11)', true, 'index')
+    ->column('RegardingID', 'int(11)', true, 'index');
 //->column('Source', 'varchar(20)', true)
 
 $Construct
