@@ -8488,7 +8488,7 @@ table.PreferenceGroup tbody tr:hover td {
 }
 
 .Banner-content.General {
-    background-image: url('../images/flo_bot.svg');
+    background-image: url('../../../../themes/alloprof/design/images/flo_bot.svg');
     background-repeat: no-repeat;
     background-position-y: bottom;
     background-color: #CAEDF9;
@@ -8496,7 +8496,7 @@ table.PreferenceGroup tbody tr:hover td {
 }
 
 .Banner-content.Categories {
-    background-image: url('../images/categories_banner.svg');
+    background-image: url('../../../../themes/alloprof/design/images/categories_banner.svg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position-y: -200px;
@@ -8570,7 +8570,7 @@ table.PreferenceGroup tbody tr:hover td {
 }
 
 .Header-left__search {
-    background-image: url('../images/icons/search.svg');
+    background-image: url('../../../../themes/alloprof/design/images/icons/search.svg');
     background-repeat: no-repeat;
     background-position-y: center;
     background-position-x: calc(100% - 20px);

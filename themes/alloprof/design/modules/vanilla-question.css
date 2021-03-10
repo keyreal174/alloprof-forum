@@ -114,25 +114,25 @@
 }
 
 .Back-Icon {
-    background: url("../images/back.png") no-repeat !important;
+    background: url("../../../../themes/alloprof/design/images/back.png") no-repeat !important;
     width: 24px;
     height: 24px;
 }
 
 .Notifications-Icon {
-    background: url("../images/Follow.png") no-repeat !important;
+    background: url("../../../../themes/alloprof/design/images/Follow.png") no-repeat !important;
     width: 24px;
     height: 24px;
 }
 
 .Favorite-Icon {
-    background: url("../images/icons/like.svg") no-repeat !important;
+    background: url("../../../../themes/alloprof/design/images/icons/like.svg") no-repeat !important;
     width: 24px;
     height: 24px;
 }
 
 .Favorite-Icon.isLiked {
-    background: url("../images/icons/like.svg") no-repeat !important;
+    background: url("../../../../themes/alloprof/design/images/icons/like.svg") no-repeat !important;
     width: 24px;
     height: 24px;
 }
