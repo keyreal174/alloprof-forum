@@ -847,19 +847,20 @@ class ProfileController extends Gdn_Controller {
 
         $this->ActivityModel = new ActivityModel();
         $activities = $this->ActivityModel->getWhere($where, '', '', c('Vanilla.Discussions.PerPage', 5), 0)->resultArray();
-
-        $UnreadNotifications = array_column($activities, 'Notified');
-        $UnreadNotifications = array_filter($UnreadNotifications, function($value) {
-            return $value == ActivityModel::SENT_PENDING;
-        });
+        $UnreadNotifications = $this->ActivityModel->getUserTotalUnread(Gdn::session()->UserID);
 
         $user = Gdn::userModel()->getID(Gdn::session()->UserID);
         if (val('CountNotifications', $user) != 0) {
             Gdn::userModel()->setField(Gdn::session()->UserID, 'CountNotifications', 0);
         }
 
+        // Get user data
+        $this->getUserInfo();
+        $userPrefs = dbdecode($this->User->Preferences);
+
         $this->setData('Activities', $activities);
         $this->setData('UnreadNotifications', $UnreadNotifications);
+        $this->setData('Preferences', $userPrefs);
         // $this->ActivityModel->markRead(Gdn::session()->UserID);
 
         $this->setData('Title', t('Notifications'));
@@ -1348,6 +1349,156 @@ class ProfileController extends Gdn_Controller {
         $this->_setBreadcrumbs($this->data('Title'), $this->canonicalUrl());
         $this->render();
     }
+
+
+    /**
+     * Edit user's preferences (mostly notification settings).
+     *
+     * @since 2.0.0
+     * @access public
+     * @param mixed $userReference Unique identifier, possibly username or ID.
+     * @param string $username .
+     * @param int $userID Unique identifier.
+     */
+    public function preferencesByAjax($userReference = '', $username = '', $userID = '') {
+        $this->addJsFile('profile.js');
+        $session = Gdn::session();
+        $this->permission('Garden.SignIn.Allow');
+
+        // Get user data
+        $this->getUserInfo($userReference, $username, $userID, true);
+        $userPrefs = dbdecode($this->User->Preferences);
+        if ($this->User->UserID != $session->UserID) {
+            $this->permission(['Garden.Users.Edit', 'Moderation.Profiles.Edit'], false);
+        }
+
+        if (!is_array($userPrefs)) {
+            $userPrefs = [];
+        }
+        $metaPrefs = UserModel::getMeta($this->User->UserID, 'Preferences.%', 'Preferences.');
+
+        // Define the preferences to be managed
+        $notifications = [];
+
+        if (c('Garden.Profile.ShowActivities', true)) {
+            $notifications = [
+                'Email.WallComment' => t('Notify me when people write on my wall.'),
+                'Email.ActivityComment' => t('Notify me when people reply to my wall comments.'),
+                'Popup.WallComment' => t('Notify me when people write on my wall.'),
+                'Popup.ActivityComment' => t('Notify me when people reply to my wall comments.')
+            ];
+        }
+
+        $this->Preferences = ['Notifications' => $notifications];
+
+        // Allow email notification of applicants (if they have permission & are using approval registration)
+        if (checkPermission('Garden.Users.Approve') && c('Garden.Registration.Method') == 'Approval') {
+            $this->Preferences['Notifications']['Email.Applicant'] = [t('NotifyApplicant', 'Notify me when anyone applies for membership.'), 'Meta'];
+        }
+
+        $this->fireEvent('AfterPreferencesDefined');
+
+        // Loop through the preferences looking for duplicates, and merge into a single row
+        $this->PreferenceGroups = [];
+        $this->PreferenceTypes = [];
+        foreach ($this->Preferences as $preferenceGroup => $preferences) {
+            $this->PreferenceGroups[$preferenceGroup] = [];
+            $this->PreferenceTypes[$preferenceGroup] = [];
+            foreach ($preferences as $name => $description) {
+                $location = 'Prefs';
+                if (is_array($description)) {
+                    list($description, $location) = $description;
+                }
+
+                $nameParts = explode('.', $name);
+                $prefType = val('0', $nameParts);
+                $subName = val('1', $nameParts);
+                if ($subName != false) {
+                    // Save an array of all the different types for this group
+                    if (!in_array($prefType, $this->PreferenceTypes[$preferenceGroup])) {
+                        $this->PreferenceTypes[$preferenceGroup][] = $prefType;
+                    }
+
+                    // Store all the different subnames for the group
+                    if (!array_key_exists($subName, $this->PreferenceGroups[$preferenceGroup])) {
+                        $this->PreferenceGroups[$preferenceGroup][$subName] = [$name];
+                    } else {
+                        $this->PreferenceGroups[$preferenceGroup][$subName][] = $name;
+                    }
+                } else {
+                    $this->PreferenceGroups[$preferenceGroup][$name] = [$name];
+                }
+            }
+        }
+
+        // Loop the preferences, setting defaults from the configuration.
+        $currentPrefs = [];
+        foreach ($this->Preferences as $prefGroup => $prefs) {
+            foreach ($prefs as $pref => $desc) {
+                $location = 'Prefs';
+                if (is_array($desc)) {
+                    list($desc, $location) = $desc;
+                }
+
+                if ($location == 'Meta') {
+                    $currentPrefs[$pref] = val($pref, $metaPrefs, false);
+                } else {
+                    $currentPrefs[$pref] = val($pref, $userPrefs, c('Preferences.'.$pref, '0'));
+                }
+
+                unset($metaPrefs[$pref]);
+            }
+        }
+        $currentPrefs = array_merge($currentPrefs, $metaPrefs);
+        $currentPrefs = array_map('intval', $currentPrefs);
+        $this->setData('Preferences', $currentPrefs);
+
+        if (UserModel::noEmail()) {
+            $this->PreferenceGroups = self::_removeEmailPreferences($this->PreferenceGroups);
+            $this->PreferenceTypes = self::_removeEmailPreferences($this->PreferenceTypes);
+            $this->setData('NoEmail', true);
+        }
+
+        $this->setData('PreferenceGroups', $this->PreferenceGroups);
+        $this->setData('PreferenceTypes', $this->PreferenceTypes);
+        $this->setData('PreferenceList', $this->Preferences);
+
+        // Get, assign, and save the preferences.
+        $newMetaPrefs = [];
+        foreach ($this->Preferences as $prefGroup => $prefs) {
+            foreach ($prefs as $pref => $desc) {
+                $location = 'Prefs';
+                if (is_array($desc)) {
+                    list($desc, $location) = $desc;
+                }
+
+                $value = $this->Form->getValue($pref, null);
+                if (is_null($value)) {
+                    continue;
+                }
+
+                if ($location == 'Meta') {
+                    $newMetaPrefs[$pref] = $value ? $value : null;
+                    if ($value) {
+                        $userPrefs[$pref] = $value; // dup for notifications code.
+                    }
+                } else {
+                    if (!$currentPrefs[$pref] && !$value) {
+                        unset($userPrefs[$pref]); // save some space
+                    } else {
+                        $userPrefs[$pref] = $value;
+                    }
+                }
+            }
+        }
+
+        $this->UserModel->savePreference($this->User->UserID, $userPrefs);
+        UserModel::setMeta($this->User->UserID, $newMetaPrefs, 'Preferences.');
+
+        $this->setData('Preferences', array_merge($this->data('Preferences', []), $userPrefs, $newMetaPrefs));
+        echo "success";
+    }
+
 
     protected static function _removeEmailPreferences($data) {
         $data = array_filter($data, ['ProfileController', '_RemoveEmailFilter']);

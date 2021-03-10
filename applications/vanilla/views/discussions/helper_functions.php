@@ -398,7 +398,7 @@ if (!function_exists('writeDiscussionDetail')) :
                         <?php
                             if(!$Discussion->Published) {
                                 echo '<div class="not-published-badge">';
-                                echo '<img src="/themes/alloprof/design/images/icons/eyebreak.svg"/>';
+                                echo '<img src="'.url("/themes/alloprof/design/images/icons/eyebreak.svg").'"/>';
                                 echo t('Awaiting publication');
                                 echo '</div>';
                             }
@@ -417,8 +417,7 @@ if (!function_exists('writeDiscussionDetail')) :
                         </span>
                         <span class="AuthorInfo">
                             <?php
-                            echo "<a class='DiscussionHeader_category' href='/categories/".$category["UrlCode"]."'>".$category["Name"]."</a>";
-                            $sender->fireEvent('AuthorInfo');
+                                $sender->fireEvent('AuthorInfo');
                             ?>
                         </span>
                         <?php
@@ -440,7 +439,7 @@ if (!function_exists('writeDiscussionDetail')) :
                         <?php
                             if ($Discussion->DateAccepted) {
                                 echo "<div class='verfied-badge'>
-                                        <img src='/themes/alloprof/design/images/icons/verifiedbadge.svg'/>
+                                        <img src='".url("/themes/alloprof/design/images/icons/verifiedbadge.svg")."'/>
                                         <span>". t('Verified by Alloprof') ."</span>
                                     </div>";
                             }
@@ -476,6 +475,7 @@ if (!function_exists('writeDiscussionDetail')) :
                             writeAttachments($Discussion->Attachments);
                         }
                         ?>
+                        <?php  echo "<a class='QuestionCategory' style='background: ".$category["Color"]."' href='/categories/".$category["UrlCode"]."'>".$category["Name"]."</a>"; ?>
                     </div>
                     <?php
                         writeDiscussionFooter($Discussion, $sender);

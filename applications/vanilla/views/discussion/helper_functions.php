@@ -124,7 +124,7 @@ if (!function_exists('writeComment')) :
             <?php
                 if ($comment->DateAccepted) {
                     echo '<div class="verfied-info">
-                            <img src="/themes/alloprof/design/images/icons/verifiedbadge.svg"/>
+                            <img src="'.url("/themes/alloprof/design/images/icons/verifiedbadge.svg").'"/>
                             <span>'.t("Explanation verified by Alloprof").'</span>
                         </div>';
                 }
@@ -145,7 +145,7 @@ if (!function_exists('writeComment')) :
                         <?php
                             if(!$comment->Published) {
                                 echo '<div class="not-published-badge">';
-                                echo '<img src="/themes/alloprof/design/images/icons/eyebreak.svg"/>';
+                                echo '<img src="'.url("/themes/alloprof/design/images/icons/eyebreak.svg").'"/>';
                                 echo t('Awaiting publication');
                                 echo '</div>';
                             }

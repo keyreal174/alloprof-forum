@@ -1136,13 +1136,13 @@ if (!function_exists('linkDropDown')) {
         $extraClasses = trim($extraClasses);
         $linkName = val('name', $selectedLink);
         $downChevronLabel = t("Down Arrow");
-
+        $iconUrl = url('/themes/alloprof/design/images/icons/'.$icon);
         $output .= <<<EOT
         <span class="ToggleFlyout selectBox {$extraClasses}">
           <span class="selectBox-label">{$label}</span>
           <span class="selectBox-main">
               <a href="#" role="button" rel="nofollow" class="FlyoutButton selectBox-toggle" tabindex="0">
-                <img src="/themes/alloprof/design/images/icons/{$icon}" />
+                <img src="{$iconUrl}" />
                 <span class="selectBox-selected">{$linkName}</span>
                 <span class="vanillaDropDown-arrow" aria-label="{$downChevronLabel}">▾</span>
               </a>

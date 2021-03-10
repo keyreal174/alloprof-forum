@@ -430,7 +430,7 @@ class DiscussionController extends VanillaController {
         $DiscussionMeta = Gdn::userModel()->getMeta($this->Discussion->InsertUserID, 'Profile.%', 'Profile.');
 
         if ($this->UserRole == "Teacher") {
-            $bannerModule = new BannerModule('Question', 'Home / '.t('Student Question'), t('Question by').' <b>'. $this->User->Name .',</b>', '', '<a>'.$Category["Name"].'</a><a>'.$DiscussionMeta["Grade"].'</a>', "", "/themes/alloprof/design/images/teacher-banner.svg", "#0C6B52");
+            $bannerModule = new BannerModule('Question', 'Home / '.t('Student Question'), t('Question by').' <b>'. $this->User->Name .',</b>', '', '<a>'.$Category["Name"].'</a><a>'.$DiscussionMeta["Grade"].'</a>', "", url("/themes/alloprof/design/images/teacher-banner.svg"), "#0C6B52");
             $discussionsFooterModule = new DiscussionsFooterModule(false, "You have the same problem and the explanations don't help?");
             $this->addModule($discussionsFooterModule);
         } else {

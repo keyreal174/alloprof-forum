@@ -218,7 +218,7 @@ class DiscussionsController extends VanillaController {
         $this->fireEvent('AddProfileTabsInfo');
 
         if ($this->UserRole == "Teacher") {
-            $bannerModule = new BannerModule('Home', 'Home', 'Welcome to', 'the Mutual Aid Zone', 'Want to help students? Explain away!', "", "/themes/alloprof/design/images/teacher-banner.svg", "#0C6B52");
+            $bannerModule = new BannerModule('Home', 'Home', 'Welcome to', 'the Mutual Aid Zone', 'Want to help students? Explain away!', "", url("/themes/alloprof/design/images/teacher-banner.svg"), "#0C6B52");
         } else {
             $this->addModule('NewDiscussionModule');
             $bannerModule = new BannerModule('Home', 'Home', 'Welcome to', 'the Mutual Aid Zone', 'Do you have a question? Here are the explanations!');
@@ -602,7 +602,7 @@ class DiscussionsController extends VanillaController {
         $this->fireEvent('AddProfileTabsInfo');
 
         if ($this->UserRole == "Teacher") {
-            $bannerModule = new BannerModule('Question followed', 'Home / Question followed', 'They are waiting', 'for you!', 'Here you\'ll find questions from your subjects awaiting explanation.', "", "/themes/alloprof/design/images/teacher-banner.svg", "#0C6B52");
+            $bannerModule = new BannerModule('Question followed', 'Home / Question followed', 'They are waiting', 'for you!', 'Here you\'ll find questions from your subjects awaiting explanation.', "", url("/themes/alloprof/design/images/teacher-banner.svg"), "#0C6B52");
         } else {
             $bannerModule = new BannerModule('Question followed', 'Home / Question followed', 'You ask yourself the same', 'questions,', 'Find here all the questions you\'re following!');
             $this->addModule('ProfileFilterModule');

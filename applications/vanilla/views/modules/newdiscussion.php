@@ -41,7 +41,7 @@
         </h1>
     </div>
     <div class="close-icon">
-        <img src="/themes/alloprof/design/images/icons/close.svg" />
+        <img src="<?= url('/themes/alloprof/design/images/icons/close.svg') ?>" />
     </div>
 
     <div id="DiscussionForm" class="FormTitleWrapper DiscussionForm">
@@ -58,12 +58,12 @@
                     $Session = Gdn::session();
                     $SigninUrl = signInUrl($Controller->SelfUrl);
 
-                    echo '<a href="'.$SigninUrl.'" class="SignInPopup" rel="nofollow">';
+                    echo '<a href="'.url($SigninUrl).'" class="SignInPopup" rel="nofollow">';
                     echo '<div class="placeholder">';
                 } else echo '<div class="placeholder OpenAskQuestionForm">';
             ?>
                 <div class="icon">
-                    <img src="/themes/alloprof/design/images/icons/ask_question.svg" />
+                    <?php echo '<img src="'.url("/themes/alloprof/design/images/icons/ask_question.svg").'" />'; ?>
                 </div>
                 <?php echo t('What is your question?'); ?>
             </div>
@@ -126,13 +126,13 @@
 
                     echo '<div>';
                     echo '<div class="Category rich-select">';
-                    echo '<img src="/themes/alloprof/design/images/icons/subject.svg"/>';
+                    echo '<img src="'.url("/themes/alloprof/design/images/icons/subject.svg").'"/>';
                     echo $this->Form->categoryDropDown('CategoryID', $options);
                     echo '</div>';
                     echo '</div>';
                     echo '<span class="space"></span>';
                     echo '<div class="Category rich-select">';
-                    echo '<img src="/themes/alloprof/design/images/icons/grade.svg"/>';
+                    echo '<img src="'.url("/themes/alloprof/design/images/icons/grade.svg").'"/>';
                     echo $this->Form->dropDown('GradeID', $GradeOption, array('Default' => $DefaultGrade, 'IncludeNull' => 'Grade', 'IsDisabled' => TRUE));
                     echo '</div>';
                 }

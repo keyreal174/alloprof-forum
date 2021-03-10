@@ -3,7 +3,7 @@
 ?>
 <div class="Box GuestBox">
     <h4 class="GuestBox-title">
-        <img src="/themes/alloprof/design/images/Anonymous_PP.svg"/>
+        <img src="<?= url('/themes/alloprof/design/images/Anonymous_PP.svg') ?>"/>
     </h4>
     <p class="GuestBox-message">
         <?php echo t($this->MessageCode, $this->MessageDefault); ?>

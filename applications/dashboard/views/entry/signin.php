@@ -7,7 +7,7 @@ echo '<div class="FormTitleWrapper AjaxForm">';
 ?>
 <div class='FormSummary'>
     <h1 class='Title'><?php echo $this->data('Title'); ?></h1>
-    <img src='/themes/alloprof/design/images/authAvatar.svg' alt='image' class='AuthAvatar' />
+    <img src='<?= url("/themes/alloprof/design/images/authAvatar.svg") ?>' alt='image' class='AuthAvatar' />
 </div>
 <?php
 echo '<div class="FormWrapper">';
@@ -30,7 +30,7 @@ echo '<div class="MainForm">';
         <li role="presentation">
             <?php
             echo $this->Form->input('Password', 'password', ['class' => 'InputBox Password', 'placeholder' => t('Password')]);
-            echo '<span class="EyeIcon EyeIconPassword"><img src="/themes/alloprof/design/images/icons/eye.svg" alt="image" /></span>';
+            echo '<span class="EyeIcon EyeIconPassword"><img src="'.url("/themes/alloprof/design/images/icons/eye.svg").'" alt="image" /></span>';
             ?>
             <!-- echo anchor(t('Forgot?'), '/entry/passwordrequest', 'ForgotPassword', ['title' => t('Forgot your password?')]); -->
         </li>
@@ -79,7 +79,7 @@ echo '</div>';
             </div>
         <?php endif; ?>
         <div>
-            <img src='/themes/alloprof/design/images/icons/help.svg' alt='image' class='HelpIcon' />
+            <img src='<?= url("/themes/alloprof/design/images/icons/help.svg") ?>' alt='image' class='HelpIcon' />
         </div>
     </div>
 

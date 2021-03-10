@@ -1,7 +1,7 @@
 /* Report post(Flag) */
 a.FlagContentPopup:before {
     content: '';
-    background: url("/themes/alloprof/design/images/icons/flag.svg");
+    background: url("../images/icons/flag.svg");
     width: 13.5px;
     height: 19.5px;
     background-repeat: no-repeat;

@@ -5237,6 +5237,8 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
 .MessageList .ItemComment .Options {
     margin-right: 8px;
     margin-top: 0;
+    position: relative;
+    z-index: 2;
 }
 
 .MessageList.AcceptedAnswers .Item:first-child,
@@ -9672,8 +9674,8 @@ body.Section-EditProfile .Box a {
 }
 
 .BoxCategories.BoxCategories a span.category-icon {
-    width: 72px;
-    height: 72px;
+    width: 64px;
+    height: 64px;
     border-radius: 12px;
     background-color: #eee;
     display: flex;

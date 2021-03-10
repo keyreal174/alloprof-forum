@@ -45,7 +45,7 @@ $this->fireEvent('BeforeCommentForm');
         }
     ?>
     <div class="close-icon">
-        <img src="/themes/alloprof/design/images/icons/close.svg" />
+        <img src="<?= url('/themes/alloprof/design/images/icons/close.svg') ?>" />
     </div>
     <div class="CommentFormWrap">
         <?php if (Gdn::session()->isValid()) : ?>

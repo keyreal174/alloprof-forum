@@ -869,7 +869,7 @@ class LogModel extends Gdn_Pluggable {
     }
 
 
-    private function publishQuestionOrExplanation($table, $ID, $notifyUser, $data, $title) {
+    private function publishQuestionOrExplanation($table, $ID, $notifyUser, $data) {
         // Publish
         Gdn::sql()->update($table)
         ->set('Published', true)
@@ -888,18 +888,70 @@ class LogModel extends Gdn_Pluggable {
         // Notify
         $activity = [
             'ActivityType' => 'Default',
-            'NotifyUserID' => $notifyUser,
             'ActivityUserID' => Gdn::session()->UserID,
             'HeadlineFormat' => ($table=='Discussion'?'Question':'Explanation').' published!',
             'Story' => '<span>"'.$textstring.'<span>" </span> <b>has been published.</b>',
             "RecordType" => "Comment",
             "RecordID" => $table=='Discussion'?$data->DiscussionID:$data->CommentID,
             "Route" => $table=='Discussion'?DiscussionModel::discussionUrl($data, "", "/"):CommentModel::commentUrl($data),
-            "Notified" => ActivityModel::SENT_PENDING
+            "Notified" => ActivityModel::SENT_PENDING,
+            "Ext" => [
+                "Email" => [
+                    "Format" =>  $data['Format'],
+                    "Story" => $data['Body'],
+                ],
+            ],
         ];
 
-        $activityModel = new ActivityModel();
-        $activityModel->save($activity);
+        $Discussion = DiscussionModel::instance()->getID($data['DiscussionID']);
+
+        /** @var ActivityModel $activityModel */
+        $activityModel = Gdn::getContainer()->get(ActivityModel::class);
+
+        if (!Gdn::config("Vanilla.Email.FullPost")) {
+            $activity["Ext"]["Email"] = $activityModel->setStoryExcerpt($activity["Ext"]["Email"]);
+        }
+
+        $notificationGroups = [
+            "mine" => [
+                "notifyUserIDs" => [$notifyUser],
+                "preference" => "Moderation",
+            ]
+        ];
+
+        foreach ($notificationGroups as $group => $groupData) {
+            $headlineFormat = $groupData["headlineFormat"] ?? $activity["HeadlineFormat"];
+            $notifyUserIDs = $groupData["notifyUserIDs"] ?? [];
+            $preference = $groupData["preference"] ?? false;
+            $options = $groupData["options"] ?? [];
+
+            foreach ($notifyUserIDs as $notifyUserID) {
+                if ($notifyUserID === null) {
+                    continue;
+                }
+
+                // Check user can still see the discussion.
+                if (!DiscussionModel::instance()->canView($Discussion, $notifyUserID)) {
+                    continue;
+                }
+
+                $notification = $activity;
+                $notification["HeadlineFormat"] = $headlineFormat;
+                $notification["NotifyUserID"] = $notifyUserID;
+                $notification["Data"]["Reason"] = $group;
+                $activityModel->queue($notification, $preference, $options);
+            }
+        }
+
+        if (\Vanilla\FeatureFlagHelper::featureEnabled("deferredNotifications")) {
+            // Queue sending notifications.
+            /** @var Vanilla\Scheduler\SchedulerInterface $scheduler */
+            $scheduler = Gdn::getContainer()->get(Vanilla\Scheduler\SchedulerInterface::class);
+            $scheduler->addJob(ExecuteActivityQueue::class);
+        } else {
+            // Send all notifications.
+            $activityModel->saveQueue();
+        }
     }
 
     /**
@@ -1070,8 +1122,7 @@ class LogModel extends Gdn_Pluggable {
                                     'Discussion',
                                     $log['RecordID'],
                                     $log['RecordUserID'],
-                                    $set,
-                                    'Question published!'
+                                    $set
                                 );
 
                                 break;
@@ -1086,8 +1137,7 @@ class LogModel extends Gdn_Pluggable {
                                     'Comment',
                                     $log['RecordID'],
                                     $log['RecordUserID'],
-                                    $set,
-                                    'Explanation published!'
+                                    $set
                                 );
 
                                 break;

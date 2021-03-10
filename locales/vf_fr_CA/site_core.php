@@ -655,8 +655,10 @@ $Definition['HeadlineFormat.Answer'] = '{ActivityUserID,user} a répondu à votr
 $Definition['HeadlineFormat.Badge'] = '{ActivityUserID,You} avez gagné le badge <a href="{Url,html}">{Data.Name,text}</a> .';
 $Definition['HeadlineFormat.Ban'] = '{RegardingUserID,You} banni {ActivityUserID,you}.';
 $Definition['HeadlineFormat.Comment'] = 'Réponse de {ActivityUserID,user}';
+$Definition['HeadlineFormat.Comment.Answer'] = 'Réponse de {ActivityUserID,user}';
 $Definition['HeadlineFormat.ConversationMessage'] = '{ActivityUserID,User} vous a envoyé un <a href="{Url,html}">message</a>';
-$Definition['HeadlineFormat.Discussion'] = '{ActivityUserID,user} a crée une nouvelle discussion. <a href="{Url,html}">{Data.Name,text}</a>';
+$Definition['HeadlineFormat.Discussion'] = 'Question de {ActivityUserID,user}';
+$Definition['HeadlineFormat.Discussion.Question'] = 'Question de {ActivityUserID,user}';
 $Definition['HeadlineFormat.Mention'] = '{ActivityUserID,user} vous a mentionné dans <a href="{Url,html}">{Data.Name,text}</a>';
 $Definition['HeadlineFormat.PictureChange.ForUser'] = '{RegardingUserID,You} avez changé de photo {ActivityUserID,user}.';
 $Definition['HeadlineFormat.Registration'] = '{ActivityUserID,User} a rejoint la communauté.';
@@ -1656,12 +1658,17 @@ $Definition['You wrote:'] = 'Vous avez écrit :';
 
 $Definition['About'] = 'À propos';
 $Definition['Notifications'] = 'Notifications';
+$Definition['Explanation notifications'] = 'Notifications d’explications';
+$Definition['Be notified by email'] = 'Être notifié par courriel';
+$Definition['Moderation notifications'] = 'Notifications de modérations';
+$Definition['Activate all notifications'] = 'Activer toutes les notifications';
 $Definition['Mark all as read'] = 'Marquer tout comme lu';
 $Definition['Access Alloprof 100% solutions'] = 'Accéder à Alloprof 100% solutions';
 $Definition['All my <b>questions,</b>'] = 'Toutes mes <b>questions,</b>';
 $Definition['Ask a question'] = 'Pose ta question';
 $Definition['Can\'t find answers?'] = 'Tu ne trouves pas de réponses?';
 $Definition['Contact Us'] = 'Nous contacter';
+$Definition['You will be notified as soon as it is published!'] = 'Tu seras averti dès sa publication !';
 $Definition['Contests and Surveys'] = 'Concours et sondages';
 $Definition['Do you already have an account?'] = 'As-tu déjà un compte?';
 $Definition['Do you have a question? Here are the explanations!'] = 'T\'as une question? Par ici les explications!';
@@ -1723,7 +1730,7 @@ $Definition['Question published!'] = 'Question publiée!';
 
 $Definition['Explanation pending approval'] = "Explication en attente d'approbation";
 $Definition['Your explanation will be reviewed by a moderator. You will be notified once it is published!'] = 'Ton explication va être examinée par un modérateur. Tu seras averti dès sa publication!';
-$Definition['has been published.'] = 'a été publiée.';
+$Definition['Your question will be reviewed by a moderator. <br/> You will be notified once it is published!'] = 'Ton explication va être examinée par un modérateur. <br/> Tu seras averti dès sa publication!';
 $Definition['has been published.'] = 'a été publiée.';
 $Definition['Awaiting publication'] = 'En attente de publication';
 $Definition['Explanation published!'] = 'Explication publiée!';

@@ -60,9 +60,6 @@ foreach ($Controller->ProfileTabs as $TabCode => $TabInfo) {
 
         ?>
     <?php if (Gdn::session()->UserID == $User->UserID) { ?>
-    <!-- <div class="BoxProfileInfo_viewprofile">
-        <a href="/profile" class="BoxProfileInfo_viewprofile__btn"><img src="/themes/alloprof/design/images/icons/emoticon.svg"/><?php echo t('View Profile') ?></a>
-    </div> -->
     <?php } ?>
 </div>
 <?php } ?>
