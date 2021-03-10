@@ -16,16 +16,46 @@
             echo '<strong>'.t('Notifications').' (<span class="notification-count">'.($this->data('UnreadNotifications')).'</span>)</strong>';
             ?></li>
         <li class="notification-settings-content FilterMenu">
-            <div><?php echo Gdn::controller()->Form->toggle('ToggleAll', t('Activate all notifications'), [ 'checked' => $explanation ]); ?></div>
-            <div><?php echo Gdn::controller()->Form->toggle('ToggleEmail', t('Be notified by email'), [ 'checked' => $explanation ]); ?></div>
-            <div><?php echo Gdn::controller()->Form->toggle('ToggleExplanation', t('Explanation notifications'), [ 'checked' => $explanation ]); ?></div>
-            <div><?php echo Gdn::controller()->Form->toggle('ToggleModeration', t('Moderation notifications'), [ 'checked' => $explanation ]); ?></div>
+            <!-- <div> -->
+                <?php
+                    // if ($this->data('Preferences')['Email.DiscussionComment']) {
+                    //     echo Gdn::controller()->Form->toggle('ToggleEmail', t('Be notified by email'), [ 'checked' => true ]);
+                    // } else {
+                    //     echo Gdn::controller()->Form->toggle('ToggleEmail', t('Be notified by email'));
+                    // }
+                ?>
+            <!-- </div> -->
+            <div>
+                <?php
+                    if ($this->data('Preferences')['Email.DiscussionComment']) {
+                        echo Gdn::controller()->Form->toggle('ToggleEmail', t('Be notified by email'), [ 'checked' => true ]);
+                    } else {
+                        echo Gdn::controller()->Form->toggle('ToggleEmail', t('Be notified by email'));
+                    }
+                ?>
+            </div>
+            <div>
+                <?php
+                    if ($this->data('Preferences')['Popup.DiscussionComment']) {
+                        echo Gdn::controller()->Form->toggle('ToggleExplanation', t('Explanation notifications'), [ 'checked' => true ]);
+                    } else {
+                        echo Gdn::controller()->Form->toggle('ToggleExplanation', t('Explanation notifications'));
+                    }
+                ?>
+            </div>
+            <div>
+                <?php
+                    if ($this->data('Preferences')['Popup.Moderation']) {
+                        echo Gdn::controller()->Form->toggle('ToggleModeration', t('Moderation notifications'), [ 'checked' => true ]);
+                    } else {
+                        echo Gdn::controller()->Form->toggle('ToggleModeration', t('Moderation notifications'));
+                    }
+                ?>
+            </div>
         </li>
         <div class="notification-list">
-
             <?php foreach ($this->data('Activities') as $Activity): ?>
             <?php
-            echo (count($this->data('Preferences')));
                 $rel = !empty($Activity['Route']) ? ' rel="'.url($Activity['Route']).'"' : null;
                 $id = ($Activity['Notified'] == ActivityModel::SENT_PENDING)?' id="'.$Activity['ActivityID'].'"':null;
             ?>
