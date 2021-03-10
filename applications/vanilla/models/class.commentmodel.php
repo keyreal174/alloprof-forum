@@ -665,7 +665,6 @@ class CommentModel extends Gdn_Model implements FormatFieldInterface, EventFromR
             "RecordType" => "Comment",
             "RecordID" => $commentID,
             "Route" => "/discussion/comment/{$commentID}#Comment_{$commentID}",
-            "Notified" => ActivityModel::SENT_PENDING,
             "Story" => $textstring,
             "Data" => [
                 "Name" => $discussion["Name"] ?? null,

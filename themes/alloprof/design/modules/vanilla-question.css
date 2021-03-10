@@ -218,6 +218,7 @@
     position: absolute;
     right: 40px;
     top: 30px;
+    z-index: 99;
 }
 
 .Discussion .PageTitle .Options {
@@ -341,6 +342,11 @@
     padding-left: 0;
 }
 
+.MessageList .ItemComment .Item-Header,
+.MessageList .ItemDiscussion .Item-Header {
+    position: relative;
+    z-index: 1;
+}
 
 .MItem-Grade {
     color: #6C6767;
