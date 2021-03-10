@@ -398,7 +398,7 @@ if (!function_exists('writeDiscussionDetail')) :
                         <?php
                             if(!$Discussion->Published) {
                                 echo '<div class="not-published-badge">';
-                                echo '<img src="/themes/alloprof/design/images/icons/eyebreak.svg"/>';
+                                echo '<img src="'.url("/themes/alloprof/design/images/icons/eyebreak.svg").'"/>';
                                 echo t('Awaiting publication');
                                 echo '</div>';
                             }
@@ -439,7 +439,7 @@ if (!function_exists('writeDiscussionDetail')) :
                         <?php
                             if ($Discussion->DateAccepted) {
                                 echo "<div class='verfied-badge'>
-                                        <img src='/themes/alloprof/design/images/icons/verifiedbadge.svg'/>
+                                        <img src='".url("/themes/alloprof/design/images/icons/verifiedbadge.svg")."'/>
                                         <span>". t('Verified by Alloprof') ."</span>
                                     </div>";
                             }

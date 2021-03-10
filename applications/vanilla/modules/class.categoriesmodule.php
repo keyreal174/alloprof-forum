@@ -91,8 +91,8 @@ class CategoriesModule extends Gdn_Module {
 
         usort($categories, "cmp");
 
-        $nextButton = array('0' => array('PhotoUrl' => "/themes/alloprof/design/images/icons/next-slide.png", 'CategoryID' => 0, 'Name' => 'next'));
-        $prevButton = array('0' => array('PhotoUrl' => "/themes/alloprof/design/images/icons/prev-slide.png", 'CategoryID' => 0, 'Name' => 'prev'));
+        $nextButton = array('0' => array('PhotoUrl' => url("/themes/alloprof/design/images/icons/next-slide.png"), 'CategoryID' => 0, 'Name' => 'next'));
+        $prevButton = array('0' => array('PhotoUrl' => url("/themes/alloprof/design/images/icons/prev-slide.png"), 'CategoryID' => 0, 'Name' => 'prev'));
 
         $index = 5;
 
