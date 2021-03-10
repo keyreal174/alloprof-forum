@@ -63,7 +63,6 @@ $this->fireEvent('BeforeDiscussionDisplay');
             </span>
             <span class="AuthorInfo">
                 <?php
-                echo "<a class='DiscussionHeader_category' href='/categories/".$category["UrlCode"]."'>".$category["Name"]."</a>";
                 echo wrapIf(htmlspecialchars(val('Title', $Author)), 'span', ['class' => 'MItem AuthorTitle']);
                 echo wrapIf(htmlspecialchars(val('Location', $Author)), 'span', ['class' => 'MItem AuthorLocation']);
                 $this->fireEvent('AuthorInfo');
@@ -100,6 +99,7 @@ $this->fireEvent('BeforeDiscussionDisplay');
                     writeAttachments($Discussion->Attachments);
                 }
                 ?>
+                <?php  echo "<a class='QuestionCategory' style='background: ".$category["Color"]."' href='/categories/".$category["UrlCode"]."'>".$category["Name"]."</a>"; ?>
             </div>
             <?php
                 writeDiscussionFooter($Discussion, $this);
