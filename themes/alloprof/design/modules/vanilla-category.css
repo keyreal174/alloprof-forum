@@ -9,6 +9,9 @@
 
 .BoxCategories {
     margin: 0 !important;
+    background: white;
+    padding: 32px;
+    border-radius: 8px;
 }
 
 .BoxCategories.vanilla-categories .vanilla-categories__viewall {
@@ -32,17 +35,14 @@
 }
 
 .PanelCategories {
-    background-color: white;
-    border-radius: 5px;
-    padding: 20px 10px;
+    /*padding: 20px 10px;*/
     display: flex;
     position: relative;
 }
 
 .PanelCategories .slick-prev-arrow,
 .PanelCategories .slick-next-arrow {
-    position: absolute;
-    top: -33px;
+    display: none!important;
 }
 
 .PanelCategories .slick-prev-arrow {
@@ -166,11 +166,50 @@
 }
 
 .PanelCategories li {
-    position: relative;
+    /*display: flex!important;
+    flex-wrap: wrap;*/
+    display: grid!important;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 0!important;
 }
 
 .PanelCategories li svg {
     position: absolute;
     right: 10px;
     top: 10px;
+}
+
+.PanelCategories li .arrow-icon {
+    min-width: 64px;
+    min-height: 64px;
+    width: 64px;
+    border-radius: 12px;
+    display: flex;
+    overflow: hidden;
+    margin-bottom: 10px;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-top: 5px;
+    border: 2px solid #DDDDDD;
+}
+
+.PanelCategories li > div {
+    position: relative;
+    min-height: 120px;
+    width: 64px;
+    max-width: 64px;
+}
+
+.PanelCategories li > div .name {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 100%;
+    text-align: center;
+}
+
+.PanelCategories{
+    overflow: hidden;
+    opacity: 0;
 }

@@ -395,7 +395,7 @@ class CategoriesController extends VanillaController {
 
         $discussionFilterModule = new DiscussionFilterModule($gradeFilterOption, $sort, $explanation, $verified);
         $this->addModule($discussionFilterModule);
-        $this->addJsFile('filterInCategory.js');
+        $this->addJsFile('filter.js');
         $wheres = [];
 
         if (($this->GradeID || $this->GradeID === '0') && $this->GradeID != -1) {
@@ -404,16 +404,20 @@ class CategoriesController extends VanillaController {
             unset($wheres['d.GradeID']);
         }
 
+        $role = $this->getUserRole(Gdn::session()->UserID);
+        $role_where = $role === 'Teacher' ? 'd.CountComments' : 'd.CountComments >';
         if ($this->IsExplanation == 'true') {
-            $wheres['d.CountComments >'] = 0;
+            $wheres[$role_where] = 0;
         } else {
-            unset($wheres['d.CountComments >']);
+            unset($wheres[$role_where]);
         }
 
+        $verify_where = $role === 'Teacher' ? 'd.DateAccepted =' : 'd.DateAccepted <>';
+        $verify_value = $role === 'Teacher' ? NULL : '';
         if ($this->IsVerifiedBy == 'true') {
-            $wheres['d.DateAccepted <>'] = '';
+            $wheres[$verify_where] = $verify_value;
         } else {
-            unset($wheres['d.DateAccepted <>']);
+            unset($wheres[$verify_where]);
         }
 
         $this->WhereClause = $wheres;

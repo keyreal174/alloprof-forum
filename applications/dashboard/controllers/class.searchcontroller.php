@@ -103,19 +103,50 @@ class SearchController extends Gdn_Controller {
             unset($wheres['d.CategoryID']);
         }
 
+        $role = $this->getUserRole(Gdn::session()->UserID);
+        $role_where = $role === 'Teacher' ? 'd.CountComments' : 'd.CountComments >';
         if ($this->IsExplanation == 'true') {
-            $wheres['d.CountComments >'] = 0;
+            $wheres[$role_where] = 0;
         } else {
-            unset($wheres['d.CountComments >']);
+            unset($wheres[$role_where]);
         }
 
+        $verify_where = $role === 'Teacher' ? 'd.DateAccepted =' : 'd.DateAccepted <>';
+        $verify_value = $role === 'Teacher' ? NULL : '';
         if ($this->IsVerifiedBy == 'true') {
-            $wheres['d.DateAccepted <>'] = '';
+            $wheres[$verify_where] = $verify_value;
         } else {
-            unset($wheres['d.DateAccepted <>']);
+            unset($wheres[$verify_where]);
         }
 
         $this->WhereClause = $wheres;
+    }
+
+    public function getUserRole($UserID = null) {
+        $userModel = new UserModel();
+        if ($UserID) {
+            $User = $userModel->getID($UserID);
+        } else {
+            $User = $userModel->getID(Gdn::session()->UserID);
+        }
+
+        if($User) {
+            $RoleData = $userModel->getRoles($User->UserID);
+            if ($RoleData !== false) {
+                $Roles = array_column($RoleData->resultArray(), 'Name');
+            }
+
+            // Hide personal info roles
+            if (!checkPermission('Garden.PersonalInfo.View')) {
+                $Roles = array_filter($Roles, 'RoleModel::FilterPersonalInfo');
+            }
+
+            if(in_array(Gdn::config('Vanilla.ExtraRoles.Teacher'), $Roles))
+                $UserRole = Gdn::config('Vanilla.ExtraRoles.Teacher') ?? 'Teacher';
+            else $UserRole = RoleModel::TYPE_MEMBER ?? 'Student';
+
+            return $UserRole;
+        } else return null;
     }
 
     /**
@@ -155,8 +186,6 @@ class SearchController extends Gdn_Controller {
 
         saveToConfig('Garden.Format.EmbedSize', '160x90', false);
         Gdn_Theme::section('SearchResults');
-
-        $this->setData('_PagerUrl', 'search?Search='.$search);
 
         $this->writeFilter();
         $where['Body like'] = '%'.str_replace(['%', '_'], ['\%', '\_'], $search).'%';
@@ -278,11 +307,5 @@ class SearchController extends Gdn_Controller {
         // $this->addSideMenu();
         $this->_UserInfoRetrieved = true;
         return true;
-    }
-
-    public function filterDiscussion() {
-        $parameter = $_POST['parameter'];
-
-        echo $this->_PagerUrl.'?'.$parameter;
     }
 }

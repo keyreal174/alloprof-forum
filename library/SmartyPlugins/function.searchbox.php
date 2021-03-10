@@ -17,8 +17,24 @@ function smarty_function_searchbox($params, &$smarty) {
     $placeholder = array_key_exists('placeholder', $params) ? val('placeholder', $params, '', true) : t('SearchBoxPlaceHolder', 'Search');
     $form = Gdn::factory('Form');
     /* @var Gdn_Form $form */
+
+    $link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+    $actual_link = '';
+
+    $search = $_GET["Search"];
+    if (isset($search)) {
+        $actual_link = str_replace('Search='.$search, '', $link);
+        $actual_link = str_replace('Search='.$search.'&', '', $actual_link);
+    } else {
+        if (strpos($link, '/search')) {
+            $actual_link = $link;
+        } else {
+            $actual_link = '/search';
+        }
+    }
+
     $result =
-        $form->open(['action' => url('/search'), 'method' => 'get']).
+        $form->open(['action' => url($actual_link), 'method' => 'get']).
         $form->textBox('Search', [
             'placeholder' => $placeholder,
             'accesskey' => '/',

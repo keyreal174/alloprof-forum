@@ -62,6 +62,12 @@ else
                             <?php echo formatBody($Row); ?>
                         </div>
                         <?php
+                            $this->fireEvent('AfterDiscussionBody');
+                            if (val('Attachments', $Row)) {
+                                writeAttachments($Row->Attachments);
+                            }
+                        ?>
+                        <?php
                         $Count = val('Count', $Row);
 
                         if (($Count) > 1) {
