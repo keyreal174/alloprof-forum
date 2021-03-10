@@ -3,6 +3,7 @@ $Session = Gdn::session();
 $this->fireEvent('BeforeCommentForm');
 ?>
 <div class="MessageForm EditCommentForm">
+    
     <div class="Form-BodyWrap">
         <div class="Form-Body">
             <div class="FormWrapper FormWrapper-Condensed">
@@ -12,14 +13,32 @@ $this->fireEvent('BeforeCommentForm');
                 $this->fireEvent('BeforeBodyField');
                 echo $this->Form->bodyBox('Body', ['Table' => 'Comment', 'FileUpload' => true, 'placeholder' => t('Type your comment'), 'title' => t('Type your comment')]);
                 $this->fireEvent('AfterBodyField');
+
+                $ButtonOptions = ['class' => 'btn-default btn-shadow btn-m-l-auto'];
+                echo "<a href='/' class='close-icon Cancel'><img src='/themes/alloprof/design/images/icons/close.svg' /></a>";
+
                 echo "<div class=\"Buttons\">\n";
-                $this->fireEvent('BeforeFormButtons');
-                echo anchor(t('Cancel'), '/', 'Button Cancel').' ';
-                echo $this->Form->button('Save Comment', ['class' => 'Button Primary CommentButton']);
+                if ($Session->isValid()) {
+                    echo $this->Form->button($Editing ? 'Save Comment' : t('Publish my explanation'), $ButtonOptions);
+                } else {
+                    $AllowSigninPopup = c('Garden.SignIn.Popup');
+                    $Attributes = ['tabindex' => '-1'];
+                    if (!$AllowSigninPopup) {
+                        $Attributes['target'] = '_parent';
+                    }
+                    $AuthenticationUrl = signInUrl($this->SelfUrl);
+                    $CssClass = 'Button Primary Stash';
+                    if ($AllowSigninPopup) {
+                        $CssClass .= ' SignInPopup';
+                    }
+                    echo anchor(t('Comment As ...'), $AuthenticationUrl, $CssClass, $Attributes);
+                }
+
                 $this->fireEvent('AfterFormButtons');
                 echo "</div>\n";
                 echo $this->Form->close();
                 ?>
+                
             </div>
         </div>
     </div>
