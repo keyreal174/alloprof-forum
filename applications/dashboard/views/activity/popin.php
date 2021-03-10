@@ -16,15 +16,6 @@
             echo '<strong>'.t('Notifications').' (<span class="notification-count">'.($this->data('UnreadNotifications')).'</span>)</strong>';
             ?></li>
         <li class="notification-settings-content FilterMenu">
-            <!-- <div> -->
-                <?php
-                    // if ($this->data('Preferences')['Email.DiscussionComment']) {
-                    //     echo Gdn::controller()->Form->toggle('ToggleEmail', t('Be notified by email'), [ 'checked' => true ]);
-                    // } else {
-                    //     echo Gdn::controller()->Form->toggle('ToggleEmail', t('Be notified by email'));
-                    // }
-                ?>
-            <!-- </div> -->
             <div>
                 <?php
                     if ($this->data('Preferences')['Email.DiscussionComment']) {

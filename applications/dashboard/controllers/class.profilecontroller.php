@@ -1496,7 +1496,7 @@ class ProfileController extends Gdn_Controller {
         UserModel::setMeta($this->User->UserID, $newMetaPrefs, 'Preferences.');
 
         $this->setData('Preferences', array_merge($this->data('Preferences', []), $userPrefs, $newMetaPrefs));
-        print_r($this->data('Preferences'));
+        echo "success";
     }
 
 
