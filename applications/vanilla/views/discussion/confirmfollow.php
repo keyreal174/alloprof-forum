@@ -59,7 +59,7 @@
 ?>
 
 <div class="BoxConfirmFollow">
-    <img src="/themes/alloprof/design/images/confirmfollow-bot.svg" />
+    <img src="<?= url('/themes/alloprof/design/images/confirmfollow-bot.svg') ?>" />
     <h2><?php echo t("Oops! The question is already followed") ?></h2>
 
     <p><?php echo t("A teacher has already indicated that he wants to answer this question.") ?></p>

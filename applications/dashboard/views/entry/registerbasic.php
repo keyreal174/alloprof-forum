@@ -2,7 +2,7 @@
 <div class="FormTitleWrapper AjaxForm SignUpForm">
     <div class='FormSummary'>
         <h1 class='Title'><?php echo t('To send in your question, sign up!'); ?></h1>
-        <img src='/themes/alloprof/design/images/authAvatar.svg' alt='image' class='AuthAvatar' />
+        <img src='<?= url("/themes/alloprof/design/images/authAvatar.svg") ?>' alt='image' class='AuthAvatar' />
     </div>
 
     <div class="FormWrapper">
@@ -36,13 +36,13 @@
                 $passwordDescID = \Vanilla\Utility\HtmlUtils::uniqueElementID('Password');
                 // echo wrap(sprintf(t('Your password must be at least %d characters long.'), c('Garden.Password.MinLength')).' '.t('For a stronger password, increase its length or combine upper and lowercase letters, digits, and symbols.'), 'div', ['class' => 'Gloss', 'id' => $passwordDescID]);
                 echo $this->Form->input('Password', 'password', ['Wrap' => true, 'Strength' => TRUE, 'aria-describedby' => $passwordDescID, 'placeholder' => t('Password')]);
-                echo '<span class="EyeIcon EyeIconPassword"><img src="/themes/alloprof/design/images/icons/eye.svg" alt="image" /></span>';
+                echo '<span class="EyeIcon EyeIconPassword"><img src="'.url("/themes/alloprof/design/images/icons/eye.svg").'" alt="image" /></span>';
                 ?>
             </li>
             <li role="presentation">
                 <?php
                 echo $this->Form->input('PasswordMatch', 'password', ['Wrap' => TRUE, 'placeholder' => t('Confirm your password')]);
-                echo '<span class="EyeIcon EyeIconConfirmPassword"><img src="/themes/alloprof/design/images/icons/eye.svg" alt="image" /></span>';
+                echo '<span class="EyeIcon EyeIconConfirmPassword"><img src="'.url("/themes/alloprof/design/images/icons/eye.svg").'" alt="image" /></span>';
                 echo '<span id="PasswordsDontMatch" class="Incorrect" style="display: none;">'.t("Passwords don't match").'</span>';
                 ?>
             </li>

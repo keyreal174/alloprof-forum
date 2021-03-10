@@ -44,7 +44,7 @@ $this->fireEvent('BeforeDiscussionDisplay');
             <?php
                 if(!$Discussion->Published) {
                     echo '<div class="not-published-badge">';
-                    echo '<img src="/themes/alloprof/design/images/icons/eyebreak.svg"/>';
+                    echo '<img src="'.url("/themes/alloprof/design/images/icons/eyebreak.svg").'"/>';
                     echo t('Awaiting publication');
                     echo '</div>';
                 }
