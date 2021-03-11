@@ -5,7 +5,7 @@ $Title = sprintf("Share your question!");
 $SubTitle = sprintf("Asking yourself the same question? Share it with your friends, they may have the explanation!");
 ?>
     <div>
-    <img src="<? url("/themes/alloprof/design/images/sharingAvatar.svg") ?>" alt='image' class='FlagAvatar' />
+    <img src='<?= url("/themes/alloprof/design/images/sharingAvatar.svg") ?>'' alt='image' class='FlagAvatar' />
     </div>
     <h2><?php echo t($Title); ?></h2>
     <p><?php echo t($SubTitle); ?></p>
