@@ -25,6 +25,26 @@
         }
     });
 
+    $(document).on('click', '#clickCopy', function() {
+        var tempItem = document.createElement('input');
+
+        tempItem.setAttribute('type','text');
+        tempItem.setAttribute('display','none');
+
+        let content = $("#clickCopy").attr('value');
+        // if (e instanceof HTMLElement) {
+        //         content = e.innerHTML;
+        // }
+
+        tempItem.setAttribute('value',content);
+        document.body.appendChild(tempItem);
+
+        tempItem.select();
+        document.execCommand('Copy');
+
+        tempItem.parentElement.removeChild(tempItem);
+    })
+
     // Prevent auto-execution of scripts when no explicit dataType was provided
     // See https://github.com/jquery/jquery/issues/2432#issuecomment-403761229
     jQuery.ajaxPrefilter(function(s) {
@@ -488,17 +508,7 @@ jQuery(document).ready(function($) {
 
     // This turns Social Sharing Popup anchors into in-page popups
     if ($.fn.popup) {
-        $('a.SocialPopup').popup({containerCssClass: 'SocialPopup CustomPopup', afterLoad: function() {
-            (function(d) {
-                var f = d.getElementsByTagName('SCRIPT')[0], p = d.createElement('SCRIPT');
-                p.type = 'text/javascript';
-                p.async = true;
-                p.defer = true;
-                p.crossorigin = "anonymous";
-                p.src = '//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v10.0&appId=1361538587516643&autoLogAppEvents=1';
-                f.parentNode.insertBefore(p, f);
-            }(document));
-        }});
+        $('a.SocialPopup').popup({containerCssClass: 'SocialPopup CustomPopup'});
     }
 
     // This turns DeleteDiscussionPopup anchors into in-page popups

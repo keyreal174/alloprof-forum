@@ -233,7 +233,6 @@
     </div>
     <div id="modals"></div>
     {event name="AfterBody"}
-    <div id="fb-root"></div>
 </body>
 
 </html>

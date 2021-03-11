@@ -170,8 +170,8 @@ $Configuration['Garden']['Modules']['ShowSignedInModule'] = false;
 $Configuration['Garden']['Modules']['ShowRecentUserModule'] = false;
 $Configuration['Modules']['Dashboard']['Panel'] = ['MeModule', 'UserBoxModule', 'ActivityFilterModule', 'UserPhotoModule', 'ProfileFilterModule', 'SideMenuModule', 'UserInfoModule', 'GuestModule', 'Ads'];
 $Configuration['Modules']['Dashboard']['Content'] = ['MessageModule', 'MeModule', 'UserBoxModule', 'ProfileOptionsModule', 'Notices', 'ActivityFilterModule', 'ProfileFilterModule', 'Content', 'Ads'];
-$Configuration['Modules']['Vanilla']['Panel'] = ['MeModule', 'UserBoxModule', 'GuestModule', 'NewDiscussionModule', 'DiscussionFilterModule', 'SignedInModule', 'Ads'];
-$Configuration['Modules']['Vanilla']['Content'] = ['MessageModule', 'MeModule', 'UserBoxModule', 'NewDiscussionModule', 'ProfileOptionsModule', 'Notices', 'NewConversationModule', 'NewDiscussionModule', 'DiscussionFilterModule', 'CategoryModeratorsModule', 'Content', 'Ads'];
+$Configuration['Modules']['Vanilla']['Panel'] = ['MeModule', 'UserBoxModule', 'GuestModule', 'NewDiscussionModule', 'CategoriesModule', 'DiscussionFilterModule', 'SignedInModule', 'Ads'];
+$Configuration['Modules']['Vanilla']['Content'] = ['MessageModule', 'MeModule', 'UserBoxModule', 'NewDiscussionModule', 'ProfileOptionsModule', 'Notices', 'NewConversationModule', 'NewDiscussionModule', 'CategoriesModule', 'DiscussionFilterModule', 'CategoryModeratorsModule', 'Content', 'Ads'];
 $Configuration['Modules']['Conversations']['Panel'] = ['MeModule', 'UserBoxModule', 'NewConversationModule', 'SignedInModule', 'GuestModule', 'Ads'];
 $Configuration['Modules']['Conversations']['Content'] = ['MessageModule', 'MeModule', 'UserBoxModule', 'NewConversationModule', 'Notices', 'Content', 'Ads'];
 

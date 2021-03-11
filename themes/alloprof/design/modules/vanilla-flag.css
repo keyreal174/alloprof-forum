@@ -102,6 +102,10 @@ div.Popup.FlagContentPopup .Body .Content .FlatReportButton input {
 }
 
 /* Social Sharing Popup */
+div.Popup.SocialPopup .Border {
+    width: 891px;
+}
+
 div.Popup.SocialPopup h2 {
     font-size: 28px;
     line-height: 31px;
@@ -119,16 +123,41 @@ div.Popup.SocialPopup p {
 div.Popup.SocialPopup .SocialSharingButtons {
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 
 div.Popup.SocialPopup .SocialSharingButtons a {
     display: flex;
     align-items: center;
-    background: #25D366;
     color: white;
     padding: 10px 20px;
     border-radius: 8px;
     font-size: 18px;
+}
+
+div.Popup.SocialPopup .SocialSharingButtons a.fb-share-button {
+    background: #227BEF;
+}
+
+div.Popup.SocialPopup .SocialSharingButtons a.twitter-share-button {
+    background: #2AA3EF;
+}
+
+div.Popup.SocialPopup .SocialSharingButtons a.whatsapp-share-button {
+    background: #25D366;
+}
+
+div.Popup.SocialPopup .SocialSharingButtons a.copy-button {
+    background: black;
+}
+
+div.Popup.SocialPopup .SocialSharingButtons a + a {
+    margin-left: 16px;
+}
+
+div.Popup.SocialPopup .SocialSharingButtons a:hover,
+div.Popup.SocialPopup .SocialSharingButtons a:focus {
+    opacity: 0.8;
 }
 
 div.Popup.SocialPopup .SocialSharingButtons a img {

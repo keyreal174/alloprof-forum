@@ -15,18 +15,21 @@ echo $this->Form->errors();
 ?>
 <?php
 echo '<div class="SocialSharingButtons">';
-echo '<div class="fb-share-button" data-href="'.$Discussion["CanonicalUrl"].'" data-layout="button" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u='.$Discussion["CanonicalUrl"].';src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>';
-echo '<a class="twitter-share-button"
-        href="https://twitter.com/intent/tweet?url='.$Discussion["CanonicalUrl"].'&via=alloprof"
-        data-size="large">
-        Tweet
+echo '<a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u='.$Discussion["CanonicalUrl"].';src=sdkpreparse" class="fb-share-button">
+        <img src="'.url("/themes/alloprof/design/images/icons/ShareNetworkFacebook.svg").'" />
+        Facebook
     </a>';
-echo '<a href=
-"whatsapp://send?text=GFG Example for whatsapp sharing"
-        data-action="share/whatsapp/share"
-        target="_blank">
+echo '<a class="twitter-share-button" href="https://twitter.com/intent/tweet?url='.$Discussion["CanonicalUrl"].'&via=alloprof" data-size="large">
+        <img src="'.url("/themes/alloprof/design/images/icons/ShareNetworkTwitter.svg").'" />
+        Twitter
+    </a>';
+echo '<a href="whatsapp://send?text='.urlencode($Discussion["CanonicalUrl"]).'" data-action="share/whatsapp/share" target="_blank" class="whatsapp-share-button">
         <img src="'.url("/themes/alloprof/design/images/icons/ShareNetworkWhatsApp.svg").'" />
         Whatsapp
+    </a>';
+echo '<a href="javascript:void();" class="copy-button" id="clickCopy" value="'.$Discussion["CanonicalUrl"].'">
+        <img src="'.url("/themes/alloprof/design/images/icons/ShareNetworkCopy.svg").'" />
+        '.t("Copy link").'
     </a>';
 echo '</div>';
 echo $this->Form->close();
