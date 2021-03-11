@@ -17,10 +17,16 @@ echo $this->Form->errors();
 echo '<div class="SocialSharingButtons">';
 echo '<div class="fb-share-button" data-href="'.$Discussion["CanonicalUrl"].'" data-layout="button" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u='.$Discussion["CanonicalUrl"].';src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>';
 echo '<a class="twitter-share-button"
-        href="https://twitter.com/intent/tweet?url='.$Discussion["CanonicalUrl"].'"
+        href="https://twitter.com/intent/tweet?url='.$Discussion["CanonicalUrl"].'&via=alloprof"
         data-size="large">
         Tweet
     </a>';
+echo '<a href=
+"whatsapp://send?text=GFG Example for whatsapp sharing"
+        data-action="share/whatsapp/share"
+        target="_blank">
+        Share to whatsapp
+    </a> ';
 echo '</div>';
 echo $this->Form->close();
 ?>
