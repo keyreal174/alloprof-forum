@@ -25,8 +25,9 @@ echo '<a href=
 "whatsapp://send?text=GFG Example for whatsapp sharing"
         data-action="share/whatsapp/share"
         target="_blank">
-        Share to whatsapp
-    </a> ';
+        <img src="'.url("/themes/alloprof/design/images/icons/ShareNetworkWhatsApp.svg").'" />
+        Whatsapp
+    </a>';
 echo '</div>';
 echo $this->Form->close();
 ?>

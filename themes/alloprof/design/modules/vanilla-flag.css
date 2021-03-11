@@ -115,3 +115,22 @@ div.Popup.SocialPopup p {
     color: #4F4F4F;
     margin-bottom: 32px;
 }
+
+div.Popup.SocialPopup .SocialSharingButtons {
+    display: flex;
+    align-items: center;
+}
+
+div.Popup.SocialPopup .SocialSharingButtons a {
+    display: flex;
+    align-items: center;
+    background: #25D366;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 18px;
+}
+
+div.Popup.SocialPopup .SocialSharingButtons a img {
+    margin-right: 16px;
+}
