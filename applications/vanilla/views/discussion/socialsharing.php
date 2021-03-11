@@ -1,6 +1,6 @@
 <?php if (!defined('APPLICATION')) exit(); ?>
 <?php
-// print_R($this->data('Discussion'));
+$Discussion = $this->data('Discussion');
 $Title = sprintf("Share your question!");
 $SubTitle = sprintf("Asking yourself the same question? Share it with your friends, they may have the explanation!");
 ?>
@@ -15,7 +15,7 @@ echo $this->Form->errors();
 ?>
 <?php
 echo '<div class="SocialSharingButtons">';
-echo '<div class="fb-share-button" data-href="http://dev.vanilla.localhost/discussion/10/question" data-layout="button" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://dev.vanilla.localhost/discussion/10/question;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>';
+echo '<div class="fb-share-button" data-href="'.$Discussion["CanonicalUrl"].'" data-layout="button" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u='.$Discussion["CanonicalUrl"].';src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>';
 echo '</div>';
 echo $this->Form->close();
 ?>
