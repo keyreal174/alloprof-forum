@@ -82,6 +82,18 @@ $Configuration['ImageUpload']['Limits']['Width'] = '1000';
 $Configuration['ImageUpload']['Limits']['Height'] = '1400';
 $Configuration['ImageUpload']['Limits']['Enabled'] = false;
 
+// Modules
+$Configuration['Modules']['Vanilla']['Panel'] = array (
+  0 => 'MeModule',
+  1 => 'UserBoxModule',
+  2 => 'GuestModule',
+  3 => 'NewDiscussionModule',
+  4 => 'CategoriesModule',
+  5 => 'DiscussionFilterModule',
+  6 => 'SignedInModule',
+  7 => 'Ads',
+);
+
 // Plugins
 $Configuration['Plugins']['GettingStarted']['Dashboard'] = '1';
 $Configuration['Plugins']['GettingStarted']['Discussion'] = '1';
