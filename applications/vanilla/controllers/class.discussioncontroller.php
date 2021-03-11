@@ -437,13 +437,6 @@ class DiscussionController extends VanillaController {
 
         $this->addModule($bannerModule);
 
-        $page_url = discussionUrl($this->Discussion, pageNumber($this->Offset, $Limit, 0, false));
-        $this->Head->addTag('meta', ['property' => 'og:type', 'content' => 'website']);
-        $this->Head->addTag('meta', ['property' => 'og:url', 'content' => $page_url]);
-        $this->Head->addTag('meta', ['property' => 'og:title', 'content' => 'This is a question']);
-        $this->Head->addTag('meta', ['property' => 'og:description', 'content' => 'website']);
-        $this->Head->addTag('meta', ['property' => 'og:image', 'content' => 'website']);
-
         $this->render();
     }
 
