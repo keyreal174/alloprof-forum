@@ -6,7 +6,7 @@ $URL = $this->data('Plugin.Flagging.Data.URL');
 $Title = sprintf("What's wrong?");
 ?>
     <div>
-    <img src='/themes/alloprof/design/images/flagAvatar.svg' alt='image' class='FlagAvatar' />
+    <img src='<?= url("/themes/alloprof/design/images/flagAvatar.") ?>svg' alt='image' class='FlagAvatar' />
     </div>
     <h2><?php echo t($Title); ?></h2>
 <?php

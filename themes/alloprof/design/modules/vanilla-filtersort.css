@@ -85,6 +85,11 @@
     cursor: pointer;
 }
 
+.FilterMenu .toggle-wrap input[type=checkbox]:checked + label::before {
+    background-color: #05BF8E;
+    border-color: #05BF8E;
+}
+
 .FilterMenu .toggle-wrap input[type=checkbox] + label::after {
     display: block;
     position: absolute;
@@ -102,12 +107,12 @@
 .FilterMenu .toggle-wrap input[type=checkbox]:checked + label::after {
     left: 26px;
     border: 0;
+    background-color: white;
 }
 
 .FilterMenu .label {
     font-size: 16px;
     line-height: 19px;
     color: black;
-    max-width: 150px;
     margin-right: 20px;
 }

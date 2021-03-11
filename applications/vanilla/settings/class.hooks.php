@@ -910,9 +910,11 @@ class VanillaHooks extends Gdn_Plugin {
         $sender->Preferences['Notifications']['Email.DiscussionComment'] = t('Notify me when people comment on my discussions.');
         $sender->Preferences['Notifications']['Email.BookmarkComment'] = t('Notify me when people comment on my bookmarked discussions.');
         $sender->Preferences['Notifications']['Email.Mention'] = t('Notify me when people mention me.');
+        $sender->Preferences['Notifications']['Email.Moderation'] = t('Notify me when moderator changed my content.');
         $sender->Preferences['Notifications']['Email.ParticipateComment'] = t('Notify me when people comment on discussions I\'ve participated in.');
 
         $sender->Preferences['Notifications']['Popup.DiscussionComment'] = t('Notify me when people comment on my discussions.');
+        $sender->Preferences['Notifications']['Popup.Moderation'] = t('Notify me when moderator changed my content.');
         $sender->Preferences['Notifications']['Popup.BookmarkComment'] = t('Notify me when people comment on my bookmarked discussions.');
         $sender->Preferences['Notifications']['Popup.Mention'] = t('Notify me when people mention me.');
         $sender->Preferences['Notifications']['Popup.ParticipateComment'] = t('Notify me when people comment on discussions I\'ve participated in.');

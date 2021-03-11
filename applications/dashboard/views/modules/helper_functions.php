@@ -20,7 +20,7 @@ if (!function_exists('writeSubjectFilter')) :
         }
 
         echo '<div class="FilterMenu__Dropdown">';
-        echo '<img src="/themes/alloprof/design/images/icons/subject.svg"/>';
+        echo '<img src="'.url("/themes/alloprof/design/images/icons/subject.svg").'"/>';
         echo $form->dropDown('SubjectDropdown', $options, array('IncludeNull' => t('Material'), 'Value' => $subject));
         echo '</div>';
     }
@@ -60,7 +60,7 @@ if (!function_exists('writeGradeFilter')) :
         }
 
         echo '<div class="FilterMenu__Dropdown">';
-        echo '<img src="/themes/alloprof/design/images/icons/grade.svg"/>';
+        echo '<img src="'.url("/themes/alloprof/design/images/icons/grade.svg").'"/>';
         echo $form->dropDown('GradeDropdown', $GradeOption, array('IncludeNull' => t('Grade'), 'Value' => $gradeID));
         echo '</div>';
     }
@@ -81,7 +81,7 @@ if (!function_exists('writeDiscussionSort')) :
         ];
 
         echo '<div class="FilterMenu__Dropdown">';
-        echo '<img src="/themes/alloprof/design/images/icons/sort.svg"/>';
+        echo '<img src="'.url("/themes/alloprof/design/images/icons/sort.svg").'"/>';
         echo $form->dropDown('DiscussionSort', $options, [ 'Value' => $sort ]);
         echo '</div>';
     }

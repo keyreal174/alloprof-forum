@@ -103,7 +103,11 @@ div.Popup.SignInPopup li.form-group select {
 
 div.Popup.SignInPopup li.form-group:after {
     content: "";
+<<<<<<< HEAD
     background: url('../../../../themes/alloprof/design/images/icons/arrowDown.svg');
+=======
+    background: url('../images/icons/arrowDown.svg');
+>>>>>>> dev
     width: 14px;
     height: 16px;
     background-repeat: no-repeat;
