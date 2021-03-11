@@ -19,7 +19,7 @@ echo '<a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u='.$D
         <img src="'.url("/themes/alloprof/design/images/icons/ShareNetworkFacebook.svg").'" />
         Facebook
     </a>';
-echo '<a class="twitter-share-button" href="https://twitter.com/intent/tweet?url='.$Discussion["CanonicalUrl"].'&via=alloprof" data-size="large">
+echo '<a target="_blank" class="twitter-share-button" href="https://twitter.com/intent/tweet?url='.$Discussion["CanonicalUrl"].'&via=alloprof" data-size="large">
         <img src="'.url("/themes/alloprof/design/images/icons/ShareNetworkTwitter.svg").'" />
         Twitter
     </a>';
