@@ -1184,6 +1184,3 @@ class LogModel extends Gdn_Pluggable {
 
     }
 }
-
-
-
