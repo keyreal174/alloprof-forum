@@ -844,6 +844,22 @@ if (!function_exists('formatMeAction')) :
     }
 endif;
 
+if (!function_exists('writeSocialSharing')) :
+    function writeSocialSharing($Discussion) {
+        $socialLink = anchor(
+            '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18.212 1.72792C20.7227 0.890167 23.1096 3.27703 22.2718 5.78774L17.2974 20.6959C16.3451 23.5498 12.3495 23.6477 11.2592 20.8514L9.67995 16.8012C9.23627 15.6634 8.33639 14.7635 7.19853 14.3198L3.14834 12.7405C0.352028 11.6502 0.449971 7.6546 3.30385 6.70235L18.212 1.72792Z" stroke="black" stroke-width="2"/>
+                <path d="M9.35449 14.6455L15.4737 8.52631" stroke="black" stroke-width="2" stroke-linecap="round"/>
+            </svg>',
+            'discussion/social/'.$Discussion->DiscussionID,
+            'SocialIcon SocialPopup',
+            ['rel' => 'nofollow']
+        );
+
+        echo wrap($socialLink, 'span', ['class' => 'MItem SocialLink']);
+    }
+endif;
+
 if (!function_exists('writeDiscussionFooter')) :
     function writeDiscussionFooter($Discussion, $sender ,$page='') {
         $discussionUrl = $Discussion->Url;
@@ -860,7 +876,7 @@ if (!function_exists('writeDiscussionFooter')) :
                             echo bookmarkButton($Discussion);
                         }
                         writeReactions($Discussion);
-                        echo '<a class="Back-Icon Option-Icon"></a>';
+                        writeSocialSharing($Discussion);
                         echo '</span>';
                     }
                 ?>
