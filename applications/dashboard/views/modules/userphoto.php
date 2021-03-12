@@ -4,6 +4,7 @@ $dataDriven = \Gdn::themeFeatures()->useDataDrivenTheme();
 $User = val('User', Gdn::controller());
 $Discussion = val('Discussion', Gdn::controller());
 $IsProfilePage = val('IsProfilePage', Gdn::controller());
+$profileUrl = Gdn::request()->url('/profile/edit');
 if (!$User && Gdn::session()->isValid()) {
     $User = Gdn::session()->User;
 }
@@ -44,7 +45,7 @@ if ($Photo) : ?>
 
         // if (!$User->Banned && $canEditPhotos && (Gdn::session()->UserID == $User->UserID || checkPermission('Garden.Users.Edit'))) {
             // $contents = ($dataDriven ? '<span class="icon icon-camera"></span>' : '').t('Change Icon');
-            echo "<a ".($IsProfilePage ? '' : 'href="/profile/edit"')." class='ProfilePhotoLarge'><img src='".$Photo."' class='ProfilePhotoLarge' alt='".$PhotoAlt."'/></a>";
+            echo "<a ".($IsProfilePage ? '' : 'href="'.$profileUrl.'"')." class='ProfilePhotoLarge'><img src='".$Photo."' class='ProfilePhotoLarge' alt='".$PhotoAlt."'/></a>";
             // echo anchor(wrap($contents, "span", ["class" => "ChangePicture-Text"]), '/profile/picture?userid='.$User->UserID, 'ChangePicture Popup', ["aria-label" => t("Change Picture")]);
         // }
 

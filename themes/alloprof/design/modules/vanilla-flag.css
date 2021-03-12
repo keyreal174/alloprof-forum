@@ -1,7 +1,7 @@
 /* Report post(Flag) */
 a.FlagContentPopup:before {
     content: '';
-    background: url("../images/icons/flag.svg");
+    background: url("../../../../themes/alloprof/design/images/icons/flag.svg");
     width: 13.5px;
     height: 19.5px;
     background-repeat: no-repeat;
@@ -21,11 +21,11 @@ a.FlagContentPopup:before {
     top: calc(50% - 360px) !important;
 } */
 
-div.Popup.FlagContentPopup .Border {
+div.Popup.CustomPopup .Border {
     width: 720px;
 }
 
-div.Popup.FlagContentPopup .Body {
+div.Popup.CustomPopup .Body {
     max-height: 700px !important;
     overflow: initial !important;
     padding: 80px !important;
@@ -35,7 +35,7 @@ div.Popup.FlagContentPopup .Body {
     border: 1px solid #DDDDDD;
 }
 
-div.Popup.FlagContentPopup .Body .Content {
+div.Popup.CustomPopup .Body .Content {
     text-align: center;
 }
 
@@ -99,4 +99,82 @@ div.Popup.FlagContentPopup .Body .Content .FlatReportButton {
 
 div.Popup.FlagContentPopup .Body .Content .FlatReportButton input {
     margin: 0 auto;
+}
+
+/* Social Sharing Popup */
+div.Popup.SocialPopup .Border {
+    width: 891px;
+}
+
+div.Popup.CustomPopup.SocialPopup .Body {
+    padding: 64px !important;
+}
+
+div.Popup.SocialPopup h2 {
+    font-size: 28px;
+    line-height: 31px;
+    color: black;
+    margin-bottom: 32px;
+}
+
+div.Popup.SocialPopup p {
+    font-size: 18px;
+    line-height: 31px;
+    color: #4F4F4F;
+    margin-bottom: 32px;
+}
+
+div.Popup.SocialPopup .Hidden {
+    display: none !important;
+}
+
+div.Popup.SocialPopup p.LinkCopiedText {
+    margin-bottom: 0;
+    color: black;
+    font-size: 21px;
+    font-weight: 700;
+}
+
+div.Popup.SocialPopup .SocialSharingButtons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+div.Popup.SocialPopup .SocialSharingButtons a {
+    display: flex;
+    align-items: center;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 18px;
+}
+
+div.Popup.SocialPopup .SocialSharingButtons a.fb-share-button {
+    background: #227BEF;
+}
+
+div.Popup.SocialPopup .SocialSharingButtons a.twitter-share-button {
+    background: #2AA3EF;
+}
+
+div.Popup.SocialPopup .SocialSharingButtons a.whatsapp-share-button {
+    background: #25D366;
+}
+
+div.Popup.SocialPopup .SocialSharingButtons a.copy-button {
+    background: black;
+}
+
+div.Popup.SocialPopup .SocialSharingButtons a + a {
+    margin-left: 16px;
+}
+
+div.Popup.SocialPopup .SocialSharingButtons a:hover,
+div.Popup.SocialPopup .SocialSharingButtons a:focus {
+    opacity: 0.8;
+}
+
+div.Popup.SocialPopup .SocialSharingButtons a img {
+    margin-right: 16px;
 }

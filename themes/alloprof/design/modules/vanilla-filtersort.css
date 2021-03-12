@@ -13,7 +13,7 @@
 
 .FilterMenu__Dropdown .SelectWrapper:after {
     content: "";
-    background: url('../images/icons/arrowDown.svg');
+    background: url('../../../../themes/alloprof/design/images/icons/arrowDown.svg');
     width: 14px;
     height: 16px;
     background-repeat: no-repeat;

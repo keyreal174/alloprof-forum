@@ -84,17 +84,18 @@
 }
 
 .Item-Body .QuestionCategory {
-    height: 27px;
-    font-size: 12px;
     color: black;
+    font-weight: 600;
+    font-size: 14px;
     border-radius: 40px;
     border: 1px solid #000000;
     display: flex;
     align-items: center;
     justify-content: center;
     width: max-content;
-    padding: 0 15px;
+    padding: 6px 12px;
     margin-top: 20px;
+    background-color: #EDF05D
 }
 
 .Item-Footer {
@@ -128,25 +129,25 @@
 }
 
 .Back-Icon {
-    background: url("../images/back.png") no-repeat !important;
+    background: url("../../../../themes/alloprof/design/images/back.png") no-repeat !important;
     width: 24px;
     height: 24px;
 }
 
 .Notifications-Icon {
-    background: url("../images/Follow.png") no-repeat !important;
+    background: url("../../../../themes/alloprof/design/images/Follow.png") no-repeat !important;
     width: 24px;
     height: 24px;
 }
 
 .Favorite-Icon {
-    background: url("../images/icons/like.svg") no-repeat !important;
+    background: url("../../../../themes/alloprof/design/images/icons/like.svg") no-repeat !important;
     width: 24px;
     height: 24px;
 }
 
 .Favorite-Icon.isLiked {
-    background: url("../images/icons/like.svg") no-repeat !important;
+    background: url("../../../../themes/alloprof/design/images/icons/like.svg") no-repeat !important;
     width: 24px;
     height: 24px;
 }
@@ -318,10 +319,11 @@
 }
 
 .Item-Search .Item-Body .AuthWrapper img {
-    width: 64px;
-    height: 64px;
-    margin-right: 20px;
     border-radius: 100%;
+}
+
+.DataList-Search .PhotoWrap {
+    position: initial;
 }
 
 .Item-Search .Item-Body .AuthWrapper .AuthDate {
@@ -329,13 +331,10 @@
     flex-direction: column;
 }
 
-.Item-Search .Item-Body .AuthWrapper .AuthDate .UserName {
-    color: #1A1919;
-    font-size: 21px;
-    line-height: 25px;
-    font-weight: 600;
-    margin-bottom: 9px;
-    padding-top: 10px;
+.Item-Search .Item-Body .AuthWrapper .AuthDate .UserName a {
+    color: black;
+    font-size: 15px;
+    font-weight: 700;
 }
 
 .DataList-Search .Item-Body {

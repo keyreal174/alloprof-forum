@@ -28,6 +28,32 @@
     $(document).on('change', '#Form_User_Register #Form_Email', function() {
         const val = $('#Form_User_Register #Form_Email').val();
         $("#Form_User_Register #Form_Name").val(val);
+    });
+
+    $(document).on('click', '#clickCopy', function() {
+        var tempItem = document.createElement('input');
+
+        tempItem.setAttribute('type','text');
+        tempItem.setAttribute('display','none');
+
+        let content = $("#clickCopy").attr('value');
+        let disID = $("#clickCopy").attr('disId');
+        // if (e instanceof HTMLElement) {
+        //         content = e.innerHTML;
+        // }
+
+        tempItem.setAttribute('value',content);
+        document.body.appendChild(tempItem);
+
+        tempItem.select();
+        document.execCommand('Copy');
+
+        tempItem.parentElement.removeChild(tempItem);
+
+        $('.SocialPopup .SubTitle').addClass('Hidden');
+        $('.SocialPopup .SocialSharingButtons').addClass('Hidden');
+        $('.SocialPopup .CopySubTitle').removeClass('Hidden');
+        $('.SocialPopup .LinkCopiedText').removeClass('Hidden');
     })
 
     // Prevent auto-execution of scripts when no explicit dataType was provided
@@ -489,7 +515,12 @@ jQuery(document).ready(function($) {
     // CustomPopup
     // This turns FlagContentPopup anchors into in-page popups
     if ($.fn.popup)
-        $('a.FlagContentPopup').popup({containerCssClass: 'FlagContentPopup'});
+        $('a.FlagContentPopup').popup({containerCssClass: 'FlagContentPopup CustomPopup'});
+
+    // This turns Social Sharing Popup anchors into in-page popups
+    if ($.fn.popup) {
+        $('a.SocialPopup').popup({containerCssClass: 'SocialPopup CustomPopup'});
+    }
 
     // This turns DeleteDiscussionPopup anchors into in-page popups
     if ($.fn.popup)

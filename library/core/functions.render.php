@@ -1403,7 +1403,12 @@ if (!function_exists('userAnchor')) {
 
         $userUrl = userUrl($user, $px);
 
-        return '<a href="'.htmlspecialchars(url($userUrl)).'"'.attribute($attributes).'>'.$text.'</a>';
+        if (Gdn::session()->UserID !== $userID) {
+            $href = '';
+        } else {
+            $href = 'href="'.htmlspecialchars(url($userUrl)).'"';
+        }
+        return '<a '.$href.attribute($attributes).'>'.$text.'</a>';
     }
 }
 
@@ -1497,7 +1502,11 @@ if (!function_exists('userPhoto')) {
             $fullUser = [];
             $profileHref = '/renderfunctionstest/profile/';
         }
-        $href = (val('NoLink', $options)) ? '' : ' href="'.$profileHref.'"';
+        if (Gdn::session()->UserID !== $userID) {
+            $href = '';
+        } else {
+            $href = (val('NoLink', $options)) ? '' : ' href="'.$profileHref.'"';
+        }
         $userCssClass = val('_CssClass', $fullUser);
         if ($userCssClass) {
             $linkClass .= ' '.$userCssClass;

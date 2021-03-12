@@ -164,6 +164,9 @@ class DiscussionController extends VanillaController {
 
         $OffsetProvided = $Page != '';
         list($Offset, $Limit) = offsetLimit($Page, $Limit);
+        if ($this->Discussion->InsertUserID === Gdn::session()->UserID) {
+            redirectTo('discussions');
+        }
 
         // set GradeID
         $this->GradeID = $this->Discussion->GradeID;
@@ -1471,5 +1474,15 @@ body { background: transparent !important; }
             throw new NotFoundException('Discussion');
         }
         return $row;
+    }
+
+    // Social Sharing
+    public function social($DiscussionID) {
+        $this->setData('Discussion', $this->discussionByID($DiscussionID));
+        $this->setData('Title', 'Share your question!');
+        $this->setData('SubTitle', 'Share it with your friends, they may have the explanation!');
+        $this->setData('CopySubTitle', 'Asking yourself the same question? Share it with your friends, they may have the explanation!');
+
+        $this->render($this->fetchViewLocation('socialsharing', 'discussion', 'vanilla'));
     }
 }
