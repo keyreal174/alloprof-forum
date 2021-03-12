@@ -52,6 +52,7 @@ $Configuration['Garden']['Cookie']['Salt'] = 'CvRpbMCk8CRQiTUd';
 $Configuration['Garden']['Cookie']['Domain'] = '';
 $Configuration['Garden']['Registration']['ConfirmEmail'] = false;
 $Configuration['Garden']['Registration']['Method'] = 'Basic';
+$Configuration['Garden']['Registration']['AutoConnect'] = false;
 $Configuration['Garden']['Email']['SupportName'] = 'Alloprof';
 $Configuration['Garden']['Email']['Format'] = 'html';
 $Configuration['Garden']['Email']['UseSmtp'] = false;
@@ -76,23 +77,12 @@ $Configuration['Garden']['MobileTheme'] = 'alloprof';
 $Configuration['Garden']['Locale'] = 'fr_CA';
 $Configuration['Garden']['EditContentTimeout'] = '-1';
 $Configuration['Garden']['Format']['DisableUrlEmbeds'] = false;
+$Configuration['Garden']['SignIn']['Popup'] = '1';
 
 // ImageUpload
 $Configuration['ImageUpload']['Limits']['Width'] = '1000';
 $Configuration['ImageUpload']['Limits']['Height'] = '1400';
 $Configuration['ImageUpload']['Limits']['Enabled'] = false;
-
-// Modules
-$Configuration['Modules']['Vanilla']['Panel'] = array (
-  0 => 'MeModule',
-  1 => 'UserBoxModule',
-  2 => 'GuestModule',
-  3 => 'NewDiscussionModule',
-  4 => 'CategoriesModule',
-  5 => 'DiscussionFilterModule',
-  6 => 'SignedInModule',
-  7 => 'Ads',
-);
 
 // Plugins
 $Configuration['Plugins']['GettingStarted']['Dashboard'] = '1';
