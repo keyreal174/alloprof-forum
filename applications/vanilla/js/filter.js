@@ -51,7 +51,7 @@ jQuery(document).ready(function($) {
 
         $.ajax({
             type: "POST",
-            url: '/discussions/filterDiscussion',
+            url: gdn.url('/discussions/filterDiscussion'),
             data: {
                 parameter
             },

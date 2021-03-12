@@ -106,6 +106,10 @@ div.Popup.SocialPopup .Border {
     width: 891px;
 }
 
+div.Popup.CustomPopup.SocialPopup .Body {
+    padding: 64px !important;
+}
+
 div.Popup.SocialPopup h2 {
     font-size: 28px;
     line-height: 31px;
@@ -118,6 +122,17 @@ div.Popup.SocialPopup p {
     line-height: 31px;
     color: #4F4F4F;
     margin-bottom: 32px;
+}
+
+div.Popup.SocialPopup .Hidden {
+    display: none !important;
+}
+
+div.Popup.SocialPopup p.LinkCopiedText {
+    margin-bottom: 0;
+    color: black;
+    font-size: 21px;
+    font-weight: 700;
 }
 
 div.Popup.SocialPopup .SocialSharingButtons {

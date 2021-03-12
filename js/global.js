@@ -32,6 +32,7 @@
         tempItem.setAttribute('display','none');
 
         let content = $("#clickCopy").attr('value');
+        let disID = $("#clickCopy").attr('disId');
         // if (e instanceof HTMLElement) {
         //         content = e.innerHTML;
         // }
@@ -43,6 +44,25 @@
         document.execCommand('Copy');
 
         tempItem.parentElement.removeChild(tempItem);
+
+        $('.SocialPopup .SubTitle').addClass('Hidden');
+        $('.SocialPopup .SocialSharingButtons').addClass('Hidden');
+        $('.SocialPopup .CopySubTitle').removeClass('Hidden');
+        $('.SocialPopup .LinkCopiedText').removeClass('Hidden');
+
+        // $.ajax({
+        //     type: "POST",
+        //     url: gdn.url('/discussion/social/' + disID),
+        //     data: {
+        //         Copy: true
+        //     },
+        //     error: function(XMLHttpRequest, textStatus, errorThrown) {
+        //         alert(errorThrown);
+        //     },
+        //     success: function(json) {
+        //         $('a.SocialPopup').popup({containerCssClass: 'SocialPopup CustomPopup'});
+        //     }
+        // });
     })
 
     // Prevent auto-execution of scripts when no explicit dataType was provided
