@@ -1346,7 +1346,7 @@ class EntryController extends Gdn_Controller {
             $this->UserModel->Validation->applyRule('Password', 'Match');
             // $this->UserModel->Validation->applyRule('DateOfBirth', 'MinimumAge');
 
-            // $this->fireEvent('RegisterValidation');
+            $this->fireEvent('RegisterValidation');
 
             try {
                 $values = $this->Form->formValues();

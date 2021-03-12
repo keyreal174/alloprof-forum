@@ -24,7 +24,7 @@ echo '<div class="MainForm">';
     <ul role="presentation">
         <li role="presentation">
             <?php
-            echo $this->Form->textBox('Email', ['id' => 'Form_Email', 'class' => 'InputBox', 'autocorrect' => 'off', 'autocapitalize' => 'off', 'Wrap' => TRUE, 'placeholder' => t('Email address or nickname')]);
+            echo $this->Form->textBox('Email', ['id' => 'Form_Email', 'class' => 'InputBox', 'autocorrect' => 'off', 'autocapitalize' => 'off', 'Wrap' => TRUE, 'placeholder' => t('Email address')]);
             ?>
         </li>
         <li role="presentation">
