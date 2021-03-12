@@ -1377,14 +1377,17 @@ if (!function_exists('userAnchor')) {
         $px = $options["Px"] ?? "";
 
         if (is_array($user)) {
-            $name = $user["{$px}Name"] ?? t("Unknown");
             $userID = $user["{$px}UserID"] ?? null;
         } elseif (is_object($user)) {
-            $name = $user->{"{$px}Name"} ?? t("Unknown");
             $userID = $user->{"{$px}UserID"} ?? null;
         } else {
-            $name = t("Unknown");
             $userID = null;
+        }
+        if ($userID) {
+            $UserMetaData = Gdn::userModel()->getMeta($userID, 'Profile.%', 'Profile.');
+            $name = $UserMetaData['DisplayName'] ?? t("Unknown");
+        } else {
+            $name = t("Unknown");
         }
 
         $text = $options["Text"] ?? htmlspecialchars($name); // Allow anchor text to be overridden.
@@ -1400,12 +1403,13 @@ if (!function_exists('userAnchor')) {
 
         $userUrl = userUrl($user, $px);
 
-        if (Gdn::session()->UserID !== $userID) {
-            $href = '';
-        } else {
-            $href = 'href="'.htmlspecialchars(url($userUrl)).'"';
-        }
-        return '<a '.$href.attribute($attributes).'>'.$text.'</a>';
+        // if (Gdn::session()->UserID !== $userID) {
+        //     $href = '';
+        // } else {
+        //     $href = 'href="'.htmlspecialchars(url($userUrl)).'"';
+        // }
+
+        return '<a '.attribute($attributes).'>'.$text.'</a>';
     }
 }
 
@@ -1499,11 +1503,11 @@ if (!function_exists('userPhoto')) {
             $fullUser = [];
             $profileHref = '/renderfunctionstest/profile/';
         }
-        if (Gdn::session()->UserID !== $userID) {
-            $href = '';
-        } else {
-            $href = (val('NoLink', $options)) ? '' : ' href="'.$profileHref.'"';
-        }
+        // if (Gdn::session()->UserID !== $userID) {
+        //     $href = '';
+        // } else {
+        //     $href = (val('NoLink', $options)) ? '' : ' href="'.$profileHref.'"';
+        // }
         $userCssClass = val('_CssClass', $fullUser);
         if ($userCssClass) {
             $linkClass .= ' '.$userCssClass;
@@ -1531,7 +1535,7 @@ if (!function_exists('userPhoto')) {
 
         $accessibleLabel = HtmlUtils::accessibleLabel('User: "%s"', [$name]);
 
-        return '<a title="'.$title.'"'.$href.$linkClass.' aria-label="' . $accessibleLabel . '" data-userid="'.$userID.'">'
+        return '<a title="'.$title.'"'.$linkClass.' aria-label="' . $accessibleLabel . '" data-userid="'.$userID.'">'
                 .img($photoUrl, ['alt' => $name, 'class' => $imgClass, 'data-fallback' => 'avatar'])
             .'</a>';
     }

@@ -25,6 +25,11 @@
         }
     });
 
+    $(document).on('change', '#Form_User_Register #Form_Email', function() {
+        const val = $('#Form_User_Register #Form_Email').val();
+        $("#Form_User_Register #Form_Name").val(val);
+    });
+
     $(document).on('click', '#clickCopy', function() {
         var tempItem = document.createElement('input');
 
@@ -49,20 +54,6 @@
         $('.SocialPopup .SocialSharingButtons').addClass('Hidden');
         $('.SocialPopup .CopySubTitle').removeClass('Hidden');
         $('.SocialPopup .LinkCopiedText').removeClass('Hidden');
-
-        // $.ajax({
-        //     type: "POST",
-        //     url: gdn.url('/discussion/social/' + disID),
-        //     data: {
-        //         Copy: true
-        //     },
-        //     error: function(XMLHttpRequest, textStatus, errorThrown) {
-        //         alert(errorThrown);
-        //     },
-        //     success: function(json) {
-        //         $('a.SocialPopup').popup({containerCssClass: 'SocialPopup CustomPopup'});
-        //     }
-        // });
     })
 
     // Prevent auto-execution of scripts when no explicit dataType was provided
