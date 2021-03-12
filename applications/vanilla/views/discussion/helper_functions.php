@@ -868,18 +868,18 @@ if (!function_exists('writeDiscussionFooter')) :
             <div>
                 <?php
                     if (!$sender->data('IsAnswer')) {
-                        if ($isUser) {
-                            echo '<a class="btn-default" disabled href="'.$discussionUrl.'">'.$Discussion->CountComments.' '.t('explanations').'</a>';
-                        } else {
-                            echo '<a class="btn-default" href="'.$discussionUrl.'">'.$Discussion->CountComments.' '.t('explanations').'</a>';
-                        }
+                        echo '<a class="btn-default" href="'.$discussionUrl.'">'.$Discussion->CountComments.' '.t('explanations').'</a>';
                     } else {
-                        echo '<div class="ReplyQuestionButton">';
+                        if ($Discussion->InsertUserID === Gdn::session()->UserID) {
+                            echo '<a class="btn-default">'.$Discussion->CountComments.' '.t('explanations').'</a>';
+                        } else {
+                            echo '<div class="ReplyQuestionButton">';
 
-                        $sender->fireEvent('BeforeFormButtons');
-                        echo $sender->Form->button('Giving an explanation', ['class' => 'btn-default btn-shadow']);
-                        $sender->fireEvent('AfterFormButtons');
-                        echo '</div>';
+                            $sender->fireEvent('BeforeFormButtons');
+                            echo $sender->Form->button('Give an explanation', ['class' => 'btn-default btn-shadow']);
+                            $sender->fireEvent('AfterFormButtons');
+                            echo '</div>';
+                        }
                     }
                 ?>
             </div>

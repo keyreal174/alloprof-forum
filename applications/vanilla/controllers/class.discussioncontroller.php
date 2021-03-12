@@ -164,9 +164,6 @@ class DiscussionController extends VanillaController {
 
         $OffsetProvided = $Page != '';
         list($Offset, $Limit) = offsetLimit($Page, $Limit);
-        if ($this->Discussion->InsertUserID === Gdn::session()->UserID) {
-            redirectTo('discussions');
-        }
 
         // set GradeID
         $this->GradeID = $this->Discussion->GradeID;

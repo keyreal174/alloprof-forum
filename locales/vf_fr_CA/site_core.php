@@ -1784,5 +1784,5 @@ $Definition['A teacher has already indicated that he wants to answer this questi
 $Definition['Do you still want to add the question to your list?'] = 'Voulez-vous quand même ajouter la question dans votre liste ?';
 $Definition['Add to my list'] = 'Ajouter à ma liste';
 $Definition['explanations'] = 'explications';
-$Definition['Giving an explanation'] = 'Donner une explication';
+$Definition['Give an explanation'] = 'Donner une explication';
 $Definition['Submit my explanation'] = 'Soumettre mon explication';
