@@ -132,13 +132,13 @@ if (!$CancelUrl) {
 
         echo '<div>';
         echo '<div class="Category rich-select">';
-        echo '<img src="/themes/alloprof/design/images/icons/subject.svg"/>';
+        echo '<img src="'.url("/themes/alloprof/design/images/icons/subject.svg").'"/>';
         echo $this->Form->categoryDropDown('CategoryID', $options);
         echo '</div>';
         echo '</div>';
         echo '<span class="space"></span>';
         echo '<div class="Category rich-select">';
-        echo '<img src="/themes/alloprof/design/images/icons/grade.svg"/>';
+        echo '<img src="'.url("/themes/alloprof/design/images/icons/grade.svg").'"/>';
         echo $this->Form->dropDown('GradeID', $GradeOption, array('Default' => $DefaultGrade, 'IncludeNull' => 'Grade', 'IsDisabled' => TRUE));
         echo '</div>';
         echo '</div>';
@@ -148,7 +148,7 @@ if (!$CancelUrl) {
     echo '<div class="Buttons">';
 
     $this->fireEvent('BeforeFormButtons');
-    echo '<a class="close-icon CancelButton"> <img src="/themes/alloprof/design/images/icons/close.svg" /> </a>';
+    echo '<a class="close-icon CancelButton"> <img src="'.url("/themes/alloprof/design/images/icons/close.svg").'" /> </a>';
     echo $this->Form->button((property_exists($this, 'Discussion')) ? 'Save' : 'Publish', ['class' => 'btn-default btn-shadow']);
     $this->fireEvent('AfterFormButtons');
     echo '</div>';
