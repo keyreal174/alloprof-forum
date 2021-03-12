@@ -468,7 +468,7 @@ jQuery(document).ready(function($) {
         $(parent).find('div.Meta span:last').after('<span class="TinyProgress">&#160;</span>');
         if (!parent.find('.EditDiscussionForm').length) {
             let discussionid = $(btn).attr('href').split("/").pop();
-            let newurl = "/post/editDiscussionDetail/" + discussionid;
+            let newurl = gdn.url("/post/editDiscussionDetail/" + discussionid);
             $.ajax({
                 type: "GET",
                 url: newurl,
