@@ -36,6 +36,7 @@ $this->EventArguments['Type'] = 'Discussion';
 
 // Discussion template event
 $this->fireEvent('BeforeDiscussionDisplay');
+
 ?>
 <div id="<?php echo 'Discussion_'.$Discussion->DiscussionID; ?>" class="<?php echo $CssClass; ?>">
     <div class="Discussion">
