@@ -3753,13 +3753,13 @@ class UserModel extends Gdn_Model implements UserProviderInterface, EventFromRow
 
         // Add & apply any extra validation rules.
         $this->Validation->addRule('UsernameBlacklist', 'function:validateAgainstUsernameBlacklist');
-        $this->Validation->applyRule('Name', 'UsernameBlacklist');
+        // $this->Validation->applyRule('Name', 'UsernameBlacklist');
         if (val('ValidateEmail', $options, true)) {
             $this->Validation->applyRule('Email', 'Email');
         }
-        if (val(self::OPT_VALIDATE_NAME, $options, true)) {
-            $this->Validation->applyRule('Name', 'Username');
-        }
+        // if (val(self::OPT_VALIDATE_NAME, $options, true)) {
+        //     $this->Validation->applyRule('Name', 'Username');
+        // }
 
         // TODO: DO I NEED THIS?!
         // Make sure that the checkbox val for email is saved as the appropriate enum

@@ -25,6 +25,11 @@
         }
     });
 
+    $(document).on('change', '#Form_User_Register #Form_Email', function() {
+        const val = $('#Form_User_Register #Form_Email').val();
+        $("#Form_User_Register #Form_Name").val(val);
+    })
+
     // Prevent auto-execution of scripts when no explicit dataType was provided
     // See https://github.com/jquery/jquery/issues/2432#issuecomment-403761229
     jQuery.ajaxPrefilter(function(s) {

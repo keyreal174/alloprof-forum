@@ -59,7 +59,7 @@ if ($Photo) : ?>
 endif;
 ?>
 <div class="userphoto-personalinfo">
-    <a <?php echo $IsProfilePage ? '' : 'href="/profile/edit"' ?> class="userphoto-personalinfo__name"><?php echo $User->Name ?></a>
+    <a <?php echo $IsProfilePage ? '' : 'href="/profile/edit"' ?> class="userphoto-personalinfo__name"><?php echo $UserMetaData["DisplayName"]; ?></a>
     <a <?php echo $IsProfilePage ? '' : 'href="/profile/edit"' ?> class="userphoto-personalinfo__secondary">
         <?php
             if(userRoleCheck($User->UserID) == Gdn::config('Vanilla.ExtraRoles.Teacher')) {

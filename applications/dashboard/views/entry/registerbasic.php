@@ -19,7 +19,7 @@
         <ul role="presentation">
             <li role="presentation">
                 <?php
-                echo $this->Form->textBox('Name', ['autocorrect' => 'off', 'autocapitalize' => 'off', 'Wrap' => TRUE, 'placeholder' => t('Choose a nickname to stay anonymous')]);
+                echo $this->Form->textBox('Name', ['autocorrect' => 'off', 'autocapitalize' => 'off', 'Wrap' => TRUE, 'type' => 'hidden', 'placeholder' => t('Choose a nickname to stay anonymous')]);
                 echo '<span id="NameUnavailable" class="Incorrect" style="display: none;">'.t('Name Unavailable').'</span>';
                 ?>
             </li>

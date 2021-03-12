@@ -1377,14 +1377,17 @@ if (!function_exists('userAnchor')) {
         $px = $options["Px"] ?? "";
 
         if (is_array($user)) {
-            $name = $user["{$px}Name"] ?? t("Unknown");
             $userID = $user["{$px}UserID"] ?? null;
         } elseif (is_object($user)) {
-            $name = $user->{"{$px}Name"} ?? t("Unknown");
             $userID = $user->{"{$px}UserID"} ?? null;
         } else {
-            $name = t("Unknown");
             $userID = null;
+        }
+        if ($userID) {
+            $UserMetaData = Gdn::userModel()->getMeta($userID, 'Profile.%', 'Profile.');
+            $name = $UserMetaData['DisplayName'] ?? t("Unknown");
+        } else {
+            $name = t("Unknown");
         }
 
         $text = $options["Text"] ?? htmlspecialchars($name); // Allow anchor text to be overridden.

@@ -39,7 +39,7 @@ class EntryController extends Gdn_Controller {
         $this->internalMethods[] = 'target';
 
         // Set error message here so it can run thru t()
-        $this->UsernameError = t('UsernameError', 'Username can only contain letters, numbers, underscores, and must be between 3 and 20 characters long.');
+        // $this->UsernameError = t('UsernameError', 'Username can only contain letters, numbers, underscores, and must be between 3 and 20 characters long.');
 
         // Allow use of a master popup template for easier theming.
         if (Gdn::request()->get('display') === 'popup') {
@@ -1277,7 +1277,7 @@ class EntryController extends Gdn_Controller {
         if ($this->Form->isPostBack()) {
             // Add validation rules that are not enforced by the model
             $this->UserModel->defineSchema();
-            $this->UserModel->Validation->applyRule('Name', 'Username', $this->UsernameError);
+            // $this->UserModel->Validation->applyRule('Name', 'Username', $this->UsernameError);
             $this->UserModel->Validation->applyRule('TermsOfService', 'Required', t('You must agree to the terms of service.'));
             $this->UserModel->Validation->applyRule('Password', 'Required');
             $this->UserModel->Validation->applyRule('Password', 'Strength');
@@ -1339,18 +1339,18 @@ class EntryController extends Gdn_Controller {
         if ($this->Form->isPostBack() === true) {
             // Add validation rules that are not enforced by the model
             $this->UserModel->defineSchema();
-            $this->UserModel->Validation->applyRule('Name', 'Username', $this->UsernameError);
+            // $this->UserModel->Validation->applyRule('Name', 'Username', $this->UsernameError);
             $this->UserModel->Validation->applyRule('TermsOfService', 'Required', t('You must agree to the terms of service.'));
             $this->UserModel->Validation->applyRule('Password', 'Required');
             $this->UserModel->Validation->applyRule('Password', 'Strength');
             $this->UserModel->Validation->applyRule('Password', 'Match');
             // $this->UserModel->Validation->applyRule('DateOfBirth', 'MinimumAge');
 
-            $this->fireEvent('RegisterValidation');
+            // $this->fireEvent('RegisterValidation');
 
             try {
                 $values = $this->Form->formValues();
-                $values = $this->UserModel->filterForm($values, true);
+                $values = $this->UserModel->filterForm($values, false);
                 unset($values['Roles']);
                 $authUserID = $this->UserModel->register($values);
                 $this->setData('UserID', $authUserID);
@@ -1481,7 +1481,7 @@ class EntryController extends Gdn_Controller {
             $this->InvitationCode = $this->Form->getValue('InvitationCode');
             // Add validation rules that are not enforced by the model
             $this->UserModel->defineSchema();
-            $this->UserModel->Validation->applyRule('Name', 'Username', $this->UsernameError);
+            // $this->UserModel->Validation->applyRule('Name', 'Username', $this->UsernameError);
             $this->UserModel->Validation->applyRule('TermsOfService', 'Required', t('You must agree to the terms of service.'));
             $this->UserModel->Validation->applyRule('Password', 'Required');
             $this->UserModel->Validation->applyRule('Password', 'Strength');
