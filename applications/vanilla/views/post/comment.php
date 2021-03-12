@@ -76,7 +76,7 @@ $this->fireEvent('BeforeCommentForm');
                     $ButtonOptions = ['class' => 'btn-default btn-shadow btn-m-l-auto'];
 
                     if ($Session->isValid()) {
-                        echo $this->Form->button($Editing ? 'Save Comment' : t('Publish my explanation'), $ButtonOptions);
+                        echo $this->Form->button($Editing ? 'Save Comment' : t('Submit my explanation'), $ButtonOptions);
                     } else {
                         $AllowSigninPopup = c('Garden.SignIn.Popup');
                         $Attributes = ['tabindex' => '-1'];

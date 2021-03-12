@@ -1783,3 +1783,6 @@ $Definition['Oops! The question is already followed'] = 'Oups! La question est d
 $Definition['A teacher has already indicated that he wants to answer this question.'] = 'Un enseignant a déjà indiqué vouloir répondre à cette question.';
 $Definition['Do you still want to add the question to your list?'] = 'Voulez-vous quand même ajouter la question dans votre liste ?';
 $Definition['Add to my list'] = 'Ajouter à ma liste';
+$Definition['explanations'] = 'explications';
+$Definition['Giving an explanation'] = 'Donner une explication';
+$Definition['Submit my explanation'] = 'Soumettre mon explication';

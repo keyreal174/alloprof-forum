@@ -847,6 +847,7 @@ endif;
 if (!function_exists('writeDiscussionFooter')) :
     function writeDiscussionFooter($Discussion, $sender ,$page='') {
         $discussionUrl = $Discussion->Url;
+        $isUser = $Discussion->InsertUserID === Gdn::session()->UserID;
         ?>
         <div class="Item-Footer">
             <div class="Item-Footer-Icons">
@@ -855,32 +856,28 @@ if (!function_exists('writeDiscussionFooter')) :
 
                 if (!Gdn::themeFeatures()->get('EnhancedAccessibility')) {
                         echo '<span class="Options">';
-                        echo bookmarkButton($Discussion);
+                        if (!$isUser) {
+                            echo bookmarkButton($Discussion);
+                        }
                         writeReactions($Discussion);
                         echo '<a class="Back-Icon Option-Icon"></a>';
                         echo '</span>';
                     }
                 ?>
-                <?php
-                    if ($page !== 'search') {
-                ?>
-                <div class="Separator"></div>
-                <span class="Response">
-                    <?php
-                        echo $Discussion->CountComments . ' ' . 'réponses';
-                    ?>
-                </span>
-                <?php } ?>
             </div>
             <div>
                 <?php
                     if (!$sender->data('IsAnswer')) {
-                        echo '<a class="btn-default" href="'.$discussionUrl.'">'.t('See').'</a>';
+                        if ($isUser) {
+                            echo '<a class="btn-default" disabled href="'.$discussionUrl.'">'.$Discussion->CountComments.' '.t('explanations').'</a>';
+                        } else {
+                            echo '<a class="btn-default" href="'.$discussionUrl.'">'.$Discussion->CountComments.' '.t('explanations').'</a>';
+                        }
                     } else {
                         echo '<div class="ReplyQuestionButton">';
 
                         $sender->fireEvent('BeforeFormButtons');
-                        echo $sender->Form->button('Reply', ['class' => 'btn-default btn-shadow']);
+                        echo $sender->Form->button('Giving an explanation', ['class' => 'btn-default btn-shadow']);
                         $sender->fireEvent('AfterFormButtons');
                         echo '</div>';
                     }
