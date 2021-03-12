@@ -8,6 +8,8 @@ if (!defined('APPLICATION')) {
     exit();
 }
 use Vanilla\Utility\HtmlUtils;
+if (!function_exists('timeElapsedString'))
+    include($this->fetchViewLocation('helper_functions', 'discussions', 'vanilla'));
 
 
 if (!function_exists('formatBody')) :
@@ -920,5 +922,36 @@ if (!function_exists('getGrade')) :
             }
         }
         return ($GradeID || $GradeID === 0) ? $GradeOption[$GradeID] : "";
+    }
+endif;
+
+if (!function_exists('checkAnswer')) :
+
+    function checkAnswer($sender) {
+        $answered = $sender->Resolved !== 1 ? 'Hidden' : '';
+        $noanswered = $sender->Resolved === 1 ? 'Hidden' : '';
+        ?>
+        <div class="BoxCheckAnswer NotAnswered <?php echo $noanswered; ?>">
+            <h2><?php echo t("Have the explanations solved your problem?") ?></h2>
+            <div class="BoxCheckAnswer-answers">
+                <a class="FeedbackPerfect">
+                    <img src="<?= url('/themes/alloprof/design/images/peace.svg') ?>" width="80px" height="80px" />
+                    <span> <?php echo t("It's perfect!") ?> </span>
+                </a>
+                <a href="<?= url('/discussion/bad') ?>" class="Popup FeedbackHelp">
+                    <img src="<?= url('/themes/alloprof/design/images/neutre.svg') ?>" width="80px" height="80px" />
+                    <span> <?php echo t("I need more help") ?> </span>
+                </a>
+            </div>
+        </div>
+        <div class="BoxCheckAnswer Answered <?php echo $answered; ?>">
+            <h2><?php echo t("The explanations have helped you!") ?></h2>
+            <div class="BoxCheckAnswer-answers">
+                <a class="">
+                    <img src="<?= url('/themes/alloprof/design/images/peace.svg') ?>" width="80px" height="80px" />
+                </a>
+            </div>
+        </div>
+        <?php
     }
 endif;

@@ -3,6 +3,9 @@ $Session = Gdn::session();
 if (!function_exists('WriteComment'))
     include $this->fetchViewLocation('helper_functions', 'discussion');
 
+if (!function_exists('checkAnswer'))
+    include $this->fetchViewLocation('helper_functions', 'discussion');
+
 if (!function_exists('userRoleCheck'))
     include($this->fetchViewLocation('helper_functions', 'discussions', 'vanilla'));
 
@@ -79,7 +82,7 @@ echo $this->data['Published'];
 
 if(userRoleCheck() != Gdn::config('Vanilla.ExtraRoles.Teacher')
     && $this->Data['Discussion']->Published && $this->Data['Discussion']->InsertUserID == Gdn::session()->UserID) {
-    echo Gdn_Theme::module('CheckAnswerModule');
+    echo checkAnswer($this->Data['Discussion']);
 }
 
 if (!$this->Data['Discussion']->Published) {
