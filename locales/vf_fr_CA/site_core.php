@@ -1788,3 +1788,6 @@ $Definition['Do you still want to add the question to your list?'] = 'Voulez-vou
 $Definition['Add to my list'] = 'Ajouter à ma liste';
 $Definition['Copy link'] = 'Copier le lien';
 $Definition['Link copied!'] = 'Lien copié!';
+$Definition['explanations'] = 'explications';
+$Definition['Giving an explanation'] = 'Donner une explication';
+$Definition['Submit my explanation'] = 'Soumettre mon explication';
