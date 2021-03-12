@@ -285,7 +285,7 @@ if (!function_exists('getDiscussionOptions')) :
             if ($timeLeft) {
                 $timeLeft = ' ('.Gdn_Format::seconds($timeLeft).')';
             }
-            $options['EditDiscussion'] = ['Label' => t('Edit').$timeLeft, 'Url' => '/post/editdiscussion/'.$discussion->DiscussionID];
+            $options['EditDiscussion'] = ['Label' => t('Edit').$timeLeft, 'Url' => '/post/editdiscussion/'.$discussion->DiscussionID, 'Class' => 'EditDiscussion'];
         }
 
         // Can the user announce?
@@ -436,7 +436,7 @@ if (!function_exists('getDiscussionOptionsDropdown')):
 
         $dropdown->addLInkIf($flagLink['isAllowed'], $flagLink['name'], $flagLink['url'], 'FlagMenuItem', $flagLink['type'])
             ->addLinkIf($canDismiss, t('Dismiss'), "vanilla/discussion/dismissannouncement?discussionid={$discussionID}", 'dismiss', 'DismissAnnouncement Hijack')
-            ->addLinkIf($canEdit, t('Edit').$timeLeft, '/post/editdiscussion/'.$discussionID, 'edit')
+            ->addLinkIf($canEdit, t('Edit').$timeLeft, '/post/editdiscussion/'.$discussionID, 'edit', 'EditDiscussion')
             ->addLinkIf($canTag, t('Tag'), '/discussion/tag?discussionid='.$discussionID, 'tag', 'TagDiscussion Popup');
 
         if ($canEdit && $canAnnounce) {
@@ -868,6 +868,7 @@ if (!function_exists('writeDiscussionFooter')) :
     function writeDiscussionFooter($Discussion, $sender ,$page='') {
         $discussionUrl = $Discussion->Url;
         $isUser = $Discussion->InsertUserID === Gdn::session()->UserID;
+        $commentsCount = CommentModel::getPublishedCommentsCount($Discussion->DiscussionID);
         ?>
         <div class="Item-Footer">
             <div class="Item-Footer-Icons">
@@ -888,10 +889,10 @@ if (!function_exists('writeDiscussionFooter')) :
             <div>
                 <?php
                     if (!$sender->data('IsAnswer')) {
-                        echo '<a class="btn-default" href="'.$discussionUrl.'">'.$Discussion->CountComments.' '.t('explanations').'</a>';
+                        echo '<a class="btn-default" href="'.$discussionUrl.'">'.$commentsCount.' '.t('explanations').'</a>';
                     } else {
                         if ($Discussion->InsertUserID === Gdn::session()->UserID) {
-                            echo '<a class="btn-default">'.$Discussion->CountComments.' '.t('explanations').'</a>';
+                            echo '<a class="btn-default">'.$commentsCount.' '.t('explanations').'</a>';
                         } else {
                             echo '<div class="ReplyQuestionButton">';
 

@@ -1277,8 +1277,7 @@ class CommentModel extends Gdn_Model implements FormatFieldInterface, EventFromR
                     return $invalidReturnType;
                 }
 
-                if($insert)
-                    $fields['Published'] = true;
+                $fields['Published'] = true;
 
                 // Check for spam
                 $spam = SpamModel::isSpam('Comment', $commentData);
@@ -1352,7 +1351,6 @@ class CommentModel extends Gdn_Model implements FormatFieldInterface, EventFromR
                     $this->fireEvent('AfterSaveComment');
                 }
             }
-
 
             // Update discussion's comment count.
             if (isset($formPostValues['DiscussionID']) && $isValidUser) {
@@ -2076,5 +2074,31 @@ class CommentModel extends Gdn_Model implements FormatFieldInterface, EventFromR
             ->firstRow();
 
         return $comment;
+    }
+
+
+    /**
+     * Count total comments in a discussion specified by ID.
+     *
+     * Events: BeforeGetCount
+     *
+     * @param int $discussionID Unique ID of discussion we're counting comments from.
+     * @return object SQL result.
+     */
+    public function getPublishedCommentsCount($discussionID) {
+        // Get the discussion
+
+        $data = Gdn::sql()->select('*')
+            ->from('Comment')
+            ->where('DiscussionID', $discussionID)
+            ->beginWhereGroup()
+            ->where('Published', 1)
+            ->orWhere('InsertUserID', Gdn::session()->UserID)
+            ->endWhereGroup()
+            ->get();
+
+        $result =& $data->result();
+
+        return count($result);
     }
 }

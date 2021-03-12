@@ -57,3 +57,139 @@ span.ReactButtons a.ReactButton.ReactButton-Like .additional-label {
     padding-top: 4px;
     margin-bottom: 16px;
 }
+
+
+/* EditDiscussion form */
+
+.ItemDiscussion.Editing .placeholder.close {
+    height: 0;
+    overflow: hidden;
+}
+
+.ItemDiscussion.Editing .vanilla-bjyl8i-richEditor-paragraphMenu {
+    left: 20px;
+}
+
+.ItemDiscussion.Editing .content {
+    padding: 32px !important;
+    background: #eee !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    transition: 0.3s all;
+    color: rgba(71, 82, 93, .8) !important;
+    border-radius: 6px;
+}
+
+.ItemDiscussion.Editing .content .placeholder {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 18px;
+    color: #828282 !important;
+}
+
+.ItemDiscussion.Editing .content .placeholder .icon {
+    border-radius: 50%;
+    background: white;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+}
+
+.ItemDiscussion.Editing .content .placeholder img {
+    width: 27px;
+}
+
+.ItemDiscussion.Editing .selects {
+    display: flex;
+    margin-top: 40px;
+}
+
+.ItemDiscussion.Editing span.space {
+    width: 30px;
+}
+
+.ItemDiscussion.Editing .selects>div {
+    flex: 1;
+}
+
+.ItemDiscussion.Editing .Buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 30px;
+}
+
+.ItemDiscussion.Editing {
+    position: relative;
+    z-index: 0;
+    border-radius: 6px;
+}
+
+.ItemDiscussion.Editing .close-icon {
+    position: absolute;
+    top: 50px;
+    right: 35px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.ItemDiscussion.Editing .richEditor-frame {
+    border: none !important;
+    background: transparent !important;
+}
+
+.ItemDiscussion.Editing .verfied-info {
+    display: none!important;
+}
+
+.ItemDiscussion.Editing .not-published-badge {
+    display: none!important;
+}
+
+.MessageList.Editing .OptionsMenu {
+    display: none!important;
+}
+
+.MessageList.Editing .Item-Footer {
+    display: none!important;
+}
+
+.MessageList.Editing .Item-Body {
+    margin-bottom: 0;
+}
+
+.EditDiscussionDetail .selects {
+    display: flex;
+    margin-top: 40px;
+}
+
+.EditDiscussionDetail .selects {
+    display: flex;
+    margin-top: 40px;
+}
+
+.EditDiscussionDetail {
+    background-color: white;
+    padding: 40px;
+}
+
+.EditDiscussionDetail .content {
+    padding: 32px !important;
+    background: #eee !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    transition: 0.3s all;
+    color: rgba(71, 82, 93, .8) !important;
+    border-radius: 6px;
+}
+
+.EditDiscussionDetail .space {
+    width: 30px;
+}
+
+.EditDiscussionDetailPage .sidebar:hover {
+    height: 100%;
+}
