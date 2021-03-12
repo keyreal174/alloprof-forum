@@ -1277,6 +1277,23 @@ class CommentModel extends Gdn_Model implements FormatFieldInterface, EventFromR
                     return $invalidReturnType;
                 }
 
+                if($insert)
+                    $fields['Published'] = true;
+
+                // Check for spam
+                $spam = SpamModel::isSpam('Comment', $commentData);
+                if ($spam) {
+                    $fields['Published'] = false;
+                    // return SPAM;
+                }
+
+                // Check for approval
+                $approvalRequired = checkRestriction('Vanilla.Approval.Require');
+                if (($approvalRequired && !val('Verified', Gdn::session()->User)) || !Gdn::session()->User) {
+                    $fields['Published'] = false;
+                    // return UNAPPROVED;
+                }
+
                 if ($insert === false) {
                     // Log the save.
                     LogModel::logChange('Edit', 'Comment', array_merge($fields, ['CommentID' => $commentID]));
@@ -1294,38 +1311,33 @@ class CommentModel extends Gdn_Model implements FormatFieldInterface, EventFromR
                         $fields['Format'] = Gdn::config('Garden.InputFormatter', '');
                     }
 
-
-                    $fields['Published'] = true;
-
-                    // Check for spam
-                    $spam = SpamModel::isSpam('Comment', $commentData);
-                    if ($spam) {
-                        $fields['Published'] = false;
-                        // return SPAM;
-                    }
-
-                    // Check for approval
-                    $approvalRequired = checkRestriction('Vanilla.Approval.Require');
-                    if (($approvalRequired && !val('Verified', Gdn::session()->User)) || !Gdn::session()->User) {
-                        $fields['Published'] = false;
-                        // return UNAPPROVED;
-                    }
-
                     // Create comment.
                     $this->serializeRow($fields);
                     $commentID = $this->SQL->insert($this->Name, $fields);
-
-                    if (!$fields['Published']) {
-                        // Insert Moderation Queue
-                        $discussionModel = $this->discussionModel;
-                        $discussion = $discussionModel->getID(val('DiscussionID', $fields));
-                        $fields['CategoryID'] = val('CategoryID', $discussion);
-                        $fields['CommentID'] = $commentID;
-                        LogModel::insert('Pending', 'Comment', $fields);
-
-                        // return UNAPPROVED;
-                    }
                 }
+
+                if (!$fields['Published']) {
+                    $discussionModel = $this->discussionModel;
+                    $discussion = $discussionModel->getID(val('DiscussionID', $fields));
+                    $fields['CategoryID'] = val('CategoryID', $discussion);
+                    $fields['CommentID'] = $commentID;
+
+                    $logRow = Gdn::sql()->getWhere('Log', ['Operation' => 'Pending', 'RecordID' => $commentID])->firstRow(DATASET_TYPE_ARRAY);
+                    $logData = array_merge($fields, ['InsertUserID' => $insertUserID, 'DateInserted' => $dateInserted]);
+
+                    if(!$logRow) {
+                        LogModel::insert('Pending', 'Comment', $logData);
+                    } else {
+                        Gdn::sql()->put(
+                            'Log',
+                            ['Data'=> dbencode($logData)],
+                            ['LogID' => $logRow['LogID']]
+                        );
+                    }
+
+                    // return UNAPPROVED;
+                }
+
                 if ($commentID) {
                     $bodyValue = $fields["Body"] ?? null;
                     if ($bodyValue) {

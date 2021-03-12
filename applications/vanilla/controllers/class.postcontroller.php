@@ -776,7 +776,7 @@ class PostController extends VanillaController {
                 // The comment is now half-saved.
                 if (is_numeric($CommentID) && $CommentID > 0) {
                     if (in_array($this->deliveryType(), [DELIVERY_TYPE_ALL, DELIVERY_TYPE_DATA])) {
-                        $this->CommentModel->save2($CommentID, $Inserted, true, true);
+                        // $this->CommentModel->save2($CommentID, $Inserted, true, true);
                     } else {
                         $this->jsonTarget('', url("/post/comment2.json?commentid=$CommentID&inserted=$Inserted"), 'Ajax');
                     }
