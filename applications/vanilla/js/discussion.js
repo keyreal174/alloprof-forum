@@ -455,4 +455,120 @@ jQuery(document).ready(function($) {
             }
         });
     });
+
+
+    // Edit discussion
+    $(document).on('click', 'a.EditDiscussion', function() {
+        var btn = this;
+        var container = $('.ItemDiscussion');
+        $(container).parent().addClass('Editing');
+        $(container).addClass('Editing');
+        var parent = $(container).find('div.Discussion');
+        var msg = $(parent).find('div.Message').first();
+        $(parent).find('div.Meta span:last').after('<span class="TinyProgress">&#160;</span>');
+        if (!parent.find('.EditDiscussionForm').length) {
+            let discussionid = $(btn).attr('href').split("/").pop();
+            let newurl = "/post/editDiscussionDetail/" + discussionid;
+            $.ajax({
+                type: "GET",
+                url: newurl,
+                data: 'DeliveryType=VIEW&DeliveryMethod=JSON',
+                dataType: 'json',
+                error: function(xhr) {
+                    gdn.informError(xhr);
+                },
+                success: function(json) {
+                    $(msg).afterTrigger(json.Data);
+                    $(msg).hide();
+                    $(document).trigger('EditDiscussionFormLoaded', [container]);
+
+                    // Dispatch a native event for things that don't use jquery
+                    var event = document.createEvent('CustomEvent');
+                    event.initCustomEvent('X-EditDiscussionFormLoaded', true, false, {});
+                    container[0].dispatchEvent(event);
+                },
+                complete: function() {
+                    $(parent).find('span.TinyProgress').remove();
+                    $(btn).closest('.Flyout').hide().closest('.ToggleFlyout').removeClass('Open');
+                }
+            });
+        } else {
+            resetDiscussionForm($(parent).find('form'));
+            clearDiscussionForm($(parent).find('form'));
+            $(parent).find('div.EditDiscussionForm').remove();
+            $(parent).find('span.TinyProgress').remove();
+            $(msg).show();
+        }
+
+        $(document).trigger('DiscussionEditingComplete', [msg]);
+        return false;
+    });
+    // Reveal the original message when cancelling an in-place edit.
+    $(document).on('click', '.Discussion .Cancel a, .Discussion a.CancelButton', function(e) {
+        e.preventDefault();
+        var btn = this;
+        // debugger
+        var $container = $(btn).closest('.ItemDiscussion');
+
+        $(btn).closest('.Discussion').find('div.Message').show();
+        $(btn).closest('.DiscussionForm, .EditDiscussionForm').remove();
+        $container.removeClass('Editing');
+        $container.parent().removeClass('Editing');
+        $container.parent().find(".ToggleFlyout.OptionsMenu").removeClass("Open");
+        $container.parent().find(".Flyout.MenuItems").css('display',"").attr("aria-hidden", "true");
+        return false;
+    });
+
+    function resetDiscussionForm(sender) {
+        var parent = $(sender).parents('.DiscussionForm, .EditDiscussionForm');
+        $(parent).find('.Preview').remove();
+        $(parent).find('.TextBoxWrapper').show();
+        $('.TinyProgress').remove();
+
+        parent.find('.PreviewButton').show();
+        parent.find('.WriteButton').addClass('Hidden');
+    }
+
+    // Utility function to clear out the comment form
+    function clearDiscussionForm(sender, deleteDraft) {
+        var container = $(sender).parents('.Editing');
+
+        // By default, we delete comment drafts, unless sender was a "Post Comment" button. Can be overriden.
+        if (typeof deleteDraft !== 'undefined') {
+            deleteDraft = !!deleteDraft;
+        } else if ($(sender).hasClass('DiscussionButton')) {
+            deleteDraft = false;
+        } else {
+            deleteDraft = true
+        }
+
+        $(container).removeClass('Editing');
+        $('div.Popup,.Overlay').remove();
+        var frm = $(sender).parents('div.DiscussionForm, .EditDiscussionForm');
+        frm.find('textarea').val('');
+        frm.find('input:hidden[name$=DiscussionID]').val('');
+        // Erase any drafts
+        var draftInp = frm.find('input:hidden[name$=DraftID]');
+        if (deleteDraft && draftInp.val() != '') {
+            $.ajax({
+                type: "POST",
+                url: gdn.url('/drafts/delete/' + draftInp.val() + '/' + gdn.definition('TransientKey')),
+                data: 'DeliveryType=BOOL&DeliveryMethod=JSON',
+                dataType: 'json'
+            });
+        }
+
+        draftInp.val('');
+        frm.find('div.Errors').remove();
+        $('div.Information').fadeOut('fast', function() {
+            $(this).remove();
+        });
+        var $form = $(sender).closest('form');
+        $form.trigger('clearDiscussionForm');
+
+        // Dispatch a native event for things that don't use jquery
+        var event = document.createEvent('CustomEvent');
+        event.initCustomEvent('X-ClearDiscussionForm', true, false, {});
+        $form[0].dispatchEvent(event);
+    }
 });

@@ -353,6 +353,8 @@ class DiscussionsController extends VanillaController {
             $this->View = 'discussions';
         }
 
+        $this->setData('Home', true);
+
         $this->render();
     }
 
@@ -780,6 +782,7 @@ class DiscussionsController extends VanillaController {
 
         // Render view
         $this->setData('Title', t('My Questions'));
+        $this->setData('Mine', true);
         $this->setData('Breadcrumbs', [['Name' => t('My Questions'), 'Url' => '/discussions/mine']]);
         $this->render();
     }
