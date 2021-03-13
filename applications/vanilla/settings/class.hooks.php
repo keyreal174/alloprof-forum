@@ -686,6 +686,7 @@ class VanillaHooks extends Gdn_Plugin {
         $sender->addJsFile('notification.js', 'vanilla');
         $sender->addJsFile('jquery.popup.js');
         $sender->addJsFile('confirmfollow.js');
+        $sender->addJsFile('verify.js');
 
         if (!inSection('Dashboard')) {
             // Spoilers assets

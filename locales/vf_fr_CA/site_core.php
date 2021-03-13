@@ -1791,3 +1791,4 @@ $Definition['explanations'] = 'explications';
 $Definition['Give an explanation'] = 'Donner une explication';
 $Definition['Submit my explanation'] = 'Soumettre mon explication';
 $Definition['DisplayName'] = 'Choisis un pseudo';
+$Definition['Mutual Aid Zone'] = 'Zone d’entraide';

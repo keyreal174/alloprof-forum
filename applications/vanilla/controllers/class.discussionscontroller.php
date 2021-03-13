@@ -218,10 +218,10 @@ class DiscussionsController extends VanillaController {
         $this->fireEvent('AddProfileTabsInfo');
 
         if ($this->UserRole == "Teacher") {
-            $bannerModule = new BannerModule('Home', 'Home', 'Welcome to', 'the Mutual Aid Zone', 'Want to help students? Explain away!', "", url("/themes/alloprof/design/images/teacher-banner.svg"), "#0C6B52");
+            $bannerModule = new BannerModule('Home', 'Home', 'Welcome to <br><b>the Mutual Aid Zone</b>', '', 'Want to help students? Explain away!', "", url("/themes/alloprof/design/images/teacher-banner.svg"), "#0C6B52", "Mutual Aid Zone");
         } else {
             $this->addModule('NewDiscussionModule');
-            $bannerModule = new BannerModule('Home', 'Home', 'Welcome to', 'the Mutual Aid Zone', 'Do you have a question? Here are the explanations!');
+            $bannerModule = new BannerModule('Home', 'Home', 'Welcome to <br><b>the Mutual Aid Zone</b>', '', 'Do you have a question? Here are the explanations!', "", "", "", "Mutual Aid Zone");
             $this->addModule('ProfileFilterModule');
         }
 

@@ -80,6 +80,8 @@ if ($this->data('Home')) {
     $ulClass = $ulClass . " Home";
 }
 
+$this->addModule('DiscussionFilterModule', 'Content');
+
 if ($this->DiscussionData->numRows() > 0 || (isset($this->AnnounceData) && is_object($this->AnnounceData) && $this->AnnounceData->numRows() > 0)) {
     ?>
     <h2 class="sr-only"><?php echo t('Discussion List'); ?></h2>

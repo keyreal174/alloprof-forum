@@ -1,7 +1,7 @@
 /* Ask a question form */
 
 .AskQuestionForm .FormWrapper {
-    height: 120px;
+    height: 66px;
     overflow: hidden;
     transition: 0.3s all;
 }
@@ -21,7 +21,7 @@
 }
 
 .AskQuestionForm .content {
-    padding: 32px !important;
+    padding: 24px !important;
     background: #eee !important;
     width: 100% !important;
     max-width: 100% !important;
@@ -34,7 +34,7 @@
     display: flex;
     align-items: center;
     cursor: pointer;
-    font-size: 18px;
+    font-size: 15px;
     color: #828282 !important;
 }
 
@@ -96,15 +96,16 @@
 }
 
 .AskQuestionForm .user-avatar {
-    width: 64px;
-    height: 64px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     margin-right: 16px;
     object-fit: cover;
+    margin-top: 10px;
 }
 
 .AskQuestionForm .BoxNewDiscussion-header {
-    margin-bottom: 40px;
+    /* margin-bottom: 40px; */
     display: flex;
     align-items: center;
 }
@@ -112,4 +113,19 @@
 .AskQuestionForm .BoxNewDiscussion-header h1 {
     font-size: 21px;
     line-height: 25px;
+}
+
+.AskQuestionForm.BoxNewDiscussion {
+    padding: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.AskQuestionForm .BoxNewDiscussion-header h1 {
+    display: none;
+}
+
+.AskQuestionForm .FormTitleWrapper {
+    margin-bottom: 0;
 }

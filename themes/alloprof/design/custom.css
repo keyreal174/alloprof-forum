@@ -369,3 +369,176 @@ div.Popup .Border {
 .not-published-badge img {
     margin-right: 15px;
 }
+
+.Banner-content__lgtitle {
+    display: none;
+}
+
+.Content.MainContent .BoxDiscussionFilter.Panel {
+    display: none;
+}
+
+.ItemDiscussion .verified-info {
+    display: none;
+}
+
+@media screen and (max-width: 1366px) {
+    .sidebar.right {
+        display: none;
+    }
+
+    .Container {
+        width: 870px!important;
+    }
+
+    .sidebar.left {
+        width: 300px;
+    }
+
+    .Content.MainContent {
+        width: 508px;
+    }
+
+    .Banner-content .Container {
+        justify-content: flex-start;
+        padding-top: 100px;
+    }
+
+    .Banner-content__pagename {
+        display: none;
+    }
+
+    .Banner-content h1 {
+        font-size: 21px;
+        line-height: 25px;
+        color: black;
+        font-weight: 500;
+        text-align: center;
+    }
+
+    .Banner-content h1 br {
+        display: none;
+    }
+
+    .Banner-content h1 b {
+        font-weight: 500;
+    }
+
+    .Banner-content .Banner-content__description {
+        font-size: 21px;
+        line-height: 25px;
+        color: black;
+        font-weight: 500;
+        text-align: center;
+        margin-top: 0;
+    }
+
+    .Banner-content h1.Banner-content__lgtitle {
+        display: block;
+        font-size: 48px;
+        line-height: 56px;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    .Banner-content.General {
+        background-position-x: center;
+        background-size: 400px;
+    }
+}
+
+@media screen and (max-width: 959px) {
+    .Frame-banner .Banner-content {
+        display: none;
+    }
+
+    .Frame-banner, .Frame-header {
+        height: 132px;
+    }
+
+    .Frame-header .Header .row {
+        height: 132px;
+        align-items: flex-start;
+    }
+
+    .Frame-header .Header .Header-left {
+        position: absolute;
+        bottom: 10px;
+        width: calc(100% - 36px);
+    }
+
+    .Frame-header .Header .Header-logo {
+        height: 70px;
+        margin-left: 0;
+    }
+
+    .Frame-header .Header .Header-right {
+        height: 70px;
+    }
+
+    .Frame-menubar {
+        max-width: 580px;
+        margin: 0 auto;
+    }
+
+    .Navigation-linkContainer a {
+        display: block;
+        text-align: center;
+        font-size: 13px;
+        line-height: 18px;
+    }
+
+    .Navigation-linkContainer svg {
+        width: 100%;
+    }
+
+    .Navigation-link {
+        padding: 0;
+    }
+
+    .Container {
+        width: 100%!important;
+    }
+
+    .sidebar.left {
+        display: none;
+    }
+
+    .Content.MainContent {
+        width: 580px;
+        margin: 0 auto;
+    }
+
+    .Content.MainContent .BoxDiscussionFilter.Panel {
+        display: block;
+        margin-bottom: 40px;
+    }
+}
+
+@media screen and (max-width: 619px) {
+    .ItemDiscussion .verified-info {
+        min-height: 42px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #DBF8EF;
+        border-radius: 8px;
+        font-size: 12px;
+        line-height: 14px;
+        margin-bottom: 16px;
+    }
+
+    .ItemDiscussion .verified-info img {
+        margin-right: 8px;
+        width: 16px;
+        height: 16px;
+    }
+
+    .ItemDiscussion .verfied-badge {
+        display: none;
+    }
+
+    .DataList .ItemDiscussion, .DataList .Item, .MessageList .ItemDiscussion.ItemDiscussion, .MessageList .ItemComment .Comment {
+        padding: 16px;
+    }
+}

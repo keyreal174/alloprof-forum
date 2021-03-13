@@ -339,13 +339,13 @@ abbr {
 }
 
 .Frame-details .SearchBoxMobile {
-    display: none
+    display: none;
 }
 
 @media screen and (max-width:992px) {
-    .Frame-details .SearchBoxMobile {
+    /* .Frame-details .SearchBoxMobile {
         display: block
-    }
+    } */
 }
 
 .Container {
@@ -8481,7 +8481,7 @@ table.PreferenceGroup tbody tr:hover td {
 
 .Frame-banner {
     background-color: #CAEDF9;
-    height: 550px;
+    height: 480px;
 }
 
 .Banner-content {
@@ -8599,7 +8599,7 @@ table.PreferenceGroup tbody tr:hover td {
     margin: 0 auto;
 }
 
-@media screen and (max-width:768px) {
+/* @media screen and (max-width:768px) {
 
     .Header .Hamburger,
     .Header .mobileMeBox-button {
@@ -8607,7 +8607,7 @@ table.PreferenceGroup tbody tr:hover td {
         display: -ms-flexbox;
         display: flex
     }
-}
+} */
 
 .Header .MeButton {
     background-color: rgba(0, 0, 0, 0);
@@ -8701,13 +8701,13 @@ table.PreferenceGroup tbody tr:hover td {
     width: auto
 }
 
-@media screen and (max-width:768px) {
+/* @media screen and (max-width:768px) {
     .Header-logo {
         -ms-flex-preferred-size: initial;
         display: none;
         flex-basis: auto
     }
-}
+} */
 
 .Header-desktopNav {
     -ms-flex-align: center;
@@ -8775,14 +8775,14 @@ table.PreferenceGroup tbody tr:hover td {
     display: none
 }
 
-@media screen and (max-width:768px) {
+/* @media screen and (max-width:768px) {
     .Header-logo.mobile {
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
         margin-left: auto
     }
-}
+} */
 
 .Header-right {
     -ms-flex-align: center;
@@ -9053,7 +9053,7 @@ screen and (-ms-high-contrast:none) {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    font-size: 21px;
+    font-size: 18px;
     line-height: 36px;
     min-height: 32px;
     padding: 0 18px;
@@ -9268,7 +9268,7 @@ screen and (-ms-high-contrast:none) {
     padding: 0 !important;
 }
 
-@media screen and (max-width:992px) {
+@media screen and (max-width: 959px) {
 
     .Panel-main .BoxCategories,
     .Panel-main .SearchBox {

@@ -62,9 +62,9 @@
                     echo '<div class="placeholder">';
                 } else echo '<div class="placeholder OpenAskQuestionForm">';
             ?>
-                <div class="icon">
-                    <?php echo '<img src="'.url("/themes/alloprof/design/images/icons/ask_question.svg").'" />'; ?>
-                </div>
+                <!-- <div class="icon">
+                    <?php /* echo '<img src="'.url("/themes/alloprof/design/images/icons/ask_question.svg").'" />'; */ ?>
+                </div> -->
                 <?php echo t('What is your question?'); ?>
             </div>
             <?php if($this->invalid) echo '</a>';?>
