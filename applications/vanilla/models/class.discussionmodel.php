@@ -4323,4 +4323,12 @@ class DiscussionModel extends Gdn_Model implements FormatFieldInterface, EventFr
 
         return url($result, $withDomain);
     }
+
+    public function resolved($discussionID) {
+        $this->SQL->put(
+            'Discussion',
+            ['Resolved' => 1],
+            ['DiscussionID' => $discussionID]
+        );
+    }
 }

@@ -140,6 +140,7 @@ class DiscussionController extends VanillaController {
         $this->addJsFile('autosave.js');
         $this->addJsFile('discussion.js');
         $this->addJsFile('replyQuestion.js');
+        $this->addJsFile('feedback.js');
 
         // write comment filter
         $this->writeCommentFilter();
@@ -1481,5 +1482,10 @@ body { background: transparent !important; }
         $this->setData('CopySubTitle', 'Asking yourself the same question? Share it with your friends, they may have the explanation!');
 
         $this->render($this->fetchViewLocation('socialsharing', 'discussion', 'vanilla'));
+    }
+
+    // discussion resolved
+    public function resolved($DiscussionID) {
+        $this->DiscussionModel->resolved($DiscussionID);
     }
 }

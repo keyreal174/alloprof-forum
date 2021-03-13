@@ -59,6 +59,8 @@ $Configuration['Garden']['Errors']['LogFile'] = '';
 $Configuration['Garden']['FolderBlacklist'] = ['.', '..', '_svn', '.git']; // Folders we should never search for classes.
 
 // User registration & authentication.
+$Configuration['Garden']['Debug'] = true;
+$Configuration['Garden']['Errors']['LogFile'] = 'log/debug.log';
 $Configuration['Garden']['Session']['Length'] = '15 minutes';
 $Configuration['Garden']['Cookie']['Salt'] = ''; // We do this during setup, chill.
 $Configuration['Garden']['Cookie']['Name'] = 'Vanilla';
