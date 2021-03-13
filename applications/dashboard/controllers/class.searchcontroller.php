@@ -17,7 +17,7 @@ use Vanilla\Search\SearchResults;
 class SearchController extends Gdn_Controller {
 
     /** @var array Models to automatically instantiate. */
-    public $Uses = ['Database', 'UserModel', 'DiscussionModel'];
+    public $Uses = ['Database', 'UserModel', 'DiscussionModel', 'CommentModel'];
 
     /**  @var Gdn_Form */
     public $Form;

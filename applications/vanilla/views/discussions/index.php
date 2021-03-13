@@ -19,7 +19,7 @@ if($this->data('Category')) {
     echo '<div class="Card">';
     echo '<div class="category-info">';
     echo '<div class="item"><h1>'.$this->data('CountAllDiscussions').'</h1><h2>'.t('Questions').'</h2></div>';
-    echo '<div class="item"><h1>'.$this->data('CountAllComments').'</h1><h2>'.t('Answers').'</h2></div>';
+    echo '<div class="item"><h1>'.$this->data('CountAllComments').'</h1><h2>'.t('Explanations').'</h2></div>';
     echo '</div>';
     echo '<div class="buttons">';
     if(followButton($this->data('Category.CategoryID')) != '' && $this->getUserRole() == 'Teacher')

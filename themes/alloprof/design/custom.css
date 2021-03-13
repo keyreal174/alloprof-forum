@@ -112,13 +112,13 @@ select {
     border: 1px solid #1A1919 !important;
     border-radius: 38px !important;
     background: white;
-    color: #1A1919 !important;
-    font-weight: bold;
+    color: black !important;
+    font-family: "ChromaticaBold";
     padding: 10px 30px !important;
-    font-size: 18px !important;
+    font-size: 15px !important;
     width: max-content !important;
     white-space: nowrap;
-    height: 50px;
+    height: 44px;
     display: flex;
     align-items: center;
     cursor: pointer;
@@ -222,10 +222,10 @@ select {
 }
 
 .FilterBanner .HomepageTitle {
-    font-size: 21px;
+    font-size: 18px;
     line-height: 25px;
     margin-bottom: 10px;
-    color: #1A1919;
+    color: black;
     margin-bottom: 10px;
 }
 
@@ -255,15 +255,19 @@ select {
 
 .scroll-top {
     text-align: center;
-    margin-top: 30px;
+    margin-top: 20px;
+    margin-bottom: 50px;
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
 }
 
-.scroll-top h2 {
-    margin-bottom: 30px;
+.scroll-top p {
+    margin-bottom: 20px;
+    font-size: 16px;
+    color: #1A1919;
+    font-family: "ChromaticaMedium";
 }
 
 .DataList.Discussions .embedExternal.embedImage {
@@ -368,4 +372,10 @@ div.Popup .Border {
 
 .not-published-badge img {
     margin-right: 15px;
+}
+
+/* Hide infinite scroll progressbar */
+
+.nanobar {
+    display: none !important;
 }

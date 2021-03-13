@@ -419,7 +419,7 @@ class DiscussionController extends VanillaController {
         );
         $this->setData('IsAnswer', true);
 
-        $this->getUserInfo('', '', $this->Discussion->InsertUserID);
+        $this->getUserInfo();
 
         $this->addModule('UserPhotoModule');
         $this->fireEvent('AddProfileInfo');
