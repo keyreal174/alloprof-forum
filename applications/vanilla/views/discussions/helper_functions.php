@@ -381,6 +381,13 @@ if (!function_exists('writeDiscussionDetail')) :
         $sender->fireEvent('BeforeDiscussionDisplay');
         ?>
         <li id="Discussion_<?php echo $Discussion->DiscussionID; ?>" class="<?php echo $cssClass; ?>">
+            <?php
+                if ($Discussion->DateAccepted) {
+                    echo "<div class='verified-info mobile'>
+                        <img src='".url("/themes/alloprof/design/images/icons/verifiedbadge.svg")."'/><span>".t("Verified by Alloprof")."</span></div>";
+                }
+            ?>
+
             <div class="Discussion">
                 <div class="Item-Header DiscussionHeader">
                     <?php

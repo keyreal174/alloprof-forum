@@ -1,22 +1,24 @@
 jQuery(document).ready(function($) {
     /* Autosave functionality for comment & discussion drafts */
-    $('.AskQuestionForm .OpenAskQuestionForm').click(function() {
-        $(this).addClass('close');
-        $('.AskQuestionForm .FormWrapper').addClass('open');
+    $('.AskQuestionForm .clickToCreate').click(function() {
+        $(this).hide();
+        $('.AskQuestionForm .FormWrapper').show();
+        $('.BoxNewDiscussion .user-info').show();
         $('.AskQuestionForm .close-icon').addClass('show');
         $(".AskQuestionForm .ql-editor").focus();
     })
 
     $('.AskQuestionForm .close-icon').click(function(){
         $(this).removeClass('show');
-        $('.AskQuestionForm .FormWrapper').removeClass('open');
-        $('.AskQuestionForm .OpenAskQuestionForm').removeClass('close')
+        $('.AskQuestionForm .clickToCreate').show()
+        $('.AskQuestionForm .FormWrapper').hide()
+        $('.BoxNewDiscussion .user-info').hide();
     })
 
     $('.scrollToAskQuestionForm').click(function(){
         $('.AskQuestionForm').css('display', 'block');
-        $('.AskQuestionForm .OpenAskQuestionForm').trigger('click');
-        console.log($(".AskQuestionForm .ql-editor"))
+        $('.AskQuestionForm .clickToCreate').trigger('click');
+
         $(".AskQuestionForm .ql-editor").focus();
         if ($(".AskQuestionForm").offset()) {
             $([document.documentElement, document.body]).animate({

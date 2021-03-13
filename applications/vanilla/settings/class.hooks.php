@@ -686,6 +686,7 @@ class VanillaHooks extends Gdn_Plugin {
         $sender->addJsFile('notification.js', 'vanilla');
         $sender->addJsFile('jquery.popup.js');
         $sender->addJsFile('confirmfollow.js');
+        $sender->addJsFile('verify.js');
 
         if (!inSection('Dashboard')) {
             // Spoilers assets
@@ -886,6 +887,7 @@ class VanillaHooks extends Gdn_Plugin {
             $commentsLabel = "";
             if (c('Vanilla.Profile.ShowCounts', true)) {
                 $discussionsCount = getValueR('User.CountDiscussions', $sender, "0");
+                // $discussionsCount = $sender->DiscussionModel->getCount(["InsertUserID" => $userID]);
                 $commentsCount = $sender->CommentModel->getCount(["InsertUserID" => $userID]);
                 $discussionsLabel .= $discussionsCount;
                 $commentsLabel .= $commentsCount;

@@ -8,9 +8,9 @@
 .userphoto-personalinfo .userphoto-personalinfo__name {
     font-size: 18px;
     line-height: 21px;
-    font-weight: bold;
     text-align: center;
     color: black;
+    font-family: "ChromaticaBlack";
 }
 
 .userphoto-personalinfo .userphoto-personalinfo__secondary {

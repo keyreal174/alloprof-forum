@@ -26,19 +26,24 @@
         <?php
             echo img($Photo, ['class' => 'user-avatar', 'alt' => $PhotoAlt]);
         ?>
-        <h1>
+        <div>
             <?php
-                if ($this->CategoryID) {
-                    $category = CategoryModel::categories($this->CategoryID);
-                    $hasPermission = CategoryModel::checkPermission($this->CategoryID, 'Vanilla.Discussions.Add');
-                    echo sprintf(t('ConnectNewQuestionLabel', 'New question in %s'), htmlspecialchars($category["Name"]));
-                    // sprintf(t('ConnectRegisteredName', 'Your registered username: <strong>%s</strong>'), htmlspecialchars($Row['Name'])
-                } else {
-                    $hasPermission = Gdn::session()->checkPermission('Vanilla.Discussions.Add', true, 'Category', 'any');
-                    echo t('New question');
-                }
+                $UserMetaData = Gdn::userModel()->getMeta(Gdn::session()->UserID, 'Profile.%', 'Profile.');
+                echo "<div class='user-info'>";
+                echo "<div class='username'>".$UserMetaData['DisplayName']."</div>";
+                echo "<div class='meta'>".$UserMetaData['Grade']."</div>";
+                echo "</div>";
             ?>
-        </h1>
+        </div>
+        <?php
+            if($this->invalid) {
+                $Controller = Gdn::controller();
+                $Session = Gdn::session();
+                $SigninUrl = signInUrl($Controller->SelfUrl);
+
+                echo '<a href="'.url($SigninUrl).'" class="SignInPopup" rel="nofollow">'.t('What is your question?').'</a>';
+            } else echo '<div class="clickToCreate">'.t('What is your question?').'</div>';
+        ?>
     </div>
     <div class="close-icon">
         <img src="<?= url('/themes/alloprof/design/images/icons/close.svg') ?>" />
@@ -52,6 +57,7 @@
         ?>
 
         <div class="content">
+
             <?php
                 if($this->invalid) {
                     $Controller = Gdn::controller();
@@ -62,10 +68,10 @@
                     echo '<div class="placeholder">';
                 } else echo '<div class="placeholder OpenAskQuestionForm">';
             ?>
-                <div class="icon">
-                    <?php echo '<img src="'.url("/themes/alloprof/design/images/icons/ask_question.svg").'" />'; ?>
-                </div>
-                <?php echo t('What is your question?'); ?>
+                <!-- <div class="icon">
+                    <?php /* echo '<img src="'.url("/themes/alloprof/design/images/icons/ask_question.svg").'" />'; */ ?>
+                </div> -->
+
             </div>
             <?php if($this->invalid) echo '</a>';?>
             <?php

@@ -351,13 +351,13 @@ abbr {
 }
 
 .Frame-details .SearchBoxMobile {
-    display: none
+    display: none;
 }
 
 @media screen and (max-width:992px) {
-    .Frame-details .SearchBoxMobile {
+    /* .Frame-details .SearchBoxMobile {
         display: block
-    }
+    } */
 }
 
 .Container {
@@ -4013,6 +4013,7 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
         z-index: 1
     }
 
+
     .ButtonGroup.Open .Flyout.Flyout,
     .ButtonGroup.Open .MenuItems.MenuItems,
     .editor-dropdown-open .Flyout.Flyout,
@@ -4027,9 +4028,10 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
         max-width: calc(100% - 24px);
         opacity: 1;
         right: auto;
-        top: auto;
+        min-width: 300px !important;
         transition-delay: 0s;
-        visibility: visible
+        visibility: visible;
+        display: block !important;
     }
 
     .Flyout,
@@ -8394,7 +8396,8 @@ table.PreferenceGroup tbody tr:hover td {
     color: #555a62;
     font-size: 14px;
     line-height: 1.5;
-    padding: 18px 0
+    padding: 18px 0;
+    height: auto !important;
 }
 
 .Footer a {
@@ -8552,7 +8555,8 @@ table.PreferenceGroup tbody tr:hover td {
     background-color: #0C6B52;
 }
 
-.Banner-content.Teacher h1, p {
+.Banner-content.Teacher h1,
+.Banner-content.Teacher p {
     color: white !important;
 }
 
@@ -8619,6 +8623,10 @@ table.PreferenceGroup tbody tr:hover td {
     width: 300px;
 }
 
+.Header.not-transparent .Header-left__search {
+    background-color: #F2F2F2;
+}
+
 .Header-left__search #Form_Go {
     display: none;
 }
@@ -8630,9 +8638,10 @@ table.PreferenceGroup tbody tr:hover td {
 
 .Header-logo {
     margin: 0 auto;
+    justify-content: center;
 }
 
-@media screen and (max-width:768px) {
+/* @media screen and (max-width:768px) {
 
     .Header .Hamburger,
     .Header .mobileMeBox-button {
@@ -8640,7 +8649,7 @@ table.PreferenceGroup tbody tr:hover td {
         display: -ms-flexbox;
         display: flex
     }
-}
+} */
 
 .Header .MeButton {
     background-color: white;
@@ -8737,13 +8746,13 @@ table.PreferenceGroup tbody tr:hover td {
     width: auto
 }
 
-@media screen and (max-width:768px) {
+/* @media screen and (max-width:768px) {
     .Header-logo {
         -ms-flex-preferred-size: initial;
         display: none;
         flex-basis: auto
     }
-}
+} */
 
 .Header-desktopNav {
     -ms-flex-align: center;
@@ -8811,14 +8820,14 @@ table.PreferenceGroup tbody tr:hover td {
     display: none
 }
 
-@media screen and (max-width:768px) {
+/* @media screen and (max-width:768px) {
     .Header-logo.mobile {
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
         margin-left: auto
     }
-}
+} */
 
 .Header-right {
     -ms-flex-align: center;
@@ -9306,7 +9315,18 @@ screen and (-ms-high-contrast:none) {
     padding: 0 !important;
 }
 
-@media screen and (max-width:992px) {
+@media screen and (max-width: 959px) {
+
+    .Panel-main .BoxCategories,
+    .Panel-main .SearchBox {
+        display: none
+    }
+
+    .Header-left__search {
+        width: 100%;
+        background-color: #F2F2F2;
+    }
+
     .Panel-main .BoxNewDiscussion.BoxNewDiscussion {
         margin: 18px 0;
         text-align: center
@@ -11958,18 +11978,6 @@ body.Section-EditProfile #CategoryNotificationHeader {
  * @copyright 2009-2018 Vanilla Forums Inc.
  * @license GPL-2.0-only
  */
-body.Section-SearchResults .Frame-content>.Container {
-    /* max-width: 800px */
-}
-
-body.Section-SearchResults .Frame-content .Content {
-    /* width: 100% */
-}
-
-body.Section-SearchResults .Frame-content .Panel,
-body.Section-SearchResults .SearchBox {
-    /* display: none */
-}
 
 body.Section-SearchResults .SearchForm {
     margin-top: 0;

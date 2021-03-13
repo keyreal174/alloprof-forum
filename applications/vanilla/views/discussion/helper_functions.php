@@ -697,7 +697,7 @@ if (!function_exists('writeCommentForm')) :
         } elseif (!$userCanComment) {
             if (!Gdn::session()->isValid()) {
                 ?>
-                <div class="Foot Closed">
+                <!-- <div class="Foot Closed">
                     <div class="Note Closed SignInOrRegister"><?php
                         $popup = (c('Garden.SignIn.Popup')) ? ' class="Popup"' : '';
                         $returnUrl = Gdn::request()->pathAndQuery();
@@ -711,7 +711,7 @@ if (!function_exists('writeCommentForm')) :
                         ); ?>
                     </div>
                     <?php //echo anchor(t('All Discussions'), 'discussions', 'TabLink'); ?>
-                </div>
+                </div> -->
             <?php
             }
         }
@@ -867,6 +867,7 @@ if (!function_exists('writeDiscussionFooter')) :
         $discussionUrl = $Discussion->Url;
         $isUser = $Discussion->InsertUserID === Gdn::session()->UserID;
         $commentsCount = CommentModel::getPublishedCommentsCount($Discussion->DiscussionID);
+        $userCanComment = CategoryModel::checkPermission($categoryID, 'Vanilla.Comments.Add');
         ?>
         <div class="Item-Footer">
             <div class="Item-Footer-Icons">
@@ -895,7 +896,13 @@ if (!function_exists('writeDiscussionFooter')) :
                             echo '<div class="ReplyQuestionButton">';
 
                             $sender->fireEvent('BeforeFormButtons');
-                            echo $sender->Form->button('Give an explanation', ['class' => 'btn-default btn-shadow']);
+
+                            if($userCanComment)
+                                echo $sender->Form->button(t('Give an explanation'), ['class' => 'btn-default btn-shadow']);
+                            else {
+                                echo anchor(t('Give an explanation'), url(signInUrl()), 'btn-default btn-shadow SignInPopup');
+                            }
+
                             $sender->fireEvent('AfterFormButtons');
                             echo '</div>';
                         }
