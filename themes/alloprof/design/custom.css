@@ -369,3 +369,20 @@ div.Popup .Border {
 .not-published-badge img {
     margin-right: 15px;
 }
+
+/* rich editor remove icons */
+#paragraphMenu1-formattingMenus-component {
+    display: none;
+}
+
+.richEditor-menuItems.richEditor-inlineMenuItems li:nth-child(1),
+.richEditor-menuItems.richEditor-inlineMenuItems li:nth-child(3),
+.richEditor-menuItems.richEditor-inlineMenuItems li:nth-child(4) {
+    display: none;
+}
+
+.editorEventWall div[role='toolbar'] button:nth-child(1),
+.editorEventWall div[role='toolbar'] button:nth-child(2),
+.editorEventWall div[role='toolbar'] button:nth-child(3) {
+    display: none;
+}
