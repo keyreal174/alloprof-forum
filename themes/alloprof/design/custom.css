@@ -382,6 +382,7 @@ div.Popup .Border {
     margin-right: 15px;
 }
 
+
 /* Hide infinite scroll progressbar */
 .nanobar {
     display: none !important;
@@ -575,4 +576,23 @@ div.Popup .Border {
     .DataList .ItemDiscussion, .DataList .Item, .MessageList .ItemDiscussion.ItemDiscussion, .MessageList .ItemComment .Comment {
         padding: 16px;
     }
+
+}
+
+
+/* rich editor remove icons */
+#paragraphMenu1-formattingMenus-component {
+    display: none;
+}
+
+.richEditor-menuItems.richEditor-inlineMenuItems li:nth-child(1),
+.richEditor-menuItems.richEditor-inlineMenuItems li:nth-child(3),
+.richEditor-menuItems.richEditor-inlineMenuItems li:nth-child(4) {
+    display: none;
+}
+
+.editorEventWall div[role='toolbar'] button:nth-child(1),
+.editorEventWall div[role='toolbar'] button:nth-child(2),
+.editorEventWall div[role='toolbar'] button:nth-child(3) {
+    display: none;
 }

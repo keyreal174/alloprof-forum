@@ -494,57 +494,6 @@ if (!function_exists('writeDiscussionDetail')) :
     }
 endif;
 
-
-if (!function_exists('writeCommentForm')) :
-    /**
-     * Output comment form.
-     *
-     * @since 2.1
-     */
-    function writeCommentForm() {
-        $session = Gdn::session();
-        $controller = Gdn::controller();
-
-        // $discussion = $controller->data('Discussion');
-        // $categoryID = val('CategoryID', $discussion);
-        // $userCanClose = CategoryModel::checkPermission($categoryID, 'Vanilla.Discussions.Close');
-        // $userCanComment = CategoryModel::checkPermission($categoryID, 'Vanilla.Comments.Add');
-
-        // // Closed notification
-        // if ($discussion->Closed == '1') {
-        //     ?>
-        //     <div class="Foot Closed">
-        //         <div class="Note Closed"><?php echo t('This discussion has been closed.'); ?></div>
-        //     </div>
-        // <?php
-        // } elseif (!$userCanComment) {
-        //     if (!Gdn::session()->isValid()) {
-        //         ?>
-        //         <div class="Foot Closed">
-        //             <div class="Note Closed SignInOrRegister"><?php
-        //                 $popup = (c('Garden.SignIn.Popup')) ? ' class="Popup"' : '';
-        //                 $returnUrl = Gdn::request()->pathAndQuery();
-        //                 echo formatString(
-        //                     t('Sign In or Register to Comment.', '<a href="{SignInUrl,html}"{Popup}>Sign In</a> or <a href="{RegisterUrl,html}">Register</a> to comment.'),
-        //                     [
-        //                         'SignInUrl' => url(signInUrl($returnUrl)),
-        //                         'RegisterUrl' => url(registerUrl($returnUrl)),
-        //                         'Popup' => $popup
-        //                     ]
-        //                 ); ?>
-        //             </div>
-        //             <?php //echo anchor(t('All Discussions'), 'discussions', 'TabLink'); ?>
-        //         </div>
-        //     <?php
-        //     }
-        // }
-
-        // if (($discussion->Closed == '1' && $userCanClose) || ($discussion->Closed == '0' && $userCanComment)) {
-            echo $controller->fetchView('comment', 'post', 'vanilla');
-        // }
-    }
-endif;
-
 if (!function_exists('WriteDiscussionSorter')) :
     /**
      *

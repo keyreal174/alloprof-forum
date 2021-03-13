@@ -120,6 +120,7 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
+    box-shadow: 0 0 20px rgb(0 0 0 / 10%);
 }
 
 .BoxNewDiscussion .user-info {
