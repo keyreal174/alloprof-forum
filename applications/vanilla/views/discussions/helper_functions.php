@@ -110,7 +110,7 @@ if (!function_exists('BookmarkButton')) {
         EOT;
 
         $icon_follow = <<<EOT
-        <svg width="19" height="21" viewBox="0 0 19 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg width="21" height="24" viewBox="0 0 19 21" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M1.75049 3.5C1.75049 2.5335 2.53399 1.75 3.50049 1.75H15.2697C16.2362 1.75 17.0197 2.5335 17.0197 3.5V18.6743L10.5623 12.8039C9.89479 12.1971 8.87541 12.1971 8.20792 12.8039L1.75049 18.6743V3.5Z" stroke="black" stroke-width="2.5"/>
         </svg>
         EOT;
@@ -381,6 +381,13 @@ if (!function_exists('writeDiscussionDetail')) :
         $sender->fireEvent('BeforeDiscussionDisplay');
         ?>
         <li id="Discussion_<?php echo $Discussion->DiscussionID; ?>" class="<?php echo $cssClass; ?>">
+            <?php
+                if ($Discussion->DateAccepted) {
+                    echo "<div class='verified-info mobile'>
+                        <img src='".url("/themes/alloprof/design/images/icons/verifiedbadge.svg")."'/><span>".t("Verified by Alloprof")."</span></div>";
+                }
+            ?>
+
             <div class="Discussion">
                 <div class="Item-Header DiscussionHeader">
                     <?php

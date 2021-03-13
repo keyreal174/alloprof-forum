@@ -420,7 +420,7 @@ class DiscussionController extends VanillaController {
         );
         $this->setData('IsAnswer', true);
 
-        $this->getUserInfo('', '', $this->Discussion->InsertUserID);
+        $this->getUserInfo();
 
         $this->addModule('UserPhotoModule');
         $this->fireEvent('AddProfileInfo');
@@ -428,11 +428,11 @@ class DiscussionController extends VanillaController {
         $DiscussionMeta = Gdn::userModel()->getMeta($this->Discussion->InsertUserID, 'Profile.%', 'Profile.');
 
         if ($this->UserRole == "Teacher") {
-            $bannerModule = new BannerModule('Question', 'Home / '.t('Student Question'), t('Question by').' <b>'. $this->User->Name .',</b>', '', '<a>'.$Category["Name"].'</a><a>'.$DiscussionMeta["Grade"].'</a>', "", url("/themes/alloprof/design/images/teacher-banner.svg"), "#0C6B52");
+            $bannerModule = new BannerModule('Home', 'Home', '', 'Mutual Aid Zone', "Welcome to the Mutual Aid Zone! <br/> Want to help the students? It's this way!", "", "Teacher");
             $discussionsFooterModule = new DiscussionsFooterModule(false, "You have the same problem and the explanations don't help?");
             $this->addModule($discussionsFooterModule);
         } else {
-            $bannerModule = new BannerModule('Question', 'Home / My Questions / Question', t('Question by').' <b>'. $this->User->Name .',</b>', '', '<a>'.$Category["Name"].'</a><a>'.$DiscussionMeta["Grade"].'</a>');
+            $bannerModule = new BannerModule('Home', 'Home', '', 'Mutual Aid Zone', 'Welcome to the Mutual Aid Zone! <br/> Do you have a question? Here are the explanations!', '');
             $this->addModule('ProfileFilterModule');
         }
 
@@ -1335,10 +1335,6 @@ body { background: transparent !important; }
             return;
         }
 
-        if (!c('Garden.Profile.Public') && !Gdn::session()->isValid()) {
-            throw permissionException();
-        }
-
         // If a UserID was provided as a querystring parameter, use it over anything else:
         if ($userID) {
             $userReference = $userID;
@@ -1361,7 +1357,7 @@ body { background: transparent !important; }
         $this->fireEvent('UserLoaded');
 
         if ($this->User === false) {
-            throw notFoundException('User');
+            // throw notFoundException('User');
         } elseif ($this->User->Deleted == 1) {
             redirectTo('dashboard/home/deleted');
         } else {

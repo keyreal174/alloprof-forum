@@ -71,7 +71,7 @@ class ProfileController extends Gdn_Controller {
         $this->CurrentTab = 'Activity';
         $this->ProfileTabs = [];
         $this->editMode(true);
-
+        $this->UserRole = $this->getUserRole();
         $this->addInternalMethod('isEditMode');
 
         \Gdn::config()->touch([
@@ -123,6 +123,36 @@ class ProfileController extends Gdn_Controller {
 
         $this->setData('Breadcrumbs', []);
         $this->CanEditPhotos = Gdn::session()->checkRankedPermission(c('Garden.Profile.EditPhotos', true)) || Gdn::session()->checkPermission('Garden.Users.Edit');
+    }
+
+
+    public function getUserRole($UserID = null) {
+        $userModel = new UserModel();
+        if ($UserID) {
+            $User = $userModel->getID($UserID);
+        } else {
+            $User = $userModel->getID(Gdn::session()->UserID);
+        }
+
+        if($User) {
+            $RoleData = $userModel->getRoles($User->UserID);
+
+            $RoleData = $userModel->getRoles($User->UserID);
+            if ($RoleData !== false) {
+                $Roles = array_column($RoleData->resultArray(), 'Name');
+            }
+
+            // Hide personal info roles
+            if (!checkPermission('Garden.PersonalInfo.View')) {
+                $Roles = array_filter($Roles, 'RoleModel::FilterPersonalInfo');
+            }
+
+            if(in_array(Gdn::config('Vanilla.ExtraRoles.Teacher'), $Roles))
+                $UserRole = Gdn::config('Vanilla.ExtraRoles.Teacher') ?? 'Teacher';
+            else $UserRole = RoleModel::TYPE_MEMBER ?? 'Student';
+
+            return $UserRole;
+        } else return null;
     }
 
     /**
@@ -372,6 +402,7 @@ class ProfileController extends Gdn_Controller {
      * @param mixed $userReference Username or User ID.
      */
     public function edit($userReference = '', $username = '', $userID = '') {
+
         $this->permission(['Garden.SignIn.Allow', 'Garden.Profiles.Edit'], true);
 
         $this->getUserInfo($userReference, $username, $userID, true);
@@ -544,6 +575,15 @@ class ProfileController extends Gdn_Controller {
                 $this->informMessage(sprite('Check', 'InformSprite').t('Your changes have been saved.'), 'Dismissable AutoDismiss HasSprite');
             }
         }
+
+
+        if ($this->UserRole == "Teacher") {
+            $bannerModule = new BannerModule('Home', 'Home', '', 'Mutual Aid Zone', "Welcome to the Mutual Aid Zone! <br/> Want to help the students? It's this way!", "", "Teacher");
+        } else {
+            $bannerModule = new BannerModule('Home', 'Home', '', 'Mutual Aid Zone', 'Welcome to the Mutual Aid Zone! <br/> Do you have a question? Here are the explanations!', '');
+        }
+
+        $this->addModule($bannerModule);
 
         $this->title(t('Edit Profile'));
         $this->_setBreadcrumbs(t('Edit Profile'), '/profile/edit');

@@ -1,13 +1,12 @@
 /* Ask a question form */
 
 .AskQuestionForm .FormWrapper {
-    height: 120px;
-    overflow: hidden;
     transition: 0.3s all;
+    display: none;
+    margin-top: 20px;
 }
 
 .AskQuestionForm .FormWrapper.open {
-    height: auto;
     overflow: visible;
 }
 
@@ -21,7 +20,7 @@
 }
 
 .AskQuestionForm .content {
-    padding: 32px !important;
+    padding: 15px !important;
     background: #eee !important;
     width: 100% !important;
     max-width: 100% !important;
@@ -34,7 +33,7 @@
     display: flex;
     align-items: center;
     cursor: pointer;
-    font-size: 18px;
+    font-size: 15px;
     color: #828282 !important;
 }
 
@@ -80,7 +79,7 @@
 
 .AskQuestionForm .close-icon {
     position: absolute;
-    top: 50px;
+    top: 35px;
     right: 35px;
     cursor: pointer;
     display: none;
@@ -96,20 +95,69 @@
 }
 
 .AskQuestionForm .user-avatar {
-    width: 64px;
-    height: 64px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     margin-right: 16px;
     object-fit: cover;
 }
 
 .AskQuestionForm .BoxNewDiscussion-header {
-    margin-bottom: 40px;
+    /* margin-bottom: 40px; */
     display: flex;
     align-items: center;
+    width: 100%;
 }
 
 .AskQuestionForm .BoxNewDiscussion-header h1 {
     font-size: 21px;
     line-height: 25px;
+}
+
+.AskQuestionForm.BoxNewDiscussion {
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    box-shadow: 0 0 20px rgb(0 0 0 / 10%);
+}
+
+.BoxNewDiscussion .user-info {
+    display: none;
+}
+
+.BoxNewDiscussion .user-info.show {
+    display: block;
+}
+
+.BoxNewDiscussion .user-info .username {
+    font-size: 15px;
+    font-family: 'ChromaticaBlack';
+    color: black;
+}
+
+.BoxNewDiscussion .user-info .meta {
+    color: #828282;
+    font-size: 12px;
+}
+
+.BoxNewDiscussion-header .SignInPopup,
+.BoxNewDiscussion-header .clickToCreate {
+    background: #eee !important;
+    border-radius: 6px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    color: #828282;
+    padding: 24px;
+    width: 100%;
+    cursor: pointer;
+}
+
+.AskQuestionForm .FormTitleWrapper {
+    margin-bottom: 0;
+    flex: 1;
+    width: 100%;
 }

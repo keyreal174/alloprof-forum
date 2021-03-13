@@ -18,7 +18,7 @@ use Vanilla\Formatting\Formats\HtmlFormat;
 class DiscussionsController extends VanillaController {
 
     /** @var array Models to include. */
-    public $Uses = ['Database', 'DiscussionModel', 'Form', 'UserModel', 'ActivityModel'];
+    public $Uses = ['Database', 'DiscussionModel', 'Form', 'UserModel', 'ActivityModel', 'CommentModel'];
 
     /** @var boolean Value indicating if discussion options should be displayed when rendering the discussion view.*/
     public $ShowOptions;
@@ -218,10 +218,10 @@ class DiscussionsController extends VanillaController {
         $this->fireEvent('AddProfileTabsInfo');
 
         if ($this->UserRole == "Teacher") {
-            $bannerModule = new BannerModule('Home', 'Home', 'Welcome to', 'the Mutual Aid Zone', 'Want to help students? Explain away!', "", url("/themes/alloprof/design/images/teacher-banner.svg"), "#0C6B52");
+            $bannerModule = new BannerModule('Home', 'Home', '', 'Mutual Aid Zone', "Welcome to the Mutual Aid Zone! <br/> Want to help the students? It's this way!", "", "Teacher");
         } else {
             $this->addModule('NewDiscussionModule');
-            $bannerModule = new BannerModule('Home', 'Home', 'Welcome to', 'the Mutual Aid Zone', 'Do you have a question? Here are the explanations!');
+            $bannerModule = new BannerModule('Home', 'Home', '', 'Mutual Aid Zone', 'Welcome to the Mutual Aid Zone! <br/> Do you have a question? Here are the explanations!', '');
             $this->addModule('ProfileFilterModule');
         }
 
@@ -603,10 +603,12 @@ class DiscussionsController extends VanillaController {
         $this->fireEvent('AfterAddSideMenu');
         $this->fireEvent('AddProfileTabsInfo');
 
+
         if ($this->UserRole == "Teacher") {
-            $bannerModule = new BannerModule('Question followed', 'Home / Question followed', 'They are waiting', 'for you!', 'Here you\'ll find questions from your subjects awaiting explanation.', "", url("/themes/alloprof/design/images/teacher-banner.svg"), "#0C6B52");
+            $bannerModule = new BannerModule('Home', 'Home', '', 'Mutual Aid Zone', "Welcome to the Mutual Aid Zone! <br/> Want to help the students? It's this way!", "", "Teacher");
         } else {
-            $bannerModule = new BannerModule('Question followed', 'Home / Question followed', 'You ask yourself the same', 'questions,', 'Find here all the questions you\'re following!');
+            $this->addModule('NewDiscussionModule');
+            $bannerModule = new BannerModule('Home', 'Home', '', 'Mutual Aid Zone', 'Welcome to the Mutual Aid Zone! <br/> Do you have a question? Here are the explanations!', '');
             $this->addModule('ProfileFilterModule');
         }
 
@@ -777,7 +779,7 @@ class DiscussionsController extends VanillaController {
 
         $this->addModule($discussionsFooterModule);
 
-        $bannerModule = new BannerModule('My Questions', 'Home / My Questions', 'All my <b>questions,</b>', '', 'Find here all the questions you have asked to the community!');
+        $bannerModule = new BannerModule('Home', 'Home', '', 'Mutual Aid Zone', 'Welcome to the Mutual Aid Zone! <br/> Do you have a question? Here are the explanations!');
         $this->addModule($bannerModule);
 
         // Render view

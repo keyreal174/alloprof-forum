@@ -1,5 +1,5 @@
 $(window).on("scroll", function () {
-    if ($(this).scrollTop() > 450) {
+    if ($(this).scrollTop() > 400) {
         $("header").addClass("not-transparent");
     }
     else {

@@ -2,10 +2,6 @@
     margin-bottom: 12px;
 }
 
-.BoxDiscussionFilter {
-    margin-top: 40px;
-}
-
 .FilterMenu__Dropdown {
     position: relative;
     /* height: 44px; */
@@ -38,7 +34,8 @@
     padding-bottom: 6px;
     padding-top: 20px;
     height: 60px;
-    font-size: 18px;
+    font-family: "ChromaticaMedium";
+    font-size: 15px;
     line-height: 21px;
 }
 
