@@ -52,7 +52,7 @@ if ($this->data('Comments')->numRows() > 0) {
     echo $this->Form->open();
     $discussionUrl = $this->data('Discussion')->Url;
     echo '<div class="CommentHeadingWrapper">';
-    echo '<h2 class="CommentHeading">'.$this->data('_CommentsHeader', t('Explanations')).'('.$this->data('CommentCount').')</h2>';
+    echo '<h2 class="CommentHeading">'.$this->data('_CommentsHeader', t('Explanations')).'('.CommentModel::getPublishedCommentsCount($this->Data['Discussion']->DiscussionID).')</h2>';
     echo '</div>';
     echo $this->Form->close();
 }
@@ -78,7 +78,8 @@ echo '</div>';
 echo $this->data['Published'];
 
 if(userRoleCheck() != Gdn::config('Vanilla.ExtraRoles.Teacher')
-    && $this->Data['Discussion']->Published && $this->Data['Discussion']->InsertUserID == Gdn::session()->UserID) {
+    && $this->Data['Discussion']->Published && $this->Data['Discussion']->InsertUserID == Gdn::session()->UserID
+    && CommentModel::getPublishedCommentsCount($this->Data['Discussion']->DiscussionID) > 0) {
     echo Gdn_Theme::module('CheckAnswerModule');
 }
 
