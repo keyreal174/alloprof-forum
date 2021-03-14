@@ -129,17 +129,17 @@ else:
 
     echo '<div class="SignInLinks">';
 
-    echo anchor(t('Sign In'), signInUrl($this->_Sender->SelfUrl), (signInPopup() ? ' SignInPopup' : ''), ['rel' => 'nofollow']);
+    echo anchor(t('Sign In'), '/entry/jsconnect-redirect?client_id=alloprof', '', ['rel' => 'nofollow']);
 
     echo '<div class="MenuDivider"></div>';
-    $Url = registerUrl($this->_Sender->SelfUrl);
+    $Url = 'https://alloprof.qc.ca/jsconnect/register';
     if (!empty($Url))
-        echo bullet(' ').anchor(t('Register'), $Url, 'SignInPopup', ['rel' => 'nofollow']).' ';
+        echo bullet(' ').anchor(t('Register'), $Url, '', ['rel' => 'nofollow']).' ';
 
     echo '<div class="MenuDivider"></div>';
 
     if (!empty($Url))
-        echo bullet(' ').anchor(t('Teacher'), $Url, 'SignInPopup', ['rel' => 'nofollow']).' ';
+        echo bullet(' ').anchor(t('Teacher'), signInUrl($this->_Sender->SelfUrl), 'SignInPopup', ['rel' => 'nofollow']).' ';
 
     echo '</div>';
 

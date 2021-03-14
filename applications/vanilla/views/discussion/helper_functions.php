@@ -902,7 +902,7 @@ if (!function_exists('writeDiscussionFooter')) :
                             if($userCanComment)
                                 echo $sender->Form->button(t('Give an explanation'), ['class' => 'btn-default btn-shadow']);
                             else {
-                                echo anchor(t('Give an explanation'), url(signInUrl()), 'btn-default btn-shadow SignInPopup');
+                                echo anchor(t('Give an explanation'), '/entry/jsconnect-redirect?client_id=alloprof', 'btn-default btn-shadow');
                             }
 
                             $sender->fireEvent('AfterFormButtons');
