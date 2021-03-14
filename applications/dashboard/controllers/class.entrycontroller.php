@@ -1060,7 +1060,7 @@ class EntryController extends Gdn_Controller {
         }
 
         $this->addJsFile('entry.js');
-        $this->setData('Title', t('Hi! Happy to see you!'));
+        $this->setData('Title', t('Teacher sign-in'));
         // Add open graph description in case a restricted page is shared.
         $this->description(Gdn::config('Garden.Description'));
 

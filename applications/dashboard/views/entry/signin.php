@@ -41,19 +41,19 @@ echo '<div class="MainForm">';
 echo '</div>';
 
 // Render the buttons to select other methods of signing in.
-if (count($Methods) > 0) {
-    echo '<div class="Methods">'
-        .wrap('<b class="Methods-label">'.t('Or you can...').'</b>', 'div');
+// if (count($Methods) > 0) {
+//     echo '<div class="Methods">'
+//         .wrap('<b class="Methods-label">'.t('Or you can...').'</b>', 'div');
 
-    foreach ($Methods as $Key => $Method) {
-        $CssClass = 'Method Method_'.$Key;
-        echo '<div class="'.$CssClass.'">',
-        $Method['SignInHtml'],
-        '</div>';
-    }
+//     foreach ($Methods as $Key => $Method) {
+//         $CssClass = 'Method Method_'.$Key;
+//         echo '<div class="'.$CssClass.'">',
+//         $Method['SignInHtml'],
+//         '</div>';
+//     }
 
-    echo '</div>';
-}
+//     echo '</div>';
+// }
 
 echo '</div>';
 
@@ -73,14 +73,15 @@ echo '</div>';
                 }
 
                 if (c('Garden.Registration.Method') != 'Invitation') {
-                    printf(t("Don't have an account yet? %s"), anchor(t('Sign up!'), '/entry/register'.$Target, '', ['title' => t('Create an Account')]));
+                    // printf(t("Don't have an account yet? %s"), anchor(t('Sign up!'), '/entry/register'.$Target, '', ['title' => t('Create an Account')]));
+                    printf(t("Don't have an account yet? %s"));
                 }
                 ?>
             </div>
         <?php endif; ?>
-        <div>
+        <!-- <div>
             <img src='<?= url("/themes/alloprof/design/images/icons/help.svg") ?>' alt='image' class='HelpIcon' />
-        </div>
+        </div> -->
     </div>
 
 <?php

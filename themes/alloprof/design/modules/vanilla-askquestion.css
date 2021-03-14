@@ -142,7 +142,7 @@
     font-size: 12px;
 }
 
-.BoxNewDiscussion-header .SignInPopup,
+.BoxNewDiscussion-header .AskQuestion,
 .BoxNewDiscussion-header .clickToCreate {
     background: #eee !important;
     border-radius: 6px;
