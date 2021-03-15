@@ -1,0 +1,34 @@
+.beta-banner {
+    background-color: white;
+    min-height: 64px;
+    display: flex;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    padding: 20px;
+}
+
+.beta-banner .info {
+    text-align: center;
+    width: 100%;
+}
+
+.beta-banner .info span {
+    font-size: 15px;
+    color: black;
+}
+
+.beta-banner a {
+    font-size: 15px;
+    text-decoration: underline;
+    color: black;
+    margin-left: 40px;
+}
+
+.beta-banner .close-icon {
+    width: 24px;
+    height: 24px;
+    float: right;
+    cursor: pointer;
+}
