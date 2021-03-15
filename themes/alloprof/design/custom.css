@@ -38,6 +38,7 @@
 @import url("./modules/vanilla-auth.css");
 @import url("./modules/vanilla-confirmfollow.css");
 @import url("./modules/vanilla-notification.css");
+@import url("./modules/vanilla-betabanner.css");
 
 .BoxNewDiscussion {
     -webkit-box-shadow: none;
