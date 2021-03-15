@@ -103,7 +103,7 @@ div.Popup.FlagContentPopup .Body .Content .FlatReportButton input {
 
 /* Social Sharing Popup */
 div.Popup.SocialPopup .Border {
-    width: 891px;
+    width: initial;
 }
 
 div.Popup.CustomPopup.SocialPopup .Body {

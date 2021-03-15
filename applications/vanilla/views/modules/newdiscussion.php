@@ -29,8 +29,9 @@
         <div>
             <?php
                 $UserMetaData = Gdn::userModel()->getMeta(Gdn::session()->UserID, 'Profile.%', 'Profile.');
+                $UserName = $UserMetaData['DisplayName'] ?? t('Unknown');
                 echo "<div class='user-info'>";
-                echo "<div class='username'>".$UserMetaData['DisplayName']."</div>";
+                echo "<div class='username'>".$UserName."</div>";
                 echo "<div class='meta'>".$UserMetaData['Grade']."</div>";
                 echo "</div>";
             ?>
