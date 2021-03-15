@@ -402,29 +402,6 @@ div.Popup .Border {
     display: none;
 }
 
-.TalkTeacher {
-    margin-right: 20px;
-}
-
-.TalkTeacher .TalkTeacher-link_mobile {
-    display: none;
-}
-
-.TalkTeacher .TalkTeacher-link {
-    background-color: transparent;
-}
-
-.Header .MeButton.avatar-button {
-    background-color: transparent!important;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.avatar-button:hover {
-    background-color: transparent!important;
-}
-
 @media screen and (max-width: 1366px) {
     .sidebar.right {
         display: none;
@@ -571,14 +548,6 @@ div.Popup .Border {
     .Content.MainContent .BoxDiscussionFilter.Panel {
         display: block;
         margin-bottom: 40px;
-    }
-
-    .TalkTeacher .TalkTeacher-link_mobile {
-        display: block;
-    }
-
-    .TalkTeacher .TalkTeacher-link {
-        display: none!important;
     }
 }
 
