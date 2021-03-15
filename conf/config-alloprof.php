@@ -137,6 +137,13 @@ $Configuration['ProfileExtender']['Fields'][1]['Required'] = '1';
 $Configuration['ProfileExtender']['Fields'][1]['OnRegister'] = '1';
 $Configuration['ProfileExtender']['Fields'][1]['OnProfile'] = '1';
 $Configuration['ProfileExtender']['Fields'][1]['Name'] = 'DisplayName';
+$Configuration['ProfileExtender']['Fields'][2]['FormType'] = 'CheckBox';
+$Configuration['ProfileExtender']['Fields'][2]['Label'] = 'BetaBannerHidden';
+$Configuration['ProfileExtender']['Fields'][2]['Options'] = '';
+$Configuration['ProfileExtender']['Fields'][2]['Required'] = false;
+$Configuration['ProfileExtender']['Fields'][2]['OnRegister'] = false;
+$Configuration['ProfileExtender']['Fields'][2]['OnProfile'] = false;
+$Configuration['ProfileExtender']['Fields'][2]['Name'] = 'BetaBannerHidden';
 
 // QnA
 $Configuration['QnA']['Points']['Enabled'] = false;
