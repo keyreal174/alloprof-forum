@@ -1798,4 +1798,3 @@ $Definition['DisplayName'] = 'Choisis un pseudo';
 $Definition['Mutual Aid Zone'] = 'Zone d’entraide';
 $Definition['The explanations have helped you!'] = 'Les explications t’ont aidées!';
 $Definition['Teacher sign-in'] = 'Connexion enseignant';
-$Definition['Talk to a teacher'] = 'Parler à un prof';

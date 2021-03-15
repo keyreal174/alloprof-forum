@@ -8701,7 +8701,7 @@ table.PreferenceGroup tbody tr:hover td {
     padding: 0;
     text-decoration: none;
     margin: 0;
-    transition: background .1s ease, border .1s ease;
+    transition: background .1s ease, border .1s ease
 }
 
 .Header .SignInLinks a:first-child {
@@ -8717,7 +8717,7 @@ table.PreferenceGroup tbody tr:hover td {
 
 @media screen and (max-width:768px) {
     .Header .SignInLinks a {
-        /* max-width: 100% */
+        max-width: 100%
     }
 }
 
@@ -8868,13 +8868,13 @@ screen and (-ms-high-contrast:none) {
     will-change: height
 }
 
-/* @media screen and (max-width:768px) {
+@media screen and (max-width:768px) {
 
     .mobileMebox,
     .Navigation {
         display: block
     }
-} */
+}
 
 .mobileMebox.needsInitialization,
 .Navigation.needsInitialization {
