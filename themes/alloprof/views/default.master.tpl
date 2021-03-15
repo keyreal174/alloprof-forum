@@ -84,6 +84,7 @@
     <![endif]-->
 
     <div class="Frame" id="page">
+        {module name="BetaBannerModule"}
         <div class="Frame-top">
             {if $DataDrivenTitleBar}
                 <header id="titleBar" data-react="title-bar-hamburger" style="display: none!important;" data-unhide="true">
@@ -91,6 +92,7 @@
                 </header>
             {else}
                 <div class="Frame-header">
+
                     <header id="MainHeader" class="Header">
                         <div class="row">
                             <div class="Header-left">
@@ -165,7 +167,7 @@
                         <div class="Frame-contentWrap">
                             <div class="Frame-menubar">
                                 {if $User.SignedIn}
-                                        {module name="SubMenuModule"}
+                                    {module name="SubMenuModule"}
                                 {/if}
                             </div>
 
