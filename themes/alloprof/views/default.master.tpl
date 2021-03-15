@@ -217,6 +217,11 @@
         </div>
         <div class="Frame-footer">
             {include file="partials/footer.tpl"}
+            <div class="footer-partner">
+                <div class="Footer-Section CustomFooter">
+                    {module name="CustomFooterModule"}
+                </div>
+            </div>
         </div>
     </div>
     <div id="modals"></div>
