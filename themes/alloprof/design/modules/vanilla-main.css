@@ -8867,14 +8867,14 @@ screen and (-ms-high-contrast:none) {
     width: 100%;
     will-change: height
 }
-
+/*
 @media screen and (max-width:768px) {
 
     .mobileMebox,
     .Navigation {
         display: block
     }
-}
+} */
 
 .mobileMebox.needsInitialization,
 .Navigation.needsInitialization {
