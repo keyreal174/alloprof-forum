@@ -38,12 +38,19 @@ if ($IsProfilePage) {
 }
 
 $UserMetaData = Gdn::userModel()->getMeta(Gdn::session()->UserID, 'Profile.%', 'Profile.');
+$UserName = $UserMetaData["DisplayName"] ?? t('Unknown');
 echo "<div class='Boxuserphoto'>";
 if ($Photo) : ?>
     <div class="Photo PhotoWrap PhotoWrapLarge <?php echo val('_CssClass', $User); ?>">
         <?php
+            $IsDefault = str_contains($Photo, 'avatars/0.svg');
             // if ($User->UserID == Gdn::session()->UserID) {
-                echo "<a ".($IsProfilePage ? '' : 'href="'.$profileUrl.'"')." class='ProfilePhotoLarge'><img src='".$Photo."' class='ProfilePhotoLarge' alt='".$PhotoAlt."'/></a>";
+                echo "<a ".($IsProfilePage ? '' : 'href="'.$profileUrl.'"')." class='ProfilePhotoLarge'>";
+                echo "<img src='".$Photo."' class='ProfilePhotoLarge' alt='".$PhotoAlt."'/>";
+                if ($IsDefault) {
+                    echo "<p class='ProfilePhotoName'>".$UserName[0]."</p>";
+                }
+                echo "</a>";
             // } else {
             //     echo img($Photo, ['class' => 'ProfilePhotoLarge', 'alt' => $PhotoAlt]);
             // }
@@ -57,7 +64,7 @@ if ($Photo) : ?>
 endif;
 ?>
 <div class="userphoto-personalinfo">
-    <a <?php echo $IsProfilePage || $User->UserID !== Gdn::session()->UserID ? '' : 'href="'.$profileUrl.'"' ?> class="userphoto-personalinfo__name"><?php echo $UserMetaData["DisplayName"] ?? t('Unknown'); ?></a>
+    <a <?php echo $IsProfilePage || $User->UserID !== Gdn::session()->UserID ? '' : 'href="'.$profileUrl.'"' ?> class="userphoto-personalinfo__name"><?php echo $UserName; ?></a>
     <a <?php echo $IsProfilePage || $User->UserID !== Gdn::session()->UserID ? '' : 'href="'.$profileUrl.'"' ?> class="userphoto-personalinfo__secondary">
         <?php
             if(userRoleCheck() == Gdn::config('Vanilla.ExtraRoles.Teacher')) {

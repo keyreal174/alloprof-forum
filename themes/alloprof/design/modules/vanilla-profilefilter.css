@@ -72,3 +72,33 @@
     align-items: center;
     justify-content: space-between;
 } */
+
+a.ProfilePhotoLarge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ProfilePhotoName {
+    position: absolute;
+    font-size: 50px !important;
+    color: black;
+    font-weight: bold;
+    margin-top: 0px;
+    text-transform: lowercase;
+}
+
+.ProfilePhotoSmallName {
+    position: absolute;
+    text-align: center;
+    color: black;
+    text-transform: lowercase;
+}
+
+.BoxNewDiscussionProfileName {
+    margin-left: 18px;
+    font-size: 16px;
+    margin-top: 4px;
+    text-transform: lowercase;
+    position: absolute;
+}

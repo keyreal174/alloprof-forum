@@ -24,12 +24,15 @@
 <div class="BoxButtons BoxNewDiscussion AskQuestionForm">
     <div class="BoxNewDiscussion-header">
         <?php
+            $UserMetaData = Gdn::userModel()->getMeta(Gdn::session()->UserID, 'Profile.%', 'Profile.');
+            $UserName = $UserMetaData['DisplayName'] ?? t('Unknown');
             echo img($Photo, ['class' => 'user-avatar', 'alt' => $PhotoAlt]);
+            if (str_contains($Photo, 'avatars/0.svg')) {
+                echo "<p class='BoxNewDiscussionProfileName'>".$UserName[0]."</p>";
+            }
         ?>
         <div>
             <?php
-                $UserMetaData = Gdn::userModel()->getMeta(Gdn::session()->UserID, 'Profile.%', 'Profile.');
-                $UserName = $UserMetaData['DisplayName'] ?? t('Unknown');
                 echo "<div class='user-info'>";
                 echo "<div class='username'>".$UserName."</div>";
                 echo "<div class='meta'>".$UserMetaData['Grade']."</div>";

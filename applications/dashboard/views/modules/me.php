@@ -82,7 +82,14 @@ if ($Session->isValid()):
 
     if ($useNewFlyouts) {
         $imgUrl = userPhotoUrl($User);
-        $triggerIcon = "<img class='ProfilePhoto ProfilePhotoSmall' src='$imgUrl'/>";
+        $UserMetaData = Gdn::userModel()->getMeta(Gdn::session()->UserID, 'Profile.%', 'Profile.');
+        $UserName = $UserMetaData["DisplayName"] ?? t('Unknown');
+
+        if (str_contains($imgUrl, 'avatars/0.svg')) {
+            $triggerIcon = "<img class='ProfilePhoto ProfilePhotoSmall' src='$imgUrl'/><p class='ProfilePhotoSmallName'>".$UserName[0]."</p>";
+        } else {
+            $triggerIcon = "<img class='ProfilePhoto ProfilePhotoSmall' src='$imgUrl'/>";
+        }
     } else {
         $triggerIcon = sprite('SpOptions', 'Sprite Sprite16', $triggerTitle);
     }
