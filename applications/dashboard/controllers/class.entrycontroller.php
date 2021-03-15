@@ -1144,6 +1144,9 @@ class EntryController extends Gdn_Controller {
                             if (!Gdn::session()->checkPermission('Garden.SignIn.Allow')) {
                                 $this->Form->addError('ErrorPermission');
                                 Gdn::session()->end();
+
+                                $this->View('banned');
+                                $this->render();
                             } else {
                                 $clientHour = $this->Form->getFormValue('ClientHour');
                                 $hourOffset = Gdn::session()->User->HourOffset;

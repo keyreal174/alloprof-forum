@@ -1,0 +1,28 @@
+.PageNotFound .Frame-banner, .PageNotFound .Frame-footer {
+    display: none;
+}
+
+.PageNotFound .Content {
+    height: calc(100vh - 270px);
+    display: flex;
+    align-items: center;
+}
+
+.PageNotFound .Content .SplashInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.PageNotFound .Content .SplashInfo h1 {
+    font-size: 28px;
+    line-height: 31px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.PageNotFound .Content .SplashInfo #Message {
+    font-size: 18px;
+    line-height: 21px;
+    margin-bottom: 30px;
+}
