@@ -184,7 +184,7 @@ else:
     $editModifiers['listItemCssClasses'] = ['EditProfileWrap', 'link-editprofile'];
     $preferencesModifiers['listItemCssClasses'] = ['EditProfileWrap', 'link-preferences'];
 
-    $dropdown->addLink(t('Sign In'), '/entry/jsconnect-redirect?client_id=alloprof', 'normalsignin', 'SignInPopup', ['rel' => 'nofollow'], $editModifiers);
+    $dropdown->addLink(t('Sign In'), '/entry/jsconnect-redirect?client_id=alloprof', 'normalsignin', '', ['rel' => 'nofollow'], $editModifiers);
     $dropdown->addLink(t('Register'), 'https://alloprof.qc.ca/jsconnect/register', 'register', '', [], $editModifiers);
     $dropdown->addLink(t('Teacher'), signInUrl($this->_Sender->SelfUrl), 'teachersignin', 'SignInPopup', ['rel' => 'nofollow'], $preferencesModifiers);
 
