@@ -39,6 +39,7 @@
 @import url("./modules/vanilla-confirmfollow.css");
 @import url("./modules/vanilla-notification.css");
 @import url("./modules/vanilla-betabanner.css");
+@import url("./modules/vanilla-newdropdown.css");
 
 .BoxNewDiscussion {
     -webkit-box-shadow: none;
