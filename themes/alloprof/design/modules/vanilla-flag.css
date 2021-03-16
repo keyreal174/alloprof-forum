@@ -178,3 +178,14 @@ div.Popup.SocialPopup .SocialSharingButtons a:focus {
 div.Popup.SocialPopup .SocialSharingButtons a img {
     margin-right: 16px;
 }
+
+div.Popup.BanPopup #Message {
+    color: black;
+    font-size: 18px;
+    line-height: 21px;
+    margin: 16px 0 32px;
+}
+
+div.Popup.BanPopup .btn {
+    margin: 0 auto;
+}
