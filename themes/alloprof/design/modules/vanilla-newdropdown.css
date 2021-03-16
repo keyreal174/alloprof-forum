@@ -6,24 +6,35 @@
 .MeBox.FlyoutRight .Flyout.unauthorized {
     border-top: none;
     min-width: 218px!important;
-    /* height: 176px; */
+    height: 176px;
     padding: 32px!important;
     top: 48px;
 }
 
 .MeBox.FlyoutRight .Flyout.unauthorized li {
     text-align: center;
-    height: 44px;
+    /* height: 44px; */
+}
 
+.MeBox.FlyoutRight .Flyout.unauthorized li:first-child a {
+    border-radius: 38px;
+    padding: 13px;
+    border: 1px solid #000000;
+    font-weight: 600;
+}
+
+.MeBox.FlyoutRight .Flyout.unauthorized li:first-child a:hover {
+    border-radius: 38px;
+    border: 1px solid #000000;
+    font-weight: 600;
+    text-decoration: none;
+    background-color: #05bf8e;
 }
 
 .MeBox.FlyoutRight .Flyout.unauthorized li a:hover {
-    border: 1px solid #000000;
-    border-radius: 38px;
     background-color: white!important;
-    font-weight: 600;
     color: black;
-    /* padding: 13px 28px; */
+    text-decoration: underline;
 }
 
 .MeBox.FlyoutRight .Flyout.unauthorized li a {
@@ -31,6 +42,5 @@
     line-height: 18px;
     font-weight: 300;
     color: black;
-    padding: 12px;
+    padding-top: 13px;
 }
-

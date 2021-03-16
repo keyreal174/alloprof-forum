@@ -472,14 +472,6 @@ div.Popup .Border {
         text-align: center;
         margin-top: 0;
     }
-
-    .TalkTeacher .TalkTeacher-link_mobile {
-        display: block;
-    }
-
-    .TalkTeacher .TalkTeacher-link {
-        display: none!important;
-    }
 }
 
 @media screen and (max-width: 959px) {
@@ -569,6 +561,14 @@ div.Popup .Border {
     .Content.MainContent .BoxDiscussionFilter.Panel {
         display: block;
         margin-bottom: 40px;
+    }
+
+    .TalkTeacher .TalkTeacher-link_mobile {
+        display: block;
+    }
+
+    .TalkTeacher .TalkTeacher-link {
+        display: none!important;
     }
 }
 
