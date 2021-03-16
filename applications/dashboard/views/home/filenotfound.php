@@ -1,9 +1,12 @@
 <?php if (!defined('APPLICATION')) exit(); ?>
 
 <div class="Center SplashInfo">
-    <h1><?php echo $this->sanitize($this->data('Message', t('Page Not Found'))); ?></h1>
+<img src=<?php echo url("/themes/alloprof/design/images/notfoundbot.svg") ?> />
+    <h1><?php echo t('Oh no! It\'s a 404 error'); ?></h1>
 
-    <div id="Message"><?php echo $this->sanitize($this->data('Description', t('The page you were looking for could not be found.'))); ?></div>
+    <div id="Message"><?php echo t('The page you\'re looking for has disappeared!'); ?></div>
+
+    <a href="/discussions" class="btn btn-default btn-shadow"><?php echo t("Return to Home") ?></a>
 </div>
 
 <?php if (debug() && $this->data('Trace')): ?>

@@ -1142,8 +1142,8 @@ class EntryController extends Gdn_Controller {
                             Gdn::userModel()->fireEvent('BeforeSignIn', ['UserID' => $user->UserID ?? false]);
                             Gdn::session()->start(val('UserID', $user), true, (bool)$this->Form->getFormValue('RememberMe'));
                             if (!Gdn::session()->checkPermission('Garden.SignIn.Allow')) {
-                                $this->Form->addError('ErrorPermission');
                                 Gdn::session()->end();
+                                redirectTo('/entry/ban');
                             } else {
                                 $clientHour = $this->Form->getFormValue('ClientHour');
                                 $hourOffset = Gdn::session()->User->HourOffset;
@@ -1901,5 +1901,14 @@ class EntryController extends Gdn_Controller {
         }
 
         return $target;
+    }
+
+    public function ban() {
+        $this->addJsFile('banned.js');
+        $this->render();
+    }
+
+    public function banmodal() {
+        $this->render();
     }
 }

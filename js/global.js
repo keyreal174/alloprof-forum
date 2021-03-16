@@ -522,6 +522,10 @@ jQuery(document).ready(function($) {
         $('a.SocialPopup').popup({containerCssClass: 'SocialPopup CustomPopup'});
     }
 
+    if ($.fn.popup) {
+        $('a.BanPopup').popup({containerCssClass: 'BanPopup CustomPopup'});
+    }
+
     // This turns DeleteDiscussionPopup anchors into in-page popups
     if ($.fn.popup)
         $('a.DeleteDiscussionPopup').popup({containerCssClass: 'DeleteDiscussionPopup'});
