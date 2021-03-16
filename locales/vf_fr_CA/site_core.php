@@ -1805,3 +1805,9 @@ $Definition['Return to Home'] = 'Retourner à l’accueil';
 $Definition['Account suspended'] = 'Compte suspendu';
 $Definition['Your account has been suspended because it violated the site rules. You can get help or additional information by contacting support.'] = 'Ton compte a été suspendu car il n’a pas respecté les régles du site. Tu peux obtenir de l’aide ou des informations complémentaires contactant le support.';
 $Definition['Contact support'] = 'Contacter le support';
+
+$Definition['Be as clear as possible in your question'] = 'Sois le plus clair possible dans ta question.';
+$Definition['Don\'t publish anything offensive'] = 'Ne publie rien d’offensant.';
+$Definition['Make sure your question hasn\'t already been asked'] = 'Assure-toi que ta question n’a pas déjà été posée.';
+$Definition['Explain your methodology so the student progresses'] = 'Explique la démarche pour que l’élève progresse';
+$Definition['Don\'t give the answer, but an explanation!'] = 'Ne donne pas la réponse, mais une explication!';
