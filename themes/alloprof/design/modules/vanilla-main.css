@@ -1,21 +1,41 @@
 @font-face {
-    font-family: Chromatica;
-    src: url("../fonts/chromatica/Chromatica-Regular.otf") format("opentype");
+    font-family: 'Chromatica';
+    src: local('Chromatica Regular'), local('Chromatica-Regular'),
+        url('../fonts/chromatica/Chromatica-Regular.woff2') format('woff2'),
+        url('../fonts/chromatica/Chromatica-Regular.woff') format('woff'),
+        url('../fonts/chromatica/Chromatica-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
 }
 
 @font-face {
-    font-family: ChromaticaBold;
-    src: url("../fonts/chromatica/Chromatica-Bold.otf") format("opentype");
+    font-family: 'ChromaticaMedium';
+    src: local('Chromatica Medium'), local('Chromatica-Medium'),
+        url('../fonts/chromatica/Chromatica-Medium.woff2') format('woff2'),
+        url('../fonts/chromatica/Chromatica-Medium.woff') format('woff'),
+        url('../fonts/chromatica/Chromatica-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
 }
 
 @font-face {
-    font-family: ChromaticaBlack;
-    src: url("../fonts/chromatica/Chromatica-Black.otf") format("opentype");
+    font-family: 'ChromaticaBold';
+    src: local('Chromatica Bold'), local('Chromatica-Bold'),
+        url('../fonts/chromatica/Chromatica-Bold.woff2') format('woff2'),
+        url('../fonts/chromatica/Chromatica-Bold.woff') format('woff'),
+        url('../fonts/chromatica/Chromatica-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
 }
 
 @font-face {
-    font-family: ChromaticaMedium;
-    src: url("../fonts/chromatica/Chromatica-Medium.otf") format("opentype");
+    font-family: 'ChromaticaBlack';
+    src: local('Chromatica Black'), local('Chromatica-Black'),
+        url('../fonts/chromatica/Chromatica-Black.woff2') format('woff2'),
+        url('../fonts/chromatica/Chromatica-Black.woff') format('woff'),
+        url('../fonts/chromatica/Chromatica-Black.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
 }
 
 .NoPanel .Frame-content>.Container {
@@ -2832,7 +2852,12 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
     -webkit-transform: translateY(-50%);
     color: inherit;
     color: #0291db;
-    content: "";
+    background-image: url('../../../../themes/alloprof/design/images/icons/arrowDown.svg');
+    content: '';
+    width: 14px;
+    height: 16px;
+    background-repeat: no-repeat;
+    top: 60%;
     display: inline-block;
     font-family: vanillicon;
     font-style: normal;
