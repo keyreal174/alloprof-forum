@@ -147,7 +147,7 @@
 }
 
 .Favorite-Icon.isLiked {
-    background: url("../../../../themes/alloprof/design/images/icons/like.svg") no-repeat !important;
+    background: url("../../../../themes/alloprof/design/images/icons/liked.svg") no-repeat !important;
     width: 24px;
     height: 24px;
 }
