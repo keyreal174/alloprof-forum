@@ -1799,3 +1799,9 @@ $Definition['Mutual Aid Zone'] = 'Zone d’entraide';
 $Definition['The explanations have helped you!'] = 'Les explications t’ont aidées!';
 $Definition['Teacher sign-in'] = 'Connexion enseignant';
 $Definition['Talk to a teacher'] = 'Parler à un prof';
+
+$Definition['Be as clear as possible in your question'] = 'Sois le plus clair possible dans ta question.';
+$Definition['Don\'t publish anything offensive'] = 'Ne publie rien d’offensant.';
+$Definition['Make sure your question hasn\'t already been asked'] = 'Assure-toi que ta question n’a pas déjà été posée.';
+$Definition['Explain your methodology so the student progresses'] = 'Explique la démarche pour que l’élève progresse';
+$Definition['Don\'t give the answer, but an explanation!'] = 'Ne donne pas la réponse, mais une explication!';

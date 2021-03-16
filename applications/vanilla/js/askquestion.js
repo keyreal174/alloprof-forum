@@ -6,6 +6,9 @@ jQuery(document).ready(function($) {
         $('.BoxNewDiscussion .user-info').show();
         $('.AskQuestionForm .close-icon').addClass('show');
         $(".AskQuestionForm .ql-editor").focus();
+        $(".AskQuestionForm .ql-editor").focus();
+        $('.information-block.newdiscussion').addClass('show');
+
     })
 
     $('.AskQuestionForm .close-icon').click(function(){
@@ -13,6 +16,7 @@ jQuery(document).ready(function($) {
         $('.AskQuestionForm .clickToCreate').show()
         $('.AskQuestionForm .FormWrapper').hide()
         $('.BoxNewDiscussion .user-info').hide();
+        $('.information-block.newdiscussion').removeClass('show');
     })
 
     $('.scrollToAskQuestionForm').click(function(){

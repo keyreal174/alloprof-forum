@@ -142,6 +142,11 @@ select {
 .btn-shadow:active {
     box-shadow: none;
     transform: translateY(3px);
+    outline: none;
+}
+
+.btn-shadow:focus {
+    outline: none;
 }
 
 .btn-m-l-auto {
