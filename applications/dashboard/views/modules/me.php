@@ -174,17 +174,36 @@ else:
 
     echo '<div class="SignInLinks">';
 
-    echo anchor(t('Sign In'), '/entry/jsconnect-redirect?client_id=alloprof', '', ['rel' => 'nofollow']);
+    $dropdown = new DropdownModule('', '', '', 'unauthorized');
+    $dropdown->setData('DashboardCount', $DashboardCount);
 
-    echo '<div class="MenuDivider"></div>';
-    $Url = 'https://alloprof.qc.ca/jsconnect/register';
-    if (!empty($Url))
-        echo bullet(' ').anchor(t('Register'), $Url, '', ['rel' => 'nofollow']).' ';
+    $dropdown->setTrigger('', 'anchor', 'MeButton FlyoutButton MeButton-user unauthorized', '<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="16.0005" cy="9.5" r="5.5" stroke="black" stroke-width="2"/>
+    <rect x="4.00049" y="19.1667" width="24" height="8.83333" rx="4.41667" stroke="black" stroke-width="2"/>
+    </svg>', '/profile/edit', ['title' => '', 'tabindex' => '0', "role" => "button", "aria-haspopup" => "true"]);
+    $editModifiers['listItemCssClasses'] = ['EditProfileWrap', 'link-editprofile'];
+    $preferencesModifiers['listItemCssClasses'] = ['EditProfileWrap', 'link-preferences'];
 
-    echo '<div class="MenuDivider"></div>';
+    $dropdown->addLink(t('Sign In'), '/entry/jsconnect-redirect?client_id=alloprof', 'normalsignin', '', ['rel' => 'nofollow'], $editModifiers);
+    $dropdown->addLink(t('Register'), 'https://alloprof.qc.ca/jsconnect/register', 'register', '', [], $editModifiers);
+    $dropdown->addLink(t('Teacher'), signInUrl($this->_Sender->SelfUrl), 'teachersignin', 'SignInPopup', ['rel' => 'nofollow'], $preferencesModifiers);
 
-    if (!empty($Url))
-        echo bullet(' ').anchor(t('Teacher'), signInUrl($this->_Sender->SelfUrl), 'SignInPopup', ['rel' => 'nofollow']).' ';
+    $this->EventArguments['Dropdown'] = &$dropdown;
+    $this->fireEvent('FlyoutMenu');
+    echo $dropdown;
+
+
+    // echo anchor(t('Sign In'), '/entry/jsconnect-redirect?client_id=alloprof', '', ['rel' => 'nofollow']);
+
+    // echo '<div class="MenuDivider"></div>';
+    // $Url = 'https://alloprof.qc.ca/jsconnect/register';
+    // if (!empty($Url))
+    //     echo bullet(' ').anchor(t('Register'), $Url, '', ['rel' => 'nofollow']).' ';
+
+    // echo '<div class="MenuDivider"></div>';
+
+    // if (!empty($Url))
+    //     echo bullet(' ').anchor(t('Teacher'), signInUrl($this->_Sender->SelfUrl), 'SignInPopup', ['rel' => 'nofollow']).' ';
 
     echo '</div>';
 
