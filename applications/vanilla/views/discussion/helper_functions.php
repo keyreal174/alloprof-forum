@@ -889,11 +889,12 @@ if (!function_exists('writeDiscussionFooter')) :
             </div>
             <div>
                 <?php
+                    $commentsLabel = $commentsCount < 2 ? $commentsCount . ' ' . t('explanation') : $commentsCount . ' ' . t('explanations');
                     if (!$sender->data('IsAnswer')) {
-                        echo '<a class="btn-default" href="'.$discussionUrl.'">'.$commentsCount.' '.t('explanations').'</a>';
+                        echo '<a class="btn-default" href="'.$discussionUrl.'">'.$commentsLabel.'</a>';
                     } else {
                         if ($Discussion->InsertUserID === Gdn::session()->UserID) {
-                            echo '<a class="btn-default">'.$commentsCount.' '.t('explanations').'</a>';
+                            echo '<a class="btn-default">'.$commentsLabel.'</a>';
                         } else {
                             echo '<div class="ReplyQuestionButton">';
 
