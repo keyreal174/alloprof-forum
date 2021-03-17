@@ -74,11 +74,11 @@ if ($this->data('EnableFollowingFilter')) {
 $this->fireEvent('PageControls');
 echo '</div>';
 
-$ulClass = "DataList Discussions";
+// $ulClass = "DataList Discussions";
 
-if ($this->data('Home')) {
-    $ulClass = $ulClass . " Home";
-}
+// if ($this->data('Home')) {
+//     $ulClass = $ulClass . " Home";
+// }
 
 $this->addModule('DiscussionFilterModule', 'Content');
 

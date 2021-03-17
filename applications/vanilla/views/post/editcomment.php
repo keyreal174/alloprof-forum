@@ -3,7 +3,7 @@ $Session = Gdn::session();
 $this->fireEvent('BeforeCommentForm');
 ?>
 <div class="MessageForm EditCommentForm">
-    
+
     <div class="Form-BodyWrap">
         <div class="Form-Body">
             <div class="FormWrapper FormWrapper-Condensed">
@@ -15,7 +15,7 @@ $this->fireEvent('BeforeCommentForm');
                 $this->fireEvent('AfterBodyField');
 
                 $ButtonOptions = ['class' => 'btn-default btn-shadow btn-m-l-auto'];
-                echo "<a href='/' class='close-icon Cancel'><img src='<?= url("/themes/alloprof/design/images/icons/close.svg") ?>' /></a>";
+                echo "<a href='/' class='close-icon Cancel'><img src='".url("/themes/alloprof/design/images/icons/close.svg")."' /></a>";
 
                 echo "<div class=\"Buttons\">\n";
                 if ($Session->isValid()) {
@@ -38,7 +38,7 @@ $this->fireEvent('BeforeCommentForm');
                 echo "</div>\n";
                 echo $this->Form->close();
                 ?>
-                
+
             </div>
         </div>
     </div>

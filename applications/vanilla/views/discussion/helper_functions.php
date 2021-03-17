@@ -564,12 +564,12 @@ if (!function_exists('getCommentOptions')) :
                 $options['QnA'] = ['Label' => '<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M1.29492 12C1.29492 5.92487 6.21979 1 12.2949 1C15.2123 1 18.0102 2.15893 20.0731 4.22183C22.136 6.28473 23.2949 9.08262 23.2949 12C23.2949 18.0751 18.3701 23 12.2949 23C6.21979 23 1.29492 18.0751 1.29492 12Z" fill="#05BF8E" stroke="#05BF8E" stroke-width="2"/>
             <path d="M7.79492 12L10.9769 15.182L17.3409 8.81802" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg><span>'.t('Remove verification').'</span>', 'Url' => 'javascript:;', 'Class' => 'mark-verify', 'Id' => '/discussion/unverify?commentid='.$comment->CommentID];
+            </svg><span>'.t('Remove verification').'</span>', 'Url' => 'javascript:;', 'Class' => 'mark-verify', 'Id' => '/zonedentraide/discussion/unverify?commentid='.$comment->CommentID];
             } else {
                 $options['QnA'] = ['Label' => '<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M1.29492 12C1.29492 5.92487 6.21979 1 12.2949 1C15.2123 1 18.0102 2.15893 20.0731 4.22183C22.136 6.28473 23.2949 9.08262 23.2949 12C23.2949 18.0751 18.3701 23 12.2949 23C6.21979 23 1.29492 18.0751 1.29492 12Z" fill="#05BF8E" stroke="#05BF8E" stroke-width="2"/>
             <path d="M7.79492 12L10.9769 15.182L17.3409 8.81802" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg><span>'.t('Mark as verified').'</span>', 'Url' => 'javascript:;', 'Class' => 'mark-verify', 'Id' => '/discussion/verify?commentid='.$comment->CommentID];
+            </svg><span>'.t('Mark as verified').'</span>', 'Url' => 'javascript:;', 'Class' => 'mark-verify', 'Id' => '/zonedentraide/discussion/verify?commentid='.$comment->CommentID];
             }
 
         }
@@ -584,7 +584,7 @@ if (!function_exists('getCommentOptions')) :
                 'Label' => '<svg width="21" height="22" viewBox="0 0 21 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M14.5853 3.61017C15.1032 3.90423 15.7614 3.72517 16.0589 3.20926C16.3022 2.77995 16.8048 2.56923 17.2815 2.69669C17.7582 2.82415 18.0886 3.2576 18.0851 3.75103C18.0851 4.34945 17.6 4.83457 17.0016 4.83457C16.4032 4.83457 15.9181 5.31969 15.9181 5.91811C15.9181 6.51653 16.4032 7.00165 17.0016 7.00165C18.5788 7.00063 19.9278 5.86752 20.201 4.31413C20.4742 2.76073 19.5929 1.23535 18.1106 0.696217C16.6284 0.157085 14.973 0.759795 14.1844 2.12572C14.0397 2.37551 14.0006 2.6727 14.0759 2.95138C14.1512 3.23007 14.3345 3.4672 14.5853 3.61017ZM19.2446 11.3356C18.6524 11.2588 18.1096 11.6755 18.031 12.2675C17.5605 16.0683 14.3303 18.9221 10.5004 18.9204H4.44342L5.14772 18.2161C5.56783 17.7935 5.56783 17.1109 5.14772 16.6883C2.98737 14.5195 2.34256 11.2646 3.51288 8.43589C4.6832 5.60722 7.4392 3.75936 10.5004 3.75086C11.0988 3.75086 11.5839 3.26574 11.5839 2.66732C11.5839 2.0689 11.0988 1.58378 10.5004 1.58378C6.76216 1.59937 3.36183 3.75059 1.74656 7.12188C0.131296 10.4932 0.585408 14.4911 2.91563 17.4143L1.06278 19.2346C0.755331 19.5462 0.665557 20.0122 0.835236 20.4157C1.00145 20.8203 1.39466 21.0853 1.83209 21.0875H10.5004C15.4133 21.0881 19.5596 17.434 20.1764 12.56C20.2164 12.2739 20.1405 11.9836 19.9655 11.7537C19.7906 11.5238 19.531 11.3733 19.2446 11.3356ZM17.4133 8.16115C17.216 8.07388 16.9972 8.04747 16.7849 8.08531L16.5898 8.15032L16.3948 8.24784L16.2322 8.3887C16.1348 8.48854 16.0575 8.60628 16.0047 8.73543C15.9406 8.87058 15.9109 9.01945 15.918 9.16885C15.9149 9.31335 15.9407 9.45703 15.9939 9.59143C16.0499 9.72147 16.1309 9.83927 16.2322 9.93816C16.4367 10.141 16.7136 10.2541 17.0016 10.2524C17.6 10.2524 18.0851 9.76727 18.0851 9.16885C18.0888 9.02671 18.0591 8.88569 17.9984 8.7571C17.882 8.49673 17.6737 8.28842 17.4133 8.17199V8.16115Z" fill="black"/>
                 </svg><span>'.t('Edit the post').$timeLeft.'</span>',
-                'Url' => '/post/editcomment/'.$comment->CommentID,
+                'Url' => '/zonedentraide/post/editcomment/'.$comment->CommentID,
                 'EditComment'
             ];
         }
@@ -606,7 +606,7 @@ if (!function_exists('getCommentOptions')) :
         if ($canDelete || $canSelfDelete) {
             $options['DeleteComment'] = [
                 'Label' => t('Delete'),
-                'Url' => '/discussion/deletecomment/'.$comment->CommentID.'/'.$session->transientKey().'/?Target='.urlencode("/discussion/{$comment->DiscussionID}/x"),
+                'Url' => '/zonedentraide/discussion/deletecomment/'.$comment->CommentID.'/'.$session->transientKey().'/?Target='.urlencode("/discussion/{$comment->DiscussionID}/x"),
                 'Class' => 'DeleteComment'
             ];
         }
