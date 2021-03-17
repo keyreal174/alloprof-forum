@@ -1,9 +1,11 @@
 $(window).on("scroll", function () {
-    if ($(this).scrollTop() > 400) {
-        $("header").addClass("not-transparent");
-    }
-    else {
-        $("header").removeClass("not-transparent");
+    if($('.Banner-content').length > 0) {
+        if ($(this).scrollTop() > 400) {
+            $("header").addClass("not-transparent");
+        }
+        else {
+            $("header").removeClass("not-transparent");
+        }
     }
 });
 
@@ -21,4 +23,11 @@ jQuery(document).ready(function($) {
 
     $(ContentSelector).prepend("<div id='PagerBefore'></div>");
     $(ContentSelector).append("<div id='PagerAfter'></div>");
+
+    function initHeader() {
+        $("header").addClass("not-transparent");
+    }
+
+    if($('.Banner-content').length === 0)
+        initHeader();
 });

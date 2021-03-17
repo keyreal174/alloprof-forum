@@ -8505,12 +8505,13 @@ table.PreferenceGroup tbody tr:hover td {
 
 .Frame-banner {
     background-color: #CAEDF9;
-    height: 480px;
+    min-height: 70px;
 }
 
 .Banner-content {
     height: 100%;
     position: relative;
+    height: 480px;
 }
 
 .Banner-content.Categories {

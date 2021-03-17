@@ -612,7 +612,7 @@ class DiscussionsController extends VanillaController {
             $this->addModule('ProfileFilterModule');
         }
 
-        $this->addModule($bannerModule);
+        // $this->addModule($bannerModule);
 
         $DiscussionEmpty = true;
         if ($this->DiscussionData->numRows() > 0 || (isset($this->AnnounceData) && is_object($this->AnnounceData) && $this->AnnounceData->numRows() > 0)) {
@@ -779,8 +779,8 @@ class DiscussionsController extends VanillaController {
 
         $this->addModule($discussionsFooterModule);
 
-        $bannerModule = new BannerModule('Home', 'Home', '', 'Mutual Aid Zone', 'Welcome to the Mutual Aid Zone! <br/> Do you have a question? Here are the explanations!');
-        $this->addModule($bannerModule);
+        // $bannerModule = new BannerModule('Home', 'Home', '', 'Mutual Aid Zone', 'Welcome to the Mutual Aid Zone! <br/> Do you have a question? Here are the explanations!');
+        // $this->addModule($bannerModule);
 
         // Render view
         $this->setData('Title', t('My Questions'));
