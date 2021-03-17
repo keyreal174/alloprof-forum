@@ -170,7 +170,7 @@ $Construct
     ->column('LastCommentUserID', 'int', true)
     ->column('Score', 'float', null)
     ->column('Attributes', 'text', true)
-    ->column('RegardingID', 'int(11)', true, 'index')
+    ->column('RegardingID', 'int(11)', true, 'index');
 //->column('Source', 'varchar(20)', true)
 
 $Construct
