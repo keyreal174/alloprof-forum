@@ -653,7 +653,7 @@ if (!function_exists('writeCommentOptions')) :
 
         if (!empty($options)) {
             foreach ($options as $code => $option) {
-                echo wrap("<a href='". $option['Url'] . "' class='" . val('Class', $option, $code) . "' id='". val('Id', $option, $code) ."'>" . $option['Label'] ."</a>", 'li');
+                echo wrap("<a href='". url($option['Url']) . "' class='" . val('Class', $option, $code) . "' id='". val('Id', $option, $code) ."'>" . $option['Label'] ."</a>", 'li');
                 // anchor($option['Label'], $option['Url'], val('Class', $option, $code), val('Id', $option, $code))
             }
         }
@@ -889,11 +889,12 @@ if (!function_exists('writeDiscussionFooter')) :
             </div>
             <div>
                 <?php
+                    $commentsLabel = $commentsCount < 2 ? $commentsCount . ' ' . t('explanation') : $commentsCount . ' ' . t('explanations');
                     if (!$sender->data('IsAnswer')) {
-                        echo '<a class="btn-default" href="'.$discussionUrl.'">'.$commentsCount.' '.t('explanations').'</a>';
+                        echo '<a class="btn-default" href="'.$discussionUrl.'">'.$commentsLabel.'</a>';
                     } else {
                         if ($Discussion->InsertUserID === Gdn::session()->UserID) {
-                            echo '<a class="btn-default">'.$commentsCount.' '.t('explanations').'</a>';
+                            echo '<a class="btn-default">'.$commentsLabel.'</a>';
                         } else {
                             echo '<div class="ReplyQuestionButton">';
 

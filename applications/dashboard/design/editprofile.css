@@ -53,6 +53,8 @@
 .profile-content .BoxProfileInfo_detailbox .BoxProfileInfo_detailbox__item {
     max-width: 125px;
     flex: 1;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 .profile-content .BoxProfileInfo_detailbox .BoxProfileInfo_detailbox__item a {
