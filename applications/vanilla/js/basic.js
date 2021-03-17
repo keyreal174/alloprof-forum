@@ -21,4 +21,44 @@ jQuery(document).ready(function($) {
 
     $(ContentSelector).prepend("<div id='PagerBefore'></div>");
     $(ContentSelector).append("<div id='PagerAfter'></div>");
+
+    function formatState (state) {
+        var data = $(state.element).data();
+        if (!state.id) { return state.text; }
+        var icon = '<div class="category-img"></div>';
+
+        if(data && data['img_src']){
+            icon = '<div class="category-img"><img src="'+data['img_src'] + '"/></div>';
+        }
+        var $state = $(
+          '<span class="image-option">'+ icon + state.text + '</span>'
+       );
+       return $state;
+    };
+
+    function selectCategoryImg (obj) {
+        var data = $(obj.element).data();
+
+        if(data && data['img_src']){
+            $('.category-selected-img').html('<img src="'+data['img_src']+'"/>');
+        } else {
+            $('.category-selected-img').html('');
+        }
+    }
+
+    $('.select2-grade select').select2({
+        minimumResultsForSearch: -1,
+        placeholder: "Select grade",
+    });
+
+    $('.select2-category select').select2({
+        placeholder: "Select category",
+        minimumResultsForSearch: -1,
+        templateResult: formatState
+    }).on('select2:select', function (e) {
+        var data = e.params.data;
+        selectCategoryImg(data);
+    });
+
+    selectCategoryImg($('.select2-category select').select2('data'));
 });
