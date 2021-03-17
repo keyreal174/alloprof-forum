@@ -110,7 +110,7 @@ if (!function_exists('BookmarkButton')) {
         EOT;
 
         $icon_follow = <<<EOT
-        <svg width="19" height="21" viewBox="0 0 19 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg width="21" height="24" viewBox="0 0 19 21" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M1.75049 3.5C1.75049 2.5335 2.53399 1.75 3.50049 1.75H15.2697C16.2362 1.75 17.0197 2.5335 17.0197 3.5V18.6743L10.5623 12.8039C9.89479 12.1971 8.87541 12.1971 8.20792 12.8039L1.75049 18.6743V3.5Z" stroke="black" stroke-width="2.5"/>
         </svg>
         EOT;
@@ -381,6 +381,13 @@ if (!function_exists('writeDiscussionDetail')) :
         $sender->fireEvent('BeforeDiscussionDisplay');
         ?>
         <li id="Discussion_<?php echo $Discussion->DiscussionID; ?>" class="<?php echo $cssClass; ?>">
+            <?php
+                if ($Discussion->DateAccepted) {
+                    echo "<div class='verified-info mobile'>
+                        <img src='".url("/themes/alloprof/design/images/icons/verifiedbadge.svg")."'/><span>".t("Verified by Alloprof")."</span></div>";
+                }
+            ?>
+
             <div class="Discussion">
                 <div class="Item-Header DiscussionHeader">
                     <?php
@@ -398,7 +405,7 @@ if (!function_exists('writeDiscussionDetail')) :
                         <?php
                             if(!$Discussion->Published) {
                                 echo '<div class="not-published-badge">';
-                                echo '<img src="/themes/alloprof/design/images/icons/eyebreak.svg"/>';
+                                echo '<img src="'.url("/themes/alloprof/design/images/icons/eyebreak.svg").'"/>';
                                 echo t('Awaiting publication');
                                 echo '</div>';
                             }
@@ -417,8 +424,7 @@ if (!function_exists('writeDiscussionDetail')) :
                         </span>
                         <span class="AuthorInfo">
                             <?php
-                            echo "<a class='DiscussionHeader_category' href='/categories/".$category["UrlCode"]."'>".$category["Name"]."</a>";
-                            $sender->fireEvent('AuthorInfo');
+                                $sender->fireEvent('AuthorInfo');
                             ?>
                         </span>
                         <?php
@@ -440,7 +446,7 @@ if (!function_exists('writeDiscussionDetail')) :
                         <?php
                             if ($Discussion->DateAccepted) {
                                 echo "<div class='verfied-badge'>
-                                        <img src='/themes/alloprof/design/images/icons/verifiedbadge.svg'/>
+                                        <img src='".url("/themes/alloprof/design/images/icons/verifiedbadge.svg")."'/>
                                         <span>". t('Verified by Alloprof') ."</span>
                                     </div>";
                             }
@@ -476,6 +482,7 @@ if (!function_exists('writeDiscussionDetail')) :
                             writeAttachments($Discussion->Attachments);
                         }
                         ?>
+                        <?php  echo "<a class='QuestionCategory' style='background: ".$category["Color"]."' href='".url('/categories/'.$category["UrlCode"])."'>".$category["Name"]."</a>"; ?>
                     </div>
                     <?php
                         writeDiscussionFooter($Discussion, $sender);
@@ -484,57 +491,6 @@ if (!function_exists('writeDiscussionDetail')) :
             </div>
         </li>
         <?php
-    }
-endif;
-
-
-if (!function_exists('writeCommentForm')) :
-    /**
-     * Output comment form.
-     *
-     * @since 2.1
-     */
-    function writeCommentForm() {
-        $session = Gdn::session();
-        $controller = Gdn::controller();
-
-        // $discussion = $controller->data('Discussion');
-        // $categoryID = val('CategoryID', $discussion);
-        // $userCanClose = CategoryModel::checkPermission($categoryID, 'Vanilla.Discussions.Close');
-        // $userCanComment = CategoryModel::checkPermission($categoryID, 'Vanilla.Comments.Add');
-
-        // // Closed notification
-        // if ($discussion->Closed == '1') {
-        //     ?>
-        //     <div class="Foot Closed">
-        //         <div class="Note Closed"><?php echo t('This discussion has been closed.'); ?></div>
-        //     </div>
-        // <?php
-        // } elseif (!$userCanComment) {
-        //     if (!Gdn::session()->isValid()) {
-        //         ?>
-        //         <div class="Foot Closed">
-        //             <div class="Note Closed SignInOrRegister"><?php
-        //                 $popup = (c('Garden.SignIn.Popup')) ? ' class="Popup"' : '';
-        //                 $returnUrl = Gdn::request()->pathAndQuery();
-        //                 echo formatString(
-        //                     t('Sign In or Register to Comment.', '<a href="{SignInUrl,html}"{Popup}>Sign In</a> or <a href="{RegisterUrl,html}">Register</a> to comment.'),
-        //                     [
-        //                         'SignInUrl' => url(signInUrl($returnUrl)),
-        //                         'RegisterUrl' => url(registerUrl($returnUrl)),
-        //                         'Popup' => $popup
-        //                     ]
-        //                 ); ?>
-        //             </div>
-        //             <?php //echo anchor(t('All Discussions'), 'discussions', 'TabLink'); ?>
-        //         </div>
-        //     <?php
-        //     }
-        // }
-
-        // if (($discussion->Closed == '1' && $userCanClose) || ($discussion->Closed == '0' && $userCanComment)) {
-            echo $controller->fetchView('comment', 'post', 'vanilla');
-        // }
     }
 endif;
 

@@ -3,6 +3,9 @@ $Session = Gdn::session();
 if (!function_exists('WriteComment'))
     include $this->fetchViewLocation('helper_functions', 'discussion');
 
+if (!function_exists('checkAnswer'))
+    include $this->fetchViewLocation('helper_functions', 'discussion');
+
 if (!function_exists('userRoleCheck'))
     include($this->fetchViewLocation('helper_functions', 'discussions', 'vanilla'));
 
@@ -52,7 +55,7 @@ if ($this->data('Comments')->numRows() > 0) {
     echo $this->Form->open();
     $discussionUrl = $this->data('Discussion')->Url;
     echo '<div class="CommentHeadingWrapper">';
-    echo '<h2 class="CommentHeading">'.$this->data('_CommentsHeader', t('Explanations')).'('.$this->data('CommentCount').')</h2>';
+    echo '<h2 class="CommentHeading">'.$this->data('_CommentsHeader', t('Explanations')).'('.CommentModel::getPublishedCommentsCount($this->Data['Discussion']->DiscussionID).')</h2>';
     echo '</div>';
     echo $this->Form->close();
 }
@@ -78,13 +81,14 @@ echo '</div>';
 echo $this->data['Published'];
 
 if(userRoleCheck() != Gdn::config('Vanilla.ExtraRoles.Teacher')
-    && $this->Data['Discussion']->Published && $this->Data['Discussion']->InsertUserID == Gdn::session()->UserID) {
-    echo Gdn_Theme::module('CheckAnswerModule');
+    && $this->Data['Discussion']->Published && $this->Data['Discussion']->InsertUserID == Gdn::session()->UserID
+    && CommentModel::getPublishedCommentsCount($this->Data['Discussion']->DiscussionID) > 0) {
+    echo checkAnswer($this->Data['Discussion']);
 }
 
 if (!$this->Data['Discussion']->Published) {
     echo '<div class="question-not-published">';
-    echo '<img src="/themes/alloprof/design/images/question_not_approved.svg"/>';
+    echo '<img src="'.url("/themes/alloprof/design/images/question_not_approved.svg").'"/>';
     echo '<p>'.t('Your question will be reviewed by a moderator.').'</p>';
     echo '<p>'.t('You will be notified as soon as it is published!').'</p>';
     echo '</div>';

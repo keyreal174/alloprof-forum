@@ -2461,6 +2461,22 @@ class DiscussionModel extends Gdn_Model implements FormatFieldInterface, EventFr
                 unset($fields['DiscussionID']);
                 $oldCategoryID = false;
 
+                $fields['Published'] = true;
+
+                // Check for spam.
+                $spam = SpamModel::isSpam('Discussion', $fields);
+                if ($spam) {
+                    $fields['Published'] = false;
+                    // return SPAM;
+                }
+
+                // Check for approval
+                $approvalRequired = checkRestriction('Vanilla.Approval.Require');
+                if ($approvalRequired && !val('Verified', Gdn::session()->User)) {
+                    $fields['Published'] = false;
+                    // return UNAPPROVED;
+                }
+
                 if ($discussionID > 0) {
                     // Updating
                     $stored = $this->getID($discussionID, DATASET_TYPE_OBJECT);
@@ -2530,23 +2546,6 @@ class DiscussionModel extends Gdn_Model implements FormatFieldInterface, EventFr
                             : c('Garden.InputFormatter', '');
                     }
 
-
-                    $fields['Published'] = true;
-
-                    // Check for spam.
-                    $spam = SpamModel::isSpam('Discussion', $fields);
-                    if ($spam) {
-                        $fields['Published'] = false;
-                        // return SPAM;
-                    }
-
-                    // Check for approval
-                    $approvalRequired = checkRestriction('Vanilla.Approval.Require');
-                    if ($approvalRequired && !val('Verified', Gdn::session()->User)) {
-                        $fields['Published'] = false;
-                        // return UNAPPROVED;
-                    }
-
                     $isValid = true;
                     $invalidReturnType = false;
                     $this->EventArguments['DiscussionData'] = $fields;
@@ -2562,12 +2561,6 @@ class DiscussionModel extends Gdn_Model implements FormatFieldInterface, EventFr
                     $this->serializeRow($fields);
                     $discussionID = $this->SQL->insert($this->Name, $fields);
                     $fields['DiscussionID'] = $discussionID;
-
-                    if (!$fields['Published']) {
-                        // Insert Moderation Queue
-                        LogModel::insert('Pending', 'Discussion', $fields);
-                        // return UNAPPROVED;
-                    }
 
                     // Update cached last post info for a category.
                     CategoryModel::updateLastPost($fields);
@@ -2598,6 +2591,25 @@ class DiscussionModel extends Gdn_Model implements FormatFieldInterface, EventFr
 
                     $discussion = $this->getID($discussionID, DATASET_TYPE_ARRAY);
                     $this->notifyNewDiscussion($discussion);
+                }
+
+
+                if (!$fields['Published']) {
+                    $discussion = $this->getID($discussionID, DATASET_TYPE_ARRAY);
+                    $where = ['Operation' => 'Pending', 'RecordID' => $discussionID, 'RecordType' => 'Discussion'];
+                    $logRow = Gdn::sql()->getWhere('Log', $where)->firstRow(DATASET_TYPE_ARRAY);
+                    $logData = (!$insert)?array_merge($fields, ['DiscussionID' => $discussionID, 'InsertUserID' => $insertUserID, 'DateInserted' => $dateInserted]):$fields;
+
+                    if(!$logRow) {
+                        LogModel::insert('Pending', 'Discussion', $discussion);
+                    } else {
+                        Gdn::sql()->put(
+                            'Log',
+                            ['Data'=> dbencode($discussion)],
+                            ['LogID' => $logRow['LogID']]
+                        );
+                    }
+                    // return UNAPPROVED;
                 }
 
                 // Get CategoryID of this discussion
@@ -2714,7 +2726,6 @@ class DiscussionModel extends Gdn_Model implements FormatFieldInterface, EventFr
             "RecordType" => "Discussion",
             "RecordID" => $discussionID,
             "Route" => discussionUrl($discussion, "", "/"),
-            "Notified" => ActivityModel::SENT_PENDING,
             "Story" => $textstring,
             "Data" => [
                 "Name" => $name,
@@ -4311,5 +4322,13 @@ class DiscussionModel extends Gdn_Model implements FormatFieldInterface, EventFr
         }
 
         return url($result, $withDomain);
+    }
+
+    public function resolved($discussionID) {
+        $this->SQL->put(
+            'Discussion',
+            ['Resolved' => 1],
+            ['DiscussionID' => $discussionID]
+        );
     }
 }

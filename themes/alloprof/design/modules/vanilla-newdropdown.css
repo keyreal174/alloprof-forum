@@ -1,0 +1,46 @@
+.Header .ToggleFlyout .MeButton.unauthorized {
+    background-color: transparent;
+    display: flex;
+}
+
+.MeBox.FlyoutRight .Flyout.unauthorized {
+    border-top: none;
+    min-width: 218px!important;
+    height: 176px;
+    padding: 32px!important;
+    top: 48px;
+}
+
+.MeBox.FlyoutRight .Flyout.unauthorized li {
+    text-align: center;
+    /* height: 44px; */
+}
+
+.MeBox.FlyoutRight .Flyout.unauthorized li:first-child a {
+    border-radius: 38px;
+    padding: 13px;
+    border: 1px solid #000000;
+    font-weight: 600;
+}
+
+.MeBox.FlyoutRight .Flyout.unauthorized li:first-child a:hover {
+    border-radius: 38px;
+    border: 1px solid #000000;
+    font-weight: 600;
+    text-decoration: none;
+    background-color: #05bf8e;
+}
+
+.MeBox.FlyoutRight .Flyout.unauthorized li a:hover {
+    background-color: white!important;
+    color: black;
+    text-decoration: underline;
+}
+
+.MeBox.FlyoutRight .Flyout.unauthorized li a {
+    font-size: 15px;
+    line-height: 18px;
+    font-weight: 300;
+    color: black;
+    padding-top: 13px;
+}

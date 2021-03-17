@@ -283,7 +283,7 @@ if (!function_exists('writeGradeFilter')) :
         }
 
         echo '<div class="FilterMenu__Dropdown">';
-        echo '<img src="/themes/alloprof/design/images/icons/grade.svg"/>';
+        echo '<img src="'.url('/themes/alloprof/design/images/icons/grade.svg').'"/>';
         echo Gdn::controller()->Form->dropDown('GradeDropdown', $GradeOption, array('IncludeNull' => t('Grade'), 'Value' => $gradeID));
         echo '</div>';
     }
@@ -303,7 +303,7 @@ if (!function_exists('writeDiscussionSort')) :
         ];
 
         echo '<div class="FilterMenu__Dropdown">';
-        echo '<img src="/themes/alloprof/design/images/icons/sort.svg"/>';
+        echo '<img src="'.url("/themes/alloprof/design/images/icons/sort.svg").'"/>';
         echo Gdn::controller()->Form->dropDown('DiscussionSort', $options, [ 'Value' => $sort ]);
         echo '</div>';
     }
@@ -386,7 +386,7 @@ if (!function_exists('writeCommentSort')) :
         ];
 
         echo '<div class="FilterMenu__Dropdown">';
-        echo '<img src="/themes/alloprof/design/images/icons/sort.svg"/>';
+        echo '<img src="'.url("/themes/alloprof/design/images/icons/sort.svg").'"/>';
         echo Gdn::controller()->Form->dropDown('CommentSort', $options, [ 'Value' => $sort ]);
         echo '</div>';
     }

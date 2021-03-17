@@ -28,9 +28,14 @@ else
                     }
                     ?>
                     <div class="AuthWrapper">
-                        <?php echo "<img src='".$Row->FirstPhoto."' alt='photo' />" ?>
+                        <?php
+                            $User = Gdn::userModel()->getID($Row->InsertUserID);
+                            echo '<span>';
+                            echo userPhoto($User);
+                            echo '</span>';
+                        ?>
                         <div class="AuthDate">
-                            <span class="UserName"><?php echo $Row->FirstName ?></span>
+                            <span class="UserName"><?php echo userAnchor($User); ?></span>
                             <div>
                             <?php
                                 if (getGrade($Row->GradeID)) {
@@ -51,7 +56,7 @@ else
                         <?php
                             if ($Row->DateAccepted) {
                                 echo "<div class='verfied-badge'>
-                                        <img src='/themes/alloprof/design/images/icons/verifiedbadge.svg'/>
+                                        <img src='".url('/themes/alloprof/design/images/icons/verifiedbadge.svg')."'/>
                                         <span>". t('Verified by Alloprof') ."</span>
                                     </div>";
                             }

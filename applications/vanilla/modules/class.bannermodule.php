@@ -1,7 +1,7 @@
 <?php defined('APPLICATION') or die;
 
 class BannerModule extends Gdn_Module {
-  public function __construct($page, $breadcrumb, $title1="", $title2="", $description="", $image="", $backgroundImage="", $backgroundColor="") {
+  public function __construct($page, $breadcrumb, $title1="", $title2="", $description="", $image="", $additionalClass="") {
     parent::__construct();
     $this->_ApplicationFolder = 'vanilla';
     $this->page = $page;
@@ -10,8 +10,7 @@ class BannerModule extends Gdn_Module {
     $this->title2 = $title2;
     $this->description = $description;
     $this->image = $image;
-    $this->BackgroundImage = $backgroundImage;
-    $this->BackgroundColor = $backgroundColor;
+    $this->additionalClass = $additionalClass;
   }
 
   public function assetTarget() {

@@ -28,7 +28,7 @@ foreach ($Controller->ProfileTabs as $TabCode => $TabInfo) {
 <div class="BoxFilter BoxProfileInfo">
     <?php
     // Get sorted filter links
-    if (Gdn::session()->UserID == $User->UserID) {
+    // if (Gdn::session()->UserID == $User->UserID) {
         if(userRoleCheck() != Gdn::config('Vanilla.ExtraRoles.Teacher')) {
             echo "<div class='BoxProfileInfo_detailbox'>";
             foreach ($SortOrder as $TabCode) {
@@ -37,32 +37,30 @@ foreach ($Controller->ProfileTabs as $TabCode => $TabInfo) {
                 if (array_key_exists($TabCode, $Controller->ProfileTabs)) {
                     $TabInfo = val($TabCode, $Controller->ProfileTabs, []);
                     $CssClass .= val('CssClass', $TabInfo, '');
-                    echo '<div class="BoxProfileInfo_detailbox__item">'.anchor(val('TabHtml', $TabInfo, $TabCode), val('TabUrl', $TabInfo)).$TabCode."</div>";
+                    echo '<div class="BoxProfileInfo_detailbox__item"><div class="count">'.val('TabHtml', $TabInfo, $TabCode).'</div>'.$TabCode."</div>";
+                    // echo '<div class="BoxProfileInfo_detailbox__item"><div class="count">'.anchor(val('TabHtml', $TabInfo, $TabCode), val('TabUrl', $TabInfo)).'</div>'.$TabCode."</div>";
                 }
             }
             echo "</div>";
         }
-    } else {
-        echo "<div class='BoxProfileInfo_detailbox'>";
-        $photoUrl = val('PhotoUrl', $Category);
+    // } else {
+    //     echo "<div class='BoxProfileInfo_detailbox'>";
+    //     $photoUrl = val('PhotoUrl', $Category);
 
-        if($photoUrl)
-            $photo = '<span class="category-icon"><img src="'.$photoUrl.'" class="CategoryPhoto" /></span>';
-        else $photo = '<span class="category-icon"></span>';
+    //     if($photoUrl)
+    //         $photo = '<span class="category-icon"><img src="'.$photoUrl.'" class="CategoryPhoto" /></span>';
+    //     else $photo = '<span class="category-icon"></span>';
 
-        if ($Category["DisplayAs"] === 'Heading') {
-            echo $CountText.' '.htmlspecialchars($Category["Name"]);
-        } else {
-            echo anchor($photo.''.$CountText.' '.htmlspecialchars($Category["Name"]), categoryUrl($Category), 'ItemLink');
-        }
-        echo "</div>";
-    }
+    //     if ($Category["DisplayAs"] === 'Heading') {
+    //         echo $CountText.' '.htmlspecialchars($Category["Name"]);
+    //     } else {
+    //         echo anchor($photo.''.$CountText.' '.htmlspecialchars($Category["Name"]), categoryUrl($Category), 'ItemLink');
+    //     }
+    //     echo "</div>";
+    // }
 
         ?>
     <?php if (Gdn::session()->UserID == $User->UserID) { ?>
-    <!-- <div class="BoxProfileInfo_viewprofile">
-        <a href="/profile" class="BoxProfileInfo_viewprofile__btn"><img src="/themes/alloprof/design/images/icons/emoticon.svg"/><?php echo t('View Profile') ?></a>
-    </div> -->
     <?php } ?>
 </div>
 <?php } ?>

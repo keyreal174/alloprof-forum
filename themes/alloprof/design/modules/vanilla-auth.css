@@ -103,7 +103,7 @@ div.Popup.SignInPopup li.form-group select {
 
 div.Popup.SignInPopup li.form-group:after {
     content: "";
-    background: url('/themes/alloprof/design/images/icons/arrowDown.svg');
+    background: url('../../../../themes/alloprof/design/images/icons/arrowDown.svg');
     width: 14px;
     height: 16px;
     background-repeat: no-repeat;
@@ -163,7 +163,7 @@ div.Popup.SignInPopup .validators .CheckBoxLabel input[type=checkbox] {
 
 div.Popup.SignInPopup .validators .CheckBoxLabel input[type=checkbox]:checked:before {
     content: '';
-    background: url(/themes/alloprof/design/images/icons/tick.svg);
+    background: url('../../../../themes/alloprof/design/images/icons/tick.svg');
     width: 16px;
     height: 11px;
     background-repeat: no-repeat;

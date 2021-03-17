@@ -183,13 +183,17 @@ if (!function_exists('reactionButton')) {
             $template = t('%s comment by user: "%s"');
             $targetName = "";
             $isLiked = ReactionModel::getCurrentStatus($recordType, 9, $iD);
-            $label = "Like";
+            $label = t("Like");
             if ($count) {
-                $additionalLabel = "people found the explanation helpful";
+                if ($count > 1) {
+                    $additionalLabel = "people found the explanation helpful";
+                } else {
+                    $additionalLabel = "person found the explanation helpful";
+                }
             }
             if ($isLiked) {
                 $linkClass = $linkClass . " isLiked";
-                $label = "Dislike";
+                $label = t("Dislike");
             }
         } elseif ($recordType === "activity") {
             $discussionModel = Gdn::getContainer()->get(DiscussionModel::class);
@@ -198,10 +202,10 @@ if (!function_exists('reactionButton')) {
         } else {
             $targetName = is_array($row) ? $row["Name"] : $row->Name;
             $isLiked = ReactionModel::getCurrentStatus($recordType, 9, $iD);
-            $label = "Like";
+            $label = t("Like");
             if ($isLiked) {
                 $linkClass = $linkClass . " isLiked";
-                $label = "Dislike";
+                $label = t("Dislike");
             }
         }
 
@@ -209,16 +213,21 @@ if (!function_exists('reactionButton')) {
         // $downAccessibleLabel= HtmlUtils::accessibleLabel($template, [$label, $targetName]);
 
 
-
-        if ($permissionClass && $permissionClass !== 'Positive' && !checkPermission('Garden.Moderation.Manage')) {
+        if (Gdn::session()->UserID === getValue('InsertUserID', $row)) {
             $result = <<<EOT
-<a class="Hijack Favorite-Icon Option-Icon ReactButton $linkClass" href="$url" tabindex="0" aria-label="$upAccessibleLabel" title="$label" rel="nofollow" role="button">$countHtml <span class="additional-label">$additionalLabel</span></a>
-EOT;
+            <a class="Hijack Favorite-Icon Option-Icon ReactButton $linkClass" tabindex="0" aria-label="$downAccessibleLabel" title="$label" $dataAttr rel="nofollow" role="button">$countHtml <span class="additional-label">$additionalLabel</span></a>
+            EOT;
         } else {
-            $result = <<<EOT
-<a class="Hijack Favorite-Icon Option-Icon ReactButton $linkClass" href="$url" tabindex="0" aria-label="$downAccessibleLabel" title="$label" $dataAttr rel="nofollow" role="button">$countHtml <span class="additional-label">$additionalLabel</span></a>
+            if ($permissionClass && $permissionClass !== 'Positive' && !checkPermission('Garden.Moderation.Manage')) {
+                $result = <<<EOT
+    <a class="Hijack Favorite-Icon Option-Icon ReactButton $linkClass" href="$url" tabindex="0" aria-label="$upAccessibleLabel" title="$label" rel="nofollow" role="button">$countHtml <span class="additional-label">$additionalLabel</span></a>
+    EOT;
+            } else {
+                $result = <<<EOT
+    <a class="Hijack Favorite-Icon Option-Icon ReactButton $linkClass" href="$url" tabindex="0" aria-label="$downAccessibleLabel" title="$label" $dataAttr rel="nofollow" role="button">$countHtml <span class="additional-label">$additionalLabel</span></a>
 
-EOT;
+    EOT;
+            }
         }
 
         return $result;

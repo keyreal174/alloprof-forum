@@ -507,9 +507,135 @@ class PostController extends VanillaController {
             $this->setData('_CancelUrl', url('drafts'));
         }
 
+        $this->CssClass = 'EditDiscussionDetailPage';
+
+        $this->addModule('CategoriesModule');
+        $this->addModule('BookmarkedModule');
+
+        // $this->getUserInfo('', '', $this->Discussion->InsertUserID);
+
+        $this->addModule('UserPhotoModule');
+        // $this->fireEvent('AddProfileInfo');
 
         // Set view and render
         $this->View = 'Discussion';
+        $this->discussion($this->CategoryID);
+    }
+
+    /**
+     * Retrieve the user to be manipulated. Defaults to current user.
+     *
+     * @since 2.0.0
+     * @access public
+     * @param mixed $User Unique identifier, possibly username or ID.
+     * @param string $username .
+     * @param int $userID Unique ID.
+     * @param bool $checkPermissions Whether or not to check user permissions.
+     * @return bool Always true.
+     */
+    public function getUserInfo($userReference = '', $username = '', $userID = '', $checkPermissions = false) {
+        if ($this->_UserInfoRetrieved) {
+            return;
+        }
+
+        if (!c('Garden.Profile.Public') && !Gdn::session()->isValid()) {
+            throw permissionException();
+        }
+
+        // If a UserID was provided as a querystring parameter, use it over anything else:
+        if ($userID) {
+            $userReference = $userID;
+            $username = 'Unknown'; // Fill this with a value so the $UserReference is assumed to be an integer/userid.
+        }
+
+        $this->Roles = [];
+        if ($userReference == '') {
+            if ($username) {
+                $this->User = $this->UserModel->getByUsername($username);
+            } else {
+                $this->User = $this->UserModel->getID(Gdn::session()->UserID);
+            }
+        } elseif (is_numeric($userReference) && $username != '') {
+            $this->User = $this->UserModel->getID($userReference);
+        } else {
+            $this->User = $this->UserModel->getByUsername($userReference);
+        }
+
+        $this->fireEvent('UserLoaded');
+
+        if ($this->User === false) {
+            throw notFoundException('User');
+        } elseif ($this->User->Deleted == 1) {
+            redirectTo('dashboard/home/deleted');
+        } else {
+            $this->RoleData = $this->UserModel->getRoles($this->User->UserID);
+            if ($this->RoleData !== false && $this->RoleData->numRows(DATASET_TYPE_ARRAY) > 0) {
+                $this->Roles = array_column($this->RoleData->resultArray(), 'Name');
+            }
+
+            // Hide personal info roles
+            if (!checkPermission('Garden.PersonalInfo.View')) {
+                $this->Roles = array_filter($this->Roles, 'RoleModel::FilterPersonalInfo');
+            }
+
+            $this->setData('Profile', $this->User);
+            $this->setData('UserRoles', $this->Roles);
+            if ($cssClass = val('_CssClass', $this->User)) {
+                $this->CssClass .= ' '.$cssClass;
+            }
+        }
+
+        if ($checkPermissions && Gdn::session()->UserID != $this->User->UserID) {
+            $this->permission(['Garden.Users.Edit', 'Moderation.Profiles.Edit'], false);
+        }
+
+        // $this->addSideMenu();
+        $this->_UserInfoRetrieved = true;
+        return true;
+    }
+
+    /**
+     * Edit a discussion (wrapper for PostController::Discussion).
+     *
+     * Will throw an error if both params are blank.
+     *
+     * @param int $discussionID Unique ID of the discussion to edit.
+     * @param int $draftID Unique ID of draft discussion to edit.
+     */
+    public function editDiscussionDetail($discussionID = 0, $draftID = 0) {
+        if ($draftID != 0) {
+            $record = $this->Draft = $this->DraftModel->getID($draftID);
+            $this->CategoryID = $this->Draft->CategoryID;
+
+            // Verify this is their draft
+            if (val('InsertUserID', $this->Draft) != Gdn::session()->UserID) {
+                throw permissionException();
+            }
+        } else {
+            $record = $this->DiscussionModel->getID($discussionID);
+            $this->setData('Discussion', $record, true);
+            $this->CategoryID = $this->Discussion->CategoryID;
+        }
+
+        // Normalize the edit data.
+        $this->applyFormatCompatibility($record, 'Body', 'Format');
+
+        // Verify we can add to the category content
+        $this->categoryPermission($this->CategoryID, 'Vanilla.Discussions.Add');
+
+        if (Gdn::config('Garden.ForceInputFormatter')) {
+            $format = Gdn::config('Garden.InputFormatter', '');
+            $this->Form->setFormValue('Format', $format);
+        }
+
+        if ($discussionID > 0) {
+            $this->setData('_CancelUrl', discussionUrl($this->data('Discussion')));
+        } else {
+            $this->setData('_CancelUrl', url('drafts'));
+        }
+
+        // Set view and render
+        $this->View = 'EditDiscussionDetail';
         $this->discussion($this->CategoryID);
     }
 
@@ -776,7 +902,7 @@ class PostController extends VanillaController {
                 // The comment is now half-saved.
                 if (is_numeric($CommentID) && $CommentID > 0) {
                     if (in_array($this->deliveryType(), [DELIVERY_TYPE_ALL, DELIVERY_TYPE_DATA])) {
-                        $this->CommentModel->save2($CommentID, $Inserted, true, true);
+                        // $this->CommentModel->save2($CommentID, $Inserted, true, true);
                     } else {
                         $this->jsonTarget('', url("/post/comment2.json?commentid=$CommentID&inserted=$Inserted"), 'Ajax');
                     }

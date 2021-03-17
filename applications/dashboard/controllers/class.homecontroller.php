@@ -83,7 +83,7 @@ class HomeController extends Gdn_Controller {
 
         $this->MasterView = 'default';
 
-        $this->CssClass = 'SplashMessage NoPanel';
+        $this->CssClass = 'SplashMessage NoPanel PageNotFound';
 
         if ($this->data('ViewPaths')) {
             trace($this->data('ViewPaths'), 'View Paths');

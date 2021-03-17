@@ -38,6 +38,9 @@
 @import url("./modules/vanilla-auth.css");
 @import url("./modules/vanilla-confirmfollow.css");
 @import url("./modules/vanilla-notification.css");
+@import url("./modules/vanilla-betabanner.css");
+@import url("./modules/vanilla-pagenotfound.css");
+@import url("./modules/vanilla-newdropdown.css");
 
 .BoxNewDiscussion {
     -webkit-box-shadow: none;
@@ -71,11 +74,20 @@
     width: 100%;
     border-bottom: 1px solid #DDD;
     display: flex;
-    height: 100px;
+    min-height: 100px;
+    height: auto;
 }
 
 .Question-submenu .Navigation-linkContainer {
     margin: 0 20px;
+}
+
+.Question-submenu .Navigation-linkContainer span.desktop {
+    display: block;
+}
+
+.Question-submenu .Navigation-linkContainer span.mobile {
+    display: none;
 }
 
 .Question-submenu a span.Count {
@@ -112,15 +124,15 @@ select {
     border: 1px solid #1A1919 !important;
     border-radius: 38px !important;
     background: white;
-    color: #1A1919 !important;
-    font-weight: bold;
+    color: black !important;
+    font-family: "ChromaticaBold";
     padding: 10px 30px !important;
-    font-size: 18px !important;
+    font-size: 15px !important;
     width: max-content !important;
     white-space: nowrap;
-    height: 50px;
-    display: flex;
-    align-items: center;
+    height: 44px;
+    display: flex !important;
+    align-items: center !important;
     cursor: pointer;
 }
 
@@ -129,9 +141,18 @@ select {
     transition: 0.3s all;
 }
 
+.btn-shadow:focus {
+    outline: none;
+}
+
 .btn-shadow:active {
     box-shadow: none;
     transform: translateY(3px);
+    outline: none;
+}
+
+.btn-shadow:focus {
+    outline: none;
 }
 
 .btn-m-l-auto {
@@ -222,10 +243,10 @@ select {
 }
 
 .FilterBanner .HomepageTitle {
-    font-size: 21px;
+    font-size: 18px;
     line-height: 25px;
     margin-bottom: 10px;
-    color: #1A1919;
+    color: black;
     margin-bottom: 10px;
 }
 
@@ -255,15 +276,19 @@ select {
 
 .scroll-top {
     text-align: center;
-    margin-top: 30px;
+    margin-top: 20px;
+    margin-bottom: 50px;
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
 }
 
-.scroll-top h2 {
-    margin-bottom: 30px;
+.scroll-top p {
+    margin-bottom: 20px;
+    font-size: 16px;
+    color: #1A1919;
+    font-family: "ChromaticaMedium";
 }
 
 .DataList.Discussions .embedExternal.embedImage {
@@ -368,4 +393,239 @@ div.Popup .Border {
 
 .not-published-badge img {
     margin-right: 15px;
+}
+
+
+/* Hide infinite scroll progressbar */
+.nanobar {
+    display: none !important;
+}
+
+
+.Banner-content__lgtitle {
+    display: none;
+}
+
+.Content.MainContent .BoxDiscussionFilter.Panel {
+    display: none;
+}
+
+.ItemDiscussion .verified-info {
+    display: none;
+}
+
+.TalkTeacher {
+    margin-right: 20px;
+}
+
+.TalkTeacher .TalkTeacher-link_mobile {
+    display: none;
+}
+
+.TalkTeacher .TalkTeacher-link {
+    background-color: transparent;
+}
+
+@media screen and (max-width: 1366px) {
+    .sidebar.right {
+        display: none;
+    }
+
+    .Container {
+        width: 870px!important;
+    }
+
+    .sidebar.left {
+        width: 300px;
+    }
+
+    .Content.MainContent {
+        width: 508px;
+    }
+
+    .Banner-content__Container {
+        justify-content: flex-start;
+        padding-top: 100px;
+        background-position-x: center;
+        background-size: 400px;
+        background-position-y: calc(100% + 40px);
+    }
+
+    .Banner-content.Teacher .Banner-content__Container {
+        background-position-y: calc(100% + 95px);
+    }
+
+    .Banner-content__pagename {
+        display: none;
+    }
+
+    .Banner-content h1 {
+        font-size: 48px;
+        color: black;
+        font-weight: 500;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .Banner-content h1 br {
+        display: none;
+    }
+
+    .Banner-content h1 b {
+        font-weight: 500;
+    }
+
+    .Banner-content .Banner-content__description {
+        font-size: 21px;
+        line-height: 25px;
+        color: black;
+        font-weight: 500;
+        text-align: center;
+        margin-top: 0;
+    }
+}
+
+@media screen and (max-width: 959px) {
+    .Header {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .Question-submenu .Navigation-linkContainer span.desktop {
+        display: none;
+    }
+
+    .Question-submenu .Navigation-linkContainer span.mobile {
+        display: inline-block;
+    }
+
+    .Frame-banner .Banner-content {
+        display: none;
+    }
+
+    .Frame-banner, .Frame-header {
+        height: 132px;
+        background-color: white;
+    }
+
+    .Frame-header {
+        box-shadow: 0px 0px 20px rgb(0 0 0 / 5%);
+    }
+
+    .Frame-menubar {
+        top: 132px;
+    }
+
+    .Frame-header .Header .row {
+        height: 132px;
+        align-items: flex-start;
+    }
+
+    .Frame-header .Header .Header-left {
+        position: absolute;
+        bottom: 10px;
+        width: calc(100% - 32px);
+    }
+
+    .Frame-header .Header .Header-logo {
+        height: 70px;
+        margin-left: 0;
+    }
+
+    .Frame-header .Header .Header-right {
+        height: 70px;
+    }
+
+    .Frame-menubar {
+        max-width: 580px;
+        margin: 0 auto;
+    }
+
+    .Navigation-linkContainer a {
+        display: block;
+        text-align: center;
+        font-size: 13px;
+        line-height: 18px;
+    }
+
+    .Navigation-linkContainer svg {
+        width: 100%;
+    }
+
+    .Navigation-link {
+        padding: 0;
+    }
+
+    .Container {
+        width: 100%!important;
+    }
+
+    .sidebar.left {
+        display: none;
+    }
+
+    .Content.MainContent {
+        max-width: 580px;
+        margin: 0 auto;
+    }
+
+    .Content.MainContent .BoxDiscussionFilter.Panel {
+        display: block;
+        margin-bottom: 40px;
+    }
+
+    .TalkTeacher .TalkTeacher-link_mobile {
+        display: block;
+    }
+
+    .TalkTeacher .TalkTeacher-link {
+        display: none!important;
+    }
+}
+
+@media screen and (max-width: 619px) {
+    .ItemDiscussion .verified-info {
+        min-height: 42px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #DBF8EF;
+        border-radius: 8px;
+        font-size: 12px;
+        line-height: 14px;
+        margin-bottom: 16px;
+    }
+
+    .ItemDiscussion .verified-info img {
+        margin-right: 8px;
+        width: 16px;
+        height: 16px;
+    }
+
+    .ItemDiscussion .verfied-badge {
+        display: none;
+    }
+
+    .DataList .ItemDiscussion, .DataList .Item, .MessageList .ItemDiscussion.ItemDiscussion, .MessageList .ItemComment .Comment {
+        padding: 16px;
+    }
+
+}
+
+
+/* rich editor remove icons */
+#paragraphMenu1-formattingMenus-component {
+    display: none;
+}
+
+.richEditor-menuItems.richEditor-inlineMenuItems li:nth-child(1),
+.richEditor-menuItems.richEditor-inlineMenuItems li:nth-child(3),
+.richEditor-menuItems.richEditor-inlineMenuItems li:nth-child(4) {
+    display: none;
+}
+
+.editorEventWall div[role='toolbar'] button:nth-child(1),
+.editorEventWall div[role='toolbar'] button:nth-child(2),
+.editorEventWall div[role='toolbar'] button:nth-child(3) {
+    display: none;
 }

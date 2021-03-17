@@ -25,7 +25,9 @@ if (is_array($sender->RegistrationFields)) {
             echo wrap($sender->Form->{$Field['FormType']}($Name, $Field['Label']), 'li');
         } else {
             if ($Name === 'Grade') {
-                echo wrap($sender->Form->{$Field['FormType']}($Name, $Options), 'li', ['class' => 'form-group', 'placeholder' => t('')]);
+                echo wrap($sender->Form->{$Field['FormType']}($Name, $Options), 'li', ['class' => 'form-group select', 'placeholder' => t('')]);
+            } elseif ($Name === 'DisplayName') {
+                echo wrap($sender->Form->{$Field['FormType']}($Name, ['placeholder' => t('DisplayName')]), 'li', []);
             } else {
                 echo wrap($sender->Form->label($Field['Label'], $Name).
                     $sender->Form->{$Field['FormType']}($Name, $Options), 'li', ['class' => 'form-group']);

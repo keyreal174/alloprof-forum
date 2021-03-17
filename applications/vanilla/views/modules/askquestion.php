@@ -8,11 +8,11 @@ require Gdn::controller()->fetchViewLocation('helper_functions', 'Discussions', 
 if(userRoleCheck() != Gdn::config('Vanilla.ExtraRoles.Teacher')) {
 ?>
 <div class="scroll-top">
-    <h2><?php echo t("Can't find answers?") ?></h2>
+    <p><?php echo t("Can't find answers?") ?></p>
     <?php
         if($Session->isValid())
             echo '<button class="btn-default btn-shadow scrollToAskQuestionForm">'.t("Ask a question").'</button>';
-        else echo anchor(t('Ask a question'), $SigninUrl, 'btn-default btn-shadow'.(signInPopup() ? ' SignInPopup' : ''), ['rel' => 'nofollow', 'aria-label' => t("Sign In Now")]);
+        else echo anchor(t('Ask a question'), '/entry/jsconnect-redirect?client_id=alloprof', 'btn-default btn-shadow', ['rel' => 'nofollow', 'aria-label' => t("Sign In Now")]);
     ?>
 </div>
 <?php } ?>

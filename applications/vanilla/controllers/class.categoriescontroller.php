@@ -20,7 +20,7 @@ use Vanilla\Site\SiteSectionModel;
 class CategoriesController extends VanillaController {
 
     /** @var array Models to include.*/
-    public $Uses = ['Database', 'Form', 'CategoryModel', 'UserModel'];
+    public $Uses = ['Database', 'Form', 'CategoryModel', 'UserModel', 'CommentModel'];
 
     /** @var CategoryModel */
     public $CategoryModel;

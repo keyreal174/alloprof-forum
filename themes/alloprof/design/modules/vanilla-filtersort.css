@@ -2,10 +2,6 @@
     margin-bottom: 12px;
 }
 
-.BoxDiscussionFilter {
-    margin-top: 40px;
-}
-
 .FilterMenu__Dropdown {
     position: relative;
     /* height: 44px; */
@@ -13,7 +9,7 @@
 
 .FilterMenu__Dropdown .SelectWrapper:after {
     content: "";
-    background: url('/themes/alloprof/design/images/icons/arrowDown.svg');
+    background: url('../../../../themes/alloprof/design/images/icons/arrowDown.svg');
     width: 14px;
     height: 16px;
     background-repeat: no-repeat;
@@ -38,7 +34,8 @@
     padding-bottom: 6px;
     padding-top: 20px;
     height: 60px;
-    font-size: 18px;
+    font-family: "ChromaticaMedium";
+    font-size: 15px;
     line-height: 21px;
 }
 
@@ -85,6 +82,11 @@
     cursor: pointer;
 }
 
+.FilterMenu .toggle-wrap input[type=checkbox]:checked + label::before {
+    background-color: #05BF8E;
+    border-color: #05BF8E;
+}
+
 .FilterMenu .toggle-wrap input[type=checkbox] + label::after {
     display: block;
     position: absolute;
@@ -102,12 +104,12 @@
 .FilterMenu .toggle-wrap input[type=checkbox]:checked + label::after {
     left: 26px;
     border: 0;
+    background-color: white;
 }
 
 .FilterMenu .label {
     font-size: 16px;
     line-height: 19px;
     color: black;
-    max-width: 150px;
     margin-right: 20px;
 }

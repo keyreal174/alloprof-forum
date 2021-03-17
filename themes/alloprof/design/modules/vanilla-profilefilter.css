@@ -4,8 +4,8 @@
 
 .BoxProfileInfo .BoxProfileInfo_detailbox {
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
+    flex-wrap: wrap;
     border-top: 1px solid #E0E0E0;
     padding-top: 28px;
 }
@@ -14,6 +14,10 @@
     text-align: center;
     max-width: 95px;
     background-color: #F3F5F7;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     height: 80px;
     font-size: 12px;
     line-height: 14px;
@@ -24,12 +28,13 @@
     margin: 5px;
 }
 
-.BoxProfileInfo .BoxProfileInfo_detailbox .BoxProfileInfo_detailbox__item a {
+.BoxProfileInfo .BoxProfileInfo_detailbox .BoxProfileInfo_detailbox__item div.count {
     justify-content: center;
     font-size: 28px;
     line-height: 33px;
     color: black;
     font-weight: bold;
+    font-family: "ChromaticaBlack";
 }
 
 .BoxProfileInfo .BoxProfileInfo_viewprofile {
@@ -67,3 +72,33 @@
     align-items: center;
     justify-content: space-between;
 } */
+
+a.ProfilePhotoLarge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ProfilePhotoName {
+    position: absolute;
+    font-size: 50px !important;
+    color: black;
+    font-weight: bold;
+    margin-top: 0px;
+    text-transform: lowercase;
+}
+
+.ProfilePhotoSmallName {
+    position: absolute;
+    text-align: center;
+    color: black;
+    text-transform: lowercase;
+}
+
+.BoxNewDiscussionProfileName {
+    margin-left: 18px;
+    font-size: 16px;
+    margin-top: 4px;
+    text-transform: lowercase;
+    position: absolute;
+}

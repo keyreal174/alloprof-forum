@@ -7,7 +7,7 @@ echo '<div class="FormTitleWrapper AjaxForm">';
 ?>
 <div class='FormSummary'>
     <h1 class='Title'><?php echo $this->data('Title'); ?></h1>
-    <img src='/themes/alloprof/design/images/authAvatar.svg' alt='image' class='AuthAvatar' />
+    <img src='<?= url("/themes/alloprof/design/images/authAvatar.svg") ?>' alt='image' class='AuthAvatar' />
 </div>
 <?php
 echo '<div class="FormWrapper">';
@@ -24,13 +24,13 @@ echo '<div class="MainForm">';
     <ul role="presentation">
         <li role="presentation">
             <?php
-            echo $this->Form->textBox('Email', ['id' => 'Form_Email', 'class' => 'InputBox', 'autocorrect' => 'off', 'autocapitalize' => 'off', 'Wrap' => TRUE, 'placeholder' => t('Email address or nickname')]);
+            echo $this->Form->textBox('Email', ['id' => 'Form_Email', 'class' => 'InputBox', 'autocorrect' => 'off', 'autocapitalize' => 'off', 'Wrap' => TRUE, 'placeholder' => t('Email address')]);
             ?>
         </li>
         <li role="presentation">
             <?php
             echo $this->Form->input('Password', 'password', ['class' => 'InputBox Password', 'placeholder' => t('Password')]);
-            echo '<span class="EyeIcon EyeIconPassword"><img src="/themes/alloprof/design/images/icons/eye.svg" alt="image" /></span>';
+            echo '<span class="EyeIcon EyeIconPassword"><img src="'.url("/themes/alloprof/design/images/icons/eye.svg").'" alt="image" /></span>';
             ?>
             <!-- echo anchor(t('Forgot?'), '/entry/passwordrequest', 'ForgotPassword', ['title' => t('Forgot your password?')]); -->
         </li>
@@ -41,19 +41,19 @@ echo '<div class="MainForm">';
 echo '</div>';
 
 // Render the buttons to select other methods of signing in.
-if (count($Methods) > 0) {
-    echo '<div class="Methods">'
-        .wrap('<b class="Methods-label">'.t('Or you can...').'</b>', 'div');
+// if (count($Methods) > 0) {
+//     echo '<div class="Methods">'
+//         .wrap('<b class="Methods-label">'.t('Or you can...').'</b>', 'div');
 
-    foreach ($Methods as $Key => $Method) {
-        $CssClass = 'Method Method_'.$Key;
-        echo '<div class="'.$CssClass.'">',
-        $Method['SignInHtml'],
-        '</div>';
-    }
+//     foreach ($Methods as $Key => $Method) {
+//         $CssClass = 'Method Method_'.$Key;
+//         echo '<div class="'.$CssClass.'">',
+//         $Method['SignInHtml'],
+//         '</div>';
+//     }
 
-    echo '</div>';
-}
+//     echo '</div>';
+// }
 
 echo '</div>';
 
@@ -73,14 +73,15 @@ echo '</div>';
                 }
 
                 if (c('Garden.Registration.Method') != 'Invitation') {
-                    printf(t("Don't have an account yet? %s"), anchor(t('Sign up!'), '/entry/register'.$Target, '', ['title' => t('Create an Account')]));
+                    // printf(t("Don't have an account yet? %s"), anchor(t('Sign up!'), '/entry/register'.$Target, '', ['title' => t('Create an Account')]));
+                    printf(t("Don't have an account yet? %s"));
                 }
                 ?>
             </div>
         <?php endif; ?>
-        <div>
-            <img src='/themes/alloprof/design/images/icons/help.svg' alt='image' class='HelpIcon' />
-        </div>
+        <!-- <div>
+            <img src='<?= url("/themes/alloprof/design/images/icons/help.svg") ?>' alt='image' class='HelpIcon' />
+        </div> -->
     </div>
 
 <?php

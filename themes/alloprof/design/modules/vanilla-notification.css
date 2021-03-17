@@ -4,7 +4,6 @@
 
 .notification-settings-content {
     flex-wrap: wrap !important;
-    padding: 10px 0;
     overflow: hidden;
     height: 0;
     transition: 0.3s all;
@@ -12,6 +11,7 @@
 
 .notification-settings-content.open {
     height: auto;
+    padding: 15px 0;
 }
 
 .notification-settings-content > div {
@@ -128,7 +128,7 @@
 }
 
 .InformMessage .toast-container {
-    padding: 20px;
+    padding: 20px 35px;
     display: flex;
 }
 

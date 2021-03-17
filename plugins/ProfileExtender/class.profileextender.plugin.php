@@ -366,11 +366,13 @@ class ProfileExtenderPlugin extends Gdn_Plugin {
         $this->ProfileFields = $this->getProfileFields($stripBuiltinFields);
         $this->ProfileFields = $eventManager->fireFilter("modifyProfileFields", $this->ProfileFields);
         // Get user-specific data
+        $userId = $Sender->Form->getValue('UserID');
         $this->UserFields = $this->getUserProfileValues([$Sender->Form->getValue('UserID')]);
 
         $this->fireEvent('beforeGetProfileFields');
         // Fill in user data on form
-        foreach ($this->UserFields as $Field => $Value) {
+
+        foreach (($this->UserFields)[$userId] as $Field => $Value) {
             $Sender->Form->setValue($Field, $Value);
         }
 

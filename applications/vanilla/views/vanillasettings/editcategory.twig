@@ -59,6 +59,14 @@ dashboardHeading({
             {{ form.textBox('CssClass', {'MultiLine': false}) }}
         </div>
     </li>
+    <li class="form-group">
+        <div class="label-wrap">
+            {{ form.label('Color', 'Color') }}
+        </div>
+        <div class="input-wrap">
+            {{ form.textBox('Color', {'MultiLine': false}) }}
+        </div>
+    </li>
     {{ form.imageUploadReact(
         'Photo',
         t('Photo')

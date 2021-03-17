@@ -45,6 +45,7 @@ class AlloprofPlugin extends Gdn_Plugin {
             ->column('Published', 'tinyint(1)', '0')
             ->column('DateAccepted', 'datetime', true)
             ->column('AcceptedUserID', 'int', true)
+            ->column('Resolved', 'tinyint(1)', 0)
             ->set();
 
         $St->table('Comment')
@@ -54,6 +55,9 @@ class AlloprofPlugin extends Gdn_Plugin {
             ->column('AcceptedUserID', 'int', true)
             ->set();
 
+        $St->table('Category')
+            ->column('Color', 'varchar(50)', null)
+            ->set();
     }
 
 }

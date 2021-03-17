@@ -8,6 +8,8 @@ if (!defined('APPLICATION')) {
     exit();
 }
 use Vanilla\Utility\HtmlUtils;
+if (!function_exists('timeElapsedString'))
+    include($this->fetchViewLocation('helper_functions', 'discussions', 'vanilla'));
 
 
 if (!function_exists('formatBody')) :
@@ -124,7 +126,7 @@ if (!function_exists('writeComment')) :
             <?php
                 if ($comment->DateAccepted) {
                     echo '<div class="verfied-info">
-                            <img src="/themes/alloprof/design/images/icons/verifiedbadge.svg"/>
+                            <img src="'.url("/themes/alloprof/design/images/icons/verifiedbadge.svg").'"/>
                             <span>'.t("Explanation verified by Alloprof").'</span>
                         </div>';
                 }
@@ -145,7 +147,7 @@ if (!function_exists('writeComment')) :
                         <?php
                             if(!$comment->Published) {
                                 echo '<div class="not-published-badge">';
-                                echo '<img src="/themes/alloprof/design/images/icons/eyebreak.svg"/>';
+                                echo '<img src="'.url("/themes/alloprof/design/images/icons/eyebreak.svg").'"/>';
                                 echo t('Awaiting publication');
                                 echo '</div>';
                             }
@@ -155,7 +157,9 @@ if (!function_exists('writeComment')) :
                         if ($userPhotoFirst) {
                             echo userPhoto($author);
                             if ($sender->getUserRole($comment->InsertUserID) == "Teacher") {
-                                echo '<a href="/profile/'.$author->Name.'" class="Username js-userCard" data-userid="'.$author->UserID.'">'.$author->Name.'<svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                $UserMetaData = Gdn::userModel()->getMeta($author->UserID, 'Profile.%', 'Profile.');
+                                $name = $UserMetaData["DisplayName"] ?? t("Unknown");
+                                echo '<a class="Username js-userCard" data-userid="'.$author->UserID.'">'.$name.'<svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M1.25 8.5C1.25 4.77208 4.27208 1.75 8 1.75C9.79021 1.75 11.5071 2.46116 12.773 3.72703C14.0388 4.9929 14.75 6.70979 14.75 8.5C14.75 12.2279 11.7279 15.25 8 15.25C4.27208 15.25 1.25 12.2279 1.25 8.5Z" fill="#05BF8E" stroke="#05BF8E" stroke-width="2.5"/>
                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M4.46978 7.96967C4.76268 7.67678 5.23755 7.67678 5.53044 7.96967L7.12143 9.56066L10.8337 5.84835C11.1266 5.55546 11.6015 5.55546 11.8944 5.84835C12.1873 6.14124 12.1873 6.61612 11.8944 6.90901L7.65176 11.1517C7.35887 11.4445 6.884 11.4445 6.5911 11.1517L4.46978 9.03033C4.17689 8.73744 4.17689 8.26256 4.46978 7.96967Z" fill="white"/>
                                 </svg></a>';
@@ -281,7 +285,7 @@ if (!function_exists('getDiscussionOptions')) :
             if ($timeLeft) {
                 $timeLeft = ' ('.Gdn_Format::seconds($timeLeft).')';
             }
-            $options['EditDiscussion'] = ['Label' => t('Edit').$timeLeft, 'Url' => '/post/editdiscussion/'.$discussion->DiscussionID];
+            $options['EditDiscussion'] = ['Label' => t('Edit').$timeLeft, 'Url' => '/post/editdiscussion/'.$discussion->DiscussionID, 'Class' => 'EditDiscussion'];
         }
 
         // Can the user announce?
@@ -432,7 +436,7 @@ if (!function_exists('getDiscussionOptionsDropdown')):
 
         $dropdown->addLInkIf($flagLink['isAllowed'], $flagLink['name'], $flagLink['url'], 'FlagMenuItem', $flagLink['type'])
             ->addLinkIf($canDismiss, t('Dismiss'), "vanilla/discussion/dismissannouncement?discussionid={$discussionID}", 'dismiss', 'DismissAnnouncement Hijack')
-            ->addLinkIf($canEdit, t('Edit').$timeLeft, '/post/editdiscussion/'.$discussionID, 'edit')
+            ->addLinkIf($canEdit, t('Edit').$timeLeft, '/post/editdiscussion/'.$discussionID, 'edit', 'EditDiscussion')
             ->addLinkIf($canTag, t('Tag'), '/discussion/tag?discussionid='.$discussionID, 'tag', 'TagDiscussion Popup');
 
         if ($canEdit && $canAnnounce) {
@@ -649,7 +653,7 @@ if (!function_exists('writeCommentOptions')) :
 
         if (!empty($options)) {
             foreach ($options as $code => $option) {
-                echo wrap("<a href='". $option['Url'] . "' class='" . val('Class', $option, $code) . "' id='". val('Id', $option, $code) ."'>" . $option['Label'] ."</a>", 'li');
+                echo wrap("<a href='". url($option['Url']) . "' class='" . val('Class', $option, $code) . "' id='". val('Id', $option, $code) ."'>" . $option['Label'] ."</a>", 'li');
                 // anchor($option['Label'], $option['Url'], val('Class', $option, $code), val('Id', $option, $code))
             }
         }
@@ -695,7 +699,7 @@ if (!function_exists('writeCommentForm')) :
         } elseif (!$userCanComment) {
             if (!Gdn::session()->isValid()) {
                 ?>
-                <div class="Foot Closed">
+                <!-- <div class="Foot Closed">
                     <div class="Note Closed SignInOrRegister"><?php
                         $popup = (c('Garden.SignIn.Popup')) ? ' class="Popup"' : '';
                         $returnUrl = Gdn::request()->pathAndQuery();
@@ -709,7 +713,7 @@ if (!function_exists('writeCommentForm')) :
                         ); ?>
                     </div>
                     <?php //echo anchor(t('All Discussions'), 'discussions', 'TabLink'); ?>
-                </div>
+                </div> -->
             <?php
             }
         }
@@ -844,9 +848,28 @@ if (!function_exists('formatMeAction')) :
     }
 endif;
 
+if (!function_exists('writeSocialSharing')) :
+    function writeSocialSharing($Discussion) {
+        $socialLink = anchor(
+            '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18.212 1.72792C20.7227 0.890167 23.1096 3.27703 22.2718 5.78774L17.2974 20.6959C16.3451 23.5498 12.3495 23.6477 11.2592 20.8514L9.67995 16.8012C9.23627 15.6634 8.33639 14.7635 7.19853 14.3198L3.14834 12.7405C0.352028 11.6502 0.449971 7.6546 3.30385 6.70235L18.212 1.72792Z" stroke="black" stroke-width="2"/>
+                <path d="M9.35449 14.6455L15.4737 8.52631" stroke="black" stroke-width="2" stroke-linecap="round"/>
+            </svg>',
+            'discussion/social/'.$Discussion->DiscussionID,
+            'SocialIcon SocialPopup',
+            ['rel' => 'nofollow', 'title' => t("Share")]
+        );
+
+        echo wrap($socialLink, 'span', ['class' => 'MItem SocialLink']);
+    }
+endif;
+
 if (!function_exists('writeDiscussionFooter')) :
     function writeDiscussionFooter($Discussion, $sender ,$page='') {
         $discussionUrl = $Discussion->Url;
+        $isUser = $Discussion->InsertUserID === Gdn::session()->UserID;
+        $commentsCount = CommentModel::getPublishedCommentsCount($Discussion->DiscussionID);
+        $userCanComment = CategoryModel::checkPermission($categoryID, 'Vanilla.Comments.Add');
         ?>
         <div class="Item-Footer">
             <div class="Item-Footer-Icons">
@@ -855,34 +878,37 @@ if (!function_exists('writeDiscussionFooter')) :
 
                 if (!Gdn::themeFeatures()->get('EnhancedAccessibility')) {
                         echo '<span class="Options">';
-                        echo bookmarkButton($Discussion);
+                        if (!$isUser) {
+                            echo bookmarkButton($Discussion);
+                        }
                         writeReactions($Discussion);
-                        echo '<a class="Back-Icon Option-Icon"></a>';
+                        writeSocialSharing($Discussion);
                         echo '</span>';
                     }
                 ?>
-                <?php
-                    if ($page !== 'search') {
-                ?>
-                <div class="Separator"></div>
-                <span class="Response">
-                    <?php
-                        echo $Discussion->CountComments . ' ' . 'réponses';
-                    ?>
-                </span>
-                <?php } ?>
             </div>
             <div>
                 <?php
+                    $commentsLabel = $commentsCount < 2 ? $commentsCount . ' ' . t('explanation') : $commentsCount . ' ' . t('explanations');
                     if (!$sender->data('IsAnswer')) {
-                        echo '<a class="btn-default" href="'.$discussionUrl.'">'.t('See').'</a>';
+                        echo '<a class="btn-default" href="'.$discussionUrl.'">'.$commentsLabel.'</a>';
                     } else {
-                        echo '<div class="ReplyQuestionButton">';
+                        if ($Discussion->InsertUserID === Gdn::session()->UserID) {
+                            echo '<a class="btn-default">'.$commentsLabel.'</a>';
+                        } else {
+                            echo '<div class="ReplyQuestionButton">';
 
-                        $sender->fireEvent('BeforeFormButtons');
-                        echo $sender->Form->button('Reply', ['class' => 'btn-default btn-shadow']);
-                        $sender->fireEvent('AfterFormButtons');
-                        echo '</div>';
+                            $sender->fireEvent('BeforeFormButtons');
+
+                            if($userCanComment)
+                                echo $sender->Form->button(t('Give an explanation'), ['class' => 'btn-default btn-shadow']);
+                            else {
+                                echo anchor(t('Give an explanation'), '/entry/jsconnect-redirect?client_id=alloprof', 'btn-default btn-shadow');
+                            }
+
+                            $sender->fireEvent('AfterFormButtons');
+                            echo '</div>';
+                        }
                     }
                 ?>
             </div>
@@ -905,5 +931,36 @@ if (!function_exists('getGrade')) :
             }
         }
         return ($GradeID || $GradeID === 0) ? $GradeOption[$GradeID] : "";
+    }
+endif;
+
+if (!function_exists('checkAnswer')) :
+
+    function checkAnswer($sender) {
+        $answered = $sender->Resolved !== 1 ? 'Hidden' : '';
+        $noanswered = $sender->Resolved === 1 ? 'Hidden' : '';
+        ?>
+        <div class="BoxCheckAnswer NotAnswered <?php echo $noanswered; ?>">
+            <h2><?php echo t("Have the explanations solved your problem?") ?></h2>
+            <div class="BoxCheckAnswer-answers">
+                <a class="FeedbackPerfect">
+                    <img src="<?= url('/themes/alloprof/design/images/peace.svg') ?>" width="80px" height="80px" />
+                    <span> <?php echo t("It's perfect!") ?> </span>
+                </a>
+                <a href="<?= url('/discussion/bad') ?>" class="Popup FeedbackHelp">
+                    <img src="<?= url('/themes/alloprof/design/images/neutre.svg') ?>" width="80px" height="80px" />
+                    <span> <?php echo t("I need more help") ?> </span>
+                </a>
+            </div>
+        </div>
+        <div class="BoxCheckAnswer Answered <?php echo $answered; ?>">
+            <h2><?php echo t("The explanations have helped you!") ?></h2>
+            <div class="BoxCheckAnswer-answers">
+                <a class="">
+                    <img src="<?= url('/themes/alloprof/design/images/peace.svg') ?>" width="80px" height="80px" />
+                </a>
+            </div>
+        </div>
+        <?php
     }
 endif;
