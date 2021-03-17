@@ -150,7 +150,7 @@
                 echo '<div class="Buttons">';
 
                 $this->fireEvent('BeforeFormButtons');
-                echo $this->Form->button((property_exists($this, 'Discussion')) ? 'Save' : 'Publish', ['class' => 'btn-default btn-shadow']);
+                echo $this->Form->button((property_exists($this, 'Discussion')) ? t('Save') : t('Publish'), ['class' => 'btn-default btn-shadow']);
                 $this->fireEvent('AfterFormButtons');
                 echo '</div>';
             }

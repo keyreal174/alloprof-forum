@@ -482,7 +482,7 @@ if (!function_exists('writeDiscussionDetail')) :
                             writeAttachments($Discussion->Attachments);
                         }
                         ?>
-                        <?php  echo "<a class='QuestionCategory' style='background: ".$category["Color"]."' href='/categories/".$category["UrlCode"]."'>".$category["Name"]."</a>"; ?>
+                        <?php  echo "<a class='QuestionCategory' style='background: ".$category["Color"]."' href='".url('/categories/'.$category["UrlCode"])."'>".$category["Name"]."</a>"; ?>
                     </div>
                     <?php
                         writeDiscussionFooter($Discussion, $sender);
