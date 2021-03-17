@@ -857,7 +857,7 @@ if (!function_exists('writeSocialSharing')) :
             </svg>',
             'discussion/social/'.$Discussion->DiscussionID,
             'SocialIcon SocialPopup',
-            ['rel' => 'nofollow']
+            ['rel' => 'nofollow', 'title' => t("Share")]
         );
 
         echo wrap($socialLink, 'span', ['class' => 'MItem SocialLink']);
