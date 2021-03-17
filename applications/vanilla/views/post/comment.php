@@ -10,8 +10,6 @@ if (!$User) {
 $IsProfilePage = val('IsProfilePage', Gdn::controller());
 $UserMetaData = Gdn::userModel()->getMeta($User->UserID, 'Profile.%', 'Profile.');
 
-
-
 $Session = Gdn::session();
 $NewOrDraft = !isset($this->Comment) || property_exists($this->Comment, 'DraftID') ? true : false;
 $Editing = isset($this->Comment);
@@ -26,9 +24,10 @@ $this->fireEvent('BeforeCommentForm');
             <h2 class="H"><?php echo t('Edit Comment'); ?></h2>
             <?php
         } else {
+            $Photo = $User->Photo ? url($User->Photo) : UserModel::getDefaultAvatarUrl($User, 'profile');
             $UserName = $UserMetaData["DisplayName"] ?? t('Unknown');
             echo '<div class="UserInfo">';
-            echo "<a class='UserPhoto' href='/profile/picture?userid=".$User->UserID."'><img src='".$User->PhotoUrl."' class='PhotoWrap' alt='Photo'/></a>";
+            echo "<a class='UserPhoto' href='".url("/profile/picture?userid=".$User->UserID)."'><img src='".$Photo."' class='PhotoWrap' alt='Photo'/></a>";
             echo '<div class="UserAuthor">';
             if ($this->UserRole == "Teacher") {
                 echo '<span class="UserAuthorName">'.$UserName.'<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -77,7 +76,7 @@ $this->fireEvent('BeforeCommentForm');
                     $ButtonOptions = ['class' => 'btn-default btn-shadow btn-m-l-auto'];
 
                     if ($Session->isValid()) {
-                        echo $this->Form->button($Editing ? 'Save Comment' : t('Submit my explanation'), $ButtonOptions);
+                        echo $this->Form->button($Editing ? t('Save Comment') : t('Submit my explanation'), $ButtonOptions);
                     } else {
                         $AllowSigninPopup = c('Garden.SignIn.Popup');
                         $Attributes = ['tabindex' => '-1'];
