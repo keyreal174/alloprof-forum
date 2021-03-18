@@ -274,7 +274,9 @@ if (!function_exists('writeGradeFilter')) :
         }
         foreach ($fields as $k => $field) {
             if ($field['Label'] == "Grade") {
-                $GradeOption = $field['Options'];
+                $GradeOption = array_filter($field['Options'], function($v) {
+                    return preg_match('/(Primaire|Secondaire)/', $v);
+                });
 
                 if ($DefaultGrade && $DefaultGrade !== 0) {
                     $DefaultGrade = array_search($DefaultGrade, $GradeOption);

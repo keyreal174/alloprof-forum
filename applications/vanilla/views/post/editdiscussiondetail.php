@@ -122,7 +122,9 @@ if (!$CancelUrl) {
         }
         foreach ($fields as $k => $field) {
             if ($field['Label'] == "Grade") {
-                $GradeOption = $field['Options'];
+                $GradeOption = array_filter($field['Options'], function($v) {
+                    return preg_match('/(Primaire|Secondaire)/', $v);
+                });
 
                 if ($DefaultGrade && $DefaultGrade !== 0) {
                     $DefaultGrade = array_search($DefaultGrade, $GradeOption);
@@ -139,7 +141,7 @@ if (!$CancelUrl) {
         echo '<span class="space"></span>';
         echo '<div class="Category rich-select">';
         echo '<img src="'.url("/themes/alloprof/design/images/icons/grade.svg").'"/>';
-        echo $this->Form->dropDown('GradeID', $GradeOption, array('Default' => $DefaultGrade, 'IncludeNull' => 'Grade', 'IsDisabled' => TRUE));
+        echo $this->Form->dropDown('GradeID', $GradeOption, array('Default' => $DefaultGrade, 'IncludeNull' => t('Grade'), 'IsDisabled' => TRUE));
         echo '</div>';
         echo '</div>';
     }
