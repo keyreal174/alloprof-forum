@@ -44,7 +44,9 @@ if (!count($this->FlaggedItems)) {
                 $flaggedBy = ($numComplaintsInThread > 1) ? $multipleReportsString : '';
                 foreach ($FlaggedList as $FlagIndex => $Flag) {
                     $type = htmlentities(ucfirst($Flag['ForeignType']));
-                    $flaggedBy .= sprintf(t('<strong>%s</strong> on %s'), anchor(htmlspecialchars($Flag['InsertName']), userUrl(['UserID' => $Flag['InsertUserID'], 'Name' => $Flag['InsertName']])), $Flag['DateInserted']).' '.t('said:');
+                    $UserMetaData = Gdn::userModel()->getMeta($Flag['InsertUserID'], 'Profile.%', 'Profile.');
+                    $UserName = $UserMetaData["DisplayName"] ?? t('Unknown');
+                    $flaggedBy .= sprintf(t('<strong>%s</strong> on %s'), anchor(htmlspecialchars($UserName), userUrl(['UserID' => $Flag['InsertUserID'], 'Name' => $UserName])), $Flag['DateInserted']).' '.t('said:');
                     $flaggedBy .= '<div class="FlaggedReason">'.Gdn_Format::text($Flag['Comment']).'</div>';
                 }
                 $options = anchor(t('Take Action'), $Flag['ForeignURL'], 'btn btn-primary');

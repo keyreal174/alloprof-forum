@@ -22,7 +22,10 @@ include $this->fetchViewLocation('helper_functions');
                 $user = Gdn::userModel()->getID($row['InsertUserID'] ?? 0);
                 $viewPersonalInfo = gdn::session()->checkPermission('Garden.PersonalInfo.View');
 
-                $userBlock = new MediaItemModule(val('Name', $user), userUrl($user));
+                $UserMetaData = Gdn::userModel()->getMeta($row['InsertUserID'], 'Profile.%', 'Profile.');
+                $UserName = $UserMetaData["DisplayName"] ?? t('Unknown');
+
+                $userBlock = new MediaItemModule($UserName, userUrl($user));
                 $userBlock->setView('media-sm')
                     ->setImage(userPhotoUrl($user))
                     ->addMeta(Gdn_Format::dateFull($row['DateInserted'], 'html'));
@@ -51,7 +54,10 @@ include $this->fetchViewLocation('helper_functions');
                         <?php
                         $recordUser = Gdn::userModel()->getID($row['Data']['InsertUserID'] ?? $row['RecordUserID'], DATASET_TYPE_ARRAY);
                         if ($row['RecordName']) {
-                            $authorBlock = new MediaItemModule(val('Name', $recordUser), userUrl($recordUser));
+                            $UserMetaData = Gdn::userModel()->getMeta($row['Data']['InsertUserID'] ?? $row['RecordUserID'], 'Profile.%', 'Profile.');
+                            $UserName = $UserMetaData["DisplayName"] ?? t('Unknown');
+
+                            $authorBlock = new MediaItemModule($UserName, userUrl($recordUser));
                             $authorBlock->setView('media-sm')
                                 ->setImage(userPhotoUrl($recordUser))
                                 ->addTitleMetaIf((bool)$recordUser['Banned'], wrap(t('Banned'), 'span', ['class' => 'text-danger']))
