@@ -644,6 +644,15 @@ div.Popup .Border {
     display: none;
 }
 
+.embedImage-notice {
+    position: absolute;
+    bottom: 7px;
+    background: rgba(0, 0, 0, 0.5);
+    right: 0;
+    padding: 10px 20px;
+    color: white;
+}
+
 @media screen and (max-width: 539px) {
     .Frame-menubar.hasBetaBanner {
         top: 224px;

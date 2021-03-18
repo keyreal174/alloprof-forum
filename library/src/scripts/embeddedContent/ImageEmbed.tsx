@@ -131,6 +131,7 @@ export function ImageEmbed(props: IProps) {
                         alt={accessibleLabel(t(`User: "%s"`), [props.name])}
                         tabIndex={props.inEditor ? -1 : undefined}
                     />
+                    <div className="embedImage-notice">embed Image notice content</div>
                 </div>
             </EmbedContent>
             <ImageEmbedModal
