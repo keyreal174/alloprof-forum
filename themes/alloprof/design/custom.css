@@ -156,6 +156,7 @@ select {
     overflow: hidden;
     position: relative;
     z-index: 0;
+    margin-bottom: 10px;
 }
 
 .rich-select i {
