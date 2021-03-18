@@ -58,7 +58,7 @@ include $this->fetchViewLocation('helper_functions');
                                 ->addTitleMeta(plural($recordUser['CountDiscussions'] + $recordUser['CountComments'], '%s post', '%s posts'))
 
                                 ->addMeta(Gdn_Format::dateFull($row['Data']['DateInserted'] ?? $row['RecordDate'], 'html'))
-                                ->addMeta('<a href="'.($row['RecordType']=='Discussion'?DiscussionModel::discussionUrl($row['Data'], "", "/"):CommentModel::commentUrl($row['Data'])).'"><b>'.htmlspecialchars(t($recordLabel, $recordLabel)).'</b></a>')
+                                ->addMeta('<a href="'.url($row['RecordType']=='Discussion'?DiscussionModel::discussionUrl($row['Data'], "", "/"):CommentModel::commentUrl($row['Data'])).'"><b>'.htmlspecialchars(t($recordLabel, $recordLabel)).'</b></a>')
                                 ->addMetaIf(($viewPersonalInfo && !empty($row['Data']['InsertIPAddress'])), iPAnchor($row['Data']['InsertIPAddress']));
 
                             echo $authorBlock;
