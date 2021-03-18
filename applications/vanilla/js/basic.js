@@ -1,6 +1,6 @@
 $(window).on("scroll", function () {
     if($('.Banner-content').length > 0) {
-        if ($(this).scrollTop() > 400) {
+        if ($(this).scrollTop() > 70) {
             $("header").addClass("not-transparent");
         }
         else {
@@ -30,4 +30,6 @@ jQuery(document).ready(function($) {
 
     if($('.Banner-content').length === 0)
         initHeader();
+
+    $(".Question-submenu.hasBetaBanner").parents('.Frame-menubar').addClass('hasBetaBanner');
 });

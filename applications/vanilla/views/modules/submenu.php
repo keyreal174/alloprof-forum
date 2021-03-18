@@ -1,7 +1,7 @@
 <?php
     require_once Gdn::controller()->fetchViewLocation('helper_functions', 'discussions', 'Vanilla');
 ?>
-<nav class="Question-submenu">
+<nav class="Question-submenu <?php echo $this->$additionalClass ?>">
     <?php if(userRoleCheck() == Gdn::config('Vanilla.ExtraRoles.Teacher')) {
     ?>
         <div class='Navigation-linkContainer'>
