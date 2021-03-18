@@ -353,7 +353,9 @@ class DiscussionController extends VanillaController {
             $GradeOption = [];
             foreach ($fields as $k => $field) {
                 if ($field['Label'] == "Grade") {
-                    $GradeOption = $field['Options'];
+                    $GradeOption = array_filter($field['Options'], function($v) {
+                        return preg_match('/(Primaire|Secondaire)/', $v);
+                    });
                 }
             }
             $this->Form->addHidden('GradeID', array_search($UserMetaData['Grade'],  $GradeOption));
