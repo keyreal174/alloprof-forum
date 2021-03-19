@@ -639,6 +639,11 @@ class PostController extends VanillaController {
         $this->discussion($this->CategoryID);
     }
 
+    public function newDiscussion() {
+        $this->View = 'newdiscussion';
+        $this->render();
+    }
+
     /**
      * Create or update a comment.
      *
