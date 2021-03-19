@@ -138,12 +138,7 @@
                         }
                     }
 
-                    echo '<div>';
-                    echo '<div class="Category rich-select select2 select2-category">';
-                    echo '<div class="category-selected-img pre-icon"><img src="'.url("/themes/alloprof/design/images/icons/subject.svg").'"/></div>';
                     echo writeCategoryDropDown($this, 'CategoryID', $options);
-                    echo '</div>';
-                    echo '</div>';
                     echo '<span class="space"></span>';
                     echo '<div class="Category rich-select select2 select2-grade">';
                     echo '<div class="pre-icon"><img src="'.url("/themes/alloprof/design/images/icons/grade.svg").'"/></div>';

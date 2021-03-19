@@ -39,12 +39,16 @@ jQuery(document).ready(function($) {
     };
 
     function selectCategoryImg (obj) {
-        var data = $(obj.element).data();
+        if(obj) {
+            var data = $(obj.element).data();
 
-        if(data && data['img_src']){
-            $('.category-selected-img').html('<img src="'+data['img_src']+'"/>');
-        } else {
-            $('.category-selected-img').html('');
+            console.log($(obj.element).parent())
+
+            if(data && data['img_src']){
+                $('.category-selected-img').html('<img src="'+data['img_src']+'"/>');
+            } else {
+                $('.category-selected-img').html('');
+            }
         }
     }
 

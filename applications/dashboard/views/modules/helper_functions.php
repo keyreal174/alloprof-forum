@@ -19,6 +19,7 @@ if (!function_exists('writeSubjectFilter')) :
             $options[$category['CategoryID']] = $category['Name'];
         }
 
+        $options = ['Value' => $subject, 'IncludeNull' => true, 'AdditionalPermissions' => ['PermsDiscussionsAdd']];
         echo '<div class="FilterMenu__Dropdown">';
         echo '<img src="'.url("/themes/alloprof/design/images/icons/subject.svg").'"/>';
         echo $form->dropDown('SubjectDropdown', $options, array('IncludeNull' => t('Material'), 'Value' => $subject));

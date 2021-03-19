@@ -249,29 +249,10 @@ if (!function_exists('writePromotedContentRow')):
     }
 endif;
 
-
 if (!function_exists('writeCategoryDropDown')) :
     function writeCategoryDropDown($sender, $fieldName = 'CategoryID', $options = []) {
         // $sender->EventArguments['Options'] = &$options;
         // $sender->fireEvent('BeforeCategoryDropDown');
-
-        $value = arrayValueI('Value', $options); // The selected category id
-        $categoryData = val('CategoryData', $options);
-
-        if (!$categoryData && val('Context', $options)) {
-            $categoryData = val('Context', $options);
-        } elseif ($categoryData && val('Context', $options)) {
-            $categoryData = array_intersect_key($categoryData, val('Context', $options));
-        }
-
-        // Sanity check
-        if (is_object($categoryData)) {
-            $categoryData = (array)$categoryData;
-        } elseif (!is_array($categoryData)) {
-            $categoryData = [];
-        }
-
-        $permission = val('Permission', $options, 'add');
 
         // Grab the category data.
         if (!$categoryData) {
@@ -368,7 +349,11 @@ if (!function_exists('writeCategoryDropDown')) :
                 $return .= '>'.$name."</option>\n";
             }
         }
-        return $return.'</select>';
+
+        echo '<div class="Category rich-select select2 select2-category">';
+        echo '<div class="category-selected-img pre-icon"><img src="'.url("/themes/alloprof/design/images/icons/subject.svg").'"/></div>';
+        echo $return.'</select>';
+        echo '</div>';
     }
 endif;
 
@@ -384,9 +369,9 @@ if (!function_exists('writeGradeFilter')) :
         $Session = Gdn::session();
         $GradeOption = array('Primaire', 'Secondaire');
 
-        echo '<div class="FilterMenu__Dropdown">';
-        echo '<img src="'.url('/themes/alloprof/design/images/icons/grade.svg').'"/>';
-        echo Gdn::controller()->Form->dropDown('GradeDropdown', $GradeOption, array('IncludeNull' => t('Grade'), 'Value' => $gradeID));
+        echo '<div class="rich-select select2 select2-grade">';
+        echo '<div class="pre-icon"><img src="'.url("/themes/alloprof/design/images/icons/grade.svg").'"/></div>';
+        echo Gdn::controller()->Form->dropDown('GradeDropdown', $GradeOption, array('Value' => $gradeID));
         echo '</div>';
     }
 endif;
@@ -404,8 +389,8 @@ if (!function_exists('writeDiscussionSort')) :
             'asc' => t('Oldest')
         ];
 
-        echo '<div class="FilterMenu__Dropdown">';
-        echo '<img src="'.url("/themes/alloprof/design/images/icons/sort.svg").'"/>';
+        echo '<div class="rich-select select2 select2-grade">';
+        echo '<div class="pre-icon"><img src="'.url("/themes/alloprof/design/images/icons/sort.svg").'" width="14" height="8" style="max-height: 10px"/></div>';
         echo Gdn::controller()->Form->dropDown('DiscussionSort', $options, [ 'Value' => $sort ]);
         echo '</div>';
     }
@@ -487,8 +472,8 @@ if (!function_exists('writeCommentSort')) :
             'asc' => t('Oldest')
         ];
 
-        echo '<div class="FilterMenu__Dropdown">';
-        echo '<img src="'.url("/themes/alloprof/design/images/icons/sort.svg").'"/>';
+        echo '<div class="rich-select select2 select2-grade">';
+        echo '<div class="pre-icon"><img src="'.url("/themes/alloprof/design/images/icons/sort.svg").'" width="14" height="8" style="max-height: 10px"/></div>';
         echo Gdn::controller()->Form->dropDown('CommentSort', $options, [ 'Value' => $sort ]);
         echo '</div>';
     }
