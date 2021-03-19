@@ -1,5 +1,7 @@
 <?php
     require_once Gdn::controller()->fetchViewLocation('helper_functions', 'Discussions', 'Vanilla');
+    require_once $this->fetchViewLocation('helper_functions');
+
     $User = val('User', Gdn::controller());
     if (!$User && Gdn::session()->isValid()) {
         $User = Gdn::session()->User;
@@ -136,17 +138,9 @@
                         }
                     }
 
-                    echo '<div>';
-                    echo '<div class="Category rich-select">';
-                    echo '<img src="'.url("/themes/alloprof/design/images/icons/subject.svg").'"/>';
-                    echo $this->Form->categoryDropDown('CategoryID', $options);
-                    echo '</div>';
-                    echo '</div>';
+                    echo writeCategoryDropDown($this, 'CategoryID', $options);
                     echo '<span class="space"></span>';
-                    echo '<div class="Category rich-select">';
-                    echo '<img src="'.url("/themes/alloprof/design/images/icons/grade.svg").'"/>';
-                    echo $this->Form->dropDown('GradeID', $GradeOption, array('Default' => $DefaultGrade, 'IncludeNull' => t('Grade'), 'IsDisabled' => TRUE));
-                    echo '</div>';
+                    echo writeGradeFilter($DefaultGrade);
                 }
                 echo '</div>';
                 echo '<div class="Buttons">';

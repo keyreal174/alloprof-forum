@@ -249,6 +249,114 @@ if (!function_exists('writePromotedContentRow')):
     }
 endif;
 
+if (!function_exists('writeCategoryDropDown')) :
+    function writeCategoryDropDown($sender, $fieldName = 'CategoryID', $options = []) {
+        // $sender->EventArguments['Options'] = &$options;
+        // $sender->fireEvent('BeforeCategoryDropDown');
+
+        // Grab the category data.
+        if (!$categoryData) {
+            $categoryData = CategoryModel::getByPermission(
+                'Discussions.View',
+                $value,
+                val('Filter', $options, ['Archived' => 0]),
+                val('PermFilter', $options, [])
+            );
+        }
+
+        // Remove categories the user shouldn't see.
+        $safeCategoryData = [];
+        $discussionType = val('DiscussionType', $options);
+        foreach ($categoryData as $categoryID => $category) {
+            if ($value != $categoryID) {
+                if ($category['CategoryID'] <= 0 || !$category['PermsDiscussionsView']) {
+                    continue;
+                }
+
+                if ($category['Archived']) {
+                    continue;
+                }
+
+                // Filter out categories that don't allow our discussion type, if specified
+                if ($discussionType) {
+                    $permissionCategory = CategoryModel::permissionCategory($category);
+                    $allowedDiscussionTypes = CategoryModel::allowedDiscussionTypes($permissionCategory, $category);
+                    if (!array_key_exists($discussionType, $allowedDiscussionTypes)) {
+                        continue;
+                    }
+                }
+            }
+
+            $safeCategoryData[$categoryID] = $category;
+        }
+        unset($discussionType, $permissionCategory, $allowedDiscussionTypes);
+
+        unset($options['Filter'], $options['PermFilter'], $options['Context'], $options['CategoryData']);
+
+        // Opening select tag
+        $return = '<select name='.$fieldName.'>';
+
+        // Start with null option?
+        $includeNull = val('IncludeNull', $options);
+        if ($includeNull === true) {
+            // $return .= '<option value="">'.t('Select a category...').'</option>';
+        } elseif (is_array($includeNull))
+            $return .= "<option value=\"{$includeNull[0]}\">{$includeNull[1]}</option>\n";
+        elseif ($includeNull)
+            $return .= "<option value=\"\">$includeNull</option>\n";
+        elseif (!$hasValue)
+            $return .= '<option value=""></option>';
+
+        // Show root categories as headings (ie. you can't post in them)?
+        $doHeadings = val('Headings', $options, c('Vanilla.Categories.DoHeadings'));
+
+        // If making headings disabled and there was no default value for
+        // selection, make sure to select the first non-disabled value, or the
+        // browser will auto-select the first disabled option.
+        $forceCleanSelection = ($doHeadings && !$hasValue && !$includeNull);
+
+        // Write out the category options.
+        $enableHeadings = $options['EnableHeadings'] ?? false;
+        if (is_array($safeCategoryData)) {
+            foreach ($safeCategoryData as $categoryID => $category) {
+                $depth = val('Depth', $category, 0);
+                $isHeading = ($depth == 1 && $doHeadings) || $category['DisplayAs'] !== 'Discussions' || !$category['AllowDiscussions'];
+                $disabled = $isHeading && !$enableHeadings;
+                $selected = in_array($categoryID, $value) && $hasValue;
+                if ($forceCleanSelection && $depth > 1) {
+                    $selected = true;
+                    $forceCleanSelection = false;
+                }
+
+                if ($category['AllowDiscussions']) {
+                    if ($permission == 'add' && !$category['PermsDiscussionsAdd']) {
+                        $disabled = true;
+                    }
+                }
+
+                $return .= '<option value="'.$categoryID.'" data-img_src="'.$category['Photo'].'"';
+                if ($disabled) {
+                    $return .= ' disabled="disabled"';
+                } elseif ($selected) {
+                    $return .= ' selected="selected"'; // only allow selection if NOT disabled
+                }
+
+                $name = htmlspecialchars(val('Name', $category, 'Blank Category Name'));
+                if ($depth > 1) {
+                    $name = str_repeat('&#160;', 4 * ($depth - 1)).$name;
+                }
+
+                $return .= '>'.$name."</option>\n";
+            }
+        }
+
+        echo '<div class="Category rich-select select2 select2-category">';
+        echo '<div class="category-selected-img pre-icon"><img src="'.url("/themes/alloprof/design/images/icons/subject.svg").'"/></div>';
+        echo $return.'</select>';
+        echo '</div>';
+    }
+endif;
+
 
 if (!function_exists('writeGradeFilter')) :
     /**
@@ -284,9 +392,9 @@ if (!function_exists('writeGradeFilter')) :
             }
         }
 
-        echo '<div class="FilterMenu__Dropdown">';
-        echo '<img src="'.url('/themes/alloprof/design/images/icons/grade.svg').'"/>';
-        echo Gdn::controller()->Form->dropDown('GradeDropdown', $GradeOption, array('IncludeNull' => t('Grade'), 'Value' => $gradeID));
+        echo '<div class="rich-select select2 select2-grade">';
+        echo '<div class="pre-icon"><img src="'.url("/themes/alloprof/design/images/icons/grade.svg").'"/></div>';
+        echo Gdn::controller()->Form->dropDown('GradeDropdown', $GradeOption, array('Value' => $gradeID));
         echo '</div>';
     }
 endif;
@@ -304,8 +412,8 @@ if (!function_exists('writeDiscussionSort')) :
             'asc' => t('Oldest')
         ];
 
-        echo '<div class="FilterMenu__Dropdown">';
-        echo '<img src="'.url("/themes/alloprof/design/images/icons/sort.svg").'"/>';
+        echo '<div class="rich-select select2 select2-grade">';
+        echo '<div class="pre-icon"><img src="'.url("/themes/alloprof/design/images/icons/sort.svg").'" width="14" height="8" style="max-height: 10px"/></div>';
         echo Gdn::controller()->Form->dropDown('DiscussionSort', $options, [ 'Value' => $sort ]);
         echo '</div>';
     }
@@ -387,8 +495,8 @@ if (!function_exists('writeCommentSort')) :
             'asc' => t('Oldest')
         ];
 
-        echo '<div class="FilterMenu__Dropdown">';
-        echo '<img src="'.url("/themes/alloprof/design/images/icons/sort.svg").'"/>';
+        echo '<div class="rich-select select2 select2-grade">';
+        echo '<div class="pre-icon"><img src="'.url("/themes/alloprof/design/images/icons/sort.svg").'" width="14" height="8" style="max-height: 10px"/></div>';
         echo Gdn::controller()->Form->dropDown('CommentSort', $options, [ 'Value' => $sort ]);
         echo '</div>';
     }
