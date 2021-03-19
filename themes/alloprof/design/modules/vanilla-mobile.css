@@ -214,5 +214,17 @@
     .DataList .ItemDiscussion, .DataList .Item, .MessageList .ItemDiscussion.ItemDiscussion, .MessageList .ItemComment .Comment {
         padding: 16px;
     }
-
 }
+
+@media screen and (max-width: 539px) {
+    .Frame-menubar.hasBetaBanner {
+        top: 224px;
+    }
+}
+
+@media screen and (max-width: 398px) {
+    .Frame-menubar.hasBetaBanner {
+        top: 244px;
+    }
+}
+

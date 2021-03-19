@@ -9691,7 +9691,8 @@ body.Section-EditProfile .Box .PanelCategories li.Depth5:before {
 .BoxCategories.BoxCategories li,
 .BoxFilter:not(.BoxBestOfFilter) li,
 body.Section-EditProfile .Box li {
-    border-radius: 6px
+    border-radius: 6px;
+    text-align: center;
 }
 
 .BoxCategories.BoxCategories li:not(.Heading)+li:not(.Heading),
@@ -9748,7 +9749,7 @@ body.Section-EditProfile .Box a {
 }
 
 .BoxCategories.BoxCategories a span {
-    font-size: 12px;
+    font-size: 11px;
     font-family: "ChromaticaMedium";
 }
 
