@@ -1,12 +1,12 @@
 $(window).on("scroll", function () {
-    if($('.Banner-content').length > 0) {
-        if ($(this).scrollTop() > 70) {
-            $("header").addClass("not-transparent");
-        }
-        else {
-            $("header").removeClass("not-transparent");
-        }
-    }
+    // if($('.Banner-content').length > 0) {
+    //     if ($(this).scrollTop() > 70) {
+    //         $("header").addClass("not-transparent");
+    //     }
+    //     else {
+    //         $("header").removeClass("not-transparent");
+    //     }
+    // }
 });
 
 jQuery(document).ready(function($) {
