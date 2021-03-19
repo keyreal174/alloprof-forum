@@ -97,9 +97,9 @@ class DiscussionsController extends VanillaController {
         $wheres = [];
 
         if (($this->GradeID || $this->GradeID === '0') && $this->GradeID != -1) {
-            $wheres['d.GradeID'] = $this->GradeID;
+            $wheres['d.Cycle'] = $this->GradeID;
         } else {
-            unset($wheres['d.GradeID']);
+            unset($wheres['d.Cycle']);
         }
 
         $role = $this->getUserRole(Gdn::session()->UserID);

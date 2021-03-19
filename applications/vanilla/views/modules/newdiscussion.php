@@ -147,7 +147,7 @@
                     echo '<span class="space"></span>';
                     echo '<div class="Category rich-select select2 select2-grade">';
                     echo '<div class="pre-icon"><img src="'.url("/themes/alloprof/design/images/icons/grade.svg").'"/></div>';
-                    echo $this->Form->dropDown('GradeID', $GradeOption, array('Default' => $DefaultGrade));
+                    echo $this->Form->dropDown('GradeID', $GradeOption, array('Default' => $DefaultGrade, 'IncludeNull' => true));
                     echo '</div>';
                 }
                 echo '</div>';

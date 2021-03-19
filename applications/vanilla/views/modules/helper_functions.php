@@ -382,30 +382,7 @@ if (!function_exists('writeGradeFilter')) :
      */
     function writeGradeFilter($gradeID) {
         $Session = Gdn::session();
-        $DefaultGrade = 0;
-        if ($Session) {
-            $UserID = $Session->UserID;
-            $AuthorMetaData = Gdn::userModel()->getMeta($UserID, 'Profile.%', 'Profile.');
-            if ($AuthorMetaData['Grade']) {
-                $DefaultGrade = $AuthorMetaData['Grade'];
-            }
-        }
-
-        $fields = c('ProfileExtender.Fields', []);
-        if (!is_array($fields)) {
-            $fields = [];
-        }
-        foreach ($fields as $k => $field) {
-            if ($field['Label'] == "Grade") {
-                $GradeOption = array_filter($field['Options'], function($v) {
-                    return preg_match('/(Primaire|Secondaire)/', $v);
-                });
-
-                if ($DefaultGrade && $DefaultGrade !== 0) {
-                    $DefaultGrade = array_search($DefaultGrade, $GradeOption);
-                }
-            }
-        }
+        $GradeOption = array('Primaire', 'Secondaire');
 
         echo '<div class="FilterMenu__Dropdown">';
         echo '<img src="'.url('/themes/alloprof/design/images/icons/grade.svg').'"/>';
