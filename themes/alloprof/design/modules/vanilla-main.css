@@ -9365,6 +9365,10 @@ screen and (-ms-high-contrast:none) {
         margin-left: auto;
         margin-right: auto
     }
+
+    .sidebar.left {
+        height: auto !important;
+    }
 }
 
 @media screen and (max-width:992px) and (max-width:500px) {

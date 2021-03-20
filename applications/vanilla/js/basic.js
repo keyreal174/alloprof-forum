@@ -80,6 +80,5 @@ jQuery(document).ready(function($) {
         selectCategoryImg(data);
     });
 
-
-    selectCategoryImg({element: $('.select2-category option:selected')});
+    selectCategoryImg({element: $('.EditDiscussionDetail .select2-category option:selected')});
 });
