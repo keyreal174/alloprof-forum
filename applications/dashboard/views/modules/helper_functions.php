@@ -95,7 +95,7 @@ if (!function_exists('writeFilterToggle')) :
      * @param string $extraClasses any extra classes you add to the drop down
      * @return string
      */
-    function writeFilterToggle($sender, $explanation, $verified) {
+    function writeFilterToggle($explanation, $verified) {
         $form  = new Gdn_Form();
         $role = getUserRole(Gdn::session()->User->UserID);
         $text = $role === 'Teacher' ? t('Without explanations only') : t('With explanations only');
