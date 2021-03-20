@@ -644,13 +644,20 @@ div.Popup .Border {
     display: none;
 }
 
-.embedImage-notice {
-    position: absolute;
-    bottom: 7px;
-    background: rgba(0, 0, 0, 0.5);
-    right: 0;
-    padding: 10px 20px;
+.embedExternal.embedImage .embedExternal-content {
+    width: fit-content;
+}
+
+a.embedImage-link:after {
+    content: "Download";
     color: white;
+    z-index: 1;
+    position: absolute;
+    bottom: 6px;
+    right: 0;
+    height: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px 20px;
 }
 
 @media screen and (max-width: 539px) {
