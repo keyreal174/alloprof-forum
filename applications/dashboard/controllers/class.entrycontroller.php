@@ -423,6 +423,9 @@ class EntryController extends Gdn_Controller {
                 'Name' => '',
                 'Email' => '',
                 'Photo' => '',
+                'Grade' => '',
+                'Role' => '',
+                'DisplayName' => '',
                 'Target' => $this->target(),
             ];
             $this->Form->setData($data);
