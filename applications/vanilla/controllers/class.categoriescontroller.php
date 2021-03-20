@@ -384,6 +384,9 @@ class CategoriesController extends VanillaController {
         $gradeFilterOption = (Gdn::request()->get('grade') || Gdn::request()->get('grade') == '0') ? strval((int)(Gdn::request()->get('grade'))) : -1;
         $this->GradeID = $gradeFilterOption;
 
+        $subject = (Gdn::request()->get('subject') || Gdn::request()->get('subject') == '0') ? strval((int)(Gdn::request()->get('subject'))) : -1;
+        $this->SubjectID = $subject;
+
         $explanation = Gdn::request()->get('explanation') ?? false;
         $this->IsExplanation = $explanation;
 
@@ -393,7 +396,7 @@ class CategoriesController extends VanillaController {
         $sort = Gdn::request()->get('sort') ?? 'desc';
         $this->SortDirection = $sort;
 
-        $discussionFilterModule = new DiscussionFilterModule($gradeFilterOption, $sort, $explanation, $verified);
+        $discussionFilterModule = new DiscussionFilterModule($gradeFilterOption, $sort, $explanation, $verified, $subject);
         $this->addModule($discussionFilterModule);
         $this->addJsFile('filter.js');
         $wheres = [];
@@ -402,6 +405,12 @@ class CategoriesController extends VanillaController {
             $wheres['d.Cycle'] = $this->GradeID;
         } else {
             unset($wheres['d.Cycle']);
+        }
+
+        if (($this->SubjectID || $this->SubjectID === '0') && $this->SubjectID != -1) {
+            $wheres['d.CategoryID'] = $this->SubjectID;
+        } else {
+            unset($wheres['d.CategoryID']);
         }
 
         $role = $this->getUserRole(Gdn::session()->UserID);

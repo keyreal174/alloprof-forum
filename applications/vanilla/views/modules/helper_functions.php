@@ -297,7 +297,7 @@ if (!function_exists('writeCategoryDropDown')) :
         unset($options['Filter'], $options['PermFilter'], $options['Context'], $options['CategoryData']);
 
         // Opening select tag
-        $return = '<select name='.$fieldName.'>';
+        $return = '<select name='.$fieldName.' id='.$fieldName.'>';
 
         // Start with null option?
         $includeNull = val('IncludeNull', $options);

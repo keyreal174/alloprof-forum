@@ -60,7 +60,9 @@ jQuery(document).ready(function($) {
 
             if(data && data['img_src']){
                 parent.find('.category-selected-img').html('<img src="'+data['img_src']+'"/>');
-            } else {
+            }
+
+            if(data && data['img_src'] === '') {
                 parent.find('.category-selected-img').html('');
             }
         }
@@ -80,5 +82,6 @@ jQuery(document).ready(function($) {
         selectCategoryImg(data);
     });
 
+    selectCategoryImg({element: $('.FilterMenu .select2-category option:selected')});
     selectCategoryImg({element: $('.EditDiscussionDetail .select2-category option:selected')});
 });

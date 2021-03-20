@@ -372,7 +372,7 @@ if (!function_exists('writeCategoryDropDown')) :
         unset($options['Filter'], $options['PermFilter'], $options['Context'], $options['CategoryData']);
 
         // Opening select tag
-        $return = '<select name='.$fieldName.'>';
+        $return = '<select name='.$fieldName.' id='.$fieldName.'>';
 
         // Get value from attributes
         if (!is_array($value)) {
