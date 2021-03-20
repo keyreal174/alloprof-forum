@@ -278,6 +278,27 @@ if (!function_exists('getDiscussionOptions')) :
             $categoryID = val('CategoryID', $sender->Discussion);
         }
 
+        if ($sender->getUserRole() === 'Teacher') {
+            if (!$discussion->Published) {
+                $logID = Gdn::sql()
+                    ->select('LogID')
+                    ->from('Log')
+                    ->where('RecordID', $discussion->DiscussionID)
+                    ->where('RecordType', 'Discussion')
+                    ->get()
+                    ->value('LogID', null);
+                $options['ApprovePublication'] = ['Label' => '<span>'.t('Approve the publication').'</span>', 'Url' => '#', 'Class' => 'RestoreButton', 'Id' => $logID];
+            }
+        }
+
+        $flagLink = addFlagButtonToDropdown($discussion, 'discussion');
+        $options['FlagDiscussion'] = [
+            'Label' => '<svg width="15" height="20" viewBox="0 0 15 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M13.2979 3.175L5.41992 2.52175L2.49492 2.278V1.225C2.49492 0.686522 2.0584 0.25 1.51992 0.25C0.981444 0.25 0.544922 0.686522 0.544922 1.225V18.775C0.544922 19.3135 0.981444 19.75 1.51992 19.75C2.0584 19.75 2.49492 19.3135 2.49492 18.775V11.872L5.41992 11.6283L13.2979 10.975C13.8057 10.9342 14.1966 10.5094 14.1949 10V4.15C14.1966 3.64057 13.8057 3.21575 13.2979 3.175ZM4.44489 9.75602L2.49489 9.91201V4.23752L4.44489 4.39352V9.75602ZM8.34493 9.42452L6.39493 9.59027V4.55926L8.34493 4.72501V9.42452ZM12.245 9.10276L10.2949 9.26851V4.88101L12.245 5.04676V9.10276Z" fill="#EB5757"/>
+            </svg><span>'.t($flagLink['name']).'</span>',
+            'Url' => $flagLink['url']
+        ];
+
         // Build the $Options array based on current user's permission.
         // Can the user edit the discussion?
         $canEdit = DiscussionModel::canEdit($discussion, $timeLeft);
@@ -414,6 +435,19 @@ if (!function_exists('getDiscussionOptionsDropdown')):
         $discussionID = $discussion->DiscussionID;
         $categoryUrl = urlencode(categoryUrl(CategoryModel::categories($categoryID)));
 
+        if ($sender->getUserRole() === 'Teacher') {
+            if (!$discussion->Published) {
+                $logID = Gdn::sql()
+                    ->select('LogID')
+                    ->from('Log')
+                    ->where('RecordID', $discussion->DiscussionID)
+                    ->where('RecordType', 'Discussion')
+                    ->get()
+                    ->value('LogID', null);
+                $dropdown->addLInk('<span>'.t('Approve the publication').'</span>', $logID, '', 'RestoreButton', ['Id' => $logID]);
+            }
+        }
+
         // Permissions
         $canEdit = DiscussionModel::canEdit($discussion, $timeLeft);
         $canAnnounce = CategoryModel::checkPermission($categoryID, 'Vanilla.Discussions.Announce');
@@ -518,7 +552,7 @@ endif;
  */
 if (!function_exists('writeDiscussionOptions')):
     function writeDiscussionOptions($discussion = null) {
-        deprecated('writeDiscussionOptions', 'getDiscussionOptionsDropdown', 'March 2016');
+        // deprecated('writeDiscussionOptions', 'getDiscussionOptionsDropdown', 'March 2016');
 
         $options = getDiscussionOptions($discussion);
 
@@ -531,7 +565,8 @@ if (!function_exists('writeDiscussionOptions')):
         echo sprite('SpFlyoutHandle', 'Arrow');
         echo '<ul class="Flyout MenuItems" style="display: none;">';
         foreach ($options as $code => $option) {
-            echo wrap(anchor($option['Label'], $option['Url'], val('Class', $option, $code)), 'li');
+            echo wrap("<a href='". url($option['Url']) . "' class='" . val('Class', $option, $code) . "' id='". val('Id', $option, $code) ."'>" . $option['Label'] ."</a>", 'li');
+            // echo wrap(anchor($option['Label'], $option['Url'], val('Class', $option, $code)), 'li');
         }
         echo '</ul>';
         echo '</span>';
@@ -559,19 +594,29 @@ if (!function_exists('getCommentOptions')) :
 
         $categoryID = val('CategoryID', $discussion);
 
-        if ($sender->getUserRole() === 'Teacher' && $comment->Published) {
-            if ($comment->DateAccepted) {
-                $options['QnA'] = ['Label' => '<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M1.29492 12C1.29492 5.92487 6.21979 1 12.2949 1C15.2123 1 18.0102 2.15893 20.0731 4.22183C22.136 6.28473 23.2949 9.08262 23.2949 12C23.2949 18.0751 18.3701 23 12.2949 23C6.21979 23 1.29492 18.0751 1.29492 12Z" fill="#05BF8E" stroke="#05BF8E" stroke-width="2"/>
-            <path d="M7.79492 12L10.9769 15.182L17.3409 8.81802" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg><span>'.t('Remove verification').'</span>', 'Url' => 'javascript:;', 'Class' => 'mark-verify', 'Id' => url('/discussion/unverify?commentid='.$comment->CommentID)];
+        if ($sender->getUserRole() === 'Teacher') {
+            if ($comment->Published) {
+                if ($comment->DateAccepted) {
+                    $options['QnA'] = ['Label' => '<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1.29492 12C1.29492 5.92487 6.21979 1 12.2949 1C15.2123 1 18.0102 2.15893 20.0731 4.22183C22.136 6.28473 23.2949 9.08262 23.2949 12C23.2949 18.0751 18.3701 23 12.2949 23C6.21979 23 1.29492 18.0751 1.29492 12Z" fill="#05BF8E" stroke="#05BF8E" stroke-width="2"/>
+                <path d="M7.79492 12L10.9769 15.182L17.3409 8.81802" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg><span>'.t('Remove verification').'</span>', 'Url' => 'javascript:;', 'Class' => 'mark-verify', 'Id' => url('/discussion/unverify?commentid='.$comment->CommentID)];
+                } else {
+                    $options['QnA'] = ['Label' => '<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1.29492 12C1.29492 5.92487 6.21979 1 12.2949 1C15.2123 1 18.0102 2.15893 20.0731 4.22183C22.136 6.28473 23.2949 9.08262 23.2949 12C23.2949 18.0751 18.3701 23 12.2949 23C6.21979 23 1.29492 18.0751 1.29492 12Z" fill="#05BF8E" stroke="#05BF8E" stroke-width="2"/>
+                <path d="M7.79492 12L10.9769 15.182L17.3409 8.81802" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg><span>'.t('Mark as verified').'</span>', 'Url' => 'javascript:;', 'Class' => 'mark-verify', 'Id' => url('/discussion/verify?commentid='.$comment->CommentID)];
+                }
             } else {
-                $options['QnA'] = ['Label' => '<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M1.29492 12C1.29492 5.92487 6.21979 1 12.2949 1C15.2123 1 18.0102 2.15893 20.0731 4.22183C22.136 6.28473 23.2949 9.08262 23.2949 12C23.2949 18.0751 18.3701 23 12.2949 23C6.21979 23 1.29492 18.0751 1.29492 12Z" fill="#05BF8E" stroke="#05BF8E" stroke-width="2"/>
-            <path d="M7.79492 12L10.9769 15.182L17.3409 8.81802" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg><span>'.t('Mark as verified').'</span>', 'Url' => 'javascript:;', 'Class' => 'mark-verify', 'Id' => url('/discussion/verify?commentid='.$comment->CommentID)];
+                $logID = Gdn::sql()
+                    ->select('LogID')
+                    ->from('Log')
+                    ->where('RecordID', $comment->CommentID)
+                    ->where('RecordType', 'Comment')
+                    ->get()
+                    ->value('LogID', null);
+                $options['ApprovePublication'] = ['Label' => '<span>'.t('Approve the publication').'</span>', 'Url' => '#', 'Class' => 'RestoreButton', 'Id' => $logID];
             }
-
         }
 
         // Can the user edit the comment?

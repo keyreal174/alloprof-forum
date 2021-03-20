@@ -1823,3 +1823,4 @@ $Definition['Publish'] = 'Publier';
 $Definition['Alloprof Teacher'] = 'Enseignant Alloprof';
 $Definition['people found the explanation helpful'] = 'personnes ont trouvé l’explication utile';
 $Definition['person found the explanation helpful'] = 'personne a trouvé l’explication utile';
+$Definition['Approve the publication'] = 'Approuver la publication';

@@ -155,10 +155,6 @@ select {
     outline: none;
 }
 
-.btn-shadow:focus {
-    outline: none;
-}
-
 .btn-m-l-auto {
     margin-left: auto;
 }
