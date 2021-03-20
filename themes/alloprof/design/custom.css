@@ -648,8 +648,20 @@ div.Popup .Border {
     width: fit-content;
 }
 
+a.embedImage-link:before {
+    content: "";
+    background: url(./images/icons/Exclamationmark.svg);
+    z-index: 2;
+    position: absolute;
+    bottom: 50px;
+    width: 17px;
+    height: 16px;
+    right: 15px;
+    transform: scale(1.5);
+}
+
 a.embedImage-link:after {
-    content: "Download";
+    content: attr(data-content);
     color: white;
     z-index: 1;
     position: absolute;
@@ -658,6 +670,9 @@ a.embedImage-link:after {
     height: 20px;
     background-color: rgba(0, 0, 0, 0.5);
     padding: 10px 20px;
+    height: fit-content;
+    text-align: left;
+    padding-right: 50px;
 }
 
 @media screen and (max-width: 539px) {
