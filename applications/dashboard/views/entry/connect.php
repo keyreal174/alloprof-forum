@@ -3,6 +3,7 @@
 /** @var \EntryController $this */
 
 // Get the connection information.
+print_r($this->Form->getFormValue('ProviderName'));
 if (!($ConnectName = $this->Form->getFormValue('FullName'))) {
     $ConnectName = $this->Form->getFormValue('Name');
 }
@@ -10,6 +11,8 @@ $ConnectPhoto = $this->Form->getFormValue('Photo');
 if (!$ConnectPhoto) {
     $ConnectPhoto = '/applications/dashboard/design/images/usericon.gif';
 }
+// Teacher default photo;
+$ConnectPhoto = "https://www.alloprof.qc.ca/zonedentraide/uploads/Avatar_Enseignant.svg";
 $ConnectSource = $this->Form->getFormValue('ProviderName');
 
 // By default, clients will try to connect existing users.
@@ -95,15 +98,37 @@ if (!$hasUserID) {
                 <?php echo '<div class="Info">', t('You are now signed in.'), '</div>'; ?>
             </div>
         <?php else : ?>
-            <ul>
-                <?php if ($this->Form->getFormValue('EmailVisible')) : ?>
-                <li>
+            <ul role="presentation">
+                <li role="presentation">
                     <?php
                     echo $this->Form->label('Email', 'Email');
-                    echo $this->Form->textBox('Email');
+                    echo $this->Form->textBox('Email', ['value' => $this->Form->getFormValue('Email'), 'id' => 'Form_Email', 'class' => 'InputBox', 'autocorrect' => 'off', 'autocapitalize' => 'off', 'Wrap' => TRUE, 'placeholder' => t('Email address')]);
                     ?>
                 </li>
-        <?php endif; ?>
+                <li role="presentation">
+                    <?php
+                    echo $this->Form->label('UserName', 'UserName');
+                    echo $this->Form->textBox('UserName', ['value' => "3333", 'id' => 'Form_Email', 'class' => 'InputBox', 'autocorrect' => 'off', 'autocapitalize' => 'off', 'Wrap' => TRUE, 'placeholder' => t('User name')]);
+                    ?>
+                </li>
+                <li role="presentation">
+                    <?php
+                    echo $this->Form->label('DisplayName', 'DisplayName');
+                    echo $this->Form->textBox('DisplayName', ['value' => $this->Form->getFormValue('FullName'), 'id' => 'Form_Email', 'class' => 'InputBox', 'autocorrect' => 'off', 'autocapitalize' => 'off', 'Wrap' => TRUE, 'placeholder' => t('Display name')]);
+                    ?>
+                </li>
+                <li role="presentation">
+                    <?php
+                    echo $this->Form->label('Grade', 'Grade');
+                    echo $this->Form->textBox('Grade', ['value' => 'Enseignant', 'id' => 'Form_Email', 'class' => 'InputBox', 'autocorrect' => 'off', 'autocapitalize' => 'off', 'Wrap' => TRUE, 'placeholder' => t('Grade')]);
+                    ?>
+                </li>
+                <li role="presentation">
+                    <?php
+                    echo $this->Form->label('Role', 'Role');
+                    echo $this->Form->textBox('Role', ['value' => t('Teacher'), 'id' => 'Form_Email', 'class' => 'InputBox', 'autocorrect' => 'off', 'autocapitalize' => 'off', 'Wrap' => TRUE, 'placeholder' => t('Role')]);
+                    ?>
+                </li>
 
         <?php if ($displayConnectName && !$this->data('HideName')) : ?>
 
