@@ -92,9 +92,9 @@ class SearchController extends Gdn_Controller {
         $wheres = [];
 
         if (($this->GradeID || $this->GradeID === '0') && $this->GradeID != -1) {
-            $wheres['d.GradeID'] = $this->GradeID;
+            $wheres['d.Cycle'] = $this->GradeID;
         } else {
-            unset($wheres['d.GradeID']);
+            unset($wheres['d.Cycle']);
         }
 
         if (($this->SubjectID || $this->SubjectID === '0') && $this->SubjectID != -1) {

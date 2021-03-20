@@ -254,6 +254,9 @@ if (!function_exists('writeCategoryDropDown')) :
         // $sender->EventArguments['Options'] = &$options;
         // $sender->fireEvent('BeforeCategoryDropDown');
 
+        $value = arrayValueI('Value', $options); // The selected category id
+        $categoryData = val('CategoryData', $options);
+
         // Grab the category data.
         if (!$categoryData) {
             $categoryData = CategoryModel::getByPermission(
@@ -367,34 +370,11 @@ if (!function_exists('writeGradeFilter')) :
      */
     function writeGradeFilter($gradeID) {
         $Session = Gdn::session();
-        $DefaultGrade = 0;
-        if ($Session) {
-            $UserID = $Session->UserID;
-            $AuthorMetaData = Gdn::userModel()->getMeta($UserID, 'Profile.%', 'Profile.');
-            if ($AuthorMetaData['Grade']) {
-                $DefaultGrade = $AuthorMetaData['Grade'];
-            }
-        }
-
-        $fields = c('ProfileExtender.Fields', []);
-        if (!is_array($fields)) {
-            $fields = [];
-        }
-        foreach ($fields as $k => $field) {
-            if ($field['Label'] == "Grade") {
-                $GradeOption = array_filter($field['Options'], function($v) {
-                    return preg_match('/(Primaire|Secondaire)/', $v);
-                });
-
-                if ($DefaultGrade && $DefaultGrade !== 0) {
-                    $DefaultGrade = array_search($DefaultGrade, $GradeOption);
-                }
-            }
-        }
+        $GradeOption = array('Primaire', 'Secondaire');
 
         echo '<div class="rich-select select2 select2-grade">';
         echo '<div class="pre-icon"><img src="'.url("/themes/alloprof/design/images/icons/grade.svg").'"/></div>';
-        echo Gdn::controller()->Form->dropDown('GradeDropdown', $GradeOption, array('Value' => $gradeID));
+        echo Gdn::controller()->Form->dropDown('GradeDropdown', $GradeOption, array('Value' => $gradeID, 'IncludeNull' => true));
         echo '</div>';
     }
 endif;
