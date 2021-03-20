@@ -68,5 +68,9 @@ jQuery(document).ready(function($) {
         selectCategoryImg(data);
     });
 
+
     selectCategoryImg({element: $('.select2-category option:selected')});
+
+    $(".Question-submenu.hasBetaBanner").parents('.Frame-menubar').addClass('hasBetaBanner');
+    $(".Question-submenu.hasBetaBanner").parents('.Frame-menubar').parents('.Frame-contentWrap').find('.sidebar').addClass('hasBetaBanner');
 });

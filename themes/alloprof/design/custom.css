@@ -515,6 +515,10 @@ div.Popup .Border {
     background-color: transparent;
 }
 
+.sidebar.hasBetaBanner {
+    top: 274px;
+}
+
 @media screen and (max-width: 1366px) {
     .sidebar.right {
         display: none;
@@ -577,6 +581,10 @@ div.Popup .Border {
 @media screen and (max-width: 995px) {
     .Frame-menubar.hasBetaBanner {
         top: 154px;
+    }
+
+    .sidebar.hasBetaBanner {
+        top: 294px;
     }
 }
 
