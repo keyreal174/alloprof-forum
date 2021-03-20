@@ -40,14 +40,16 @@ jQuery(document).ready(function($) {
 
     function selectCategoryImg (obj) {
         if(obj) {
+
             var data = $(obj.element).data();
 
-            console.log($(obj.element).parent())
+            console.log(data, obj.element)
+            var parent = $(obj.element).parent().parent().parent();
 
             if(data && data['img_src']){
-                $('.category-selected-img').html('<img src="'+data['img_src']+'"/>');
+                parent.find('.category-selected-img').html('<img src="'+data['img_src']+'"/>');
             } else {
-                $('.category-selected-img').html('');
+                parent.find('.category-selected-img').html('');
             }
         }
     }
@@ -58,7 +60,7 @@ jQuery(document).ready(function($) {
     });
 
     $('.select2-category select').select2({
-        placeholder: "Select category",
+        placeholder: "Select subject",
         minimumResultsForSearch: -1,
         templateResult: formatState
     }).on('select2:select', function (e) {
@@ -66,5 +68,5 @@ jQuery(document).ready(function($) {
         selectCategoryImg(data);
     });
 
-    selectCategoryImg($('.select2-category select').select2('data'));
+    selectCategoryImg({element: $('.select2-category option:selected')});
 });

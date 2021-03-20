@@ -62,7 +62,7 @@ if (!function_exists('writeGradeFilter')) :
 
         echo '<div class="FilterMenu__Dropdown">';
         echo '<img src="'.url("/themes/alloprof/design/images/icons/grade.svg").'"/>';
-        echo $form->dropDown('GradeDropdown', $GradeOption, array('IncludeNull' => t('Grade'), 'Value' => $gradeID));
+        echo $form->dropDown('GradeDropdown', $GradeOption, array('IncludeNull' => true, 'Value' => $gradeID));
         echo '</div>';
     }
 endif;

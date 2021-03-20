@@ -254,6 +254,9 @@ if (!function_exists('writeCategoryDropDown')) :
         // $sender->EventArguments['Options'] = &$options;
         // $sender->fireEvent('BeforeCategoryDropDown');
 
+        $value = arrayValueI('Value', $options); // The selected category id
+        $categoryData = val('CategoryData', $options);
+
         // Grab the category data.
         if (!$categoryData) {
             $categoryData = CategoryModel::getByPermission(
@@ -371,7 +374,7 @@ if (!function_exists('writeGradeFilter')) :
 
         echo '<div class="rich-select select2 select2-grade">';
         echo '<div class="pre-icon"><img src="'.url("/themes/alloprof/design/images/icons/grade.svg").'"/></div>';
-        echo Gdn::controller()->Form->dropDown('GradeDropdown', $GradeOption, array('Value' => $gradeID));
+        echo Gdn::controller()->Form->dropDown('GradeDropdown', $GradeOption, array('Value' => $gradeID, 'IncludeNull' => true));
         echo '</div>';
     }
 endif;
