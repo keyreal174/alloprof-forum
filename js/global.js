@@ -524,6 +524,7 @@ jQuery(document).ready(function($) {
 
     if ($.fn.popup) {
         $('a.BanPopup').popup({containerCssClass: 'BanPopup CustomPopup'});
+        $('a.SearchPopup').popup({containerCssClass: 'SearchPopup CustomPopup'});
     }
 
     // This turns DeleteDiscussionPopup anchors into in-page popups

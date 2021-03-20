@@ -20,19 +20,19 @@ echo '<p class="LinkCopiedText Hidden">'.t("Link copied!").'</p>';
 echo '<div class="SocialSharingButtons">';
 echo '<a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u='.$Discussion["CanonicalUrl"].';src=sdkpreparse" class="fb-share-button">
         <img src="'.url("/themes/alloprof/design/images/icons/ShareNetworkFacebook.svg").'" />
-        Facebook
+        <span>Facebook</span>
     </a>';
 echo '<a target="_blank" class="twitter-share-button" href="https://twitter.com/intent/tweet?url='.$Discussion["CanonicalUrl"].'&via=alloprof" data-size="large">
         <img src="'.url("/themes/alloprof/design/images/icons/ShareNetworkTwitter.svg").'" />
-        Twitter
+        <span>Twitter</span>
     </a>';
 echo '<a href="whatsapp://send?text='.urlencode($Discussion["CanonicalUrl"]).'" data-action="share/whatsapp/share" target="_blank" class="whatsapp-share-button">
         <img src="'.url("/themes/alloprof/design/images/icons/ShareNetworkWhatsApp.svg").'" />
-        Whatsapp
+        <span>Whatsapp</span>
     </a>';
 echo '<a href="javascript:void();" class="copy-button" id="clickCopy" disId="'.$Discussion["DiscussionID"].'" value="'.$Discussion["CanonicalUrl"].'">
         <img src="'.url("/themes/alloprof/design/images/icons/ShareNetworkCopy.svg").'" />
-        '.t("Copy link").'
+        <span>'.t("Copy link").'</span>
     </a>';
 echo '</div>';
 echo $this->Form->close();

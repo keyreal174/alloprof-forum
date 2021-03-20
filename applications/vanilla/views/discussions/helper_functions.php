@@ -389,6 +389,14 @@ if (!function_exists('writeDiscussionDetail')) :
             ?>
 
             <div class="Discussion">
+                <?php
+                    if(!$Discussion->Published) {
+                        echo '<div class="not-published-badge mobile">';
+                        echo '<img src="'.url("/themes/alloprof/design/images/icons/eyebreak.svg").'"/>';
+                        echo t('Awaiting publication');
+                        echo '</div>';
+                    }
+                ?>
                 <div class="Item-Header DiscussionHeader">
                     <?php
                     if (!Gdn::themeFeatures()->get('EnhancedAccessibility')) {
@@ -404,7 +412,7 @@ if (!function_exists('writeDiscussionDetail')) :
                     <div class="AuthorWrap">
                         <?php
                             if(!$Discussion->Published) {
-                                echo '<div class="not-published-badge">';
+                                echo '<div class="not-published-badge desktop">';
                                 echo '<img src="'.url("/themes/alloprof/design/images/icons/eyebreak.svg").'"/>';
                                 echo t('Awaiting publication');
                                 echo '</div>';

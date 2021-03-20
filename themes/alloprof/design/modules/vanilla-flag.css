@@ -26,9 +26,8 @@ div.Popup.CustomPopup .Border {
 }
 
 div.Popup.CustomPopup .Body {
-    max-height: 700px !important;
     overflow: initial !important;
-    padding: 80px !important;
+    padding: 80px;
 
     box-shadow: 0px 16px 40px -5px rgba(108, 103, 103, 0.05);
     border-radius: 24px;
