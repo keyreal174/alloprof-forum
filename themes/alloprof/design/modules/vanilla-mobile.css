@@ -331,6 +331,10 @@
     .sidebar {
         display: none !important;
     }
+    div.Popup a.Close {
+        right: 15px;
+        top: 5px;
+    }
     .Frame#page {
         margin-bottom: 64px;
     }
@@ -339,6 +343,7 @@
         position: fixed;
         top: calc(100% - 64px);
         max-width: 100%;
+        width: 100%;
         z-index: 9;
     }
     .Frame-menubar .Question-submenu {
@@ -346,6 +351,7 @@
         box-shadow: 0px -8px 16px rgba(26, 32, 44, 0.05);
         background: white;
         min-height: 64px;
+        justify-content: space-around;
     }
     .Navigation-linkContainer {
         justify-content: center;
