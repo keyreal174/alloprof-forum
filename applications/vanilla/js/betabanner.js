@@ -4,6 +4,8 @@ jQuery(document).ready(function ($) {
         var $button = $(this);
 
         $('.beta-banner').css('display', 'none');
+        $('.Frame-menubar.hasBetaBanner').removeClass('hasBetaBanner');
+        $('.Question-submenu.hasBetaBanner').removeClass('hasBetaBanner');
 
         var api_url = $button.attr("data-url");
         var url = window.location.origin + api_url;

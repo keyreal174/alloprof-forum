@@ -96,7 +96,7 @@ class CategoriesModule extends Gdn_Module {
 
         $index = 5;
 
-        while ($index <= count($categories)) {
+        while ($index < count($categories) - 1) {
             # code...
             array_splice( $categories, $index, 0, $nextButton );
             $index += 1;

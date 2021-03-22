@@ -186,9 +186,9 @@ if (!function_exists('reactionButton')) {
             $label = t("Like");
             if ($count) {
                 if ($count > 1) {
-                    $additionalLabel = "people found the explanation helpful";
+                    $additionalLabel = t("people found the explanation helpful");
                 } else {
-                    $additionalLabel = "person found the explanation helpful";
+                    $additionalLabel = t("person found the explanation helpful");
                 }
             }
             if ($isLiked) {

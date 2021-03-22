@@ -78,6 +78,10 @@
     height: auto;
 }
 
+.Frame-menubar.hasBetaBanner {
+    top: 134px;
+}
+
 .Question-submenu .Navigation-linkContainer {
     margin: 0 20px;
 }
@@ -426,6 +430,10 @@ div.Popup .Border {
     background-color: transparent;
 }
 
+.sidebar.hasBetaBanner {
+    top: 274px;
+}
+
 @media screen and (max-width: 1366px) {
     .sidebar.right {
         display: none;
@@ -485,10 +493,24 @@ div.Popup .Border {
     }
 }
 
+@media screen and (max-width: 995px) {
+    .Frame-menubar.hasBetaBanner {
+        top: 154px;
+    }
+
+    .sidebar.hasBetaBanner {
+        top: 294px;
+    }
+}
+
 @media screen and (max-width: 959px) {
     .Header {
         padding-left: 16px;
         padding-right: 16px;
+    }
+
+    .Frame-menubar.hasBetaBanner {
+        top: 200px;
     }
 
     .Question-submenu .Navigation-linkContainer span.desktop {
@@ -632,4 +654,15 @@ div.Popup .Border {
 
 .not-clickable {
     cursor: initial;
+}
+@media screen and (max-width: 539px) {
+    .Frame-menubar.hasBetaBanner {
+        top: 224px;
+    }
+}
+
+@media screen and (max-width: 398px) {
+    .Frame-menubar.hasBetaBanner {
+        top: 244px;
+    }
 }
