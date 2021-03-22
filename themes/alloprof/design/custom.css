@@ -629,3 +629,7 @@ div.Popup .Border {
 .editorEventWall div[role='toolbar'] button:nth-child(3) {
     display: none;
 }
+
+.not-clickable {
+    cursor: initial;
+}
