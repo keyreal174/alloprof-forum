@@ -1,5 +1,5 @@
 <?php if (!defined('APPLICATION')) exit(); ?>
-<div class="modal-dialog modal-sm modal-confirm" role="document">
+<div class="modal-dialog modal-sm modal-confirm <?php echo strtolower($this->data('Action')) ?>" role="document">
     <div class="modal-content">
         <?php
         $ItemCount = $this->data('ItemCount');
