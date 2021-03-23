@@ -19,21 +19,21 @@ jQuery(document).ready(function($) {
         $('.information-block.newdiscussion').removeClass('show');
     })
 
-    $('.scrollToAskQuestionForm').click(function(){
-        $('.AskQuestionForm').css('display', 'block');
-        $('.AskQuestionForm .clickToCreate').trigger('click');
+    // $('.scrollToAskQuestionForm').click(function(){
+    //     $('.AskQuestionForm').css('display', 'block');
+    //     $('.AskQuestionForm .clickToCreate').trigger('click');
 
-        $(".AskQuestionForm .ql-editor").focus();
-        if ($(".AskQuestionForm").offset()) {
-            $([document.documentElement, document.body]).animate({
-                scrollTop: $(".AskQuestionForm").offset().top - 220
-            }, 500);
-        }
+    //     $(".AskQuestionForm .ql-editor").focus();
+    //     if ($(".AskQuestionForm").offset()) {
+    //         $([document.documentElement, document.body]).animate({
+    //             scrollTop: $(".AskQuestionForm").offset().top - 220
+    //         }, 500);
+    //     }
 
-        if ($("#MainContent").offset()) {
-            $([document.documentElement, document.body]).animate({
-                scrollTop: $("#MainContent").offset().top - 235
-            }, 500);
-        }
-    })
+    //     if ($("#MainContent").offset()) {
+    //         $([document.documentElement, document.body]).animate({
+    //             scrollTop: $("#MainContent").offset().top - 235
+    //         }, 500);
+    //     }
+    // })
 });

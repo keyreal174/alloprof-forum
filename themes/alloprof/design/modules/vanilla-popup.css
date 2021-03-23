@@ -189,3 +189,29 @@ div.Popup.BanPopup #Message {
 div.Popup.BanPopup .btn {
     margin: 0 auto;
 }
+
+/* Popup scrollToAskQuestionFormPopup hasRichEditor */
+.scrollToAskQuestionFormPopup .Border {
+    max-width: 750px !important;
+}
+
+.scrollToAskQuestionFormPopup .Border .Body {
+    padding: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    max-height: initial !important;
+    border-radius: 6px !important;
+}
+
+.scrollToAskQuestionFormPopup .Border .Body::-webkit-scrollbar {
+    width: 0px;
+}
+
+.scrollToAskQuestionFormPopup .Border .Body .information-block.show {
+    margin-bottom: 0;
+}
+
+.scrollToAskQuestionFormPopup.Popup.hasRichEditor .FormWrapper {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
