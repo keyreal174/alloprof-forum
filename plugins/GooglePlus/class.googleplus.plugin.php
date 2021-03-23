@@ -344,8 +344,6 @@ class GooglePlusPlugin extends Gdn_Plugin {
         $form->setFormValue('ProviderName', 'Google+');
         $form->setFormValue('FullName', val('name', $profile));
         $form->setFormValue('Email', val('email', $profile));
-        $form->setFormValue('Role', t('Teacher'));
-        $form->setFormValue('Grade', 'Enseignant');
         if (c('Plugins.GooglePlus.UseAvatars', true)) {
             $form->setFormValue('Photo', val('picture', $profile));
         }

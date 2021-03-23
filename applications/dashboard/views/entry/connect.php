@@ -108,83 +108,27 @@ if (!$hasUserID) {
                 <li role="presentation">
                     <?php
                     echo $this->Form->label('UserName', 'UserName');
-                    echo $this->Form->textBox('UserName', ['value' => "3333", 'id' => 'Form_Email', 'class' => 'InputBox', 'autocorrect' => 'off', 'autocapitalize' => 'off', 'Wrap' => TRUE, 'placeholder' => t('User name')]);
+                    echo $this->Form->textBox('UserName', ['value' => $this->Form->getFormValue('Email'), 'id' => 'Form_Email', 'class' => 'InputBox', 'autocorrect' => 'off', 'autocapitalize' => 'off', 'Wrap' => TRUE, 'placeholder' => t('User name')]);
                     ?>
                 </li>
                 <li role="presentation">
                     <?php
                     echo $this->Form->label('DisplayName', 'DisplayName');
-                    echo $this->Form->textBox('DisplayName', ['value' => $this->Form->getFormValue('FullName'), 'id' => 'Form_Email', 'class' => 'InputBox', 'autocorrect' => 'off', 'autocapitalize' => 'off', 'Wrap' => TRUE, 'placeholder' => t('Display name')]);
+                    echo $this->Form->textBox('DisplayName', ['value' => $this->Form->getFormValue('DisplayName'), 'id' => 'Form_Email', 'class' => 'InputBox', 'autocorrect' => 'off', 'autocapitalize' => 'off', 'Wrap' => TRUE, 'placeholder' => t('Display name')]);
                     ?>
                 </li>
                 <li role="presentation">
                     <?php
                     echo $this->Form->label('Grade', 'Grade');
-                    echo $this->Form->textBox('Grade', ['value' => 'Enseignant', 'id' => 'Form_Email', 'class' => 'InputBox', 'autocorrect' => 'off', 'autocapitalize' => 'off', 'Wrap' => TRUE, 'placeholder' => t('Grade')]);
+                    echo $this->Form->textBox('Grade', ['value' => $this->Form->getFormValue('Grade'), 'id' => 'Form_Email', 'class' => 'InputBox', 'autocorrect' => 'off', 'autocapitalize' => 'off', 'Wrap' => TRUE, 'placeholder' => t('Grade')]);
                     ?>
                 </li>
                 <li role="presentation">
                     <?php
                     echo $this->Form->label('Role', 'Role');
-                    echo $this->Form->textBox('Role', ['value' => t('Teacher'), 'id' => 'Form_Email', 'class' => 'InputBox', 'autocorrect' => 'off', 'autocapitalize' => 'off', 'Wrap' => TRUE, 'placeholder' => t('Role')]);
+                    echo $this->Form->textBox('Role', ['value' => $this->Form->getFormValue('Role'), 'id' => 'Form_Email', 'class' => 'InputBox', 'autocorrect' => 'off', 'autocapitalize' => 'off', 'Wrap' => TRUE, 'placeholder' => t('Role')]);
                     ?>
                 </li>
-
-        <?php if ($displayConnectName && !$this->data('HideName')) : ?>
-
-                <li>
-                    <?php
-
-                    // One User was found in GDN_User based on the Email.
-                    if (count($ExistingUsers) == 1 && $NoConnectName) {
-                        $Row = reset($ExistingUsers);
-
-                        echo '<div class="FinePrint">', t('ConnectAccountExists', 'You already have an account here.'), '</div>',
-                        wrap(sprintf(t('ConnectRegisteredName', 'Your registered username: <strong>%s</strong>'), htmlspecialchars($Row['Name'])), 'div', ['class' => 'ExistingUsername']);
-                        $this->addDefinition('NoConnectName', true);
-                        echo $this->Form->hidden('UserSelect', ['Value' => $Row['UserID']]);
-                    }
-
-                    // Found User's Name in GDN_User.
-                    if (count($ExistingUsers) >= 1 && !$NoConnectName){
-                        echo $this->Form->label('Username', 'ConnectName');
-                        echo \Gdn::translate('ConnectWithExistingUser', 'One or more users with your name already exist, would you like to connect as them?');
-                        $connectNameMessage = (!$allowConnect) ? '' : ' <span class="FinePrint">'.\Gdn::translate('(Requires a password.)').'</span>';
-                        foreach ($ExistingUsers as $Row) {
-                            echo wrap($this->Form->radio('UserSelect', $Row['Name'] . $connectNameMessage, ['value' => $Row['UserID'], 'class' => 'existingConnectName']), 'div');
-                        }
-                        $connectChooseName = ' <span class="FinePrint">('.\Gdn::translate('ConnectChooseName', 'Choose a name to identify yourself on the site.').')</span>';
-                        echo wrap($this->Form->radio('UserSelect', 'Other'.$connectChooseName, ['value' => 'other']), 'div');
-                        echo $this->Form->textbox('ConnectName');
-                    }
-
-                    // No Name was passed over SSO and...
-                    // No Users were found in GDN_User
-                    if (count($ExistingUsers) === 0 && !$NoConnectName) {
-                        echo \Gdn::translate('ConnectChooseName', 'Choose a name to identify yourself on the site.');
-                        echo $this->Form->textbox('ConnectName', ["aria-label" => t("Username")]);
-                    }
-                    ?>
-                </li>
-        <?php endif; ?>
-
-                <?php $this->fireEvent('RegisterBeforePassword'); ?>
-
-                <?php
-                /**
-                 *  HidePassword can be passed by any plugin that hooks into
-                 *  the EntryController that has rules that require this form to be
-                 *  shown but not the Password Field.
-                 */
-                if (!$this->data('HidePassword')) {
-                    echo '<li id="ConnectPassword">';
-                    echo $this->Form->label('Password', 'ConnectPassword');
-                    $PasswordMessage = t('ConnectExistingPassword', 'Enter your existing account password.');
-                    echo wrap($PasswordMessage, 'div', ['class' => 'FinePrint']);
-                    echo $this->Form->input('ConnectPassword', 'password');
-                    echo '</li>';
-                }
-                ?>
             </ul>
 
             <?php
