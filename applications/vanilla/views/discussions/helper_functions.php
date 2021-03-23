@@ -4,6 +4,7 @@ if (!defined('APPLICATION')) exit();
 use Vanilla\Cache\StaticCache;
 use Vanilla\Utility\HtmlUtils;
 
+
 if (!function_exists('AdminCheck')) {
     /**
      *
@@ -323,6 +324,125 @@ if (!function_exists('WriteDiscussion')) :
     }
 endif;
 
+if (!function_exists('writeCategoryDropDown')) :
+    function writeCategoryDropDown($sender, $fieldName = 'CategoryID', $options = []) {
+        $sender->EventArguments['Options'] = &$options;
+        $sender->fireEvent('BeforeCategoryDropDown');
+
+        $value = arrayValueI('Value', $options); // The selected category id
+        $categoryData = val('CategoryData', $options);
+
+        // Grab the category data.
+        if (!$categoryData) {
+            $categoryData = CategoryModel::getByPermission(
+                'Discussions.View',
+                $value,
+                val('Filter', $options, ['Archived' => 0]),
+                val('PermFilter', $options, [])
+            );
+        }
+
+        // Remove categories the user shouldn't see.
+        $safeCategoryData = [];
+        $discussionType = val('DiscussionType', $options);
+        foreach ($categoryData as $categoryID => $category) {
+            if ($value != $categoryID) {
+                if ($category['CategoryID'] <= 0 || !$category['PermsDiscussionsView']) {
+                    continue;
+                }
+
+                if ($category['Archived']) {
+                    continue;
+                }
+
+                // Filter out categories that don't allow our discussion type, if specified
+                if ($discussionType) {
+                    $permissionCategory = CategoryModel::permissionCategory($category);
+                    $allowedDiscussionTypes = CategoryModel::allowedDiscussionTypes($permissionCategory, $category);
+                    if (!array_key_exists($discussionType, $allowedDiscussionTypes)) {
+                        continue;
+                    }
+                }
+            }
+
+            $safeCategoryData[$categoryID] = $category;
+        }
+        unset($discussionType, $permissionCategory, $allowedDiscussionTypes);
+
+        unset($options['Filter'], $options['PermFilter'], $options['Context'], $options['CategoryData']);
+
+        // Opening select tag
+        $return = '<select name='.$fieldName.' id='.$fieldName.'>';
+
+        // Get value from attributes
+        if (!is_array($value)) {
+            $value = [$value];
+        }
+
+        // Prevent default $Value from matching key of zero
+        $hasValue = ($value !== [false] && $value !== ['']) ? true : false;
+
+        // Start with null option?
+        $includeNull = val('IncludeNull', $options);
+        if ($includeNull === true) {
+            // $return .= '<option value="">'.t('Select a category...').'</option>';
+        } elseif (is_array($includeNull))
+            $return .= "<option value=\"{$includeNull[0]}\">{$includeNull[1]}</option>\n";
+        elseif ($includeNull)
+            $return .= "<option value=\"\">$includeNull</option>\n";
+        elseif (!$hasValue)
+            $return .= '<option value=""></option>';
+
+        // Show root categories as headings (ie. you can't post in them)?
+        $doHeadings = val('Headings', $options, c('Vanilla.Categories.DoHeadings'));
+
+        // If making headings disabled and there was no default value for
+        // selection, make sure to select the first non-disabled value, or the
+        // browser will auto-select the first disabled option.
+        $forceCleanSelection = ($doHeadings && !$hasValue && !$includeNull);
+
+        // Write out the category options.
+        $enableHeadings = $options['EnableHeadings'] ?? false;
+        if (is_array($safeCategoryData)) {
+            foreach ($safeCategoryData as $categoryID => $category) {
+                $depth = val('Depth', $category, 0);
+                $isHeading = ($depth == 1 && $doHeadings) || $category['DisplayAs'] !== 'Discussions' || !$category['AllowDiscussions'];
+                $disabled = $isHeading && !$enableHeadings;
+                $selected = in_array($categoryID, $value) && $hasValue;
+                if ($forceCleanSelection && $depth > 1) {
+                    $selected = true;
+                    $forceCleanSelection = false;
+                }
+
+                if ($category['AllowDiscussions']) {
+                    if ($permission == 'add' && !$category['PermsDiscussionsAdd']) {
+                        $disabled = true;
+                    }
+                }
+
+                $return .= '<option value="'.$categoryID.'" data-img_src="'.$category['Photo'].'"';
+                if ($disabled) {
+                    $return .= ' disabled="disabled"';
+                } elseif ($selected) {
+                    $return .= ' selected="selected"'; // only allow selection if NOT disabled
+                }
+
+                $name = htmlspecialchars(val('Name', $category, 'Blank Category Name'));
+                if ($depth > 1) {
+                    $name = str_repeat('&#160;', 4 * ($depth - 1)).$name;
+                }
+
+                $return .= '>'.$name."</option>\n";
+            }
+        }
+
+        echo '<div class="Category rich-select select2 select2-category">';
+        echo '<div class="category-selected-img pre-icon"><img src="'.url("/themes/alloprof/design/images/icons/subject.svg").'"/></div>';
+        echo $return.'</select>';
+        echo '</div>';
+    }
+endif;
+
 if (!function_exists('timeElapsedString')) :
     function timeElapsedString($datetime, $full = false) {
         $now = new DateTime;
@@ -351,7 +471,37 @@ if (!function_exists('timeElapsedString')) :
             }
         }
 
-        if (!$full) $string = array_slice($string, 0, 1);
+        if (!$full) {
+            // $string = array_slice($string, 0, 1);
+            $frenchStr = "";
+            if ($diff->y) {
+                if ($diff->y > 1) $frenchStr = "Il y a ". $diff->y . " ans";
+                else $frenchStr = "Il y a 1 an";
+            } else {
+                if ($diff->m) {
+                    if ($diff->m > 1) $frenchStr = "Il ya ". $diff->m . " mois";
+                    else $frenchStr = "Il ya 1 mois";
+                } else {
+                    if ($diff->d) {
+                        if ($diff->d > 1) $frenchStr = "Il y a ". $diff->d . " jours";
+                        else $frenchStr = "Il y a 1 jour";
+                    } else {
+                        if ($diff->h) {
+                            if ($diff->h > 1) $frenchStr = "Il y a ". $diff->h . " heures";
+                            else $frenchStr = "Il y a 1 heure";
+                        } else {
+                            if ($diff->i) {
+                                if ($diff->i > 1) $frenchStr = "Il y a moins de ". $diff->i . " minutes";
+                                else $frenchStr = "Il y a 1 minute";
+                            } else {
+                                $frenchStr = "Il y a moins de 1 minute";
+                            }
+                        }
+                    }
+                }
+            }
+            return $frenchStr;
+        }
         return $string ? implode(', ', $string) . ' ago' : 'just now';
     }
 endif;

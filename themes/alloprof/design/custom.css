@@ -41,6 +41,7 @@
 @import url("./modules/vanilla-betabanner.css");
 @import url("./modules/vanilla-pagenotfound.css");
 @import url("./modules/vanilla-newdropdown.css");
+@import url("./modules/vanilla-mobile.css");
 
 .BoxNewDiscussion {
     -webkit-box-shadow: none;
@@ -161,25 +162,20 @@ select {
 
 .rich-select {
     min-height: 44px;
-    border-radius: 38px;
-    background: #F2F2F2;
+    border-bottom: 1px solid black;
     display: flex;
     align-items: center;
     overflow: hidden;
     position: relative;
     z-index: 0;
+    margin-bottom: 10px;
 }
 
-.rich-select i,
-.rich-select img {
+.rich-select i {
     position: absolute;
-    left: 20px;
+    left: 12px;
     top: 14px;
     z-index: 1;
-}
-
-.rich-select .SelectWrapper {
-    width: 100%;
 }
 
 .rich-select.bg-transparent {
@@ -198,6 +194,96 @@ select {
 }
 
 /* customize selectbox */
+
+.select2-container--default.select2-container--open .select2-selection--single .select2-selection__arrow b {
+    background: url(../../../../themes/alloprof/design/images/icons/arrowDown.svg);
+    transform: rotate(180deg);
+    background-repeat: no-repeat !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow b {
+    background: url(../../../../themes/alloprof/design/images/icons/arrowDown.svg);
+    width: 14px !important;
+    height: 16px !important;
+    top: 60% !important;
+    left: 0 !important;
+    background-repeat: no-repeat !important;
+    border-width: 0 !important;
+    transition: 0.3s all;
+}
+
+.select2-container--default .select2-selection--single {
+    height: 100% !important;
+    border: none !important;
+}
+
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+    background-color: #F2F2F2 !important;
+}
+
+.select2-results__option {
+    margin: 6px;
+    border-radius: 8px;
+    color: black !important;
+    background-color: white !important;
+}
+
+.select2-dropdown {
+    border: 1px solid #DDDDDD !important;
+    box-shadow: 0 0 10px rgb(0 0 0 / 10%);
+    border-radius: 8px !important;
+    top: 10px;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    line-height: 44px !important;
+    padding-left: 45px !important;
+}
+
+.select2 .select2-container {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.select2 .pre-icon {
+    height: 16px;
+    min-width: 16px;
+    position: absolute;
+    left: 12px;
+    top: 14px;
+    z-index: 1;
+}
+
+.select2 .pre-icon img {
+    height: 100%;
+    width: auto;
+}
+
+.select2-dropdown .image-option {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    height: 28px;
+}
+
+.select2-container--default .select2-results > .select2-results__options {
+    max-height: 350px !important;
+}
+
+.select2-dropdown .image-option .category-img {
+    height: 28px;
+    width: 30px;
+    margin-right: 15px;
+    margin-left: 5px;
+    text-align: center;
+}
+
+.select2-dropdown .image-option .category-img img {
+    height: 100%;
+    width: auto;
+    margin: 0 auto;
+}
+
 .selectBox {
     display: flex;
 }
@@ -426,211 +512,6 @@ div.Popup .Border {
     background-color: transparent;
 }
 
-.sidebar.hasBetaBanner {
-    top: 274px;
-}
-
-@media screen and (max-width: 1366px) {
-    .sidebar.right {
-        display: none;
-    }
-
-    .Container {
-        width: 870px!important;
-    }
-
-    .sidebar.left {
-        width: 300px;
-    }
-
-    .Content.MainContent {
-        width: 508px;
-    }
-
-    .Banner-content__Container {
-        justify-content: flex-start;
-        padding-top: 100px;
-        background-position-x: center;
-        background-size: 400px;
-        background-position-y: calc(100% + 40px);
-    }
-
-    .Banner-content.Teacher .Banner-content__Container {
-        background-position-y: calc(100% + 95px);
-    }
-
-    .Banner-content__pagename {
-        display: none;
-    }
-
-    .Banner-content h1 {
-        font-size: 48px;
-        color: black;
-        font-weight: 500;
-        text-align: center;
-        margin-bottom: 20px;
-    }
-
-    .Banner-content h1 br {
-        display: none;
-    }
-
-    .Banner-content h1 b {
-        font-weight: 500;
-    }
-
-    .Banner-content .Banner-content__description {
-        font-size: 21px;
-        line-height: 25px;
-        color: black;
-        font-weight: 500;
-        text-align: center;
-        margin-top: 0;
-    }
-}
-
-@media screen and (max-width: 995px) {
-    .Frame-menubar.hasBetaBanner {
-        top: 154px;
-    }
-
-    .sidebar.hasBetaBanner {
-        top: 294px;
-    }
-}
-
-@media screen and (max-width: 959px) {
-    .Header {
-        padding-left: 16px;
-        padding-right: 16px;
-    }
-
-    .Frame-menubar.hasBetaBanner {
-        top: 200px;
-    }
-
-    .Question-submenu .Navigation-linkContainer span.desktop {
-        display: none;
-    }
-
-    .Question-submenu .Navigation-linkContainer span.mobile {
-        display: inline-block;
-    }
-
-    .Frame-banner .Banner-content {
-        display: none;
-    }
-
-    .Frame-banner, .Frame-header {
-        height: 132px;
-        background-color: white;
-    }
-
-    .Frame-header {
-        box-shadow: 0px 0px 20px rgb(0 0 0 / 5%);
-    }
-
-    .Frame-menubar {
-        top: 132px;
-    }
-
-    .Frame-header .Header .row {
-        height: 132px;
-        align-items: flex-start;
-    }
-
-    .Frame-header .Header .Header-left {
-        position: absolute;
-        bottom: 10px;
-        width: calc(100% - 32px);
-    }
-
-    .Frame-header .Header .Header-logo {
-        height: 70px;
-        margin-left: 0;
-    }
-
-    .Frame-header .Header .Header-right {
-        height: 70px;
-    }
-
-    .Frame-menubar {
-        max-width: 580px;
-        margin: 0 auto;
-    }
-
-    .Navigation-linkContainer a {
-        display: block;
-        text-align: center;
-        font-size: 13px;
-        line-height: 18px;
-    }
-
-    .Navigation-linkContainer svg {
-        width: 100%;
-    }
-
-    .Navigation-link {
-        padding: 0;
-    }
-
-    .Container {
-        width: 100%!important;
-    }
-
-    .sidebar.left {
-        display: none;
-    }
-
-    .Content.MainContent {
-        max-width: 580px;
-        margin: 0 auto;
-    }
-
-    .Content.MainContent .BoxDiscussionFilter.Panel {
-        display: block;
-        margin-bottom: 40px;
-    }
-
-    .TalkTeacher .TalkTeacher-link_mobile {
-        display: block;
-    }
-
-    .TalkTeacher .TalkTeacher-link {
-        display: none!important;
-    }
-}
-
-@media screen and (max-width: 619px) {
-    .ItemDiscussion .verified-info {
-        min-height: 42px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: #DBF8EF;
-        border-radius: 8px;
-        font-size: 12px;
-        line-height: 14px;
-        margin-bottom: 16px;
-    }
-
-    .ItemDiscussion .verified-info img {
-        margin-right: 8px;
-        width: 16px;
-        height: 16px;
-    }
-
-    .ItemDiscussion .verfied-badge {
-        display: none;
-    }
-
-    .DataList .ItemDiscussion, .DataList .Item, .MessageList .ItemDiscussion.ItemDiscussion, .MessageList .ItemComment .Comment {
-        padding: 16px;
-    }
-
-}
-
-
 /* rich editor remove icons */
 #paragraphMenu1-formattingMenus-component {
     display: none;
@@ -646,6 +527,41 @@ div.Popup .Border {
 .editorEventWall div[role='toolbar'] button:nth-child(2),
 .editorEventWall div[role='toolbar'] button:nth-child(3) {
     display: none;
+}
+
+.embedExternal.embedImage .embedExternal-content {
+    width: fit-content;
+}
+
+a.embedImage-link:before {
+    content: "";
+    background: url(./images/icons/Exclamationmark.svg);
+    z-index: 2;
+    position: absolute;
+    bottom: 50px;
+    width: 17px;
+    height: 16px;
+    right: 15px;
+    transform: scale(1.5);
+}
+
+a.embedImage-link:after {
+    content: attr(data-content);
+    color: white;
+    z-index: 1;
+    position: absolute;
+    bottom: 6px;
+    right: 0;
+    height: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px 20px;
+    height: fit-content;
+    text-align: left;
+    padding-right: 50px;
+}
+
+.not-clickable {
+    cursor: initial;
 }
 
 @media screen and (max-width: 539px) {

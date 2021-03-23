@@ -248,6 +248,7 @@ class PostController extends VanillaController {
 
         // Set the model on the form
         $this->Form->setModel($this->DiscussionModel);
+
         if (!$this->Form->isPostBack()) {
             // Prep form with current data for editing
             if (isset($this->Discussion)) {
@@ -325,6 +326,14 @@ class PostController extends VanillaController {
                     }
                 }
 
+                if (isset($formValues['GradeID'])) {
+                    $GradeID = $formValues['GradeID'];
+
+                    if ($GradeID == "") {
+                        $this->Form->addError(t('Grade is required.'));
+                    }
+                }
+
                 $isTitleValid = true;
                 $name = trim($this->Form->getFormValue('Name', ''));
 
@@ -349,6 +358,21 @@ class PostController extends VanillaController {
                         $draftID = $this->DraftModel->save($formValues);
                         $this->Form->setValidationResults($this->DraftModel->validationResults());
                     } else {
+                        $fields = c('ProfileExtender.Fields', []);
+                        $GradeOption = [];
+                        foreach ($fields as $k => $field) {
+                            if ($field['Label'] == "Grade") {
+                                $GradeOption = array_filter($field['Options'], function($v) {
+                                    return preg_match('/(Primaire|Secondaire)/', $v);
+                                });
+                            }
+                        }
+                        if (str_contains($GradeOption[$this->Form->getValue('GradeID')], 'Primaire')) {
+                            $Cycle = 0;
+                        } else {
+                            $Cycle = 1;
+                        }
+                        $formValues['Cycle'] = $Cycle;
                         $discussionID = $this->DiscussionModel->save($formValues);
                         $this->Form->setValidationResults($this->DiscussionModel->validationResults());
 

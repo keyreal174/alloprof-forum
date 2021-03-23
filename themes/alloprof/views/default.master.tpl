@@ -7,6 +7,7 @@
     {asset name="Head"}
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,700,700i" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.css" />
 </head>
 
 {assign
@@ -93,7 +94,7 @@
             {else}
                 <div class="Frame-header">
 
-                    <header id="MainHeader" class="Header">
+                    <header id="MainHeader" class="Header not-transparent">
                         <div class="row">
                             <div class="Header-left">
                                 <div class="Header-left__search">

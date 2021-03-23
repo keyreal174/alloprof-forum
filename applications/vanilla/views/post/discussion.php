@@ -132,12 +132,9 @@ if (!$CancelUrl) {
             }
         }
 
-        echo '<div class="Category rich-select">';
-        echo '<img src="'.url("/themes/alloprof/design/images/icons/subject.svg").'"/>';
-        echo $this->Form->categoryDropDown('CategoryID', $options);
-        echo '</div>';
+        echo writeCategoryDropDown($this, 'CategoryID', $options);
         echo '<span class="space"></span>';
-        echo '<div class="Category rich-select">';
+        echo '<div class="Category rich-select select2 select2-grade">';
         echo '<img src="'.url("/themes/alloprof/design/images/icons/grade.svg").'"/>';
         echo $this->Form->dropDown('GradeID', $GradeOption, array('Default' => $DefaultGrade, 'IncludeNull' => t('Grade'), 'IsDisabled' => TRUE));
         echo '</div>';
