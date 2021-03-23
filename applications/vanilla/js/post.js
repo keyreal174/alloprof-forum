@@ -121,8 +121,8 @@ jQuery(document).ready(function($) {
             },
             success: function(json) {
                 // Remove any old popups if not saving as a draft
-                // if (!draft)
-                //     $('div.Popup').remove();
+                if (!draft)
+                    $('div.Popup').remove();
 
                 // Assign the discussion id to the form if it was defined
                 if (json.DiscussionID != null)

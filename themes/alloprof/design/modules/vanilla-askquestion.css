@@ -6,10 +6,6 @@
     margin-top: 20px;
 }
 
-.AskQuestionForm.AskQuestionFormPopup .FormWrapper {
-    display: block;
-}
-
 .AskQuestionForm .FormWrapper.open {
     overflow: visible;
 }
@@ -158,10 +154,6 @@
     padding: 24px;
     width: 100%;
     cursor: pointer;
-}
-
-.AskQuestionFormPopup .BoxNewDiscussion-header .clickToCreate {
-    display: none;
 }
 
 .AskQuestionForm .FormTitleWrapper {
