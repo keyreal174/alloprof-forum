@@ -8575,6 +8575,11 @@ table.PreferenceGroup tbody tr:hover td {
     margin: 0 auto;
 }
 
+.Categories .Banner-content__Container {
+    justify-content: flex-start;
+    padding-top: 100px;
+}
+
 .Banner-content.General .Banner-content__Container {
     background-image: url(../../../../themes/alloprof/design/images/flo_bot.svg);
 }

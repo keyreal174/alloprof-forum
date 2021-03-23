@@ -94,7 +94,7 @@
             {else}
                 <div class="Frame-header">
 
-                    <header id="MainHeader" class="Header">
+                    <header id="MainHeader" class="Header not-transparent">
                         <div class="row">
                             <div class="Header-left">
                                 <div class="Header-left__search">

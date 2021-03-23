@@ -19,7 +19,7 @@ echo '<!-- Page Title -->
 echo '<div class="Options">';
 
 $this->fireEvent('BeforeDiscussionOptions');
-echo getDiscussionOptionsDropdown();
+echo writeDiscussionOptions();
 writeAdminCheck();
 
 echo '</div>';
