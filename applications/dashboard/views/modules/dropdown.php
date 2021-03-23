@@ -20,7 +20,8 @@ $triggerID = $dropdown->getTriggerId();
         $cssClass = $trigger['cssClass'] ?? false;
         $attributes = $trigger['attributes'] ?? false;
         $alert = !empty($dropdown->data('DashboardCount', '')) ? wrap($dropdown->data('DashboardCount', ''), 'span', ['class' => 'Alert']) : '';
-        echo anchor($icon.$text.$alert, $url, $cssClass, $attributes);
+        // echo anchor($icon.$text.$alert, $url, $cssClass, $attributes);
+        echo "<a class='".$cssClass."'>".$icon.$text.$alert."</a>";
     endif; ?>
     <ul class="Flyout MenuItems list-reset <?php echo $dropdown->getListCssClass(); ?>" role="menu" aria-labelledby="<?php echo $triggerID; ?>">
         <?php foreach($dropdown->getItems() as $item) {
