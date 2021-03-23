@@ -11,7 +11,7 @@ if(userRoleCheck() != Gdn::config('Vanilla.ExtraRoles.Teacher')) {
     <p><?php echo t("Can't find answers?") ?></p>
     <?php
         if($Session->isValid())
-            echo '<a href="/post/newDiscussion" class="btn-default btn-shadow scrollToAskQuestionForm scrollToAskQuestionFormPopup ">'.t("Ask a question").'</a>';
+            echo '<button class="btn-default btn-shadow scrollToAskQuestionForm">'.t("Ask a question").'</button>';
         else echo anchor(t('Ask a question'), '/entry/jsconnect-redirect?client_id=alloprof', 'btn-default btn-shadow', ['rel' => 'nofollow', 'aria-label' => t("Sign In Now")]);
     ?>
 </div>
