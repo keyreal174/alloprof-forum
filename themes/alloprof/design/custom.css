@@ -683,6 +683,10 @@ a.embedImage-link:after {
     padding-right: 50px;
 }
 
+.not-clickable {
+    cursor: initial;
+}
+
 @media screen and (max-width: 539px) {
     .Frame-menubar.hasBetaBanner {
         top: 224px;
