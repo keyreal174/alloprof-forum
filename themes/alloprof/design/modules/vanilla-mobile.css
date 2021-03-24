@@ -5,6 +5,21 @@
  * @license GPL-2.0-only
  */
 
+ .d-desktop {
+    display: initial;
+ }
+
+ .d-mobile {
+    display: none;
+ }
+
+ .MobileHeader {
+    display: none;
+ }
+
+ .MobileHeader h3 {
+    font-size: 18px;
+ }
 
  .not-published-badge.mobile {
     display: none !important;
@@ -21,6 +36,75 @@
 
  .discussion-filters-mobile {
      display: none;
+ }
+
+ .SearchPopup .modal-header {
+    box-shadow: 0px 8px 20px rgb(26 32 44 / 5%);
+    padding: 15px 30px;
+ }
+
+ .SearchPopup .modal-body {
+    padding: 30px 30px;
+ }
+
+ .SearchPopup .modal-header h3 {
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    font-size: 18px;
+ }
+
+ .SearchPopup h2 {
+     text-align: left;
+     margin-bottom: 20px;
+ }
+
+ .SearchPopup .modal-header .Header-left__search {
+     margin-top: 40px;
+ }
+
+ .SearchPopup .mobile-categories {
+    max-height: calc(100vh - 235px);
+    overflow-y: auto;
+ }
+
+ .SearchPopup .mobile-categories li {
+     display: flex;
+     flex-wrap: wrap;
+     align-items: center;
+ }
+
+ .SearchPopup .mobile-categories li > div {
+     height: 120px;
+     margin-right: 12px;
+     width: 72px;
+ }
+
+ .SearchPopup .mobile-categories li .category-icon {
+    width: 72px;
+    height: 72px;
+    background: #F2F2F2;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+ }
+
+ .SearchPopup .mobile-categories li .name {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 100%;
+    height: auto;
+    text-align: center;
+    font-size: 11px;
+    display: block;
+    margin-top: 7px;
+    line-height: 15px;
+    color: #1A1919;
+ }
+
+ .SearchPopup .mobile-categories li .category-icon img {
+     max-height: 40px;
  }
 
  /* Basic Mobile theme */
@@ -323,6 +407,7 @@
     .Frame-header,
     .Frame-header .Header .row {
         height: 64px;
+        justify-content: left;
     }
     .Frame-header .Header .Header-left,
     .Banner-content .Banner-content__description,
@@ -429,7 +514,16 @@
         right: 10px;
         bottom: 75px;
     }
-
+    .back-btn {
+        display: none !important;
+    }
+    .profile-content {
+        margin-top: -30px;
+    }
+    .profile-content .Photo {
+        width: 128px !important;
+        height: 128px !important;
+    }
     .SearchPopup .Border {
         padding: 0;
         width: 100% !important;
@@ -443,7 +537,19 @@
         max-height: 100% !important;
         margin-left: -15px;
         margin-right: -15px;
-        padding: 15px 30px !important;
+        padding: 0 !important;
+    }
+    .Frame-header .Header .Header-logo a.Header-logo {
+        display: none;
+    }
+    .MobileHeader {
+        display: block;
+    }
+    .d-mobile {
+        display: initial !important;
+     }
+    .d-desktop {
+        display: none !important;
     }
 }
 

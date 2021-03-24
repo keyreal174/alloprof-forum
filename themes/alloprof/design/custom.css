@@ -442,6 +442,8 @@ div.Popup .Footer {
 div.Popup .Footer .Close span {
     font-size: 45px;
     font-weight: 100;
+    font-family: ChromaticaThin;
+    color: black;
 }
 
 div.Popup .Border {

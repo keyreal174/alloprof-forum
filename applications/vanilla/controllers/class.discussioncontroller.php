@@ -1475,7 +1475,8 @@ body { background: transparent !important; }
     // Social Sharing
     public function social($DiscussionID) {
         $this->setData('Discussion', $this->discussionByID($DiscussionID));
-        $this->setData('Title', 'Share your question!');
+        $this->setData('DesktopTitle', 'Share your question!');
+        $this->setData('MobileTitle', 'Share');
         $this->setData('SubTitle', 'Share it with your friends, they may have the explanation!');
         $this->setData('CopySubTitle', 'Asking yourself the same question? Share it with your friends, they may have the explanation!');
 

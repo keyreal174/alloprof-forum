@@ -219,7 +219,7 @@
 .Discussion .PageTitle {
     position: absolute;
     right: 40px;
-    top: 30px;
+    top: 46px;
     z-index: 99;
 }
 
@@ -485,4 +485,11 @@
 
 .EditCommentForm .Buttons {
     margin-top: 10px;
+}
+
+@media screen and (max-width: 619px) {
+    .Discussion .PageTitle {
+        right: 20px;
+        top: 85px;
+    }
 }

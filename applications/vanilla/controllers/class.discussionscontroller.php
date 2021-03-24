@@ -227,6 +227,10 @@ class DiscussionsController extends VanillaController {
 
         $this->addModule($bannerModule);
 
+        $mobileHeader = new MobileHeaderModule('Home');
+        $this->addModule($mobileHeader);
+
+
         // $this->addModule('BookmarkedModule');
         // $this->addModule('TagModule');
 
@@ -603,6 +607,8 @@ class DiscussionsController extends VanillaController {
         $this->fireEvent('AfterAddSideMenu');
         $this->fireEvent('AddProfileTabsInfo');
 
+        $mobileHeader = new MobileHeaderModule('Questions followed');
+        $this->addModule($mobileHeader);
 
         if ($this->UserRole == "Teacher") {
             $bannerModule = new BannerModule('Home', 'Home', '', 'Mutual Aid Zone', "Welcome to the Mutual Aid Zone! <br/> Want to help the students? It's this way!", "", "Teacher");
@@ -768,6 +774,9 @@ class DiscussionsController extends VanillaController {
         $this->addModule('ProfileFilterModule');
         $this->fireEvent('AfterAddSideMenu');
         $this->fireEvent('AddProfileTabsInfo');
+
+        $mobileHeader = new MobileHeaderModule('My Questions');
+        $this->addModule($mobileHeader);
 
         $DiscussionEmpty = true;
         if ($this->DiscussionData->numRows() > 0 || (isset($this->AnnounceData) && is_object($this->AnnounceData) && $this->AnnounceData->numRows() > 0)) {

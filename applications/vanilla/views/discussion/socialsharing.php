@@ -1,14 +1,16 @@
 <?php if (!defined('APPLICATION')) exit(); ?>
 <?php
 $Discussion = $this->data('Discussion');
-$Title = $this->data('Title');
+$DesktopTitle = $this->data('DesktopTitle');
+$MobileTitle = $this->data('MobileTitle');
 $SubTitle = $this->data('SubTitle');
 $CopySubTitle = $this->data('CopySubTitle');
 ?>
     <div>
     <img src='<?= url("/themes/alloprof/design/images/sharingAvatar.svg") ?>'' alt='image' class='FlagAvatar' />
     </div>
-    <h2><?php echo t($Title); ?></h2>
+    <h2 class="d-desktop"><?php echo t($DesktopTitle); ?></h2>
+    <h2 class="d-mobile"><?php echo t($MobileTitle); ?></h2>
     <p class='SubTitle'><?php echo t($SubTitle); ?></p>
     <p class='CopySubTitle Hidden'><?php echo t($CopySubTitle); ?></p>
 <?php

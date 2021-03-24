@@ -122,6 +122,9 @@
                                         <path d="M107.889 6.77148C101.717 6.77148 100.778 11.759 100.778 14.7078V28.5781H104.568V14.7442C104.568 12.0502 105.109 10.6304 107.889 10.6304H108.033V6.77148H107.889Z" fill="#1A1919"/>
                                     </svg>
                                 </a>
+                                <div class="MobileHeader">
+                                    {asset name="MobileHeader"}
+                                </div>
                             </div>
                             <div class="Header-right">
                                 {community_chooser buttonType='titleBarLink' buttonClass='Header-desktopCommunityChooser'}

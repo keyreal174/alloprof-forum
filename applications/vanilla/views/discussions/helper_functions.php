@@ -356,6 +356,58 @@ if (!function_exists('timeElapsedString')) :
     }
 endif;
 
+
+if(!function_exists('writeCategories')) :
+    function writeCategories() {
+        $categoryModel = new CategoryModel();
+        $categories = $categoryModel
+            ->setJoinUserCategory(true)
+            ->getChildTree(null, ['collapseCategories' => true]);
+        $categories = CategoryModel::flattenTree($categories);
+
+        $categories = array_filter($categories, function ($category) {
+            return val('PermsDiscussionsView', $category) && val('Following', $category);
+        });
+
+        $userCategories = $categoryModel->getFollowed(Gdn::session()->UserID);
+
+        function isFollowingCategory($followingCategories, $category) {
+            foreach ($followingCategories as $element) {
+                if ($element["CategoryID"] == $category["CategoryID"]) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        foreach ($categories as $key => $value) {
+            # code...
+            if (isFollowingCategory($userCategories, $value)) {
+                $categories[$key]["isFollowing"] = 1;
+            } else {
+                $categories[$key]["isFollowing"] = 0;
+            }
+        }
+
+        function cmp($a, $b) {
+            if ($a["isFollowing"] > $b["isFollowing"]) {
+                return -1;
+            } else if ($a["isFollowing"] < $b["isFollowing"]) {
+                return 1;
+            } else return 0;
+        }
+
+        usort($categories, 'cmp');
+
+        $newCategorySet = array($categories);
+
+        $data = new Gdn_DataSet($newCategorySet, DATASET_TYPE_ARRAY);
+        $data->datasetType(DATASET_TYPE_OBJECT);
+
+        return $data;
+    }
+endif;
+
 if (!function_exists('writeDiscussionDetail')) :
     function writeDiscussionDetail($Discussion, $sender, $session) {
         $Author = Gdn::userModel()->getID($Discussion->InsertUserID); // userBuilder($Discussion, 'Insert');

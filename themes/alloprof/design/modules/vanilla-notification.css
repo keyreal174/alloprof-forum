@@ -178,11 +178,58 @@
     text-decoration: none !important;
 }
 
-
 .Flayout-notification {
     display: none !important;
 }
 
 .Flayout-notification.open {
     display: block !important;
+}
+
+@media screen and (max-width: 619px) {
+    .MeBox.FlyoutRight .Flyout {
+        max-width: 100% !important;
+        top: -7px;
+        height: 100% !important;
+        max-height: 100% !important;
+        padding: 0 !important;
+    }
+    .PopList.PopList {
+        height: calc(100vh - 80px);
+    }
+    .PopList.PopList .Item.Title {
+        padding: 16px !important;
+        border-bottom: none;
+        box-shadow: 0px 8px 20px rgba(26, 32, 44, 0.1);
+    }
+    .PopList.PopList .Item.Title .Close {
+        color: #000000;
+        font-size: 41px;
+        font-weight: 100;
+        position: absolute;
+        right: 0px;
+        top: 8px;
+        font-family: ChromaticaThin;
+    }
+    .PopList.PopList .actions {
+        display: flex;
+        padding: 12px 16px !important;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .notification-settings {
+        padding-top: 5px;
+    }
+    .notification-settings-content.open,
+    .notification-list {
+        border-top: 1px solid #E0E0E0;
+    }
+    .notification-all-read {
+        color: black;
+        text-decoration: underline;
+    }
+    .Activities .notification-list {
+        max-height: calc(100% - 105px);
+        padding: 10px;
+    }
 }
