@@ -179,10 +179,6 @@ class DiscussionsController extends VanillaController {
         $this->EventArguments['Limit'] = &$Limit;
         $this->fireEvent('AfterPageCalculation');
 
-        $this->page = $Page;
-        $this->offset = $Offset;
-        $this->limit = $Limit;
-
         // Set canonical URL
         $canonicalUrl = empty($this->Data['isHomepage']) ?
             url(concatSep('/', 'discussions', pageNumber($Offset, $Limit, true, false)), true) :

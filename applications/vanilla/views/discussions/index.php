@@ -14,10 +14,6 @@ echo '<h1 class="H HomepageTitle">'.
     '</h1>';
 echo '</div>';
 
-echo $this->currentPath;
-// echo $this->data('Sort');
-
-
 if($this->data('Category')) {
     echo '<div class="CategoryDetail">';
     echo '<div class="Card">';
