@@ -652,7 +652,7 @@ div.Popup .Border {
     display: none;
 }
 
-.embedExternal.embedImage .embedExternal-content {
+/*.embedExternal.embedImage .embedExternal-content {
     width: fit-content;
 }
 
@@ -681,7 +681,7 @@ a.embedImage-link:after {
     height: fit-content;
     text-align: left;
     padding-right: 50px;
-}
+}*/
 
 .not-clickable {
     cursor: initial;
