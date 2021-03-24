@@ -26,9 +26,9 @@ class InfiniteScrollPlugin extends Gdn_Plugin {
         $PaginationAllowedMethods = array("index", "mine", "bookmarked");
         if (in_array(strtolower($sender->RequestMethod), $PaginationAllowedMethods) && $this->enabled('DiscussionList')) {
             $this->prepareDiscussionList($sender);
-            $sender->addDefinition('InfiniteScroll.Url', url('discussions', true));
+            $sender->addDefinition('InfiniteScroll.Url', url($_SERVER['REQUEST_URI'], true));
             if (strtolower($sender->RequestMethod) != "index") {
-                $sender->addDefinition('InfiniteScroll.Url', url('discussions/' . strtolower($sender->RequestMethod), true));
+                $sender->addDefinition('InfiniteScroll.Url', url($_SERVER['REQUEST_URI'] . strtolower($sender->RequestMethod), true));
             }
             $this->resources($sender);
         }

@@ -14,6 +14,10 @@ echo '<h1 class="H HomepageTitle">'.
     '</h1>';
 echo '</div>';
 
+echo $this->currentPath;
+// echo $this->data('Sort');
+
+
 if($this->data('Category')) {
     echo '<div class="CategoryDetail">';
     echo '<div class="Card">';
@@ -40,6 +44,7 @@ $htmlSanitizer = Gdn::getContainer()->get(\Vanilla\Formatting\Html\HtmlSanitizer
 echo wrapIf($Description, 'div', ['class' => 'P PageDescription']);
 
 $this->fireEvent('AfterPageTitle');
+
 
 $subtreeView = $this->fetchViewLocation('subtree', 'categories', 'vanilla', false);
 if ($subtreeView) {
@@ -69,7 +74,7 @@ PagerModule::write($PagerOptions);
 // Avoid displaying in a category's list of discussions.
 if ($this->data('EnableFollowingFilter')) {
     // comment out to avoid display filter dropdown in discussions page
-    // echo discussionFilters();
+    echo discussionFilters();
 }
 $this->fireEvent('PageControls');
 echo '</div>';
