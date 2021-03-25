@@ -100,7 +100,11 @@
             if(!$this->invalid) {
                 echo '<div class="selects">';
                 if ($this->ShowCategorySelector === true) {
-                    // $options = ['Value' => val('CategoryID', $this->Category), 'IncludeNull' => true, 'AdditionalPermissions' => ['PermsDiscussionsAdd']];
+                    $Controller = Gdn::controller();
+                    if($Controller->data('Category')) {
+                        $category = $Controller->data('Category');
+                        $options = ['Value' => val('CategoryID', $category), 'IncludeNull' => true, 'AdditionalPermissions' => ['PermsDiscussionsAdd']];
+                    }
                     // if ($this->Context) {
                     //     $options['Context'] = $this->Context;
                     // }
