@@ -606,9 +606,9 @@ if (!function_exists('writeDiscussionDetail')) :
                         <span class="MItem TimeAgo">
                             <?php
                                 if ($grade) {
-                                    echo $grade . ' • ' . timeElapsedString($Discussion->LastDate, false);
+                                    echo $grade . ' • ' . timeElapsedString($Discussion->FirstDate, false);
                                 } else {
-                                    echo timeElapsedString($Discussion->LastDate, false);
+                                    echo timeElapsedString($Discussion->FirstDate, false);
                                 }
                             ?>
                         </span>

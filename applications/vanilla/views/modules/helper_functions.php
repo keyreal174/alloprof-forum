@@ -37,7 +37,7 @@ if (!function_exists('WriteModuleDiscussion')):
                 echo newComments($discussion);
 
                 $translation = pluralTranslate($discussion->CountComments, '%s comment html', '%s comments html', t('%s comment'), t('%s comments'));
-                echo '<span class="MItem">'.Gdn_Format::date($discussion->LastDate, 'html').userAnchor($last).'</span>';
+                echo '<span class="MItem">'.Gdn_Format::date($discussion->FirstDate, 'html').userAnchor($last).'</span>';
                 echo '<span class="MItem CountComments Hidden">'.sprintf($translation, $discussion->CountComments).'</span>';
                 ?>
             </div>

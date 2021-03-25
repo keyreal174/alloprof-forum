@@ -141,7 +141,6 @@ class DiscussionsController extends VanillaController {
     public function index($Page = false) {
         $this->getUserInfo();
         $this->allowJSONP(true);
-        $this->ShowOptions = true;
         // Figure out which discussions layout to choose (Defined on "Homepage" settings page).
         $Layout = c('Vanilla.Discussions.Layout');
         switch ($Layout) {
@@ -279,10 +278,10 @@ class DiscussionsController extends VanillaController {
         if ($this->data('ApplyRestrictions') === true) {
             $DiscussionModel->setOption('ApplyRestrictions', true);
         }
-        // $DiscussionModel->setSort($this->SortDirection);
-        // $DiscussionModel->setFilters(Gdn::request()->get());
-        // $this->setData('Sort', $DiscussionModel->getSort());
-        // $this->setData('Filters', $DiscussionModel->getFilters());
+        $DiscussionModel->setSort($this->SortDirection);
+        $DiscussionModel->setFilters(Gdn::request()->get());
+        $this->setData('Sort', $DiscussionModel->getSort());
+        $this->setData('Filters', $DiscussionModel->getFilters());
 
         // Check for individual categories.
         $categoryIDs = $this->getCategoryIDs();
@@ -327,7 +326,7 @@ class DiscussionsController extends VanillaController {
         $this->setData('Announcements', $this->AnnounceData !== false ? $this->AnnounceData : [], true);
 
         // Get Discussions
-        $this->DiscussionData = $DiscussionModel->getWhereWithOrder($where, 'DateLastComment', $this->SortDirection, $Limit, $Offset);
+        $this->DiscussionData = $DiscussionModel->getWhereWithOrder($where, 'DateInserted', $this->SortDirection, $Limit, $Offset);
 
         $this->setData('Discussions', $this->DiscussionData, true);
         $this->setJson('Loading', $Offset.' to '.$Limit);
@@ -337,7 +336,7 @@ class DiscussionsController extends VanillaController {
         $this->EventArguments['PagerType'] = 'Pager';
         $this->fireEvent('BeforeBuildPager');
         if (!$this->data('_PagerUrl')) {
-            $this->setData('_PagerUrl', 'discussions/');
+            $this->setData('_PagerUrl', 'discussions/{Page}');
         }
         $queryString = DiscussionModel::getSortFilterQueryString($DiscussionModel->getSort(), $DiscussionModel->getFilters());
         $this->setData('_PagerUrl', $this->data('_PagerUrl').$queryString);
@@ -570,7 +569,7 @@ class DiscussionsController extends VanillaController {
 
         $wheres = array_merge($wheres, $this->WhereClause);
 
-        $this->DiscussionData = $discussionModel->get($offset, $limit, $wheres, [$this->SortDirection => 'DateLastComment']);
+        $this->DiscussionData = $discussionModel->get($offset, $limit, $wheres, [$this->SortDirection => 'DateInserted']);
         $this->setData('Discussions', $this->DiscussionData);
         $countDiscussions = $discussionModel->getCount($wheres);
         $this->setData('CountDiscussions', $countDiscussions);
@@ -739,7 +738,7 @@ class DiscussionsController extends VanillaController {
         $this->setData('Sort', $discussionModel->getSort());
         $this->setData('Filters', $discussionModel->getFilters());
 
-        $this->DiscussionData = $discussionModel->get($offset, $limit, $wheres, [$this->SortDirection => 'DateLastComment']);
+        $this->DiscussionData = $discussionModel->get($offset, $limit, $wheres, [$this->SortDirection => 'DateInserted']);
         $this->setData('Discussions', $this->DiscussionData);
         $countDiscussions = $this->setData('CountDiscussions', $discussionModel->getCount($wheres));
         // Build a pager
@@ -1340,6 +1339,6 @@ class DiscussionsController extends VanillaController {
     public function filterDiscussion() {
         $parameter = $_POST['parameter'];
 
-        echo '/discussions?'.$parameter;
+        echo $this->_PagerUrl.'?'.$parameter;
     }
 }
