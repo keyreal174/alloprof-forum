@@ -428,7 +428,7 @@ abbr {
     margin-right: auto !important;
     max-width: 300px;
     overflow-y: auto;
-    height: calc(100vh - 240px);
+    max-height: calc(100vh - 240px);
 }
 
 .sidebar.right {

@@ -141,6 +141,7 @@ class DiscussionsController extends VanillaController {
     public function index($Page = false) {
         $this->getUserInfo();
         $this->allowJSONP(true);
+        $this->ShowOptions = true;
         // Figure out which discussions layout to choose (Defined on "Homepage" settings page).
         $Layout = c('Vanilla.Discussions.Layout');
         switch ($Layout) {
@@ -278,10 +279,10 @@ class DiscussionsController extends VanillaController {
         if ($this->data('ApplyRestrictions') === true) {
             $DiscussionModel->setOption('ApplyRestrictions', true);
         }
-        $DiscussionModel->setSort($this->SortDirection);
-        $DiscussionModel->setFilters(Gdn::request()->get());
-        $this->setData('Sort', $DiscussionModel->getSort());
-        $this->setData('Filters', $DiscussionModel->getFilters());
+        // $DiscussionModel->setSort($this->SortDirection);
+        // $DiscussionModel->setFilters(Gdn::request()->get());
+        // $this->setData('Sort', $DiscussionModel->getSort());
+        // $this->setData('Filters', $DiscussionModel->getFilters());
 
         // Check for individual categories.
         $categoryIDs = $this->getCategoryIDs();
@@ -336,7 +337,7 @@ class DiscussionsController extends VanillaController {
         $this->EventArguments['PagerType'] = 'Pager';
         $this->fireEvent('BeforeBuildPager');
         if (!$this->data('_PagerUrl')) {
-            $this->setData('_PagerUrl', 'discussions/{Page}');
+            $this->setData('_PagerUrl', 'discussions/');
         }
         $queryString = DiscussionModel::getSortFilterQueryString($DiscussionModel->getSort(), $DiscussionModel->getFilters());
         $this->setData('_PagerUrl', $this->data('_PagerUrl').$queryString);
@@ -1339,6 +1340,6 @@ class DiscussionsController extends VanillaController {
     public function filterDiscussion() {
         $parameter = $_POST['parameter'];
 
-        echo $this->_PagerUrl.'?'.$parameter;
+        echo '/discussions?'.$parameter;
     }
 }

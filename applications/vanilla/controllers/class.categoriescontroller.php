@@ -668,7 +668,7 @@ class CategoriesController extends VanillaController {
                 $wheres['Announce'] = 'all';
             }
 
-            $this->DiscussionData = $this->setData('Discussions', $discussionModel->getWhereWithOrder($wheres, 'DateLastComment', $this->SortDirection, $Limit, $Offset));
+            $this->DiscussionData = $this->setData('Discussions', $discussionModel->getWhereWithOrder($wheres, 'DateLastComment', $this->SortDirection, $limit, $offset));
 
             // Build a pager
             $pagerFactory = new Gdn_PagerFactory();

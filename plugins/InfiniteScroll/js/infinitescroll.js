@@ -224,7 +224,7 @@ jQuery(function ($) {
         ajax = true;
         showLoading(PagerAfter);
 
-        $.get(baseUrl + '/p' + pageNext + '?DeliveryType=VIEW&InnerList=1', function (data) {
+        $.get("/discussions" + '/p' + pageNext + '?DeliveryType=VIEW&InnerList=1', function (data) {
             // Extract and append the content.
             $(data)
                 .appendTo(DataList)
@@ -255,7 +255,7 @@ jQuery(function ($) {
         showLoading(PagerBefore);
 
         // DeliveryType=VIEW can not be used here as it doesn't include the first post.
-        $.get(baseUrl + '/p' + pagesBefore, function (data) {
+        $.get("/discussions" + '/p' + pagesBefore, function (data) {
             var OldHeight = $document.height(),
                 OldScroll = $window.scrollTop();
 
