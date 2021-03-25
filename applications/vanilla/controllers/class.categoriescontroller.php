@@ -20,7 +20,7 @@ use Vanilla\Site\SiteSectionModel;
 class CategoriesController extends VanillaController {
 
     /** @var array Models to include.*/
-    public $Uses = ['Database', 'Form', 'CategoryModel', 'UserModel', 'CommentModel'];
+    public $Uses = ['Database', 'Form', 'CategoryModel', 'UserModel', 'CommentModel', 'DiscussionModel'];
 
     /** @var CategoryModel */
     public $CategoryModel;
@@ -518,9 +518,41 @@ class CategoriesController extends VanillaController {
 
             $this->setData('BannerImage', val('BannerImage', $category));
 
-            $this->setData('CountAllDiscussions', val('CountAllDiscussions', $category));
+            $discussionModel = new DiscussionModel();
 
-            $this->setData('CountAllComments', val('CountAllComments', $category));
+            $dWheres = [];
+            $cWheres = [];
+            $cID = val('CategoryID', $category);
+
+            if ($this->getUserRole() == 'Student') {
+                $cWheres = ['d.Published' => 1, 'cm.Published' => 1, 'd.CategoryID' => $cID];
+                $dWheres = ['d.CategoryID' => $cID, 'd.Published' => 1];
+            } else {
+                $cWheres = ['d.CategoryID' => $cID];
+                $dWheres = ['d.CategoryID' => $cID];
+            }
+
+            $cCount = Gdn::sql()
+                ->select('cm.CommentID', 'count', 'CountComments')
+                ->from('Comment cm')
+                ->join('Discussion d', 'd.DiscussionID = cm.DiscussionID')
+                ->where($cWheres)
+                ->orWhere(['d.CategoryID' => $cID, 'd.InsertUserID' => Gdn::session()->UserID])
+                ->get()
+                ->firstRow()
+                ->CountComments;
+
+            $DCount = Gdn::sql()
+                ->select('d.DiscussionID', 'count', 'CountDiscussions')
+                ->from('Discussion d')
+                ->where($dWheres)
+                ->orWhere(['d.CategoryID' => $cID, 'd.InsertUserID' => Gdn::session()->UserID])
+                ->get()
+                ->firstRow()
+                ->CountDiscussions;
+
+            $this->setData('CountAllDiscussions', $DCount);
+            $this->setData('CountAllComments', $cCount);
 
             // $this->title(Gdn::formatService()->renderPlainText(val('Name', $category, ''), HtmlFormat::FORMAT_KEY));
 
