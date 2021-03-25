@@ -682,12 +682,13 @@ class VanillaHooks extends Gdn_Plugin {
         $sender->addJsFile('setlocale.js', 'vanilla');
         $sender->addJsFile('slick.js', 'vanilla');
         $sender->addJsFile('slickcarousel.js', 'vanilla');
-        $sender->addJsFile('basic.js', 'vanilla');
-        $sender->addJsFile('notification.js', 'vanilla');
         $sender->addJsFile('jquery.popup.js');
         $sender->addJsFile('confirmfollow.js');
         $sender->addJsFile('verify.js');
         $sender->addJsFile('betabanner.js');
+        $sender->addJsFile('select2.js');
+        $sender->addJsFile('basic.js', 'vanilla');
+        $sender->addJsFile('notification.js', 'vanilla');
 
         if (!inSection('Dashboard')) {
             // Spoilers assets
@@ -771,8 +772,14 @@ class VanillaHooks extends Gdn_Plugin {
             $commentsLabel = "";
             $commentsGivenLabel = "";
             if (c('Vanilla.Profile.ShowCounts', true)) {
-                $discussionsCount = getValueR('User.CountDiscussions', $sender, "0");
-                $commentsCount = getValueR('User.CountComments', $sender, "0");
+                $discussionsCount = Gdn::sql()
+                        ->select('d.DiscussionID', 'count', 'CountDiscussions')
+                        ->from('Discussion d')
+                        ->where(['d.InsertUserID' => Gdn::session()->UserID])
+                        ->get()
+                        ->firstRow()
+                        ->CountDiscussions;
+                $commentsCount = $sender->CommentModel->getCount(["InsertUserID" => $userID]);
                 $commentsGivenCount = $sender->CommentModel->getCount(["InsertUserID" => $userID]);
                 // getValueR('User.CountComments', $sender, "0");
                 $discussionsLabel .= $discussionsCount;
@@ -805,7 +812,13 @@ class VanillaHooks extends Gdn_Plugin {
             $discussionsLabel = "";
             $commentsLabel = "";
             if (c('Vanilla.Profile.ShowCounts', true)) {
-                $discussionsCount = getValueR('User.CountDiscussions', $sender, "0");
+                $discussionsCount = Gdn::sql()
+                        ->select('d.DiscussionID', 'count', 'CountDiscussions')
+                        ->from('Discussion d')
+                        ->where(['d.InsertUserID' => Gdn::session()->UserID])
+                        ->get()
+                        ->firstRow()
+                        ->CountDiscussions;
                 $commentsCount = $sender->CommentModel->getCount(["InsertUserID" => $userID]);
                 $discussionsLabel .= $discussionsCount;
                 $commentsLabel .= $commentsCount;
@@ -835,7 +848,13 @@ class VanillaHooks extends Gdn_Plugin {
             $discussionsLabel = "";
             $commentsLabel = "";
             if (c('Vanilla.Profile.ShowCounts', true)) {
-                $discussionsCount = getValueR('User.CountDiscussions', $sender, "0");
+                $discussionsCount = Gdn::sql()
+                        ->select('d.DiscussionID', 'count', 'CountDiscussions')
+                        ->from('Discussion d')
+                        ->where(['d.InsertUserID' => Gdn::session()->UserID])
+                        ->get()
+                        ->firstRow()
+                        ->CountDiscussions;
                 $commentsCount = $sender->CommentModel->getCount(["InsertUserID" => $userID]);
                 $discussionsLabel .= $discussionsCount;
                 $commentsLabel .= $commentsCount;
@@ -865,7 +884,13 @@ class VanillaHooks extends Gdn_Plugin {
             $discussionsLabel = "";
             $commentsLabel = "";
             if (c('Vanilla.Profile.ShowCounts', true)) {
-                $discussionsCount = getValueR('User.CountDiscussions', $sender, "0");
+                $discussionsCount = Gdn::sql()
+                        ->select('d.DiscussionID', 'count', 'CountDiscussions')
+                        ->from('Discussion d')
+                        ->where(['d.InsertUserID' => Gdn::session()->UserID])
+                        ->get()
+                        ->firstRow()
+                        ->CountDiscussions;
                 $commentsCount = $sender->CommentModel->getCount(["InsertUserID" => $userID]);
                 $discussionsLabel .= $discussionsCount;
                 $commentsLabel .= $commentsCount;
@@ -887,8 +912,13 @@ class VanillaHooks extends Gdn_Plugin {
             $discussionsLabel = "";
             $commentsLabel = "";
             if (c('Vanilla.Profile.ShowCounts', true)) {
-                $discussionsCount = getValueR('User.CountDiscussions', $sender, "0");
-                // $discussionsCount = $sender->DiscussionModel->getCount(["InsertUserID" => $userID]);
+                $discussionsCount = Gdn::sql()
+                        ->select('d.DiscussionID', 'count', 'CountDiscussions')
+                        ->from('Discussion d')
+                        ->where(['d.InsertUserID' => Gdn::session()->UserID])
+                        ->get()
+                        ->firstRow()
+                        ->CountDiscussions;
                 $commentsCount = $sender->CommentModel->getCount(["InsertUserID" => $userID]);
                 $discussionsLabel .= $discussionsCount;
                 $commentsLabel .= $commentsCount;
@@ -980,6 +1010,16 @@ class VanillaHooks extends Gdn_Plugin {
         $sender->addLinkIf($home !== 'discussions', t('Recent Discussions'), '/discussions', 'main.discussions', '', 1, ['icon' => 'discussion']);
         $sender->addGroup(t('Favorites'), 'favorites', '', 3);
 
+        $discussionsCount = Gdn::sql()
+                ->select('d.DiscussionID', 'count', 'CountDiscussions')
+                ->from('Discussion d')
+                ->where(['d.InsertUserID' => Gdn::session()->UserID])
+                ->get()
+                ->firstRow()
+                ->CountDiscussions;
+        // $discussionsCount = $sender->DiscussionModel->getCount(["InsertUserID" => $userID]);
+        // $commentsCount = $sender->CommentModel->getCount(["InsertUserID" => $userID]);
+
         if (Gdn::session()->isValid()) {
             $sender->addLink(
                 t('My Bookmarks'),
@@ -995,7 +1035,7 @@ class VanillaHooks extends Gdn_Plugin {
                 'favorites.discussions',
                 '',
                 [],
-                ['icon' => 'discussion', 'badge' => Gdn::session()->User->CountDiscussions]
+                ['icon' => 'discussion', 'badge' => $discussionsCount]
             );
             $sender->addLink(t('Drafts'), '/drafts', 'favorites.drafts', '', [], ['icon' => 'compose', 'badge' => Gdn::session()->User->CountDrafts]);
         }

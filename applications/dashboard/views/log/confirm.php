@@ -1,5 +1,5 @@
 <?php if (!defined('APPLICATION')) exit(); ?>
-<div class="modal-dialog modal-sm modal-confirm" role="document">
+<div class="modal-dialog modal-sm modal-confirm <?php echo strtolower($this->data('Action')) ?>" role="document">
     <div class="modal-content">
         <?php
         $ItemCount = $this->data('ItemCount');
@@ -101,7 +101,7 @@
             <div class="modal-footer">
                 <?php
                 echo anchor(t("No, get me outta here!"), '#', ['class' => 'btn btn-text ConfirmNo']);
-                echo $this->Form->button('Yes, continue', ['class' => 'btn btn-primary ConfirmYes']);
+                echo $this->Form->button(t('Yes, continue'), ['class' => 'btn btn-primary ConfirmYes']);
                 ?>
             </div>
 

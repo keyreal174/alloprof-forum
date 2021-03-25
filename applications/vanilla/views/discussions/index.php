@@ -41,6 +41,7 @@ echo wrapIf($Description, 'div', ['class' => 'P PageDescription']);
 
 $this->fireEvent('AfterPageTitle');
 
+
 $subtreeView = $this->fetchViewLocation('subtree', 'categories', 'vanilla', false);
 if ($subtreeView) {
     // This use of subtree is deprecated.
@@ -69,7 +70,7 @@ PagerModule::write($PagerOptions);
 // Avoid displaying in a category's list of discussions.
 if ($this->data('EnableFollowingFilter')) {
     // comment out to avoid display filter dropdown in discussions page
-    // echo discussionFilters();
+    echo discussionFilters();
 }
 $this->fireEvent('PageControls');
 echo '</div>';

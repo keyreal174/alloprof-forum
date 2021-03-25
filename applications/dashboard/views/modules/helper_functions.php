@@ -19,6 +19,7 @@ if (!function_exists('writeSubjectFilter')) :
             $options[$category['CategoryID']] = $category['Name'];
         }
 
+        $options = ['Value' => $subject, 'IncludeNull' => true, 'AdditionalPermissions' => ['PermsDiscussionsAdd']];
         echo '<div class="FilterMenu__Dropdown">';
         echo '<img src="'.url("/themes/alloprof/design/images/icons/subject.svg").'"/>';
         echo $form->dropDown('SubjectDropdown', $options, array('IncludeNull' => t('Material'), 'Value' => $subject));
@@ -61,7 +62,7 @@ if (!function_exists('writeGradeFilter')) :
 
         echo '<div class="FilterMenu__Dropdown">';
         echo '<img src="'.url("/themes/alloprof/design/images/icons/grade.svg").'"/>';
-        echo $form->dropDown('GradeDropdown', $GradeOption, array('IncludeNull' => t('Grade'), 'Value' => $gradeID));
+        echo $form->dropDown('GradeDropdown', $GradeOption, array('IncludeNull' => true, 'Value' => $gradeID));
         echo '</div>';
     }
 endif;
@@ -94,7 +95,7 @@ if (!function_exists('writeFilterToggle')) :
      * @param string $extraClasses any extra classes you add to the drop down
      * @return string
      */
-    function writeFilterToggle($sender, $explanation, $verified) {
+    function writeFilterToggle($explanation, $verified) {
         $form  = new Gdn_Form();
         $role = getUserRole(Gdn::session()->User->UserID);
         $text = $role === 'Teacher' ? t('Without explanations only') : t('With explanations only');

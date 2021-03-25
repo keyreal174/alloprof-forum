@@ -60,4 +60,38 @@ jQuery(document).ready(function($) {
             }
         });
     });
+
+    var restore = function() {
+        handleAction('/log/restore');
+    };
+
+    var afterSuccess = function(data) {
+        // Figure out the IDs that are currently in the view.
+        console.log(data);
+        window.location.reload();
+    }
+
+    $('.RestoreButton').click(function(e) {
+        var IDs = $(this).attr('Id');
+        console.log(IDs);
+        currentAction = restore;
+
+        // Popup the confirm.
+        var bar = $.popup({afterSuccess: afterSuccess},
+            function(settings) {
+                $.post(
+                    gdn.url('/log/confirm/restore'),
+                    {'DeliveryType': 'VIEW',
+                        'Postback': true,
+                        'IDs': IDs,
+                        'Action': 'Restore',
+                        'TransientKey': gdn.definition('TransientKey', '')
+                    },
+                    function(data) {
+                        $.popup.reveal(settings, data);
+                    })
+            });
+
+        return false;
+    });
 });

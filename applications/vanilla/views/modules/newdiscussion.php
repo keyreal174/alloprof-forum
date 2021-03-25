@@ -1,5 +1,7 @@
 <?php
     require_once Gdn::controller()->fetchViewLocation('helper_functions', 'Discussions', 'Vanilla');
+    require_once $this->fetchViewLocation('helper_functions');
+
     $User = val('User', Gdn::controller());
     if (!$User && Gdn::session()->isValid()) {
         $User = Gdn::session()->User;
@@ -98,17 +100,17 @@
             if(!$this->invalid) {
                 echo '<div class="selects">';
                 if ($this->ShowCategorySelector === true) {
-                    $options = ['Value' => val('CategoryID', $this->Category), 'IncludeNull' => true, 'AdditionalPermissions' => ['PermsDiscussionsAdd']];
-                    if ($this->Context) {
-                        $options['Context'] = $this->Context;
-                    }
-                    $discussionType = property_exists($this, 'Type') ? $this->Type : $this->data('Type');
-                    if ($discussionType) {
-                        $options['DiscussionType'] = $discussionType;
-                    }
-                    if (property_exists($this, 'Draft') && is_object($this->Draft)) {
-                        $options['DraftID'] = $this->Draft->DraftID;
-                    }
+                    // $options = ['Value' => val('CategoryID', $this->Category), 'IncludeNull' => true, 'AdditionalPermissions' => ['PermsDiscussionsAdd']];
+                    // if ($this->Context) {
+                    //     $options['Context'] = $this->Context;
+                    // }
+                    // $discussionType = property_exists($this, 'Type') ? $this->Type : $this->data('Type');
+                    // if ($discussionType) {
+                    //     $options['DiscussionType'] = $discussionType;
+                    // }
+                    // if (property_exists($this, 'Draft') && is_object($this->Draft)) {
+                    //     $options['DraftID'] = $this->Draft->DraftID;
+                    // }
 
                     $Session = Gdn::session();
                     $DefaultGrade = 0;
@@ -136,16 +138,11 @@
                         }
                     }
 
-                    echo '<div>';
-                    echo '<div class="Category rich-select">';
-                    echo '<img src="'.url("/themes/alloprof/design/images/icons/subject.svg").'"/>';
-                    echo $this->Form->categoryDropDown('CategoryID', $options);
-                    echo '</div>';
-                    echo '</div>';
+                    echo writeCategoryDropDown($this, 'CategoryID', $options);
                     echo '<span class="space"></span>';
-                    echo '<div class="Category rich-select">';
-                    echo '<img src="'.url("/themes/alloprof/design/images/icons/grade.svg").'"/>';
-                    echo $this->Form->dropDown('GradeID', $GradeOption, array('Default' => $DefaultGrade, 'IncludeNull' => t('Grade'), 'IsDisabled' => TRUE));
+                    echo '<div class="Category rich-select select2 select2-grade">';
+                    echo '<div class="pre-icon"><img src="'.url("/themes/alloprof/design/images/icons/grade.svg").'"/></div>';
+                    echo $this->Form->dropDown('GradeID', $GradeOption, array('IncludeNull' => true));
                     echo '</div>';
                 }
                 echo '</div>';

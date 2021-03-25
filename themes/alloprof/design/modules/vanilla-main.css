@@ -1,9 +1,9 @@
 @font-face {
     font-family: 'Chromatica';
-    src: local('Chromatica Regular'), local('Chromatica-Regular'),
-        url('../fonts/chromatica/Chromatica-Regular.woff2') format('woff2'),
-        url('../fonts/chromatica/Chromatica-Regular.woff') format('woff'),
-        url('../fonts/chromatica/Chromatica-Regular.ttf') format('truetype');
+    src: local('Chromatica Medium'), local('Chromatica-Medium'),
+        url('../fonts/chromatica/Chromatica-Medium.woff2') format('woff2'),
+        url('../fonts/chromatica/Chromatica-Medium.woff') format('woff'),
+        url('../fonts/chromatica/Chromatica-Medium.ttf') format('truetype');
     font-weight: 400;
     font-style: normal;
 }
@@ -427,6 +427,8 @@ abbr {
     margin-left: 0 !important;
     margin-right: auto !important;
     max-width: 300px;
+    overflow-y: auto;
+    max-height: calc(100vh - 240px);
 }
 
 .sidebar.right {
@@ -2852,7 +2854,6 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
     -webkit-transform: translateY(-50%);
     color: inherit;
     color: #0291db;
-    background-image: url('../../../../themes/alloprof/design/images/icons/arrowDown.svg');
     content: '';
     width: 14px;
     height: 16px;
@@ -6353,7 +6354,7 @@ div.Popup {
     left: 50vw !important;
     position: fixed;
     top: 50vh !important;
-    transform: translateX(-50%) translateY(-50%)
+    transform: translateX(-50%) translateY(-50%);
 }
 
 div.Popup .Border {
@@ -6366,7 +6367,8 @@ div.Popup .Body {
     border-radius: 6px;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .4);
     color: #555a62;
-    padding: 12px 18px
+    padding: 12px 18px;
+    min-height: 150px;
 }
 
 div.Popup .Body .FormWrapper {
@@ -8574,6 +8576,11 @@ table.PreferenceGroup tbody tr:hover td {
     margin: 0 auto;
 }
 
+.Categories .Banner-content__Container {
+    justify-content: flex-start;
+    padding-top: 100px;
+}
+
 .Banner-content.General .Banner-content__Container {
     background-image: url(../../../../themes/alloprof/design/images/flo_bot.svg);
 }
@@ -9363,6 +9370,10 @@ screen and (-ms-high-contrast:none) {
     .Panel-main .ButtonGroup.Multi {
         margin-left: auto;
         margin-right: auto
+    }
+
+    .sidebar.left {
+        height: auto !important;
     }
 }
 
@@ -11265,10 +11276,6 @@ body.Post .FormWrapper .Buttons {
 
 body.Post .FormWrapper .Buttons .Button {
     margin: 0 0 3px 3px
-}
-
-body.Post .FormWrapper .SelectWrapper {
-    width: 100%
 }
 
 body.Post .FormWrapper .ShowTags {

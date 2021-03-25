@@ -177,7 +177,7 @@ span.ReactButtons a.ReactButton.ReactButton-Like .additional-label {
 }
 
 .EditDiscussionDetail .content {
-    padding: 32px !important;
+    padding: 5px !important;
     background: #eee !important;
     width: 100% !important;
     max-width: 100% !important;
@@ -192,4 +192,66 @@ span.ReactButtons a.ReactButton.ReactButton-Like .additional-label {
 
 .EditDiscussionDetailPage .sidebar:hover {
     height: 100%;
+}
+
+.Discussion .modal-confirm.restore button.Close,
+.Discussions .modal-confirm.restore button.Close {
+    display: none;
+}
+
+.Discussion .modal-confirm.restore .modal-title,
+.Discussions .modal-confirm.restore .modal-title {
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+.Discussion .modal-confirm.restore #ConfirmForm
+.Discussions .modal-confirm.restore #ConfirmForm {
+    margin-top: 30px;
+}
+
+.Discussion .modal-confirm.restore .modal-footer,
+.Discussions .modal-confirm.restore .modal-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.Discussion .modal-confirm.restore .modal-footer a,
+.Discussions .modal-confirm.restore .modal-footer a {
+    color: black;
+    font-family: "ChromaticaBold";
+    font-size: 15px !important;
+    display: none;
+}
+
+.Discussion .modal-confirm.restore .modal-footer button,
+.Discussions .modal-confirm.restore .modal-footer button {
+    border: 1px solid #1A1919 !important;
+    border-radius: 38px !important;
+    background: white;
+    color: black !important;
+    font-family: "ChromaticaBold";
+    padding: 10px 30px !important;
+    font-size: 15px !important;
+    width: max-content !important;
+    white-space: nowrap;
+    height: 44px;
+    display: flex !important;
+    align-items: center !important;
+    cursor: pointer;
+    box-shadow: 3px 5px 0px #1a1919;
+    transition: 0.3s all;
+}
+
+.Discussion .modal-confirm.restore .modal-footer button:focus,
+.Discussions .modal-confirm.restore .modal-footer button:focus {
+    outline: none;
+}
+
+.Discussion .modal-confirm.restore .modal-footer button:active,
+.Discussions .modal-confirm.restore .modal-footer button:active {
+    box-shadow: none;
+    transform: translateY(3px);
+    outline: none;
 }

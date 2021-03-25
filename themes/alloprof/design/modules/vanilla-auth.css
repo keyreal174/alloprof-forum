@@ -1,5 +1,6 @@
 .Header .SignInLinks {
     white-space: nowrap;
+    cursor: pointer;
 }
 
 div.Popup.SignInPopup .Body {

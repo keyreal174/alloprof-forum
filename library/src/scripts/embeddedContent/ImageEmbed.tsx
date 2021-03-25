@@ -131,6 +131,9 @@ export function ImageEmbed(props: IProps) {
                         alt={accessibleLabel(t(`User: "%s"`), [props.name])}
                         tabIndex={props.inEditor ? -1 : undefined}
                     />
+                    <div className="embedImage-link-copyright">
+                        {t('This content is protected by copyright. Any reproduction outside the Alloprof forums is prohibited and may be considered a violation of copyright.')}
+                    </div>
                 </div>
             </EmbedContent>
             <ImageEmbedModal

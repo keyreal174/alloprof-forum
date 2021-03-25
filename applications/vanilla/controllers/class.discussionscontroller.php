@@ -82,6 +82,9 @@ class DiscussionsController extends VanillaController {
         $gradeFilterOption = (Gdn::request()->get('grade') || Gdn::request()->get('grade') == '0') ? strval((int)(Gdn::request()->get('grade'))) : -1;
         $this->GradeID = $gradeFilterOption;
 
+        $subject = (Gdn::request()->get('subject') || Gdn::request()->get('subject') == '0') ? strval((int)(Gdn::request()->get('subject'))) : -1;
+        $this->SubjectID = $subject;
+
         $explanation = Gdn::request()->get('explanation') ?? false;
         $this->IsExplanation = $explanation;
 
@@ -91,15 +94,21 @@ class DiscussionsController extends VanillaController {
         $sort = Gdn::request()->get('sort') ?? 'desc';
         $this->SortDirection = $sort;
 
-        $discussionFilterModule = new DiscussionFilterModule($gradeFilterOption, $sort, $explanation, $verified);
+        $discussionFilterModule = new DiscussionFilterModule($gradeFilterOption, $sort, $explanation, $verified, $subject);
         $this->addModule($discussionFilterModule);
         $this->addJsFile('filter.js');
         $wheres = [];
 
         if (($this->GradeID || $this->GradeID === '0') && $this->GradeID != -1) {
-            $wheres['d.GradeID'] = $this->GradeID;
+            $wheres['d.Cycle'] = $this->GradeID;
         } else {
-            unset($wheres['d.GradeID']);
+            unset($wheres['d.Cycle']);
+        }
+
+        if (($this->SubjectID || $this->SubjectID === '0') && $this->SubjectID != -1) {
+            $wheres['d.CategoryID'] = $this->SubjectID;
+        } else {
+            unset($wheres['d.CategoryID']);
         }
 
         $role = $this->getUserRole(Gdn::session()->UserID);
@@ -132,6 +141,7 @@ class DiscussionsController extends VanillaController {
     public function index($Page = false) {
         $this->getUserInfo();
         $this->allowJSONP(true);
+        $this->ShowOptions = true;
         // Figure out which discussions layout to choose (Defined on "Homepage" settings page).
         $Layout = c('Vanilla.Discussions.Layout');
         switch ($Layout) {
@@ -269,10 +279,10 @@ class DiscussionsController extends VanillaController {
         if ($this->data('ApplyRestrictions') === true) {
             $DiscussionModel->setOption('ApplyRestrictions', true);
         }
-        $DiscussionModel->setSort($this->SortDirection);
-        $DiscussionModel->setFilters(Gdn::request()->get());
-        $this->setData('Sort', $DiscussionModel->getSort());
-        $this->setData('Filters', $DiscussionModel->getFilters());
+        // $DiscussionModel->setSort($this->SortDirection);
+        // $DiscussionModel->setFilters(Gdn::request()->get());
+        // $this->setData('Sort', $DiscussionModel->getSort());
+        // $this->setData('Filters', $DiscussionModel->getFilters());
 
         // Check for individual categories.
         $categoryIDs = $this->getCategoryIDs();
@@ -327,7 +337,7 @@ class DiscussionsController extends VanillaController {
         $this->EventArguments['PagerType'] = 'Pager';
         $this->fireEvent('BeforeBuildPager');
         if (!$this->data('_PagerUrl')) {
-            $this->setData('_PagerUrl', 'discussions/{Page}');
+            $this->setData('_PagerUrl', 'discussions/');
         }
         $queryString = DiscussionModel::getSortFilterQueryString($DiscussionModel->getSort(), $DiscussionModel->getFilters());
         $this->setData('_PagerUrl', $this->data('_PagerUrl').$queryString);
@@ -1330,6 +1340,6 @@ class DiscussionsController extends VanillaController {
     public function filterDiscussion() {
         $parameter = $_POST['parameter'];
 
-        echo $this->_PagerUrl.'?'.$parameter;
+        echo '/discussions?'.$parameter;
     }
 }

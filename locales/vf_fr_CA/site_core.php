@@ -1814,6 +1814,7 @@ $Definition['Return to Home'] = 'Retourner à l’accueil';
 $Definition['Account suspended'] = 'Compte suspendu';
 $Definition['Your account has been suspended because it violated the site rules. You can get help or additional information by contacting support.'] = 'Ton compte a été suspendu car il n’a pas respecté les régles du site. Tu peux obtenir de l’aide ou des informations complémentaires contactant le support.';
 $Definition['Contact support'] = 'Contacter le support';
+$Definition['Yes, continue'] = 'Oui, continuer';
 
 $Definition['Be as clear as possible in your question'] = 'Sois le plus clair possible dans ta question.';
 $Definition['Don\'t publish anything offensive'] = 'Ne publie rien d’offensant.';
@@ -1827,3 +1828,5 @@ $Definition['person found the explanation helpful'] = 'personne a trouvé l’ex
 
 $Definition['Confirm account information'] = 'Confirmer détails du compte';
 $Definition['Display name'] = 'Pseudonyme';
+$Definition['Approve the publication'] = 'Approuver la publication';
+$Definition['This content is protected by copyright. Any reproduction outside the Alloprof forums is prohibited and may be considered a violation of copyright.'] = 'Ce contenu est protégé par le droit d\'auteur. Toute reproduction à l\'extérieur des forums Alloprof est interdite et pourra être considérée comme une violation du droit d\'auteur.';
