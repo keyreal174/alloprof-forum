@@ -358,7 +358,7 @@ class LogController extends DashboardController {
         if (!Gdn::request()->isAuthenticatedPostBack(true)) {
             throw new Exception('Requires POST', 405);
         }
-        // $this->permission(['Garden.Moderation.Manage'], false);
+        $this->permission(['Garden.Moderation.Manage', 'Moderation.Spam.Manage', 'Moderation.ModerationQueue.Manage'], false);
         $logIDs = Gdn::request()->post('LogIDs');
 
         // Grab the logs.
