@@ -353,7 +353,7 @@ if (!function_exists('getDiscussionOptions')) :
         }
 
         // Can the user move?
-        if ($canEdit && $session->checkPermission('Garden.Moderation.Manage')) {
+        if (FALSE && $canEdit && $session->checkPermission('Garden.Moderation.Manage')) {
             $options['MoveDiscussion'] = [
                 'Label' => t('Move'),
                 'Url' => '/moderation/confirmdiscussionmoves?discussionid='.$discussion->DiscussionID,
@@ -460,7 +460,7 @@ if (!function_exists('getDiscussionOptionsDropdown')):
         $canSink = CategoryModel::checkPermission($categoryID, 'Vanilla.Discussions.Sink');
         $canClose = DiscussionModel::canClose($discussion);
         $canDelete = CategoryModel::checkPermission($categoryID, 'Vanilla.Discussions.Delete');
-        $canMove = $canEdit && $session->checkPermission('Garden.Moderation.Manage');
+        $canMove = FALSE && $canEdit && $session->checkPermission('Garden.Moderation.Manage');
         $canRefetch = $canEdit && valr('Attributes.ForeignUrl', $discussion);
         $canDismiss = c('Vanilla.Discussions.Dismiss', 1)
             && $discussion->Announce
