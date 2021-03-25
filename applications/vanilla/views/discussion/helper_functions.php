@@ -138,9 +138,13 @@ if (!function_exists('writeComment')) :
                     echo '<span id="latest"></span>';
                 }
                 ?>
-                <div class="Options">
-                    <?php writeCommentOptions($comment); ?>
-                </div>
+                <?php
+                if (Gdn::session()->isValid()) {
+                ?>
+                    <div class="Options">
+                        <?php writeCommentOptions($comment); ?>
+                    </div>
+                <?php } ?>
                 <?php $sender->fireEvent('BeforeCommentMeta'); ?>
                 <div class="Item-Header CommentHeader">
                     <div class="AuthorWrap">

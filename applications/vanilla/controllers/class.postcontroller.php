@@ -491,7 +491,7 @@ class PostController extends VanillaController {
         $this->render();
     }
 
-    public function newDiscussion() {
+    public function newDiscussion($selectedCategory = null) {
         // Override CategoryID if categories are disabled
         $useCategories = $this->ShowCategorySelector = (bool)c('Vanilla.Categories.Use');
         if (!$useCategories) {
@@ -818,6 +818,8 @@ class PostController extends VanillaController {
         $this->setData('Breadcrumbs', $breadcrumbs);
 
         $this->setData('_AnnounceOptions', $this->announceOptions());
+
+        $this->setData('SelectedCategory', $selectedCategory);
 
         // Render view (posts/discussion.php or post/preview.php)
         $this->render();

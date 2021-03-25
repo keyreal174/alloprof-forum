@@ -98,7 +98,7 @@
             if(!$this->invalid) {
                 echo '<div class="selects">';
                 if ($this->ShowCategorySelector === true) {
-                    $options = ['Value' => val('CategoryID', $this->Category), 'IncludeNull' => true, 'AdditionalPermissions' => ['PermsDiscussionsAdd']];
+                    $options = ['Value' => $this->data('SelectedCategory'), 'IncludeNull' => true, 'AdditionalPermissions' => ['PermsDiscussionsAdd']];
                     if ($this->Context) {
                         $options['Context'] = $this->Context;
                     }
