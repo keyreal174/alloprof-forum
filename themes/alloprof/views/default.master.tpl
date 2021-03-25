@@ -109,7 +109,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             {else}
                 <div class="Frame-header">
 
-                    <header id="MainHeader" class="Header not-transparent">
+                    <header id="MainHeader" class="Header">
                         <div class="row">
                             <div class="Header-left">
                                 <div class="Header-left__search">
