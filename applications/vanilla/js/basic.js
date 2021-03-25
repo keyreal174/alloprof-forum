@@ -70,11 +70,11 @@ jQuery(document).ready(function($) {
 
     $('.select2-grade select').select2({
         minimumResultsForSearch: -1,
-        placeholder: "Select grade",
+        placeholder: "Niveau",
     });
 
     $('.select2-category select').select2({
-        placeholder: "Select subject",
+        placeholder: "Matière",
         minimumResultsForSearch: -1,
         templateResult: formatState
     }).on('select2:select', function (e) {
