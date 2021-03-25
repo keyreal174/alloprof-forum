@@ -84,7 +84,7 @@ else
                 </div>
                 <div class='SearchResultCategory'>
                     <?php
-                        echo "<a class='DiscussionHeader_category' href='/categories/".$category["UrlCode"]."'>".$category["Name"]."</a>";
+                        echo "<a class='DiscussionHeader_category' style='background: ".$category["Color"]."' href='/categories/".$category["UrlCode"]."'>".$category["Name"]."</a>";
                     ?>
                 </div>
                 <?php

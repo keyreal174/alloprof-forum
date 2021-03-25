@@ -100,9 +100,9 @@ class DiscussionsController extends VanillaController {
         $wheres = [];
 
         if (($this->GradeID || $this->GradeID === '0') && $this->GradeID != -1) {
-            $wheres['d.Cycle'] = $this->GradeID;
+            $wheres['d.GradeID'] = $this->GradeID;
         } else {
-            unset($wheres['d.Cycle']);
+            unset($wheres['d.GradeID']);
         }
 
         if (($this->SubjectID || $this->SubjectID === '0') && $this->SubjectID != -1) {
