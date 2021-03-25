@@ -16,7 +16,7 @@ if(userRoleCheck() != Gdn::config('Vanilla.ExtraRoles.Teacher')) {
                 $category = $Controller->data('Category');
                 $categoryID = val('CategoryID', $category);
             }
-            echo '<a href="/post/newDiscussion/'. $categoryID .'" class="btn-default btn-shadow scrollToAskQuestionForm scrollToAskQuestionFormPopup ">'.t("Ask a question").'</a>';
+            echo '<a href="'.url('/post/newDiscussion/'. $categoryID) .'" class="btn-default btn-shadow scrollToAskQuestionForm scrollToAskQuestionFormPopup ">'.t("Ask a question").'</a>';
         }
         else echo anchor(t('Ask a question'), '/entry/jsconnect-redirect?client_id=alloprof', 'btn-default btn-shadow', ['rel' => 'nofollow', 'aria-label' => t("Sign In Now")]);
     ?>
