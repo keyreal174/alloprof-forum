@@ -1,6 +1,8 @@
 $(window).on("scroll", function () {
     if ($(window).scrollTop() == 0) {
-        $("header").removeClass("not-transparent");
+        if($('.Banner-content').length > 0) {
+            $("header").removeClass("not-transparent");
+        }
     } else {
         $("header").addClass("not-transparent");
     }
@@ -23,7 +25,7 @@ jQuery(document).ready(function($) {
 
 
     function initHeader() {
-        // $("header").addClass("not-transparent");
+        $("header").addClass("not-transparent");
     }
 
     if($('.Banner-content').length === 0)
