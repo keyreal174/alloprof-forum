@@ -66,10 +66,10 @@ header.not-transparent {
     padding-bottom: 20px;
 }
 
-.sidebar:hover {
+/* .sidebar:hover {
     overflow-y: auto;
     height: calc(100vh - 240px);
-}
+} */
 
 .sidebar::-webkit-scrollbar {
     width: 0px;

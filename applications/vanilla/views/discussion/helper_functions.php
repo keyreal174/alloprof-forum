@@ -138,9 +138,13 @@ if (!function_exists('writeComment')) :
                     echo '<span id="latest"></span>';
                 }
                 ?>
-                <div class="Options">
-                    <?php writeCommentOptions($comment); ?>
-                </div>
+                <?php
+                if (Gdn::session()->isValid()) {
+                ?>
+                    <div class="Options">
+                        <?php writeCommentOptions($comment); ?>
+                    </div>
+                <?php } ?>
                 <?php $sender->fireEvent('BeforeCommentMeta'); ?>
                 <div class="Item-Header CommentHeader">
                     <div class="AuthorWrap">
@@ -292,12 +296,14 @@ if (!function_exists('getDiscussionOptions')) :
         }
 
         $flagLink = addFlagButtonToDropdown($discussion, 'discussion');
-        $options['FlagDiscussion'] = [
-            'Label' => '<svg width="15" height="20" viewBox="0 0 15 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M13.2979 3.175L5.41992 2.52175L2.49492 2.278V1.225C2.49492 0.686522 2.0584 0.25 1.51992 0.25C0.981444 0.25 0.544922 0.686522 0.544922 1.225V18.775C0.544922 19.3135 0.981444 19.75 1.51992 19.75C2.0584 19.75 2.49492 19.3135 2.49492 18.775V11.872L5.41992 11.6283L13.2979 10.975C13.8057 10.9342 14.1966 10.5094 14.1949 10V4.15C14.1966 3.64057 13.8057 3.21575 13.2979 3.175ZM4.44489 9.75602L2.49489 9.91201V4.23752L4.44489 4.39352V9.75602ZM8.34493 9.42452L6.39493 9.59027V4.55926L8.34493 4.72501V9.42452ZM12.245 9.10276L10.2949 9.26851V4.88101L12.245 5.04676V9.10276Z" fill="#EB5757"/>
-            </svg><span>'.t($flagLink['name']).'</span>',
-            'Url' => $flagLink['url']
-        ];
+        if ($session && $session->UserID != $discussion->InsertUserID) {
+            $options['FlagDiscussion'] = [
+                'Label' => '<svg width="15" height="20" viewBox="0 0 15 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M13.2979 3.175L5.41992 2.52175L2.49492 2.278V1.225C2.49492 0.686522 2.0584 0.25 1.51992 0.25C0.981444 0.25 0.544922 0.686522 0.544922 1.225V18.775C0.544922 19.3135 0.981444 19.75 1.51992 19.75C2.0584 19.75 2.49492 19.3135 2.49492 18.775V11.872L5.41992 11.6283L13.2979 10.975C13.8057 10.9342 14.1966 10.5094 14.1949 10V4.15C14.1966 3.64057 13.8057 3.21575 13.2979 3.175ZM4.44489 9.75602L2.49489 9.91201V4.23752L4.44489 4.39352V9.75602ZM8.34493 9.42452L6.39493 9.59027V4.55926L8.34493 4.72501V9.42452ZM12.245 9.10276L10.2949 9.26851V4.88101L12.245 5.04676V9.10276Z" fill="#EB5757"/>
+                </svg><span>'.t($flagLink['name']).'</span>',
+                'Url' => $flagLink['url']
+            ];
+        }
 
         // Build the $Options array based on current user's permission.
         // Can the user edit the discussion?
@@ -306,7 +312,7 @@ if (!function_exists('getDiscussionOptions')) :
             if ($timeLeft) {
                 $timeLeft = ' ('.Gdn_Format::seconds($timeLeft).')';
             }
-            $options['EditDiscussion'] = ['Label' => t('Edit').$timeLeft, 'Url' => '/post/editdiscussion/'.$discussion->DiscussionID, 'Class' => 'EditDiscussion'];
+            $options['EditDiscussion'] = ['Label' => t('Edit the publication').$timeLeft, 'Url' => '/post/editdiscussion/'.$discussion->DiscussionID, 'Class' => 'EditDiscussion'];
         }
 
         // Can the user announce?
@@ -347,7 +353,7 @@ if (!function_exists('getDiscussionOptions')) :
         }
 
         // Can the user move?
-        if ($canEdit && $session->checkPermission('Garden.Moderation.Manage')) {
+        if (FALSE && $canEdit && $session->checkPermission('Garden.Moderation.Manage')) {
             $options['MoveDiscussion'] = [
                 'Label' => t('Move'),
                 'Url' => '/moderation/confirmdiscussionmoves?discussionid='.$discussion->DiscussionID,
@@ -359,7 +365,7 @@ if (!function_exists('getDiscussionOptions')) :
         if (CategoryModel::checkPermission($categoryID, 'Vanilla.Discussions.Delete')) {
             $category = CategoryModel::categories($categoryID);
             $options['DeleteDiscussion'] = [
-                'Label' => t('Delete Discussion'),
+                'Label' => t('Delete the publication'),
                 'Url' => '/discussion/delete?discussionid='.$discussion->DiscussionID.'&target='.urlencode(categoryUrl($category)),
                 'Class' => 'DeleteDiscussion DeleteDiscussionPopup'
             ];
@@ -454,7 +460,7 @@ if (!function_exists('getDiscussionOptionsDropdown')):
         $canSink = CategoryModel::checkPermission($categoryID, 'Vanilla.Discussions.Sink');
         $canClose = DiscussionModel::canClose($discussion);
         $canDelete = CategoryModel::checkPermission($categoryID, 'Vanilla.Discussions.Delete');
-        $canMove = $canEdit && $session->checkPermission('Garden.Moderation.Manage');
+        $canMove = FALSE && $canEdit && $session->checkPermission('Garden.Moderation.Manage');
         $canRefetch = $canEdit && valr('Attributes.ForeignUrl', $discussion);
         $canDismiss = c('Vanilla.Discussions.Dismiss', 1)
             && $discussion->Announce
@@ -470,7 +476,7 @@ if (!function_exists('getDiscussionOptionsDropdown')):
 
         $dropdown->addLInkIf($flagLink['isAllowed'], $flagLink['name'], $flagLink['url'], 'FlagMenuItem', $flagLink['type'])
             ->addLinkIf($canDismiss, t('Dismiss'), "vanilla/discussion/dismissannouncement?discussionid={$discussionID}", 'dismiss', 'DismissAnnouncement Hijack')
-            ->addLinkIf($canEdit, t('Edit').$timeLeft, '/post/editdiscussion/'.$discussionID, 'edit', 'EditDiscussion')
+            ->addLinkIf($canEdit, t('Edit the publication').$timeLeft, '/post/editdiscussion/'.$discussionID, 'edit', 'EditDiscussion')
             ->addLinkIf($canTag, t('Tag'), '/discussion/tag?discussionid='.$discussionID, 'tag', 'TagDiscussion Popup');
 
         if ($canEdit && $canAnnounce) {
@@ -486,7 +492,7 @@ if (!function_exists('getDiscussionOptionsDropdown')):
 
         $hasDiv = false;
         if ($session->checkPermission('Garden.Moderation.Manage')) {
-            if (!empty(val('DateUpdated', $discussion))) {
+            if (FALSE && !empty(val('DateUpdated', $discussion))) {
                 $hasDiv = true;
                 $dropdown
                     ->addDivider()
@@ -510,7 +516,7 @@ if (!function_exists('getDiscussionOptionsDropdown')):
         if ($canDelete) {
             $dropdown
                 ->addDivider()
-                ->addLink(t('Delete Discussion'), '/discussion/delete?discussionid='.$discussionID.'&target='.$categoryUrl, 'delete', 'DeleteDiscussion Popup');
+                ->addLink(t('Delete the publication'), '/discussion/delete?discussionid='.$discussionID.'&target='.$categoryUrl, 'delete', 'DeleteDiscussion Popup');
         }
 
         // DEPRECATED
@@ -634,7 +640,7 @@ if (!function_exists('getCommentOptions')) :
             ];
         }
 
-        if ($session->checkPermission('Garden.Moderation.Manage') && !empty(val('DateUpdated', $comment))) {
+        if (FALSE && $session->checkPermission('Garden.Moderation.Manage') && !empty(val('DateUpdated', $comment))) {
             $options['RevisionHistory'] = [
                 'Label' => t('Revision History'),
                 'Url' => '/log/filter?' . http_build_query(['recordType' => 'comment', 'recordID' => $comment->CommentID]),
@@ -650,7 +656,7 @@ if (!function_exists('getCommentOptions')) :
         $canSelfDelete = ($canEdit && $session->UserID == $comment->InsertUserID && c('Vanilla.Comments.AllowSelfDelete'));
         if ($canDelete || $canSelfDelete) {
             $options['DeleteComment'] = [
-                'Label' => t('Delete'),
+                'Label' => t('Delete the publication'),
                 'Url' => '/discussion/deletecomment/'.$comment->CommentID.'/'.$session->transientKey().'/?Target='.urlencode("/discussion/{$comment->DiscussionID}/x"),
                 'Class' => 'DeleteComment'
             ];

@@ -16,13 +16,15 @@ echo '<div class="MessageList Discussion">';
 echo '<!-- Page Title -->
 <div id="Item_0" class="PageTitle">';
 
-echo '<div class="Options">';
+if (Gdn::session()->isValid()) {
+    echo '<div class="Options">';
 
-$this->fireEvent('BeforeDiscussionOptions');
-echo writeDiscussionOptions();
-writeAdminCheck();
+    $this->fireEvent('BeforeDiscussionOptions');
+    echo writeDiscussionOptions();
+    writeAdminCheck();
 
-echo '</div>';
+    echo '</div>';
+}
 
 echo "</div>\n\n";
 

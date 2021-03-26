@@ -55,7 +55,7 @@ else
                         </div>
                         <?php
                             if ($Row->DateAccepted) {
-                                echo "<div class='verfied-badge'>
+                                echo "<div class='verified-badge'>
                                         <img src='".url('/themes/alloprof/design/images/icons/verifiedbadge.svg')."'/>
                                         <span>". t('Verified by Alloprof') ."</span>
                                     </div>";

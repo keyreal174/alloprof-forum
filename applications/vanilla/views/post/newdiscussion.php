@@ -98,7 +98,7 @@
             if(!$this->invalid) {
                 echo '<div class="selects">';
                 if ($this->ShowCategorySelector === true) {
-                    $options = ['Value' => val('CategoryID', $this->Category), 'IncludeNull' => true, 'AdditionalPermissions' => ['PermsDiscussionsAdd']];
+                    $options = ['Value' => $this->data('SelectedCategory'), 'IncludeNull' => true, 'AdditionalPermissions' => ['PermsDiscussionsAdd']];
                     if ($this->Context) {
                         $options['Context'] = $this->Context;
                     }
@@ -145,7 +145,7 @@
                     echo '<span class="space"></span>';
                     echo '<div class="Category rich-select">';
                     echo '<img src="'.url("/themes/alloprof/design/images/icons/grade.svg").'"/>';
-                    echo $this->Form->dropDown('GradeID', $GradeOption, array('Default' => $DefaultGrade, 'IncludeNull' => t('Grade'), 'IsDisabled' => TRUE));
+                    echo $this->Form->dropDown('GradeID', $GradeOption, array('Value' => $DefaultGrade, 'IncludeNull' => t('Grade'), 'IsDisabled' => TRUE));
                     echo '</div>';
                 }
                 echo '</div>';
