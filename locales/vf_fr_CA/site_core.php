@@ -1816,6 +1816,8 @@ $Definition['Contact support'] = 'Contacter le support';
 $Definition['Yes, continue'] = 'Oui, continuer';
 $Definition['Grade is required.'] = 'Niveau est obligatoire.';
 $Definition['Category'] = 'Matière';
+$Definition['CategoryID'] = 'Matière';
+$Definition['Categories'] = 'Matières';
 $Definition['Body'] = 'Contenu';
 
 $Definition['Be as clear as possible in your question'] = 'Sois le plus clair possible dans ta question.';
