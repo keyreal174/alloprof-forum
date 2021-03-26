@@ -1085,6 +1085,16 @@ class LogModel extends Gdn_Pluggable {
                             $set['DateLastComment'] = $set['DateInserted'];
                         }
                     }
+                    if ($log['RecordID'] && 'Discussion' === $log['RecordType']) {
+                        $discussion = Gdn::sql()->select('*')
+                            ->from('Discussion')
+                            ->where('DiscussionID', $log['RecordID'])
+                            ->get()
+                            ->firstRow();
+
+                        $set['DateAccepted'] = $discussion->DateAccepted;
+                        $set['AcceptedUserID'] = $discussion->AcceptedUserID;
+                    }
                     $iD = Gdn::sql()
                         ->options('Replace', true)
                         ->insert($tableName, $set);
