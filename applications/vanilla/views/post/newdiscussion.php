@@ -99,9 +99,9 @@
                 echo '<div class="selects">';
                 // if ($this->ShowCategorySelector === true) {
                     $Controller = Gdn::controller();
-                    if($Controller->data('Category')) {
-                        $category = $Controller->data('Category');
-                        $options = ['Value' => val('CategoryID', $category), 'IncludeNull' => true, 'AdditionalPermissions' => ['PermsDiscussionsAdd']];
+                    if($Controller->data('SelectedCategory')) {
+                        $category = $Controller->data('SelectedCategory');
+                        $options = ['Value' => $category, 'IncludeNull' => true, 'AdditionalPermissions' => ['PermsDiscussionsAdd']];
                     }
 
                     $Session = Gdn::session();
