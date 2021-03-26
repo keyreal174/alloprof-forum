@@ -492,7 +492,7 @@ if (!function_exists('getDiscussionOptionsDropdown')):
 
         $hasDiv = false;
         if ($session->checkPermission('Garden.Moderation.Manage')) {
-            if (!empty(val('DateUpdated', $discussion))) {
+            if (FALSE && !empty(val('DateUpdated', $discussion))) {
                 $hasDiv = true;
                 $dropdown
                     ->addDivider()
@@ -640,7 +640,7 @@ if (!function_exists('getCommentOptions')) :
             ];
         }
 
-        if ($session->checkPermission('Garden.Moderation.Manage') && !empty(val('DateUpdated', $comment))) {
+        if (FALSE && $session->checkPermission('Garden.Moderation.Manage') && !empty(val('DateUpdated', $comment))) {
             $options['RevisionHistory'] = [
                 'Label' => t('Revision History'),
                 'Url' => '/log/filter?' . http_build_query(['recordType' => 'comment', 'recordID' => $comment->CommentID]),
@@ -656,7 +656,7 @@ if (!function_exists('getCommentOptions')) :
         $canSelfDelete = ($canEdit && $session->UserID == $comment->InsertUserID && c('Vanilla.Comments.AllowSelfDelete'));
         if ($canDelete || $canSelfDelete) {
             $options['DeleteComment'] = [
-                'Label' => t('Delete'),
+                'Label' => t('Delete the publication'),
                 'Url' => '/discussion/deletecomment/'.$comment->CommentID.'/'.$session->transientKey().'/?Target='.urlencode("/discussion/{$comment->DiscussionID}/x"),
                 'Class' => 'DeleteComment'
             ];
