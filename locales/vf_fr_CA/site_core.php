@@ -1814,6 +1814,9 @@ $Definition['Account suspended'] = 'Compte suspendu';
 $Definition['Your account has been suspended because it violated the site rules. You can get help or additional information by contacting support.'] = 'Ton compte a été suspendu car il n’a pas respecté les régles du site. Tu peux obtenir de l’aide ou des informations complémentaires contactant le support.';
 $Definition['Contact support'] = 'Contacter le support';
 $Definition['Yes, continue'] = 'Oui, continuer';
+$Definition['Grade is required.'] = 'Niveau est obligatoire.';
+$Definition['Category'] = 'Matière';
+$Definition['Body'] = 'Contenu';
 
 $Definition['Be as clear as possible in your question'] = 'Sois le plus clair possible dans ta question.';
 $Definition['Don\'t publish anything offensive'] = 'Ne publie rien d’offensant.';
