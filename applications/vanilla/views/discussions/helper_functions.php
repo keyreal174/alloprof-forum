@@ -450,7 +450,7 @@ if (!function_exists('timeElapsedString')) :
         $diff = $now->diff($ago);
 
         $diff->w = floor($diff->d / 7);
-        $diff->d -= $diff->w * 7;
+        // $diff->d -= $diff->w * 7;
 
         $string = array(
             'y' => 'year',
@@ -502,6 +502,7 @@ if (!function_exists('timeElapsedString')) :
             }
             return $frenchStr;
         }
+
         return $string ? implode(', ', $string) . ' ago' : 'just now';
     }
 endif;
