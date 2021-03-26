@@ -1513,7 +1513,6 @@ if (!function_exists('userPhoto')) {
             $linkClass .= ' '.$userCssClass;
         }
 
-        $linkClass = $linkClass == '' ? '' : ' class="'.$linkClass.'"';
 
         $photo = val('Photo', $fullUser, val('PhotoUrl', $user));
         $title = htmlspecialchars(val('Title', $options, $name));
@@ -1533,9 +1532,16 @@ if (!function_exists('userPhoto')) {
             $photoUrl = UserModel::getDefaultAvatarUrl($fullUser, 'thumbnail');
         }
 
+        $firstLetter = getFirstLetter($userID);
+
+        if (str_contains($photoUrl, 'avatars/0.svg')) {
+            $linkClass = $linkClass.' ProfilePhotoDefaultWrapper';
+        }
+
+        $linkClass = $linkClass == '' ? '' : ' class="'.$linkClass.'"';
         $accessibleLabel = HtmlUtils::accessibleLabel('User: "%s"', [$name]);
 
-        return '<a title="'.$title.'"'.$linkClass.' aria-label="' . $accessibleLabel . '" data-userid="'.$userID.'">'
+        return '<a title="'.$title.'"'.$linkClass.' aria-label="' . $accessibleLabel . '" data-userid="'.$userID.'" avatar--first-letter="'.$firstLetter.'">'
                 .img($photoUrl, ['alt' => $name, 'class' => $imgClass, 'data-fallback' => 'avatar'])
             .'</a>';
     }
@@ -1912,5 +1918,15 @@ if (!function_exists('writeReactions')) {
         Gdn::controller()->fireEvent('AfterReactions');
         echo '</div>';
         Gdn::controller()->fireEvent('Replies');
+    }
+}
+
+if (!function_exists('getFirstLetter')) {
+    function getFirstLetter($userID) {
+        $UserMetaData = Gdn::userModel()->getMeta($userID, 'Profile.%', 'Profile.');
+        $UserName = $UserMetaData['DisplayName'] ?? t('Unknown');
+        $firstLetter = $UserName[0];
+
+        return $firstLetter;
     }
 }

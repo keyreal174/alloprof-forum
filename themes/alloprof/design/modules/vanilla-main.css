@@ -5338,7 +5338,7 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
 .DataList-Search .PhotoWrap {
     left: 0;
     position: absolute;
-    top: 16px
+    /* top: 16px */
 }
 
 .DataList-Search .Meta {
