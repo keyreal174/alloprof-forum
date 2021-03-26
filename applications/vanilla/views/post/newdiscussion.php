@@ -231,12 +231,12 @@
         }
     }
 
-    $('.select2-grade select').select2({
+    $('.scrollToAskQuestionFormPopup .select2-grade select').select2({
         minimumResultsForSearch: -1,
         placeholder: "Niveau",
     });
 
-    $('.select2-category select').select2({
+    $('.scrollToAskQuestionFormPopup .select2-category select').select2({
         placeholder: "Matière",
         minimumResultsForSearch: -1,
         templateResult: formatState
