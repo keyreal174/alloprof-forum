@@ -1825,4 +1825,6 @@ $Definition['Alloprof Teacher'] = 'Enseignant Alloprof';
 $Definition['people found the explanation helpful'] = 'personnes ont trouvé l’explication utile';
 $Definition['person found the explanation helpful'] = 'personne a trouvé l’explication utile';
 $Definition['Approve the publication'] = 'Approuver la publication';
+$Definition['Edit the publication'] = 'Éditer la publication';
+$Definition['Delete the publication'] = 'Supprimer la publication';
 $Definition['This content is protected by copyright. Any reproduction outside the Alloprof forums is prohibited and may be considered a violation of copyright.'] = 'Ce contenu est protégé par le droit d\'auteur. Toute reproduction à l\'extérieur des forums Alloprof est interdite et pourra être considérée comme une violation du droit d\'auteur.';

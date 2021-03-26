@@ -312,7 +312,7 @@ if (!function_exists('getDiscussionOptions')) :
             if ($timeLeft) {
                 $timeLeft = ' ('.Gdn_Format::seconds($timeLeft).')';
             }
-            $options['EditDiscussion'] = ['Label' => t('Edit').$timeLeft, 'Url' => '/post/editdiscussion/'.$discussion->DiscussionID, 'Class' => 'EditDiscussion'];
+            $options['EditDiscussion'] = ['Label' => t('Edit the publication').$timeLeft, 'Url' => '/post/editdiscussion/'.$discussion->DiscussionID, 'Class' => 'EditDiscussion'];
         }
 
         // Can the user announce?
@@ -365,7 +365,7 @@ if (!function_exists('getDiscussionOptions')) :
         if (CategoryModel::checkPermission($categoryID, 'Vanilla.Discussions.Delete')) {
             $category = CategoryModel::categories($categoryID);
             $options['DeleteDiscussion'] = [
-                'Label' => t('Delete Discussion'),
+                'Label' => t('Delete the publication'),
                 'Url' => '/discussion/delete?discussionid='.$discussion->DiscussionID.'&target='.urlencode(categoryUrl($category)),
                 'Class' => 'DeleteDiscussion DeleteDiscussionPopup'
             ];
@@ -476,7 +476,7 @@ if (!function_exists('getDiscussionOptionsDropdown')):
 
         $dropdown->addLInkIf($flagLink['isAllowed'], $flagLink['name'], $flagLink['url'], 'FlagMenuItem', $flagLink['type'])
             ->addLinkIf($canDismiss, t('Dismiss'), "vanilla/discussion/dismissannouncement?discussionid={$discussionID}", 'dismiss', 'DismissAnnouncement Hijack')
-            ->addLinkIf($canEdit, t('Edit').$timeLeft, '/post/editdiscussion/'.$discussionID, 'edit', 'EditDiscussion')
+            ->addLinkIf($canEdit, t('Edit the publication').$timeLeft, '/post/editdiscussion/'.$discussionID, 'edit', 'EditDiscussion')
             ->addLinkIf($canTag, t('Tag'), '/discussion/tag?discussionid='.$discussionID, 'tag', 'TagDiscussion Popup');
 
         if ($canEdit && $canAnnounce) {
@@ -516,7 +516,7 @@ if (!function_exists('getDiscussionOptionsDropdown')):
         if ($canDelete) {
             $dropdown
                 ->addDivider()
-                ->addLink(t('Delete Discussion'), '/discussion/delete?discussionid='.$discussionID.'&target='.$categoryUrl, 'delete', 'DeleteDiscussion Popup');
+                ->addLink(t('Delete the publication'), '/discussion/delete?discussionid='.$discussionID.'&target='.$categoryUrl, 'delete', 'DeleteDiscussion Popup');
         }
 
         // DEPRECATED
