@@ -208,7 +208,7 @@
 .PanelCategories li > div .name {
     text-overflow: ellipsis;
     overflow: hidden;
-    width: 110%;
+    width: 90%;
     text-align: center;
 }
 

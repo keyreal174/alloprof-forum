@@ -7,7 +7,18 @@
 
 // Global vanilla library function.
 (function(window, $) {
-    $(".embedExternal.embedImage .embedImage-link").attr('data-content', 'Ce contenu est protégé par le droit d\'auteur. Toute reproduction à l\'extérieur des forums Alloprof est interdite et pourra être considérée comme une violation du droit d\'auteur.');
+    $(document).on('click', '.embedImage-img-copyright-img', function() {
+        if ($(this).siblings().css('display') == "none") {
+            $(this).parent().addClass('embedImage-img-copyright-wrapper-collapse');
+            $(this).parent().css('border-top-left-radius', 0);
+            $(this).siblings().css('display', 'block');
+        } else {
+            $(this).parent().removeClass('embedImage-img-copyright-wrapper-collapse');
+            $(this).siblings().css('display', 'none');
+            $(this).parent().css('border-top-left-radius', '8px');
+        }
+    });
+
     $(document).on('click', '.EyeIconPassword', function() {
         var type = $('#Form_Password').attr('type');
         if (type == 'password') {
