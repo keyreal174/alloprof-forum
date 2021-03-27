@@ -523,7 +523,7 @@ div.Popup .Border {
 }
 
 /* rich editor remove icons */
-#paragraphMenu1-formattingMenus-component {
+div[id*="-formattingMenus-component"] {
     display: none;
 }
 
