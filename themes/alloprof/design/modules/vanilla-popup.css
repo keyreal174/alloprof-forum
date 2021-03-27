@@ -211,14 +211,14 @@ div.Popup.BanPopup .btn {
 
 /* Popup scrollToAskQuestionFormPopup hasRichEditor */
 .scrollToAskQuestionFormPopup .Border {
-    max-width: 750px !important;
+    max-width: 580px !important;
 }
 
 .scrollToAskQuestionFormPopup .Border .Body {
     padding: 0 !important;
     background: transparent !important;
     box-shadow: none !important;
-    max-height: initial !important;
+    max-height: 615px !important;
     border-radius: 6px !important;
 }
 
@@ -233,4 +233,37 @@ div.Popup.BanPopup .btn {
 .scrollToAskQuestionFormPopup.Popup.hasRichEditor .FormWrapper {
     padding-left: 0 !important;
     padding-right: 0 !important;
+    margin-top: 16px;
+    padding-top: 0;
+}
+
+.scrollToAskQuestionFormPopup .Border .Body .AskQuestionForm {
+    max-height: 377px;
+    padding: 24px;
+}
+
+.scrollToAskQuestionFormPopup.Popup.hasRichEditor .Border .Body .AskQuestionForm .richEditor-textWrap,
+.scrollToAskQuestionFormPopup.Popup.hasRichEditor .Border .Body .AskQuestionForm .richEditor .richEditor-frame,
+.scrollToAskQuestionFormPopup.Popup.hasRichEditor .Border .Body .AskQuestionForm .richEditor-text {
+    min-height: 105px;
+}
+
+.scrollToAskQuestionFormPopup.Popup.hasRichEditor .Border .Body .AskQuestionForm .richEditor-textWrap {
+    max-height: 105px;
+    overflow: auto;
+}
+
+.scrollToAskQuestionFormPopup.Popup.hasRichEditor .Border .Body .AskQuestionForm .richEditor-embedBar {
+    position: absolute;
+    bottom: -135px;
+    z-index: 1;
+    left: -25px;
+}
+
+.scrollToAskQuestionFormPopup.Popup.hasRichEditor .Border .Body .AskQuestionForm .selects {
+    margin-top: 0;
+}
+
+.scrollToAskQuestionFormPopup.Popup.hasRichEditor .Border .Body .AskQuestionForm .Buttons {
+    margin-top: 10px;
 }

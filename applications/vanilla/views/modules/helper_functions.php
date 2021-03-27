@@ -37,7 +37,7 @@ if (!function_exists('WriteModuleDiscussion')):
                 echo newComments($discussion);
 
                 $translation = pluralTranslate($discussion->CountComments, '%s comment html', '%s comments html', t('%s comment'), t('%s comments'));
-                echo '<span class="MItem">'.Gdn_Format::date($discussion->LastDate, 'html').userAnchor($last).'</span>';
+                echo '<span class="MItem">'.Gdn_Format::date($discussion->FirstDate, 'html').userAnchor($last).'</span>';
                 echo '<span class="MItem CountComments Hidden">'.sprintf($translation, $discussion->CountComments).'</span>';
                 ?>
             </div>
@@ -370,7 +370,30 @@ if (!function_exists('writeGradeFilter')) :
      */
     function writeGradeFilter($gradeID) {
         $Session = Gdn::session();
-        $GradeOption = array('Primaire', 'Secondaire');
+        $DefaultGrade = 0;
+        if ($Session) {
+            $UserID = $Session->UserID;
+            $AuthorMetaData = Gdn::userModel()->getMeta($UserID, 'Profile.%', 'Profile.');
+            if ($AuthorMetaData['Grade']) {
+                $DefaultGrade = $AuthorMetaData['Grade'];
+            }
+        }
+
+        $fields = c('ProfileExtender.Fields', []);
+        if (!is_array($fields)) {
+            $fields = [];
+        }
+        foreach ($fields as $k => $field) {
+            if ($field['Label'] == "Grade") {
+                $GradeOption = array_filter($field['Options'], function($v) {
+                    return preg_match('/(Primaire|Secondaire)/', $v);
+                });
+
+                if ($DefaultGrade && $DefaultGrade !== 0) {
+                    $DefaultGrade = array_search($DefaultGrade, $GradeOption);
+                }
+            }
+        }
 
         echo '<div class="rich-select select2 select2-grade">';
         echo '<div class="pre-icon"><img src="'.url("/themes/alloprof/design/images/icons/grade.svg").'"/></div>';

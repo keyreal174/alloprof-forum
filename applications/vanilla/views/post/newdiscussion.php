@@ -26,10 +26,14 @@
         <?php
             $UserMetaData = Gdn::userModel()->getMeta(Gdn::session()->UserID, 'Profile.%', 'Profile.');
             $UserName = $UserMetaData['DisplayName'] ?? t('Unknown');
-            echo img($Photo, ['class' => 'user-avatar', 'alt' => $PhotoAlt]);
+
+            $photoClassName = 'user-avatar';
             if (str_contains($Photo, 'avatars/0.svg')) {
-                echo "<p class='BoxNewDiscussionProfileName'>".$UserName[0]."</p>";
+                $photoClassName = $photoClassName.' ProfilePhotoDefaultWrapper';
             }
+            echo '<span class="'.$photoClassName.'" avatar--first-letter="'.$UserName[0].'">';
+            echo img($Photo, ['class' => 'user-avatar', 'alt' => $PhotoAlt]);
+            echo '</span>';
         ?>
         <div>
             <?php
@@ -97,17 +101,11 @@
         <?php
             if(!$this->invalid) {
                 echo '<div class="selects">';
-                if ($this->ShowCategorySelector === true) {
-                    $options = ['Value' => val('CategoryID', $this->Category), 'IncludeNull' => true, 'AdditionalPermissions' => ['PermsDiscussionsAdd']];
-                    if ($this->Context) {
-                        $options['Context'] = $this->Context;
-                    }
-                    $discussionType = property_exists($this, 'Type') ? $this->Type : $this->data('Type');
-                    if ($discussionType) {
-                        $options['DiscussionType'] = $discussionType;
-                    }
-                    if (property_exists($this, 'Draft') && is_object($this->Draft)) {
-                        $options['DraftID'] = $this->Draft->DraftID;
+                // if ($this->ShowCategorySelector === true) {
+                    $Controller = Gdn::controller();
+                    if($Controller->data('SelectedCategory')) {
+                        $category = $Controller->data('SelectedCategory');
+                        $options = ['Value' => $category, 'IncludeNull' => true, 'AdditionalPermissions' => ['PermsDiscussionsAdd']];
                     }
 
                     $Session = Gdn::session();
@@ -136,18 +134,13 @@
                         }
                     }
 
-                    echo '<div>';
-                    echo '<div class="Category rich-select">';
-                    echo '<img src="'.url("/themes/alloprof/design/images/icons/subject.svg").'"/>';
-                    echo $this->Form->categoryDropDown('CategoryID', $options);
-                    echo '</div>';
-                    echo '</div>';
+                    echo writeCategoryDropDown($this, 'CategoryID', $options);
                     echo '<span class="space"></span>';
-                    echo '<div class="Category rich-select">';
-                    echo '<img src="'.url("/themes/alloprof/design/images/icons/grade.svg").'"/>';
-                    echo $this->Form->dropDown('GradeID', $GradeOption, array('Default' => $DefaultGrade, 'IncludeNull' => t('Grade'), 'IsDisabled' => TRUE));
+                    echo '<div class="Category rich-select select2 select2-grade">';
+                    echo '<div class="pre-icon"><img src="'.url("/themes/alloprof/design/images/icons/grade.svg").'"/></div>';
+                    echo $this->Form->dropDown('GradeID', $GradeOption, array('IncludeNull' => true, 'Value' => $DefaultGrade));
                     echo '</div>';
-                }
+                // }
                 echo '</div>';
                 echo '<div class="Buttons">';
 
@@ -211,3 +204,51 @@
         <p><?php echo t('Make sure your question hasn\'t already been asked') ?></p>
     </div>
 </div>
+<script >
+    function formatState (state) {
+        var data = $(state.element).data();
+        if (!state.id) { return state.text; }
+        var icon = '<div class="category-img"></div>';
+
+        if(data && data['img_src']){
+            icon = '<div class="category-img"><img src="'+data['img_src'] + '"/></div>';
+        }
+        var $state = $(
+          '<span class="image-option">'+ icon + state.text + '</span>'
+       );
+       return $state;
+    };
+
+    function selectCategoryImg (obj) {
+        if(obj) {
+
+            var data = $(obj.element).data();
+            var parent = $(obj.element).parent().parent().parent();
+
+            if(data && data['img_src']){
+                parent.find('.category-selected-img').html('<img src="'+data['img_src']+'"/>');
+            }
+
+            if(data && data['img_src'] === '') {
+                parent.find('.category-selected-img').html('');
+            }
+        }
+    }
+
+    $('.scrollToAskQuestionFormPopup .select2-grade select').select2({
+        minimumResultsForSearch: -1,
+        placeholder: "Niveau",
+    });
+
+    $('.scrollToAskQuestionFormPopup .select2-category select').select2({
+        placeholder: "Matière",
+        minimumResultsForSearch: -1,
+        templateResult: formatState
+    }).on('select2:select', function (e) {
+        var data = e.params.data;
+        selectCategoryImg(data);
+    });
+
+    selectCategoryImg({element: $('.FilterMenu .select2-category option:selected')});
+    selectCategoryImg({element: $('.EditDiscussionDetail .select2-category option:selected')});
+</script>

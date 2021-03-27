@@ -105,7 +105,8 @@ if ($Session->isValid()):
         $UserName = $UserMetaData["DisplayName"] ?? t('Unknown');
 
         if (str_contains($imgUrl, 'avatars/0.svg')) {
-            $triggerIcon = "<img class='ProfilePhoto ProfilePhotoSmall' src='$imgUrl'/><p class='ProfilePhotoSmallName'>".$UserName[0]."</p>";
+            $ClassName = "ProfilePhotoDefaultWrapper";
+            $triggerIcon = "<span class='".$ClassName."' avatar--first-letter='".$UserName[0]."'><img class='ProfilePhoto ProfilePhotoSmall' src='$imgUrl'/></span>";
         } else {
             $triggerIcon = "<img class='ProfilePhoto ProfilePhotoSmall' src='$imgUrl'/>";
         }

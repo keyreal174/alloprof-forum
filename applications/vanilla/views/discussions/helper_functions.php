@@ -450,7 +450,7 @@ if (!function_exists('timeElapsedString')) :
         $diff = $now->diff($ago);
 
         $diff->w = floor($diff->d / 7);
-        $diff->d -= $diff->w * 7;
+        // $diff->d -= $diff->w * 7;
 
         $string = array(
             'y' => 'year',
@@ -502,6 +502,7 @@ if (!function_exists('timeElapsedString')) :
             }
             return $frenchStr;
         }
+
         return $string ? implode(', ', $string) . ' ago' : 'just now';
     }
 endif;
@@ -541,7 +542,7 @@ if (!function_exists('writeDiscussionDetail')) :
             <div class="Discussion">
                 <div class="Item-Header DiscussionHeader">
                     <?php
-                    if (!Gdn::themeFeatures()->get('EnhancedAccessibility')) {
+                    if (!Gdn::themeFeatures()->get('EnhancedAccessibility') && Gdn::session()->isValid()) {
                         ?>
                         <span class="Options-Icon">
                         <?php
@@ -595,7 +596,7 @@ if (!function_exists('writeDiscussionDetail')) :
                         ?>
                         <?php
                             if ($Discussion->DateAccepted) {
-                                echo "<div class='verfied-badge'>
+                                echo "<div class='verified-badge'>
                                         <img src='".url("/themes/alloprof/design/images/icons/verifiedbadge.svg")."'/>
                                         <span>". t('Verified by Alloprof') ."</span>
                                     </div>";
@@ -606,9 +607,9 @@ if (!function_exists('writeDiscussionDetail')) :
                         <span class="MItem TimeAgo">
                             <?php
                                 if ($grade) {
-                                    echo $grade . ' • ' . timeElapsedString($Discussion->LastDate, false);
+                                    echo $grade . ' • ' . timeElapsedString($Discussion->FirstDate, false);
                                 } else {
-                                    echo timeElapsedString($Discussion->LastDate, false);
+                                    echo timeElapsedString($Discussion->FirstDate, false);
                                 }
                             ?>
                         </span>

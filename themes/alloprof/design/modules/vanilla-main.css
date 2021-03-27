@@ -5338,7 +5338,7 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
 .DataList-Search .PhotoWrap {
     left: 0;
     position: absolute;
-    top: 16px
+    /* top: 16px */
 }
 
 .DataList-Search .Meta {
@@ -8525,7 +8525,6 @@ table.PreferenceGroup tbody tr:hover td {
     border-bottom: 0;
     box-shadow: none;
     color: #1A1919;
-    backdrop-filter: blur(6px);
     padding-left: 24px;
     padding-right: 24px;
 }
@@ -8578,7 +8577,7 @@ table.PreferenceGroup tbody tr:hover td {
 
 .Categories .Banner-content__Container {
     justify-content: flex-start;
-    padding-top: 100px;
+    padding-top: 85px;
 }
 
 .Banner-content.General .Banner-content__Container {

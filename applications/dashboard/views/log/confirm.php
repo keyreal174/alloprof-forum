@@ -32,8 +32,8 @@
                         $AfterHtml = plural($ItemCount, t('Are you sure you want to delete 1 item forever?'), t('Are you sure you want to delete %s items forever?'));
                         break;
                     case 'restore':
-                        echo wrap(t('Restoring your selection removes the items from this list.', 'When you restore, the items are removed from this list and put back into the site.'), 'p');
-                        $AfterHtml = plural($ItemCount, t('Are you sure you want to restore 1 item?'), t('Are you sure you want to restore %s items?'));
+                        //echo wrap(t('Restoring your selection removes the items from this list.', 'When you restore, the items are removed from this list and put back into the site.'), 'p');
+                        $AfterHtml = plural($ItemCount, t('Are you sure you want to approve 1 item?'), t('Are you sure you want to approve %s items?'));
                         break;
                     case 'deletespam':
                         echo '<div class="alert alert-danger">'.t('Warning: deleting is permanent', 'WARNING: deleted items are removed from this list and cannot be brought back.').'</div>';

@@ -2013,18 +2013,28 @@ class CommentModel extends Gdn_Model implements FormatFieldInterface, EventFromR
         } else {
             $now = new DateTime();
 
+            $nowTimeStr = $now->format('Y-m-d H:i:s');
+
             // Update the comment's cached version
             $this->SQL->update('Comment')
-                ->set('DateAccepted', $now->format('Y-m-d H:i:s'))
+                ->set('DateAccepted', $nowTimeStr)
                 ->set('AcceptedUserID', $userID)
                 ->where('CommentID', $commentID)
                 ->put();
 
+            // $this->discussionModel->save(['DiscussionID' => $discussionID, 'DateAccepted' => $now->format('Y-m-d H:i:s'), 'AcceptedUserID' => $userID]);
             $this->SQL->update('Discussion')
-                ->set('DateAccepted', $now->format('Y-m-d H:i:s'))
+                ->set('DateAccepted', $nowTimeStr)
                 ->set('AcceptedUserID', $userID)
                 ->where('DiscussionID', $discussionID)
                 ->put();
+
+            // $discussionLog = $this->SQL->select('*')
+            //     ->from('Log')
+            //     ->where('RecordID', $discussionID)
+            //     ->where('RecordType', 'Discussion')
+            //     ->get()
+            //     ->firstRow();
 
             $comment = $this->SQL->select('*')
                 ->from('Comment')

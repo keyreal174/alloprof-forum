@@ -83,11 +83,16 @@ class NotificationsController extends Gdn_Controller {
         $sender->fireEvent('InformNotifications');
 
         foreach ($activities as $activity) {
+            $ClassName = '';
+            if (str_contains($activity['Photo'], 'avatars/0.svg')) {
+                $ClassName = 'ProfilePhotoDefaultWrapper';
+            }
+            $firstLetter = getFirstLetter($Activity['ActivityUserID']);
             if ($activity['Photo']) {
                 $userPhoto = anchor(
                     img($activity['Photo'], ['class' => 'ProfilePhotoMedium']),
                     $activity['Url'],
-                    'Icon'
+                    'Icon '.$ClassName, ["avatar--first-letter" => $firstLetter]
                 );
             } else {
                 $userPhoto = '';

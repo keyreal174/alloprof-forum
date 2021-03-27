@@ -402,9 +402,9 @@ class CategoriesController extends VanillaController {
         $wheres = [];
 
         if (($this->GradeID || $this->GradeID === '0') && $this->GradeID != -1) {
-            $wheres['d.Cycle'] = $this->GradeID;
+            $wheres['d.GradeID'] = $this->GradeID;
         } else {
-            unset($wheres['d.Cycle']);
+            unset($wheres['d.GradeID']);
         }
 
         if (($this->SubjectID || $this->SubjectID === '0') && $this->SubjectID != -1) {
@@ -524,7 +524,7 @@ class CategoriesController extends VanillaController {
             $cWheres = [];
             $cID = val('CategoryID', $category);
 
-            if ($this->getUserRole() == 'Student') {
+            if ($this->getUserRole() == 'member') {
                 $cWheres = ['d.Published' => 1, 'cm.Published' => 1, 'd.CategoryID' => $cID];
                 $dWheres = ['d.CategoryID' => $cID, 'd.Published' => 1];
             } else {
