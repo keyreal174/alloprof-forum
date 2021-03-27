@@ -57,7 +57,7 @@
         <img src="<?= url('/themes/alloprof/design/images/icons/close.svg') ?>" />
     </div>
 
-    <div id="DiscussionForm" class="FormTitleWrapper DiscussionForm">
+    <div id="DiscussionForm1" class="FormTitleWrapper DiscussionForm">
         <?php
             echo '<div class="FormWrapper">';
             echo $this->Form->open();
