@@ -681,6 +681,14 @@ class PostController extends VanillaController {
                     }
                 }
 
+                if (isset($formValues['GradeID'])) {
+                    $GradeID = $formValues['GradeID'];
+
+                    if ($GradeID == "") {
+                        $this->Form->addError(t('Grade is required.'));
+                    }
+                }
+
                 $isTitleValid = true;
                 $name = trim($this->Form->getFormValue('Name', ''));
 
