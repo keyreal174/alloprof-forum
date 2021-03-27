@@ -105,7 +105,7 @@ class NotificationsController extends Gdn_Controller {
             $format = $activity['Format'] ?? HtmlFormat::FORMAT_KEY;
             $excerpt = htmlspecialchars($story ? Gdn::formatService()->renderExcerpt($story, $format) : $excerpt);
             $activityClass = ' Activity-'.$activity['ActivityType'];
-            $link = $activity['Route'];
+            $link = url($activity['Route']);
 
             $verifiedIcon='';
             $verified = $activity['Verified'] && $activity['ActivityTypeID'] == 30;
