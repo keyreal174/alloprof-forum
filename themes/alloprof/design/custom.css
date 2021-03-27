@@ -539,47 +539,47 @@ div[id*="-formattingMenus-component"] {
     display: none;
 }
 
-/* .embedExternal.embedImage .embedExternal-content {
-    width: fit-content;
+.embedExternal.embedImage .embedExternal-content .embedImage-link,
+.embedExternal.embedImage .embedExternal-content .embedImage-link .embedImage-img {
+    width: 100% !important;
+    position: relative;
 }
 
-a.embedImage-link:before {
-    content: "";
-    background: url(./images/icons/Exclamationmark.svg);
-    z-index: 2;
-    position: absolute;
-    bottom: 50px;
-    width: 17px;
-    height: 16px;
-    right: 15px;
-    transform: scale(1.5);
-}
-
-a.embedImage-link:after {
-    content: attr(data-content);
-    color: white;
-    z-index: 1;
+.embedImage-img-copyright-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgba(0, 0, 0, 0.5);
     position: absolute;
     bottom: 6px;
     right: 0;
-    height: 20px;
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 10px 20px;
-    height: fit-content;
-    text-align: left;
-    padding-right: 50px;
-} */
-
-.menu {
-    overflow: hidden;
-    width: 350px;
-    height: 600px;
-    transition: width 600ms ease-out, height 600ms ease-out;
+    width: 100%;
+    border-top-left-radius: 6px;
 }
 
-.menu--collapsed {
-    width: 200px;
-    height: 60px;
+.embedImage-img-copyright-img {
+    padding: 10px;
+}
+
+.embedImage-img-copyright-img img {
+    max-width: initial !important;
+}
+
+.embedImage-img-copyright-text {
+    display: none;
+    color: white;
+}
+
+.embedImage-img-copyright-wrapper {
+    overflow: hidden;
+    width: 36px;
+    height: 36px;
+    transition: width 500ms ease-out, height 500ms ease-out;
+}
+
+.embedImage-img-copyright-wrapper.embedImage-img-copyright-wrapper-collapse {
+    width: fit-content;
+    height: auto;
 }
 
 .not-clickable {
