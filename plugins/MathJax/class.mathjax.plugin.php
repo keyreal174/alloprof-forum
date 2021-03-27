@@ -71,4 +71,29 @@ MATHJAX;
         $sender->addJsFile("https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js");
         $sender->addJsFile("live.js", "plugins/MathJax");
     }
+
+    /**
+     * Insert MathJax javascript into categories page
+     *
+     * @param CategoriesController $sender
+     */
+    public function categoriesController_render_before($sender) {
+
+        // Add basic MathJax configuration
+        $mathJaxConfig = <<<MATHJAX
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$$','$$'], ['\\(','\\)'] ]
+        },
+        ignoreClass: "CommentHeading"
+        preview: "TeX",
+    });
+</script>
+MATHJAX;
+        $sender->Head->addString($mathJaxConfig);
+        $sender->addJsFile("https://polyfill.io/v3/polyfill.min.js?features=es6");
+        $sender->addJsFile("https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js");
+        $sender->addJsFile("live.js", "plugins/MathJax");
+    }
 }
