@@ -199,7 +199,7 @@ div.Popup.BanPopup .btn {
     padding: 0 !important;
     background: transparent !important;
     box-shadow: none !important;
-    max-height: 615px !important;
+    max-height: initial !important;
     border-radius: 6px !important;
 }
 
@@ -219,7 +219,6 @@ div.Popup.BanPopup .btn {
 }
 
 .scrollToAskQuestionFormPopup .Border .Body .AskQuestionForm {
-    max-height: 377px;
     padding: 24px;
 }
 
@@ -239,6 +238,7 @@ div.Popup.BanPopup .btn {
     bottom: -135px;
     z-index: 1;
     left: -25px;
+    width: initial;
 }
 
 .scrollToAskQuestionFormPopup.Popup.hasRichEditor .Border .Body .AskQuestionForm .selects {
