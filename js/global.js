@@ -10,10 +10,12 @@
     $(document).on('click', '.embedImage-img-copyright-img', function() {
         if ($(this).siblings().css('display') == "none") {
             $(this).parent().addClass('embedImage-img-copyright-wrapper-collapse');
+            $(this).parent().css('border-top-left-radius', 0);
             $(this).siblings().css('display', 'block');
         } else {
             $(this).parent().removeClass('embedImage-img-copyright-wrapper-collapse');
             $(this).siblings().css('display', 'none');
+            $(this).parent().css('border-top-left-radius', '8px');
         }
     });
 

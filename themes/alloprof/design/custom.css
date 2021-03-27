@@ -553,12 +553,15 @@ div[id*="-formattingMenus-component"] {
     position: absolute;
     bottom: 6px;
     right: 0;
-    width: 100%;
-    border-top-left-radius: 6px;
+    width: fit-content;
+    border-top-left-radius: 8px;
 }
 
 .embedImage-img-copyright-img {
     padding: 10px;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
 }
 
 .embedImage-img-copyright-img img {
@@ -568,6 +571,10 @@ div[id*="-formattingMenus-component"] {
 .embedImage-img-copyright-text {
     display: none;
     color: white;
+    font-size: 12px;
+    line-height: 14px;
+    padding-left: 10px;
+    text-align: left;
 }
 
 .embedImage-img-copyright-wrapper {

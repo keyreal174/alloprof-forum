@@ -11,6 +11,7 @@ use Vanilla\EmbeddedContent\AbstractEmbed;
 use Vanilla\EmbeddedContent\EmbedUtils;
 use Vanilla\Models\VanillaMediaSchema;
 use Vanilla\Utility\ArrayUtils;
+use Gdn;
 
 /**
  * Image data object.
@@ -51,6 +52,7 @@ class ImageEmbed extends AbstractEmbed {
      */
     public function renderHtml(): string {
         $viewPath = dirname(__FILE__) . '/ImageEmbed.twig';
+        $this->data['IconImage'] = Gdn::request()->url("/themes/alloprof/design/images/icons/Exclamationmark.svg");
         return $this->renderTwig($viewPath, $this->data);
     }
 
