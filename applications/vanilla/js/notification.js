@@ -18,7 +18,7 @@ jQuery(document).ready(function($) {
     function markAllAsRead() {
         $.ajax({
             type: "POST",
-            url: '/notifications/markAllAsRead',
+            url: gdn.url('/notifications/markAllAsRead'),
             error: function(XMLHttpRequest, textStatus, errorThrown) {
                 alert(errorThrown);
             },
@@ -33,7 +33,7 @@ jQuery(document).ready(function($) {
     function markSingleRead($id) {
         $.ajax({
             type: "POST",
-            url: '/notifications/markSingleRead/'+$id,
+            url: gdn.url('/notifications/markSingleRead/'+$id),
             error: function(XMLHttpRequest, textStatus, errorThrown) {
                 alert(errorThrown);
             },
@@ -71,7 +71,7 @@ jQuery(document).ready(function($) {
 
         $.ajax({
             type: "POST",
-            url: '/profile/preferencesByAjax',
+            url: gdn.url('/profile/preferencesByAjax'),
             data: formData,
             processData: false,
             contentType: false,
