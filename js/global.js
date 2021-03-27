@@ -8,6 +8,7 @@
 // Global vanilla library function.
 (function(window, $) {
     $(".embedExternal.embedImage .embedImage-link").attr('data-content', 'Ce contenu est protégé par le droit d\'auteur. Toute reproduction à l\'extérieur des forums Alloprof est interdite et pourra être considérée comme une violation du droit d\'auteur.');
+
     $(document).on('click', '.EyeIconPassword', function() {
         var type = $('#Form_Password').attr('type');
         if (type == 'password') {

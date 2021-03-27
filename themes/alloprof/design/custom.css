@@ -539,7 +539,7 @@ div[id*="-formattingMenus-component"] {
     display: none;
 }
 
-/*.embedExternal.embedImage .embedExternal-content {
+/* .embedExternal.embedImage .embedExternal-content {
     width: fit-content;
 }
 
@@ -568,7 +568,19 @@ a.embedImage-link:after {
     height: fit-content;
     text-align: left;
     padding-right: 50px;
-}*/
+} */
+
+.menu {
+    overflow: hidden;
+    width: 350px;
+    height: 600px;
+    transition: width 600ms ease-out, height 600ms ease-out;
+}
+
+.menu--collapsed {
+    width: 200px;
+    height: 60px;
+}
 
 .not-clickable {
     cursor: initial;
