@@ -1344,95 +1344,12 @@ class DiscussionsController extends VanillaController {
 
 
     public function search($page = 'p1') {
-        $this->View = 'search';
+        $this->View = 'mobile_search';
         $this->render();
-        // $this->getUserInfo();
-        // $this->permission('Garden.SignIn.Allow');
-        // Gdn_Theme::section('DiscussionList');
+    }
 
-        // // Add js
-        // $this->addJsFile('jquery.autosize.min.js');
-        // $this->addJsFile('autosave.js');
-        // $this->addJsFile('post.js');
-        // $this->addJsFile('askquestion.js');
-
-        // // Set criteria & get discussions data
-        // list($offset, $limit) = offsetLimit($page, c('Vanilla.Discussions.PerPage', 30));
-        // $session = Gdn::session();
-        // $wheres = ['d.InsertUserID' => $session->UserID];
-
-        // $this->View = 'index';
-        // if (c('Vanilla.Discussions.Layout') === 'table') {
-        //     $this->View = 'table';
-        // }
-
-        // // Filter Discussion Module
-        // $this->writeFilter();
-        // $wheres = array_merge($wheres, $this->WhereClause);
-
-        // $discussionModel = new DiscussionModel();
-        // $discussionModel->setSort($this->SortDirection);
-        // $discussionModel->setFilters(Gdn::request()->get());
-        // $this->setData('Sort', $discussionModel->getSort());
-        // $this->setData('Filters', $discussionModel->getFilters());
-
-        // $this->DiscussionData = $discussionModel->get($offset, $limit, $wheres, [$this->SortDirection => 'DateLastComment']);
-        // $this->setData('Discussions', $this->DiscussionData);
-        // $countDiscussions = $this->setData('CountDiscussions', $discussionModel->getCount($wheres));
-        // // Build a pager
-        // $pagerFactory = new Gdn_PagerFactory();
-        // $this->EventArguments['PagerType'] = 'MorePager';
-        // $this->fireEvent('BeforeBuildMinePager');
-        // $this->Pager = $pagerFactory->getPager($this->EventArguments['PagerType'], $this);
-        // $this->Pager->MoreCode = 'More Discussions';
-        // $this->Pager->LessCode = 'Newer Discussions';
-        // $this->Pager->ClientID = 'Pager';
-        // $this->Pager->configure(
-        //     $offset,
-        //     $limit,
-        //     $countDiscussions,
-        //     'discussions/mine/%1$s'
-        // );
-
-        // $this->setData('_PagerUrl', 'discussions/mine/{Page}');
-        // $this->setData('_Page', $page);
-        // $this->setData('_Limit', $limit);
-
-        // $this->fireEvent('AfterBuildMinePager');
-
-        // // Deliver JSON data if necessary
-        // if ($this->_DeliveryType != DELIVERY_TYPE_ALL) {
-        //     $this->setJson('LessRow', $this->Pager->toString('less'));
-        //     $this->setJson('MoreRow', $this->Pager->toString('more'));
-        //     $this->View = 'discussions';
-        // }
-
-        // // Add modules
-        // $this->addModule('NewDiscussionModule');
-        // $this->addModule('AskQuestionModule');
-        // $this->addModule('CategoriesModule');
-        // $this->addModule('UserPhotoModule');
-        // $this->addModule('ProfileFilterModule');
-        // $this->fireEvent('AfterAddSideMenu');
-        // $this->fireEvent('AddProfileTabsInfo');
-
-        // $DiscussionEmpty = true;
-        // if ($this->DiscussionData->numRows() > 0 || (isset($this->AnnounceData) && is_object($this->AnnounceData) && $this->AnnounceData->numRows() > 0)) {
-        //     $DiscussionEmpty = false;
-        //     $discussionsFooterModule = new DiscussionsFooterModule($DiscussionEmpty, "That's all for now!", "If you have other questions, don't hesitate to ask😉");
-        // } else {
-        //     $discussionsFooterModule = new DiscussionsFooterModule($DiscussionEmpty, "It seems there's nothing here at the moment!", "Don't hesitate ask if you have a question.");
-        // }
-
-        // $this->addModule($discussionsFooterModule);
-
-        // // $bannerModule = new BannerModule('Home', 'Home', '', 'Mutual Aid Zone', 'Welcome to the Mutual Aid Zone! <br/> Do you have a question? Here are the explanations!');
-        // // $this->addModule($bannerModule);
-
-        // // Render view
-        // $this->setData('Title', t('My Questions'));
-        // $this->setData('Mine', true);
-        // $this->setData('Breadcrumbs', [['Name' => t('My Questions'), 'Url' => '/discussions/mine']]);
-        // $this->render();
+    public function filter() {
+        $this->View = 'mobile_filter';
+        $this->render();
     }
 }

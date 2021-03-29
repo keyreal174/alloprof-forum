@@ -365,7 +365,7 @@ if (!function_exists('writeGradeFilter')) :
      * @param string $extraClasses any extra classes you add to the drop down
      * @return string
      */
-    function writeGradeFilter($gradeID) {
+    function writeGradeFilter($gradeID, $isMobile) {
         $Session = Gdn::session();
         $DefaultGrade = 0;
         if ($Session) {
@@ -457,16 +457,16 @@ if (!function_exists('writeFilterToggle')) :
      * @param string $extraClasses any extra classes you add to the drop down
      * @return string
      */
-    function writeFilterToggle($explanation, $verified) {
+    function writeFilterToggle($explanation, $verified, $isMobile='') {
         $role = getUserRole(Gdn::session()->User->UserID);
         echo '<ul>';
         echo '<li class="form-group">';
         $text = $role === 'Teacher' ? t('Without explanations only') : t('With explanations only');
         $verifiedText = $role === 'Teacher' ? t('Not Verified by Alloprof only') : t('Verified by Alloprof only');
         if ($explanation == 'true') {
-            echo Gdn::controller()->Form->toggle('Explanation', $text, [ 'checked' => $explanation ]);
+            echo Gdn::controller()->Form->toggle($isMobile.'Explanation', $text, [ 'checked' => $explanation ]);
         } else {
-            echo Gdn::controller()->Form->toggle('Explanation', $text);
+            echo Gdn::controller()->Form->toggle($isMobile.'Explanation', $text);
         }
         echo '</li>';
         echo '<li class="form-group">';
