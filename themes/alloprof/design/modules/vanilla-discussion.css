@@ -17,7 +17,9 @@ span.ReactButtons a.ReactButton.ReactButton-Like {
 }
 
 span.ReactButtons a.ReactButton.ReactButton-Like .Count {
-    margin-left: 24px;
+    margin-top: 3px;
+    margin-right: 0;
+    margin-left: 30px;
     font-size: 21px;
     line-height: 21px;
     color: #1A1919;
