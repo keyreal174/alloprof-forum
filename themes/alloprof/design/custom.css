@@ -570,9 +570,9 @@ div[id*="-formattingMenus-component"] {
 
 .embedImage-img-copyright-text {
     display: none;
-    color: white;
-    font-size: 12px;
-    line-height: 14px;
+    color: white !important;
+    font-size: 12px !important;
+    line-height: 14px !important;
     padding-left: 10px;
     text-align: left;
 }
