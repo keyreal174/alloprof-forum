@@ -568,10 +568,13 @@ div[id*="-formattingMenus-component"] {
     max-width: initial !important;
 }
 
-.embedImage-img-copyright-text {
+.MessageList .Item-BodyWrap .Message.userContent p.embedImage-img-copyright-text,
+.DataList.Discussions .Item-BodyWrap .Message.userContent p.embedImage-img-copyright-text,
+.Item-Search .Item-Body .Summary p.embedImage-img-copyright-text {
     display: none;
     color: white;
-    font-size: 12px;
+    font-size: 12px !important;
+    margin: 10px 0;
     line-height: 14px;
     padding-left: 10px;
     text-align: left;
