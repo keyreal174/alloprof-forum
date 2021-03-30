@@ -10,7 +10,7 @@
 .BoxCategories {
     margin: 0;
     background: white;
-    padding: 32px;
+    padding: 32px 25px;
     border-radius: 8px;
     margin-bottom: 24px;
 }
@@ -203,12 +203,13 @@
     position: relative;
     min-height: 120px;
     margin: 0 auto;
+    max-width: 85px;
 }
 
 .PanelCategories li > div .name {
     text-overflow: ellipsis;
     overflow: hidden;
-    width: 90%;
+    width: 130%;
     text-align: center;
 }
 
