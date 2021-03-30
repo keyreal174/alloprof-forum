@@ -498,6 +498,11 @@ class PostController extends VanillaController {
             $categoryID = '';
         }
 
+        if ($this->getUserRole() == 'Teacher') {
+            redirectTo("discussions");
+            return;
+        }
+
         // Setup head
         $this->addJsFile('jquery.autosize.min.js');
         $this->addJsFile('autosave.js');

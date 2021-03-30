@@ -772,7 +772,7 @@ if (!function_exists('writeCommentForm')) :
             }
         }
 
-        if (($discussion->Closed == '1' && $userCanClose) || ($discussion->Closed == '0' && $userCanComment)) {
+        if (($discussion->Closed == '1') || ($discussion->Closed == '0')) {
             echo $controller->fetchView('comment', 'post', 'vanilla');
         }
     }
@@ -954,11 +954,13 @@ if (!function_exists('writeDiscussionFooter')) :
 
                             $sender->fireEvent('BeforeFormButtons');
 
-                            if($userCanComment)
+                            // if($userCanComment)
+                                // echo $sender->Form->button(t('Give an explanation'), ['class' => 'btn-default btn-shadow']);
+                            // else {
                                 echo $sender->Form->button(t('Give an explanation'), ['class' => 'btn-default btn-shadow']);
-                            else {
-                                echo anchor(t('Give an explanation'), '/entry/jsconnect-redirect?client_id=alloprof', 'btn-default btn-shadow');
-                            }
+                                // echo '<a data-url="'.url("/entry/jsconnect-redirect?client_id=alloprof&target=").urlencode('/discussions/saveDiscussion').'" class="btn-default btn-shadow signinandsave">'.t('Give an explanation').'</a>';
+                                // echo anchor(t('Give an explanation'), '/entry/jsconnect-redirect?client_id=alloprof', 'btn-default btn-shadow');
+                            // }
 
                             $sender->fireEvent('AfterFormButtons');
                             echo '</div>';
