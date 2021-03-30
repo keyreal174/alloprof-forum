@@ -5,9 +5,9 @@
 .DataList .ItemDiscussion,
 .DataList .Item,
 .MessageList .ItemDiscussion.ItemDiscussion {
-    border-radius: 5px;
-    margin-bottom: 20px;
-    padding: 32px;
+    border-radius: 8px;
+    margin-bottom: 24px;
+    padding: 24px;
 }
 
 .MessageList .ItemComment {
@@ -24,7 +24,7 @@
 
 .Item-Header.DiscussionHeader,
 .MessageList .Item-Header.DiscussionHeader {
-    height: 64px;
+    margin-top: 0;
     margin-bottom: 0px;
     padding: 0;
 }
@@ -53,7 +53,7 @@
     font-family: "ChromaticaBlack";
     font-size: 15px;
     line-height: 18px;
-    font-weight: 600;
+    font-weight: bold;
     margin-bottom: 0px;
     padding-top: 5px;
 }
@@ -73,29 +73,40 @@
     flex-direction: column;
     background-color: #f2f2f2;
     border-radius: 8px;
-    padding: 32px;
+    padding: 16px;
+}
 
-    font-size: 18px !important;
-    color: #1A1919;
-    line-height: 21px;
+.MessageList .Item-BodyWrap .Message.userContent p,
+.DataList.Discussions .Item-BodyWrap .Message.userContent p,
+.Item-Search .Item-Body .Summary p {
+    margin: 0;
+    font-size: 15px !important;
+    line-height: 18px;
+    color: black;
+}
+
+.userContent.Message {
+    margin-top: 16px;
+    margin-bottom: 0;
 }
 
 .ItemDiscussion .Item-Body {
-    margin-bottom: 25px;
+    margin-bottom: 24px;
 }
 
 .Item-Body .QuestionCategory {
     color: black;
     font-size: 12px;
-    border-radius: 40px;
+    line-height: 14px;
+    border-radius: 43px;
     border: 1px solid #000000;
     display: flex;
     align-items: center;
     justify-content: center;
     height: 27px;
     width: max-content;
-    padding: 6px 12px 3px 12px;
-    margin-top: 20px;
+    padding: 6px 12px 6px 12px;
+    margin-top: 16px;
 }
 
 .Item-Footer {
@@ -122,9 +133,15 @@
     background-color: #f2f2f2;
 }
 
-.Options-Icon {
+.Item-Header.DiscussionHeader .Options-Icon {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: absolute;
-    right: 40px;
+    right: 20px;
+    top: 15px;
     z-index: 1;
 }
 
@@ -152,11 +169,6 @@
     height: 24px;
 }
 
-.Options>a.Option-Icon {
-    margin-left: 0 !important;
-    margin-right: 17px;
-}
-
 .followButton.isFollowing svg {
     width: 21px;
     height: 24px;
@@ -166,11 +178,7 @@
     fill: black;
 }
 
-.Options>a.Option-Icon:last-child {
-    margin-right: 0;
-    margin-left: 15px !important;
-}
-
+/* Footer icons in Question Card */
 .Item-Footer-Icons {
     display: flex;
     align-items: center;
@@ -186,6 +194,43 @@
     height: 30px;
     background-color: #1A1919;
     margin: 0 20px;
+}
+
+.Item-Footer-Icons .Options>a.Option-Icon {
+    margin-left: -10px;
+    margin-right: 10px;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Item-Footer-Icons .SocialIcon.SocialPopup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 44px;
+    height: 44px;
+}
+
+.Item-Footer-Icons .Reactions {
+    height: 44px;
+    display: flex;
+}
+
+.Item-Footer-Icons .Reactions .ReactButtons {
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Item-Footer-Icons .Reactions .ReactButtons a.Option-Icon {
+    width: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .MessageList .ItemComment .AuthorWrap,

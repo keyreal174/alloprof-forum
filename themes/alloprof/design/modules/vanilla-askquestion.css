@@ -119,7 +119,7 @@
 }
 
 .AskQuestionForm.BoxNewDiscussion {
-    padding: 32px;
+    padding: 24px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -149,13 +149,14 @@
 .BoxNewDiscussion-header .AskQuestion,
 .BoxNewDiscussion-header .clickToCreate {
     background: #eee !important;
-    border-radius: 6px;
+    border-radius: 8px;
     padding: 0;
     display: flex;
     align-items: center;
     font-size: 15px;
+    line-height: 18px;
     color: #828282;
-    padding: 24px;
+    padding: 16px;
     width: 100%;
     cursor: pointer;
 }

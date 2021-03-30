@@ -141,8 +141,9 @@ select {
     background: white;
     color: black !important;
     font-family: "ChromaticaBold";
-    padding: 10px 30px !important;
+    padding: 13px 26px !important;
     font-size: 15px !important;
+    line-height: 18px;
     width: max-content !important;
     white-space: nowrap;
     height: 44px;
@@ -341,9 +342,8 @@ select {
 .FilterBanner .HomepageTitle {
     font-size: 18px;
     line-height: 25px;
-    margin-bottom: 10px;
+    margin-bottom: 24px;
     color: black;
-    margin-bottom: 10px;
 }
 
 .CustomSelect {
