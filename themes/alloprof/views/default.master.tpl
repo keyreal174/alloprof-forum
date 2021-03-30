@@ -2,6 +2,15 @@
 <html lang="{$CurrentLocale.Key}">
 
 <head>
+    {literal}
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-MF69GGC');</script>
+    <!-- End Google Tag Manager -->
+    {/literal}
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     {asset name="Head"}
@@ -78,6 +87,12 @@
     locale-{$CurrentLocale.Lang}
 "}
 <body id="{$BodyID}" class="{$BodyClass}{$TemplateCss|strip:" "}">
+{literal}
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MF69GGC"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+{/literal}
 <a href="#MainContent" class="Button Primary btn button-skipToContent sr-only SrOnly">{t c="Skip to content"}</a>
 
     <!--[if lt IE 9]>
@@ -152,9 +167,7 @@
                     <div class="Container">
                         <div class="Frame-contentWrap">
                             <div class="Frame-menubar">
-                                {if $User.SignedIn}
-                                    {module name="SubMenuModule"}
-                                {/if}
+                                {module name="SubMenuModule"}
                             </div>
 
                             <div class="Frame-details">
@@ -210,7 +223,7 @@
             </div>
         </div>
     </div>
-    <a href="discussions/filter" class="discussion-filters-mobile FilterPopup">
+    <a href="/discussions/filter" class="discussion-filters-mobile FilterPopup">
         <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" clip-rule="evenodd" d="M6.49997 4.79997H5.29997V1.19999C5.29997 0.537255 4.76272 0 4.09998 0C3.43724 0 2.89999 0.537255 2.89999 1.19999V4.79997H1.69999C1.03726 4.79997 0.5 5.33723 0.5 5.99997C0.5 6.6627 1.03726 7.19996 1.69999 7.19996H6.49997C7.1627 7.19996 7.69996 6.6627 7.69996 5.99997C7.69996 5.33723 7.1627 4.79997 6.49997 4.79997ZM4.09991 9.5998C3.43718 9.5998 2.89992 10.1371 2.89992 10.7998V22.7997C2.89992 23.4625 3.43718 23.9997 4.09991 23.9997C4.76265 23.9997 5.29991 23.4625 5.29991 22.7997V10.7998C5.29991 10.1371 4.76265 9.5998 4.09991 9.5998ZM12.4999 19.2C11.8372 19.2 11.3 19.7373 11.3 20.4V22.8C11.3 23.4628 11.8372 24 12.4999 24C13.1627 24 13.6999 23.4628 13.6999 22.8V20.4C13.6999 19.7373 13.1627 19.2 12.4999 19.2ZM23.2998 9.59994H22.0998V1.19999C22.0998 0.537255 21.5626 0 20.8998 0C20.2371 0 19.6998 0.537255 19.6998 1.19999V9.59994H18.4998C17.8371 9.59994 17.2998 10.1372 17.2998 10.7999C17.2998 11.4627 17.8371 11.9999 18.4998 11.9999H23.2998C23.9625 11.9999 24.4998 11.4627 24.4998 10.7999C24.4998 10.1372 23.9625 9.59994 23.2998 9.59994ZM20.8999 14.3999C20.2372 14.3999 19.6999 14.9372 19.6999 15.5999V22.7999C19.6999 23.4626 20.2372 23.9999 20.8999 23.9999C21.5627 23.9999 22.0999 23.4626 22.0999 22.7999V15.5999C22.0999 14.9372 21.5627 14.3999 20.8999 14.3999ZM14.8999 14.3999H13.7V1.19999C13.7 0.537255 13.1627 0 12.5 0C11.8372 0 11.3 0.537255 11.3 1.19999V14.3999H10.1C9.43723 14.3999 8.89998 14.9372 8.89998 15.5999C8.89998 16.2626 9.43723 16.7999 10.1 16.7999H14.8999C15.5627 16.7999 16.0999 16.2626 16.0999 15.5999C16.0999 14.9372 15.5627 14.3999 14.8999 14.3999Z" fill="black"/>
         </svg>

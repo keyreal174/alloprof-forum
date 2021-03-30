@@ -12,6 +12,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-top: 55px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.PageNotFound .Content .SplashInfo img {
+    width: 70% !important;
 }
 
 .PageNotFound .Content .SplashInfo h1 {

@@ -105,7 +105,8 @@ if ($Session->isValid()):
         $UserName = $UserMetaData["DisplayName"] ?? t('Unknown');
 
         if (str_contains($imgUrl, 'avatars/0.svg')) {
-            $triggerIcon = "<img class='ProfilePhoto ProfilePhotoSmall' src='$imgUrl'/><p class='ProfilePhotoSmallName'>".$UserName[0]."</p>";
+            $ClassName = "ProfilePhotoDefaultWrapper";
+            $triggerIcon = "<span class='".$ClassName."' avatar--first-letter='".$UserName[0]."'><img class='ProfilePhoto ProfilePhotoSmall' src='$imgUrl'/></span>";
         } else {
             $triggerIcon = "<img class='ProfilePhoto ProfilePhotoSmall' src='$imgUrl'/>";
         }
@@ -113,7 +114,7 @@ if ($Session->isValid()):
         $triggerIcon = sprite('SpOptions', 'Sprite Sprite16', $triggerTitle);
     }
 
-    $dropdown->setTrigger('', 'anchor', 'MeButton FlyoutButton MeButton-user', $triggerIcon, '/profile/edit', ['title' => $triggerTitle, 'tabindex' => '0', "role" => "button", "aria-haspopup" => "true"]);
+    $dropdown->setTrigger('', 'anchor', 'MeButton FlyoutButton MeButton-user', $triggerIcon, '/', ['title' => $triggerTitle, 'tabindex' => '0', "role" => "button", "aria-haspopup" => "true"]);
     $editModifiers['listItemCssClasses'] = ['EditProfileWrap', 'link-editprofile'];
     $preferencesModifiers['listItemCssClasses'] = ['EditProfileWrap', 'link-preferences'];
 
@@ -180,7 +181,7 @@ else:
     $dropdown->setTrigger('', 'anchor', 'MeButton FlyoutButton MeButton-user unauthorized', '<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
     <circle cx="16.0005" cy="9.5" r="5.5" stroke="black" stroke-width="2"/>
     <rect x="4.00049" y="19.1667" width="24" height="8.83333" rx="4.41667" stroke="black" stroke-width="2"/>
-    </svg>', '/profile/edit', ['title' => '', 'tabindex' => '0', "role" => "button", "aria-haspopup" => "true"]);
+    </svg>', '', ['title' => '', 'tabindex' => '0', "role" => "button", "aria-haspopup" => "true"]);
     $editModifiers['listItemCssClasses'] = ['EditProfileWrap', 'link-editprofile'];
     $preferencesModifiers['listItemCssClasses'] = ['EditProfileWrap', 'link-preferences'];
 

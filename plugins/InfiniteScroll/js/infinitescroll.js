@@ -29,6 +29,7 @@ jQuery(function ($) {
         showPageNum = def('PageNumber', false),
         treshold = def('Treshold', 300),
         baseUrl = def('Url', false),
+        filters = def('Filters', false),
         Dummy = $('<div/>'),
         throttle = 0,
         scrollstop = null,
@@ -104,10 +105,10 @@ jQuery(function ($) {
 
     // Toggles the visibility of elements that should only be shown on the first page.
     function toggleHead(toggle) {
-        if (hideHead) {
-            HeadElems.css('visibility', toggle ? 'visible' : 'hidden');
-            Panel.toggle(toggle);
-        }
+        // if (hideHead) {
+        //     HeadElems.css('visibility', toggle ? 'visible' : 'hidden');
+        //     Panel.toggle(toggle);
+        // }
     }
 
 
@@ -194,6 +195,7 @@ jQuery(function ($) {
         }
 
         newState = (page !== 1 || inDiscussion) ? baseUrl + '/p' + page + hash : baseUrl;
+        if (filters) newState += '?' + filters;
         if (newState !== window.location.href && historySupport) {
             history.replaceState(null, null, newState);
         }
@@ -224,7 +226,8 @@ jQuery(function ($) {
         ajax = true;
         showLoading(PagerAfter);
 
-        $.get(baseUrl + '/p' + pageNext + '?DeliveryType=VIEW&InnerList=1', function (data) {
+        $.get(baseUrl + '/p' + pageNext + '?DeliveryType=VIEW&InnerList=1' + (filters?('&'+filters):''), function (data) {
+        // $.get("/discussions" + '/p' + pageNext + '?DeliveryType=VIEW&InnerList=1', function (data) {
             // Extract and append the content.
             $(data)
                 .appendTo(DataList)
@@ -255,7 +258,8 @@ jQuery(function ($) {
         showLoading(PagerBefore);
 
         // DeliveryType=VIEW can not be used here as it doesn't include the first post.
-        $.get(baseUrl + '/p' + pagesBefore, function (data) {
+        $.get(baseUrl + '/p' + pagesBefore + (filters?('&'+filters):''), function (data) {
+        // $.get("/discussions" + '/p' + pagesBefore, function (data) {
             var OldHeight = $document.height(),
                 OldScroll = $window.scrollTop();
 

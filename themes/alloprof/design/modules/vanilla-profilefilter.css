@@ -107,3 +107,29 @@ a.ProfilePhotoLarge {
     text-transform: lowercase;
     position: absolute;
 }
+
+.ProfilePhotoDefaultWrapper {
+    position: relative !important;
+    font-size: 16px !important;
+}
+
+.ProfilePhotoDefaultWrapper:after {
+    content: attr(avatar--first-letter);
+    color: black;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    text-transform: lowercase;
+}
+
+.ProfilePhotoDefaultWrapper.ProfilePhotoLarge {
+    height: inherit !important;
+    font-size: 50px !important;
+    font-weight: bold;
+}

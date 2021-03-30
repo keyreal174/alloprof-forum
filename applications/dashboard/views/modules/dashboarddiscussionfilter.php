@@ -51,12 +51,15 @@ $titleID = "BoxFilterTitle";
     </h2>
     <div class="FilterMenu">
         <?php
+            if($this->SubjectID != -1)
+                $options = ['Value' => $this->SubjectID];
+            else $options = [];
 
-            $options = ['Value' => $this->SubjectID];
-            echo writeCategoryDropDown($this, 'SubjectDropdown', $options);
+            echo writeCategoryDropDown($this, 'Form_SubjectDropdown', $options);
+            // echo writeSubjectFilter($this->SubjectID);
             echo writeGradeFilter($this->GradeID);
             echo writeDiscussionSort($this->Sort);
-            echo writeFilterToggle($this, $this->IsExplanation, $this->IsVerified);
+            echo writeFilterToggle($this->IsExplanation, $this->IsVerified);
         ?>
     </div>
 </div>

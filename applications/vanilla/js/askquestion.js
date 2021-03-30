@@ -19,21 +19,33 @@ jQuery(document).ready(function($) {
         $('.information-block.newdiscussion').removeClass('show');
     })
 
-    $('.scrollToAskQuestionForm').click(function(){
-        $('.AskQuestionForm').css('display', 'block');
-        $('.AskQuestionForm .clickToCreate').trigger('click');
-
-        $(".AskQuestionForm .ql-editor").focus();
-        if ($(".AskQuestionForm").offset()) {
-            $([document.documentElement, document.body]).animate({
-                scrollTop: $(".AskQuestionForm").offset().top - 220
-            }, 500);
-        }
-
-        if ($("#MainContent").offset()) {
-            $([document.documentElement, document.body]).animate({
-                scrollTop: $("#MainContent").offset().top - 235
-            }, 500);
+    $(document).on('click', '.QuestionPopup .editor', function() {
+        if($('.QuestionPopup .editor .richEditor-text').hasClass('focus-visible')) {
+            $('.QuestionPopup .clickToCreate').hide();
         }
     })
+
+    $(document).on('click', '.QuestionPopup .mobile-categories .category-item', function() {
+        $('.QuestionPopup .mobile-categories .category-item').removeClass('selected');
+        $(this).addClass('selected');
+        $('.QuestionPopup #Form_CategoryID').val($(this).attr('id'));
+    })
+
+    // $('.scrollToAskQuestionForm').click(function(){
+    //     $('.AskQuestionForm').css('display', 'block');
+    //     $('.AskQuestionForm .clickToCreate').trigger('click');
+
+    //     $(".AskQuestionForm .ql-editor").focus();
+    //     if ($(".AskQuestionForm").offset()) {
+    //         $([document.documentElement, document.body]).animate({
+    //             scrollTop: $(".AskQuestionForm").offset().top - 220
+    //         }, 500);
+    //     }
+
+    //     if ($("#MainContent").offset()) {
+    //         $([document.documentElement, document.body]).animate({
+    //             scrollTop: $("#MainContent").offset().top - 235
+    //         }, 500);
+    //     }
+    // })
 });

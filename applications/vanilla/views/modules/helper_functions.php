@@ -37,7 +37,7 @@ if (!function_exists('WriteModuleDiscussion')):
                 echo newComments($discussion);
 
                 $translation = pluralTranslate($discussion->CountComments, '%s comment html', '%s comments html', t('%s comment'), t('%s comments'));
-                echo '<span class="MItem">'.Gdn_Format::date($discussion->LastDate, 'html').userAnchor($last).'</span>';
+                echo '<span class="MItem">'.Gdn_Format::date($discussion->FirstDate, 'html').userAnchor($last).'</span>';
                 echo '<span class="MItem CountComments Hidden">'.sprintf($translation, $discussion->CountComments).'</span>';
                 ?>
             </div>
@@ -254,6 +254,9 @@ if (!function_exists('writeCategoryDropDown')) :
         // $sender->EventArguments['Options'] = &$options;
         // $sender->fireEvent('BeforeCategoryDropDown');
 
+        $value = arrayValueI('Value', $options); // The selected category id
+        $categoryData = val('CategoryData', $options);
+
         // Grab the category data.
         if (!$categoryData) {
             $categoryData = CategoryModel::getByPermission(
@@ -294,7 +297,7 @@ if (!function_exists('writeCategoryDropDown')) :
         unset($options['Filter'], $options['PermFilter'], $options['Context'], $options['CategoryData']);
 
         // Opening select tag
-        $return = '<select name='.$fieldName.'>';
+        $return = '<select name='.$fieldName.' id='.$fieldName.'>';
 
         // Start with null option?
         $includeNull = val('IncludeNull', $options);
@@ -365,7 +368,7 @@ if (!function_exists('writeGradeFilter')) :
      * @param string $extraClasses any extra classes you add to the drop down
      * @return string
      */
-    function writeGradeFilter($gradeID, $isMobile) {
+    function writeGradeFilter($gradeID, $isMobile=false) {
         $Session = Gdn::session();
         $DefaultGrade = 0;
         if ($Session) {
@@ -392,10 +395,28 @@ if (!function_exists('writeGradeFilter')) :
             }
         }
 
-        echo '<div class="rich-select select2 select2-grade">';
-        echo '<div class="pre-icon"><img src="'.url("/themes/alloprof/design/images/icons/grade.svg").'"/></div>';
-        echo Gdn::controller()->Form->dropDown('GradeDropdown', $GradeOption, array('Value' => $gradeID));
-        echo '</div>';
+        if($isMobile) {
+            echo '<div class="mobile-grade">';
+            if (is_array($GradeOption)) {
+                foreach ($GradeOption as $id => $text) {
+                    if (is_array($text)) {
+                        $attribs = $text;
+                        $text = val('Text', $attribs, '');
+                        unset($attribs['Text']);
+                    } else {
+                        $attribs = [];
+                    }
+
+                    echo '<div class="item" value="'.htmlspecialchars($id).'">'.$text.'</div>';
+                }
+            }
+            echo '</div>';
+        } else {
+            echo '<div class="rich-select select2 select2-grade">';
+            echo '<div class="pre-icon"><img src="'.url("/themes/alloprof/design/images/icons/grade.svg").'"/></div>';
+            echo Gdn::controller()->Form->dropDown('GradeDropdown', $GradeOption, array('Value' => $gradeID, 'IncludeNull' => true));
+            echo '</div>';
+        }
     }
 endif;
 
@@ -457,23 +478,23 @@ if (!function_exists('writeFilterToggle')) :
      * @param string $extraClasses any extra classes you add to the drop down
      * @return string
      */
-    function writeFilterToggle($explanation, $verified, $isMobile='') {
+    function writeFilterToggle($explanation=false, $verified=false, $isMobile=false) {
         $role = getUserRole(Gdn::session()->User->UserID);
         echo '<ul>';
         echo '<li class="form-group">';
         $text = $role === 'Teacher' ? t('Without explanations only') : t('With explanations only');
         $verifiedText = $role === 'Teacher' ? t('Not Verified by Alloprof only') : t('Verified by Alloprof only');
         if ($explanation == 'true') {
-            echo Gdn::controller()->Form->toggle($isMobile.'Explanation', $text, [ 'checked' => $explanation ]);
+            echo Gdn::controller()->Form->toggle(($isMobile?'Mobile':'').'Explanation', $text, [ 'checked' => $explanation ]);
         } else {
-            echo Gdn::controller()->Form->toggle($isMobile.'Explanation', $text);
+            echo Gdn::controller()->Form->toggle(($isMobile?'Mobile':'').'Explanation', $text);
         }
         echo '</li>';
         echo '<li class="form-group">';
         if ($verified == 'true') {
-            echo Gdn::controller()->Form->toggle('VerifiedBy', $verifiedText, [ 'checked' => $verified ]);
+            echo Gdn::controller()->Form->toggle(($isMobile?'Mobile':'').'VerifiedBy', $verifiedText, [ 'checked' => $verified ]);
         } else {
-            echo Gdn::controller()->Form->toggle('VerifiedBy', $verifiedText);
+            echo Gdn::controller()->Form->toggle(($isMobile?'Mobile':'').'VerifiedBy', $verifiedText);
         }
         echo '</li>';
         echo '</ul>';

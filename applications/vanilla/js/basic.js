@@ -1,11 +1,10 @@
 $(window).on("scroll", function () {
-    if($('.Banner-content').length > 0) {
-        if ($(this).scrollTop() > 70) {
-            $("header").addClass("not-transparent");
-        }
-        else {
+    if ($(window).scrollTop() == 0) {
+        if($('.Banner-content').length > 0) {
             $("header").removeClass("not-transparent");
         }
+    } else {
+        $("header").addClass("not-transparent");
     }
 });
 
@@ -54,12 +53,15 @@ jQuery(document).ready(function($) {
 
     function selectCategoryImg (obj) {
         if(obj) {
+
             var data = $(obj.element).data();
             var parent = $(obj.element).parent().parent().parent();
 
             if(data && data['img_src']){
                 parent.find('.category-selected-img').html('<img src="'+data['img_src']+'"/>');
-            } else {
+            }
+
+            if(data && data['img_src'] === '') {
                 parent.find('.category-selected-img').html('');
             }
         }
@@ -67,11 +69,11 @@ jQuery(document).ready(function($) {
 
     $('.select2-grade select').select2({
         minimumResultsForSearch: -1,
-        placeholder: "Select grade",
+        placeholder: "Niveau",
     });
 
     $('.select2-category select').select2({
-        placeholder: "Select category",
+        placeholder: "Matière",
         minimumResultsForSearch: -1,
         templateResult: formatState
     }).on('select2:select', function (e) {
@@ -79,5 +81,6 @@ jQuery(document).ready(function($) {
         selectCategoryImg(data);
     });
 
-    selectCategoryImg($('.select2-category select').select2('data'));
+    selectCategoryImg({element: $('.FilterMenu .select2-category option:selected')});
+    selectCategoryImg({element: $('.EditDiscussionDetail .select2-category option:selected')});
 });

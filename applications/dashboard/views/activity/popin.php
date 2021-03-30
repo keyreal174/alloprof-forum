@@ -69,14 +69,22 @@
             <li class="Item"<?php echo $rel, $id?>>
                 <?php
                 if ($Activity['Photo']) {
+                    if (str_contains($Activity['Photo'], 'avatars/0.svg')) {
+                        $ClassName = 'ProfilePhotoDefaultWrapper';
+                    }
+
+                    $firstLetter = getFirstLetter($Activity['ActivityUserID']);
+
                     $PhotoAnchor = anchor(
                         img($Activity['Photo'], ['class' => 'ProfilePhoto PhotoWrapMedium']),
-                        $Activity['PhotoUrl'], 'PhotoWrap PhotoWrapMedium');
+                        $Activity['PhotoUrl'], 'PhotoWrap PhotoWrapMedium '.$ClassName, ["avatar--first-letter" => $firstLetter]);
                 } else {
                     $PhotoAnchor = '';
                 }
                 ?>
-                <div class="Author Photo"><?php echo $PhotoAnchor; ?></div>
+                <div class="Author Photo">
+                    <?php echo $PhotoAnchor; ?>
+                </div>
 
                 <div class="ItemContent Activity">
                     <?php

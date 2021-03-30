@@ -81,9 +81,9 @@ $this->fireEvent('BeforeDiscussionDisplay');
                 <span class="MItem TimeAgo">
                     <?php
                         if ($Grade) {
-                            echo $Grade . ' • ' . timeElapsedString($Discussion->LastDate, false);
+                            echo $Grade . ' • ' . timeElapsedString($Discussion->FirstDate, false);
                         } else {
-                            echo timeElapsedString($Discussion->LastDate, false);
+                            echo timeElapsedString($Discussion->FirstDate, false);
                         }
                     ?>
                 </span>

@@ -27,7 +27,10 @@ $this->fireEvent('BeforeCommentForm');
             $Photo = $User->Photo ? url($User->Photo) : UserModel::getDefaultAvatarUrl($User, 'profile');
             $UserName = $UserMetaData["DisplayName"] ?? t('Unknown');
             echo '<div class="UserInfo">';
-            echo "<a class='UserPhoto' href='".url("/profile/picture?userid=".$User->UserID)."'><img src='".$Photo."' class='PhotoWrap' alt='Photo'/></a>";
+            // echo "<a class='UserPhoto' href='".url("/profile/picture?userid=".$User->UserID)."'><img src='".$Photo."' class='PhotoWrap' alt='Photo'/></a>";
+            echo '<span style="margin-right: 12px">';
+            echo userPhoto($User);
+            echo '</span>';
             echo '<div class="UserAuthor">';
             if ($this->UserRole == "Teacher") {
                 echo '<span class="UserAuthorName">'.$UserName.'<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -83,11 +83,16 @@ class NotificationsController extends Gdn_Controller {
         $sender->fireEvent('InformNotifications');
 
         foreach ($activities as $activity) {
+            $ClassName = '';
+            if (str_contains($activity['Photo'], 'avatars/0.svg')) {
+                $ClassName = 'ProfilePhotoDefaultWrapper';
+            }
+            $firstLetter = getFirstLetter($Activity['ActivityUserID']);
             if ($activity['Photo']) {
                 $userPhoto = anchor(
                     img($activity['Photo'], ['class' => 'ProfilePhotoMedium']),
                     $activity['Url'],
-                    'Icon'
+                    'Icon '.$ClassName, ["avatar--first-letter" => $firstLetter]
                 );
             } else {
                 $userPhoto = '';
@@ -100,7 +105,7 @@ class NotificationsController extends Gdn_Controller {
             $format = $activity['Format'] ?? HtmlFormat::FORMAT_KEY;
             $excerpt = htmlspecialchars($story ? Gdn::formatService()->renderExcerpt($story, $format) : $excerpt);
             $activityClass = ' Activity-'.$activity['ActivityType'];
-            $link = $activity['Route'];
+            $link = url($activity['Route']);
 
             $verifiedIcon='';
             $verified = $activity['Verified'] && $activity['ActivityTypeID'] == 30;

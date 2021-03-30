@@ -118,6 +118,7 @@
 /* Filter Popup CSS */
 .FilterPopup .Body {
     overflow: hidden !important;
+    max-height: max-content !important;
 }
 
 .FilterPopup h3 {
@@ -155,6 +156,31 @@
 
 .FilterPopup .FilterMenu .toggle-wrap input[type=checkbox] + label::before {
     height: 23px !important;
+}
+
+.FilterPopup .mobile-grade {
+    display: flex;
+    overflow-x: auto;
+    padding-bottom: 15px;
+}
+
+.FilterPopup .mobile-grade .item {
+    white-space: nowrap;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 38px;
+    font-size: 14px;
+    border-radius: 38px;
+    background-color: #F2F2F2;
+    margin: 0 5px;
+    color: black;
+}
+
+.FilterPopup .mobile-grade .item.selected {
+    background-color: #05BF8E;
+    color: white;
 }
 
 .FilterPopup .modal-footer {

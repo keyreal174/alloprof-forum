@@ -7,6 +7,18 @@
 
 // Global vanilla library function.
 (function(window, $) {
+    $(document).on('click', '.embedImage-img-copyright-img', function() {
+        if ($(this).siblings().css('display') == "none") {
+            $(this).parent().addClass('embedImage-img-copyright-wrapper-collapse');
+            $(this).parent().css('border-top-left-radius', 0);
+            $(this).siblings().css('display', 'block');
+        } else {
+            $(this).parent().removeClass('embedImage-img-copyright-wrapper-collapse');
+            $(this).siblings().css('display', 'none');
+            $(this).parent().css('border-top-left-radius', '8px');
+        }
+    });
+
     $(document).on('click', '.EyeIconPassword', function() {
         var type = $('#Form_Password').attr('type');
         if (type == 'password') {
@@ -526,6 +538,9 @@ jQuery(document).ready(function($) {
         $('a.BanPopup').popup({containerCssClass: 'BanPopup CustomPopup'});
         $('a.SearchPopup').popup({containerCssClass: 'SearchPopup CustomPopup'});
         $('a.FilterPopup').popup({containerCssClass: 'SocialPopup FilterPopup CustomPopup'});
+        $('a.QuestionPopup').popup({containerCssClass: 'SearchPopup QuestionPopup CustomPopup'});
+        $('a.RulesPopup').popup({containerCssClass: 'SocialPopup RulesPopup'});
+        $('a.scrollToAskQuestionFormPopup').popup({containerCssClass: 'scrollToAskQuestionFormPopup'});
     }
 
     // This turns DeleteDiscussionPopup anchors into in-page popups

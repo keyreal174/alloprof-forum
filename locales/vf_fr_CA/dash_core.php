@@ -664,3 +664,8 @@ $Definition['Your configuration file does not have the correct permissions. PHP 
 $Definition['Your default locale won\'t display properly'] = 'Votre pack de langue par défaut ne s\'affiche pas correctement car il n\'a pas été activé préalablement. Veuillez activer : %s.';
 $Definition['Your inbox is empty.'] = 'Vous n\'avez aucun message.';
 $Definition['Your invitations were sent successfully.'] = 'Vos invitations ont bien été envoyées.';
+
+// Custom Definitions
+
+$Definition['Are you sure you want to approve %s items?'] = 'Êtes-vous sûr de vouloir approuver %s objets?';
+$Definition['Are you sure you want to approve 1 item?'] = 'Êtes-vous sûr de vouloir approuver 1 objet?';

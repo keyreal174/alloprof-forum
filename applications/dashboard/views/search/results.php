@@ -55,7 +55,7 @@ else
                         </div>
                         <?php
                             if ($Row->DateAccepted) {
-                                echo "<div class='verfied-badge'>
+                                echo "<div class='verified-badge'>
                                         <img src='".url('/themes/alloprof/design/images/icons/verifiedbadge.svg')."'/>
                                         <span>". t('Verified by Alloprof') ."</span>
                                     </div>";
@@ -84,7 +84,7 @@ else
                 </div>
                 <div class='SearchResultCategory'>
                     <?php
-                        echo "<a class='DiscussionHeader_category' href='/categories/".$category["UrlCode"]."'>".$category["Name"]."</a>";
+                        echo "<a class='DiscussionHeader_category' style='background: ".$category["Color"]."' href='/categories/".$category["UrlCode"]."'>".$category["Name"]."</a>";
                     ?>
                 </div>
                 <?php

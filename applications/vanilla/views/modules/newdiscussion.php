@@ -28,10 +28,14 @@
         <?php
             $UserMetaData = Gdn::userModel()->getMeta(Gdn::session()->UserID, 'Profile.%', 'Profile.');
             $UserName = $UserMetaData['DisplayName'] ?? t('Unknown');
-            echo img($Photo, ['class' => 'user-avatar', 'alt' => $PhotoAlt]);
+
+            $photoClassName = 'user-avatar';
             if (str_contains($Photo, 'avatars/0.svg')) {
-                echo "<p class='BoxNewDiscussionProfileName'>".$UserName[0]."</p>";
+                $photoClassName = $photoClassName.' ProfilePhotoDefaultWrapper';
             }
+            echo '<span class="'.$photoClassName.'" avatar--first-letter="'.$UserName[0].'">';
+            echo img($Photo, ['class' => 'user-avatar', 'alt' => $PhotoAlt]);
+            echo '</span>';
         ?>
         <div>
             <?php
@@ -100,17 +104,21 @@
             if(!$this->invalid) {
                 echo '<div class="selects">';
                 if ($this->ShowCategorySelector === true) {
-                    $options = ['Value' => val('CategoryID', $this->Category), 'IncludeNull' => true, 'AdditionalPermissions' => ['PermsDiscussionsAdd']];
-                    if ($this->Context) {
-                        $options['Context'] = $this->Context;
+                    $Controller = Gdn::controller();
+                    if($Controller->data('Category')) {
+                        $category = $Controller->data('Category');
+                        $options = ['Value' => val('CategoryID', $category), 'IncludeNull' => true, 'AdditionalPermissions' => ['PermsDiscussionsAdd']];
                     }
-                    $discussionType = property_exists($this, 'Type') ? $this->Type : $this->data('Type');
-                    if ($discussionType) {
-                        $options['DiscussionType'] = $discussionType;
-                    }
-                    if (property_exists($this, 'Draft') && is_object($this->Draft)) {
-                        $options['DraftID'] = $this->Draft->DraftID;
-                    }
+                    // if ($this->Context) {
+                    //     $options['Context'] = $this->Context;
+                    // }
+                    // $discussionType = property_exists($this, 'Type') ? $this->Type : $this->data('Type');
+                    // if ($discussionType) {
+                    //     $options['DiscussionType'] = $discussionType;
+                    // }
+                    // if (property_exists($this, 'Draft') && is_object($this->Draft)) {
+                    //     $options['DraftID'] = $this->Draft->DraftID;
+                    // }
 
                     $Session = Gdn::session();
                     $DefaultGrade = 0;
@@ -140,7 +148,10 @@
 
                     echo writeCategoryDropDown($this, 'CategoryID', $options);
                     echo '<span class="space"></span>';
-                    echo writeGradeFilter($DefaultGrade);
+                    echo '<div class="Category rich-select select2 select2-grade">';
+                    echo '<div class="pre-icon"><img src="'.url("/themes/alloprof/design/images/icons/grade.svg").'"/></div>';
+                    echo $this->Form->dropDown('GradeID', $GradeOption, array('IncludeNull' => true, 'Value' => $DefaultGrade));
+                    echo '</div>';
                 }
                 echo '</div>';
                 echo '<div class="Buttons">';

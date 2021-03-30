@@ -20,7 +20,7 @@ use Vanilla\Site\SiteSectionModel;
 class CategoriesController extends VanillaController {
 
     /** @var array Models to include.*/
-    public $Uses = ['Database', 'Form', 'CategoryModel', 'UserModel', 'CommentModel'];
+    public $Uses = ['Database', 'Form', 'CategoryModel', 'UserModel', 'CommentModel', 'DiscussionModel'];
 
     /** @var CategoryModel */
     public $CategoryModel;
@@ -384,6 +384,9 @@ class CategoriesController extends VanillaController {
         $gradeFilterOption = (Gdn::request()->get('grade') || Gdn::request()->get('grade') == '0') ? strval((int)(Gdn::request()->get('grade'))) : -1;
         $this->GradeID = $gradeFilterOption;
 
+        $subject = (Gdn::request()->get('subject') || Gdn::request()->get('subject') == '0') ? strval((int)(Gdn::request()->get('subject'))) : -1;
+        $this->SubjectID = $subject;
+
         $explanation = Gdn::request()->get('explanation') ?? false;
         $this->IsExplanation = $explanation;
 
@@ -393,7 +396,7 @@ class CategoriesController extends VanillaController {
         $sort = Gdn::request()->get('sort') ?? 'desc';
         $this->SortDirection = $sort;
 
-        $discussionFilterModule = new DiscussionFilterModule($gradeFilterOption, $sort, $explanation, $verified);
+        $discussionFilterModule = new DiscussionFilterModule($gradeFilterOption, $sort, $explanation, $verified, $subject);
         $this->addModule($discussionFilterModule);
         $this->addJsFile('filter.js');
         $wheres = [];
@@ -402,6 +405,12 @@ class CategoriesController extends VanillaController {
             $wheres['d.GradeID'] = $this->GradeID;
         } else {
             unset($wheres['d.GradeID']);
+        }
+
+        if (($this->SubjectID || $this->SubjectID === '0') && $this->SubjectID != -1) {
+            $wheres['d.CategoryID'] = $this->SubjectID;
+        } else {
+            unset($wheres['d.CategoryID']);
         }
 
         $role = $this->getUserRole(Gdn::session()->UserID);
@@ -509,9 +518,41 @@ class CategoriesController extends VanillaController {
 
             $this->setData('BannerImage', val('BannerImage', $category));
 
-            $this->setData('CountAllDiscussions', val('CountAllDiscussions', $category));
+            $discussionModel = new DiscussionModel();
 
-            $this->setData('CountAllComments', val('CountAllComments', $category));
+            $dWheres = [];
+            $cWheres = [];
+            $cID = val('CategoryID', $category);
+
+            if ($this->getUserRole() == 'member') {
+                $cWheres = ['d.Published' => 1, 'cm.Published' => 1, 'd.CategoryID' => $cID];
+                $dWheres = ['d.CategoryID' => $cID, 'd.Published' => 1];
+            } else {
+                $cWheres = ['d.CategoryID' => $cID];
+                $dWheres = ['d.CategoryID' => $cID];
+            }
+
+            $cCount = Gdn::sql()
+                ->select('cm.CommentID', 'count', 'CountComments')
+                ->from('Comment cm')
+                ->join('Discussion d', 'd.DiscussionID = cm.DiscussionID')
+                ->where($cWheres)
+                ->orWhere(['d.CategoryID' => $cID, 'd.InsertUserID' => Gdn::session()->UserID])
+                ->get()
+                ->firstRow()
+                ->CountComments;
+
+            $DCount = Gdn::sql()
+                ->select('d.DiscussionID', 'count', 'CountDiscussions')
+                ->from('Discussion d')
+                ->where($dWheres)
+                ->orWhere(['d.CategoryID' => $cID, 'd.InsertUserID' => Gdn::session()->UserID])
+                ->get()
+                ->firstRow()
+                ->CountDiscussions;
+
+            $this->setData('CountAllDiscussions', $DCount);
+            $this->setData('CountAllComments', $cCount);
 
             // $this->title(Gdn::formatService()->renderPlainText(val('Name', $category, ''), HtmlFormat::FORMAT_KEY));
 
@@ -599,6 +640,10 @@ class CategoriesController extends VanillaController {
             $bannerModule = new BannerModule('Categories', 'Home / '.val('Name', $category, ''), '', val('Name', $category, ''), '', val('BannerImage', $category));
             $this->addModule($bannerModule);
 
+            $mobileHeader = new MobileHeaderModule(val('Name', $category, ''), true);
+            $this->addModule($mobileHeader);
+
+
             // Get a DiscussionModel
             $discussionModel = new DiscussionModel();
             $discussionModel->setSort($this->SortDirection);
@@ -659,7 +704,7 @@ class CategoriesController extends VanillaController {
                 $wheres['Announce'] = 'all';
             }
 
-            $this->DiscussionData = $this->setData('Discussions', $discussionModel->getWhereWithOrder($wheres, 'DateLastComment', $this->SortDirection, $Limit, $Offset));
+            $this->DiscussionData = $this->setData('Discussions', $discussionModel->getWhereWithOrder($wheres, 'DateLastComment', $this->SortDirection, $limit, $offset));
 
             // Build a pager
             $pagerFactory = new Gdn_PagerFactory();

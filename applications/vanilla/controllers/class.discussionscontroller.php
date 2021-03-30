@@ -82,6 +82,9 @@ class DiscussionsController extends VanillaController {
         $gradeFilterOption = (Gdn::request()->get('grade') || Gdn::request()->get('grade') == '0') ? strval((int)(Gdn::request()->get('grade'))) : -1;
         $this->GradeID = $gradeFilterOption;
 
+        $subject = (Gdn::request()->get('subject') || Gdn::request()->get('subject') == '0') ? strval((int)(Gdn::request()->get('subject'))) : -1;
+        $this->SubjectID = $subject;
+
         $explanation = Gdn::request()->get('explanation') ?? false;
         $this->IsExplanation = $explanation;
 
@@ -91,7 +94,7 @@ class DiscussionsController extends VanillaController {
         $sort = Gdn::request()->get('sort') ?? 'desc';
         $this->SortDirection = $sort;
 
-        $discussionFilterModule = new DiscussionFilterModule($gradeFilterOption, $sort, $explanation, $verified);
+        $discussionFilterModule = new DiscussionFilterModule($gradeFilterOption, $sort, $explanation, $verified, $subject);
         $this->addModule($discussionFilterModule);
         $this->addJsFile('filter.js');
         $wheres = [];
@@ -100,6 +103,12 @@ class DiscussionsController extends VanillaController {
             $wheres['d.GradeID'] = $this->GradeID;
         } else {
             unset($wheres['d.GradeID']);
+        }
+
+        if (($this->SubjectID || $this->SubjectID === '0') && $this->SubjectID != -1) {
+            $wheres['d.CategoryID'] = $this->SubjectID;
+        } else {
+            unset($wheres['d.CategoryID']);
         }
 
         $role = $this->getUserRole(Gdn::session()->UserID);
@@ -230,7 +239,6 @@ class DiscussionsController extends VanillaController {
         $mobileHeader = new MobileHeaderModule('Home');
         $this->addModule($mobileHeader);
 
-
         // $this->addModule('BookmarkedModule');
         // $this->addModule('TagModule');
 
@@ -321,7 +329,7 @@ class DiscussionsController extends VanillaController {
         $this->setData('Announcements', $this->AnnounceData !== false ? $this->AnnounceData : [], true);
 
         // Get Discussions
-        $this->DiscussionData = $DiscussionModel->getWhereWithOrder($where, 'DateLastComment', $this->SortDirection, $Limit, $Offset);
+        $this->DiscussionData = $DiscussionModel->getWhereWithOrder($where, 'DateInserted', $this->SortDirection, $Limit, $Offset);
 
         $this->setData('Discussions', $this->DiscussionData, true);
         $this->setJson('Loading', $Offset.' to '.$Limit);
@@ -564,7 +572,7 @@ class DiscussionsController extends VanillaController {
 
         $wheres = array_merge($wheres, $this->WhereClause);
 
-        $this->DiscussionData = $discussionModel->get($offset, $limit, $wheres, [$this->SortDirection => 'DateLastComment']);
+        $this->DiscussionData = $discussionModel->get($offset, $limit, $wheres, [$this->SortDirection => 'DateInserted']);
         $this->setData('Discussions', $this->DiscussionData);
         $countDiscussions = $discussionModel->getCount($wheres);
         $this->setData('CountDiscussions', $countDiscussions);
@@ -735,7 +743,7 @@ class DiscussionsController extends VanillaController {
         $this->setData('Sort', $discussionModel->getSort());
         $this->setData('Filters', $discussionModel->getFilters());
 
-        $this->DiscussionData = $discussionModel->get($offset, $limit, $wheres, [$this->SortDirection => 'DateLastComment']);
+        $this->DiscussionData = $discussionModel->get($offset, $limit, $wheres, [$this->SortDirection => 'DateInserted']);
         $this->setData('Discussions', $this->DiscussionData);
         $countDiscussions = $this->setData('CountDiscussions', $discussionModel->getCount($wheres));
         // Build a pager
@@ -1350,6 +1358,11 @@ class DiscussionsController extends VanillaController {
 
     public function filter() {
         $this->View = 'mobile_filter';
+        $this->render();
+    }
+
+    public function question() {
+        $this->View = 'mobile_newquestion';
         $this->render();
     }
 }

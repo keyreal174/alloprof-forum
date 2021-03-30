@@ -1,5 +1,5 @@
 <?php if (!defined('APPLICATION')) exit(); ?>
-<div class="modal-dialog modal-sm modal-confirm" role="document">
+<div class="modal-dialog modal-sm modal-confirm <?php echo strtolower($this->data('Action')) ?>" role="document">
     <div class="modal-content">
         <?php
         $ItemCount = $this->data('ItemCount');
@@ -32,8 +32,8 @@
                         $AfterHtml = plural($ItemCount, t('Are you sure you want to delete 1 item forever?'), t('Are you sure you want to delete %s items forever?'));
                         break;
                     case 'restore':
-                        echo wrap(t('Restoring your selection removes the items from this list.', 'When you restore, the items are removed from this list and put back into the site.'), 'p');
-                        $AfterHtml = plural($ItemCount, t('Are you sure you want to restore 1 item?'), t('Are you sure you want to restore %s items?'));
+                        //echo wrap(t('Restoring your selection removes the items from this list.', 'When you restore, the items are removed from this list and put back into the site.'), 'p');
+                        $AfterHtml = plural($ItemCount, t('Are you sure you want to approve 1 item?'), t('Are you sure you want to approve %s items?'));
                         break;
                     case 'deletespam':
                         echo '<div class="alert alert-danger">'.t('Warning: deleting is permanent', 'WARNING: deleted items are removed from this list and cannot be brought back.').'</div>';
@@ -101,7 +101,7 @@
             <div class="modal-footer">
                 <?php
                 echo anchor(t("No, get me outta here!"), '#', ['class' => 'btn btn-text ConfirmNo']);
-                echo $this->Form->button('Yes, continue', ['class' => 'btn btn-primary ConfirmYes']);
+                echo $this->Form->button(t('Yes, continue'), ['class' => 'btn btn-primary ConfirmYes']);
                 ?>
             </div>
 

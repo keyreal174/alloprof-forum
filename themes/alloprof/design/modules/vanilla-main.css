@@ -442,7 +442,7 @@ abbr {
     margin-right: auto !important;
     max-width: 300px;
     overflow-y: auto;
-    height: calc(100vh - 240px);
+    max-height: calc(100vh - 240px);
 }
 
 .sidebar.right {
@@ -5352,7 +5352,7 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
 .DataList-Search .PhotoWrap {
     left: 0;
     position: absolute;
-    top: 16px
+    /* top: 16px */
 }
 
 .DataList-Search .Meta {
@@ -6368,7 +6368,7 @@ div.Popup {
     left: 50vw !important;
     position: fixed;
     top: 50vh !important;
-    transform: translateX(-50%) translateY(-50%)
+    transform: translateX(-50%) translateY(-50%);
 }
 
 div.Popup .Border {
@@ -6381,7 +6381,8 @@ div.Popup .Body {
     border-radius: 6px;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .4);
     color: #555a62;
-    padding: 12px 18px
+    padding: 12px 18px;
+    min-height: 150px;
 }
 
 div.Popup .Body .FormWrapper {
@@ -8538,7 +8539,6 @@ table.PreferenceGroup tbody tr:hover td {
     border-bottom: 0;
     box-shadow: none;
     color: #1A1919;
-    backdrop-filter: blur(6px);
     padding-left: 24px;
     padding-right: 24px;
 }
@@ -8587,6 +8587,11 @@ table.PreferenceGroup tbody tr:hover td {
     background-position-y: bottom;
     background-position-x: calc(100% - 30px);
     margin: 0 auto;
+}
+
+.Categories .Banner-content__Container {
+    justify-content: flex-start;
+    padding-top: 85px;
 }
 
 .Banner-content.General .Banner-content__Container {
@@ -9378,6 +9383,10 @@ screen and (-ms-high-contrast:none) {
     .Panel-main .ButtonGroup.Multi {
         margin-left: auto;
         margin-right: auto
+    }
+
+    .sidebar.left {
+        height: auto !important;
     }
 }
 
@@ -11280,10 +11289,6 @@ body.Post .FormWrapper .Buttons {
 
 body.Post .FormWrapper .Buttons .Button {
     margin: 0 0 3px 3px
-}
-
-body.Post .FormWrapper .SelectWrapper {
-    width: 100%
 }
 
 body.Post .FormWrapper .ShowTags {

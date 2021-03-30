@@ -374,7 +374,7 @@
     color: #000000;
 }
 
-.verfied-badge {
+.verified-badge {
     padding: 12px 16px;
     width: 185px;
     height: 40px;
@@ -386,16 +386,15 @@
     position: absolute;
     right: 50px;
     top: 0;
-    cursor: pointer;
 }
 
-.verfied-badge img {
+.verified-badge img {
     width: 15px;
     height: 15px;
     margin-right: 8px;
 }
 
-.verfied-badge span {
+.verified-badge span {
     font-size: 13px;
     line-height: 15px;
 }

@@ -44,16 +44,10 @@ if ($Photo) : ?>
     <div class="Photo PhotoWrap PhotoWrapLarge <?php echo val('_CssClass', $User); ?>">
         <?php
             $IsDefault = str_contains($Photo, 'avatars/0.svg');
-            // if ($User->UserID == Gdn::session()->UserID) {
-                echo "<a ".($IsProfilePage ? '' : 'href="'.$profileUrl.'"')." class='ProfilePhotoLarge'>";
-                echo "<img src='".$Photo."' class='ProfilePhotoLarge' alt='".$PhotoAlt."'/>";
-                if ($IsDefault) {
-                    echo "<p class='ProfilePhotoName'>".$UserName[0]."</p>";
-                }
-                echo "</a>";
-            // } else {
-            //     echo img($Photo, ['class' => 'ProfilePhotoLarge', 'alt' => $PhotoAlt]);
-            // }
+            $ClassName = $IsDefault ? 'ProfilePhotoLarge ProfilePhotoDefaultWrapper' : 'ProfilePhotoLarge';
+            echo "<a ".($IsProfilePage ? '' : 'href="'.$profileUrl.'"')." class='".$ClassName."' avatar--first-letter='".$UserName[0]."'>";
+            echo "<img src='".$Photo."' class='ProfilePhotoLarge' alt='".$PhotoAlt."'/>";
+            echo "</a>";
         ?>
     </div>
 <?php elseif ($User->UserID == Gdn::session()->UserID || Gdn::session()->checkPermission('Garden.Users.Edit')) : ?>
