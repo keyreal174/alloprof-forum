@@ -607,3 +607,13 @@ div[id*="-formattingMenus-component"] {
         top: 244px;
     }
 }
+
+/* Teacher Check Icon */
+.TeacherCheckIcon {
+    margin-left: 8px;
+    margin-top: -3px;
+}
+
+.ItemGrade {
+    font-weight: bold;
+}
