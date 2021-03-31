@@ -475,26 +475,19 @@ if (!function_exists('timeElapsedString')) :
             // $string = array_slice($string, 0, 1);
             $frenchStr = "";
             if ($diff->y) {
-                if ($diff->y > 1) $frenchStr = "Il y a ". $diff->y . " ans";
-                else $frenchStr = "Il y a 1 an";
+                $frenchStr = $diff->y . "a";
             } else {
                 if ($diff->m) {
-                    if ($diff->m > 1) $frenchStr = "Il ya ". $diff->m . " mois";
-                    else $frenchStr = "Il ya 1 mois";
+                    $frenchStr = $diff->m . "m";
                 } else {
                     if ($diff->d) {
-                        if ($diff->d > 1) $frenchStr = "Il y a ". $diff->d . " jours";
-                        else $frenchStr = "Il y a 1 jour";
+                        $frenchStr = $diff->d . "j";
                     } else {
                         if ($diff->h) {
-                            if ($diff->h > 1) $frenchStr = "Il y a ". $diff->h . " heures";
-                            else $frenchStr = "Il y a 1 heure";
+                            $frenchStr = $diff->h . "h";
                         } else {
                             if ($diff->i) {
-                                if ($diff->i > 1) $frenchStr = "Il y a moins de ". $diff->i . " minutes";
-                                else $frenchStr = "Il y a 1 minute";
-                            } else {
-                                $frenchStr = "Il y a moins de 1 minute";
+                                $frenchStr = $diff->i . "min";
                             }
                         }
                     }
