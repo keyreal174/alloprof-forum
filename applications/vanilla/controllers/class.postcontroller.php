@@ -567,11 +567,11 @@ class PostController extends VanillaController {
             $this->Form->removeFormValue('DiscussionID');
 
             // Permission to add.
-            if ($this->Category) {
-                $this->categoryPermission($this->Category, 'Vanilla.Discussions.Add');
-            } else {
-                $this->permission('Vanilla.Discussions.Add');
-            }
+            // if ($this->Category) {
+            //     $this->categoryPermission($this->Category, 'Vanilla.Discussions.Add');
+            // } else {
+            //     $this->permission('Vanilla.Discussions.Add');
+            // }
             $this->title(t('New Discussion'));
         }
 
@@ -1032,6 +1032,10 @@ class PostController extends VanillaController {
         // Set discussion data
         $this->DiscussionID = $DiscussionID;
         $this->Discussion = $Discussion = $this->DiscussionModel->getID($DiscussionID);
+
+        if ($Discussion->InsertUserID == Gdn::session()->UserID) {
+            return;
+        }
 
         $isAuthenticatedPostback = $this->Form->authenticatedPostBack();
 

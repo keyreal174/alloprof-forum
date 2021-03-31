@@ -593,6 +593,25 @@ div[id*="-formattingMenus-component"] {
     cursor: initial;
 }
 
+.saveDiscussion .sidebar, .saveComment .sidebar {
+    display: none;
+}
+
+.saveDiscussion .Content, .saveComment .Content {
+    width: 100%;
+    text-align: center;
+}
+
+.saveDiscussion .Content img, .saveComment .Content img {
+    max-width: 600px;
+    display: block;
+    margin: 0 auto;
+}
+
+.saveDiscussion .Frame-contentWrap , .saveComment .Frame-contentWrap {
+    padding-bottom: 0;
+}
+
 @media screen and (max-width: 539px) {
     .Frame-menubar.hasBetaBanner {
         top: 224px;
