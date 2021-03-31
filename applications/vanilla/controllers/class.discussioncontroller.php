@@ -345,21 +345,23 @@ class DiscussionController extends VanillaController {
         $this->DiscussionID = $this->Discussion->DiscussionID;
         $this->Form->addHidden('DiscussionID', $this->DiscussionID);
         $UserMetaData = Gdn::userModel()->getMeta($Session->UserID, 'Profile.%', 'Profile.');
+        $fields = c('ProfileExtender.Fields', []);
+        if (!is_array($fields)) {
+            $fields = [];
+        }
+        $GradeOption = [];
+        foreach ($fields as $k => $field) {
+            if ($field['Label'] == "Grade") {
+                $GradeOption = $field['Options'];
+            }
+        }
         if ($UserMetaData && $UserMetaData['Grade']) {
-            $fields = c('ProfileExtender.Fields', []);
-            if (!is_array($fields)) {
-                $fields = [];
-            }
-            $GradeOption = [];
-            foreach ($fields as $k => $field) {
-                if ($field['Label'] == "Grade") {
-                    $GradeOption = array_filter($field['Options'], function($v) {
-                        return preg_match('/(Primaire|Secondaire)/', $v);
-                    });
-                }
-            }
             $this->Form->addHidden('GradeID', array_search($UserMetaData['Grade'],  $GradeOption));
         }
+        if ($this->UserRole === TEACHER_ROLE) {
+            $this->Form->addHidden('GradeID', array_search('Enseignant',  $GradeOption));
+        }
+
         $this->Form->addHidden('CommentID', '');
 
         // Look in the session stash for a comment
@@ -429,7 +431,7 @@ class DiscussionController extends VanillaController {
 
         $DiscussionMeta = Gdn::userModel()->getMeta($this->Discussion->InsertUserID, 'Profile.%', 'Profile.');
 
-        if ($this->UserRole == "Teacher") {
+        if ($this->UserRole == TEACHER_ROLE) {
             // $bannerModule = new BannerModule('Home', 'Home', '', 'Mutual Aid Zone', "Welcome to the Mutual Aid Zone! <br/> Want to help the students? It's this way!", "", "Teacher");
             $discussionsFooterModule = new DiscussionsFooterModule(false, "You have the same problem and the explanations don't help?");
             $this->addModule($discussionsFooterModule);
@@ -516,7 +518,7 @@ class DiscussionController extends VanillaController {
             }
 
             if(in_array(Gdn::config('Vanilla.ExtraRoles.Teacher'), $Roles))
-                $UserRole = Gdn::config('Vanilla.ExtraRoles.Teacher') ?? 'Teacher';
+                $UserRole = Gdn::config('Vanilla.ExtraRoles.Teacher') ?? TEACHER_ROLE;
             else $UserRole = RoleModel::TYPE_MEMBER ?? 'Student';
 
             return $UserRole;
