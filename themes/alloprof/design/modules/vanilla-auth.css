@@ -34,12 +34,12 @@ div.Popup.SignInPopup .AjaxForm .FormWrapper {
     width: 480px;
 }
 
-div.Popup.SignInPopup .AjaxForm .FormWrapper ul li {
+.AjaxForm .FormWrapper ul li {
     margin-bottom: 35px;
     position: relative;
 }
 
-div.Popup.SignInPopup .InputBox {
+.AjaxForm .FormWrapper .InputBox {
     border: none;
     border-bottom: 1px solid;
     border-radius: 0;
@@ -54,7 +54,7 @@ div.Popup.SignInPopup .InputBox {
     border-color: black !important;
 }
 
-div.Popup.SignInPopup .InputBox::placeholder {
+.AjaxForm .FormWrapper .InputBox::placeholder {
     color: black;
     font-size: 15px;
     line-height: 18px;

@@ -40,21 +40,6 @@ echo '<div class="MainForm">';
 
 echo '</div>';
 
-// Render the buttons to select other methods of signing in.
-// if (count($Methods) > 0) {
-//     echo '<div class="Methods">'
-//         .wrap('<b class="Methods-label">'.t('Or you can...').'</b>', 'div');
-
-//     foreach ($Methods as $Key => $Method) {
-//         $CssClass = 'Method Method_'.$Key;
-//         echo '<div class="'.$CssClass.'">',
-//         $Method['SignInHtml'],
-//         '</div>';
-//     }
-
-//     echo '</div>';
-// }
-
 echo '</div>';
 
 ?>
@@ -85,6 +70,20 @@ echo '</div>';
     </div>
 
 <?php
+// Render the buttons to select other methods of signing in.
+if (count($Methods) > 0) {
+    echo '<div class="Methods">';
+
+    foreach ($Methods as $Key => $Method) {
+        $CssClass = 'Method Method_'.$Key;
+        echo '<div class="'.$CssClass.'">',
+        $Method['SignInHtml'],
+        '</div>';
+    }
+
+    echo '</div>';
+}
+
 echo $this->Form->close();
 echo '<div />';
 echo '<div />';
