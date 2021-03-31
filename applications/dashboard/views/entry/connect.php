@@ -10,6 +10,8 @@ $ConnectPhoto = $this->Form->getFormValue('Photo');
 if (!$ConnectPhoto) {
     $ConnectPhoto = '/applications/dashboard/design/images/usericon.gif';
 }
+// Teacher default photo;
+$ConnectPhoto = "https://www.alloprof.qc.ca/zonedentraide/uploads/Avatar_Enseignant.svg";
 $ConnectSource = $this->Form->getFormValue('ProviderName');
 
 // By default, clients will try to connect existing users.
@@ -45,7 +47,7 @@ if (!$hasUserID) {
 }
 ?>
 <div class="Connect FormTitleWrapper AjaxForm">
-    <h1><?php echo stringIsNullOrEmpty($ConnectSource) ? t("Sign In") : sprintf(t('%s Connect'), htmlentities($ConnectSource)); ?></h1>
+    <h1><?php echo stringIsNullOrEmpty($ConnectSource) ? t("Confirm account information") : sprintf(t('%s Connect'), htmlentities($ConnectSource)); ?></h1>
 
     <div class="FormWrapper">
         <?php
@@ -95,73 +97,107 @@ if (!$hasUserID) {
                 <?php echo '<div class="Info">', t('You are now signed in.'), '</div>'; ?>
             </div>
         <?php else : ?>
-            <ul>
-                <?php if ($this->Form->getFormValue('EmailVisible')) : ?>
-                <li>
+        <?php if ($this->data('Method') === "googlesignin") { ?>
+            <ul role="presentation">
+                <li role="presentation">
                     <?php
                     echo $this->Form->label('Email', 'Email');
-                    echo $this->Form->textBox('Email');
+                    echo $this->Form->textBox('Email', ['value' => $this->Form->getFormValue('Email'), 'id' => 'Form_Email', 'class' => 'InputBox', 'autocorrect' => 'off', 'autocapitalize' => 'off', 'Wrap' => TRUE, 'disabled' => 'disabled', 'placeholder' => t('Email address')]);
                     ?>
                 </li>
-        <?php endif; ?>
-
-        <?php if ($displayConnectName && !$this->data('HideName')) : ?>
-
-                <li>
+                <li role="presentation">
                     <?php
-
-                    // One User was found in GDN_User based on the Email.
-                    if (count($ExistingUsers) == 1 && $NoConnectName) {
-                        $Row = reset($ExistingUsers);
-
-                        echo '<div class="FinePrint">', t('ConnectAccountExists', 'You already have an account here.'), '</div>',
-                        wrap(sprintf(t('ConnectRegisteredName', 'Your registered username: <strong>%s</strong>'), htmlspecialchars($Row['Name'])), 'div', ['class' => 'ExistingUsername']);
-                        $this->addDefinition('NoConnectName', true);
-                        echo $this->Form->hidden('UserSelect', ['Value' => $Row['UserID']]);
-                    }
-
-                    // Found User's Name in GDN_User.
-                    if (count($ExistingUsers) >= 1 && !$NoConnectName){
-                        echo $this->Form->label('Username', 'ConnectName');
-                        echo \Gdn::translate('ConnectWithExistingUser', 'One or more users with your name already exist, would you like to connect as them?');
-                        $connectNameMessage = (!$allowConnect) ? '' : ' <span class="FinePrint">'.\Gdn::translate('(Requires a password.)').'</span>';
-                        foreach ($ExistingUsers as $Row) {
-                            echo wrap($this->Form->radio('UserSelect', $Row['Name'] . $connectNameMessage, ['value' => $Row['UserID'], 'class' => 'existingConnectName']), 'div');
-                        }
-                        $connectChooseName = ' <span class="FinePrint">('.\Gdn::translate('ConnectChooseName', 'Choose a name to identify yourself on the site.').')</span>';
-                        echo wrap($this->Form->radio('UserSelect', 'Other'.$connectChooseName, ['value' => 'other']), 'div');
-                        echo $this->Form->textbox('ConnectName');
-                    }
-
-                    // No Name was passed over SSO and...
-                    // No Users were found in GDN_User
-                    if (count($ExistingUsers) === 0 && !$NoConnectName) {
-                        echo \Gdn::translate('ConnectChooseName', 'Choose a name to identify yourself on the site.');
-                        echo $this->Form->textbox('ConnectName', ["aria-label" => t("Username")]);
-                    }
+                    echo $this->Form->label('Name', 'UserName');
+                    echo $this->Form->textBox('UserName', ['value' => $this->Form->getFormValue('Email'), 'id' => 'UserName', 'class' => 'InputBox', 'autocorrect' => 'off', 'autocapitalize' => 'off', 'Wrap' => TRUE, 'disabled' => 'disabled', 'placeholder' => t('User name')]);
                     ?>
                 </li>
-        <?php endif; ?>
-
-                <?php $this->fireEvent('RegisterBeforePassword'); ?>
-
-                <?php
-                /**
-                 *  HidePassword can be passed by any plugin that hooks into
-                 *  the EntryController that has rules that require this form to be
-                 *  shown but not the Password Field.
-                 */
-                if (!$this->data('HidePassword')) {
-                    echo '<li id="ConnectPassword">';
-                    echo $this->Form->label('Password', 'ConnectPassword');
-                    $PasswordMessage = t('ConnectExistingPassword', 'Enter your existing account password.');
-                    echo wrap($PasswordMessage, 'div', ['class' => 'FinePrint']);
-                    echo $this->Form->input('ConnectPassword', 'password');
-                    echo '</li>';
-                }
-                ?>
+                <li role="presentation">
+                    <?php
+                    echo $this->Form->label('Display name', 'DisplayName');
+                    echo $this->Form->textBox('DisplayName', ['value' => $this->Form->getFormValue('DisplayName'), 'id' => 'DisplayName', 'class' => 'InputBox', 'autocorrect' => 'off', 'autocapitalize' => 'off', 'Wrap' => TRUE, 'disabled' => 'disabled', 'placeholder' => t('Display name')]);
+                    ?>
+                </li>
+                <li role="presentation">
+                    <?php
+                    echo $this->Form->label('Grade', 'Grade');
+                    echo $this->Form->textBox('Grade', ['value' => $this->Form->getFormValue('Grade'), 'id' => 'Grade', 'class' => 'InputBox', 'autocorrect' => 'off', 'autocapitalize' => 'off', 'Wrap' => TRUE, 'disabled' => 'disabled', 'placeholder' => t('Grade')]);
+                    ?>
+                </li>
+                <li role="presentation">
+                    <?php
+                    echo $this->Form->label('Role', 'Role');
+                    echo $this->Form->textBox('Role', ['value' => $this->Form->getFormValue('Role'), 'id' => 'Role', 'class' => 'InputBox', 'autocorrect' => 'off', 'autocapitalize' => 'off', 'Wrap' => TRUE, 'disabled' => 'disabled', 'placeholder' => t('Role')]);
+                    ?>
+                </li>
             </ul>
+            <?php } else { ?>
+                <ul>
+                    <?php if ($this->Form->getFormValue('EmailVisible')) : ?>
+                    <li>
+                        <?php
+                        echo $this->Form->label('Email', 'Email');
+                        echo $this->Form->textBox('Email');
+                        ?>
+                    </li>
+                    <?php endif; ?>
 
+                    <?php if ($displayConnectName && !$this->data('HideName')) : ?>
+
+                    <li>
+                        <?php
+
+                        // One User was found in GDN_User based on the Email.
+                        if (count($ExistingUsers) == 1 && $NoConnectName) {
+                            $Row = reset($ExistingUsers);
+
+                            echo '<div class="FinePrint">', t('ConnectAccountExists', 'You already have an account here.'), '</div>',
+                            wrap(sprintf(t('ConnectRegisteredName', 'Your registered username: <strong>%s</strong>'), htmlspecialchars($Row['Name'])), 'div', ['class' => 'ExistingUsername']);
+                            $this->addDefinition('NoConnectName', true);
+                            echo $this->Form->hidden('UserSelect', ['Value' => $Row['UserID']]);
+                        }
+
+                        // Found User's Name in GDN_User.
+                        if (count($ExistingUsers) >= 1 && !$NoConnectName){
+                            echo $this->Form->label('Username', 'ConnectName');
+                            echo \Gdn::translate('ConnectWithExistingUser', 'One or more users with your name already exist, would you like to connect as them?');
+                            $connectNameMessage = (!$allowConnect) ? '' : ' <span class="FinePrint">'.\Gdn::translate('(Requires a password.)').'</span>';
+                            foreach ($ExistingUsers as $Row) {
+                                echo wrap($this->Form->radio('UserSelect', $Row['Name'] . $connectNameMessage, ['value' => $Row['UserID'], 'class' => 'existingConnectName']), 'div');
+                            }
+                            $connectChooseName = ' <span class="FinePrint">('.\Gdn::translate('ConnectChooseName', 'Choose a name to identify yourself on the site.').')</span>';
+                            echo wrap($this->Form->radio('UserSelect', 'Other'.$connectChooseName, ['value' => 'other']), 'div');
+                            echo $this->Form->textbox('ConnectName');
+                        }
+
+                        // No Name was passed over SSO and...
+                        // No Users were found in GDN_User
+                        if (count($ExistingUsers) === 0 && !$NoConnectName) {
+                            echo \Gdn::translate('ConnectChooseName', 'Choose a name to identify yourself on the site.');
+                            echo $this->Form->textbox('ConnectName', ["aria-label" => t("Username")]);
+                        }
+                        ?>
+                    </li>
+                    <?php endif; ?>
+
+                    <?php $this->fireEvent('RegisterBeforePassword'); ?>
+
+                    <?php
+                    /**
+                     *  HidePassword can be passed by any plugin that hooks into
+                     *  the EntryController that has rules that require this form to be
+                     *  shown but not the Password Field.
+                     */
+                    if (!$this->data('HidePassword')) {
+                        echo '<li id="ConnectPassword">';
+                        echo $this->Form->label('Password', 'ConnectPassword');
+                        $PasswordMessage = t('ConnectExistingPassword', 'Enter your existing account password.');
+                        echo wrap($PasswordMessage, 'div', ['class' => 'FinePrint']);
+                        echo $this->Form->input('ConnectPassword', 'password');
+                        echo '</li>';
+                    }
+                    ?>
+                </ul>
+            <?php } ?>
             <?php
             echo '<div class="Buttons">', wrap($this->Form->button('Connect', ['class' => 'Button Primary']), 'div', ['class' => 'ButtonContainer']), '</div>';
 

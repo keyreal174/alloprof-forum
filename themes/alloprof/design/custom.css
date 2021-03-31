@@ -592,6 +592,10 @@ div[id*="-formattingMenus-component"] {
     height: auto;
 }
 
+.embedLink, .embedExternal {
+    max-width: 400px !important;
+}
+
 .not-clickable {
     cursor: initial;
 }
