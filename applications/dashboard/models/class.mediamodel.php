@@ -255,6 +255,14 @@ class MediaModel extends Gdn_Model implements FileUploadHandler {
             $media['ImageHeight'] = $file->getClientHeight();
         }
 
+        $Session = Gdn::session();
+
+        if ($Session->isValid()) {
+            $media['InsertUserID'] = $Session->UserID;
+        } else {
+            $media['InsertUserID'] = 0;
+        }
+
         $id = $this->save($media);
         ModelUtils::validationResultToValidationException($this, \Gdn::locale(), true);
 

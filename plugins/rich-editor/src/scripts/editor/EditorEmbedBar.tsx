@@ -59,19 +59,15 @@ export function EditorEmbedBar(props: IProps) {
                         <EmojiFlyout disabled={isLoading} renderAbove={legacyMode} legacyMode={legacyMode} />
                     </li>
                 )}
-                <Permission permission="uploads.add">
-                    <li className={classNames("richEditor-menuItem", classesRichEditor.menuItem)} role="menuitem">
-                        <EditorUploadButton disabled={isLoading} type="image" allowedMimeTypes={mimeTypes} />
-                    </li>
-                </Permission>
+                <li className={classNames("richEditor-menuItem", classesRichEditor.menuItem)} role="menuitem">
+                    <EditorUploadButton disabled={isLoading} type="image" allowedMimeTypes={mimeTypes} />
+                </li>
                 <li className={classNames("richEditor-menuItem", classesRichEditor.menuItem)} role="menuitem">
                     <EmbedFlyout disabled={isLoading} renderAbove={legacyMode} />
                 </li>
-                <Permission permission="uploads.add">
-                    <li className={classNames("richEditor-menuItem", classesRichEditor.menuItem)} role="menuitem">
-                        <EditorUploadButton disabled={isLoading} type="file" allowedMimeTypes={mimeTypes} />
-                    </li>
-                </Permission>
+                <li className={classNames("richEditor-menuItem", classesRichEditor.menuItem)} role="menuitem">
+                    <EditorUploadButton disabled={isLoading} type="file" allowedMimeTypes={mimeTypes} />
+                </li>
                 {getExtraComponents().length > 0 && (
                     <li className={classNames("richEditor-menuItem", classesRichEditor.menuItem)} role="separator">
                         <hr className={classesRichEditor.embedBarSeparator} />
