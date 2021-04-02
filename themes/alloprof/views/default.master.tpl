@@ -254,6 +254,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     appId: "1:811980803247:web:e68aceb268f2ddf3e4185a"
   };
   firebase.initializeApp(firebaseConfig);
+  var auth = firebase.auth();
 </script>
 {/literal}
 
