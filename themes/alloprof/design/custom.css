@@ -593,23 +593,25 @@ div[id*="-formattingMenus-component"] {
     cursor: initial;
 }
 
-.saveDiscussion .sidebar, .saveComment .sidebar {
+.saveDiscussion .sidebar, .saveDiscussion footer, .saveDiscussion .footer-partner, .saveComment .footer-partner, .saveComment .sidebar, .saveComment footer {
     display: none;
 }
 
-.saveDiscussion .Content, .saveComment .Content {
-    width: 100%;
-    text-align: center;
+.saveDiscussion header::after, .saveComment header::after {
+    content: " ";
+    height: 8px;
+    width: 0%;
+    left: 0%;
+    bottom: -8px;
+    position: absolute;
+    background-color: #05BF8E;
+    animation-name: example;
+    animation-duration: 6s;
 }
 
-.saveDiscussion .Content img, .saveComment .Content img {
-    max-width: 600px;
-    display: block;
-    margin: 0 auto;
-}
-
-.saveDiscussion .Frame-contentWrap , .saveComment .Frame-contentWrap {
-    padding-bottom: 0;
+@keyframes example {
+    from {width: 0; }
+    to {width: 100%;}
 }
 
 @media screen and (max-width: 539px) {
