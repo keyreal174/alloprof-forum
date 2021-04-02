@@ -70,12 +70,12 @@
 }
 
 .Question-submenu {
-    padding-top: 40px;
+    padding-top: 32px;
     justify-content: center;
     width: 100%;
     border-bottom: 1px solid #DDD;
     display: flex;
-    min-height: 100px;
+    min-height: 72px;
     height: auto;
 }
 
@@ -85,6 +85,22 @@
 
 .Question-submenu .Navigation-linkContainer {
     margin: 0 20px;
+}
+
+.Question-submenu .Navigation-linkContainer:after {
+    content: none;
+}
+
+.Question-submenu .Navigation-linkContainer .Navigation-link {
+    display: flex;
+    align-items: center;
+    min-height: initial;
+    line-height: initial;
+    padding: 0 20px;
+}
+
+.Question-submenu .Navigation-linkContainer .Navigation-link svg {
+    margin-bottom: 0;
 }
 
 .Question-submenu .Navigation-linkContainer span.desktop {

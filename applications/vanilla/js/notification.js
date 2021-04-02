@@ -115,7 +115,7 @@ jQuery(document).ready(function($) {
 
         $('.ProfilePhotoDefaultWrapper').click(function() {
             $('.Flayout-notification').removeClass('open');
-        })
+        });
     }
 
     initNotification();
