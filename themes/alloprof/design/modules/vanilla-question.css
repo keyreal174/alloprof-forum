@@ -359,6 +359,25 @@
     overflow: visible;
 }
 
+/* .CommentPostForm .CommentFormWrap .richEditor-textWrap,
+.CommentPostForm .CommentFormWrap .richEditor .richEditor-frame,
+.CommentPostForm .CommentFormWrap .richEditor-text {
+    min-height: 105px;
+}
+
+.CommentPostForm .CommentFormWrap .richEditor-textWrap {
+    max-height: 105px;
+    overflow: auto;
+} */
+
+.CommentPostForm .CommentFormWrap .richEditor-embedBar {
+    position: absolute;
+    bottom: -70px;
+    z-index: 1;
+    left: -10px;
+    width: initial;
+}
+
 /* .CommentPostForm .richEditor-frame .richEditor-embedBar {
     position: absolute;
     left: -10px;

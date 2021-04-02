@@ -77,7 +77,13 @@ export class EditorUploadButton extends React.Component<IProps, { uploadCount: n
             case "file":
                 return <AttachmentIcon />;
             case "image":
-                return <ImageIcon />;
+                return (
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="1" y="1" width="22" height="22" rx="2" stroke="black" stroke-width="2"/>
+                        <path d="M0.922852 13.5637L5.11815 9.36836C5.70393 8.78258 6.65368 8.78258 7.23947 9.36836L20.948 23.0769" stroke="black" stroke-width="2"/>
+                        <path d="M12.3867 15.0228L15.8414 11.5681C16.6224 10.787 17.8888 10.787 18.6698 11.5681L23.0766 15.9749" stroke="black" stroke-width="2"/>
+                    </svg>
+                );
         }
     }
 

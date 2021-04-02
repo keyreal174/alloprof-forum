@@ -6653,7 +6653,7 @@ body.hasRichEditor .richEditor-frame {
 
 body.hasRichEditor .bodybox-wrap,
 body.hasRichEditor .CommentOptions {
-    margin-bottom: 12px
+    margin-bottom: 16px
 }
 
 body.hasRichEditor .Popup .NoteForm {
