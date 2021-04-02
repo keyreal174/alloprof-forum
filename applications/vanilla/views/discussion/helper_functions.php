@@ -926,7 +926,7 @@ if (!function_exists('writeDiscussionFooter')) :
         $userCanComment = CategoryModel::checkPermission($categoryID, 'Vanilla.Comments.Add');
         ?>
         <div class="Item-Footer">
-            <div class="Item-Footer-Icons">
+            <div class="Item-Footer-Icons DisableClick">
                 <?php
                 include($sender->fetchViewLocation('helper_functions', 'discussions', 'vanilla'));
 

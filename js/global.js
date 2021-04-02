@@ -7,6 +7,17 @@
 
 // Global vanilla library function.
 (function(window, $) {
+    $(document).on('click', 'li.ItemDiscussion', function (event) {
+        window.location.href = $(this).attr('data-url');
+    });
+    $(document).on('click', 'li.Item-Search', function (event) {
+        window.location.href = $(this).attr('data-url');
+    })
+    $(document).on('click', '.DisableClick', function(event) {
+        event.stopPropagation();
+        return true;
+    });
+
     $(document).on('click', '.embedImage-img-copyright-img', function() {
         if ($(this).siblings().css('display') == "none") {
             $(this).parent().addClass('embedImage-img-copyright-wrapper-collapse');

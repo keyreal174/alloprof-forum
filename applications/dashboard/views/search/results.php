@@ -13,13 +13,13 @@ else
 ?>
     <ol id="search-results" class="DataList DataList-Search" start="<?php echo $this->data('From'); ?>">
         <?php foreach ($this->data('SearchResults') as $Row): ?>
-            <li class="Item Item-Search">
+            <li class="Item Item-Search" data-url="<?php echo $Row->Url; ?>">
                 <div class="Item-Body Media">
                     <?php
                     $category = CategoryModel::categories($Row->CategoryID);
                     if (!Gdn::themeFeatures()->get('EnhancedAccessibility')) {
                         ?>
-                        <span class="Options-Icon">
+                        <span class="Options-Icon DisableClick">
                         <?php
                             echo optionsList($Row);
                         ?>
@@ -30,11 +30,11 @@ else
                     <div class="AuthWrapper">
                         <?php
                             $User = Gdn::userModel()->getID($Row->InsertUserID);
-                            echo '<span>';
+                            echo '<span class="DisableClick">';
                             echo userPhoto($User);
                             echo '</span>';
                         ?>
-                        <div class="AuthDate">
+                        <div class="AuthDate DisableClick">
                             <span class="UserName"><?php echo userAnchor($User); ?></span>
                             <div>
                             <?php
@@ -82,7 +82,7 @@ else
                         ?>
                     </div>
                 </div>
-                <div class='SearchResultCategory'>
+                <div class='SearchResultCategory DisableClick DisableClickWrapper'>
                     <?php
                         echo "<a class='DiscussionHeader_category' style='background: ".$category["Color"]."' href='/categories/".$category["UrlCode"]."'>".$category["Name"]."</a>";
                     ?>

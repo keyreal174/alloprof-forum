@@ -531,20 +531,19 @@ if (!function_exists('writeDiscussionDetail')) :
 
         $sender->fireEvent('BeforeDiscussionDisplay');
         ?>
-        <li id="Discussion_<?php echo $Discussion->DiscussionID; ?>" class="<?php echo $cssClass; ?>">
+        <li id="Discussion_<?php echo $Discussion->DiscussionID; ?>" class="<?php echo $cssClass; ?>" data-url="<?php echo $Discussion->Url; ?>">
             <?php
                 if ($Discussion->DateAccepted) {
                     echo "<div class='verified-info mobile'>
                         <img src='".url("/themes/alloprof/design/images/icons/verifiedbadge.svg")."'/><span>".t("Verified by Alloprof")."</span></div>";
                 }
             ?>
-
             <div class="Discussion">
                 <div class="Item-Header DiscussionHeader">
                     <?php
                     if (!Gdn::themeFeatures()->get('EnhancedAccessibility') && Gdn::session()->isValid()) {
                         ?>
-                        <span class="Options-Icon">
+                        <span class="Options-Icon DisableClick">
                         <?php
                             echo optionsList($Discussion);
                         ?>
@@ -555,13 +554,13 @@ if (!function_exists('writeDiscussionDetail')) :
                     <div class="AuthorWrap">
                         <?php
                             if(!$Discussion->Published) {
-                                echo '<div class="not-published-badge">';
+                                echo '<div class="not-published-badge DisableClick">';
                                 echo '<img src="'.url("/themes/alloprof/design/images/icons/eyebreak.svg").'"/>';
                                 echo t('Awaiting publication');
                                 echo '</div>';
                             }
                         ?>
-                        <span class="Author">
+                        <span class="Author DisableClick">
                             <?php
                             if ($UserPhotoFirst) {
                                 echo userPhoto($Author);
@@ -596,7 +595,7 @@ if (!function_exists('writeDiscussionDetail')) :
                         ?>
                         <?php
                             if ($Discussion->DateAccepted) {
-                                echo "<div class='verified-badge'>
+                                echo "<div class='verified-badge DisableClick'>
                                         <img src='".url("/themes/alloprof/design/images/icons/verifiedbadge.svg")."'/>
                                         <span>". t('Verified by Alloprof') ."</span>
                                     </div>";
@@ -604,7 +603,7 @@ if (!function_exists('writeDiscussionDetail')) :
                         ?>
                     </div>
                     <div class="Meta DiscussionMeta">
-                        <span class="MItem TimeAgo">
+                        <span class="MItem TimeAgo DisableClick">
                             <?php
                                 if ($grade) {
                                     echo $grade . ' • ' . timeElapsedString($Discussion->FirstDate, false);
@@ -633,7 +632,7 @@ if (!function_exists('writeDiscussionDetail')) :
                             writeAttachments($Discussion->Attachments);
                         }
                         ?>
-                        <?php  echo "<a class='QuestionCategory' style='background: ".$category["Color"]."' href='".url('/categories/'.$category["UrlCode"])."'>".$category["Name"]."</a>"; ?>
+                        <?php  echo "<div class='DisableClick DisableClickWrapper'><a class='QuestionCategory' style='background: ".$category["Color"]."' href='".url('/categories/'.$category["UrlCode"])."'>".$category["Name"]."</a></div>"; ?>
                     </div>
                     <?php
                         writeDiscussionFooter($Discussion, $sender);
