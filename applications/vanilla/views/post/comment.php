@@ -28,7 +28,7 @@ $this->fireEvent('BeforeCommentForm');
             $UserName = $UserMetaData["DisplayName"] ?? t('Unknown');
             echo '<div class="UserInfo">';
             // echo "<a class='UserPhoto' href='".url("/profile/picture?userid=".$User->UserID)."'><img src='".$Photo."' class='PhotoWrap' alt='Photo'/></a>";
-            echo '<span style="margin-right: 12px">';
+            echo '<span style="margin-right: 8px; height: 44px;">';
             echo userPhoto($User);
             echo '</span>';
             echo '<div class="UserAuthor">';
