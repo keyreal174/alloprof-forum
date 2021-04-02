@@ -615,9 +615,11 @@ if (!function_exists('writeDiscussionDetail')) :
                 <div class="Item-BodyWrap">
                     <div class="Item-Body">
                         <div class="Message userContent">
-                            <?php
-                            echo formatBody($Discussion);
-                            ?>
+                            <div class="MessageWrapper">
+                                <?php
+                                echo formatBody($Discussion);
+                                ?>
+                            </div>
                         </div>
                         <?php
                         $sender->fireEvent('AfterDiscussionBody');

@@ -64,7 +64,9 @@ else
                     </div>
                     <div class="Media-Body">
                         <div class="Summary">
-                            <?php echo formatBody($Row); ?>
+                            <div class="MessageWrapper">
+                                <?php echo formatBody($Row); ?>
+                            </div>
                         </div>
                         <?php
                             $this->fireEvent('AfterDiscussionBody');
