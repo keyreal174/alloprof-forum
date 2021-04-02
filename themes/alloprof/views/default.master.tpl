@@ -242,6 +242,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
     <div id="modals"></div>
     {event name="AfterBody"}
+
+{literal}
+<script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-auth.js"></script>
+<script>
+  var firebaseConfig = {
+    apiKey: "AIzaSyACxE0KuvExUdFyx0gx6z_rBP3Nnhkstlc",
+    authDomain: "alloprof-production.firebaseapp.com",
+    projectId: "alloprof-production",
+    appId: "1:811980803247:web:e68aceb268f2ddf3e4185a"
+  };
+  firebase.initializeApp(firebaseConfig);
+</script>
+{/literal}
+
 </body>
 
 </html>
