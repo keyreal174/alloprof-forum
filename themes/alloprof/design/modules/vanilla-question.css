@@ -17,7 +17,9 @@ li.Item-Search {
 
 li.ItemDiscussion .MItem.DisableClick,
 li.ItemDiscussion .Author.DisableClick,
-li.Item-Search .AuthWrapper {
+li.Item-Search .AuthWrapper,
+.not-published-badge.DisableClick,
+.verified-badge.DisableClick {
     cursor: initial;
 }
 
