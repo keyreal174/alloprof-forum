@@ -112,6 +112,10 @@ jQuery(document).ready(function($) {
         $('.Flayout-notification').on('change', '.notification-settings-content input[type="checkbox"]', function() {
             updateNotificationSettings()
         });
+
+        $('.ProfilePhotoDefaultWrapper').click(function() {
+            $('.Flayout-notification').removeClass('open');
+        });
     }
 
     initNotification();

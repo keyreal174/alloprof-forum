@@ -48,8 +48,8 @@
     background: #fff;
     /* border-top: 1px solid #d6d7d9; */
     box-shadow: none;
-    padding: 40px;
-    margin-bottom: 40px;
+    padding: 24px;
+    margin-bottom: 24px;
 }
 
 .BoxNewDiscussion .BigButton {
@@ -70,12 +70,12 @@
 }
 
 .Question-submenu {
-    padding-top: 40px;
+    padding-top: 32px;
     justify-content: center;
     width: 100%;
     border-bottom: 1px solid #DDD;
     display: flex;
-    min-height: 100px;
+    min-height: 72px;
     height: auto;
 }
 
@@ -85,6 +85,22 @@
 
 .Question-submenu .Navigation-linkContainer {
     margin: 0 20px;
+}
+
+.Question-submenu .Navigation-linkContainer:after {
+    content: none;
+}
+
+.Question-submenu .Navigation-linkContainer .Navigation-link {
+    display: flex;
+    align-items: center;
+    min-height: initial;
+    line-height: initial;
+    padding: 0 20px;
+}
+
+.Question-submenu .Navigation-linkContainer .Navigation-link svg {
+    margin-bottom: 0;
 }
 
 .Question-submenu .Navigation-linkContainer span.desktop {
@@ -610,4 +626,14 @@ div[id*="-formattingMenus-component"] {
     .Frame-menubar.hasBetaBanner {
         top: 244px;
     }
+}
+
+/* Teacher Check Icon */
+.TeacherCheckIcon {
+    margin-left: 8px;
+    margin-top: -3px;
+}
+
+.ItemGrade {
+    font-weight: bold;
 }
