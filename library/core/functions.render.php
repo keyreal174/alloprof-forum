@@ -1385,9 +1385,9 @@ if (!function_exists('userAnchor')) {
         }
         if ($userID) {
             $UserMetaData = Gdn::userModel()->getMeta($userID, 'Profile.%', 'Profile.');
-            $name = $UserMetaData['DisplayName'] ?? t("Unknown");
+            $name = $UserMetaData['DisplayName'] ?? "";
         } else {
-            $name = t("Unknown");
+            $name = "";
         }
 
         $text = $options["Text"] ?? htmlspecialchars($name); // Allow anchor text to be overridden.
@@ -1924,7 +1924,7 @@ if (!function_exists('writeReactions')) {
 if (!function_exists('getFirstLetter')) {
     function getFirstLetter($userID) {
         $UserMetaData = Gdn::userModel()->getMeta($userID, 'Profile.%', 'Profile.');
-        $UserName = $UserMetaData['DisplayName'] ?? t('Unknown');
+        $UserName = $UserMetaData['DisplayName'] ?? "";
         $firstLetter = $UserName[0];
 
         return $firstLetter;
