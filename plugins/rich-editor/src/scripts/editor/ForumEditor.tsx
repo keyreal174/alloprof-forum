@@ -38,7 +38,7 @@ export function ForumEditor(props: IProps) {
                 <Editor
                     isPrimaryEditor={true}
                     legacyMode={true}
-                    allowUpload={hasPermission("uploads.add")}
+                    allowUpload={true}
                     isLoading={false}
                     onFocus={setHasFocus}
                 >

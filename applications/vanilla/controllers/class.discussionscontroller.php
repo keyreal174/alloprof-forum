@@ -1341,4 +1341,10 @@ class DiscussionsController extends VanillaController {
 
         echo $this->_PagerUrl.'?'.$parameter;
     }
+
+    public function saveDiscussion() {
+        $this->addJsFile('savediscussion.js');
+        $this->View = 'saveDiscussion';
+        $this->render();
+    }
 }

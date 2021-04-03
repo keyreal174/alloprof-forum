@@ -42,6 +42,7 @@ export class EditorUploadButton extends React.Component<IProps, { uploadCount: n
                     "richEditor-button",
                     "richEditor-embedButton",
                     "richEditor-buttonUpload",
+                    'builtin',
                     classesRichEditor.button,
                 )}
                 type="button"

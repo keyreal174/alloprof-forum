@@ -616,6 +616,27 @@ div[id*="-formattingMenus-component"] {
     cursor: initial;
 }
 
+.saveDiscussion .sidebar, .saveDiscussion footer, .saveDiscussion .footer-partner, .saveComment .footer-partner, .saveComment .sidebar, .saveComment footer {
+    display: none;
+}
+
+.saveDiscussion header::after, .saveComment header::after {
+    content: " ";
+    height: 8px;
+    width: 0%;
+    left: 0%;
+    bottom: -8px;
+    position: absolute;
+    background-color: #05BF8E;
+    animation-name: example;
+    animation-duration: 6s;
+}
+
+@keyframes example {
+    from {width: 0; }
+    to {width: 100%;}
+}
+
 @media screen and (max-width: 539px) {
     .Frame-menubar.hasBetaBanner {
         top: 224px;

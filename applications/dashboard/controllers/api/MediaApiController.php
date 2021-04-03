@@ -247,7 +247,7 @@ class MediaApiController extends AbstractApiController {
      * @return array
      */
     public function post(array $body) {
-        $this->permission('Garden.Uploads.Add');
+        // $this->permission('Garden.Uploads.Add');
 
         $allowedExtensions = $this->config->get('Garden.Upload.AllowedFileExtensions', []);
         $uploadSchema = new UploadedFileSchema([

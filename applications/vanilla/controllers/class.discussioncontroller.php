@@ -1488,4 +1488,10 @@ body { background: transparent !important; }
     public function resolved($DiscussionID) {
         $this->DiscussionModel->resolved($DiscussionID);
     }
+
+    public function saveComment() {
+        $this->addJsFile('savecomment.js');
+        $this->View = 'savecomment';
+        $this->render();
+    }
 }

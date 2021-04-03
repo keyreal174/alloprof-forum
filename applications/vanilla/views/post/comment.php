@@ -3,9 +3,9 @@ $dataDriven = \Gdn::themeFeatures()->useDataDrivenTheme();
 if (Gdn::session()->isValid()) {
     $User = Gdn::session()->User;
 }
-if (!$User) {
-    return;
-}
+// if (!$User) {
+//     return;
+// }
 
 $IsProfilePage = val('IsProfilePage', Gdn::controller());
 $UserMetaData = Gdn::userModel()->getMeta($User->UserID, 'Profile.%', 'Profile.');
@@ -55,7 +55,9 @@ $this->fireEvent('BeforeCommentForm');
         <img src="<?= url('/themes/alloprof/design/images/icons/close.svg') ?>" />
     </div>
     <div class="CommentFormWrap">
-        <?php if (Gdn::session()->isValid()) : ?>
+        <?php
+            // if (Gdn::session()->isValid()) :
+        ?>
             <div class="Form-HeaderWrap">
                 <div class="Form-Header">
                     <span class="Author">
@@ -63,7 +65,9 @@ $this->fireEvent('BeforeCommentForm');
                     </span>
                 </div>
             </div>
-        <?php endif; ?>
+        <?php
+            // endif;
+        ?>
         <div class="Form-BodyWrap">
             <div class="Form-Body">
                 <div class="FormWrapper FormWrapper-Condensed">
@@ -85,17 +89,18 @@ $this->fireEvent('BeforeCommentForm');
                     if ($Session->isValid()) {
                         echo $this->Form->button($Editing ? t('Save Comment') : t('Submit my explanation'), $ButtonOptions);
                     } else {
-                        $AllowSigninPopup = c('Garden.SignIn.Popup');
-                        $Attributes = ['tabindex' => '-1'];
-                        if (!$AllowSigninPopup) {
-                            $Attributes['target'] = '_parent';
-                        }
-                        $AuthenticationUrl = signInUrl($this->SelfUrl);
-                        $CssClass = 'Button Primary Stash';
-                        if ($AllowSigninPopup) {
-                            $CssClass .= ' SignInPopup';
-                        }
-                        echo anchor(t('Comment As ...'), $AuthenticationUrl, $CssClass, $Attributes);
+                        echo '<a data-url="'.url("/entry/jsconnect-redirect?client_id=alloprof&target=").urlencode('/discussion/saveComment').'" class="btn-default btn-shadow signinandsavecomment">'.t('Submit my explanation').'</a>';
+                        // $AllowSigninPopup = c('Garden.SignIn.Popup');
+                        // $Attributes = ['tabindex' => '-1'];
+                        // if (!$AllowSigninPopup) {
+                        //     $Attributes['target'] = '_parent';
+                        // }
+                        // $AuthenticationUrl = signInUrl($this->SelfUrl);
+                        // $CssClass = 'Button Primary Stash';
+                        // if ($AllowSigninPopup) {
+                        //     $CssClass .= ' SignInPopup';
+                        // }
+                        // echo anchor(t('Comment As ...'), $AuthenticationUrl, $CssClass, $Attributes);
                     }
 
                     $this->fireEvent('AfterFormButtons');
