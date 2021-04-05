@@ -7,6 +7,171 @@
 
 // Global vanilla library function.
 (function(window, $) {
+    // student signin/signup
+    const signIn = (email, password) => {
+        auth.signInWithEmailAndPassword(email, password).then(res => {
+            console.log(res);
+            ssoLogin(res);
+        }).catch(error => {
+            var err = "";
+            const { message, code } = error;
+            if (code === "auth/user-not-found") {
+                err = "E-mail address doesn’t exist in the system";
+            } else if (code === "auth/wrong-password") {
+                err = "Wrong Password";
+            }
+
+            addErrorMessage(err);
+        });
+    };
+
+    const signup = (email, password, grade, displayName) => {
+        const apiUrl = "https://www.alloprof.qc.ca/ws/services/accnt/createUser";
+        const user = {
+            email,
+            password,
+            photo_url: "0",
+            gender: "U",
+            type: "student",
+            skills: [],
+            nickname: displayName,
+            level: +grade
+        }
+
+        axios.post(apiUrl, user)
+            .then((response) => {
+                console.log(response)
+                auth.signInWithEmailAndPassword(email, password).then(res => {
+                    ssoLogin(res);
+                }).catch(error => {
+                    addSignUpErrorMessage("Problème technique");
+                });
+            })
+            .catch(error => {
+                if (error.response && error.response.data.code == "auth/email-already-exists") {
+                    error = "E-mail is already used by another account";
+                    addSignUpErrorMessage(error);
+                } else {
+                    addSignUpErrorMessage("Problème technique");
+                }
+            });
+    };
+
+    const ssoLogin = (res) => {
+        const ssoUrl = "https://www.alloprof.qc.ca/auth/signin";
+        res.user.getIdTokenResult().then(result => {
+            const data = {
+                idToken: result.token
+            };
+            axios.post(ssoUrl, data)
+                .then(response => {
+                    window.location.href = gdn.url("/entry/jsconnect-redirect?client_id=alloprof");
+                });
+        });
+    };
+
+    const validateEmail = (email) => {
+        const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
+    };
+
+    const addErrorMessage = (error) => {
+        var errorMessage = '<div class="Messages Errors" role="alert"><ul><li>' + error + '</li></ul></div>';
+        $('.SignInStudentPopup .ErrorMessage .Messages').remove();
+        $('.SignInStudentPopup .ErrorMessage').append(errorMessage);
+    };
+
+    const addSignUpErrorMessage = (error) => {
+        var errorMessage = '<div class="Messages Errors" role="alert"><ul><li>' + error + '</li></ul></div>';
+        $('.registerPopup .ErrorMessage .Messages').remove();
+        $('.registerPopup .ErrorMessage').append(errorMessage);
+    };
+
+    const checkAllFilled = () => {
+        var emtpy = false;
+
+        $('.registerPopup .InputBox').each(function() {
+            empty = $(this).val().length == 0;
+        });
+
+        if (!$('.registerPopup #Form_Grade').val()) empty = true;
+        if ($('.registerPopup input[type=checkbox]:checked').length !== 2) empty = true;
+
+        if (empty) {
+            $('.registerPopup input[type=submit]').attr('disabled', 'disabled');
+        } else {
+            $('.registerPopup input[type=submit]').attr('disabled', false);
+        }
+    }
+
+    $(document).on('click', '.SignInStudentPopup input[type=submit]', function() {
+        var email = $('.SignInStudentPopup #Form_Email').val();
+        var password = $('.SignInStudentPopup #Form_Password').val();
+        var error = "";
+        if (!email || !password) {
+            error = "Not all fields filled out";
+            addErrorMessage(error);
+        } else {
+            if (validateEmail(email)) {
+                error = "";
+                $('.SignInStudentPopup .ErrorMessage .Messages').remove();
+                signIn(email, password);
+            } else {
+                error = "E-mail is not correctly written";
+                addErrorMessage(error);
+            }
+        }
+    });
+
+    $(document).on('change', '.registerPopup .InputBox', function() {
+        checkAllFilled();
+    });
+
+    $(document).on('change', '.registerPopup #Form_Grade', function() {
+        checkAllFilled();
+    });
+
+    $(document).on('click', '.registerPopup .CheckBoxLabel', function() {
+        checkAllFilled();
+    });
+
+    $(document).on('click', '.registerPopup input[type=submit]', function() {
+        var username = $('.registerPopup #Form_Name').val();
+        var email = $('.registerPopup #Form_Email').val();
+        var password = $('.registerPopup #Form_Password').val();
+        var confirmPassword = $('.registerPopup #Form_PasswordMatch').val();
+        var grade = $('.registerPopup #Form_Grade').text();
+        var displayName = $('.registerPopup #Form_DisplayName').val();
+
+        var error = '';
+        if (!/\S+@\S+\.\S+/.test(email)) {
+          error = 'E-mail is not correctly written';
+        } else if (!/^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9!$%@#£€*?&-_]+){8,}$/.test(password)) {
+          error = 'Password does not contain minimal safety requirements';
+        } else if (password !== confirmPassword) {
+          error = 'Passwords do not match';
+        }
+
+        if (error) {
+            addSignUpErrorMessage(error);
+        } else {
+            $('.registerPopup .ErrorMessage .Messages').remove();
+            signup(email, password, grade, displayName);
+        }
+    });
+    // student signin/signup end
+
+    $(document).on('click', 'li.ItemDiscussion', function (event) {
+        window.location.href = $(this).attr('data-url');
+    });
+    $(document).on('click', 'li.Item-Search', function (event) {
+        window.location.href = $(this).attr('data-url');
+    })
+    $(document).on('click', '.DisableClick', function(event) {
+        event.stopPropagation();
+        return true;
+    });
+
     $(document).on('click', '.embedImage-img-copyright-img', function() {
         if ($(this).siblings().css('display') == "none") {
             $(this).parent().addClass('embedImage-img-copyright-wrapper-collapse');
@@ -521,8 +686,11 @@ jQuery(document).ready(function($) {
         $('a.Popdown').popup({hijackForms: false});
 
     // This turns SignInPopup anchors into in-page popups
-    if ($.fn.popup)
+    if ($.fn.popup) {
         $('a.SignInPopup').popup({containerCssClass: 'SignInPopup'});
+        $('a.registerPopup').popup({containerCssClass: 'registerPopup SignInPopup'});
+        $('a.SignInStudentPopup').popup({containerCssClass: 'SignInStudentPopup SignInPopup'});
+    }
 
     // CustomPopup
     // This turns FlagContentPopup anchors into in-page popups

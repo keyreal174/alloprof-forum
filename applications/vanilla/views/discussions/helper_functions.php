@@ -516,26 +516,19 @@ if (!function_exists('timeElapsedString')) :
             // $string = array_slice($string, 0, 1);
             $frenchStr = "";
             if ($diff->y) {
-                if ($diff->y > 1) $frenchStr = "Il y a ". $diff->y . " ans";
-                else $frenchStr = "Il y a 1 an";
+                $frenchStr = $diff->y . "a";
             } else {
                 if ($diff->m) {
-                    if ($diff->m > 1) $frenchStr = "Il ya ". $diff->m . " mois";
-                    else $frenchStr = "Il ya 1 mois";
+                    $frenchStr = $diff->m . "m";
                 } else {
                     if ($diff->d) {
-                        if ($diff->d > 1) $frenchStr = "Il y a ". $diff->d . " jours";
-                        else $frenchStr = "Il y a 1 jour";
+                        $frenchStr = $diff->d . "j";
                     } else {
                         if ($diff->h) {
-                            if ($diff->h > 1) $frenchStr = "Il y a ". $diff->h . " heures";
-                            else $frenchStr = "Il y a 1 heure";
+                            $frenchStr = $diff->h . "h";
                         } else {
                             if ($diff->i) {
-                                if ($diff->i > 1) $frenchStr = "Il y a moins de ". $diff->i . " minutes";
-                                else $frenchStr = "Il y a 1 minute";
-                            } else {
-                                $frenchStr = "Il y a moins de 1 minute";
+                                $frenchStr = $diff->i . "min";
                             }
                         }
                     }
@@ -624,14 +617,13 @@ if (!function_exists('writeDiscussionDetail')) :
 
         $sender->fireEvent('BeforeDiscussionDisplay');
         ?>
-        <li id="Discussion_<?php echo $Discussion->DiscussionID; ?>" class="<?php echo $cssClass; ?>">
+        <li id="Discussion_<?php echo $Discussion->DiscussionID; ?>" class="<?php echo $cssClass; ?>" data-url="<?php echo $Discussion->Url; ?>">
             <?php
                 if ($Discussion->DateAccepted) {
                     echo "<div class='verified-info mobile'>
                         <img src='".url("/themes/alloprof/design/images/icons/verifiedbadge.svg")."'/><span>".t("Verified by Alloprof")."</span></div>";
                 }
             ?>
-
             <div class="Discussion">
                 <?php
                     if(!$Discussion->Published) {
@@ -645,7 +637,7 @@ if (!function_exists('writeDiscussionDetail')) :
                     <?php
                     if (!Gdn::themeFeatures()->get('EnhancedAccessibility') && Gdn::session()->isValid()) {
                         ?>
-                        <span class="Options-Icon">
+                        <span class="Options-Icon DisableClick">
                         <?php
                             echo optionsList($Discussion);
                         ?>
@@ -656,13 +648,13 @@ if (!function_exists('writeDiscussionDetail')) :
                     <div class="AuthorWrap">
                         <?php
                             if(!$Discussion->Published) {
-                                echo '<div class="not-published-badge desktop">';
+                                echo '<div class="not-published-badge DisableClick desktop">';
                                 echo '<img src="'.url("/themes/alloprof/design/images/icons/eyebreak.svg").'"/>';
                                 echo t('Awaiting publication');
                                 echo '</div>';
                             }
                         ?>
-                        <span class="Author">
+                        <span class="Author DisableClick">
                             <?php
                             if ($UserPhotoFirst) {
                                 echo userPhoto($Author);
@@ -697,7 +689,7 @@ if (!function_exists('writeDiscussionDetail')) :
                         ?>
                         <?php
                             if ($Discussion->DateAccepted) {
-                                echo "<div class='verified-badge'>
+                                echo "<div class='verified-badge DisableClick'>
                                         <img src='".url("/themes/alloprof/design/images/icons/verifiedbadge.svg")."'/>
                                         <span>". t('Verified by Alloprof') ."</span>
                                     </div>";
@@ -705,10 +697,10 @@ if (!function_exists('writeDiscussionDetail')) :
                         ?>
                     </div>
                     <div class="Meta DiscussionMeta">
-                        <span class="MItem TimeAgo">
+                        <span class="MItem TimeAgo DisableClick">
                             <?php
                                 if ($grade) {
-                                    echo $grade . ' • ' . timeElapsedString($Discussion->FirstDate, false);
+                                    echo '<span class="ItemGrade">'.$grade . ' • </span>' . timeElapsedString($Discussion->FirstDate, false);
                                 } else {
                                     echo timeElapsedString($Discussion->FirstDate, false);
                                 }
@@ -724,9 +716,11 @@ if (!function_exists('writeDiscussionDetail')) :
                 <div class="Item-BodyWrap">
                     <div class="Item-Body">
                         <div class="Message userContent">
-                            <?php
-                            echo formatBody($Discussion);
-                            ?>
+                            <div class="MessageWrapper">
+                                <?php
+                                echo formatBody($Discussion);
+                                ?>
+                            </div>
                         </div>
                         <?php
                         $sender->fireEvent('AfterDiscussionBody');
@@ -734,7 +728,7 @@ if (!function_exists('writeDiscussionDetail')) :
                             writeAttachments($Discussion->Attachments);
                         }
                         ?>
-                        <?php  echo "<a class='QuestionCategory' style='background: ".$category["Color"]."' href='".url('/categories/'.$category["UrlCode"])."'>".$category["Name"]."</a>"; ?>
+                        <?php  echo "<div class='DisableClick DisableClickWrapper'><a class='QuestionCategory' style='background: ".$category["Color"]."' href='".url('/categories/'.$category["UrlCode"])."'>".$category["Name"]."</a></div>"; ?>
                     </div>
                     <?php
                         writeDiscussionFooter($Discussion, $sender);

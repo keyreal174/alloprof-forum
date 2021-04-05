@@ -25,18 +25,16 @@ span.ReactButtons a.ReactButton.ReactButton-Like .Count {
     color: #1A1919;
 }
 
-.Comment .Reactions {
-    margin-top: 42px!important;
-}
-
 .Comment span.ReactButtons a.ReactButton.ReactButton-Like {
+    display: flex !important;
+    align-items: center;
     width: max-content;
     min-width: 40px;
 }
 
 .Comment span.ReactButtons a.ReactButton.ReactButton-Like .Count {
-    margin-left: 24px;
-    margin-right: 0;
+    margin-left: 30px;
+    margin-right: 5px;
     font-size: 17px;
     line-height: 20px;
     color: #6C6767;
@@ -287,5 +285,8 @@ span.ReactButtons a.ReactButton.ReactButton-Like .additional-label {
     }
     #vanilla_post_editdiscussion .discussion-filters-mobile {
         display: none !important;
+    }
+    .Comment span.ReactButtons a.ReactButton.ReactButton-Like span {
+        font-size: 13px !important;
     }
 }

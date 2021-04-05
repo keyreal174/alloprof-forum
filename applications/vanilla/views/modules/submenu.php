@@ -11,7 +11,7 @@
     <?php if(userRoleCheck() == Gdn::config('Vanilla.ExtraRoles.Teacher')) {
     ?>
         <div class='Navigation-linkContainer'>
-        <?php echo Gdn_Theme::link('discussions', sprite('Home').' '.t('Home'), '<a href="%url" class="%class Navigation-link"><svg width="21" height="22" viewBox="0 0 21 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <?php echo Gdn_Theme::link('discussions', sprite('Home').' <span style="margin-top: 1px;">'.t('Home').'</span>', '<a href="%url" class="%class Navigation-link"><svg width="21" height="22" viewBox="0 0 21 22" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M1.25 11.5178L10.5 2.26777L19.75 11.5178V20.25H13.146V16.3809C13.146 15.4144 12.3625 14.6309 11.396 14.6309H9.6665C8.70001 14.6309 7.9165 15.4144 7.9165 16.3809V20.25H1.25V11.5178Z" stroke="black" stroke-width="2.5"/>
 </svg>
 %text</a>'); ?>
@@ -31,7 +31,7 @@
 
     <?php } else { ?>
         <div class='Navigation-linkContainer'>
-            <?php echo Gdn_Theme::link('discussions', sprite('Home').' '.t('Home'), '<a href="%url" class="%class Navigation-link"><svg width="21" height="22" viewBox="0 0 21 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <?php echo Gdn_Theme::link('discussions', sprite('Home').' <span style="margin-top: 1px;">'.t('Home').'</span>', '<a href="%url" class="%class Navigation-link"><svg width="21" height="22" viewBox="0 0 21 22" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M1.25 11.5178L10.5 2.26777L19.75 11.5178V20.25H13.146V16.3809C13.146 15.4144 12.3625 14.6309 11.396 14.6309H9.6665C8.70001 14.6309 7.9165 15.4144 7.9165 16.3809V20.25H1.25V11.5178Z" stroke="black" stroke-width="2.5"/>
 </svg>
 %text</a>'); ?>

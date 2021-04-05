@@ -749,6 +749,10 @@ a.ChangePicture {
     font-size: 12px
 }
 
+.Reactions {
+    display: flex;
+}
+
 .Reactions .ReactButton,
 .Reactions .ReactButton.HasCount {
     -ms-flex-align: center;
@@ -6658,7 +6662,7 @@ body.hasRichEditor .richEditor-frame {
 
 body.hasRichEditor .bodybox-wrap,
 body.hasRichEditor .CommentOptions {
-    margin-bottom: 12px;
+    margin-bottom: 16px
 }
 
 body.hasRichEditor .Popup .NoteForm {

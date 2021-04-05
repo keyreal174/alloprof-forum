@@ -27,7 +27,7 @@
     <div class="BoxNewDiscussion-header">
         <?php
             $UserMetaData = Gdn::userModel()->getMeta(Gdn::session()->UserID, 'Profile.%', 'Profile.');
-            $UserName = $UserMetaData['DisplayName'] ?? t('Unknown');
+            $UserName = $UserMetaData['DisplayName'] ?? "";
 
             $photoClassName = 'user-avatar';
             if (str_contains($Photo, 'avatars/0.svg')) {
@@ -46,13 +46,14 @@
             ?>
         </div>
         <?php
-            if($this->invalid) {
-                $Controller = Gdn::controller();
-                $Session = Gdn::session();
-                $SigninUrl = signInUrl($Controller->SelfUrl);
+            // if($this->invalid) {
+                // $Controller = Gdn::controller();
+                // $Session = Gdn::session();
+                // $SigninUrl = signInUrl($Controller->SelfUrl);
 
-                echo '<a href="'.url("/entry/jsconnect-redirect?client_id=alloprof").'" class="AskQuestion" rel="nofollow">'.t('What is your question?').'</a>';
-            } else echo '<div class="clickToCreate">'.t('What is your question?').'</div>';
+                // echo '<a href="'.url("/entry/jsconnect-redirect?client_id=alloprof").'" class="AskQuestion" rel="nofollow">'.t('What is your question?').'</a>';
+            // } else
+                echo '<div class="clickToCreate">'.t('What is your question?').'</div>';
         ?>
     </div>
     <div class="close-icon">
@@ -69,23 +70,27 @@
         <div class="content">
 
             <?php
-                if($this->invalid) {
-                    $Controller = Gdn::controller();
-                    $Session = Gdn::session();
-                    $SigninUrl = signInUrl($Controller->SelfUrl);
+                // if($this->invalid) {
+                //     $Controller = Gdn::controller();
+                //     $Session = Gdn::session();
+                //     $SigninUrl = signInUrl($Controller->SelfUrl);
 
-                    echo '<a href="'.url($SigninUrl).'" class="SignInPopup" rel="nofollow">';
-                    echo '<div class="placeholder">';
-                } else echo '<div class="placeholder OpenAskQuestionForm">';
+                //     echo '<a href="'.url($SigninUrl).'" class="SignInPopup" rel="nofollow">';
+                //     echo '<div class="placeholder">';
+                // } else
+                    echo '<div class="placeholder OpenAskQuestionForm">';
             ?>
                 <!-- <div class="icon">
                     <?php /* echo '<img src="'.url("/themes/alloprof/design/images/icons/ask_question.svg").'" />'; */ ?>
                 </div> -->
 
             </div>
-            <?php if($this->invalid) echo '</a>';?>
             <?php
-                if(!$this->invalid) {
+                // if($this->invalid)
+                //     echo '</a>';
+            ?>
+            <?php
+                // if(!$this->invalid) {
                     $this->fireEvent('BeforeFormInputs');
 
                     echo '<div class="P">';
@@ -97,11 +102,11 @@
                     echo '<div class="P">';
                     echo $this->Form->bodyBox('Body', ['Table' => 'Discussion', 'FileUpload' => true, 'placeholder' => t('Type your question'), 'title' => t('Type your question')]);
                     echo '</div>';
-                }
+                // }
             ?>
         </div>
         <?php
-            if(!$this->invalid) {
+            // if(!$this->invalid) {
                 echo '<div class="selects">';
                 if ($this->ShowCategorySelector === true) {
                     $Controller = Gdn::controller();
@@ -157,10 +162,18 @@
                 echo '<div class="Buttons">';
 
                 $this->fireEvent('BeforeFormButtons');
-                echo $this->Form->button((property_exists($this, 'Discussion')) ? t('Save') : t('Publish'), ['class' => 'btn-default btn-shadow']);
+                if($this->invalid) {
+                    $Controller = Gdn::controller();
+                    $Session = Gdn::session();
+                    $SigninUrl = signInUrl($Controller->SelfUrl);
+
+                    echo '<a data-url="'.url("/entry/jsconnect-redirect?client_id=alloprof&target=").urlencode('/discussions/saveDiscussion').'" class="btn-default btn-shadow signinandsave">'.t('Publish').'</a>';
+                } else {
+                    echo $this->Form->button((property_exists($this, 'Discussion')) ? t('Save') : t('Publish'), ['class' => 'btn-default btn-shadow']);
+                }
                 $this->fireEvent('AfterFormButtons');
                 echo '</div>';
-            }
+            // }
                 echo $this->Form->close();
                 echo '</div>';
 

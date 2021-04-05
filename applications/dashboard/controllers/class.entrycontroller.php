@@ -1119,6 +1119,7 @@ class EntryController extends Gdn_Controller {
      * @param string|false $method
      * @param array|false $arg1
      * @return string Rendered XHTML template.
+     * Teacher signin
      */
     public function signIn($method = false, $arg1 = false) {
         $this->canonicalUrl(url('/entry/signin', true));
@@ -1255,6 +1256,17 @@ class EntryController extends Gdn_Controller {
 
         return $this->render();
     }
+
+    /**
+     * Sign in process that multiple authentication methods.
+     * Student signin
+     */
+    public function signinstudent() {
+        $this->setData('Title', t('Salvation! Happy to see you!'));
+        $this->View = 'signinstudent';
+        $this->render();
+    }
+
 
     /**
      * Calls the appropriate registration method based on the configuration setting.

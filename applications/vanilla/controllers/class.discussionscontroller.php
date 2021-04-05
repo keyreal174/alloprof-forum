@@ -1349,23 +1349,22 @@ class DiscussionsController extends VanillaController {
     // Filter Discussion Function
     public function filterDiscussion() {
         $parameter = $_POST['parameter'];
-
         echo $this->_PagerUrl.'?'.$parameter;
     }
 
     public function filter() {
-        // $this->setData('sort', $this->GradeID);
-
-        $discussionModel = new DiscussionModel();
-        $this->setData('Sort', $this->PublicGradeID);
-        $this->setData('Filters', $discussionModel->getFilters());
-
         $this->View = 'mobile_filter';
         $this->render();
     }
 
     public function question() {
         $this->View = 'mobile_newquestion';
+        $this->render();
+    }
+
+    public function saveDiscussion() {
+        $this->addJsFile('savediscussion.js');
+        $this->View = 'saveDiscussion';
         $this->render();
     }
 }

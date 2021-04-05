@@ -25,7 +25,7 @@
     <div class="BoxNewDiscussion-header">
         <?php
             $UserMetaData = Gdn::userModel()->getMeta(Gdn::session()->UserID, 'Profile.%', 'Profile.');
-            $UserName = $UserMetaData['DisplayName'] ?? t('Unknown');
+            $UserName = $UserMetaData['DisplayName'] ?? "";
 
             $photoClassName = 'user-avatar';
             if (str_contains($Photo, 'avatars/0.svg')) {
@@ -145,7 +145,16 @@
                 echo '<div class="Buttons">';
 
                 $this->fireEvent('BeforeFormButtons');
-                echo $this->Form->button((property_exists($this, 'Discussion')) ? t('Save') : t('Publish'), ['class' => 'btn-default btn-shadow']);
+                if(!Gdn::session()->isValid()) {
+                    $Controller = Gdn::controller();
+                    $Session = Gdn::session();
+                    $SigninUrl = signInUrl($Controller->SelfUrl);
+
+                    echo '<a data-url="'.url("/entry/jsconnect-redirect?client_id=alloprof&target=").urlencode('/discussions/saveDiscussion').'" class="btn-default btn-shadow signinandsave">'.t('Publish').'</a>';
+                } else {
+                    echo $this->Form->button((property_exists($this, 'Discussion')) ? t('Save') : t('Publish'), ['class' => 'btn-default btn-shadow']);
+                }
+
                 $this->fireEvent('AfterFormButtons');
                 echo '</div>';
             }
@@ -251,4 +260,15 @@
 
     selectCategoryImg({element: $('.FilterMenu .select2-category option:selected')});
     selectCategoryImg({element: $('.EditDiscussionDetail .select2-category option:selected')});
+
+    $('.signinandsave').click(function() {
+        var parent = $(this).parents('.DiscussionForm, .EditDiscussionForm');
+        var redirectUrl = $(this).attr('data-url');
+        console.log(redirectUrl);
+        var frm = $(parent).find('form').first();
+        var postValues = $(frm).serialize();
+        localStorage.setItem('draft', postValues);
+        window.location.replace(window.location.origin + redirectUrl);
+        console.log(postValues);
+    });
 </script>

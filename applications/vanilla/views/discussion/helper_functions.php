@@ -162,11 +162,8 @@ if (!function_exists('writeComment')) :
                             echo userPhoto($author);
                             if ($sender->getUserRole($comment->InsertUserID) == "Teacher") {
                                 $UserMetaData = Gdn::userModel()->getMeta($author->UserID, 'Profile.%', 'Profile.');
-                                $name = $UserMetaData["DisplayName"] ?? t("Unknown");
-                                echo '<a class="Username js-userCard" data-userid="'.$author->UserID.'">'.$name.'<svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M1.25 8.5C1.25 4.77208 4.27208 1.75 8 1.75C9.79021 1.75 11.5071 2.46116 12.773 3.72703C14.0388 4.9929 14.75 6.70979 14.75 8.5C14.75 12.2279 11.7279 15.25 8 15.25C4.27208 15.25 1.25 12.2279 1.25 8.5Z" fill="#05BF8E" stroke="#05BF8E" stroke-width="2.5"/>
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M4.46978 7.96967C4.76268 7.67678 5.23755 7.67678 5.53044 7.96967L7.12143 9.56066L10.8337 5.84835C11.1266 5.55546 11.6015 5.55546 11.8944 5.84835C12.1873 6.14124 12.1873 6.61612 11.8944 6.90901L7.65176 11.1517C7.35887 11.4445 6.884 11.4445 6.5911 11.1517L4.46978 9.03033C4.17689 8.73744 4.17689 8.26256 4.46978 7.96967Z" fill="white"/>
-                                </svg></a>';
+                                $name = $UserMetaData["DisplayName"] ?? "";
+                                echo '<a class="Username js-userCard" style="display: flex;" data-userid="'.$author->UserID.'">'.$name.'<img class="TeacherCheckIcon" src="'.url("/themes/alloprof/design/images/icons/teacherCheck.svg").'" alt="teacher check"></a>';
                             } else {
                                 echo userAnchor($author, 'Username');
                             }
@@ -190,11 +187,11 @@ if (!function_exists('writeComment')) :
                         <span class="MItem TimeAgo">
                         <?php
                             $grade = getGrade($comment->GradeID);
-                            if ($sender->getUserRole($comment->InsertUserID) === 'Teacher') {
-                                echo t("Alloprof Teacher") . ' • ' . timeElapsedString($comment->DateInserted, false);
+                            if ($sender->getUserRole($comment->InsertUserID) === TEACHER_ROLE) {
+                                echo '<span class="ItemGrade">'.t("Alloprof Teacher") . ' • </span>'. timeElapsedString($comment->DateInserted, false);
                             } else {
                                 if ($grade) {
-                                    echo $grade . ' • ' . timeElapsedString($comment->DateInserted, false);
+                                    echo '<span class="ItemGrade">'.$grade . ' • </span>' . timeElapsedString($comment->DateInserted, false);
                                 } else {
                                     echo timeElapsedString($comment->DateInserted, false);
                                 }
@@ -787,7 +784,7 @@ if (!function_exists('writeCommentForm')) :
             }
         }
 
-        if (($discussion->Closed == '1' && $userCanClose) || ($discussion->Closed == '0' && $userCanComment)) {
+        if (($discussion->Closed == '1') || ($discussion->Closed == '0')) {
             echo $controller->fetchView('comment', 'post', 'vanilla');
         }
     }
@@ -941,7 +938,7 @@ if (!function_exists('writeDiscussionFooter')) :
         $userCanComment = CategoryModel::checkPermission($categoryID, 'Vanilla.Comments.Add');
         ?>
         <div class="Item-Footer">
-            <div class="Item-Footer-Icons">
+            <div class="Item-Footer-Icons DisableClick">
                 <?php
                 include($sender->fetchViewLocation('helper_functions', 'discussions', 'vanilla'));
 

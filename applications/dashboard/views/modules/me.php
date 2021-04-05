@@ -102,7 +102,7 @@ if ($Session->isValid()):
     if ($useNewFlyouts) {
         $imgUrl = userPhotoUrl($User);
         $UserMetaData = Gdn::userModel()->getMeta(Gdn::session()->UserID, 'Profile.%', 'Profile.');
-        $UserName = $UserMetaData["DisplayName"] ?? t('Unknown');
+        $UserName = $UserMetaData["DisplayName"] ?? "";
 
         if (str_contains($imgUrl, 'avatars/0.svg')) {
             $ClassName = "ProfilePhotoDefaultWrapper";
@@ -187,8 +187,10 @@ else:
     $editModifiers['listItemCssClasses'] = ['EditProfileWrap', 'link-editprofile'];
     $preferencesModifiers['listItemCssClasses'] = ['EditProfileWrap', 'link-preferences'];
 
-    $dropdown->addLink(t('Sign In'), '/entry/jsconnect-redirect?client_id=alloprof', 'normalsignin', '', ['rel' => 'nofollow'], $editModifiers);
-    $dropdown->addLink(t('Register'), 'https://alloprof.qc.ca/jsconnect/register', 'register', '', [], $editModifiers);
+    // $dropdown->addLink(t('Sign In'), '/entry/jsconnect-redirect?client_id=alloprof', 'normalsignin', '', ['rel' => 'nofollow'], $editModifiers);
+    // $dropdown->addLink(t('Register'), 'https://alloprof.qc.ca/jsconnect/register', 'register', '', [], $editModifiers);
+    $dropdown->addLink(t('Sign In'), '/entry/signinstudent?Target='.$this->_Sender->SelfUrl, 'studentsignin', 'SignInStudentPopup', ['rel' => 'nofollow'], $editModifiers);
+    $dropdown->addLink(t('Register'), registerUrl($this->_Sender->SelfUrl), 'register', 'registerPopup', [], $editModifiers);
     $dropdown->addLink(t('Teacher'), signInUrl($this->_Sender->SelfUrl), 'teachersignin', 'SignInPopup', ['rel' => 'nofollow'], $preferencesModifiers);
 
     $dropdown->addLink(t('×'), '#', 'Close', '');

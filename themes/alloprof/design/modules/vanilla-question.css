@@ -10,6 +10,19 @@
     padding: 24px;
 }
 
+li.ItemDiscussion,
+li.Item-Search {
+    cursor: pointer;
+}
+
+li.ItemDiscussion .MItem.DisableClick,
+li.ItemDiscussion .Author.DisableClick,
+li.Item-Search .AuthWrapper,
+.not-published-badge.DisableClick,
+.verified-badge.DisableClick {
+    cursor: initial;
+}
+
 .MessageList .ItemComment {
     padding: 0;
 }
@@ -92,6 +105,27 @@
     margin-bottom: 0;
 }
 
+li.ItemDiscussion .Message {
+    max-height: 200px;
+}
+
+.MessageWrapper {
+    max-height: 168px;
+    overflow: hidden;
+    position: relative;
+}
+
+/* .MessageWrapper:after {
+    content: "\02026";
+    position: absolute;
+    bottom: -12px;
+    left: 0px;
+    width: fit-content;
+    text-align: right;
+    vertical-align: bottom;
+    font-size: 26px;
+} */
+
 .ItemDiscussion .Item-Body {
     margin-bottom: 24px;
 }
@@ -135,7 +169,8 @@
     background-color: #f2f2f2;
 }
 
-.Item-Header.DiscussionHeader .Options-Icon {
+.Item-Header.DiscussionHeader .Options-Icon,
+.Item-Search .Options-Icon {
     width: 44px;
     height: 44px;
     display: flex;
@@ -285,16 +320,27 @@
     position: relative;
 }
 
+.CommentPostForm .CommentFormWrap {
+    margin-top: 16px;
+}
+
 .CommentPostForm.open {
     display: block;
 }
 
 .CommentPostForm .close-icon {
     position: absolute;
-    top: 25px;
-    right: 25px;
+    top: 10px;
+    right: 10px;
     cursor: pointer;
     display: block;
+    padding: 14px;
+}
+
+.CommentPostForm .close-icon img {
+    display: block;
+    width: 16px;
+    height: 16px;
 }
 
 .CommentPostForm .UserInfo {
@@ -314,11 +360,12 @@
 }
 
 .CommentPostForm .UserInfo .UserAuthor .UserAuthorName {
-    color: #1A1919;
+    color: black;
+    font-family: "ChromaticaBlack";
     font-size: 15px;
     line-height: 18px;
-    display: flex;
-    font-weight: 600;
+    font-weight: bold;
+    margin-bottom: 2px;
 }
 
 .CommentPostForm .UserInfo .UserAuthor .UserAuthorName svg {
@@ -355,6 +402,25 @@
     justify-content: center;
     position: relative;
     overflow: visible;
+}
+
+/* .CommentPostForm .CommentFormWrap .richEditor-textWrap,
+.CommentPostForm .CommentFormWrap .richEditor .richEditor-frame,
+.CommentPostForm .CommentFormWrap .richEditor-text {
+    min-height: 105px;
+}
+
+.CommentPostForm .CommentFormWrap .richEditor-textWrap {
+    max-height: 105px;
+    overflow: auto;
+} */
+
+.CommentPostForm .CommentFormWrap .richEditor-embedBar {
+    position: absolute;
+    bottom: -70px;
+    z-index: 1;
+    left: -10px;
+    width: initial;
 }
 
 /* .CommentPostForm .richEditor-frame .richEditor-embedBar {
@@ -545,6 +611,10 @@
 
 .EditCommentForm .Buttons {
     margin-top: 10px;
+}
+
+.DisableClickWrapper {
+    width: fit-content;
 }
 
 @media screen and (max-width: 619px) {

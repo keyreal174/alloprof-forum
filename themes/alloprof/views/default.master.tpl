@@ -232,6 +232,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     {event name="AfterBody"}
 
 {literal}
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-auth.js"></script>
 <script>
