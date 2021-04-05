@@ -640,6 +640,10 @@ class CategoriesController extends VanillaController {
             $bannerModule = new BannerModule('Categories', 'Home / '.val('Name', $category, ''), '', val('Name', $category, ''), '', val('BannerImage', $category));
             $this->addModule($bannerModule);
 
+            $mobileHeader = new MobileHeaderModule(val('Name', $category, ''), true);
+            $this->addModule($mobileHeader);
+
+
             // Get a DiscussionModel
             $discussionModel = new DiscussionModel();
             $discussionModel->setSort($this->SortDirection);

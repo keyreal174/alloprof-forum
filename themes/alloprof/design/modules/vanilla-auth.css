@@ -3,36 +3,57 @@
     cursor: pointer;
 }
 
-div.Popup.SignInPopup .Body {
-    padding: 80px 130px;
-    max-height: none !important;
+div.Popup.SignInPopup .Border {
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
+div.Popup.SignInPopup .Body {
+    padding: 5% 10%;
+    max-height: none !important;
+    width: fit-content;
+    min-width: 300px;
+    position: relative;
+    max-width: 90vw;
+}
+
+.UserLoggedOut .AjaxForm,
 div.Popup.SignInPopup .AjaxForm {
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 
+.UserLoggedOut .AjaxForm .FormSummary,
 div.Popup.SignInPopup .AjaxForm .FormSummary {
     margin-right: 64px;
+    flex: 1.2;
 }
 
-div.Popup.SignInPopup .AjaxForm .Title {
+div.Popup.SignInPopup .Title {
     margin-bottom: 40px;
     font-size: 50px;
     line-height: 59px;
     max-width: 400px;
 }
 
+.UserLoggedOut .AjaxForm img.AuthAvatar,
 div.Popup.SignInPopup .AjaxForm img.AuthAvatar {
-    width: 400px;
-    height: 400px;
+    width: 100%;
+    max-width: 400px;
 }
 
+.UserLoggedOut .AjaxForm .FormWrapper,
 div.Popup.SignInPopup .AjaxForm .FormWrapper {
-    width: 480px;
+    width: 100%;
+    padding-right: 20px !important;
+    margin-right: -15px;
+    max-height: 80vh;
+    overflow: auto;
+    flex: 1;
 }
+
 
 .AjaxForm .FormWrapper ul li {
     margin-bottom: 35px;
@@ -60,14 +81,18 @@ div.Popup.SignInPopup .AjaxForm .FormWrapper {
     line-height: 18px;
 }
 
+.UserLoggedOut .Buttons,
 div.Popup.SignInPopup .Buttons {
     margin-top: 0;
 }
 
+.UserLoggedOut .Buttons .CreateAccount,
 div.Popup.SignInPopup .Buttons .CreateAccount {
     margin-top: 40px;
 }
 
+.UserLoggedOut .Buttons .CreateAccount,
+.UserLoggedOut .Buttons .CreateAccount a,
 div.Popup.SignInPopup .Buttons .CreateAccount,
 div.Popup.SignInPopup .Buttons .CreateAccount a {
     font-size: 18px;
@@ -77,6 +102,7 @@ div.Popup.SignInPopup .Buttons .CreateAccount a {
     font-weight: 600;
 }
 
+.UserLoggedOut img.HelpIcon,
 div.Popup.SignInPopup img.HelpIcon {
     margin-top: 40px;
     cursor: pointer;
@@ -88,6 +114,7 @@ div.Popup.SignInPopup li.form-group {
     margin-bottom: 0;
 }
 
+.UserLoggedOut li.form-group select,
 div.Popup.SignInPopup li.form-group select {
     border: none;
     border-color: initial !important;
@@ -113,19 +140,29 @@ div.Popup.SignInPopup li.form-group:after {
     position: absolute;
 }
 
+.UserLoggedOut .PasswordStrength,
 div.Popup.SignInPopup .PasswordStrength  {
     width: 100% !important;
 }
 
+.UserLoggedOut .Buttons.SignUpButtons,
 div.Popup.SignInPopup .Buttons.SignUpButtons {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
 }
 
+div.Popup.SignInPopup .Buttons.SignUpButtons input,
+div.Popup.SignInPopup .Buttons.SignUpButtons a {
+    margin-bottom: 20px;
+}
+
+.UserLoggedOut
 div.Popup.SignInPopup .Buttons.SignUpButtons input[type=submit] {
     margin-right: 40px;
 }
 
+.UserLoggedOut .Buttons.SignUpButtons a,
 div.Popup.SignInPopup .Buttons.SignUpButtons a {
     font-size: 18px;
     line-height: 21px;
@@ -134,11 +171,13 @@ div.Popup.SignInPopup .Buttons.SignUpButtons a {
     font-weight: 600;
 }
 
+.UserLoggedOut .validators,
 div.Popup.SignInPopup .validators {
     display: flex;
     flex-direction: column;
 }
 
+.UserLoggedOut .validators .CheckBoxLabel,
 div.Popup.SignInPopup .validators .CheckBoxLabel {
     position: relative;
     margin: 0;
@@ -150,11 +189,13 @@ div.Popup.SignInPopup .validators .CheckBoxLabel {
     margin-bottom: 24px;
 }
 
+.UserLoggedOut .validators .CheckBoxLabel a,
 div.Popup.SignInPopup .validators .CheckBoxLabel a {
     color: black;
     border-bottom: 1px solid black;
 }
 
+.UserLoggedOut .validators .CheckBoxLabel input[type=checkbox],
 div.Popup.SignInPopup .validators .CheckBoxLabel input[type=checkbox] {
     position: absolute;
     left: 0;
@@ -162,6 +203,7 @@ div.Popup.SignInPopup .validators .CheckBoxLabel input[type=checkbox] {
     margin-left: 0;
 }
 
+.UserLoggedOut .validators .CheckBoxLabel input[type=checkbox]:checked:before,
 div.Popup.SignInPopup .validators .CheckBoxLabel input[type=checkbox]:checked:before {
     content: '';
     background: url('../../../../themes/alloprof/design/images/icons/tick.svg');
@@ -174,6 +216,7 @@ div.Popup.SignInPopup .validators .CheckBoxLabel input[type=checkbox]:checked:be
     visibility: visible;
 }
 
+.UserLoggedOut .validators .CheckBoxLabel input[type=checkbox]:after,
 div.Popup.SignInPopup .validators .CheckBoxLabel input[type=checkbox]:after {
     width: 20px;
     height: 20px;
@@ -188,6 +231,7 @@ div.Popup.SignInPopup .validators .CheckBoxLabel input[type=checkbox]:after {
     margin-bottom: 0 !important;
 }
 
+.UserLoggedOut .EyeIcon,
 div.Popup.SignInPopup .EyeIcon {
     position: absolute;
     right: 0;
@@ -195,10 +239,119 @@ div.Popup.SignInPopup .EyeIcon {
     cursor: pointer;
 }
 
+.UserLoggedOut input[type=password],
 div.Popup.SignInPopup input[type=password] {
     padding-right: 32px;
 }
 
 .Errors ul li {
     margin-bottom: 0 !important;
+}
+
+div.Popup.SignInPopup a.Close {
+    right: 15px;
+    top: 5px;
+}
+
+div.Popup.SignInPopup .logo {
+    display: none;
+}
+
+@media screen and (max-width: 1200px) {
+    div.Popup.SignInPopup .Title {
+        font-size: 40px;
+    }
+}
+
+
+@media screen and (max-width: 950px) {
+    div.Popup.SignInPopup .Title {
+        font-size: 30px;
+        line-height: 40px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    div.Popup.SignInPopup .Title {
+        font-size: 25px;
+        line-height: 30px;
+    }
+
+    div.Popup.SignInPopup .CreateAccount {
+        font-size: 15px;
+    }
+    .UserLoggedOut .AjaxForm, div.Popup.SignInPopup .AjaxForm {
+        padding-top: 25px;
+    }
+}
+
+@media screen and (max-width: 619px) {
+    div.Popup.SignInPopup {
+        left: 50vw !important;
+    }
+    div.Popup.SignInPopup .logo {
+        display: block;
+    }
+    div.Popup.SignInPopup .Title {
+        font-size: 36px;
+        display: block !important;
+    }
+    div.Popup.SignInPopup .Border {
+        padding: 0;
+    }
+    div.Popup.SignInPopup .Body {
+        height: 100vh;
+        width: 100vw;
+        min-width: 300px;
+        border-radius: 0;
+        padding: 90px 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: unset !important;
+        max-width: 100vw;
+    }
+    div.Popup.SignInPopup .Body .Content {
+        width: calc(100vw - 30px) !important;
+    }
+    div.Popup.SignInPopup .logo {
+        position: absolute;
+        top: 2px;
+        left: 15px;
+        width: 100%;
+        z-index: 2;
+        padding: 15px 0;
+        background-color: white;
+    }
+    div.Popup.SignInPopup .logo svg {
+        width: 78px;
+        height: 16px;
+    }
+    .UserLoggedOut .AjaxForm .FormSummary, div.Popup.SignInPopup .AjaxForm .FormSummary {
+        display: none;
+    }
+    .UserLoggedOut .Buttons, div.Popup.SignInPopup .Buttons {
+        text-align: center;
+        justify-content: center;
+    }
+    .UserLoggedOut .Buttons, input#Form_Seconnecter {
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+    .UserLoggedOut .AjaxForm .FormWrapper, div.Popup.SignInPopup .AjaxForm .FormWrapper {
+        max-height: 100vh;
+        height: 100vh;
+        padding-top: 85px;
+        padding-bottom: 30px;
+    }
+    .UserLoggedOut .validators .CheckBoxLabel input[type=checkbox]:checked:before, div.Popup.SignInPopup .validators .CheckBoxLabel input[type=checkbox]:checked:before {
+        left: 2px;
+        top: 4px;
+        width: 16px;
+        height: 12px;
+    }
+    .UserLoggedOut .validators .CheckBoxLabel input[type=checkbox]:after, div.Popup.SignInPopup .validators .CheckBoxLabel input[type=checkbox]:after {
+        width: 15px;
+        height: 15px;
+    }
 }

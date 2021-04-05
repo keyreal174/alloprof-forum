@@ -146,6 +146,7 @@ class PostController extends VanillaController {
         $this->addJsFile('jquery.autosize.min.js');
         $this->addJsFile('autosave.js');
         $this->addJsFile('post.js');
+        $this->addJsFile('askquestion.js');
 
         $session = Gdn::session();
 
@@ -838,6 +839,16 @@ class PostController extends VanillaController {
         $this->render();
     }
 
+    public function newQuestionPopup($selectedCategory = null) {
+        $this->View = 'mobile_askquestion';
+        $this->discussion($selectedCategory);
+    }
+
+    public function rules() {
+        $this->View = 'mobile_questionrules';
+        $this->render();
+    }
+
     /**
      * Edit a discussion (wrapper for PostController::Discussion).
      *
@@ -846,7 +857,7 @@ class PostController extends VanillaController {
      * @param int $discussionID Unique ID of the discussion to edit.
      * @param int $draftID Unique ID of draft discussion to edit.
      */
-    public function editDiscussion($discussionID = 0, $draftID = 0) {
+    public function editDiscussion($discussionID = 0, $draftID = 0, $isMobile=false) {
         if ($draftID != 0) {
             $record = $this->Draft = $this->DraftModel->getID($draftID);
             $this->CategoryID = $this->Draft->CategoryID;
@@ -883,14 +894,21 @@ class PostController extends VanillaController {
         $this->addModule('CategoriesModule');
         $this->addModule('BookmarkedModule');
 
+        $mobileHeader = new MobileHeaderModule("Edit question", true);
+        $this->addModule($mobileHeader);
+
         // $this->getUserInfo('', '', $this->Discussion->InsertUserID);
 
         $this->addModule('UserPhotoModule');
         // $this->fireEvent('AddProfileInfo');
 
         // Set view and render
-        $this->View = 'Discussion';
+        $this->View = $isMobile?'mobile_askquestion':'Discussion';
         $this->discussion($this->CategoryID);
+    }
+
+    public function editQuestionPopup($discussionID = 0, $draftID = 0) {
+        $this->editDiscussion($discussionID = 0, $draftID = 0, true);
     }
 
     /**
@@ -1385,6 +1403,7 @@ class PostController extends VanillaController {
                             // Also define the discussion url in case this request came from the post screen and needs to be redirected to the discussion
                             $this->setJson('DiscussionUrl', discussionUrl($this->Discussion).'#Comment_'.$CommentID);
                         } else {
+                            redirectTo("discussion/comment/$CommentID/#Comment_$CommentID");
                             // If the comment model isn't sorted by DateInserted or CommentID then we can't do any fancy loading of comments.
                             $OrderBy = valr('0.0', $this->CommentModel->orderBy());
 //                     $Redirect = !in_array($OrderBy, array('c.DateInserted', 'c.CommentID'));
@@ -1478,6 +1497,12 @@ class PostController extends VanillaController {
             // Render default view.
             $this->render();
         }
+    }
+
+
+    public function answerPopup($discussionID = null) {
+        $this->View = 'mobile_answer';
+        $this->comment($discussionID);
     }
 
     /**

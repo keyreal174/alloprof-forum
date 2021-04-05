@@ -95,10 +95,8 @@ $Definition['%s weeks'] = '%s semaines';
 $Definition['%s year'] = '%s année';
 $Definition['%s years'] = '%s années';
 
-$Definition['&laquo; hide previous quotes'] = '&laquo; masquer les citations précédentes
-';
-$Definition['&raquo; show previous quotes'] = '&raquo; afficher les citations précédentes
-';
+$Definition['&laquo; hide previous quotes'] = '&laquo; masquer les citations précédentes';
+$Definition['&raquo; show previous quotes'] = '&raquo; afficher les citations précédentes';
 
 $Definition['(All)'] = '(Tous)';
 $Definition['(empty message)'] = '(message vide)';
@@ -409,7 +407,7 @@ $Definition['Delete Account'] = 'Supprimer le Compte';
 $Definition['Delete Content'] = 'Supprimer le contenu';
 $Definition['Delete Conversation'] = 'Supprimer';
 $Definition['Deleted'] = 'Supprimé';
-$Definition['Delete Discussion'] = 'Supprimer la Discussion';
+$Definition['Delete Post'] = 'Supprimer la publication';
 $Definition['Delete Forever'] = 'Supprimer Définitivement';
 $Definition['Delete Group'] = 'Supprimer le groupe';
 $Definition['Delete the user and all of the user\'s content. This will cause discussions to be disjointed, appearing as though people are responding to content that is not there. This is a great option for removing spammer content.'] = 'Supprimer l\'utilisateur ainsi que tout le contenu qu\'il a publié. Cela pourrait générer des discussions décousues, apparaissant comme si des utilisateurs répondaient à du contenu qui n\'existe pas. Cependant, c\'est une bonne option pour supprimer tout contenu indésirable (spam).';
@@ -1812,7 +1810,7 @@ $Definition['Oh no! It\'s a 404 error'] = 'Oh non ! c’est l’erreur 404';
 $Definition['The page you\'re looking for has disappeared!'] = 'La page que tu cherches a disparu!';
 $Definition['Return to Home'] = 'Retourner à l’accueil';
 $Definition['Account suspended'] = 'Compte suspendu';
-$Definition['Your account has been suspended because it violated the site rules. You can get help or additional information by contacting support.'] = 'Ton compte a été suspendu car il n’a pas respecté les régles du site. Tu peux obtenir de l’aide ou des informations complémentaires contactant le support.';
+$Definition['Your account has been suspended because it violated the site rules. <br/> You can get help or additional information by contacting support.'] = 'Ton compte a été suspendu car il n’a pas respecté les régles du site. <br/> Tu peux obtenir de l’aide ou des informations complémentaires contactant le support.';
 $Definition['Contact support'] = 'Contacter le support';
 $Definition['Yes, continue'] = 'Oui, continuer';
 $Definition['Grade is required.'] = 'Niveau est obligatoire.';
@@ -1837,3 +1835,20 @@ $Definition['Approve the publication'] = 'Approuver la publication';
 $Definition['Edit the publication'] = 'Éditer la publication';
 $Definition['Delete the publication'] = 'Supprimer la publication';
 $Definition['This content is protected by copyright. Any reproduction outside the Alloprof forums is prohibited and may be considered a violation of copyright.'] = 'Ce contenu est protégé par le droit d\'auteur. Toute reproduction à l\'extérieur des forums Alloprof est interdite et pourra être considérée comme une violation du droit d\'auteur.';
+
+$Definition['Filters'] = 'Filtres';
+$Definition['Status'] = 'Statut';
+$Definition['Grade'] = 'Niveau';
+$Definition['Clean'] = 'Effacer';
+$Definition['Followed'] = 'Suivies';
+$Definition['Publication rules'] = 'Règles de publication';
+$Definition['Explore by subject'] = 'Explorer par matières';
+$Definition['Sort By'] = 'Trier par';
+$Definition['Most recent first'] = 'Les plus récentes d’abord';
+$Definition['The oldest first'] = 'Les plus anciennes d’abord';
+$Definition["You are about to delete the post. It will no longer be visible to users of the Mutual Aid Zone. <br/><br/>You can leave a comment on the reason for the deletion to the author."] = "Vous êtes sur le point de supprimer la publication. Elle ne sera plus visible par les utilisateurs de la Zone d’entraide.<br/><br/>Vous pouvez laisser un commentaire sur les raisons de la suppression à l’auteur.";
+$Definition['Giving an explanation'] = 'Donner une explication';
+$Definition['Student Question'] = 'Question de l’élève';
+$Definition['Home'] = 'Accueil';
+$Definition['The question is already followed'] = 'La question est déjà suivie';
+$Definition['Salvation! Happy to see you!'] = 'Salut! Content de te voir!';

@@ -19,6 +19,18 @@ jQuery(document).ready(function($) {
         $('.information-block.newdiscussion').removeClass('show');
     })
 
+    $(document).on('click', '.QuestionPopup .editor', function() {
+        if($('.QuestionPopup .editor .richEditor-text').hasClass('focus-visible')) {
+            $('.QuestionPopup .clickToCreate').hide();
+        }
+    })
+
+    $(document).on('click', '.QuestionPopup .mobile-categories .category-item', function() {
+        $('.QuestionPopup .mobile-categories .category-item').removeClass('selected');
+        $(this).addClass('selected');
+        $('.QuestionPopup #Form_CategoryID').val($(this).attr('id'));
+    })
+
     // $('.scrollToAskQuestionForm').click(function(){
     //     $('.AskQuestionForm').css('display', 'block');
     //     $('.AskQuestionForm .clickToCreate').trigger('click');

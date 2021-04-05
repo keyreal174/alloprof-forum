@@ -9,6 +9,16 @@
 }
 
 @font-face {
+    font-family: 'ChromaticaRegular';
+    src: local('Chromatica Medium'), local('Chromatica-Regular'),
+        url('../fonts/chromatica/Chromatica-Regular.woff2') format('woff2'),
+        url('../fonts/chromatica/Chromatica-Regular.woff') format('woff'),
+        url('../fonts/chromatica/Chromatica-Regular.ttf') format('truetype');
+    font-weight: 200;
+    font-style: normal;
+}
+
+@font-face {
     font-family: 'ChromaticaMedium';
     src: local('Chromatica Medium'), local('Chromatica-Medium'),
         url('../fonts/chromatica/Chromatica-Medium.woff2') format('woff2'),
@@ -108,15 +118,6 @@
     text-decoration: none !important;
 }
 
-@media screen and (max-width:768px) {
-
-    .flyoutIsOpen,
-    .NoScroll {
-        height: 100vh;
-        overflow: hidden
-    }
-}
-
 @-webkit-keyframes spinnerLoader {
     0% {
         -webkit-transform: rotate(73deg);
@@ -134,6 +135,10 @@
  * @copyright 2009-2018 Vanilla Forums Inc.
  * @license GPL-2.0-only
  */
+html {
+    overflow-y: auto !important;
+}
+
 body {
     font-family: "Chromatica", Open Sans, HelveticaNeue-Light, Segoe UI, Helvetica Neue, Helvetica, Raleway, Arial, sans-serif;
     font-size: 14px;
@@ -742,6 +747,10 @@ a.ChangePicture {
 
 .UserSignature {
     font-size: 12px
+}
+
+.Reactions {
+    display: flex;
 }
 
 .Reactions .ReactButton,
@@ -2714,7 +2723,6 @@ select::-ms-expand {
     border-radius: 6px;
     color: #555a62;
     display: inline-block;
-    font-family: Open Sans, HelveticaNeue-Light, Segoe UI, Helvetica Neue, Helvetica, Raleway, Arial, sans-serif;
     font-size: 14px;
     font-weight: 400;
     line-height: 36px;
@@ -3293,7 +3301,7 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
     border-radius: 6px;
     box-shadow: 0 5px 10px 0 rgba(0, 0, 0, .3);
     color: #555a62;
-    min-width: 400px;
+    min-width: 350px;
     padding: 15px 20px !important;
     position: absolute;
     z-index: 1
@@ -5083,7 +5091,7 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
     background: rgba(0, 0, 0, 0);
     margin: 0;
     min-height: 66px;
-    padding: 16px 8px 8px;
+    padding: 16px 0;
     width: 100%
 }
 
@@ -5606,7 +5614,7 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
     font-size: 20px;
     height: 32px;
     padding: 0;
-    margin: 0 10px;
+    margin: 0;
     width: 32px
 }
 
@@ -6352,7 +6360,7 @@ a.MoreWrap:hover {
 div.Popup {
     -ms-transform: translateX(-50%) translateY(-50%);
     -webkit-transform: translateX(-50%) translateY(-50%);
-    left: 50vw !important;
+    left: 49.5vw !important;
     position: fixed;
     top: 50vh !important;
     transform: translateX(-50%) translateY(-50%);
@@ -6415,6 +6423,7 @@ div.Popup .Content {
     width: auto !important
 }
 
+div.Popup .Footer a,
 div.Popup a.Close {
     -ms-flex-align: center;
     -ms-flex-pack: center;
@@ -6542,7 +6551,6 @@ div.Popup .Button.change-picture-remove:hover {
     display: flex !important;
     font-family: Arial, sans-serif;
     font-size: 20px;
-    font-size: 20px !important;
     justify-content: center;
     margin: 3px;
     padding: 0;
@@ -6636,6 +6644,7 @@ div.Popup .Button.change-picture-remove:hover {
 body.hasRichEditor .FormWrapper.FormWrapper-Condensed {
     background-color: rgba(0, 0, 0, 0);
     border-width: 0;
+    padding: 0;
     padding-right: 0 !important
 }
 

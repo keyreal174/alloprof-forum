@@ -133,7 +133,7 @@ class DiscussionController extends VanillaController {
      * @param string $DiscussionStub URL-safe title slug
      * @param string $Page The current page of comments
      */
-    public function index($DiscussionID = 0, $DiscussionStub = '', $Page = '', $Order = '') {
+    public function index($DiscussionID = 0, $DiscussionStub = '', $Page = 0, $Order = '') {
         // Setup head
         $Session = Gdn::session();
         $this->addJsFile('jquery.autosize.min.js');
@@ -405,6 +405,9 @@ class DiscussionController extends VanillaController {
         // Report the discussion id so js can use it.
         $this->addDefinition('DiscussionID', $DiscussionID);
         $this->addDefinition('Category', $this->data('Category.Name'));
+
+        $mobileHeader = new MobileHeaderModule('Student Question', true);
+        $this->addModule($mobileHeader);
 
         $this->fireEvent('BeforeDiscussionRender');
 
@@ -924,7 +927,7 @@ class DiscussionController extends VanillaController {
             }
         }
 
-        $this->setData('Title', t('Delete Discussion'));
+        $this->setData('Title', t('Delete Post'));
         $this->render();
     }
 
@@ -1477,7 +1480,8 @@ body { background: transparent !important; }
     // Social Sharing
     public function social($DiscussionID) {
         $this->setData('Discussion', $this->discussionByID($DiscussionID));
-        $this->setData('Title', 'Share your question!');
+        $this->setData('DesktopTitle', 'Share your question!');
+        $this->setData('MobileTitle', 'Share');
         $this->setData('SubTitle', 'Share it with your friends, they may have the explanation!');
         $this->setData('CopySubTitle', 'Asking yourself the same question? Share it with your friends, they may have the explanation!');
 

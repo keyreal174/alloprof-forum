@@ -89,7 +89,7 @@ if (!$CancelUrl) {
         echo '</div>';
     }
 
-    $this->fireEvent('AfterDiscussionFormOptions');
+    // $this->fireEvent('AfterDiscussionFormOptions');
 
     // Category select and grade select
     // if ($this->ShowCategorySelector === true) {
@@ -135,7 +135,7 @@ if (!$CancelUrl) {
         echo writeCategoryDropDown($this, 'CategoryID', $options);
         echo '<span class="space"></span>';
         echo '<div class="Category rich-select select2 select2-grade">';
-        echo '<img src="'.url("/themes/alloprof/design/images/icons/grade.svg").'"/>';
+        echo '<div class="pre-icon"><img src="'.url("/themes/alloprof/design/images/icons/grade.svg").'"/></div>';
         echo $this->Form->dropDown('GradeID', $GradeOption, array('Default' => $DefaultGrade, 'IncludeNull' => t('Grade'), 'IsDisabled' => TRUE));
         echo '</div>';
         echo '</div>';

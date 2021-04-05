@@ -1,17 +1,27 @@
+#dashboard_entry_ban .Frame-banner,
+#dashboard_entry_ban .Frame-footer,
 .PageNotFound .Frame-banner, .PageNotFound .Frame-footer {
     display: none;
 }
 
 .PageNotFound .Content {
-    height: calc(100vh - 270px);
+    /* height: calc(100vh - 270px); */
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 .PageNotFound .Content .SplashInfo {
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 3% 20px;
+    padding-top: 10%;
+}
+
+.PageNotFound .Content .SplashInfo img {
+    width: 70% !important;
+    max-width: 250px;
 }
 
 .PageNotFound .Content .SplashInfo h1 {
@@ -25,4 +35,32 @@
     font-size: 18px;
     line-height: 21px;
     margin-bottom: 30px;
+}
+
+#dashboard_entry_ban .Frame#page,
+.PageNotFound .Frame#page {
+    margin-bottom: 0 !important;
+}
+
+#dashboard_entry_index .sidebar,
+#dashboard_entry_ban .sidebar,
+#dashboard_entry_ban .discussion-filters-mobile,
+#dashboard_home_filenotfound .discussion-filters-mobile,
+#dashboard_home_filenotfound .sidebar {
+    display: none !important;
+}
+
+@media screen and (max-width: 619px) {
+    .PageNotFound .Content .SplashInfo #Message {
+        font-size: 15px;
+    }
+
+    .PageNotFound .Content .SplashInfo {
+        padding-bottom: 10%;
+        padding-top: 20%;
+    }
+
+    .PageNotFound .SplashInfo .btn {
+        margin-top: 0 !important;
+    }
 }
