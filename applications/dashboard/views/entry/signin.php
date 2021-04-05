@@ -87,7 +87,7 @@ echo '</div>';
 <div class="Methods">
     <div class="Method Method_0">
         <a
-            href="/entry/googlesignin-redirect"
+            href=<?= url("/entry/googlesignin-redirect") ?>
             class="SocialIcon SocialIcon-Google HasText default"
             rel="nofollow"
             title="Connexion enseignant"
