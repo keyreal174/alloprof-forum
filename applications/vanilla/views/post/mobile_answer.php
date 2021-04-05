@@ -65,7 +65,7 @@
                 echo '<div class="bottom shadow">';
                 if(!$this->invalid) {
                     echo '<div class="Buttons">';
-                    echo '<a href="/post/rules" class="RulesPopup">
+                    echo '<a href="'.url('/post/rules').'" class="RulesPopup">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <circle cx="12" cy="12" r="11.5" stroke="black"/>
                                     <path d="M11.985 6.75C11.1345 6.75 10.5 7.344 10.5 8.127C10.5 8.8965 11.1345 9.4905 11.985 9.4905C12.822 9.4905 13.443 8.8965 13.443 8.127C13.443 7.344 12.822 6.75 11.985 6.75ZM11.013 17.631H12.93V10.476H11.013V17.631Z" fill="black"/>
