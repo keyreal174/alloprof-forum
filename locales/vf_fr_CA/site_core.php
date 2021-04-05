@@ -1838,7 +1838,7 @@ $Definition['This content is protected by copyright. Any reproduction outside th
 
 $Definition['Filters'] = 'Filtres';
 $Definition['Status'] = 'Statut';
-$Definition['Grade'] = 'Niveaux';
+$Definition['Grade'] = 'Niveau';
 $Definition['Clean'] = 'Effacer';
 $Definition['Followed'] = 'Suivies';
 $Definition['Publication rules'] = 'Règles de publication';
