@@ -596,3 +596,7 @@ li.ItemDiscussion .Message {
 .DisableClickWrapper {
     width: fit-content;
 }
+
+.signinandsavecomment {
+    margin-left: auto;
+}
