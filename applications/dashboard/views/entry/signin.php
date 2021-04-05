@@ -71,19 +71,37 @@ echo '</div>';
 
 <?php
 // Render the buttons to select other methods of signing in.
-if (count($Methods) > 0) {
-    echo '<div class="Methods">';
+// if (count($Methods) > 0) {
+//     echo '<div class="Methods">';
 
-    foreach ($Methods as $Key => $Method) {
-        $CssClass = 'Method Method_'.$Key;
-        echo '<div class="'.$CssClass.'">',
-        $Method['SignInHtml'],
-        '</div>';
-    }
+//     foreach ($Methods as $Key => $Method) {
+//         $CssClass = 'Method Method_'.$Key;
+//         echo '<div class="'.$CssClass.'">',
+//         $Method['SignInHtml'],
+//         '</div>';
+//     }
 
-    echo '</div>';
-}
-
+//     echo '</div>';
+// }
+?>
+<div class="Methods">
+    <div class="Method Method_0">
+        <a
+            href="/entry/googlesignin-redirect"
+            class="SocialIcon SocialIcon-Google HasText default"
+            rel="nofollow"
+            title="Connexion enseignant"
+            tabindex="0"
+        >
+            <span class="Icon">
+            </span>
+            <span class="Text">
+                <?php echo t("Sign In with Google"); ?>
+            </span>
+        </a>
+    </div>
+</div>
+<?php
 echo $this->Form->close();
 echo '<div />';
 echo '<div />';

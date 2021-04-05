@@ -38,7 +38,7 @@ if ($IsProfilePage) {
 }
 
 $UserMetaData = Gdn::userModel()->getMeta(Gdn::session()->UserID, 'Profile.%', 'Profile.');
-$UserName = $UserMetaData["DisplayName"] ?? t('Unknown');
+$UserName = $UserMetaData["DisplayName"] ?? "";
 echo "<div class='Boxuserphoto'>";
 if ($Photo) : ?>
     <div class="Photo PhotoWrap PhotoWrapLarge <?php echo val('_CssClass', $User); ?>">

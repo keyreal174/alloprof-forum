@@ -25,7 +25,7 @@ $this->fireEvent('BeforeCommentForm');
             <?php
         } else {
             $Photo = $User->Photo ? url($User->Photo) : UserModel::getDefaultAvatarUrl($User, 'profile');
-            $UserName = $UserMetaData["DisplayName"] ?? t('Unknown');
+            $UserName = $UserMetaData["DisplayName"] ?? "";
             echo '<div class="UserInfo">';
             // echo "<a class='UserPhoto' href='".url("/profile/picture?userid=".$User->UserID)."'><img src='".$Photo."' class='PhotoWrap' alt='Photo'/></a>";
             echo '<span style="margin-right: 8px; height: 44px;">';

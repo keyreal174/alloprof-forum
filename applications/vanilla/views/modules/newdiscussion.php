@@ -27,7 +27,7 @@
     <div class="BoxNewDiscussion-header">
         <?php
             $UserMetaData = Gdn::userModel()->getMeta(Gdn::session()->UserID, 'Profile.%', 'Profile.');
-            $UserName = $UserMetaData['DisplayName'] ?? t('Unknown');
+            $UserName = $UserMetaData['DisplayName'] ?? "";
 
             $photoClassName = 'user-avatar';
             if (str_contains($Photo, 'avatars/0.svg')) {

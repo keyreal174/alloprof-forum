@@ -102,7 +102,7 @@ if ($Session->isValid()):
     if ($useNewFlyouts) {
         $imgUrl = userPhotoUrl($User);
         $UserMetaData = Gdn::userModel()->getMeta(Gdn::session()->UserID, 'Profile.%', 'Profile.');
-        $UserName = $UserMetaData["DisplayName"] ?? t('Unknown');
+        $UserName = $UserMetaData["DisplayName"] ?? "";
 
         if (str_contains($imgUrl, 'avatars/0.svg')) {
             $ClassName = "ProfilePhotoDefaultWrapper";

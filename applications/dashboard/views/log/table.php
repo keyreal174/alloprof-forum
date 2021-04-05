@@ -23,7 +23,7 @@ include $this->fetchViewLocation('helper_functions');
                 $viewPersonalInfo = gdn::session()->checkPermission('Garden.PersonalInfo.View');
 
                 $UserMetaData = Gdn::userModel()->getMeta($row['InsertUserID'], 'Profile.%', 'Profile.');
-                $UserName = $UserMetaData["DisplayName"] ?? t('Unknown');
+                $UserName = $UserMetaData["DisplayName"] ?? "";
 
                 $userBlock = new MediaItemModule($UserName, userUrl($user));
                 $userBlock->setView('media-sm')
@@ -55,7 +55,7 @@ include $this->fetchViewLocation('helper_functions');
                         $recordUser = Gdn::userModel()->getID($row['Data']['InsertUserID'] ?? $row['RecordUserID'], DATASET_TYPE_ARRAY);
                         if ($row['RecordName']) {
                             $UserMetaData = Gdn::userModel()->getMeta($row['Data']['InsertUserID'] ?? $row['RecordUserID'], 'Profile.%', 'Profile.');
-                            $UserName = $UserMetaData["DisplayName"] ?? t('Unknown');
+                            $UserName = $UserMetaData["DisplayName"] ?? "";
 
                             $authorBlock = new MediaItemModule($UserName, userUrl($recordUser));
                             $authorBlock->setView('media-sm')

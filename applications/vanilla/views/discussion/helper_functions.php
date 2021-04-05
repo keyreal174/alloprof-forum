@@ -162,7 +162,7 @@ if (!function_exists('writeComment')) :
                             echo userPhoto($author);
                             if ($sender->getUserRole($comment->InsertUserID) == "Teacher") {
                                 $UserMetaData = Gdn::userModel()->getMeta($author->UserID, 'Profile.%', 'Profile.');
-                                $name = $UserMetaData["DisplayName"] ?? t("Unknown");
+                                $name = $UserMetaData["DisplayName"] ?? "";
                                 echo '<a class="Username js-userCard" style="display: flex;" data-userid="'.$author->UserID.'">'.$name.'<img class="TeacherCheckIcon" src="'.url("/themes/alloprof/design/images/icons/teacherCheck.svg").'" alt="teacher check"></a>';
                             } else {
                                 echo userAnchor($author, 'Username');
