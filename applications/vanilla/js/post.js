@@ -120,6 +120,7 @@ jQuery(document).ready(function($) {
                 gdn.enable(btn);
             },
             success: function(json) {
+                console.log("11111", json)
                 // Remove any old popups if not saving as a draft
                 // if (!draft)
                 //     $('div.Popup').remove();

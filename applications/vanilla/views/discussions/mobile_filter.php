@@ -52,3 +52,43 @@
     <button class="btn-default clean-filter"><?php echo t('Clean') ?></button>
     <button class="btn-default btn-shadow apply-filter"><?php echo t('Apply') ?></button>
 </div>
+
+<script>
+    var getUrlParameter = function getUrlParameter(sParam) {
+        var sPageURL = window.location.search.substring(1),
+            sURLVariables = sPageURL.split('&'),
+            sParameterName,
+            i;
+
+        for (i = 0; i < sURLVariables.length; i++) {
+            sParameterName = sURLVariables[i].split('=');
+
+            if (sParameterName[0] === sParam) {
+                return typeof sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+            }
+        }
+        return false;
+    };
+
+    var setPreFilter = function setPreFilter() {
+        var grade = getUrlParameter('grade');
+        var sort = getUrlParameter('sort');
+        var explanation = getUrlParameter('explanation');
+        var verifiedBy = getUrlParameter('verifiedBy');
+        var subject = getUrlParameter('subject');
+
+        if(sort === 'asc')
+            $(".FilterPopup input:radio").last().prop("checked", true);
+        else $(".FilterPopup input:radio").first().prop("checked", true);
+
+        if(explanation === 'true')
+            $('.FilterMenu #Form_MobileExplanation').attr("checked", true);
+
+        if(verifiedBy === 'true')
+            $('.FilterMenu #Form_MobileVerifiedBy').attr("checked", true);
+
+        $('.FilterMenu .mobile-grade .item[value='+grade+']').addClass('selected');
+    }
+
+    setPreFilter();
+</script>

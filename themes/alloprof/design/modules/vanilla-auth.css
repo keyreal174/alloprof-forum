@@ -116,7 +116,6 @@ div.Popup.SignInPopup li.form-group select {
     appearance: none;
 }
 
-.UserLoggedOut li.form-group:after,
 div.Popup.SignInPopup li.form-group:after {
     content: "";
     background: url('../../../../themes/alloprof/design/images/icons/arrowDown.svg');

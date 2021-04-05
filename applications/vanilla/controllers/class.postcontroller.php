@@ -852,7 +852,7 @@ class PostController extends VanillaController {
      * @param int $discussionID Unique ID of the discussion to edit.
      * @param int $draftID Unique ID of draft discussion to edit.
      */
-    public function editDiscussion($discussionID = 0, $draftID = 0) {
+    public function editDiscussion($discussionID = 0, $draftID = 0, $isMobile=false) {
         if ($draftID != 0) {
             $record = $this->Draft = $this->DraftModel->getID($draftID);
             $this->CategoryID = $this->Draft->CategoryID;
@@ -889,18 +889,21 @@ class PostController extends VanillaController {
         $this->addModule('CategoriesModule');
         $this->addModule('BookmarkedModule');
 
+        $mobileHeader = new MobileHeaderModule("Edit question", true);
+        $this->addModule($mobileHeader);
+
         // $this->getUserInfo('', '', $this->Discussion->InsertUserID);
 
         $this->addModule('UserPhotoModule');
         // $this->fireEvent('AddProfileInfo');
 
         // Set view and render
-        $this->View = 'Discussion';
+        $this->View = $isMobile?'mobile_askquestion':'Discussion';
         $this->discussion($this->CategoryID);
     }
 
-    public function editdiscussionpopup($discussionID = 0, $draftID = 0) {
-        $this->editDiscussion($discussionID = 0, $draftID = 0);
+    public function editQuestionPopup($discussionID = 0, $draftID = 0) {
+        $this->editDiscussion($discussionID = 0, $draftID = 0, true);
     }
 
     /**

@@ -59,18 +59,20 @@
 ?>
 
 <div class="BoxConfirmFollow">
-    <img src="<?= url('/themes/alloprof/design/images/confirmfollow-bot.svg') ?>" />
-    <h2><?php echo t("Oops! The question is already followed") ?></h2>
+    <h2 class="d-mobile"><?php echo t("The question is already followed") ?></h2>
+    <img src="<?= url('/themes/alloprof/design/images/noquestion.svg') ?>" />
+
+    <h2 class="d-desktop"><?php echo t("Oops! The question is already followed") ?></h2>
 
     <p><?php echo t("A teacher has already indicated that he wants to answer this question.") ?></p>
     <p><?php echo t("Do you still want to add the question to your list?") ?></p>
 
     <div class="BoxConfirmFollow-options">
         <?php
-            echo '<button id="'.$discussion->DiscussionID.'" after-title="'.t('UnFollow').'" class="btn-default followButton Option-Icon'.($isBookmarked ? ' TextColor isFollowing' : '').'" title="'.$title.'" data-url="'.'/discussion/bookmark/'.$discussion->DiscussionID.'/'.Gdn::session()->transientKey().'">'.t("Add to my list")."</button>";
+            echo '<button id="'.$discussion->DiscussionID.'" after-title="'.t('UnFollow').'" class="btn-default followButton Option-Icon'.($isBookmarked ? ' TextColor isFollowing' : '').'" title="'.$title.'" data-url="'.'/discussion/bookmark/'.$discussion->DiscussionID.'/'.Gdn::session()->transientKey().'">'.'<span class="d-desktop">'.t("Add to my list").'</span>'.'<span class="d-mobile">'.t("Add").'</span>'."</button>";
         ?>
         <a class="btn-default btn-shadow close-link Close">
-            <span> <?php echo t("Cancel") ?> </span>
+            <span> <?php echo t("Cancel"); ?> </span>
         </a>
     </div>
 </div>

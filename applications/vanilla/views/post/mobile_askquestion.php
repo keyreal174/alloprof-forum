@@ -1,6 +1,8 @@
 <?php if (!defined('APPLICATION')) exit();
     include_once $this->fetchViewLocation('helper_functions', 'discussions', 'vanilla');
 
+    $Content = $this->Form->getFormValue('Body', false);
+
     $User = val('User', Gdn::controller());
     if (!$User && Gdn::session()->isValid()) {
         $User = Gdn::session()->User;
@@ -26,7 +28,7 @@
 </div>
 <div class="modal-body">
     <div class="BoxButtons BoxNewDiscussion">
-        <div id="DiscussionForm" class="FormTitleWrapper DiscussionForm">
+        <div class="FormTitleWrapper DiscussionForm">
             <?php
                 echo '<div class="FormWrapper">';
                 echo $this->Form->open();
@@ -63,7 +65,8 @@
 
                             $this->fireEvent('BeforeBodyInput');
 
-                            echo '<div class="clickToCreate">'.t('What is your question?').'</div>';
+                            if(!$Content)
+                                echo '<div class="clickToCreate">'.t('What is your question?').'</div>';
 
                             echo '<div class="P">';
                             echo $this->Form->bodyBox('Body', ['Table' => 'Discussion', 'FileUpload' => true, 'placeholder' => t('Type your question'), 'title' => t('Type your question')]);
@@ -109,7 +112,7 @@
                     }
 
 
-                    echo writeCategoryDropDown($this, 'CategoryID', $options, true);
+                    echo writeCategoryDropDown($this, 'CategoryID', $options, true, $this->Form);
                     echo '<span class="space"></span>';
                     echo '<div class="Category rich-select select2 select2-grade">';
                     echo '<div class="pre-icon"><img src="'.url("/themes/alloprof/design/images/icons/grade.svg").'"/></div>';

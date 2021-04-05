@@ -172,7 +172,7 @@ span.ReactButtons a.ReactButton.ReactButton-Like .additional-label {
 
 .EditDiscussionDetail .selects {
     display: flex;
-    margin-top: 40px;
+    margin-top: 25px;
 }
 
 .EditDiscussionDetail .selects {
@@ -236,10 +236,8 @@ span.ReactButtons a.ReactButton.ReactButton-Like .additional-label {
 
 .Discussion .modal-confirm.restore .modal-footer button,
 .Discussions .modal-confirm.restore .modal-footer button {
-    border: 1px solid #1A1919 !important;
     border-radius: 38px !important;
     background: white;
-    color: black !important;
     font-family: "ChromaticaBold";
     padding: 10px 30px !important;
     font-size: 15px !important;
@@ -268,5 +266,26 @@ span.ReactButtons a.ReactButton.ReactButton-Like .additional-label {
 @media screen and (max-width: 619px) {
     .discussion-list-footer a.btn-default {
         display: flex !important;
+    }
+    .EditDiscussionDetail .selects {
+        flex-wrap: wrap;
+        padding:0 25px;
+        margin-top: 10px;
+    }
+    .EditDiscussionDetail .Buttons {
+        padding: 0 25px;
+    }
+    .EditDiscussionDetail {
+        background-color: white;
+        padding: 0;
+        padding-bottom: 50px;
+        margin-top: -25px;
+        margin-bottom: 0;
+    }
+    .MessageList.Editing .Item-Body {
+        margin-bottom: 24px;
+    }
+    #vanilla_post_editdiscussion .discussion-filters-mobile {
+        display: none !important;
     }
 }

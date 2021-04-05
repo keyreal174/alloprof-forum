@@ -406,7 +406,7 @@ class DiscussionController extends VanillaController {
         $this->addDefinition('DiscussionID', $DiscussionID);
         $this->addDefinition('Category', $this->data('Category.Name'));
 
-        $mobileHeader = new MobileHeaderModule('Student Questions', true);
+        $mobileHeader = new MobileHeaderModule('Student Question', true);
         $this->addModule($mobileHeader);
 
         $this->fireEvent('BeforeDiscussionRender');

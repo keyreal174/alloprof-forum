@@ -45,13 +45,66 @@
     padding-top: 13px;
 }
 
+.MeBox.FlyoutRight .Flyout li a.dropdown-menu-link-Close {
+    display: none;
+}
 
 @media screen and (max-width: 619px) {
     .MeBox.FlyoutRight .Flyout.authorized {
         padding: 15px !important;
     }
 
+    .MeBox.FlyoutRight .Flyout {
+        border: none !important;
+    }
+
+    .MeBox.FlyoutRight .Flyout.authorized,
     .MeBox.FlyoutRight .Flyout.unauthorized {
         top: 0;
+        display: flex !important;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding-bottom: 100px !important;
+    }
+
+    .MeBox.FlyoutRight .Flyout.authorized li hr {
+        min-width: 300px;
+    }
+
+    .MeBox.FlyoutRight .Flyout.authorized li a {
+        font-size: 20px;
+        font-weight: 300;
+    }
+
+    .MeBox.FlyoutRight .Flyout.unauthorized li a {
+        font-size: 25px;
+        border: none !important;
+        padding: 13px !important;
+    }
+
+    .MeBox.FlyoutRight .Flyout li a.dropdown-menu-link-Close {
+        position: fixed;
+        top: 0px;
+        right: 0;
+        width: 60px;
+        display: flex !important;
+        font-size: 41px;
+        line-height: 18px;
+        text-decoration: none !important;
+        font-family: "ChromaticaThin";
+        display: block;
+        font-weight: lighter !important;
+    }
+
+    .MeBox.FlyoutRight .Flyout li .dropdown-menu-link .Alert {
+        background: #fa4444;
+        border-radius: 20px;
+        padding: 0 5px;
+        color: white;
+        position: absolute;
+        right: -13px;
+        top: 5px;
+        font-size: 10px;
     }
 }

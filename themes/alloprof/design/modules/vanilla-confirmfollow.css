@@ -1,12 +1,5 @@
 .BoxConfirmFollow {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    padding: 64px 50px;
-    height: 532px;
     background: #FFFFFF;
-    border-radius: 8px;
 }
 
 .BoxConfirmFollow h2 {
@@ -18,10 +11,16 @@
 }
 
 .BoxConfirmFollow p {
-    font-size: 18px;
-    line-height: 21px;
-    margin: 0;
+    font-size: 15px !important;
+    line-height: 18px !important;
+    margin: 0 !important;
+    padding: 0 !important;
     color: #4F4F4F;
+}
+
+.BoxConfirmFollow img {
+    margin-bottom: 20px;
+    width: 96px;
 }
 
 .BoxConfirmFollow .BoxConfirmFollow-options {
@@ -38,3 +37,12 @@
     left: 0 !important;
     margin: 0 10px;
 }
+
+.modal-confirm {
+    padding-bottom: 15px;
+}
+
+.followButton {
+    text-transform: none !important;
+}
+

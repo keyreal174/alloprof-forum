@@ -75,7 +75,7 @@
 <script>
     $(document).on('keyup', '#mobileSearch', function (e) {
         if(e.keyCode == 13){
-            window.location.replace("/search?Search="+$(this).val());
+            window.location.replace('<?php echo url("/search?Search=") ?>'+$(this).val());
         }
     })
 </script>

@@ -171,6 +171,9 @@ class SearchController extends Gdn_Controller {
         // Make sure the userphoto module gets added to the page
         $this->addModule('UserPhotoModule');
 
+        $mobileHeader = new MobileHeaderModule(null);
+        $this->addModule($mobileHeader);
+
         // And add the filter menu module
         $this->fireEvent('AfterAddSideMenu');
 

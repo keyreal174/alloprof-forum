@@ -89,6 +89,11 @@
     display: none;
 }
 
+body.isMobile .FormWrapper {
+    padding-left: 0;
+    padding-right: 0;
+}
+
 .AskQuestionForm .close-icon.show {
     display: block;
 }

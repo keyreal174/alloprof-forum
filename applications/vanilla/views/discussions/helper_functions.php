@@ -122,7 +122,7 @@ if (!function_exists('BookmarkButton')) {
             return anchor(
                 $icon,
                 $popupLink,
-                'Hijack followButton Option-Icon Popup'.($isBookmarked ? ' TextColor isFollowing' : ''),
+                'Hijack followButton Option-Icon SocialPopup'.($isBookmarked ? ' TextColor isFollowing' : ''),
                 ['title' => $title, 'id' => 'followButton'.$discussion->DiscussionID, 'aria-pressed' => $isBookmarked ? 'true' : 'false', 'role' => 'button', 'aria-label' => $accessibleLabel]
             );
         }
@@ -325,11 +325,17 @@ if (!function_exists('WriteDiscussion')) :
 endif;
 
 if (!function_exists('writeCategoryDropDown')) :
-    function writeCategoryDropDown($sender, $fieldName = 'CategoryID', $options = [], $isMobile=false) {
+    function writeCategoryDropDown($sender, $fieldName = 'CategoryID', $options = [], $isMobile=false, $form=false) {
         $sender->EventArguments['Options'] = &$options;
         $sender->fireEvent('BeforeCategoryDropDown');
 
         $value = arrayValueI('Value', $options); // The selected category id
+        if ($value === false && $form) {
+            $value = $form->getFormValue($fieldName, false);
+        }
+        if (!is_array($value)) {
+            $value = [$value];
+        }
         $categoryData = val('CategoryData', $options);
 
         // Grab the category data.
@@ -372,6 +378,8 @@ if (!function_exists('writeCategoryDropDown')) :
         unset($options['Filter'], $options['PermFilter'], $options['Context'], $options['CategoryData']);
 
         if($isMobile) {
+            // Prevent default $Value from matching key of zero
+            $hasValue = ($value !== [false] && $value !== ['']) ? true : false;
             echo '<div class="mobile-categories">';
             if (is_array($safeCategoryData)) {
                 foreach ($safeCategoryData as $categoryID => $category) {
