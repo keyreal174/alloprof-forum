@@ -291,14 +291,17 @@ if (!function_exists('getDiscussionOptions')) :
                     ->where('RecordType', 'Discussion')
                     ->get()
                     ->value('LogID', null);
-                $options['ApprovePublication'] = ['Label' => '<span>'.t('Approve the publication').'</span>', 'Url' => '#', 'Class' => 'RestoreButton', 'Id' => $logID];
+                $options['ApprovePublication'] = ['Label' => '<svg width="24" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1.29492 12C1.29492 5.92487 6.21979 1 12.2949 1C15.2123 1 18.0102 2.15893 20.0731 4.22183C22.136 6.28473 23.2949 9.08262 23.2949 12C23.2949 18.0751 18.3701 23 12.2949 23C6.21979 23 1.29492 18.0751 1.29492 12Z" fill="#05BF8E" stroke="#05BF8E" stroke-width="2"/>
+                <path d="M7.79492 12L10.9769 15.182L17.3409 8.81802" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg><span>'.t('Approve the publication').'</span>', 'Url' => '#', 'Class' => 'RestoreButton', 'Id' => $logID];
             }
         }
 
         $flagLink = addFlagButtonToDropdown($discussion, 'discussion');
         if ($session && $session->UserID != $discussion->InsertUserID) {
             $options['FlagDiscussion'] = [
-                'Label' => '<svg width="15" height="20" viewBox="0 0 15 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                'Label' => '<svg width="24" height="24" viewBox="0 0 15 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M13.2979 3.175L5.41992 2.52175L2.49492 2.278V1.225C2.49492 0.686522 2.0584 0.25 1.51992 0.25C0.981444 0.25 0.544922 0.686522 0.544922 1.225V18.775C0.544922 19.3135 0.981444 19.75 1.51992 19.75C2.0584 19.75 2.49492 19.3135 2.49492 18.775V11.872L5.41992 11.6283L13.2979 10.975C13.8057 10.9342 14.1966 10.5094 14.1949 10V4.15C14.1966 3.64057 13.8057 3.21575 13.2979 3.175ZM4.44489 9.75602L2.49489 9.91201V4.23752L4.44489 4.39352V9.75602ZM8.34493 9.42452L6.39493 9.59027V4.55926L8.34493 4.72501V9.42452ZM12.245 9.10276L10.2949 9.26851V4.88101L12.245 5.04676V9.10276Z" fill="#EB5757"/>
                 </svg><span>'.t($flagLink['name']).'</span>',
                 'Url' => $flagLink['url']
@@ -312,7 +315,12 @@ if (!function_exists('getDiscussionOptions')) :
             if ($timeLeft) {
                 $timeLeft = ' ('.Gdn_Format::seconds($timeLeft).')';
             }
-            $options['EditDiscussion'] = ['Label' => t('Edit the publication').$timeLeft, 'Url' => '/post/editdiscussion/'.$discussion->DiscussionID, 'Class' => 'EditDiscussion'];
+            $options['EditDiscussion'] = ['Label' => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M23.6488 3.2648L20.7329 0.348935C20.2649 -0.116312 19.509 -0.116312 19.041 0.348935L12.3453 7.04462C12.1207 7.27107 11.9955 7.57763 11.9973 7.89658V10.8004C11.9973 11.4631 12.5345 12.0004 13.1973 12.0004H16.1011C16.4201 12.0022 16.7266 11.877 16.9531 11.6524L23.6488 4.95672C24.114 4.48869 24.114 3.73282 23.6488 3.2648ZM15.597 9.60073H14.3971V8.40079L19.8928 2.90505L21.0928 4.10499L15.597 9.60073ZM20.3969 12.0006C19.7342 12.0006 19.1969 12.5378 19.1969 13.2006C19.1969 17.8395 15.4363 21.6002 10.7973 21.6002H4.08966L4.85763 20.8442C5.08479 20.6189 5.21257 20.3122 5.21257 19.9922C5.21257 19.6723 5.08479 19.3656 4.85763 19.1403C2.4551 16.738 1.73635 13.125 3.03655 9.98608C4.33676 6.84721 7.39983 4.80071 10.7973 4.80095C11.4601 4.80095 11.9973 4.26372 11.9973 3.60101C11.9973 2.9383 11.4601 2.40107 10.7973 2.40107C6.65301 2.41469 2.88202 4.79877 1.09229 8.53675C-0.697448 12.2747 -0.190202 16.7072 2.39774 19.9442L0.34584 21.9481C0.00536261 22.2932 -0.0940553 22.8092 0.0938519 23.2561C0.277927 23.7042 0.71338 23.9976 1.1978 24H10.7973C16.7617 24 21.5968 19.1649 21.5968 13.2006C21.5968 12.5378 21.0596 12.0006 20.3969 12.0006Z" fill="black"/>
+            </svg><span>'.t('Edit the publication').$timeLeft.'</span>', 'Url' => '/post/editdiscussion/'.$discussion->DiscussionID, 'Class' => 'EditDiscussion d-desktop'];
+            $options['EditDiscussionPopup'] = ['Label' => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M23.6488 3.2648L20.7329 0.348935C20.2649 -0.116312 19.509 -0.116312 19.041 0.348935L12.3453 7.04462C12.1207 7.27107 11.9955 7.57763 11.9973 7.89658V10.8004C11.9973 11.4631 12.5345 12.0004 13.1973 12.0004H16.1011C16.4201 12.0022 16.7266 11.877 16.9531 11.6524L23.6488 4.95672C24.114 4.48869 24.114 3.73282 23.6488 3.2648ZM15.597 9.60073H14.3971V8.40079L19.8928 2.90505L21.0928 4.10499L15.597 9.60073ZM20.3969 12.0006C19.7342 12.0006 19.1969 12.5378 19.1969 13.2006C19.1969 17.8395 15.4363 21.6002 10.7973 21.6002H4.08966L4.85763 20.8442C5.08479 20.6189 5.21257 20.3122 5.21257 19.9922C5.21257 19.6723 5.08479 19.3656 4.85763 19.1403C2.4551 16.738 1.73635 13.125 3.03655 9.98608C4.33676 6.84721 7.39983 4.80071 10.7973 4.80095C11.4601 4.80095 11.9973 4.26372 11.9973 3.60101C11.9973 2.9383 11.4601 2.40107 10.7973 2.40107C6.65301 2.41469 2.88202 4.79877 1.09229 8.53675C-0.697448 12.2747 -0.190202 16.7072 2.39774 19.9442L0.34584 21.9481C0.00536261 22.2932 -0.0940553 22.8092 0.0938519 23.2561C0.277927 23.7042 0.71338 23.9976 1.1978 24H10.7973C16.7617 24 21.5968 19.1649 21.5968 13.2006C21.5968 12.5378 21.0596 12.0006 20.3969 12.0006Z" fill="black"/>
+            </svg><span>'.t('Edit the publication').$timeLeft.'</span>', 'Url' => '/post/editdiscussionpopup/'.$discussion->DiscussionID, 'Class' => 'EditDiscussion d-mobile QuestionPopup'];
         }
 
         // Can the user announce?
@@ -365,9 +373,11 @@ if (!function_exists('getDiscussionOptions')) :
         if (CategoryModel::checkPermission($categoryID, 'Vanilla.Discussions.Delete')) {
             $category = CategoryModel::categories($categoryID);
             $options['DeleteDiscussion'] = [
-                'Label' => t('Delete the publication'),
+                'Label' => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M21.4 4.8H16.6V3.6C16.6 1.61177 14.9882 0 13 0H10.6C8.61177 0 7 1.61177 7 3.6V4.8H2.2C1.53726 4.8 1 5.33726 1 6C1 6.66274 1.53726 7.2 2.2 7.2H3.4V20.4C3.4 22.3882 5.01178 24 7 24H16.6C18.5882 24 20.2 22.3882 20.2 20.4V7.2H21.4C22.0627 7.2 22.6 6.66274 22.6 6C22.6 5.33726 22.0627 4.8 21.4 4.8ZM9.40007 3.60031C9.40007 2.93757 9.93732 2.40031 10.6001 2.40031H13.0001C13.6628 2.40031 14.2001 2.93757 14.2001 3.60031V4.80031H9.40007V3.60031ZM17.8001 20.4C17.8001 21.0627 17.2629 21.6 16.6001 21.6H7.00013C6.33739 21.6 5.80013 21.0627 5.80013 20.4V7.19995H17.8001V20.4Z" fill="#333333"/>
+                </svg><span>'.t('Delete the publication').'</span>',
                 'Url' => '/discussion/delete?discussionid='.$discussion->DiscussionID.'&target='.urlencode(categoryUrl($category)),
-                'Class' => 'DeleteDiscussion DeleteDiscussionPopup'
+                'Class' => 'DeleteDiscussion SocialPopup'
             ];
         }
 
@@ -603,12 +613,12 @@ if (!function_exists('getCommentOptions')) :
         if ($sender->getUserRole() === 'Teacher') {
             if ($comment->Published) {
                 if ($comment->DateAccepted) {
-                    $options['QnA'] = ['Label' => '<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    $options['QnA'] = ['Label' => '<svg width="24" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M1.29492 12C1.29492 5.92487 6.21979 1 12.2949 1C15.2123 1 18.0102 2.15893 20.0731 4.22183C22.136 6.28473 23.2949 9.08262 23.2949 12C23.2949 18.0751 18.3701 23 12.2949 23C6.21979 23 1.29492 18.0751 1.29492 12Z" fill="#05BF8E" stroke="#05BF8E" stroke-width="2"/>
                 <path d="M7.79492 12L10.9769 15.182L17.3409 8.81802" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg><span>'.t('Remove verification').'</span>', 'Url' => 'javascript:;', 'Class' => 'mark-verify', 'Id' => url('/discussion/unverify?commentid='.$comment->CommentID)];
                 } else {
-                    $options['QnA'] = ['Label' => '<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    $options['QnA'] = ['Label' => '<svg width="24" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M1.29492 12C1.29492 5.92487 6.21979 1 12.2949 1C15.2123 1 18.0102 2.15893 20.0731 4.22183C22.136 6.28473 23.2949 9.08262 23.2949 12C23.2949 18.0751 18.3701 23 12.2949 23C6.21979 23 1.29492 18.0751 1.29492 12Z" fill="#05BF8E" stroke="#05BF8E" stroke-width="2"/>
                 <path d="M7.79492 12L10.9769 15.182L17.3409 8.81802" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg><span>'.t('Mark as verified').'</span>', 'Url' => 'javascript:;', 'Class' => 'mark-verify', 'Id' => url('/discussion/verify?commentid='.$comment->CommentID)];
@@ -621,7 +631,10 @@ if (!function_exists('getCommentOptions')) :
                     ->where('RecordType', 'Comment')
                     ->get()
                     ->value('LogID', null);
-                $options['ApprovePublication'] = ['Label' => '<span>'.t('Approve the publication').'</span>', 'Url' => '#', 'Class' => 'RestoreButton', 'Id' => $logID];
+                $options['ApprovePublication'] = ['Label' => '<svg width="24" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1.29492 12C1.29492 5.92487 6.21979 1 12.2949 1C15.2123 1 18.0102 2.15893 20.0731 4.22183C22.136 6.28473 23.2949 9.08262 23.2949 12C23.2949 18.0751 18.3701 23 12.2949 23C6.21979 23 1.29492 18.0751 1.29492 12Z" fill="#05BF8E" stroke="#05BF8E" stroke-width="2"/>
+                <path d="M7.79492 12L10.9769 15.182L17.3409 8.81802" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg><span>'.t('Approve the publication').'</span>', 'Url' => '#', 'Class' => 'RestoreButton', 'Id' => $logID];
             }
         }
 
@@ -632,9 +645,9 @@ if (!function_exists('getCommentOptions')) :
                 $timeLeft = ' ('.Gdn_Format::seconds($timeLeft).')';
             }
             $options['EditComment'] = [
-                'Label' => '<svg width="21" height="22" viewBox="0 0 21 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M14.5853 3.61017C15.1032 3.90423 15.7614 3.72517 16.0589 3.20926C16.3022 2.77995 16.8048 2.56923 17.2815 2.69669C17.7582 2.82415 18.0886 3.2576 18.0851 3.75103C18.0851 4.34945 17.6 4.83457 17.0016 4.83457C16.4032 4.83457 15.9181 5.31969 15.9181 5.91811C15.9181 6.51653 16.4032 7.00165 17.0016 7.00165C18.5788 7.00063 19.9278 5.86752 20.201 4.31413C20.4742 2.76073 19.5929 1.23535 18.1106 0.696217C16.6284 0.157085 14.973 0.759795 14.1844 2.12572C14.0397 2.37551 14.0006 2.6727 14.0759 2.95138C14.1512 3.23007 14.3345 3.4672 14.5853 3.61017ZM19.2446 11.3356C18.6524 11.2588 18.1096 11.6755 18.031 12.2675C17.5605 16.0683 14.3303 18.9221 10.5004 18.9204H4.44342L5.14772 18.2161C5.56783 17.7935 5.56783 17.1109 5.14772 16.6883C2.98737 14.5195 2.34256 11.2646 3.51288 8.43589C4.6832 5.60722 7.4392 3.75936 10.5004 3.75086C11.0988 3.75086 11.5839 3.26574 11.5839 2.66732C11.5839 2.0689 11.0988 1.58378 10.5004 1.58378C6.76216 1.59937 3.36183 3.75059 1.74656 7.12188C0.131296 10.4932 0.585408 14.4911 2.91563 17.4143L1.06278 19.2346C0.755331 19.5462 0.665557 20.0122 0.835236 20.4157C1.00145 20.8203 1.39466 21.0853 1.83209 21.0875H10.5004C15.4133 21.0881 19.5596 17.434 20.1764 12.56C20.2164 12.2739 20.1405 11.9836 19.9655 11.7537C19.7906 11.5238 19.531 11.3733 19.2446 11.3356ZM17.4133 8.16115C17.216 8.07388 16.9972 8.04747 16.7849 8.08531L16.5898 8.15032L16.3948 8.24784L16.2322 8.3887C16.1348 8.48854 16.0575 8.60628 16.0047 8.73543C15.9406 8.87058 15.9109 9.01945 15.918 9.16885C15.9149 9.31335 15.9407 9.45703 15.9939 9.59143C16.0499 9.72147 16.1309 9.83927 16.2322 9.93816C16.4367 10.141 16.7136 10.2541 17.0016 10.2524C17.6 10.2524 18.0851 9.76727 18.0851 9.16885C18.0888 9.02671 18.0591 8.88569 17.9984 8.7571C17.882 8.49673 17.6737 8.28842 17.4133 8.17199V8.16115Z" fill="black"/>
-                </svg><span>'.t('Edit the post').$timeLeft.'</span>',
+                'Label' => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M23.6488 3.2648L20.7329 0.348935C20.2649 -0.116312 19.509 -0.116312 19.041 0.348935L12.3453 7.04462C12.1207 7.27107 11.9955 7.57763 11.9973 7.89658V10.8004C11.9973 11.4631 12.5345 12.0004 13.1973 12.0004H16.1011C16.4201 12.0022 16.7266 11.877 16.9531 11.6524L23.6488 4.95672C24.114 4.48869 24.114 3.73282 23.6488 3.2648ZM15.597 9.60073H14.3971V8.40079L19.8928 2.90505L21.0928 4.10499L15.597 9.60073ZM20.3969 12.0006C19.7342 12.0006 19.1969 12.5378 19.1969 13.2006C19.1969 17.8395 15.4363 21.6002 10.7973 21.6002H4.08966L4.85763 20.8442C5.08479 20.6189 5.21257 20.3122 5.21257 19.9922C5.21257 19.6723 5.08479 19.3656 4.85763 19.1403C2.4551 16.738 1.73635 13.125 3.03655 9.98608C4.33676 6.84721 7.39983 4.80071 10.7973 4.80095C11.4601 4.80095 11.9973 4.26372 11.9973 3.60101C11.9973 2.9383 11.4601 2.40107 10.7973 2.40107C6.65301 2.41469 2.88202 4.79877 1.09229 8.53675C-0.697448 12.2747 -0.190202 16.7072 2.39774 19.9442L0.34584 21.9481C0.00536261 22.2932 -0.0940553 22.8092 0.0938519 23.2561C0.277927 23.7042 0.71338 23.9976 1.1978 24H10.7973C16.7617 24 21.5968 19.1649 21.5968 13.2006C21.5968 12.5378 21.0596 12.0006 20.3969 12.0006Z" fill="black"/>
+                </svg><span>'.t('Edit the comment').$timeLeft.'</span>',
                 'Url' => '/post/editcomment/'.$comment->CommentID,
                 'EditComment'
             ];
@@ -656,7 +669,9 @@ if (!function_exists('getCommentOptions')) :
         $canSelfDelete = ($canEdit && $session->UserID == $comment->InsertUserID && c('Vanilla.Comments.AllowSelfDelete'));
         if ($canDelete || $canSelfDelete) {
             $options['DeleteComment'] = [
-                'Label' => t('Delete the publication'),
+                'Label' => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M21.4 4.8H16.6V3.6C16.6 1.61177 14.9882 0 13 0H10.6C8.61177 0 7 1.61177 7 3.6V4.8H2.2C1.53726 4.8 1 5.33726 1 6C1 6.66274 1.53726 7.2 2.2 7.2H3.4V20.4C3.4 22.3882 5.01178 24 7 24H16.6C18.5882 24 20.2 22.3882 20.2 20.4V7.2H21.4C22.0627 7.2 22.6 6.66274 22.6 6C22.6 5.33726 22.0627 4.8 21.4 4.8ZM9.40007 3.60031C9.40007 2.93757 9.93732 2.40031 10.6001 2.40031H13.0001C13.6628 2.40031 14.2001 2.93757 14.2001 3.60031V4.80031H9.40007V3.60031ZM17.8001 20.4C17.8001 21.0627 17.2629 21.6 16.6001 21.6H7.00013C6.33739 21.6 5.80013 21.0627 5.80013 20.4V7.19995H17.8001V20.4Z" fill="#333333"/>
+                </svg><span>'.t('Delete the publication').'</span>',
                 'Url' => '/discussion/deletecomment/'.$comment->CommentID.'/'.$session->transientKey().'/?Target='.urlencode("/discussion/{$comment->DiscussionID}/x"),
                 'Class' => 'DeleteComment'
             ];
@@ -941,7 +956,7 @@ if (!function_exists('writeDiscussionFooter')) :
                     }
                 ?>
             </div>
-            <div>
+            <div class="Item-Footer-Buttons">
                 <?php
                     $commentsLabel = $commentsCount < 2 ? $commentsCount . ' ' . t('explanation') : $commentsCount . ' ' . t('explanations');
                     if (!$sender->data('IsAnswer')) {
@@ -950,15 +965,21 @@ if (!function_exists('writeDiscussionFooter')) :
                         if ($Discussion->InsertUserID === Gdn::session()->UserID) {
                             echo '<a class="btn-default not-clickable">'.$commentsLabel.'</a>';
                         } else {
-                            echo '<div class="ReplyQuestionButton">';
+                            echo '<div class="ReplyQuestionButton d-desktop">';
 
                             $sender->fireEvent('BeforeFormButtons');
+                            $answerButton = '';
+                            $answerButtonForMobile = null;
 
-                            if($userCanComment)
-                                echo $sender->Form->button(t('Give an explanation'), ['class' => 'btn-default btn-shadow']);
-                            else {
-                                echo anchor(t('Give an explanation'), '/entry/jsconnect-redirect?client_id=alloprof', 'btn-default btn-shadow');
+                            if($userCanComment){
+                                $answerButton = $sender->Form->button(t('Give an explanation'), ['class' => 'btn-default btn-shadow']);
+                                $answerButtonForMobile = anchor(t('Give an explanation'), '/post/answerPopup/'.$Discussion->DiscussionID, 'btn-default btn-shadow AnswerPopup QuestionPopup');
+                            } else {
+                                $answerButton = anchor(t('Give an explanation'), '/entry/jsconnect-redirect?client_id=alloprof', 'btn-default btn-shadow');
+                                $answerButtonForMobile = anchor(t('Give an explanation'), '/entry/jsconnect-redirect?client_id=alloprof', 'btn-default btn-shadow');
                             }
+
+                            echo $answerButton;
 
                             $sender->fireEvent('AfterFormButtons');
                             echo '</div>';
@@ -966,6 +987,15 @@ if (!function_exists('writeDiscussionFooter')) :
                     }
                 ?>
             </div>
+        </div>
+        <div class="Answer-Button d-mobile ReplyQuestionButton">
+            <?php
+                if($answerButtonForMobile) {
+                    echo '<div class="answer-button-mobile">';
+                    echo $answerButtonForMobile;
+                    echo '</div>';
+                }
+            ?>
         </div>
         <?php
     }
@@ -1003,7 +1033,7 @@ if (!function_exists('checkAnswer')) :
                     <img src="<?= url('/themes/alloprof/design/images/peace.svg') ?>" width="80px" height="80px" />
                     <span> <?php echo t("It's perfect!") ?> </span>
                 </a>
-                <a href="<?= url('/discussion/bad') ?>" class="Popup FeedbackHelp">
+                <a href="<?= url('/discussion/bad') ?>" class="FeedbackHelp">
                     <img src="<?= url('/themes/alloprof/design/images/neutre.svg') ?>" width="80px" height="80px" />
                     <span> <?php echo t("I need more help") ?> </span>
                 </a>

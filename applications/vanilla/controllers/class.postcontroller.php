@@ -899,6 +899,10 @@ class PostController extends VanillaController {
         $this->discussion($this->CategoryID);
     }
 
+    public function editdiscussionpopup($discussionID = 0, $draftID = 0) {
+        $this->editDiscussion($discussionID = 0, $draftID = 0);
+    }
+
     /**
      * Retrieve the user to be manipulated. Defaults to current user.
      *
@@ -1387,6 +1391,7 @@ class PostController extends VanillaController {
                             // Also define the discussion url in case this request came from the post screen and needs to be redirected to the discussion
                             $this->setJson('DiscussionUrl', discussionUrl($this->Discussion).'#Comment_'.$CommentID);
                         } else {
+                            redirectTo("discussion/comment/$CommentID/#Comment_$CommentID");
                             // If the comment model isn't sorted by DateInserted or CommentID then we can't do any fancy loading of comments.
                             $OrderBy = valr('0.0', $this->CommentModel->orderBy());
 //                     $Redirect = !in_array($OrderBy, array('c.DateInserted', 'c.CommentID'));
@@ -1480,6 +1485,12 @@ class PostController extends VanillaController {
             // Render default view.
             $this->render();
         }
+    }
+
+
+    public function answerPopup($discussionID = null) {
+        $this->View = 'mobile_answer';
+        $this->comment($discussionID);
     }
 
     /**

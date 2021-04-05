@@ -26,7 +26,7 @@
 </div>
 <div class="modal-body">
     <div class="BoxButtons BoxNewDiscussion">
-        <div id="DiscussionForm2" class="FormTitleWrapper DiscussionForm">
+        <div id="DiscussionForm" class="FormTitleWrapper DiscussionForm">
             <?php
                 echo '<div class="FormWrapper">';
                 echo $this->Form->open();
@@ -58,7 +58,7 @@
                             echo '</div>';
 
                             echo '<div class="P">';
-                            echo wrap($this->Form->Hidden('CategoryID', ['maxlength' => 100, 'class' => 'InputBox BigInput', 'spellcheck' => 'true']), 'div', ['class' => 'TextBoxWrapper']);
+                            echo wrap($this->Form->Hidden('CategoryID', ['maxlength' => 100, 'value' => $categoryID, 'class' => 'InputBox BigInput', 'spellcheck' => 'true']), 'div', ['class' => 'TextBoxWrapper']);
                             echo '</div>';
 
                             $this->fireEvent('BeforeBodyInput');
@@ -77,6 +77,7 @@
                 if(!$this->invalid) {
                     echo '<div class="selects">';
                     $Controller = Gdn::controller();
+
                     if($Controller->data('Category')) {
                         $category = $Controller->data('Category');
                         $options = ['Value' => val('CategoryID', $category), 'IncludeNull' => true, 'AdditionalPermissions' => ['PermsDiscussionsAdd']];
@@ -107,11 +108,12 @@
                         }
                     }
 
+
                     echo writeCategoryDropDown($this, 'CategoryID', $options, true);
                     echo '<span class="space"></span>';
                     echo '<div class="Category rich-select select2 select2-grade">';
                     echo '<div class="pre-icon"><img src="'.url("/themes/alloprof/design/images/icons/grade.svg").'"/></div>';
-                    echo $this->Form->dropDown('GradeID', $GradeOption, array('IncludeNull' => true, 'Value' => $DefaultGrade));
+                    echo $this->Form->dropDown('GradeID', $GradeOption, array('IncludeNull' => true, 'Default' => $DefaultGrade));
                     echo '</div>';
                     echo '</div>';
                     echo '<div class="Buttons">';
@@ -135,50 +137,8 @@
 </div>
 
 <script >
-    function formatState (state) {
-        var data = $(state.element).data();
-        if (!state.id) { return state.text; }
-        var icon = '<div class="category-img"></div>';
-
-        if(data && data['img_src']){
-            icon = '<div class="category-img"><img src="'+data['img_src'] + '"/></div>';
-        }
-        var $state = $(
-          '<span class="image-option">'+ icon + state.text + '</span>'
-       );
-       return $state;
-    };
-
-    function selectCategoryImg (obj) {
-        if(obj) {
-
-            var data = $(obj.element).data();
-            var parent = $(obj.element).parent().parent().parent();
-
-            if(data && data['img_src']){
-                parent.find('.category-selected-img').html('<img src="'+data['img_src']+'"/>');
-            }
-
-            if(data && data['img_src'] === '') {
-                parent.find('.category-selected-img').html('');
-            }
-        }
-    }
-
     $('.QuestionPopup .select2-grade select').select2({
         minimumResultsForSearch: -1,
         placeholder: "Niveau",
     });
-
-    $('.QuestionPopup .select2-category select').select2({
-        placeholder: "Matière",
-        minimumResultsForSearch: -1,
-        templateResult: formatState
-    }).on('select2:select', function (e) {
-        var data = e.params.data;
-        selectCategoryImg(data);
-    });
-
-    selectCategoryImg({element: $('.FilterMenu .select2-category option:selected')});
-    selectCategoryImg({element: $('.EditDiscussionDetail .select2-category option:selected')});
 </script>

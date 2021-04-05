@@ -15,7 +15,7 @@ header.not-transparent {
 }
 
 .Panel {
-    padding: 32px;
+    padding: 32px 25px;
     border-radius: 8px;
     width: 100%;
 }
@@ -76,7 +76,8 @@ header.not-transparent {
 }
 
 .SplashInfo img {
-    width: 100%;
+    width: 50%;
+    margin-bottom: 20px;
 }
 
 .SplashInfo .btn {

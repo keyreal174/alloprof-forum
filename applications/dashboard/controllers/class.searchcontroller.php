@@ -310,4 +310,10 @@ class SearchController extends Gdn_Controller {
         $this->_UserInfoRetrieved = true;
         return true;
     }
+
+    public function mobile() {
+        $this->View = 'mobile_search';
+        $this->addJsFile('search.js');
+        $this->render();
+    }
 }

@@ -424,7 +424,8 @@ abbr {
     border: none;
     border-radius: 0;
     padding: 0;
-    width: 47%
+    /* width: 47% */
+    flex: 1;
 }
 
 .sidebar {
@@ -439,14 +440,14 @@ abbr {
 
 .sidebar.left {
     margin-left: 0 !important;
-    margin-right: auto !important;
+    margin-right: 32px !important;
     max-width: 300px;
     overflow-y: auto;
     max-height: calc(100vh - 240px);
 }
 
 .sidebar.right {
-    margin-left: auto !important;
+    margin-left: 32px !important;
     margin-right: 0 !important;
     max-width: 300px;
 }
@@ -2727,7 +2728,6 @@ select::-ms-expand {
     border-radius: 6px;
     color: #555a62;
     display: inline-block;
-    font-family: Open Sans, HelveticaNeue-Light, Segoe UI, Helvetica Neue, Helvetica, Raleway, Arial, sans-serif;
     font-size: 14px;
     font-weight: 400;
     line-height: 36px;
@@ -4836,7 +4836,7 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
     display: inline-flex;
     height: 42px;
     justify-content: center;
-    margin: 0 12px 0 0;
+    margin: 0 8px 0 0;
     overflow: hidden;
     padding: 0;
     width: 42px
@@ -6365,7 +6365,7 @@ a.MoreWrap:hover {
 div.Popup {
     -ms-transform: translateX(-50%) translateY(-50%);
     -webkit-transform: translateX(-50%) translateY(-50%);
-    left: 50vw !important;
+    left: 49.5vw !important;
     position: fixed;
     top: 50vh !important;
     transform: translateX(-50%) translateY(-50%);
@@ -6428,6 +6428,7 @@ div.Popup .Content {
     width: auto !important
 }
 
+div.Popup .Footer a,
 div.Popup a.Close {
     -ms-flex-align: center;
     -ms-flex-pack: center;
@@ -6555,7 +6556,6 @@ div.Popup .Button.change-picture-remove:hover {
     display: flex !important;
     font-family: Arial, sans-serif;
     font-size: 20px;
-    font-size: 20px !important;
     justify-content: center;
     margin: 3px;
     padding: 0;
@@ -6666,7 +6666,7 @@ body.hasRichEditor .richEditor-frame {
 
 body.hasRichEditor .bodybox-wrap,
 body.hasRichEditor .CommentOptions {
-    margin-bottom: 12px
+    margin-bottom: 12px;
 }
 
 body.hasRichEditor .Popup .NoteForm {

@@ -1,7 +1,13 @@
 <?php
     require_once Gdn::controller()->fetchViewLocation('helper_functions', 'discussions', 'Vanilla');
+
+    if (!Gdn::session()->isValid()) {
+        $additionalClass = 'invalid';
+    } else {
+        $additionalClass = 'valid';
+    }
 ?>
-<nav class="Question-submenu <?php echo $this->$additionalClass ?>">
+<nav class="Question-submenu <?php echo $additionalClass ?>">
     <?php if(userRoleCheck() == Gdn::config('Vanilla.ExtraRoles.Teacher')) {
     ?>
         <div class='Navigation-linkContainer'>
@@ -17,7 +23,7 @@
 %text</a>'); ?>
         </div>
         <div class='Navigation-linkContainer mobile'>
-            <?php echo Gdn_Theme::link('/discussions/search', t('Explorer'), '<a href="%url" class="%class Navigation-link SearchPopup"><svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <?php echo Gdn_Theme::link('/search/mobile', t('Explorer'), '<a href="%url" class="%class Navigation-link SearchPopup"><svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="9.78105" cy="9.78105" r="8.28105" stroke="black" stroke-width="2"/>
                 <path d="M16.25 16.25L20 20" stroke="black" stroke-width="2" stroke-linecap="round"/>
                 </svg>%text</a>'); ?>
@@ -72,7 +78,7 @@
 %text</a>'); ?>
         </div>
         <div class='Navigation-linkContainer mobile'>
-            <?php echo Gdn_Theme::link('/discussions/search', t('Explorer'), '<a href="%url" class="%class Navigation-link SearchPopup"><svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <?php echo Gdn_Theme::link('/search/mobile', t('Explorer'), '<a href="%url" class="%class Navigation-link SearchPopup"><svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="9.78105" cy="9.78105" r="8.28105" stroke="black" stroke-width="2"/>
                 <path d="M16.25 16.25L20 20" stroke="black" stroke-width="2" stroke-linecap="round"/>
                 </svg>%text</a>'); ?>

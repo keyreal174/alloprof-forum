@@ -248,7 +248,7 @@ class GooglePlusPlugin extends Gdn_Plugin {
         $target = Gdn::request()->post('Target', Gdn::request()->get('Target', url('', '/')));
         $url = 'entry/googleplusauthredirect?Target='.$target;
 
-        $result = socialSignInButton('Google', $url, $type, ['rel' => 'nofollow']);
+        $result = socialSignInButton('Google', $url, $type, ['rel' => 'nofollow', 'title' => t('Teacher sign in')]);
         return $result;
     }
 

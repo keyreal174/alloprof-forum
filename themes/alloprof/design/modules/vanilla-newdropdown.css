@@ -44,3 +44,14 @@
     color: black;
     padding-top: 13px;
 }
+
+
+@media screen and (max-width: 619px) {
+    .MeBox.FlyoutRight .Flyout.authorized {
+        padding: 15px !important;
+    }
+
+    .MeBox.FlyoutRight .Flyout.unauthorized {
+        top: 0;
+    }
+}

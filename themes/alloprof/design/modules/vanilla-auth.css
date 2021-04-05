@@ -3,21 +3,25 @@
     cursor: pointer;
 }
 
+.UserLoggedOut .Body,
 div.Popup.SignInPopup .Body {
     padding: 80px 130px;
     max-height: none !important;
 }
 
+.UserLoggedOut .AjaxForm,
 div.Popup.SignInPopup .AjaxForm {
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 
+.UserLoggedOut .AjaxForm .FormSummary,
 div.Popup.SignInPopup .AjaxForm .FormSummary {
     margin-right: 64px;
 }
 
+.UserLoggedOut .AjaxForm .Title,
 div.Popup.SignInPopup .AjaxForm .Title {
     margin-bottom: 40px;
     font-size: 50px;
@@ -25,21 +29,24 @@ div.Popup.SignInPopup .AjaxForm .Title {
     max-width: 400px;
 }
 
+.UserLoggedOut .AjaxForm img.AuthAvatar,
 div.Popup.SignInPopup .AjaxForm img.AuthAvatar {
     width: 400px;
     height: 400px;
 }
 
+.UserLoggedOut .AjaxForm .FormWrapper,
 div.Popup.SignInPopup .AjaxForm .FormWrapper {
     width: 480px;
 }
 
-div.Popup.SignInPopup .AjaxForm .FormWrapper ul li {
+
+.AjaxForm .FormWrapper ul li {
     margin-bottom: 35px;
     position: relative;
 }
 
-div.Popup.SignInPopup .InputBox {
+.AjaxForm .FormWrapper .InputBox {
     border: none;
     border-bottom: 1px solid;
     border-radius: 0;
@@ -54,20 +61,24 @@ div.Popup.SignInPopup .InputBox {
     border-color: black !important;
 }
 
-div.Popup.SignInPopup .InputBox::placeholder {
+.AjaxForm .FormWrapper .InputBox::placeholder {
     color: black;
     font-size: 15px;
     line-height: 18px;
 }
 
+.UserLoggedOut .Buttons,
 div.Popup.SignInPopup .Buttons {
     margin-top: 0;
 }
 
+.UserLoggedOut .Buttons .CreateAccount,
 div.Popup.SignInPopup .Buttons .CreateAccount {
     margin-top: 40px;
 }
 
+.UserLoggedOut .Buttons .CreateAccount,
+.UserLoggedOut .Buttons .CreateAccount a,
 div.Popup.SignInPopup .Buttons .CreateAccount,
 div.Popup.SignInPopup .Buttons .CreateAccount a {
     font-size: 18px;
@@ -77,17 +88,20 @@ div.Popup.SignInPopup .Buttons .CreateAccount a {
     font-weight: 600;
 }
 
+.UserLoggedOut img.HelpIcon,
 div.Popup.SignInPopup img.HelpIcon {
     margin-top: 40px;
     cursor: pointer;
 }
 
+.UserLoggedOut li.form-group,
 div.Popup.SignInPopup li.form-group {
     position: relative;
     margin-top: 0;
     margin-bottom: 0;
 }
 
+.UserLoggedOut li.form-group select,
 div.Popup.SignInPopup li.form-group select {
     border: none;
     border-color: initial !important;
@@ -102,6 +116,7 @@ div.Popup.SignInPopup li.form-group select {
     appearance: none;
 }
 
+.UserLoggedOut li.form-group:after,
 div.Popup.SignInPopup li.form-group:after {
     content: "";
     background: url('../../../../themes/alloprof/design/images/icons/arrowDown.svg');
@@ -113,19 +128,24 @@ div.Popup.SignInPopup li.form-group:after {
     position: absolute;
 }
 
+.UserLoggedOut .PasswordStrength,
 div.Popup.SignInPopup .PasswordStrength  {
     width: 100% !important;
 }
 
+.UserLoggedOut .Buttons.SignUpButtons,
 div.Popup.SignInPopup .Buttons.SignUpButtons {
     display: flex;
     align-items: center;
 }
 
+
+.UserLoggedOut
 div.Popup.SignInPopup .Buttons.SignUpButtons input[type=submit] {
     margin-right: 40px;
 }
 
+.UserLoggedOut .Buttons.SignUpButtons a,
 div.Popup.SignInPopup .Buttons.SignUpButtons a {
     font-size: 18px;
     line-height: 21px;
@@ -134,11 +154,13 @@ div.Popup.SignInPopup .Buttons.SignUpButtons a {
     font-weight: 600;
 }
 
+.UserLoggedOut .validators,
 div.Popup.SignInPopup .validators {
     display: flex;
     flex-direction: column;
 }
 
+.UserLoggedOut .validators .CheckBoxLabel,
 div.Popup.SignInPopup .validators .CheckBoxLabel {
     position: relative;
     margin: 0;
@@ -150,11 +172,13 @@ div.Popup.SignInPopup .validators .CheckBoxLabel {
     margin-bottom: 24px;
 }
 
+.UserLoggedOut .validators .CheckBoxLabel a,
 div.Popup.SignInPopup .validators .CheckBoxLabel a {
     color: black;
     border-bottom: 1px solid black;
 }
 
+.UserLoggedOut .validators .CheckBoxLabel input[type=checkbox],
 div.Popup.SignInPopup .validators .CheckBoxLabel input[type=checkbox] {
     position: absolute;
     left: 0;
@@ -162,6 +186,7 @@ div.Popup.SignInPopup .validators .CheckBoxLabel input[type=checkbox] {
     margin-left: 0;
 }
 
+.UserLoggedOut .validators .CheckBoxLabel input[type=checkbox]:checked:before,
 div.Popup.SignInPopup .validators .CheckBoxLabel input[type=checkbox]:checked:before {
     content: '';
     background: url('../../../../themes/alloprof/design/images/icons/tick.svg');
@@ -174,6 +199,7 @@ div.Popup.SignInPopup .validators .CheckBoxLabel input[type=checkbox]:checked:be
     visibility: visible;
 }
 
+.UserLoggedOut .validators .CheckBoxLabel input[type=checkbox]:after,
 div.Popup.SignInPopup .validators .CheckBoxLabel input[type=checkbox]:after {
     width: 20px;
     height: 20px;
@@ -188,6 +214,7 @@ div.Popup.SignInPopup .validators .CheckBoxLabel input[type=checkbox]:after {
     margin-bottom: 0 !important;
 }
 
+.UserLoggedOut .EyeIcon,
 div.Popup.SignInPopup .EyeIcon {
     position: absolute;
     right: 0;
@@ -195,6 +222,7 @@ div.Popup.SignInPopup .EyeIcon {
     cursor: pointer;
 }
 
+.UserLoggedOut input[type=password],
 div.Popup.SignInPopup input[type=password] {
     padding-right: 32px;
 }

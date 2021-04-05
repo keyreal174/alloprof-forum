@@ -141,8 +141,9 @@ select {
     background: white;
     color: black !important;
     font-family: "ChromaticaBold";
-    padding: 10px 30px !important;
+    padding: 13px 26px !important;
     font-size: 15px !important;
+    line-height: 18px;
     width: max-content !important;
     white-space: nowrap;
     height: 44px;
@@ -348,9 +349,8 @@ select {
 .FilterBanner .HomepageTitle {
     font-size: 18px;
     line-height: 25px;
-    margin-bottom: 10px;
+    margin-bottom: 24px;
     color: black;
-    margin-bottom: 10px;
 }
 
 .CustomSelect {
@@ -441,36 +441,11 @@ select {
     display: none;
 }
 
-
-/* Modal  */
-
-div.Popup .Body {
-    border-radius: 24px;
-}
-
-div.Popup .Footer {
-    height: 0 !important;
-    position: relative;
-    z-index: 4;
-}
-
-div.Popup .Footer .Close span {
-    font-size: 45px;
-    font-weight: 100;
-    font-family: ChromaticaThin;
-    color: black;
-}
-
-div.Popup .Border {
-    min-width: 400px;
-    width: auto;
-}
-
 /* Not approved question box */
 
 .question-not-published {
     text-align: center;
-    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 .question-not-published img {
@@ -579,10 +554,13 @@ div[id*="-formattingMenus-component"] {
     max-width: initial !important;
 }
 
-.embedImage-img-copyright-text {
+.MessageList .Item-BodyWrap .Message.userContent p.embedImage-img-copyright-text,
+.DataList.Discussions .Item-BodyWrap .Message.userContent p.embedImage-img-copyright-text,
+.Item-Search .Item-Body .Summary p.embedImage-img-copyright-text {
     display: none;
     color: white;
-    font-size: 12px;
+    font-size: 12px !important;
+    margin: 10px 0;
     line-height: 14px;
     padding-left: 10px;
     text-align: left;
@@ -598,6 +576,10 @@ div[id*="-formattingMenus-component"] {
 .embedImage-img-copyright-wrapper.embedImage-img-copyright-wrapper-collapse {
     width: fit-content;
     height: auto;
+}
+
+.embedLink, .embedExternal {
+    max-width: 400px !important;
 }
 
 .not-clickable {

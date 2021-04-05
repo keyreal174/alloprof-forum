@@ -1,5 +1,11 @@
 <?php if (!defined('APPLICATION')) exit();
 
+// ContentSecurityPolicy
+$Configuration['ContentSecurityPolicy']['ScriptSrc']['AllowedDomains'] = array (
+  0 => '*.googletagmanager.com',
+  1 => '*.google-analytics.com',
+);
+
 // Conversations
 $Configuration['Conversations']['Conversation']['SpamCount'] = '2';
 $Configuration['Conversations']['Conversation']['SpamTime'] = '30';
@@ -125,6 +131,7 @@ $Configuration['ProfileExtender']['Fields'][0]['Options'] = array (
   10 => 'Secondaire 5',
   11 => 'Enseignant',
   12 => 'Parent',
+  13 => 'Utilisateur',
 );
 $Configuration['ProfileExtender']['Fields'][0]['OnRegister'] = '1';
 $Configuration['ProfileExtender']['Fields'][0]['OnProfile'] = '1';

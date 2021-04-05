@@ -14,7 +14,7 @@
 class EntryController extends Gdn_Controller {
 
     /** @var array Models to include. */
-    public $Uses = ['Database', 'Form', 'UserModel'];
+    public $Uses = ['Database', 'Form', 'UserModel', 'UserMetaModel'];
 
     /** @var Gdn_Form */
     public $Form;
@@ -392,7 +392,12 @@ class EntryController extends Gdn_Controller {
      *
      * @param string $method Used to register multiple providers on ConnectData event.
      */
+
     public function connect($method) {
+        $isGoogleSign = $method === "googlesignin" ? true : false;
+        if ($isGoogleSign) {
+            $this->setData('Method', 'googlesignin');
+        }
         // Basic page setup.
         $this->addJsFile('entry.js');
         $this->View = 'connect';
@@ -415,16 +420,32 @@ class EntryController extends Gdn_Controller {
 
         if (!$isPostBack) {
             // Initialize data array that can be set by a plugin.
-            $data = [
-                'Provider' => '',
-                'ProviderName' => '',
-                'UniqueID' => '',
-                'FullName' => '',
-                'Name' => '',
-                'Email' => '',
-                'Photo' => '',
-                'Target' => $this->target(),
-            ];
+            if ($isGoogleSign) {
+                $data = [
+                    'Provider' => '',
+                    'ProviderName' => '',
+                    'UniqueID' => '',
+                    'FullName' => '',
+                    'Name' => '',
+                    'Email' => '',
+                    'Photo' => '',
+                    'Grade' => '',
+                    'Role' => '',
+                    'DisplayName' => '',
+                    'Target' => $this->target(),
+                ];
+            } else {
+                $data = [
+                    'Provider' => '',
+                    'ProviderName' => '',
+                    'UniqueID' => '',
+                    'FullName' => '',
+                    'Name' => '',
+                    'Email' => '',
+                    'Photo' => '',
+                    'Target' => $this->target(),
+                ];
+            }
             $this->Form->setData($data);
             $this->Form->addHidden('Target', $this->Request->get('Target', '/'));
         } else {
@@ -463,6 +484,17 @@ class EntryController extends Gdn_Controller {
             }
 
             return $this->render('ConnectError');
+        }
+        if ($isGoogleSign) {
+            $fullName = explode(' ', $this->Form->getFormValue('FullName'));
+            $displayName = $fullName[0].' '.$fullName[1][0].'.';
+            $this->Form->setFormValue('Grade', 'Enseignant');
+            $this->Form->setFormValue('Role', 'Teacher');
+            $this->Form->setFormValue('DisplayName', $displayName);
+            $this->Form->setFormValue('Photo', 'https://www.alloprof.qc.ca/zonedentraide/uploads/Avatar_Enseignant.svg');
+            if (!str_contains($this->Form->getFormValue('Email'), '@alloprof.qc.ca') && !str_contains($this->Form->getFormValue('Email'), '@alloprof.ca')) {
+                redirectTo('/entry/ban');
+            }
         }
 
         // Allow a provider to not send an email address but require one be manually entered.
@@ -508,7 +540,12 @@ class EntryController extends Gdn_Controller {
         }
 
         $isTrustedProvider = $this->data('Trusted');
-        $roles = $this->Form->getFormValue('Roles', $this->Form->getFormValue('roles', null));
+        if ($isGoogleSign) {
+            $roles = 'Teacher';
+            $this->Form->setFormValue('Roles', 'Teacher');
+        } else {
+            $roles = $this->Form->getFormValue('Roles', $this->Form->getFormValue('roles', null));
+        }
 
         // Check if we need to sync roles
         if (($isTrustedProvider || c('Garden.SSO.SyncRoles')) && $roles !== null) {
@@ -588,19 +625,23 @@ class EntryController extends Gdn_Controller {
             $autoConnect = c('Garden.Registration.AutoConnect');
 
             // Decide which name to search for.
-            if ($isPostBack && $this->Form->getFormValue('ConnectName')) {
-                $searchName = $this->Form->getFormValue('ConnectName');
-            } else {
-                $searchName = $this->Form->getFormValue('Name');
+            if (!$isGoogleSign) {
+                if ($isPostBack && $this->Form->getFormValue('ConnectName')) {
+                    $searchName = $this->Form->getFormValue('ConnectName');
+                } else {
+                    $searchName = $this->Form->getFormValue('Name');
+                }
             }
 
             // Find existing users that match the name or email of the connection.
             // First, discover if we have search criteria.
             $search = false;
             $existingUsers = [];
-            if ($searchName && $nameUnique) {
-                $userModel->SQL->orWhere('Name', $searchName);
-                $search = true;
+            if (!$isGoogleSign) {
+                if ($searchName && $nameUnique) {
+                    $userModel->SQL->orWhere('Name', $searchName);
+                    $search = true;
+                }
             }
             if ($this->Form->getFormValue('Email') && ($emailUnique || $autoConnect)) {
                 $userModel->SQL->orWhere('Email', $this->Form->getFormValue('Email'));
@@ -621,8 +662,14 @@ class EntryController extends Gdn_Controller {
 
             // Check to automatically link the user.
             if ($autoConnect && count($existingUsers) > 0) {
-                if ($isPostBack && $this->Form->getFormValue('ConnectName')) {
-                    $this->Form->setFormValue('Name', $this->Form->getFormValue('ConnectName'));
+                if (!$isGoogleSign) {
+                    if ($isPostBack && $this->Form->getFormValue('ConnectName')) {
+                        $this->Form->setFormValue('Name', $this->Form->getFormValue('ConnectName'));
+                    }
+                } else {
+                    if ($isPostBack && $this->Form->getFormValue('Email')) {
+                        $this->Form->setFormValue('Name', $this->Form->getFormValue('Email'));
+                    }
                 }
 
                 if ($canMatchEmail) {
@@ -756,8 +803,14 @@ class EntryController extends Gdn_Controller {
                 $user['SourceID'] = $this->Form->getFormValue('UniqueID');
                 $user['Attributes'] = $this->Form->getFormValue('Attributes', null);
                 $user['Email'] = $this->Form->getFormValue('ConnectEmail', $this->Form->getFormValue('Email', null));
-                $user['Name'] = $this->Form->getFormValue('ConnectName', $this->Form->getFormValue('Name', null));
-                $userID = $userModel->register($user, $registerOptions);
+                if ($isGoogleSign) {
+                    $user['Name'] = $this->Form->getFormValue('ConnectEmail', $this->Form->getFormValue('Email', null));
+                    $userID = $userModel->register($user, $registerOptions);
+                    $this->UserMetaModel->setUserMeta($userID, 'Profile.DisplayName', $this->Form->getFormValue('DisplayName', $this->Form->getFormValue('Name', null)));
+                } else {
+                    $user['Name'] = $this->Form->getFormValue('ConnectName', $this->Form->getFormValue('Name', null));
+                    $userID = $userModel->register($user, $registerOptions);
+                }
 
                 $user['UserID'] = $userID;
 
@@ -772,6 +825,9 @@ class EntryController extends Gdn_Controller {
                     $user['DiscoveryText'] = sprintft(t('SSO connection (%s)'), $method);
                     $userModel->Validation->reset();
                     $userID = $userModel->register($user, $registerOptions);
+                    if ($isGoogleSign) {
+                        $this->UserMetaModel->setUserMeta($userID, 'Profile.DisplayName', $this->Form->getFormValue('DisplayName', $this->Form->getFormValue('Name', null)));
+                    }
 
                     if ($userID === UserModel::REDIRECT_APPROVE) {
                         $this->Form->setFormValue('Target', '/entry/registerthanks');
@@ -823,7 +879,7 @@ class EntryController extends Gdn_Controller {
             if (!$userSelect || $userSelect == 'other') {
                 // The user entered a username. Validate it.
                 $connectNameEntered = true;
-                if (!empty($this->Form->getFormValue('ConnectName'))) {
+                if (!$isGoogleSign && !empty($this->Form->getFormValue('ConnectName'))) {
                     $connectName = $this->Form->getFormValue('ConnectName');
                     $user = false;
 
@@ -863,7 +919,11 @@ class EntryController extends Gdn_Controller {
                             // Validate their password.
                             try {
                                 $password = $this->Form->getFormValue('ConnectPassword');
-                                $name = $this->Form->getFormValue('ConnectName');
+                                if ($isGoogleSign) {
+                                    $name = $this->Form->getFormValue('Email');
+                                } else {
+                                    $name = $this->Form->getFormValue('ConnectName');
+                                }
 
                                 $passwordChecked = $passwordHash->checkPassword($password, $user['Password'], $user['HashMethod'], $name);
                                 Gdn::userModel()->rateLimit((object)$user, $passwordChecked);
@@ -889,7 +949,11 @@ class EntryController extends Gdn_Controller {
             } elseif ($this->Form->errorCount() == 0) {
                 // The user doesn't exist so we need to add another user.
                 $user = $this->Form->formValues();
-                $user['Name'] = $user['ConnectName'] ?? $user['Name'];
+                if ($isGoogleSign) {
+                    $user['Name'] = $this->Form->getFormValue('ConnectEmail', $this->Form->getFormValue('Email', null));
+                } else {
+                    $user['Name'] = $user['ConnectName'] ?? $user['Name'];
+                }
                 $user['Password'] = randomString(16); // Required field.
                 $user['HashMethod'] = 'Random';
                 $userID = $userModel->register($user, [
@@ -899,6 +963,9 @@ class EntryController extends Gdn_Controller {
                     'ValidateName' => !$isTrustedProvider,
                 ]);
                 $user['UserID'] = $userID;
+                if ($isGoogleSign) {
+                    $this->UserMetaModel->setUserMeta($userID, 'Profile.DisplayName', $this->Form->getFormValue('DisplayName', $this->Form->getFormValue('Name', null)));
+                }
 
                 $this->EventArguments['UserID'] = $userID;
                 $this->fireEvent('AfterConnectSave');
@@ -1292,6 +1359,9 @@ class EntryController extends Gdn_Controller {
                 $values = $this->UserModel->filterForm($values, true);
                 unset($values['Roles']);
                 $authUserID = $this->UserModel->register($values);
+                if ($isGoogleSign) {
+                    $this->UserMetaModel->setUserMeta($userID, 'Profile.DisplayName', $this->Form->getFormValue('DisplayName', $this->Form->getFormValue('Name', null)));
+                }
                 $this->setData('UserID', $authUserID);
                 if (!$authUserID) {
                     $this->Form->setValidationResults($this->UserModel->validationResults());
@@ -1904,7 +1974,9 @@ class EntryController extends Gdn_Controller {
     }
 
     public function ban() {
-        $this->addJsFile('banned.js');
+        $mobileHeader = new MobileHeaderModule(null);
+        $this->addModule($mobileHeader);
+        // $this->addJsFile('banned.js');
         $this->render();
     }
 

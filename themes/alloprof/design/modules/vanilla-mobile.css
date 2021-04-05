@@ -10,7 +10,7 @@
  }
 
  .d-mobile {
-    display: none;
+    display: none !important;
  }
 
  .MobileHeader {
@@ -19,6 +19,10 @@
 
  .MobileHeader h3 {
     font-size: 18px;
+ }
+
+ .Question-submenu.invalid {
+    display: none;
  }
 
  .not-published-badge.mobile {
@@ -38,78 +42,6 @@
      display: none;
  }
 
- .SearchPopup .modal-header {
-    box-shadow: 0px 8px 20px rgb(26 32 44 / 5%);
-    padding: 15px 30px;
-    z-index: 3;
-    position: relative;
- }
-
- .SearchPopup .modal-footer,
- .SearchPopup .modal-body {
-    padding: 30px 30px;
- }
-
- .SearchPopup .modal-header h3 {
-    margin: 0;
-    padding: 0;
-    text-align: left;
-    font-size: 18px;
- }
-
- .SearchPopup h2 {
-     text-align: left;
-     margin-bottom: 20px;
- }
-
- .SearchPopup .modal-header .Header-left__search {
-     margin-top: 40px;
- }
-
- .SearchPopup .mobile-categories {
-    max-height: calc(100vh - 235px);
-    overflow-y: auto;
- }
-
- .SearchPopup .mobile-categories li {
-     display: flex;
-     flex-wrap: wrap;
-     align-items: center;
- }
-
- .SearchPopup .mobile-categories li > div {
-     height: 120px;
-     margin-right: 12px;
-     width: 72px;
- }
-
- .SearchPopup .mobile-categories li .category-icon {
-    width: 72px;
-    height: 72px;
-    background: #F2F2F2;
-    border-radius: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
- }
-
- .SearchPopup .mobile-categories li .name {
-    text-overflow: ellipsis;
-    overflow: hidden;
-    width: 100%;
-    height: auto;
-    text-align: center;
-    font-size: 11px;
-    display: block;
-    margin-top: 7px;
-    line-height: 15px;
-    color: #1A1919;
- }
-
- .SearchPopup .mobile-categories li .category-icon img {
-     max-height: 40px;
- }
-
  /* Basic Mobile theme */
 
  @media screen and (max-width: 1366px) {
@@ -126,7 +58,7 @@
     }
 
     .Content.MainContent {
-        width: 508px;
+        width: 502px;
     }
 
     .Banner-content__Container {
@@ -183,6 +115,10 @@
         padding-right: 16px;
     }
 
+    .sidebar.left {
+        margin-right: 0 !important;
+    }
+
     .Frame-details {
         max-width: 580px;
         margin: 0 auto;
@@ -190,6 +126,7 @@
 
     .Frame-details .Frame-row {
         flex-direction: column;
+        padding-top: 65px;
     }
 
     .Frame-menubar.hasBetaBanner {
@@ -303,6 +240,22 @@
 }
 
 @media screen and (max-width: 619px) {
+    .Question-submenu.invalid {
+        display: flex;
+    }
+
+    .Banner-content.Teacher .Banner-content__Container {
+        background-position-y: calc(100% + 70px);
+    }
+
+    .Frame-details .Frame-row {
+        padding-top: 0;
+    }
+
+    .CommentHeading {
+        padding-left: 15px;
+    }
+
     .ItemDiscussion .verified-info {
         min-height: 40px;
         display: flex !important;
@@ -327,6 +280,7 @@
 
     .DataList .ItemDiscussion, .DataList .Item, .MessageList .ItemDiscussion.ItemDiscussion, .MessageList .ItemComment .Comment {
         padding: 16px;
+        border-radius: 0;
     }
 
     .CategoryDetail .Card {
@@ -528,27 +482,6 @@
         width: 128px !important;
         height: 128px !important;
     }
-    .SearchPopup a.Close {
-        position: fixed !important;
-        right: 15px;
-        top: 5px;
-    }
-
-    .SearchPopup .Border {
-        padding: 0;
-        width: 100% !important;
-        height: 100vh;
-        min-width: 0 !important;
-    }
-    .SearchPopup .Border .Body {
-        height: 100%;
-        min-height: 100vh;
-        border-radius: 0 !important;
-        max-height: 100% !important;
-        margin-left: -15px;
-        margin-right: -15px;
-        padding: 0 !important;
-    }
     .Frame-header .Header .Header-logo a.Header-logo {
         display: none;
     }
@@ -570,6 +503,12 @@
      }
     .d-desktop {
         display: none !important;
+    }
+    .PageControls.PageControls {
+        display: none;
+    }
+    .SearchResult {
+        margin-left: 15px;
     }
 }
 

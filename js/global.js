@@ -540,6 +540,7 @@ jQuery(document).ready(function($) {
         $('a.FilterPopup').popup({containerCssClass: 'SocialPopup FilterPopup CustomPopup'});
         $('a.QuestionPopup').popup({containerCssClass: 'SearchPopup QuestionPopup CustomPopup'});
         $('a.RulesPopup').popup({containerCssClass: 'SocialPopup RulesPopup'});
+        $('a.FeedbackHelp').popup({containerCssClass: 'SocialPopup'});
         $('a.scrollToAskQuestionFormPopup').popup({containerCssClass: 'scrollToAskQuestionFormPopup'});
     }
 

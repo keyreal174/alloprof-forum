@@ -53,6 +53,8 @@ class DiscussionsController extends VanillaController {
     /** @var string UserRole 'Teacher' or 'Student' */
     public $UserRole;
 
+    public $PublicGradeID;
+
     /**
      * Prep properties.
      *
@@ -81,6 +83,7 @@ class DiscussionsController extends VanillaController {
     public function writeFilter() {
         $gradeFilterOption = (Gdn::request()->get('grade') || Gdn::request()->get('grade') == '0') ? strval((int)(Gdn::request()->get('grade'))) : -1;
         $this->GradeID = $gradeFilterOption;
+        $this->PublicGradeID = $gradeFilterOption;
 
         $subject = (Gdn::request()->get('subject') || Gdn::request()->get('subject') == '0') ? strval((int)(Gdn::request()->get('subject'))) : -1;
         $this->SubjectID = $subject;
@@ -1350,13 +1353,13 @@ class DiscussionsController extends VanillaController {
         echo $this->_PagerUrl.'?'.$parameter;
     }
 
-
-    public function search($page = 'p1') {
-        $this->View = 'mobile_search';
-        $this->render();
-    }
-
     public function filter() {
+        // $this->setData('sort', $this->GradeID);
+
+        $discussionModel = new DiscussionModel();
+        $this->setData('Sort', $this->PublicGradeID);
+        $this->setData('Filters', $discussionModel->getFilters());
+
         $this->View = 'mobile_filter';
         $this->render();
     }

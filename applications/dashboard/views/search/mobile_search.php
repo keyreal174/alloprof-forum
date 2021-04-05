@@ -5,11 +5,11 @@
     <h3><?php echo t("Explorer"); ?></h3>
 
     <div class="Header-left__search">
-        <form method="get" action="/search" autocomplete="off">
+        <!-- <form method="get" action="/search" autocomplete="off"> -->
             <div>
-                <input type="text" id="Form_Search" name="Search" value="" placeholder="Rechercher" accesskey="/" role="searchbox" class="InputBox js-search">
+                <input type="text" name="Search" id="mobileSearch"  value="" placeholder="Rechercher" accesskey="/" role="searchbox" class="InputBox js-search">
             </div>
-        </form>
+        <!-- </form> -->
     </div>
 </div>
 <div class="modal-body">
@@ -71,3 +71,11 @@
         ?>
     </ul>
 </div>
+
+<script>
+    $(document).on('keyup', '#mobileSearch', function (e) {
+        if(e.keyCode == 13){
+            window.location.replace("/search?Search="+$(this).val());
+        }
+    })
+</script>

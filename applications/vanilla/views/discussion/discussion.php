@@ -48,6 +48,17 @@ $this->fireEvent('BeforeDiscussionDisplay');
             }
         ?>
         <div class="Item-Header DiscussionHeader">
+            <?php
+                if (Gdn::session()->isValid()) {
+                    echo '<div class="Options-Icon">';
+
+                    $this->fireEvent('BeforeDiscussionOptions');
+                    echo writeDiscussionOptions();
+                    writeAdminCheck();
+
+                    echo '</div>';
+                }
+            ?>
             <div class="AuthorWrap">
             <?php
                 if(!$Discussion->Published) {

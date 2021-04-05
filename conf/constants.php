@@ -87,3 +87,6 @@ const MYSQL_DATE_FORMAT = 'Y-m-d H:i:s';
 
 // Signal we did all this ^.
 define('VANILLA_CONSTANTS', true);
+
+// Roles
+define('TEACHER_ROLE', 'Teacher');

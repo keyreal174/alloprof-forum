@@ -95,7 +95,7 @@ if ($Session->isValid()):
     // }
 
     // Profile Settings & Logout
-    $dropdown = new DropdownModule();
+    $dropdown = new DropdownModule('', '', 'account-options', 'authorized');
     $dropdown->setData('DashboardCount', $DashboardCount);
     $triggerTitle = t('Account Options');
 
@@ -175,7 +175,7 @@ else:
 
     echo '<div class="SignInLinks">';
 
-    $dropdown = new DropdownModule('', '', '', 'unauthorized');
+    $dropdown = new DropdownModule('', '', 'account-options', 'unauthorized');
     $dropdown->setData('DashboardCount', $DashboardCount);
 
     $dropdown->setTrigger('', 'anchor', 'MeButton FlyoutButton MeButton-user unauthorized', '<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">

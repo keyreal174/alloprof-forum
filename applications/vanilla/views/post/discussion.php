@@ -89,7 +89,7 @@ if (!$CancelUrl) {
         echo '</div>';
     }
 
-    $this->fireEvent('AfterDiscussionFormOptions');
+    // $this->fireEvent('AfterDiscussionFormOptions');
 
     // Category select and grade select
     // if ($this->ShowCategorySelector === true) {

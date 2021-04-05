@@ -1,5 +1,7 @@
 <?php if (!defined('APPLICATION')) exit();
     include_once $this->fetchViewLocation('helper_functions', 'modules', 'vanilla');
+
+    echo $this->data('Sort');
 ?>
 <div class="modal-header">
     <h3><?php echo t("Filters"); ?></h3>
@@ -8,17 +10,17 @@
     <div class="filter-block">
         <h4><?php echo t('Sort By') ?></h4>
         <div class="sort">
-            <div class="custom-radio">
+            <!-- <div class="custom-radio">
                 <label class="container">
                     <span><?php echo t('Most popular questions') ?></span>
                     <input type="radio" checked="checked" value="popular" name="sortRadio">
                     <span class="checkmark"></span>
                 </label>
-            </div>
+            </div> -->
             <div class="custom-radio">
                 <label class="container">
                     <span><?php echo t('Most recent first') ?></span>
-                    <input type="radio" name="sortRadio" value="desc">
+                    <input type="radio" name="sortRadio" checked="checked" value="desc">
                     <span class="checkmark"></span>
                 </label>
             </div>
