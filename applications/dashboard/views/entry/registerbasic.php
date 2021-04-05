@@ -1,11 +1,26 @@
 <?php if (!defined('APPLICATION')) exit(); ?>
+<?php
+    $GradeOption = [];
+    $fields = c('ProfileExtender.Fields', []);
+    if (!is_array($fields)) {
+        $fields = [];
+    }
+    foreach ($fields as $k => $field) {
+        if ($field['Label'] == "Grade") {
+            $GradeOption = array_filter($field['Options'], function($v) {
+                return preg_match('/(Primaire|Secondaire)/', $v);
+            });
+        }
+    }
+?>
 <div class="FormTitleWrapper AjaxForm SignUpForm">
     <div class='FormSummary'>
-        <h1 class='Title'><?php echo t('To send in your question, sign up!'); ?></h1>
+        <h1 class='Title'><?php echo t('Salvation! Happy to see you!'); ?></h1>
         <img src='<?= url("/themes/alloprof/design/images/authAvatar.svg") ?>' alt='image' class='AuthAvatar' />
     </div>
 
     <div class="FormWrapper">
+        <div class='ErrorMessage'></div>
         <?php
         $TermsOfServiceUrl = Gdn::config('Garden.TermsOfService', '#');
         $TermsOfServiceText = sprintf(t('I accept the <a href="https://www.alloprof.qc.ca/fr/pages/conditions-d-utilisation-et-vie-privee">Terms of Service and the Privacy Policy</a>, as well as the creation of a personal file in which notes can be added by the Alloprof teachers with whom I communicate.'), url($TermsOfServiceUrl));
@@ -13,10 +28,15 @@
 
         // Make sure to force this form to post to the correct place in case the view is
         // rendered within another view (ie. /dashboard/entry/index/):
-        echo $this->Form->open(['Action' => url('/entry/register'), 'id' => 'Form_User_Register']);
-        echo $this->Form->errors();
+        // echo $this->Form->open(['Action' => url('/entry/register'), 'id' => 'Form_Student_Register']);
+        // echo $this->Form->errors();
         ?>
         <ul role="presentation">
+            <li role="presentation">
+                <?php
+                    echo $this->Form->input('DisplayName', 'displayName', ['Wrap' => TRUE, 'placeholder' => t('DisplayName')]);
+                ?>
+            </li>
             <li role="presentation">
                 <?php
                 echo $this->Form->textBox('Name', ['autocorrect' => 'off', 'autocapitalize' => 'off', 'Wrap' => TRUE, 'type' => 'hidden', 'placeholder' => t('Choose a nickname to stay anonymous')]);
@@ -46,8 +66,13 @@
                 echo '<span id="PasswordsDontMatch" class="Incorrect" style="display: none;">'.t("Passwords don't match").'</span>';
                 ?>
             </li>
-            <?php $this->fireEvent('RegisterBeforePassword'); ?>
-            <?php $this->fireEvent('ExtendedRegistrationFields'); ?>
+            <li role="presentation" class="select form-group" style="margin-bottom: 35px;">
+                <?php
+                    echo $this->Form->dropDown('Grade', $GradeOption, array('IncludeNull' => t('Grade')));
+                ?>
+            </li>
+            <!-- <?php $this->fireEvent('RegisterBeforePassword'); ?>
+            <?php $this->fireEvent('ExtendedRegistrationFields'); ?> -->
             <?php if ($this->Form->getValue('DiscoveryText') || val('DiscoveryText', $this->Form->validationResults())): ?>
                 <li role="presentation">
                     <?php
@@ -68,10 +93,10 @@
                 ?>
             </li>
             <li class="Buttons SignUpButtons"  role="presentation">
-                <?php echo $this->Form->button(t('Sign up'), ['class' => 'btn btn-default btn-shadow']); ?>
+                <?php echo $this->Form->button(t('Sign up'), ['class' => 'btn btn-default btn-shadow', 'disabled' => 'disabled']); ?>
                 <?php printf(anchor(t('Sign in'), '/entry/signin'.$Target, '')); ?>
             </li>
         </ul>
-        <?php echo $this->Form->close(); ?>
+        <!-- <?php echo $this->Form->close(); ?> -->
     </div>
 </div>
