@@ -657,3 +657,7 @@ li.ItemDiscussion .Message {
         width: calc(100% - 30px);
     }
 }
+
+.signinandsavecomment {
+    margin-left: auto;
+}
