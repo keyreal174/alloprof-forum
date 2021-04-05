@@ -4,7 +4,7 @@ $role = getUserRole();
 $button = '';
 
 if($role != Gdn::config('Vanilla.ExtraRoles.Teacher')) {
-    $button = '<a href="/post/newQuestionPopup" class="btn-default btn-shadow QuestionPopup d-mobile">'.t('Ask a question').'</a>';
+    $button = '<a href="'.url('/post/newQuestionPopup').'" class="btn-default btn-shadow QuestionPopup d-mobile">'.t('Ask a question').'</a>';
 }
 
 if (!$this->Empty) {
