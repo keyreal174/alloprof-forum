@@ -11,7 +11,7 @@
     const signIn = (email, password) => {
         auth.signInWithEmailAndPassword(email, password).then(res => {
             console.log(res);
-            ssoLogin(res);
+            ssoLogin(res.user);
         }).catch(error => {
             var err = "";
             const { message, code } = error;
@@ -42,7 +42,7 @@
             .then((response) => {
                 console.log(response)
                 auth.signInWithEmailAndPassword(email, password).then(res => {
-                    ssoLogin(res);
+                    ssoLogin(res.user);
                 }).catch(error => {
                     addSignUpErrorMessage("Problème technique");
                 });
@@ -57,9 +57,9 @@
             });
     };
 
-    const ssoLogin = (res) => {
+    const ssoLogin = (user) => {
         const ssoUrl = "https://www.alloprof.qc.ca/auth/signin";
-        res.user.getIdTokenResult().then(result => {
+        user.getIdTokenResult().then(result => {
             const data = {
                 idToken: result.token
             };
