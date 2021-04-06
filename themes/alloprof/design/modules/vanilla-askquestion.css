@@ -369,7 +369,6 @@ body.isMobile .FormWrapper {
 
 .RulesPopup .information-block.show {
     padding: 20px !important;
-    max-width: 500px;
 }
 
 .RulesPopup .information-block .slick-dots li {

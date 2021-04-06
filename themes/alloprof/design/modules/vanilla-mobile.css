@@ -237,9 +237,7 @@
     .TalkTeacher .TalkTeacher-link {
         display: none!important;
     }
-}
 
-@media screen and (max-width: 619px) {
     .Question-submenu.invalid {
         display: flex;
     }

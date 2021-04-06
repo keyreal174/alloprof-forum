@@ -443,7 +443,7 @@ div.Popup.BanPopup .btn {
 }
 
 
-@media screen and (max-width: 619px) {
+@media screen and (max-width: 958px) {
     div.Popup.BanPopup #Message {
         font-size: 15px;
     }
