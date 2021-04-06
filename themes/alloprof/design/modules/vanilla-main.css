@@ -220,7 +220,7 @@ h1 a {
     font-weight: inherit
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     h1 {
         font-size: 18px
     }
@@ -357,7 +357,7 @@ abbr {
     width: calc(100% + 36px)
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .Frame-contentWrap {
         margin-left: -12px;
         margin-right: -12px;
@@ -392,7 +392,7 @@ abbr {
     padding-right: 18px
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .Container {
         padding-left: 12px;
         padding-right: 12px
@@ -464,7 +464,7 @@ abbr {
     padding: 0
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .Frame-content .HomepageTitle .AdminCheck {
         height: 22.5px
     }
@@ -802,7 +802,7 @@ a.ChangePicture {
     transition: background .1s ease, border .1s ease
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     #Form_Ban {
         max-width: 100%
     }
@@ -816,7 +816,7 @@ a.ChangePicture {
     color: #fff
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .Dropdown.MenuItems {
         min-width: auto
     }
@@ -884,7 +884,7 @@ table.PreferenceGroup th {
     transition: background .1s ease, border .1s ease
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .Popup #UserBadgeForm button {
         max-width: 100%
     }
@@ -956,7 +956,7 @@ table.PreferenceGroup th {
     flex-wrap: wrap
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .DataList-Connections .Connection-Header {
         -ms-flex-pack: center;
         -webkit-box-pack: center;
@@ -996,7 +996,7 @@ table.PreferenceGroup th {
     margin: 0
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .DataList-Connections .Connection-Connect {
         -ms-flex-pack: center;
         -webkit-box-pack: center;
@@ -2523,7 +2523,7 @@ select::-ms-expand {
     transition: background .1s ease, border .1s ease
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .js-poll-result-btn {
         max-width: 100%
     }
@@ -2566,7 +2566,7 @@ select::-ms-expand {
     text-decoration: none
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
 
     .FormTitleWrapper .Buttons .Back,
     .FormWrapper .Buttons .Back {
@@ -2599,7 +2599,7 @@ select::-ms-expand {
     transition: background .1s ease, border .1s ease
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
 
     .FormTitleWrapper .Buttons .Button,
     .FormWrapper .Buttons .Button {
@@ -2639,7 +2639,7 @@ select::-ms-expand {
     transition: background .1s ease, border .1s ease
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
 
     .FormTitleWrapper .Buttons .Button.Primary,
     .FormWrapper .Buttons .Button.Primary {
@@ -2686,7 +2686,7 @@ select::-ms-expand {
     transition: background .1s ease, border .1s ease
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
 
     #Form_OK,
     .btn-primary.Close,
@@ -2733,7 +2733,7 @@ select::-ms-expand {
     transition: background .1s ease, border .1s ease
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
 
     .Button.Danger,
     .Buttons .Close {
@@ -2829,7 +2829,7 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
     width: 100%
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
 
     div.token-input-dropdown p,
     div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
@@ -2907,7 +2907,7 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
     transition: background .1s ease, border .1s ease
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
 
     .BigButton:not(.Danger),
     .Button-Controls .Button.Primary,
@@ -2951,7 +2951,7 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
     transition: background .1s ease, border .1s ease
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
 
     .BoxButtons .Button.Primary,
     .groupToolbar .Button.Primary {
@@ -2985,7 +2985,7 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
     width: 100%
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .BigButton,
     .ButtonGroup.Multi {
         display: -webkit-box;
@@ -3044,7 +3044,7 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
     margin: 12px 0
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .change-picture .Button {
         text-align: center;
         width: 100%
@@ -3078,7 +3078,7 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
     padding: 0
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
 
     .CommentForm.CommentForm .FormWrapper.FormWrapper .Buttons,
     .FormWrapper-Condensed .FormWrapper.FormWrapper .Buttons {
@@ -3118,7 +3118,7 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
     width: 100%
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .file-upload {
         max-width: 100%
     }
@@ -3193,7 +3193,7 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
     transition: background .1s ease, border .1s ease
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .file-upload-browse {
         max-width: 100%
     }
@@ -3275,7 +3275,7 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
     top: 110%
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
 
     .editor-dropdown-open,
     .richEditor-button.isOpen,
@@ -3307,7 +3307,7 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
     z-index: 1
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
 
     .Flyout.Flyout,
     .MenuItems {
@@ -3551,7 +3551,7 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
     width: 100%
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
 
     .MenuItems .editor-action,
     .MenuItems a,
@@ -3876,7 +3876,7 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
     z-index: 1
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
 
     .MenuItems-Reactions,
     .OnlineUserWrap .OnlineUserName.OnlineUserName {
@@ -3895,7 +3895,7 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
     padding: 4px 18px !important
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .OnlineUserWrap .OnlineUserName {
         display: none
     }
@@ -4015,7 +4015,7 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
     }
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .mobileFlyoutOverlay {
         -ms-flex-align: center;
         -ms-flex-pack: center;
@@ -4188,7 +4188,7 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
     width: 22px
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .Hamburger {
         position: absolute
     }
@@ -4282,7 +4282,7 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
     width: 100%
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .Herobanner {
         display: none
     }
@@ -4328,7 +4328,7 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
     max-width: 673px
 }
 
-@media screen and (min-width:768px) {
+@media screen and (min-width:958px) {
     .Herobanner .SearchBox {
         font-size: 16px;
         margin: 0 auto
@@ -4406,7 +4406,7 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
     width: 100%
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .Herobanner-bgImage {
         display: none
     }
@@ -4469,7 +4469,7 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
     display: none
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
 
     .DataList .Item.CategoryHeading,
     .MessageList .Item.CategoryHeading {
@@ -4627,7 +4627,7 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
     margin-right: -6px
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
 
     .DataList .AuthorWrap,
     .DataList .Meta,
@@ -4900,7 +4900,7 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
     transition: background .1s ease, border .1s ease
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
 
     .DataList .Item-Col .Options .OptionsLink,
     .MessageList .Item-Col .Options .OptionsLink {
@@ -4988,7 +4988,7 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
     margin: 3px 3px 0
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
 
     .DataList .Reactions .ReactButton,
     .MessageList .Reactions .ReactButton {
@@ -5064,7 +5064,7 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
     line-height: 1.25
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .MessageList .PageTitle h1 {
         font-size: 18px
     }
@@ -5171,7 +5171,7 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
     width: 100%
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
 
     .MessageList .ItemComment .Meta,
     .MessageList .ItemDiscussion .Meta {
@@ -5184,7 +5184,7 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
     margin-bottom: 0
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
 
     .MessageList .ItemComment .MItem,
     .MessageList .ItemDiscussion .MItem {
@@ -5308,7 +5308,7 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
     margin-left: 20px
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .Activities .ItemContent .Title {
         padding-right: 12px
     }
@@ -5318,13 +5318,13 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
     display: block
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .Activities .ItemContent .Author .PhotoWrap {
         margin-right: 0
     }
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .Activities .ItemContent .Delete {
         position: absolute
     }
@@ -5378,7 +5378,7 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
     top: 16px
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .Group-Content .DataList .Meta {
         margin-top: 0
     }
@@ -5459,7 +5459,7 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
     color: inherit
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .CategoryBox .H {
         font-size: 18px
     }
@@ -5641,7 +5641,7 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
     top: 4px
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .MeBox .MeButton .Alert {
         top: 0
     }
@@ -5659,7 +5659,7 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
     outline: none
 }
 
-@media screen and (min-width:768px) {
+@media screen and (min-width:958px) {
     .MeBox .MeBox-mobileClose {
         display: none
     }
@@ -5696,7 +5696,7 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
     min-height: 0
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .MeBox-header {
         display: none
     }
@@ -5876,7 +5876,7 @@ a.Dismiss.Dismiss:hover {
     transition: background .1s ease, border .1s ease
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
 
     .PrevNextPager .Next,
     .PrevNextPager .Previous {
@@ -5996,7 +5996,7 @@ a.MoreWrap:hover {
     flex-wrap: wrap
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .Pager {
         -ms-flex-pack: center;
         -webkit-box-pack: center;
@@ -6108,7 +6108,7 @@ a.MoreWrap:hover {
     transition: background .1s ease, border .1s ease
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
 
     .Pager .QuickSearchButton,
     .Pager .QuickSearchWrap .Button {
@@ -6200,7 +6200,7 @@ a.MoreWrap:hover {
     margin-right: 12px
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .PageControls.PageControls {
         -ms-flex-wrap: wrap;
         display: -webkit-box;
@@ -6235,7 +6235,7 @@ a.MoreWrap:hover {
     height: 38px
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .PageControls.PageControls .selectBox {
         margin: 0
     }
@@ -6250,7 +6250,7 @@ a.MoreWrap:hover {
     display: block
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .PageControls.Top .NumberedPager {
         display: none
     }
@@ -6473,7 +6473,7 @@ div.Popup .Button.change-picture-new {
     transition: background .1s ease, border .1s ease
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     div.Popup .Button.change-picture-new {
         max-width: 100%
     }
@@ -6507,7 +6507,7 @@ div.Popup .Button.change-picture-remove {
     transition: background .1s ease, border .1s ease
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     div.Popup .Button.change-picture-remove {
         max-width: 100%
     }
@@ -6684,7 +6684,7 @@ body.hasRichEditor .CommentForm.CommentForm .Buttons {
     padding-right: 0
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     body.hasRichEditor .embedDialogue.embedDialogue {
         position: static
     }
@@ -6706,7 +6706,7 @@ body.hasRichEditor #MessageForm .FormWrapper {
     }
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
 
     body.hasRichEditor #MessageForm .FormWrapper-Condensed.FormWrapper-Condensed,
     body.hasRichEditor.Profile .FormWrapper-Condensed.FormWrapper-Condensed {
@@ -6892,7 +6892,7 @@ body.hasRichEditor.Section-PostDiscussion #DiscussionForm .FormWrapper {
     display: table
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .SearchBox {
         max-width: 100%
     }
@@ -7026,7 +7026,7 @@ body.hasRichEditor.Section-PostDiscussion #DiscussionForm .FormWrapper {
     margin-bottom: 16px 8px
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .categoryList-heading {
         font-size: 18px
     }
@@ -7212,7 +7212,7 @@ body.hasRichEditor.Section-PostDiscussion #DiscussionForm .FormWrapper {
     display: flex
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
 
     .DataTable .Options,
     .Groups .DataTable .Options {
@@ -7254,7 +7254,7 @@ body.hasRichEditor.Section-PostDiscussion #DiscussionForm .FormWrapper {
     white-space: nowrap
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
 
     .DataTable .MItem.Category,
     .Groups .DataTable .MItem.Category {
@@ -7376,7 +7376,7 @@ body.hasRichEditor.Section-PostDiscussion #DiscussionForm .FormWrapper {
     margin-top: 6px
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
 
     .DataTable .Meta,
     .DataTable .MItem.Category,
@@ -7639,7 +7639,7 @@ body.hasRichEditor.Section-PostDiscussion #DiscussionForm .FormWrapper {
     }
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
 
     .DataTable.CategoryTable td.CountComments,
     .DataTable.CategoryTable td.LatestPost,
@@ -7689,7 +7689,7 @@ body.hasRichEditor.Section-PostDiscussion #DiscussionForm .FormWrapper {
     width: 100%
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
 
     .DataTable.DiscussionsTable.DiscussionsTable .MiniPager,
     .Groups .DataTable.DiscussionsTable.DiscussionsTable .MiniPager {
@@ -7776,7 +7776,7 @@ body.hasRichEditor.Section-PostDiscussion #DiscussionForm .FormWrapper {
     }
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
 
     .DataTable.DiscussionsTable.DiscussionsTable td.CountViews,
     .Groups .DataTable.DiscussionsTable.DiscussionsTable td.CountViews {
@@ -7821,7 +7821,7 @@ body.Section-Group .DataTable.DiscussionsTable {
     width: 100%
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .GroupWrap .DataTable tbody tr:first-child .CountMembers {
         border-top-right-radius: 0
     }
@@ -7865,7 +7865,7 @@ body.Section-Group .DataTable.DiscussionsTable {
     margin-right: -6px
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .GroupWrap .DataTable .Meta {
         margin-top: 0
     }
@@ -7877,7 +7877,7 @@ body.Section-Group .DataTable.DiscussionsTable {
     color: #696e75
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .GroupWrap .DataTable .Invitation .UserName {
         border-bottom-right-radius: 0;
         border-top-right-radius: 0
@@ -7888,13 +7888,13 @@ body.Section-Group .DataTable.DiscussionsTable {
     }
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .GroupWrap .DataTable .Invitation .BlockColumn-Buttons {
         min-width: 105px
     }
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .GroupWrap .DataTable .Event .EventTitle .Wrap {
         -ms-flex-wrap: wrap;
         display: -webkit-box;
@@ -7979,7 +7979,7 @@ body.Section-Group .DataTable.DiscussionsTable {
     color: #fff
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .GroupWrap .DataTable .Group-Name .Wrap {
         -ms-flex-wrap: wrap;
         display: -webkit-box;
@@ -8006,7 +8006,7 @@ body.Section-Group .DataTable.DiscussionsTable {
     white-space: nowrap
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .GroupWrap .DataTable tr.Invitation td.UserName {
         border-right: none
     }
@@ -8025,7 +8025,7 @@ body.Section-Group .DataTable.DiscussionsTable {
     }
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
 
     .GroupWrap .DataTable td.CountDiscussions,
     .GroupWrap .DataTable td.CountMembers,
@@ -8042,7 +8042,7 @@ body.Section-Group .DataTable.DiscussionsTable {
     width: 70%
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .MemberList .DataTable td.UserName {
         border-right-width: 0;
         border-top-left-radius: 0;
@@ -8057,7 +8057,7 @@ body.Section-Group .DataTable.DiscussionsTable {
     width: 260px
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .MemberList .DataTable td.BlockColumn-Buttons {
         width: 160px
     }
@@ -8073,7 +8073,7 @@ body.Section-Group .DataTable.DiscussionsTable {
     }
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .MemberList .DataTable td.JoinDate {
         display: none
     }
@@ -8105,7 +8105,7 @@ body.Section-Group .DataTable.DiscussionsTable {
     padding-right: 0
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .Group-Box .DiscussionsTable .DiscussionName .Title.Title {
         margin-bottom: 12px
     }
@@ -8465,7 +8465,7 @@ table.PreferenceGroup tbody tr:hover td {
     padding: 0 3px
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .Footer .col {
         margin: 6px 0;
         text-align: center;
@@ -8503,7 +8503,7 @@ table.PreferenceGroup tbody tr:hover td {
     flex: 1
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
 
     .Footer .col-copyRight,
     .Footer .col-logo {
@@ -8519,7 +8519,7 @@ table.PreferenceGroup tbody tr:hover td {
     width: 120px
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .Vanilla-logo {
         margin: 0 auto
     }
@@ -8684,7 +8684,7 @@ table.PreferenceGroup tbody tr:hover td {
     justify-content: center;
 }
 
-/* @media screen and (max-width:768px) {
+/* @media screen and (max-width:958px) {
 
     .Header .Hamburger,
     .Header .mobileMeBox-button {
@@ -8758,7 +8758,7 @@ table.PreferenceGroup tbody tr:hover td {
     background-color: black;
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .Header .SignInLinks a {
         max-width: 100%
     }
@@ -8789,7 +8789,7 @@ table.PreferenceGroup tbody tr:hover td {
     width: auto
 }
 
-/* @media screen and (max-width:768px) {
+/* @media screen and (max-width:958px) {
     .Header-logo {
         -ms-flex-preferred-size: initial;
         display: none;
@@ -8806,7 +8806,7 @@ table.PreferenceGroup tbody tr:hover td {
     display: flex
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .Header-desktopNav {
         display: none
     }
@@ -8841,7 +8841,7 @@ table.PreferenceGroup tbody tr:hover td {
     display: none
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .Header-desktopCommunityChooser.Header-desktopCommunityChooser {
         display: none
     }
@@ -8853,7 +8853,7 @@ table.PreferenceGroup tbody tr:hover td {
     flex: 1
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .Header-flexSpacer {
         display: none
     }
@@ -8863,7 +8863,7 @@ table.PreferenceGroup tbody tr:hover td {
     display: none
 }
 
-/* @media screen and (max-width:768px) {
+/* @media screen and (max-width:958px) {
     .Header-logo.mobile {
         display: -webkit-box;
         display: -ms-flexbox;
@@ -8891,7 +8891,7 @@ screen and (-ms-high-contrast:none) {
     }
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .Header.hasOpenNavigation {
         border-bottom-left-radius: 6px;
         border-bottom-right-radius: 6px;
@@ -8911,7 +8911,7 @@ screen and (-ms-high-contrast:none) {
     will-change: height
 }
 /*
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
 
     .mobileMebox,
     .Navigation {
@@ -8936,7 +8936,7 @@ screen and (-ms-high-contrast:none) {
     color: #555a62
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .Navigation .Container {
         padding: 0 0 6px
     }
@@ -8963,7 +8963,7 @@ screen and (-ms-high-contrast:none) {
     width: 100%
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .Navigation .BoxButtons .Button:not(.Handle) {
         max-width: 100%
     }
@@ -9098,7 +9098,7 @@ screen and (-ms-high-contrast:none) {
     transition: background .1s ease, border .1s ease
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .Navigation .SignInLinks.SignInLinks a {
         max-width: 100%
     }
@@ -9257,7 +9257,7 @@ screen and (-ms-high-contrast:none) {
     width: 28px
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .mobileMeBox-button {
         position: absolute
     }
@@ -9338,7 +9338,7 @@ screen and (-ms-high-contrast:none) {
     color: #fff
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .mobileMebox .MeButton .Alert {
         top: -6px
     }
@@ -9996,7 +9996,7 @@ body.Section-BestOf .FilterMenu a {
     transition: background .1s ease, border .1s ease
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     body.Section-BestOf .FilterMenu a {
         max-width: 100%
     }
@@ -10053,7 +10053,7 @@ body.Section-BestOf .Tiles:after {
     display: table
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     body.Section-BestOf .Tiles {
         margin: 0;
         width: 100%
@@ -10137,7 +10137,7 @@ body.Section-BestOf .Tile .Reactions {
     padding-left: 48px
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     body.Section-BestOf .Tile .Reactions {
         margin-left: -6px;
         padding-left: 0
@@ -10205,7 +10205,7 @@ body.Section-BestOf .Tile .ReactButton {
     margin: 0 6px
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
 
     body.Section-BestOf .Item .ReactButton,
     body.Section-BestOf .Tile .ReactButton {
@@ -10232,7 +10232,7 @@ body.Section-BestOf .Item .Meta {
     padding-left: 54px
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     body.Section-BestOf .Item .Meta {
         margin-top: 0
     }
@@ -10251,7 +10251,7 @@ body.Section-BestOf.UserLoggedOut .Author .PhotoWrap {
     margin: 0 3px 0 0
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     body.Section-BestOf .ImageWrap {
         width: 100%
     }
@@ -10346,7 +10346,7 @@ body.Section-Entry .Legal br {
     display: none
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     body.Section-Entry .g-recaptcha {
         -ms-transform: scale(.8);
         -webkit-transform: scale(.8);
@@ -10387,7 +10387,7 @@ body.Section-Entry .Legal br {
     padding: 0
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .MultipleEntryMethods .Methods {
         float: none
     }
@@ -10415,7 +10415,7 @@ body.Section-Entry .Legal br {
     width: 100%
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .Section-Group .H {
         text-align: left
     }
@@ -10425,7 +10425,7 @@ body.Section-Entry .Legal br {
     margin-right: 0
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
 
     .Section-Group .BoCloseButtons,
     .Section-Group .Button-Controls {
@@ -10434,7 +10434,7 @@ body.Section-Entry .Legal br {
     }
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .Section-Group .Button-Controls .ButtonGroup.Multi {
         padding: 0
     }
@@ -10444,7 +10444,7 @@ body.Section-Entry .Legal br {
     }
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
 
     .Section-Group .Button-Controls .Button:not(.Handle),
     .Section-Group .Button-Controls .ButtonGroup,
@@ -10455,7 +10455,7 @@ body.Section-Entry .Legal br {
     }
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .Section-Group .BoxButtons {
         display: block;
         width: 100%
@@ -10489,7 +10489,7 @@ body.Section-Entry .Legal br {
     justify-content: flex-end
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .Section-GroupList .groupToolbar-newGroup {
         text-align: center;
         width: 100%
@@ -10513,7 +10513,7 @@ body.Section-Entry .Legal br {
     float: right
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .Section-GroupList .MainContent>.Button.Primary {
         text-align: center;
         width: 100%
@@ -10549,7 +10549,7 @@ body.Section-Entry .Legal br {
     margin-left: 3px
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .Section-GroupList .DataList .Item {
         -ms-flex-direction: column;
         -webkit-box-direction: normal;
@@ -10670,7 +10670,7 @@ body.Section-Entry .Legal br {
     order: 2
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .Button-Controls.Button-Controls {
         -ms-flex-wrap: wrap;
         flex-wrap: wrap
@@ -10695,7 +10695,7 @@ body.Section-Entry .Legal br {
     color: #fff
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .Button-Controls.Button-Controls .Button:nth-child(2) {
         margin-left: 0
     }
@@ -10732,7 +10732,7 @@ body.Section-Entry .Legal br {
     width: 100%
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .Group-Icon-Big-Wrap {
         display: none
     }
@@ -10762,7 +10762,7 @@ body.Section-Entry .Legal br {
     margin-bottom: 18px
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .Group-Description {
         display: none
     }
@@ -10772,7 +10772,7 @@ body.Section-Entry .Legal br {
     padding-left: 176px
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .Group-Header-Info {
         margin-bottom: 18px;
         padding-left: 0
@@ -10853,7 +10853,7 @@ body.noGroupIcon .Group-Header-Info {
     padding-left: 158px
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .Group-Header.NoBanner .Group-Header-Info {
         padding-left: 0
     }
@@ -10873,7 +10873,7 @@ body.noGroupIcon .Group-Header-Info {
     top: 0
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .Section-Members .DataList .Item {
         -ms-flex-direction: column;
         -webkit-box-direction: normal;
@@ -10946,7 +10946,7 @@ body.noGroupIcon .Group-Header-Info {
     transition: background .1s ease, border .1s ease
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .Section-Members .Group-RemoveMember {
         max-width: 100%
     }
@@ -11015,7 +11015,7 @@ body.noGroupIcon .Group-Header-Info {
     margin-bottom: 18px
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .Section-Event.Section-Event .AttendeeList.AttendeeList h3 {
         font-size: 18px
     }
@@ -11064,7 +11064,7 @@ body.noGroupIcon .Group-Header-Info {
     margin-top: 0
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .Section-Event.Section-Event .FieldInfo {
         display: block;
         margin-bottom: 12px;
@@ -11076,7 +11076,7 @@ body.noGroupIcon .Group-Header-Info {
     height: 38px
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     #Form_memberFilter {
         margin-bottom: 3px;
         margin-right: 0;
@@ -11091,7 +11091,7 @@ body.noGroupIcon .Group-Header-Info {
     position: relative
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .group-members-filter-box {
         -ms-flex-pack: end;
         -ms-flex-wrap: wrap;
@@ -11121,7 +11121,7 @@ body.noGroupIcon .Group-Header-Info {
     transition: background .1s ease, border .1s ease
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .group-members-filter-box .Button {
         max-width: 100%
     }
@@ -11159,7 +11159,7 @@ body.noGroupIcon .Group-Header-Info {
     transition: background .1s ease, border .1s ease
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     .group-members-filter-box .Button.search {
         max-width: 100%
     }
@@ -11333,7 +11333,7 @@ body.Section-Profile .Profile h2 {
     margin-bottom: 18px
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
 
     body.Section-Profile .BadgeGrid h4,
     body.Section-Profile .Profile h2 {
@@ -11423,7 +11423,7 @@ body.Section-Profile .Profile-header .Profile-username {
     margin: 0
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     body.Section-Profile .Profile-header .Profile-username {
         font-size: 16px
     }
@@ -11525,7 +11525,7 @@ body.Section-Profile .ProfileOptions .MemberButtons {
     transition: background .1s ease, border .1s ease
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     body.Section-Profile .ProfileOptions .MemberButtons {
         max-width: 100%
     }
@@ -11539,7 +11539,7 @@ body.Section-Profile .ProfileOptions .MemberButtons:hover {
     color: #0291db
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     body.Section-Profile .ProfileOptions .MemberButtons {
         margin-right: 0
     }
@@ -11565,7 +11565,7 @@ body.Section-Profile .ProfileOptions .Button-EditProfile {
     transition: background .1s ease, border .1s ease
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     body.Section-Profile .ProfileOptions .Button-EditProfile {
         max-width: 100%
     }
@@ -11605,7 +11605,7 @@ body.Section-Profile .ProfileOptions .ProfileButtons-BackToProfile {
     transition: background .1s ease, border .1s ease
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     body.Section-Profile .ProfileOptions .ProfileButtons-BackToProfile {
         max-width: 100%
     }
@@ -11634,7 +11634,7 @@ body.Section-Profile .ProfileOptions .ProfileButtons-BackToProfile:hover {
     }
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     body.Section-Profile .ProfileOptions {
         -ms-flex-pack: center;
         -ms-flex-wrap: wrap;
@@ -11694,7 +11694,7 @@ body.Section-Profile.quotes .Frame-content form {
     padding: 12px
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
 
     body.Section-Profile .About.P .About,
     body.Section-Profile .change-picture,
@@ -11718,7 +11718,7 @@ body.Section-Profile .DataCounts {
     width: calc(100% + 12px)
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
 
     body.Section-Profile .Content .BadgeGrid .PhotoGrid,
     body.Section-Profile .DataCounts {
@@ -11758,7 +11758,7 @@ body.Section-Profile .CountItemWrap {
     width: calc(20% - 12px)
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
 
     body.Section-Profile .Content .BadgeGrid a,
     body.Section-Profile .CountItemWrap {
@@ -11869,7 +11869,7 @@ body.Section-Profile .Profile dt {
     width: 25%
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     body.Section-Profile .Profile dt {
         display: block;
         margin-bottom: 0;
@@ -11883,7 +11883,7 @@ body.Section-Profile .Profile dd {
     width: 75%
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     body.Section-Profile .Profile dd {
         display: block;
         margin-bottom: 12px;
@@ -11911,7 +11911,7 @@ body.Section-EditProfile.signature h2 {
     margin-top: 0
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
 
     body.Section-EditProfile.preferences h2,
     body.Section-EditProfile.signature h2 {
@@ -11923,7 +11923,7 @@ body.Section-EditProfile .Profile-header {
     display: none
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     body.Section-EditProfile .ProfileButtons-BackToProfile {
         text-align: center;
         width: 100%
@@ -11990,7 +11990,7 @@ body.Section-EditProfile table.PreferenceGroup {
     width: 100%
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     body.Section-EditProfile table.PreferenceGroup {
         min-width: 500px
     }
@@ -12004,7 +12004,7 @@ body.Section-EditProfile .Preferences .Buttons .Button {
     float: right
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
 
     body.Section-EditProfile .Buttons .Button,
     body.Section-EditProfile.tokens .Button.Action {
@@ -12041,7 +12041,7 @@ body.Section-SearchResults .AdvancedSearch {
     margin: 0 auto
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     body.Section-SearchResults .AdvancedSearch {
         max-width: 100%
     }
@@ -12052,7 +12052,7 @@ body.Section-SearchResults .AdvancedSearch .KeywordsWrap {
     padding: 0
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     body.Section-SearchResults .AdvancedSearch .KeywordsWrap {
         padding: 0
     }
@@ -12090,7 +12090,7 @@ body.Section-SearchResults .AdvancedSearch .AdvancedWrap:after {
     display: table
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:958px) {
     body.Section-SearchResults .AdvancedSearch .AdvancedWrap {
         background: rgba(0, 0, 0, 0);
         padding: 0
