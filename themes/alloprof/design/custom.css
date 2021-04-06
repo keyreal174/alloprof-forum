@@ -403,7 +403,7 @@ select {
 }
 
 .DataList.Discussions .embedExternal.embedImage {
-    display: none;
+    /* display: none; */
 }
 
 .richEditor button[title="Upload File"],

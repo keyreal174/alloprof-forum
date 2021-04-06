@@ -109,10 +109,41 @@ li.ItemDiscussion .Message {
     max-height: 200px;
 }
 
-.MessageWrapper {
+body.Discussions .DataList.Discussions .MessageWrapper {
     max-height: 168px;
     overflow: hidden;
     position: relative;
+    /* text-overflow: ellipsis; */
+}
+
+body.Discussions .DataList.Discussions .embedText-body.embedLink-body {
+    display: none;
+}
+
+body.Discussions .DataList.Discussions .embedExternal.embedLink {
+    background-color: transparent;
+    box-shadow: none;
+    margin: 0;
+}
+
+body.Discussions .DataList.Discussions .embedExternal.embedLink .embedExternal-content {
+    text-align: left;
+}
+
+body.Discussions .DataList.Discussions .embedExternal.embedImage.crossed {
+    position: relative;
+    overflow: hidden;
+}
+
+body.Discussions .DataList.Discussions .embedExternal.embedImage.crossed::after {
+    content: " ";
+    position: absolute;
+    width: 100%;
+    height: 74px;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-image: linear-gradient(0deg, white, transparent);
 }
 
 /* .MessageWrapper:after {
