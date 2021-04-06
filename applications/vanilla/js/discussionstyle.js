@@ -22,7 +22,7 @@ var handleOverflowedContent = function () {
         $(this).children().each(function(index) {
             var topPoint = $(this).position().top;
             var bottomPoint = $(this).outerHeight();
-            if ((bottomPoint + topPoint) < (messageWrapperHeight + 10)) {
+            if ((bottomPoint + topPoint) < (messageWrapperHeight - 10)) {
                 // element is fully visible
             } else {
                 // element or part of the element is hidden
@@ -44,10 +44,13 @@ var handleOverflowedContent = function () {
             var crossedElementTagName = crossedElement.prop("tagName").toLowerCase();
             if (crossedElementTagName == 'p') {
                 var lineCount = Math.floor(visibleHeight / 18);
-                if (crossedElement.text() == "") {
-                    lineCount --;
+                if (lineCount > 1) {
+                    if (crossedElement.text() == "") {
+                        lineCount --;
+                    }
+                    $clamp($(this).children()[acrossIndex], {clamp: lineCount});
                 }
-                $clamp($(this).children()[acrossIndex], {clamp: lineCount});
+                $(this).children().eq(acrossIndex + 1).text('...');
             } else {
                 if (crossedElementClass.indexOf('embedImage') > -1) {
                     crossedElement.css({
