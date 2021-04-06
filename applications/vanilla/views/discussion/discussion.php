@@ -39,11 +39,30 @@ $this->fireEvent('BeforeDiscussionDisplay');
 ?>
 <div id="<?php echo 'Discussion_'.$Discussion->DiscussionID; ?>" class="<?php echo $CssClass; ?>">
     <div class="Discussion">
+        <?php
+            if(!$Discussion->Published) {
+                echo '<div class="not-published-badge mobile">';
+                echo '<img src="'.url("/themes/alloprof/design/images/icons/eyebreak.svg").'"/>';
+                echo t('Awaiting publication');
+                echo '</div>';
+            }
+        ?>
         <div class="Item-Header DiscussionHeader">
+            <?php
+                if (Gdn::session()->isValid()) {
+                    echo '<div class="Options-Icon">';
+
+                    $this->fireEvent('BeforeDiscussionOptions');
+                    echo writeDiscussionOptions();
+                    writeAdminCheck();
+
+                    echo '</div>';
+                }
+            ?>
             <div class="AuthorWrap">
             <?php
                 if(!$Discussion->Published) {
-                    echo '<div class="not-published-badge">';
+                    echo '<div class="not-published-badge desktop">';
                     echo '<img src="'.url("/themes/alloprof/design/images/icons/eyebreak.svg").'"/>';
                     echo t('Awaiting publication');
                     echo '</div>';

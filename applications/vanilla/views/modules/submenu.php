@@ -1,7 +1,13 @@
 <?php
     require_once Gdn::controller()->fetchViewLocation('helper_functions', 'discussions', 'Vanilla');
+
+    if (!Gdn::session()->isValid()) {
+        $additionalClass = 'invalid';
+    } else {
+        $additionalClass = 'valid';
+    }
 ?>
-<nav class="Question-submenu <?php echo $this->$additionalClass ?>">
+<nav class="Question-submenu <?php echo $additionalClass ?>">
     <?php if(userRoleCheck() == Gdn::config('Vanilla.ExtraRoles.Teacher')) {
     ?>
         <div class='Navigation-linkContainer'>
@@ -11,11 +17,18 @@
 %text</a>'); ?>
         </div>
         <div class='Navigation-linkContainer'>
-            <?php echo Gdn_Theme::link('discussions/bookmarked', sprite('Home').' '.t('Questions followed'), '<a href="%url" class="%class Navigation-link"><svg width="19" height="21" viewBox="0 0 19 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <?php echo Gdn_Theme::link('discussions/bookmarked', sprite('Home').' '.'<span class="desktop">'.t('Questions followed').'</span>'.'<span class="mobile">'.t('Followed'), '<a href="%url" class="%class Navigation-link"><svg width="19" height="21" viewBox="0 0 19 21" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M1.75049 3.5C1.75049 2.5335 2.53399 1.75 3.50049 1.75H15.2697C16.2362 1.75 17.0197 2.5335 17.0197 3.5V18.6743L10.5623 12.8039C9.89479 12.1971 8.87541 12.1971 8.20792 12.8039L1.75049 18.6743V3.5Z" stroke="black" stroke-width="2.5"/>
 </svg>
 %text</a>'); ?>
         </div>
+        <div class='Navigation-linkContainer mobile'>
+            <?php echo Gdn_Theme::link('/search/mobile', t('Explorer'), '<a href="%url" class="%class Navigation-link SearchPopup"><svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="9.78105" cy="9.78105" r="8.28105" stroke="black" stroke-width="2"/>
+                <path d="M16.25 16.25L20 20" stroke="black" stroke-width="2" stroke-linecap="round"/>
+                </svg>%text</a>'); ?>
+        </div>
+
     <?php } else { ?>
         <div class='Navigation-linkContainer'>
             <?php echo Gdn_Theme::link('discussions', sprite('Home').' <span style="margin-top: 1px;">'.t('Home').'</span>', '<a href="%url" class="%class Navigation-link"><svg width="21" height="22" viewBox="0 0 21 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -39,11 +52,36 @@
                 %text'. ($discussionsCount > 0 ? "<span class='realcount Count'>".$discussionsCount."</span>" : '') .'</a>');
                 ?>
         </div>
+        <?php
+            if(!Gdn::session()->isValid()) {
+                $Controller = Gdn::controller();
+                $Session = Gdn::session();
+                $SigninUrl = signInUrl($Controller->SelfUrl);
+                $class="";
+                $href = url($SigninUrl);
+            } else {
+                $class="QuestionPopup";
+                $href = url('/post/newQuestionPopup');
+            }
+        ?>
+        <div class='Navigation-linkContainer mobile'>
+            <?php echo '<a href="'.$href.'" class="'.$class.'"><svg width="49" height="48" viewBox="0 0 49 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0.5 24C0.5 10.7452 11.2452 0 24.5 0C37.7548 0 48.5 10.7452 48.5 24C48.5 37.2548 37.7548 48 24.5 48C11.2452 48 0.5 37.2548 0.5 24Z" fill="#05BF8E"/>
+                <path d="M34.0863 19L21.8298 31.2565L16.88 31.9636L17.5871 27.0139L29.8436 14.7574L34.0863 19Z" stroke="white" stroke-width="2"/>
+                <path d="M31.7293 21.8284L27.0153 17.1144" stroke="white" stroke-width="2"/>
+                </svg></a>'; ?>
+        </div>
         <div class='Navigation-linkContainer'>
-            <?php echo Gdn_Theme::link('discussions/bookmarked', sprite('Home').' '.'<span class="desktop">'.t('Questions followed').'</span>'.'<span class="mobile">'.t('Questions followed').'</span>', '<a href="%url" class="%class Navigation-link"><svg width="19" height="21" viewBox="0 0 19 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <?php echo Gdn_Theme::link('discussions/bookmarked', sprite('Home').' '.'<span class="desktop">'.t('Questions followed').'</span>'.'<span class="mobile">'.t('Followed').'</span>', '<a href="%url" class="%class Navigation-link"><svg width="19" height="21" viewBox="0 0 19 21" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M1.75049 3.5C1.75049 2.5335 2.53399 1.75 3.50049 1.75H15.2697C16.2362 1.75 17.0197 2.5335 17.0197 3.5V18.6743L10.5623 12.8039C9.89479 12.1971 8.87541 12.1971 8.20792 12.8039L1.75049 18.6743V3.5Z" stroke="black" stroke-width="2.5"/>
 </svg>
 %text</a>'); ?>
+        </div>
+        <div class='Navigation-linkContainer mobile'>
+            <?php echo Gdn_Theme::link('/search/mobile', t('Explorer'), '<a href="%url" class="%class Navigation-link SearchPopup"><svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="9.78105" cy="9.78105" r="8.28105" stroke="black" stroke-width="2"/>
+                <path d="M16.25 16.25L20 20" stroke="black" stroke-width="2" stroke-linecap="round"/>
+                </svg>%text</a>'); ?>
         </div>
 
     <?php } ?>

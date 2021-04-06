@@ -83,10 +83,15 @@
 
 .AskQuestionForm .close-icon {
     position: absolute;
-    top: 35px;
-    right: 35px;
+    top: 25px;
+    right: 25px;
     cursor: pointer;
     display: none;
+}
+
+body.isMobile .FormWrapper {
+    padding-left: 0;
+    padding-right: 0;
 }
 
 .AskQuestionForm .close-icon.show {
@@ -204,4 +209,173 @@
     line-height: 18px;
     color: #000000;
     margin: 0;
+}
+
+
+/* Ask a question popup */
+
+.QuestionPopup .BoxNewDiscussion {
+    padding: 0 !important;
+    margin-top: -30px;
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+.QuestionPopup .BoxNewDiscussion .avatar {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    border-radius: 50%;
+    margin-top: 15px;
+    vertical-align: top;
+    display: inline-block;
+    overflow: hidden;
+}
+
+.QuestionPopup .BoxNewDiscussion .editor {
+    width: calc(100% - 55px);
+    display: inline-block;
+    position: relative;
+}
+
+.QuestionPopup .BoxNewDiscussion .editor .richEditor-text {
+    padding-left: 0;
+    padding-right: 0;
+    height: calc(100vh - 240px);
+    overflow-y: auto;
+}
+
+.QuestionPopup .BoxNewDiscussion .clickToCreate {
+    position: absolute;
+    left: 10px;
+    top: 18px;
+    color: #828282;
+}
+
+.QuestionPopup .BoxNewDiscussion .avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.QuestionPopup .BoxNewDiscussion .content {
+    margin-left: 10px;
+}
+
+.QuestionPopup .BoxNewDiscussion .bodybox-wrap {
+    text-align: left;
+}
+
+.QuestionPopup .BoxNewDiscussion .Buttons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end !important;
+    flex-direction: row !important;
+    margin-bottom: 10px;
+    padding-right: 10px;
+}
+
+.QuestionPopup .BoxNewDiscussion .richEditor .richEditor-frame {
+    background-color: transparent !important;
+}
+
+.QuestionPopup .BoxNewDiscussion .bottom {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    z-index: 2;
+}
+
+.QuestionPopup .BoxNewDiscussion .bottom.shadow {
+    box-shadow: 0px -8px 16px rgba(26, 32, 44, 0.05);
+}
+
+.QuestionPopup .BoxNewDiscussion .richEditor-embedBar {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    z-index: 3;
+    width: fit-content;
+}
+
+.QuestionPopup .select2-selection {
+    text-align: left;
+    background-color: #F3F5F7 !important;
+}
+
+.QuestionPopup .Buttons a {
+    height: 24px;
+    margin-right: 10px !important;
+}
+
+.QuestionPopup .mobile-categories {
+    display: flex;
+    padding-bottom: 15px;
+    overflow-x: auto;
+    border-bottom: 1px solid #DDDDDD !important;
+}
+
+.QuestionPopup .mobile-categories .category-item {
+    display: flex;
+    align-items: center;
+    background: #F2F2F2;
+    border-radius: 99px;
+    height: 40px;
+    padding: 4px;
+    font-size: 12px;
+    margin-right: 10px;
+    padding-right: 15px;
+    color: black;
+    white-space: nowrap;
+}
+
+.QuestionPopup .mobile-categories .category-item.selected {
+    background-color: #EEF05D;
+}
+
+.QuestionPopup .mobile-categories .category-item .icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: white;
+    margin-right: 8px;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.QuestionPopup .mobile-categories .category-item .icon img {
+    width: 100%;
+    height: auto;
+    max-height: 80%;
+    object-fit: contain;
+}
+
+.QuestionPopup .rich-select {
+    border-bottom: none;
+    background-color: #F3F5F7;
+}
+
+/* Question rules popup */
+
+.RulesPopup .information-block > div {
+    width: 100%;
+}
+
+.RulesPopup .slick-dots {
+    left: 0;
+}
+
+.RulesPopup .information-block.show {
+    padding: 20px !important;
+    max-width: 500px;
+}
+
+.RulesPopup .information-block .slick-dots li {
+    margin: 0 !important;
+}
+
+.RulesPopup .information-block .slick-dots li button:before {
+    font-size: 12px;
 }

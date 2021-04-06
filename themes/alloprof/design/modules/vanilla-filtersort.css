@@ -113,3 +113,155 @@
     color: black;
     margin-right: 20px;
 }
+
+
+/* Filter Popup CSS */
+.FilterPopup .Body {
+    overflow: hidden !important;
+    max-height: max-content !important;
+}
+
+.FilterPopup h3 {
+    font-size: 20px !important;
+    padding-top: 0 !important;
+}
+
+.FilterPopup h3,
+.FilterPopup h4 {
+    text-align: left;
+}
+
+.FilterPopup h4 {
+    font-size: 17px;
+    color: #828282;
+    margin-bottom: 15px;
+    font-family: 'ChromaticaBold';
+}
+
+.FilterPopup .filter-block {
+    padding-top: 17px;
+    padding-bottom: 15px;
+}
+
+.FilterPopup .filter-block:not(:last-child) {
+    border-bottom: 1px solid #DDDDDD;
+}
+
+.FilterPopup .FilterMenu .form-group {
+    margin-top: 0 !important;
+}
+
+.FilterPopup .FilterMenu .label {
+    font-size: 14px !important;
+}
+
+.FilterPopup .FilterMenu .toggle-wrap input[type=checkbox] + label::before {
+    height: 23px !important;
+}
+
+.FilterPopup .mobile-grade {
+    display: flex;
+    overflow-x: auto;
+    padding-bottom: 15px;
+}
+
+.FilterPopup .mobile-grade .item {
+    white-space: nowrap;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 38px;
+    font-size: 14px;
+    border-radius: 38px;
+    background-color: #F2F2F2;
+    margin: 0 5px;
+    color: black;
+}
+
+.FilterPopup .mobile-grade .item.selected {
+    background-color: #05BF8E;
+    color: white;
+}
+
+.FilterPopup .modal-footer {
+    background: #F5F3EF;
+    width: calc(100% + 42px);
+    padding: 20px;
+    display: flex;
+    margin-bottom: -35px;
+    margin-left: -21px;
+    justify-content: center;
+    border-bottom-left-radius: 24px;
+    border-bottom-right-radius: 24px;
+}
+
+.FilterPopup .btn-default {
+    width: 120px !important;
+    text-align: center;
+    margin: 0 8px;
+    padding: 10px 15px !important;
+    justify-content: center;
+}
+
+/* Customize the label (the container) */
+.custom-radio .container {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    margin-bottom: 7px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-size: 14px;
+    color: black;
+}
+
+  /* Hide the browser's default radio button */
+.custom-radio .container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+  /* Create a custom radio button */
+.custom-radio .checkmark {
+    position: relative;
+    height: 20px;
+    width: 20px;
+    border: 2px solid black;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+  /* When the radio button is checked, add a blue background */
+.custom-radio .container input:checked ~ .checkmark {
+    border-color: #05BF8E;
+}
+
+  /* Create the indicator (the dot/circle - hidden when not checked) */
+.custom-radio .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+  /* Show the indicator (dot/circle) when checked */
+.custom-radio .container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+  /* Style the indicator (dot/circle) */
+.custom-radio .container .checkmark:after {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #05BF8E;
+}

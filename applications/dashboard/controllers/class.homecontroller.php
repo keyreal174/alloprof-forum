@@ -89,6 +89,9 @@ class HomeController extends Gdn_Controller {
             trace($this->data('ViewPaths'), 'View Paths');
         }
 
+        $mobileHeader = new MobileHeaderModule(null);
+        $this->addModule($mobileHeader);
+
         $this->setData('_NoMessages', true);
         Gdn_Theme::section('Error');
 

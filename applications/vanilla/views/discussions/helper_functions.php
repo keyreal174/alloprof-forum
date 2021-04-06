@@ -122,7 +122,7 @@ if (!function_exists('BookmarkButton')) {
             return anchor(
                 $icon,
                 $popupLink,
-                'Hijack followButton Option-Icon Popup'.($isBookmarked ? ' TextColor isFollowing' : ''),
+                'Hijack followButton Option-Icon SocialPopup'.($isBookmarked ? ' TextColor isFollowing' : ''),
                 ['title' => $title, 'id' => 'followButton'.$discussion->DiscussionID, 'aria-pressed' => $isBookmarked ? 'true' : 'false', 'role' => 'button', 'aria-label' => $accessibleLabel]
             );
         }
@@ -325,11 +325,17 @@ if (!function_exists('WriteDiscussion')) :
 endif;
 
 if (!function_exists('writeCategoryDropDown')) :
-    function writeCategoryDropDown($sender, $fieldName = 'CategoryID', $options = []) {
+    function writeCategoryDropDown($sender, $fieldName = 'CategoryID', $options = [], $isMobile=false, $form=false) {
         $sender->EventArguments['Options'] = &$options;
         $sender->fireEvent('BeforeCategoryDropDown');
 
         $value = arrayValueI('Value', $options); // The selected category id
+        if ($value === false && $form) {
+            $value = $form->getFormValue($fieldName, false);
+        }
+        if (!is_array($value)) {
+            $value = [$value];
+        }
         $categoryData = val('CategoryData', $options);
 
         // Grab the category data.
@@ -371,75 +377,110 @@ if (!function_exists('writeCategoryDropDown')) :
 
         unset($options['Filter'], $options['PermFilter'], $options['Context'], $options['CategoryData']);
 
-        // Opening select tag
-        $return = '<select name='.$fieldName.' id='.$fieldName.'>';
-
-        // Get value from attributes
-        if (!is_array($value)) {
-            $value = [$value];
-        }
-
-        // Prevent default $Value from matching key of zero
-        $hasValue = ($value !== [false] && $value !== ['']) ? true : false;
-
-        // Start with null option?
-        $includeNull = val('IncludeNull', $options);
-        if ($includeNull === true) {
-            // $return .= '<option value="">'.t('Select a category...').'</option>';
-        } elseif (is_array($includeNull))
-            $return .= "<option value=\"{$includeNull[0]}\">{$includeNull[1]}</option>\n";
-        elseif ($includeNull)
-            $return .= "<option value=\"\">$includeNull</option>\n";
-        elseif (!$hasValue)
-            $return .= '<option value=""></option>';
-
-        // Show root categories as headings (ie. you can't post in them)?
-        $doHeadings = val('Headings', $options, c('Vanilla.Categories.DoHeadings'));
-
-        // If making headings disabled and there was no default value for
-        // selection, make sure to select the first non-disabled value, or the
-        // browser will auto-select the first disabled option.
-        $forceCleanSelection = ($doHeadings && !$hasValue && !$includeNull);
-
-        // Write out the category options.
-        $enableHeadings = $options['EnableHeadings'] ?? false;
-        if (is_array($safeCategoryData)) {
-            foreach ($safeCategoryData as $categoryID => $category) {
-                $depth = val('Depth', $category, 0);
-                $isHeading = ($depth == 1 && $doHeadings) || $category['DisplayAs'] !== 'Discussions' || !$category['AllowDiscussions'];
-                $disabled = $isHeading && !$enableHeadings;
-                $selected = in_array($categoryID, $value) && $hasValue;
-                if ($forceCleanSelection && $depth > 1) {
-                    $selected = true;
-                    $forceCleanSelection = false;
-                }
-
-                if ($category['AllowDiscussions']) {
-                    if ($permission == 'add' && !$category['PermsDiscussionsAdd']) {
-                        $disabled = true;
+        if($isMobile) {
+            // Prevent default $Value from matching key of zero
+            $hasValue = ($value !== [false] && $value !== ['']) ? true : false;
+            echo '<div class="mobile-categories">';
+            if (is_array($safeCategoryData)) {
+                foreach ($safeCategoryData as $categoryID => $category) {
+                    $depth = val('Depth', $category, 0);
+                    $isHeading = ($depth == 1 && $doHeadings) || $category['DisplayAs'] !== 'Discussions' || !$category['AllowDiscussions'];
+                    $disabled = $isHeading && !$enableHeadings;
+                    $selected = in_array($categoryID, $value) && $hasValue;
+                    if ($forceCleanSelection && $depth > 1) {
+                        $selected = true;
+                        $forceCleanSelection = false;
                     }
-                }
 
-                $return .= '<option value="'.$categoryID.'" data-img_src="'.$category['Photo'].'"';
-                if ($disabled) {
-                    $return .= ' disabled="disabled"';
-                } elseif ($selected) {
-                    $return .= ' selected="selected"'; // only allow selection if NOT disabled
-                }
+                    if ($category['AllowDiscussions']) {
+                        if ($permission == 'add' && !$category['PermsDiscussionsAdd']) {
+                            $disabled = true;
+                        }
+                    }
 
-                $name = htmlspecialchars(val('Name', $category, 'Blank Category Name'));
-                if ($depth > 1) {
-                    $name = str_repeat('&#160;', 4 * ($depth - 1)).$name;
-                }
+                    $name = htmlspecialchars(val('Name', $category, 'Blank Category Name'));
+                    if ($depth > 1) {
+                        $name = str_repeat('&#160;', 4 * ($depth - 1)).$name;
+                    }
 
-                $return .= '>'.$name."</option>\n";
+                    echo '<div class="category-item '.($selected?'selected':'').'" id="'.$categoryID.'">';
+                    echo '<div class="icon">'.($category['Photo']?'<img src="'.$category['Photo'].'"/>':'').'</div>';
+                    echo $name;
+                    echo '</div>';
+                }
             }
-        }
+            echo '</div>';
+        } else {
+            // Opening select tag
+            $return = '<select name='.$fieldName.' id='.$fieldName.'>';
 
-        echo '<div class="Category rich-select select2 select2-category">';
-        echo '<div class="category-selected-img pre-icon"><img src="'.url("/themes/alloprof/design/images/icons/subject.svg").'"/></div>';
-        echo $return.'</select>';
-        echo '</div>';
+            // Get value from attributes
+            if (!is_array($value)) {
+                $value = [$value];
+            }
+
+            // Prevent default $Value from matching key of zero
+            $hasValue = ($value !== [false] && $value !== ['']) ? true : false;
+
+            // Start with null option?
+            $includeNull = val('IncludeNull', $options);
+            if ($includeNull === true) {
+                // $return .= '<option value="">'.t('Select a category...').'</option>';
+            } elseif (is_array($includeNull))
+                $return .= "<option value=\"{$includeNull[0]}\">{$includeNull[1]}</option>\n";
+            elseif ($includeNull)
+                $return .= "<option value=\"\">$includeNull</option>\n";
+            elseif (!$hasValue)
+                $return .= '<option value=""></option>';
+
+            // Show root categories as headings (ie. you can't post in them)?
+            $doHeadings = val('Headings', $options, c('Vanilla.Categories.DoHeadings'));
+
+            // If making headings disabled and there was no default value for
+            // selection, make sure to select the first non-disabled value, or the
+            // browser will auto-select the first disabled option.
+            $forceCleanSelection = ($doHeadings && !$hasValue && !$includeNull);
+
+            // Write out the category options.
+            $enableHeadings = $options['EnableHeadings'] ?? false;
+            if (is_array($safeCategoryData)) {
+                foreach ($safeCategoryData as $categoryID => $category) {
+                    $depth = val('Depth', $category, 0);
+                    $isHeading = ($depth == 1 && $doHeadings) || $category['DisplayAs'] !== 'Discussions' || !$category['AllowDiscussions'];
+                    $disabled = $isHeading && !$enableHeadings;
+                    $selected = in_array($categoryID, $value) && $hasValue;
+                    if ($forceCleanSelection && $depth > 1) {
+                        $selected = true;
+                        $forceCleanSelection = false;
+                    }
+
+                    if ($category['AllowDiscussions']) {
+                        if ($permission == 'add' && !$category['PermsDiscussionsAdd']) {
+                            $disabled = true;
+                        }
+                    }
+
+                    $return .= '<option value="'.$categoryID.'" data-img_src="'.$category['Photo'].'"';
+                    if ($disabled) {
+                        $return .= ' disabled="disabled"';
+                    } elseif ($selected) {
+                        $return .= ' selected="selected"'; // only allow selection if NOT disabled
+                    }
+
+                    $name = htmlspecialchars(val('Name', $category, 'Blank Category Name'));
+                    if ($depth > 1) {
+                        $name = str_repeat('&#160;', 4 * ($depth - 1)).$name;
+                    }
+
+                    $return .= '>'.$name."</option>\n";
+                }
+            }
+
+            echo '<div class="Category rich-select select2 select2-category">';
+            echo '<div class="category-selected-img pre-icon"><img src="'.url("/themes/alloprof/design/images/icons/subject.svg").'"/></div>';
+            echo $return.'</select>';
+            echo '</div>';
+        }
     }
 endif;
 
@@ -500,6 +541,58 @@ if (!function_exists('timeElapsedString')) :
     }
 endif;
 
+
+if(!function_exists('writeCategories')) :
+    function writeCategories() {
+        $categoryModel = new CategoryModel();
+        $categories = $categoryModel
+            ->setJoinUserCategory(true)
+            ->getChildTree(null, ['collapseCategories' => true]);
+        $categories = CategoryModel::flattenTree($categories);
+
+        $categories = array_filter($categories, function ($category) {
+            return val('PermsDiscussionsView', $category) && val('Following', $category);
+        });
+
+        $userCategories = $categoryModel->getFollowed(Gdn::session()->UserID);
+
+        function isFollowingCategory($followingCategories, $category) {
+            foreach ($followingCategories as $element) {
+                if ($element["CategoryID"] == $category["CategoryID"]) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        foreach ($categories as $key => $value) {
+            # code...
+            if (isFollowingCategory($userCategories, $value)) {
+                $categories[$key]["isFollowing"] = 1;
+            } else {
+                $categories[$key]["isFollowing"] = 0;
+            }
+        }
+
+        function cmp($a, $b) {
+            if ($a["isFollowing"] > $b["isFollowing"]) {
+                return -1;
+            } else if ($a["isFollowing"] < $b["isFollowing"]) {
+                return 1;
+            } else return 0;
+        }
+
+        usort($categories, 'cmp');
+
+        $newCategorySet = array($categories);
+
+        $data = new Gdn_DataSet($newCategorySet, DATASET_TYPE_ARRAY);
+        $data->datasetType(DATASET_TYPE_OBJECT);
+
+        return $data;
+    }
+endif;
+
 if (!function_exists('writeDiscussionDetail')) :
     function writeDiscussionDetail($Discussion, $sender, $session) {
         $Author = Gdn::userModel()->getID($Discussion->InsertUserID); // userBuilder($Discussion, 'Insert');
@@ -532,6 +625,14 @@ if (!function_exists('writeDiscussionDetail')) :
                 }
             ?>
             <div class="Discussion">
+                <?php
+                    if(!$Discussion->Published) {
+                        echo '<div class="not-published-badge mobile">';
+                        echo '<img src="'.url("/themes/alloprof/design/images/icons/eyebreak.svg").'"/>';
+                        echo t('Awaiting publication');
+                        echo '</div>';
+                    }
+                ?>
                 <div class="Item-Header DiscussionHeader">
                     <?php
                     if (!Gdn::themeFeatures()->get('EnhancedAccessibility') && Gdn::session()->isValid()) {
@@ -547,7 +648,7 @@ if (!function_exists('writeDiscussionDetail')) :
                     <div class="AuthorWrap">
                         <?php
                             if(!$Discussion->Published) {
-                                echo '<div class="not-published-badge DisableClick">';
+                                echo '<div class="not-published-badge DisableClick desktop">';
                                 echo '<img src="'.url("/themes/alloprof/design/images/icons/eyebreak.svg").'"/>';
                                 echo t('Awaiting publication');
                                 echo '</div>';

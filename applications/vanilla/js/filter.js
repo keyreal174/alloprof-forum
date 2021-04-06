@@ -27,12 +27,41 @@ jQuery(document).ready(function($) {
         filterComment();
     });
 
-    function filterDiscussion() {
-        var subject = $('.FilterMenu #Form_SubjectDropdown').val();
-        var grade = $('.FilterMenu #Form_GradeDropdown').val();
-        var sort = $('.FilterMenu #Form_DiscussionSort').val();
-        var explanation = $('.FilterMenu #Form_Explanation').is(":checked");
-        var verifiedBy = $('.FilterMenu #Form_VerifiedBy').is(":checked");
+    $(document).on('click', '.FilterPopup .apply-filter', function() {
+        filterDiscussion(true);
+    });
+
+    $(document).on('click', '.FilterPopup .clean-filter', function() {
+        $('.FilterPopup .mobile-grade .item').removeClass('selected');
+        $(".FilterPopup input:radio").first().prop("checked", true);
+        $(".FilterPopup input:checkbox").attr("checked", false);
+    });
+
+    $(document).on('click', '.mobile-grade .item', function() {
+        $('.mobile-grade .item').removeClass('selected');
+        $(this).addClass('selected');
+    });
+
+    function filterDiscussion(isMobile=false) {
+        var subject=-1,
+            grade=-1,
+            sort='desc',
+            explanation=false,
+            verifiedBy=false;
+
+        if(isMobile) {
+            if($('.FilterMenu .mobile-grade .item.selected'))
+                grade = $('.FilterMenu .mobile-grade .item.selected').attr('value');
+            sort = $("input[type='radio'][name='sortRadio']:checked").val();
+            explanation = $('.FilterMenu #Form_MobileExplanation').is(":checked");
+            verifiedBy = $('.FilterMenu #Form_MobileVerifiedBy').is(":checked");
+        } else {
+            subject = $('.FilterMenu #Form_SubjectDropdown').val();
+            grade = $('.FilterMenu #Form_GradeDropdown').val();
+            sort = $('.FilterMenu #Form_DiscussionSort').val();
+            explanation = $('.FilterMenu #Form_Explanation').is(":checked");
+            verifiedBy = $('.FilterMenu #Form_VerifiedBy').is(":checked");
+        }
 
         grade = !grade ? -1 : grade;
         subject = !subject ? -1 : subject;

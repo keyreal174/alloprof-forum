@@ -99,6 +99,10 @@ jQuery(document).ready(function($) {
             e.stopPropagation();
         });
 
+        $('.Flayout-notification').on('click', '.toggle-wrap', function(e) {
+            e.stopPropagation();
+        });
+
         $('.Flayout-notification').on('click', '.notification-list .Item', function(e) {
             if($(this).attr('id'))
                 markSingleRead($(this).attr('id'));

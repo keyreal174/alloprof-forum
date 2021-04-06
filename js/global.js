@@ -704,6 +704,11 @@ jQuery(document).ready(function($) {
 
     if ($.fn.popup) {
         $('a.BanPopup').popup({containerCssClass: 'BanPopup CustomPopup'});
+        $('a.SearchPopup').popup({containerCssClass: 'SearchPopup CustomPopup'});
+        $('a.FilterPopup').popup({containerCssClass: 'SocialPopup FilterPopup CustomPopup'});
+        $('a.QuestionPopup').popup({containerCssClass: 'SearchPopup QuestionPopup CustomPopup'});
+        $('a.RulesPopup').popup({containerCssClass: 'SocialPopup RulesPopup'});
+        $('a.FeedbackHelp').popup({containerCssClass: 'SocialPopup'});
         $('a.scrollToAskQuestionFormPopup').popup({containerCssClass: 'scrollToAskQuestionFormPopup'});
     }
 

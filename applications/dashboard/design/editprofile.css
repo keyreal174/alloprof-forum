@@ -8,7 +8,7 @@
 }
 
 .Frame-row .MainContent {
-    width: 580px;
+    max-width: 580px;
 }
 
 .profile-content {

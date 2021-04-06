@@ -1986,7 +1986,9 @@ class EntryController extends Gdn_Controller {
     }
 
     public function ban() {
-        $this->addJsFile('banned.js');
+        $mobileHeader = new MobileHeaderModule(null);
+        $this->addModule($mobileHeader);
+        // $this->addJsFile('banned.js');
         $this->render();
     }
 

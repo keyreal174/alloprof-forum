@@ -53,6 +53,8 @@ class DiscussionsController extends VanillaController {
     /** @var string UserRole 'Teacher' or 'Student' */
     public $UserRole;
 
+    public $PublicGradeID;
+
     /**
      * Prep properties.
      *
@@ -81,6 +83,7 @@ class DiscussionsController extends VanillaController {
     public function writeFilter() {
         $gradeFilterOption = (Gdn::request()->get('grade') || Gdn::request()->get('grade') == '0') ? strval((int)(Gdn::request()->get('grade'))) : -1;
         $this->GradeID = $gradeFilterOption;
+        $this->PublicGradeID = $gradeFilterOption;
 
         $subject = (Gdn::request()->get('subject') || Gdn::request()->get('subject') == '0') ? strval((int)(Gdn::request()->get('subject'))) : -1;
         $this->SubjectID = $subject;
@@ -235,6 +238,9 @@ class DiscussionsController extends VanillaController {
         }
 
         $this->addModule($bannerModule);
+
+        $mobileHeader = new MobileHeaderModule('Home');
+        $this->addModule($mobileHeader);
 
         // $this->addModule('BookmarkedModule');
         // $this->addModule('TagModule');
@@ -612,6 +618,8 @@ class DiscussionsController extends VanillaController {
         $this->fireEvent('AfterAddSideMenu');
         $this->fireEvent('AddProfileTabsInfo');
 
+        $mobileHeader = new MobileHeaderModule('Questions followed');
+        $this->addModule($mobileHeader);
 
         if ($this->UserRole == "Teacher") {
             $bannerModule = new BannerModule('Home', 'Home', '', 'Mutual Aid Zone', "Welcome to the Mutual Aid Zone! <br/> Want to help the students? It's this way!", "", "Teacher");
@@ -777,6 +785,9 @@ class DiscussionsController extends VanillaController {
         $this->addModule('ProfileFilterModule');
         $this->fireEvent('AfterAddSideMenu');
         $this->fireEvent('AddProfileTabsInfo');
+
+        $mobileHeader = new MobileHeaderModule('My Questions');
+        $this->addModule($mobileHeader);
 
         $DiscussionEmpty = true;
         if ($this->DiscussionData->numRows() > 0 || (isset($this->AnnounceData) && is_object($this->AnnounceData) && $this->AnnounceData->numRows() > 0)) {
@@ -1338,8 +1349,17 @@ class DiscussionsController extends VanillaController {
     // Filter Discussion Function
     public function filterDiscussion() {
         $parameter = $_POST['parameter'];
-
         echo $this->_PagerUrl.'?'.$parameter;
+    }
+
+    public function filter() {
+        $this->View = 'mobile_filter';
+        $this->render();
+    }
+
+    public function question() {
+        $this->View = 'mobile_newquestion';
+        $this->render();
     }
 
     public function saveDiscussion() {

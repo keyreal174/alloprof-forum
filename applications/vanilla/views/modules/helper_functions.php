@@ -368,7 +368,7 @@ if (!function_exists('writeGradeFilter')) :
      * @param string $extraClasses any extra classes you add to the drop down
      * @return string
      */
-    function writeGradeFilter($gradeID) {
+    function writeGradeFilter($gradeID, $isMobile=false) {
         $Session = Gdn::session();
         $DefaultGrade = 0;
         if ($Session) {
@@ -395,10 +395,28 @@ if (!function_exists('writeGradeFilter')) :
             }
         }
 
-        echo '<div class="rich-select select2 select2-grade">';
-        echo '<div class="pre-icon"><img src="'.url("/themes/alloprof/design/images/icons/grade.svg").'"/></div>';
-        echo Gdn::controller()->Form->dropDown('GradeDropdown', $GradeOption, array('Value' => $gradeID, 'IncludeNull' => true));
-        echo '</div>';
+        if($isMobile) {
+            echo '<div class="mobile-grade">';
+            if (is_array($GradeOption)) {
+                foreach ($GradeOption as $id => $text) {
+                    if (is_array($text)) {
+                        $attribs = $text;
+                        $text = val('Text', $attribs, '');
+                        unset($attribs['Text']);
+                    } else {
+                        $attribs = [];
+                    }
+
+                    echo '<div class="item" value="'.htmlspecialchars($id).'">'.$text.'</div>';
+                }
+            }
+            echo '</div>';
+        } else {
+            echo '<div class="rich-select select2 select2-grade">';
+            echo '<div class="pre-icon"><img src="'.url("/themes/alloprof/design/images/icons/grade.svg").'"/></div>';
+            echo Gdn::controller()->Form->dropDown('GradeDropdown', $GradeOption, array('Value' => $gradeID, 'IncludeNull' => true));
+            echo '</div>';
+        }
     }
 endif;
 
@@ -460,23 +478,23 @@ if (!function_exists('writeFilterToggle')) :
      * @param string $extraClasses any extra classes you add to the drop down
      * @return string
      */
-    function writeFilterToggle($explanation, $verified) {
+    function writeFilterToggle($explanation=false, $verified=false, $isMobile=false) {
         $role = getUserRole(Gdn::session()->User->UserID);
         echo '<ul>';
         echo '<li class="form-group">';
         $text = $role === 'Teacher' ? t('Without explanations only') : t('With explanations only');
         $verifiedText = $role === 'Teacher' ? t('Not Verified by Alloprof only') : t('Verified by Alloprof only');
         if ($explanation == 'true') {
-            echo Gdn::controller()->Form->toggle('Explanation', $text, [ 'checked' => $explanation ]);
+            echo Gdn::controller()->Form->toggle(($isMobile?'Mobile':'').'Explanation', $text, [ 'checked' => $explanation ]);
         } else {
-            echo Gdn::controller()->Form->toggle('Explanation', $text);
+            echo Gdn::controller()->Form->toggle(($isMobile?'Mobile':'').'Explanation', $text);
         }
         echo '</li>';
         echo '<li class="form-group">';
         if ($verified == 'true') {
-            echo Gdn::controller()->Form->toggle('VerifiedBy', $verifiedText, [ 'checked' => $verified ]);
+            echo Gdn::controller()->Form->toggle(($isMobile?'Mobile':'').'VerifiedBy', $verifiedText, [ 'checked' => $verified ]);
         } else {
-            echo Gdn::controller()->Form->toggle('VerifiedBy', $verifiedText);
+            echo Gdn::controller()->Form->toggle(($isMobile?'Mobile':'').'VerifiedBy', $verifiedText);
         }
         echo '</li>';
         echo '</ul>';

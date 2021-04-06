@@ -137,22 +137,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                                         <path d="M107.889 6.77148C101.717 6.77148 100.778 11.759 100.778 14.7078V28.5781H104.568V14.7442C104.568 12.0502 105.109 10.6304 107.889 10.6304H108.033V6.77148H107.889Z" fill="#1A1919"/>
                                     </svg>
                                 </a>
-                                <a href="{home_link format="%url"}" class="Header-logo mobile">
-                                    {mobile_logo}
-                                </a>
+                                <div class="MobileHeader">
+                                    {asset name="MobileHeader"}
+                                </div>
                             </div>
                             <div class="Header-right">
                                 {community_chooser buttonType='titleBarLink' buttonClass='Header-desktopCommunityChooser'}
                                 <div class="MeBox-header">
                                     {module name="MeModule" CssClass="FlyoutRight"}
                                 </div>
-                                {if $User.SignedIn}
-                                    <button class="mobileMeBox-button">
-                                        <span class="Photo PhotoWrap">
-                                            <img src="{$User.Photo|escape:'html'}" class="ProfilePhotoSmall" alt="{t c='Avatar'}">
-                                        </span>
-                                    </button>
-                                {/if}
                             </div>
                         </div>
                         <nav class="Navigation needsInitialization js-nav">
@@ -161,14 +154,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                                 <div class='Navigation-linkContainer'>
                                     {community_chooser buttonType='reset' fullWidth=true buttonClass='Navigation-link'}
                                 </div>
-                            </div>
-                        </nav>
-                        <nav class="mobileMebox js-mobileMebox needsInitialization">
-                            <div class="Container">
-                                {module name="MeModule"}
-                                <button class="mobileMebox-buttonClose Close">
-                                    <span>×</span>
-                                </button>
                             </div>
                         </nav>
                     </header>
@@ -182,9 +167,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <div class="Container">
                         <div class="Frame-contentWrap">
                             <div class="Frame-menubar">
-                                {if $User.SignedIn}
-                                    {module name="SubMenuModule"}
-                                {/if}
+                                {module name="SubMenuModule"}
                             </div>
 
                             <div class="Frame-details">
@@ -240,6 +223,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
         </div>
     </div>
+    <a href="{url('/discussions/filter')}" class="discussion-filters-mobile FilterPopup">
+        <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M6.49997 4.79997H5.29997V1.19999C5.29997 0.537255 4.76272 0 4.09998 0C3.43724 0 2.89999 0.537255 2.89999 1.19999V4.79997H1.69999C1.03726 4.79997 0.5 5.33723 0.5 5.99997C0.5 6.6627 1.03726 7.19996 1.69999 7.19996H6.49997C7.1627 7.19996 7.69996 6.6627 7.69996 5.99997C7.69996 5.33723 7.1627 4.79997 6.49997 4.79997ZM4.09991 9.5998C3.43718 9.5998 2.89992 10.1371 2.89992 10.7998V22.7997C2.89992 23.4625 3.43718 23.9997 4.09991 23.9997C4.76265 23.9997 5.29991 23.4625 5.29991 22.7997V10.7998C5.29991 10.1371 4.76265 9.5998 4.09991 9.5998ZM12.4999 19.2C11.8372 19.2 11.3 19.7373 11.3 20.4V22.8C11.3 23.4628 11.8372 24 12.4999 24C13.1627 24 13.6999 23.4628 13.6999 22.8V20.4C13.6999 19.7373 13.1627 19.2 12.4999 19.2ZM23.2998 9.59994H22.0998V1.19999C22.0998 0.537255 21.5626 0 20.8998 0C20.2371 0 19.6998 0.537255 19.6998 1.19999V9.59994H18.4998C17.8371 9.59994 17.2998 10.1372 17.2998 10.7999C17.2998 11.4627 17.8371 11.9999 18.4998 11.9999H23.2998C23.9625 11.9999 24.4998 11.4627 24.4998 10.7999C24.4998 10.1372 23.9625 9.59994 23.2998 9.59994ZM20.8999 14.3999C20.2372 14.3999 19.6999 14.9372 19.6999 15.5999V22.7999C19.6999 23.4626 20.2372 23.9999 20.8999 23.9999C21.5627 23.9999 22.0999 23.4626 22.0999 22.7999V15.5999C22.0999 14.9372 21.5627 14.3999 20.8999 14.3999ZM14.8999 14.3999H13.7V1.19999C13.7 0.537255 13.1627 0 12.5 0C11.8372 0 11.3 0.537255 11.3 1.19999V14.3999H10.1C9.43723 14.3999 8.89998 14.9372 8.89998 15.5999C8.89998 16.2626 9.43723 16.7999 10.1 16.7999H14.8999C15.5627 16.7999 16.0999 16.2626 16.0999 15.5999C16.0999 14.9372 15.5627 14.3999 14.8999 14.3999Z" fill="black"/>
+        </svg>
+    </a>
     <div id="modals"></div>
     {event name="AfterBody"}
 

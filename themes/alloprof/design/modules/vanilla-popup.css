@@ -14,22 +14,34 @@ a.FlagContentPopup:before {
     content: none;
 }
 
-/* div.Popup.FlagContentPopup {
-    transform: none !important;
-    -webkit-transform: none !important;
-    left: initial !important;
-    top: calc(50% - 360px) !important;
-} */
 
-div.Popup.CustomPopup .Border {
-    width: 720px;
+/* Basic Modal  */
+
+div.Popup .Body {
+    border-radius: 24px;
+}
+
+div.Popup .Footer {
+    height: 0 !important;
+    z-index: 4;
+}
+
+div.Popup .Footer .Close span {
+    font-size: 45px;
+    font-weight: 100;
+    font-family: ChromaticaThin;
+    color: black;
+}
+
+div.Popup .Border {
+    min-width: 300px;
+    width: auto;
 }
 
 div.Popup.CustomPopup .Body {
-    max-height: 700px !important;
     overflow: initial !important;
-    padding: 80px !important;
-
+    padding: 8% 5%;
+    max-height: fit-content !important;
     box-shadow: 0px 16px 40px -5px rgba(108, 103, 103, 0.05);
     border-radius: 24px;
     border: 1px solid #DDDDDD;
@@ -101,18 +113,136 @@ div.Popup.FlagContentPopup .Body .Content .FlatReportButton input {
     margin: 0 auto;
 }
 
+
+.SearchPopup .modal-header {
+    box-shadow: 0px 8px 20px rgb(26 32 44 / 5%);
+    padding: 15px 30px;
+    z-index: 3;
+    position: relative;
+ }
+
+ .SearchPopup .modal-footer,
+ .SearchPopup .modal-body {
+    padding: 30px 30px;
+ }
+
+ .SearchPopup .modal-header h3 {
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    font-size: 18px;
+ }
+
+ .SearchPopup h2 {
+     text-align: left;
+     margin-bottom: 20px;
+ }
+
+ .SearchPopup .modal-header .Header-left__search {
+     margin-top: 20px;
+ }
+
+ .SearchPopup .mobile-categories {
+    max-height: calc(100vh - 235px);
+    overflow-y: auto;
+ }
+
+ .SearchPopup .mobile-categories li {
+     display: flex;
+     flex-wrap: wrap;
+     align-items: center;
+ }
+
+.SearchPopup .mobile-categories li > div {
+     height: 120px;
+     margin-right: 12px;
+     width: 72px;
+     position: relative;
+}
+
+.SearchPopup .mobile-categories li > div > svg {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.SearchPopup .Body .FormWrapper {
+    padding: 0 !important;
+}
+
+.SearchPopup a.Close {
+    right: 15px !important;
+    top: 5px !important;
+}
+
+.SearchPopup .mobile-categories li .category-icon {
+    width: 72px;
+    height: 72px;
+    background: #F2F2F2;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.SearchPopup .mobile-categories li .name {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 100%;
+    height: auto;
+    text-align: center;
+    font-size: 11px;
+    display: block;
+    margin-top: 7px;
+    line-height: 15px;
+    color: #1A1919;
+ }
+
+.SearchPopup .Footer {
+    position: relative !important;
+}
+
+ .SearchPopup .mobile-categories li .category-icon img {
+    max-height: 40px;
+ }
+
+ .SearchPopup a.Close {
+    position: fixed !important;
+    right: 15px;
+    top: 5px;
+}
+
+.SearchPopup .Border {
+    padding: 0;
+    width: 100% !important;
+    height: 100vh;
+    min-width: 0 !important;
+}
+.SearchPopup .Border .Body {
+    height: 100%;
+    min-height: 100vh;
+    border-radius: 0 !important;
+    max-height: 100% !important;
+    margin-left: -15px;
+    margin-right: -15px;
+    padding: 0 !important;
+}
+
+
 /* Social Sharing Popup */
+
 div.Popup.SocialPopup .Border {
     width: initial;
 }
 
-div.Popup.CustomPopup.SocialPopup .Body {
+div.Popup.SocialPopup .Body {
     padding: 64px !important;
+    max-height: fit-content !important;
 }
 
 div.Popup.SocialPopup h2 {
-    font-size: 28px;
-    line-height: 31px;
+    font-size: 21px;
+    line-height: 25px;
     color: black;
     margin-bottom: 32px;
 }
@@ -179,6 +309,41 @@ div.Popup.SocialPopup .SocialSharingButtons a img {
     margin-right: 16px;
 }
 
+/* Delete discussion popup */
+.DeleteDiscussionPopup {
+    max-width: 600px;
+}
+
+.DeleteDiscussionPopup h1 {
+    text-align: center;
+    font-size: 21px;
+    margin-bottom: 20px;
+}
+
+.DeleteDiscussionPopup .P {
+    font-size: 15px;
+    line-height: 18px;
+    text-align: center;
+    color: black;
+    margin-bottom: 15px;
+}
+
+.DeleteDiscussionPopup .Body {
+    padding: 25px !important;
+}
+
+.DeleteDiscussionPopup .Buttons {
+    display: flex;
+    justify-content: center;
+}
+
+.DeleteDiscussionPopup .Buttons input {
+    margin: 0 10px !important;
+    line-height: 15px;
+}
+
+/* Account Banned popup */
+
 div.Popup.BanPopup #Message {
     color: black;
     font-size: 18px;
@@ -186,9 +351,16 @@ div.Popup.BanPopup #Message {
     margin: 16px 0 32px;
 }
 
+div.Popup.BanPopup .SplashInfo {
+    max-width: 500px;
+}
+
 div.Popup.BanPopup .btn {
     margin: 0 auto;
 }
+
+
+/* Signin popup */
 
 .SignInPopup .SocialIcon {
     background: transparent !important;
@@ -209,7 +381,9 @@ div.Popup.BanPopup .btn {
     opacity: 0.6;
 }
 
+
 /* Popup scrollToAskQuestionFormPopup hasRichEditor */
+
 .scrollToAskQuestionFormPopup .Border {
     max-width: 580px !important;
 }
@@ -266,4 +440,87 @@ div.Popup.BanPopup .btn {
 
 .scrollToAskQuestionFormPopup.Popup.hasRichEditor .Border .Body .AskQuestionForm .Buttons {
     margin-top: 10px;
+}
+
+
+@media screen and (max-width: 619px) {
+    div.Popup.BanPopup #Message {
+        font-size: 15px;
+    }
+
+    div.Popup.SocialPopup {
+        transform: none !important;
+        left: 0 !important;
+        top: unset !important;
+        bottom: 0;
+    }
+
+    div.Popup.SocialPopup .Footer {
+        width: 40px;
+        height: 4px !important;
+        background: #DDDDDD;
+        border-radius: 23px;
+        top: 20px;
+        left: calc(50% - 20px);
+        position: absolute;
+    }
+
+    div.Popup.SocialPopup .Footer span {
+        display: none;
+    }
+
+    div.Popup.SocialPopup .Footer .Close {
+        width: 10px;
+        height: 4px;
+    }
+
+    div.Popup.CustomPopup.SocialPopup .Body .FlagAvatar {
+        display: none;
+    }
+
+    div.Popup.SocialPopup .SocialSharingButtons span {
+        display: none;
+    }
+
+    div.Popup.SocialPopup .SocialSharingButtons a {
+        padding: 16px;
+    }
+
+    div.Popup.SocialPopup .SocialSharingButtons {
+        justify-content: center;
+    }
+
+    div.Popup.SocialPopup .Body {
+        padding: 30px 20px !important;
+    }
+
+    div.Popup.SocialPopup .Border {
+        min-width: 100vw;
+    }
+
+    div.Popup.CustomPopup.SocialPopup h2.d-mobile {
+        font-size: 21px;
+        text-align: left;
+        margin-top: 20px;
+        margin-bottom: 30px;
+        display: block !important;
+    }
+    div.Popup.SocialPopup p {
+        font-size: 18px;
+        line-height: 19px;
+        color: black;
+    }
+
+    .MeButton-user .FlyoutRight .Flyout {
+
+    }
+
+    .MeButton-user .MeBox-mobileClose {
+        font-size: 69px;
+        z-index: 200;
+        font-size: 45px;
+        font-weight: 100;
+        font-family: ChromaticaThin;
+        color: black;
+    }
 }

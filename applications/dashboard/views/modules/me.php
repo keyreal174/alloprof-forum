@@ -95,7 +95,7 @@ if ($Session->isValid()):
     // }
 
     // Profile Settings & Logout
-    $dropdown = new DropdownModule();
+    $dropdown = new DropdownModule('', '', 'account-options', 'authorized');
     $dropdown->setData('DashboardCount', $DashboardCount);
     $triggerTitle = t('Account Options');
 
@@ -142,6 +142,8 @@ if ($Session->isValid()):
 
     $dropdown->addLink(t('Sign Out'), signOutUrl(), 'entry.signout', '', [], $signoutModifiers);
 
+    $dropdown->addLink(t('×'), '#', 'Close', '');
+
     $this->EventArguments['Dropdown'] = &$dropdown;
     $this->fireEvent('FlyoutMenu');
     echo $dropdown;
@@ -175,7 +177,7 @@ else:
 
     echo '<div class="SignInLinks">';
 
-    $dropdown = new DropdownModule('', '', '', 'unauthorized');
+    $dropdown = new DropdownModule('', '', 'account-options', 'unauthorized');
     $dropdown->setData('DashboardCount', $DashboardCount);
 
     $dropdown->setTrigger('', 'anchor', 'MeButton FlyoutButton MeButton-user unauthorized', '<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -190,6 +192,8 @@ else:
     $dropdown->addLink(t('Sign In'), '/entry/signinstudent?Target='.$this->_Sender->SelfUrl, 'studentsignin', 'SignInStudentPopup', ['rel' => 'nofollow'], $editModifiers);
     $dropdown->addLink(t('Register'), registerUrl($this->_Sender->SelfUrl), 'register', 'registerPopup', [], $editModifiers);
     $dropdown->addLink(t('Teacher'), signInUrl($this->_Sender->SelfUrl), 'teachersignin', 'SignInPopup', ['rel' => 'nofollow'], $preferencesModifiers);
+
+    $dropdown->addLink(t('×'), '#', 'Close', '');
 
     $this->EventArguments['Dropdown'] = &$dropdown;
     $this->fireEvent('FlyoutMenu');

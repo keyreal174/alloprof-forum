@@ -14,7 +14,6 @@
     <div class="Banner-content General <?php echo $this->additionalClass; ?>">
         <div class="Banner-content__Container">
             <!-- <p class="Banner-content__pagename"><?php echo t($this->breadcrumb); ?></p> -->
-            <h1><?php echo t($this->title1); ?></h1>
             <h1><strong><?php echo t($this->title2); ?></strong></h1>
             <p class="Banner-content__description"><?php echo t($this->description); ?></p>
         </div>

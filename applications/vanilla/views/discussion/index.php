@@ -12,22 +12,6 @@ if (!function_exists('userRoleCheck'))
 // Wrap the discussion related content in a div.
 echo '<div class="MessageList Discussion">';
 
-// Write the page title.
-echo '<!-- Page Title -->
-<div id="Item_0" class="PageTitle">';
-
-if (Gdn::session()->isValid()) {
-    echo '<div class="Options">';
-
-    $this->fireEvent('BeforeDiscussionOptions');
-    echo writeDiscussionOptions();
-    writeAdminCheck();
-
-    echo '</div>';
-}
-
-echo "</div>\n\n";
-
 $this->fireEvent('AfterDiscussionTitle');
 $this->fireEvent('AfterPageTitle');
 
@@ -46,11 +30,11 @@ writeCommentForm();
 echo '<div class="CommentsWrap">';
 
 // Write the comments.
-$this->Pager->Wrapper = '<span %1$s>%2$s</span>';
-echo '<span class="BeforeCommentHeading">';
-$this->fireEvent('CommentHeading');
-echo $this->Pager->toString('less');
-echo '</span>';
+// $this->Pager->Wrapper = '<span %1$s>%2$s</span>';
+// echo '<span class="BeforeCommentHeading">';
+// $this->fireEvent('CommentHeading');
+// echo $this->Pager->toString('less');
+// echo '</span>';
 
 echo '<div class="DataBox DataBox-Comments">';
 if ($this->data('Comments')->numRows() > 0) {

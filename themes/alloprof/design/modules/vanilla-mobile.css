@@ -5,6 +5,43 @@
  * @license GPL-2.0-only
  */
 
+ .d-desktop {
+    display: initial;
+ }
+
+ .d-mobile {
+    display: none !important;
+ }
+
+ .MobileHeader {
+    display: none;
+ }
+
+ .MobileHeader h3 {
+    font-size: 18px;
+ }
+
+ .Question-submenu.invalid {
+    display: none;
+ }
+
+ .not-published-badge.mobile {
+    display: none !important;
+    position: relative;
+    left: 0;
+    top: 0;
+    width: 100%;
+    margin-bottom: 15px;
+ }
+
+ .Navigation-linkContainer.mobile {
+     display: none;
+ }
+
+ .discussion-filters-mobile {
+     display: none;
+ }
+
  /* Basic Mobile theme */
 
  @media screen and (max-width: 1366px) {
@@ -78,6 +115,10 @@
         padding-right: 16px;
     }
 
+    .sidebar.left {
+        margin-right: 0 !important;
+    }
+
     .Frame-details {
         max-width: 580px;
         margin: 0 auto;
@@ -85,24 +126,33 @@
 
     .Frame-details .Frame-row {
         flex-direction: column;
+        padding-top: 65px;
     }
 
     .Frame-menubar.hasBetaBanner {
         top: 200px;
     }
 
+    div.Popup.SocialPopup .SocialSharingButtons a {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    div.Popup.SocialPopup .SocialSharingButtons a img {
+        margin: 0;
+    }
+
     .Frame-banner .Banner-content,
     .Extra,
     .Question-submenu .Navigation-linkContainer span.desktop {
-        display: none;
+        display: none !important;
     }
 
     .Question-submenu .Navigation-linkContainer span.mobile {
-        display: inline-block;
+        display: inline-block !important;
     }
 
     .Frame-banner, .Frame-header {
-        height: 132px;
         background-color: white;
     }
 
@@ -163,6 +213,7 @@
         max-width: 100%;
         position: relative;
         top: 0;
+        height: auto;
     }
 
     .sidebar:hover {
@@ -189,9 +240,25 @@
 }
 
 @media screen and (max-width: 619px) {
-    .ItemDiscussion .verified-info {
-        min-height: 42px;
+    .Question-submenu.invalid {
         display: flex;
+    }
+
+    .Banner-content.Teacher .Banner-content__Container {
+        background-position-y: calc(100% + 70px);
+    }
+
+    .Frame-details .Frame-row {
+        padding-top: 0;
+    }
+
+    .CommentHeading {
+        padding-left: 15px;
+    }
+
+    .ItemDiscussion .verified-info {
+        min-height: 40px;
+        display: flex !important;
         justify-content: center;
         align-items: center;
         background: #DBF8EF;
@@ -213,6 +280,235 @@
 
     .DataList .ItemDiscussion, .DataList .Item, .MessageList .ItemDiscussion.ItemDiscussion, .MessageList .ItemComment .Comment {
         padding: 16px;
+        border-radius: 0;
+    }
+
+    .CategoryDetail .Card {
+        margin-left: 25px !important;
+        margin-right: 25px !important;
+        margin-bottom: 25px !important;
+    }
+    .CategoryDetail .Card h1 {
+        font-size: 40px;
+    }
+    .CategoryDetail .Card h2 {
+        font-size: 15px;
+    }
+
+    .MeBox .MeButton-user .ProfilePhoto,
+    .Header .MeButton {
+        width: 32px;
+        height: 32px;
+    }
+    .Header .MeButton svg {
+        height: 21px;
+    }
+    .MeBox .MeButton .Alert {
+        min-width: 10px;
+        width: 10px;
+        height: 10px;
+        right: 5px;
+    }
+    .Frame-banner {
+        margin-top: 64px;
+        min-height: 0;
+        display: block;
+    }
+    .Banner-content {
+        height: 196px;
+    }
+    .Frame-banner {
+        background-color: #CAEDF9;
+    }
+    .Frame-banner .Banner-content {
+        display: flex !important;
+    }
+    .Banner-content__Container {
+        padding: 15px 30px;
+        background-size: 245px;
+        background-position-y: calc(100% + 25px);
+        z-index: 0;
+    }
+    .Banner-content h1 {
+        padding: 0px 30px;
+        font-size: 21px;
+    }
+    .followButton.isFollowing svg,
+    .SocialIcon svg,
+    .Options>a svg,
+    .Options>a, .Options>span {
+        height: 20px;
+        margin-right: 0 !important;
+    }
+    span.ReactButtons a.ReactButton.ReactButton-Like {
+        height: 20px;
+        width: auto;
+        min-width: 22px;
+        margin-left: 10px;
+    }
+    span.ReactButtons a.ReactButton.ReactButton-Like .Count {
+        font-size: 17px;
+    }
+    .Favorite-Icon.isLiked {
+        background-image: url("../../../../themes/alloprof/design/images/icons/liked.svg") !important;
+        background-repeat: no-repeat;
+        background-size: 20px 20px !important;
+    }
+    .Favorite-Icon {
+        background-image: url("../../../../themes/alloprof/design/images/icons/like.svg") !important;
+        background-repeat: no-repeat;
+        background-size: 20px 20px !important;
+    }
+    .Frame-header .Header .Header-logo,
+    .Frame-header .Header .Header-right,
+    .Frame-header,
+    .Frame-header .Header .row {
+        height: 64px;
+        justify-content: left;
+    }
+    .Frame-header .Header .Header-left,
+    .Banner-content .Banner-content__description,
+    .FilterBanner,
+    .AskQuestionForm.BoxNewDiscussion,
+    .sidebar {
+        display: none !important;
+    }
+    div.Popup a.Close {
+        position: absolute;
+        right: 15px;
+        top: 5px;
+    }
+    .Frame#page {
+        margin-bottom: 64px;
+    }
+    .Frame-menubar {
+        height: 64px;
+        position: fixed;
+        top: calc(100% - 64px);
+        max-width: 100%;
+        width: 100%;
+        z-index: 9;
+    }
+    .Frame-menubar .Question-submenu {
+        padding-top: 0;
+        box-shadow: 0px -8px 16px rgba(26, 32, 44, 0.05);
+        background: white;
+        min-height: 64px;
+        justify-content: space-around;
+    }
+    .Navigation-linkContainer {
+        justify-content: center;
+        margin: 0 !important;
+    }
+    .Navigation-linkContainer.mobile {
+        display: flex;
+    }
+    .Navigation-linkContainer:after {
+        content: none;
+    }
+    .Navigation-linkContainer,
+    .Navigation-link {
+        font-size: 11px !important;
+        font-family: "ChromaticaRegular";
+        color: #828282;
+        font-weight: normal !important;
+    }
+    .Navigation-link {
+        margin-top: 5px !important;
+    }
+    .Navigation-link svg {
+        margin-bottom: 0;
+    }
+    .Question-submenu .Count {
+        display: none !important;
+    }
+    .Options-Icon {
+        right: 15px;
+    }
+    .OptionsMenu .Flyout {
+        top: auto;
+    }
+    .SpFlyoutHandle:before {
+        font-size: 30px !important;
+    }
+    .MessageList .Item-BodyWrap .Message.userContent,
+    .DataList.Discussions .Item-BodyWrap .Message.userContent,
+    .Item-Search .Item-Body .Summary {
+        font-size: 15px !important;
+        padding: 15px;
+    }
+    .Frame-body {
+        padding-top: 25px;
+    }
+    .Frame-body .Frame-content > .Container {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .Frame-contentWrap {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+    }
+    .not-published-badge.mobile {
+        display: flex !important;
+    }
+    .not-published-badge.desktop {
+        display: none !important;
+    }
+    .footer__newsletter h2 {
+        font-size: 25px;
+        line-height: 29.3px;
+    }
+    .discussion-filters-mobile {
+        display: flex;
+        align-items: center;
+        width: 56px;
+        height: 56px;
+        justify-content: center;
+        border-radius: 50%;
+        background: white;
+        box-shadow: 0px 0px 10px rgba(108, 103, 103, 0.5);
+        position: fixed;
+        right: 10px;
+        bottom: 75px;
+    }
+    .back-btn {
+        display: none !important;
+    }
+    .profile-content {
+        margin-top: -30px;
+    }
+    .profile-content .Photo {
+        width: 128px !important;
+        height: 128px !important;
+    }
+    .Frame-header .Header .Header-logo a.Header-logo {
+        display: none;
+    }
+    .MobileHeader {
+        display: flex;
+        align-items: center;
+        white-space: nowrap;
+    }
+    .MobileHeader a {
+        margin-top: 3px;
+        margin-right: 10px;
+    }
+    .MobileHeader .logo svg {
+        height: 16px;
+        width: 75px;
+    }
+    .d-mobile {
+        display: initial !important;
+     }
+    .d-desktop {
+        display: none !important;
+    }
+    .PageControls.PageControls {
+        display: none;
+    }
+    .SearchResult {
+        margin-left: 15px;
     }
 }
 

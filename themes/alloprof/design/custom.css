@@ -91,14 +91,6 @@
     content: none;
 }
 
-.Question-submenu .Navigation-linkContainer .Navigation-link {
-    display: flex;
-    align-items: center;
-    min-height: initial;
-    line-height: initial;
-    padding: 0 20px;
-}
-
 .Question-submenu .Navigation-linkContainer .Navigation-link svg {
     margin-bottom: 0;
 }
@@ -166,6 +158,13 @@ select {
     display: flex !important;
     align-items: center !important;
     cursor: pointer;
+}
+
+.btn-primary {
+    background-color: #05BF8E !important;
+    color: white !important;
+    border: none !important;
+    line-height: normal !important;
 }
 
 .btn-shadow {
@@ -460,32 +459,11 @@ select {
     display: none;
 }
 
-
-/* Modal  */
-
-div.Popup .Body {
-    border-radius: 24px;
-}
-
-div.Popup .Footer {
-    height: 0 !important;
-}
-
-div.Popup .Footer .Close span {
-    font-size: 45px;
-    font-weight: 100;
-}
-
-div.Popup .Border {
-    min-width: 400px;
-    width: auto;
-}
-
 /* Not approved question box */
 
 .question-not-published {
     text-align: center;
-    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 .question-not-published img {
