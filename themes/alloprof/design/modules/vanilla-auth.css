@@ -285,7 +285,7 @@ div.Popup.SignInPopup .logo {
     }
 }
 
-@media screen and (max-width: 619px) {
+@media screen and (max-width: 958px) {
     div.Popup.SignInPopup {
         left: 50vw !important;
     }

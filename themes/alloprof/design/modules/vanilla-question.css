@@ -617,7 +617,7 @@ li.ItemDiscussion .Message {
     width: fit-content;
 }
 
-@media screen and (max-width: 619px) {
+@media screen and (max-width: 958px) {
     .Discussion .PageTitle {
         right: 20px;
         top: 85px;

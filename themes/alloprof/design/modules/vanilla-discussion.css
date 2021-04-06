@@ -261,7 +261,7 @@ span.ReactButtons a.ReactButton.ReactButton-Like .additional-label {
     outline: none;
 }
 
-@media screen and (max-width: 619px) {
+@media screen and (max-width: 958px) {
     .discussion-list-footer a.btn-default {
         display: flex !important;
     }

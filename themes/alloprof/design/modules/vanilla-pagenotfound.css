@@ -50,14 +50,14 @@
     display: none !important;
 }
 
-@media screen and (max-width: 619px) {
+@media screen and (max-width: 958px) {
     .PageNotFound .Content .SplashInfo #Message {
         font-size: 15px;
     }
 
     .PageNotFound .Content .SplashInfo {
         padding-bottom: 10%;
-        padding-top: 20%;
+        padding-top: 15%;
     }
 
     .PageNotFound .SplashInfo .btn {
