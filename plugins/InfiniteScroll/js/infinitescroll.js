@@ -248,6 +248,8 @@ jQuery(function ($) {
             ajax = false;
             $('.ScrollProgress').remove();
             updateIndex();
+            window.convertEmbedLinkToNormalLink();
+            window.handleOverflowedContent();
         });
     }
 
@@ -292,6 +294,8 @@ jQuery(function ($) {
             ajax = false;
             $('.ScrollProgress').remove();
             updateIndex();
+            window.convertEmbedLinkToNormalLink();
+            window.handleOverflowedContent();
         });
     }
 
