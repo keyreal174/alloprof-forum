@@ -58,7 +58,7 @@
     };
 
     const ssoLogin = (res) => {
-        const ssoUrl = "https://www.alloprof.qc.ca/auth/signin";
+        const ssoUrl = "/auth/signin";
         res.user.getIdTokenResult().then(result => {
             const data = {
                 idToken: result.token
