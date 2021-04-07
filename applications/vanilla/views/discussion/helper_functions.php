@@ -972,8 +972,8 @@ if (!function_exists('writeDiscussionFooter')) :
                                 $answerButton = $sender->Form->button(t('Give an explanation'), ['class' => 'btn-default btn-shadow']);
                                 $answerButtonForMobile = anchor(t('Give an explanation'), '/post/answerPopup/'.$Discussion->DiscussionID, 'btn-default btn-shadow AnswerPopup QuestionPopup');
                             } else {
-                                $answerButton = anchor(t('Give an explanation'), '/entry/jsconnect-redirect?client_id=alloprof', 'btn-default btn-shadow');
-                                $answerButtonForMobile = anchor(t('Give an explanation'), '/entry/jsconnect-redirect?client_id=alloprof', 'btn-default btn-shadow');
+                                $answerButton = anchor(t('Give an explanation'), '/entry/signinstudent', 'btn-default btn-shadow SignInStudentPopup');
+                                $answerButtonForMobile = anchor(t('Give an explanation'), '/entry/signinstudent', 'btn-default btn-shadow SignInStudentPopup');
                             }
 
                             echo $answerButton;

@@ -102,6 +102,10 @@ div.Popup.SignInPopup .Buttons .CreateAccount a {
     font-weight: 600;
 }
 
+div.Popup.SignInPopup .Buttons .CreateAccount {
+    text-decoration: none;
+}
+
 .UserLoggedOut img.HelpIcon,
 div.Popup.SignInPopup img.HelpIcon {
     margin-top: 40px;

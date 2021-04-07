@@ -11,7 +11,7 @@
     const signIn = (email, password) => {
         auth.signInWithEmailAndPassword(email, password).then(res => {
             console.log(res);
-            ssoLogin(res);
+            ssoLogin(res.user);
         }).catch(error => {
             var err = "";
             const { message, code } = error;
@@ -35,14 +35,14 @@
             type: "student",
             skills: [],
             nickname: displayName,
-            level: +grade
+            level: parseInt(grade)
         }
 
         axios.post(apiUrl, user)
             .then((response) => {
                 console.log(response)
                 auth.signInWithEmailAndPassword(email, password).then(res => {
-                    ssoLogin(res);
+                    ssoLogin(res.user);
                 }).catch(error => {
                     addSignUpErrorMessage("Problème technique");
                 });
@@ -57,9 +57,9 @@
             });
     };
 
-    const ssoLogin = (res) => {
+    const ssoLogin = (user) => {
         const ssoUrl = "/auth/signin";
-        res.user.getIdTokenResult().then(result => {
+        user.getIdTokenResult().then(result => {
             const data = {
                 idToken: result.token
             };
@@ -88,11 +88,20 @@
     };
 
     const checkAllFilled = () => {
-        var emtpy = false;
+        let emtpy = false;
 
+        let k = 0;
         $('.registerPopup .InputBox').each(function() {
-            empty = $(this).val().length == 0;
+            if ($(this).val().length == 0) {
+                empty = true;
+            } else {
+                k ++;
+            }
         });
+
+        if (k === $('.registerPopup .InputBox').length) {
+            empty = false;
+        }
 
         if (!$('.registerPopup #Form_Grade').val()) empty = true;
         if ($('.registerPopup input[type=checkbox]:checked').length !== 2) empty = true;
@@ -123,7 +132,7 @@
         }
     });
 
-    $(document).on('change', '.registerPopup .InputBox', function() {
+    $(document).on('keyup', '.registerPopup .InputBox', function() {
         checkAllFilled();
     });
 
@@ -140,7 +149,7 @@
         var email = $('.registerPopup #Form_Email').val();
         var password = $('.registerPopup #Form_Password').val();
         var confirmPassword = $('.registerPopup #Form_PasswordMatch').val();
-        var grade = $('.registerPopup #Form_Grade').text();
+        var grade = $('.registerPopup #Form_Grade').val();
         var displayName = $('.registerPopup #Form_DisplayName').val();
 
         var error = '';
@@ -160,6 +169,31 @@
         }
     });
     // student signin/signup end
+
+    // switch popup
+    $(document).on('click', '.registerLink', function (event) {
+        $('div.Popup').remove();
+        $('.Overlay').remove();
+    });
+
+    $(document).on('click', '.SignInStudentLink', function (event) {
+        $('div.Popup').remove();
+        $('.Overlay').remove();
+    });
+
+    // SignInPopup Trigger
+    $(document).on('click', '.SignInStudentPopupAgent', function (event) {
+        event.stopPropagation();
+
+        if (auth.currentUser) {
+            ssoLogin(auth.currentUser);
+            return false;
+        } else {
+            event.preventDefault();
+            $('.SignInStudentPopup').eq(0).trigger('click');
+        }
+    });
+    // SignInPopup Trigger end =================
 
     $(document).on('click', 'li.ItemDiscussion', function (event) {
         window.location.href = $(this).attr('data-url');

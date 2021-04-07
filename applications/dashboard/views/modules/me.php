@@ -187,9 +187,8 @@ else:
     $editModifiers['listItemCssClasses'] = ['EditProfileWrap', 'link-editprofile'];
     $preferencesModifiers['listItemCssClasses'] = ['EditProfileWrap', 'link-preferences'];
 
-    // $dropdown->addLink(t('Sign In'), '/entry/jsconnect-redirect?client_id=alloprof', 'normalsignin', '', ['rel' => 'nofollow'], $editModifiers);
-    // $dropdown->addLink(t('Register'), 'https://alloprof.qc.ca/jsconnect/register', 'register', '', [], $editModifiers);
-    $dropdown->addLink(t('Sign In'), '/entry/signinstudent?Target='.$this->_Sender->SelfUrl, 'studentsignin', 'SignInStudentPopup', ['rel' => 'nofollow'], $editModifiers);
+    $dropdown->addLink(t('Sign In'), false, '', 'SignInStudentPopupAgent', ['rel' => 'nofollow'], $editModifiers);
+    $dropdown->addLink(t('Sign In'), '/entry/signinstudent?Target='.$this->_Sender->SelfUrl, 'studentsignin', 'SignInStudentPopup HiddenImportant', ['rel' => 'nofollow'], $editModifiers);
     $dropdown->addLink(t('Register'), registerUrl($this->_Sender->SelfUrl), 'register', 'registerPopup', [], $editModifiers);
     $dropdown->addLink(t('Teacher'), signInUrl($this->_Sender->SelfUrl), 'teachersignin', 'SignInPopup', ['rel' => 'nofollow'], $preferencesModifiers);
 
@@ -198,20 +197,6 @@ else:
     $this->EventArguments['Dropdown'] = &$dropdown;
     $this->fireEvent('FlyoutMenu');
     echo $dropdown;
-
-
-    // echo anchor(t('Sign In'), '/entry/jsconnect-redirect?client_id=alloprof', '', ['rel' => 'nofollow']);
-
-    // echo '<div class="MenuDivider"></div>';
-    // $Url = 'https://alloprof.qc.ca/jsconnect/register';
-    // if (!empty($Url))
-    //     echo bullet(' ').anchor(t('Register'), $Url, '', ['rel' => 'nofollow']).' ';
-
-    // echo '<div class="MenuDivider"></div>';
-
-    // if (!empty($Url))
-    //     echo bullet(' ').anchor(t('Teacher'), signInUrl($this->_Sender->SelfUrl), 'SignInPopup', ['rel' => 'nofollow']).' ';
-
     echo '</div>';
 
     echo ' <div class="SignInIcons">';

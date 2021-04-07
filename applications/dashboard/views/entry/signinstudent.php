@@ -76,7 +76,7 @@ echo '</div>';
                 }
 
                 if (c('Garden.Registration.Method') != 'Invitation') {
-                    printf(t("Don't have an account yet? %s"), anchor(t('Sign up!'), '/entry/register'.$Target, '', ['title' => t('Create an Account')]));
+                    printf(t("Don't have an account yet? %s"), anchor(t('Sign up!'), '/entry/register'.$Target, 'registerPopup registerLink', ['title' => t('Create an Account')]));
                     printf(t("Don't have an account yet? %s"));
                 }
                 ?>
