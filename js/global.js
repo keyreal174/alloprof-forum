@@ -195,6 +195,25 @@
     });
     // SignInPopup Trigger end =================
 
+    // Signout
+    $(document).on('click', '.dropdown-menu-link-entry-signout', function (event) {
+        event.stopPropagation();
+        event.preventDefault();
+
+        axios.post("/auth/signout")
+            .then((response) => {
+                auth.signOut().then(() => {
+                    window.location.href = $(this).attr('href');
+                });
+            }).catch((error) => {
+                auth.signOut().then(() => {
+                    window.location.href = $(this).attr('href');
+                });
+            });
+        return false;
+    });
+    // Signout end
+
     $(document).on('click', 'li.ItemDiscussion', function (event) {
         window.location.href = $(this).attr('data-url');
     });
