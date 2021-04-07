@@ -140,7 +140,7 @@ if ($Session->isValid()):
     $dropdown->addLinkIf($modPermission, t('Moderation Queue'), '/dashboard/log/moderation', 'moderation.moderation', '', [], $modModifiers);
     $dropdown->addLinkIf($dashboardPermission, t('Dashboard'), '/dashboard/settings', 'dashboard.dashboard', '', [], $dashboardModifiers);
 
-    $dropdown->addLink(t('Sign Out'), signOutUrl(), 'entry.signout', '', [], $signoutModifiers);
+    $dropdown->addLink(t('Sign Out'), signOutUrl(), 'entry.signout', '', $signoutModifiers);
 
     $dropdown->addLink(t('×'), '#', 'Close', '');
 
