@@ -241,15 +241,16 @@ jQuery(function ($) {
                 Content.find('.CommentForm').show();
                 $(PagerAfter).remove();
             }
-
+            setTimeout(() => {
+                window.convertEmbedLinkToNormalLink();
+                window.handleOverflowedContent();
+            }, 1000);
             $document.trigger('CommentPagingComplete');
         }).always(function () {
             // Allow new requests, even if this request failed somehow.
             ajax = false;
             $('.ScrollProgress').remove();
             updateIndex();
-            window.convertEmbedLinkToNormalLink();
-            window.handleOverflowedContent();
         });
     }
 
@@ -272,7 +273,10 @@ jQuery(function ($) {
                 .first().find(':not(tr)')
                 .first().prepend('<a id="Page_' + pagesBefore + '"/>');
 
-
+            setTimeout(() => {
+                window.convertEmbedLinkToNormalLink();
+                window.handleOverflowedContent();
+            }, 1000);
             // Prepend the first post of a discussion.
             $('div.ItemDiscussion', data).appendTo(MessageList);
 
@@ -294,8 +298,6 @@ jQuery(function ($) {
             ajax = false;
             $('.ScrollProgress').remove();
             updateIndex();
-            window.convertEmbedLinkToNormalLink();
-            window.handleOverflowedContent();
         });
     }
 

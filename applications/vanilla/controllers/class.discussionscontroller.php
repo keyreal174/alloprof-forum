@@ -722,6 +722,7 @@ class DiscussionsController extends VanillaController {
         Gdn_Theme::section('DiscussionList');
 
         // Add js
+        $this->addJsFile('discussionstyle.js');
         $this->addJsFile('jquery.autosize.min.js');
         $this->addJsFile('autosave.js');
         $this->addJsFile('post.js');
@@ -1276,6 +1277,7 @@ class DiscussionsController extends VanillaController {
         Gdn_Theme::section('DiscussionList');
 
         // Add js
+        $this->addJsFile('discussionstyle.js');
         $this->addJsFile('jquery.autosize.min.js');
         $this->addJsFile('autosave.js');
         $this->addJsFile('post.js');
