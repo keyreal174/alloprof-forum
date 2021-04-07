@@ -56,7 +56,7 @@ div.Popup.SignInPopup .AjaxForm .FormWrapper {
 
 
 .AjaxForm .FormWrapper ul li {
-    margin-bottom: 35px;
+    margin-bottom: 32px;
     position: relative;
 }
 
@@ -158,7 +158,7 @@ div.Popup.SignInPopup .Buttons.SignUpButtons {
 
 div.Popup.SignInPopup .Buttons.SignUpButtons input,
 div.Popup.SignInPopup .Buttons.SignUpButtons a {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .UserLoggedOut
@@ -191,6 +191,10 @@ div.Popup.SignInPopup .validators .CheckBoxLabel {
     line-height: 18px;
     color: black;
     margin-bottom: 24px;
+}
+
+div.Popup.SignInPopup.registerPopup .validators .CheckBoxLabel:last-child {
+    margin-bottom: 0;
 }
 
 .UserLoggedOut .validators .CheckBoxLabel a,
@@ -259,6 +263,14 @@ div.Popup.SignInPopup a.Close {
 
 div.Popup.SignInPopup .logo {
     display: none;
+}
+
+div.Popup.SignInPopup .AjaxForm.FormTitleWrapper {
+    margin-bottom: 0;
+}
+
+div.Popup.SignInPopup.registerPopup .Buttons.SignUpButtons {
+    padding: 0 !important;
 }
 
 @media screen and (max-width: 1200px) {
