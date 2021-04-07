@@ -10,7 +10,6 @@
     // student signin/signup
     const signIn = (email, password) => {
         auth.signInWithEmailAndPassword(email, password).then(res => {
-            console.log(res);
             ssoLogin(res.user);
         }).catch(error => {
             var err = "";
@@ -20,7 +19,6 @@
             } else if (code === "auth/wrong-password") {
                 err = "Wrong Password";
             }
-
             addErrorMessage(err);
         });
     };
@@ -40,7 +38,6 @@
 
         axios.post(apiUrl, user)
             .then((response) => {
-                console.log(response)
                 auth.signInWithEmailAndPassword(email, password).then(res => {
                     ssoLogin(res.user);
                 }).catch(error => {
