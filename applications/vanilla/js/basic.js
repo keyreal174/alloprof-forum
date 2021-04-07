@@ -83,26 +83,4 @@ jQuery(document).ready(function($) {
 
     selectCategoryImg({element: $('.FilterMenu .select2-category option:selected')});
     selectCategoryImg({element: $('.EditDiscussionDetail .select2-category option:selected')});
-
-    $('.signinandsave').click(function() {
-        var parent = $(this).parents('.DiscussionForm, .EditDiscussionForm');
-        var redirectUrl = $(this).attr('data-url');
-        console.log(redirectUrl);
-        var frm = $(parent).find('form').first();
-        var postValues = $(frm).serialize();
-        localStorage.setItem('draft', postValues);
-        window.location.replace(window.location.origin + redirectUrl);
-        console.log(postValues);
-    });
-
-    $('.signinandsavecomment').click(function() {
-        var parent = $(this).parents('.CommentPostForm');
-        var redirectUrl = $(this).attr('data-url');
-        console.log(redirectUrl);
-        var frm = $(parent).find('form').first();
-        var postValues = $(frm).serialize();
-        localStorage.setItem('draft', postValues);
-        window.location.replace(window.location.origin + redirectUrl);
-        console.log(postValues);
-    });
 });

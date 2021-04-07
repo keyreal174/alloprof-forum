@@ -89,18 +89,8 @@ $this->fireEvent('BeforeCommentForm');
                     if ($Session->isValid()) {
                         echo $this->Form->button($Editing ? t('Save Comment') : t('Submit my explanation'), $ButtonOptions);
                     } else {
-                        echo '<a data-url="'.url("/entry/jsconnect-redirect?client_id=alloprof&target=").urlencode('/discussion/saveComment').'" class="btn-default btn-shadow signinandsavecomment">'.t('Submit my explanation').'</a>';
-                        // $AllowSigninPopup = c('Garden.SignIn.Popup');
-                        // $Attributes = ['tabindex' => '-1'];
-                        // if (!$AllowSigninPopup) {
-                        //     $Attributes['target'] = '_parent';
-                        // }
-                        // $AuthenticationUrl = signInUrl($this->SelfUrl);
-                        // $CssClass = 'Button Primary Stash';
-                        // if ($AllowSigninPopup) {
-                        //     $CssClass .= ' SignInPopup';
-                        // }
-                        // echo anchor(t('Comment As ...'), $AuthenticationUrl, $CssClass, $Attributes);
+                        echo anchor(t('Submit my explanation'), '/entry/signinstudent?Target=discussions', 'btn-default btn-shadow SignInStudentPopupAgent SaveComment');
+                        echo anchor(t('Submit my explanation'), '/entry/signinstudent?Target=discussions', 'btn-default btn-shadow SignInStudentPopup SaveComment HiddenImportant');
                     }
 
                     $this->fireEvent('AfterFormButtons');
