@@ -27,7 +27,7 @@ div.Popup .Footer {
 }
 
 div.Popup .Footer .Close span {
-    font-size: 45px;
+    font-size: 40px;
     font-weight: 100;
     font-family: ChromaticaThin;
     color: black;
@@ -456,22 +456,26 @@ div.Popup.BanPopup .btn {
     }
 
     div.Popup.SocialPopup .Footer {
-        width: 40px;
-        height: 4px !important;
-        background: #DDDDDD;
+        width: 44px;
+        height: 44px !important;
         border-radius: 23px;
-        top: 20px;
-        left: calc(50% - 20px);
+        top: 24px;
+        right: 24px;
         position: absolute;
     }
 
     div.Popup.SocialPopup .Footer span {
-        display: none;
+        width: 44px;
+        height: 44px;
+        text-align: center;
     }
 
     div.Popup.SocialPopup .Footer .Close {
-        width: 10px;
-        height: 4px;
+        width: 44px;
+        height: 44px;
+        position: relative;
+        top: 0;
+        left: 0;
     }
 
     div.Popup.CustomPopup.SocialPopup .Body .FlagAvatar {
@@ -491,7 +495,7 @@ div.Popup.BanPopup .btn {
     }
 
     div.Popup.SocialPopup .Body {
-        padding: 30px 20px !important;
+        padding: 24px !important;
     }
 
     div.Popup.SocialPopup .Border {
@@ -501,7 +505,6 @@ div.Popup.BanPopup .btn {
     div.Popup.CustomPopup.SocialPopup h2.d-mobile {
         font-size: 21px;
         text-align: left;
-        margin-top: 20px;
         margin-bottom: 30px;
         display: block !important;
     }
@@ -509,10 +512,6 @@ div.Popup.BanPopup .btn {
         font-size: 18px;
         line-height: 19px;
         color: black;
-    }
-
-    .MeButton-user .FlyoutRight .Flyout {
-
     }
 
     .MeButton-user .MeBox-mobileClose {
