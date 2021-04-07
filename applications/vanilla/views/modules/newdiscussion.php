@@ -46,14 +46,7 @@
             ?>
         </div>
         <?php
-            // if($this->invalid) {
-                // $Controller = Gdn::controller();
-                // $Session = Gdn::session();
-                // $SigninUrl = signInUrl($Controller->SelfUrl);
-
-                // echo '<a href="'.url("/entry/jsconnect-redirect?client_id=alloprof").'" class="AskQuestion" rel="nofollow">'.t('What is your question?').'</a>';
-            // } else
-                echo '<div class="clickToCreate">'.t('What is your question?').'</div>';
+            echo '<div class="clickToCreate">'.t('What is your question?').'</div>';
         ?>
     </div>
     <div class="close-icon">
@@ -167,7 +160,7 @@
                     $Session = Gdn::session();
                     $SigninUrl = signInUrl($Controller->SelfUrl);
 
-                    echo '<a data-url="'.url("/entry/jsconnect-redirect?client_id=alloprof&target=").urlencode('/discussions/saveDiscussion').'" class="btn-default btn-shadow signinandsave">'.t('Publish').'</a>';
+                    echo anchor(t('Publish'), '/entry/signinstudent?Target=discussions', 'btn-default btn-shadow signinandsave SignInStudentPopup');
                 } else {
                     echo $this->Form->button((property_exists($this, 'Discussion')) ? t('Save') : t('Publish'), ['class' => 'btn-default btn-shadow']);
                 }

@@ -53,12 +53,6 @@
                     echo $this->Form->input('DisplayName', 'displayName', ['Wrap' => TRUE, 'placeholder' => t('DisplayName')]);
                 ?>
             </li>
-            <li role="presentation">
-                <?php
-                echo $this->Form->textBox('Name', ['autocorrect' => 'off', 'autocapitalize' => 'off', 'Wrap' => TRUE, 'type' => 'hidden', 'placeholder' => t('Choose a nickname to stay anonymous')]);
-                echo '<span id="NameUnavailable" class="Incorrect" style="display: none;">'.t('Name Unavailable').'</span>';
-                ?>
-            </li>
             <?php if (!$this->data('NoEmail')): ?>
                 <li role="presentation">
                     <?php
@@ -110,7 +104,7 @@
             </li>
             <li class="Buttons SignUpButtons"  role="presentation">
                 <?php echo $this->Form->button(t('Sign up'), ['class' => 'btn btn-default btn-shadow', 'disabled' => 'disabled']); ?>
-                <?php printf(anchor(t('Sign in'), '/entry/signin'.$Target, '')); ?>
+                <?php printf(anchor(t('Sign in'), '/entry/signinstudent'.$Target, 'SignInStudentLink SignInStudentPopup')); ?>
             </li>
         </ul>
         <!-- <?php echo $this->Form->close(); ?> -->

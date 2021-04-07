@@ -497,7 +497,8 @@ select {
 
 
 /* Hide infinite scroll progressbar */
-.nanobar {
+.nanobar,
+.HiddenImportant {
     display: none !important;
 }
 
