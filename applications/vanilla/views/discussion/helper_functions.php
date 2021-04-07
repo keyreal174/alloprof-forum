@@ -1009,7 +1009,7 @@ if (!function_exists('getGrade')) :
         foreach ($fields as $k => $field) {
             if ($field['Label'] == "Grade") {
                 $GradeOption = array_filter($field['Options'], function($v) {
-                    return preg_match('/(Primaire|Secondaire)/', $v);
+                    return preg_match('/(Primaire|Secondaire|Post-secondaire)/', $v);
                 });
             }
         }
