@@ -8,6 +8,7 @@
 // Global vanilla library function.
 (function(window, $) {
     // student signin/signup
+    var saveURL = '';
     const signIn = (email, password) => {
         auth.signInWithEmailAndPassword(email, password).then(res => {
             console.log(res);
@@ -65,7 +66,7 @@
             };
             axios.post(ssoUrl, data)
                 .then(response => {
-                    window.location.href = gdn.url("/entry/jsconnect-redirect?client_id=alloprof");
+                    window.location.href = gdn.url("/entry/jsconnect-redirect?client_id=alloprof" + saveURL);
                 });
         });
     };
@@ -184,6 +185,24 @@
     // SignInPopup Trigger
     $(document).on('click', '.SignInStudentPopupAgent', function (event) {
         event.stopPropagation();
+        if ($(this).hasClass('SaveDiscussion')) {
+            var parent = $(this).parents('.DiscussionForm, .EditDiscussionForm');
+            var frm = $(parent).find('form').first();
+            var postValues = $(frm).serialize();
+            localStorage.setItem('draft', postValues);
+
+            saveURL = '&target=discussions/saveDiscussion';
+        } else if ($(this).hasClass('SaveComment')) {
+            var parent = $(this).parents('.CommentPostForm');
+            var frm = $(parent).find('form').first();
+            var postValues = $(frm).serialize();
+            localStorage.setItem('draft', postValues);
+
+            saveURL = '&target=discussion/saveComment';
+        } else {
+            localStorage.removeItem('draft');
+            isSaveDiscussion = '';
+        }
 
         if (auth.currentUser) {
             ssoLogin(auth.currentUser);

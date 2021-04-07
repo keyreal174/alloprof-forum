@@ -968,13 +968,13 @@ if (!function_exists('writeDiscussionFooter')) :
                             $answerButton = '';
                             $answerButtonForMobile = null;
 
-                            if($userCanComment){
+                            // if($userCanComment){
                                 $answerButton = $sender->Form->button(t('Give an explanation'), ['class' => 'btn-default btn-shadow']);
                                 $answerButtonForMobile = anchor(t('Give an explanation'), '/post/answerPopup/'.$Discussion->DiscussionID, 'btn-default btn-shadow AnswerPopup QuestionPopup');
-                            } else {
-                                $answerButton = anchor(t('Give an explanation'), '/entry/signinstudent', 'btn-default btn-shadow SignInStudentPopup');
-                                $answerButtonForMobile = anchor(t('Give an explanation'), '/entry/signinstudent', 'btn-default btn-shadow SignInStudentPopup');
-                            }
+                            // } else {
+                            //     $answerButton = anchor(t('Give an explanation'), '/entry/signinstudent', 'btn-default btn-shadow');
+                            //     $answerButtonForMobile = anchor(t('Give an explanation'), '/entry/signinstudent', 'btn-default btn-shadow');
+                            // }
 
                             echo $answerButton;
 

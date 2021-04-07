@@ -160,16 +160,15 @@
                     $Session = Gdn::session();
                     $SigninUrl = signInUrl($Controller->SelfUrl);
 
-                    echo anchor(t('Publish'), '/entry/signinstudent?Target=discussions', 'btn-default btn-shadow signinandsave SignInStudentPopup');
+                    echo anchor(t('Publish'), '/entry/signinstudent?Target=discussions/saveDiscussions', 'btn-default btn-shadow SignInStudentPopupAgent SaveDiscussion');
+                    echo anchor(t('Publish'), '/entry/signinstudent?Target=discussions', 'btn-default btn-shadow SignInStudentPopup HiddenImportant');
                 } else {
                     echo $this->Form->button((property_exists($this, 'Discussion')) ? t('Save') : t('Publish'), ['class' => 'btn-default btn-shadow']);
                 }
                 $this->fireEvent('AfterFormButtons');
                 echo '</div>';
-            // }
                 echo $this->Form->close();
                 echo '</div>';
-
         ?>
     </div>
 
