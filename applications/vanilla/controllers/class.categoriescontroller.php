@@ -452,7 +452,7 @@ class CategoriesController extends VanillaController {
             }
         }
 
-
+        $this->addJsFile('discussionstyle.js');
         $this->addJsFile('askquestion.js');
 
         // Figure out which category layout to choose (Defined on "Homepage" settings page).
