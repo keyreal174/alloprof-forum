@@ -377,7 +377,7 @@ class FlaggingPlugin extends Gdn_Plugin {
                         ->message($emailBody);
 
                     try {
-                        $headlineFormat = sprintf(t('Your content has been flagged for moderation %s', 'Your content has been flagged for moderation <b>%s</b>'), $reasons[$comment]);
+                        $headlineFormat = sprintf(t('Your content has been flagged for moderation: <b>"%s"</b>'), $reasons[$comment]);
                         if ($context === "comment") {
                             \Gdn::config()->touch([
                                 'Preferences.Email.Flag' => 2,

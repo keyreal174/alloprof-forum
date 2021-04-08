@@ -895,8 +895,7 @@ class DiscussionController extends VanillaController {
                     'Preferences.Email.Delete' => 2,
                     'Preferences.Popup.Delete' => 2,
                 ]);
-                $text = sprintf(t('Your question has been deleted by a moderator %s.',
-                    'Your question has been deleted by a moderator <b>"%s"</b>.'), $this->Form->getFormValue('DeleteMessage'));
+                $text = sprintf(t('Your question has been deleted by a moderator: <b>"%s"</b>.'), $this->Form->getFormValue('DeleteMessage'));
                 $data = [
                     "ActivityType" => "Delete",
                     "NotifyUserID" => $discussion->InsertUserID,
@@ -999,7 +998,7 @@ class DiscussionController extends VanillaController {
                 'Preferences.Email.Delete' => 2,
                 'Preferences.Popup.Delete' => 2,
             ]);
-            $headlineFormat = sprintf(t('Your content has been deleted by a moderator %s', 'Your content has been deleted by a moderator <b>%s</b>'), $this->Form->getFormValue('DeleteMessage'));
+            $headlineFormat = sprintf(t('Your explanation has been deleted by a moderator: <b>"%s"</b>.'), $this->Form->getFormValue('DeleteMessage'));
             $data = [
                 "ActivityType" => "Delete",
                 "NotifyUserID" => $comment->InsertUserID,

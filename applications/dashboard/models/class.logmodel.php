@@ -232,8 +232,7 @@ class LogModel extends Gdn_Pluggable {
                         'Preferences.Email.Delete' => 2,
                         'Preferences.Popup.Delete' => 2,
                     ]);
-                    $text = sprintf(t('Your '.($recordType=='Discussion'?'question':'explanation').' has been deleted by a moderator %s.',
-                        'Your '.($recordType=='Discussion'?'question':'explanation').' has been deleted by a moderator <b>"%s"</b>.'), $deleteMessage);
+                    $text = sprintf(t('Your '.($recordType=='Discussion'?'question':'explanation').' has been deleted by a moderator: <b>"%s"</b>.'), $deleteMessage);
                     $data = [
                         "ActivityType" => "Delete",
                         "NotifyUserID" => $log['InsertUserID'],
