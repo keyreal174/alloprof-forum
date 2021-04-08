@@ -60,14 +60,14 @@ class AlloprofPlugin extends Gdn_Plugin {
             ->column('Color', 'varchar(50)', null)
             ->set();
 
-
-        // Set default preferences for all users
-
-        $preferences = '{"Email.DiscussionComment":"1","Email.Moderation":"1","Popup.DiscussionComment":"1","Popup.Moderation":"1"}';
-
-        $Sql->update('User')
-            ->set('Preferences', $preferences)
-            ->put();
+        // NOTE: disabled as was one-time script to fix existing users
+        //// Set default preferences for all users
+        //
+        //$preferences = '{"Email.DiscussionComment":"1","Email.Moderation":"1","Popup.DiscussionComment":"1","Popup.Moderation":"1"}';
+        //
+        //$Sql->update('User')
+        //    ->set('Preferences', $preferences)
+        //    ->put();
     }
 
 }
