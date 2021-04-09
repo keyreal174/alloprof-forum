@@ -388,7 +388,7 @@
         z-index: 9;
     }
     .Frame-menubar .Question-submenu {
-        padding-top: 0;
+        padding-top: 6px;
         box-shadow: 0px -8px 16px rgba(26, 32, 44, 0.05);
         background: white;
         min-height: 64px;
@@ -409,10 +409,13 @@
         font-size: 11px !important;
         font-family: "ChromaticaRegular";
         color: #828282;
+        flex: 1;
+        white-space: nowrap;
         font-weight: normal !important;
+        line-height: 1.5em !important;
     }
     .Navigation-link {
-        margin-top: 5px !important;
+        margin-top: 8px !important;
     }
     .Navigation-link svg {
         margin-bottom: 0;

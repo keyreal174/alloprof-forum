@@ -58,7 +58,7 @@
                 dots: true
             });
 
-            $('.RulesPopup .Footer .Close').removeClass('Close');
+            $('.RulesPopup .Footer .Close').remove();
 
             $('.Popup.RulesPopup .Footer').click(function() {
                 $('.Popup.RulesPopup').parent().remove();

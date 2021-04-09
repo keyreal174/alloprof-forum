@@ -23,6 +23,10 @@
     left: 20px;
 }
 
+.vanilla-gmzbbv-embed-medium {
+    width: 100% !important;
+}
+
 .AskQuestionForm .content {
     padding: 15px !important;
     background: #eee !important;
@@ -232,6 +236,10 @@ body.isMobile .FormWrapper {
     overflow: hidden;
 }
 
+.QuestionPopup .BoxNewDiscussion .avatar span {
+    display: flex;
+}
+
 .QuestionPopup .BoxNewDiscussion .editor {
     width: calc(100% - 55px);
     display: inline-block;
@@ -280,7 +288,7 @@ body.isMobile .FormWrapper {
 }
 
 .QuestionPopup .BoxNewDiscussion .bottom {
-    position: fixed;
+    position: absolute;
     width: 100%;
     bottom: 0;
     z-index: 2;
