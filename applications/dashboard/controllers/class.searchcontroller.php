@@ -163,6 +163,7 @@ class SearchController extends Gdn_Controller {
         $this->addJsFile('askquestion.js', 'vanilla');
         $this->addJsFile('select2.js', 'vanilla');
         $this->addJsFile('basic.js', 'vanilla');
+        $this->addJsFile('discussionstyle.js', 'vanilla');
         $this->title(t('Search'));
 
         // Add New Modules
