@@ -73,7 +73,13 @@
                             </a>';
                     $this->fireEvent('BeforeFormButtons');
                     $Editing = isset($this->Comment);
-                    echo $this->Form->button($Editing ? t('Save') : t('Publish'), ['class' => 'btn-default btn-primary']);
+                    if (Gdn::session()->isValid()) {
+                        echo $this->Form->button($Editing ? t('Save') : t('Publish'), ['class' => 'btn-default btn-primary']);
+                    } else {
+                        echo anchor(t('Publish'), '/entry/signinstudent?Target=discussions', 'btn-default btn-shadow SignInStudentPopupAgent SaveComment');
+                        echo anchor(t('Publish'), '/entry/signinstudent?Target=discussions', 'btn-default btn-shadow SignInStudentPopup SaveComment HiddenImportant');
+                    }
+
                     $this->fireEvent('AfterFormButtons');
                     echo '</div>';
                 }
