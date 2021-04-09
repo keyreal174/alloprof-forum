@@ -71,6 +71,11 @@ class EmailTemplate extends Gdn_Pluggable implements Gdn_IEmailTemplate {
     /** @var bool Whether to render in plaintext. */
     protected $plaintext = false;
 
+    protected $username = null;
+
+    protected $boxtext = null;
+
+    protected $discussionLink = null;
 
     // Color properties
 
@@ -88,6 +93,7 @@ class EmailTemplate extends Gdn_Pluggable implements Gdn_IEmailTemplate {
 
     /** @var string The default hex color code of the button background, must include the leading '#'. */
     protected $defaultButtonBackgroundColor = self::DEFAULT_BUTTON_BACKGROUND_COLOR;
+
 
 
     /**
@@ -143,6 +149,18 @@ class EmailTemplate extends Gdn_Pluggable implements Gdn_IEmailTemplate {
         $image['link'] = url('/', true);
         $image['alt'] = c('Garden.LogoTitle', c('Garden.Title', ''));
         return $image;
+    }
+
+    public function setUsername($user) {
+        $this->username = $user;
+    }
+
+    public function setBoxText($text) {
+        $this->boxtext = $text;
+    }
+
+    public function setDiscussionLink($link) {
+        $this->discussionLink = $link;
     }
 
     /**

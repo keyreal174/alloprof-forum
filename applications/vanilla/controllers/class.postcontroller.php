@@ -25,7 +25,7 @@ class PostController extends VanillaController {
     public $FormCollection;
 
     /** @var array Models to include. */
-    public $Uses = ['Form', 'Database', 'CommentModel', 'DiscussionModel', 'DraftModel'];
+    public $Uses = ['Form', 'Database', 'CommentModel', 'DiscussionModel', 'DraftModel', 'UserModel'];
 
     /** @var bool Whether or not to show the category dropdown. */
     public $ShowCategorySelector = true;
@@ -1290,6 +1290,35 @@ class PostController extends VanillaController {
 
                 if ($this->getUserRole() == 'Teacher') {
                     $comment = $this->CommentModel->setVerified($CommentID, Gdn::session()->UserID);
+                    $Discussion = $this->DiscussionModel->getID($DiscussionID);
+                    $discussionInsertUser = $this->UserModel->getID($Discussion->InsertUserID);
+                    $UserMetaData = Gdn::userModel()->getMeta($Discussion->InsertUserID, 'Profile.%', 'Profile.');
+                    $username = $UserMetaData['DisplayName'] ?? "";
+                    $message = "this is test";
+                    $address = $discussionInsertUser->Email;
+                    // $username = "midas test"; /* $discussionInsertUser->DisplayName */
+                    $subject = "Objet - Oups! Ta question a été refusée.";
+                    $discussionLink = url("/discussion/comment/" . $CommentID . "/#Comment_" . $CommentID);
+                    $emailer = new Gdn_Email();
+                    $email = $emailer->getEmailTemplate();
+                    $email->setUsername($username);
+                    $email->setBoxText($message);
+                    $email->setDiscussionLink($discussionLink);
+                    $emailer = $emailer->setEmailTemplate($email);
+                    $emailer->to($address);
+                    $emailer->subject($subject);
+
+                    try {
+                        if ($emailer->send()) {
+                            $this->informMessage(t("The email has been sent."));
+                        } else {
+                            $this->Form->addError(t('Error sending email. Please review the addresses and try again.'));
+                        }
+                    } catch (Exception $e) {
+                        if (debug()) {
+                            throw $e;
+                        }
+                    }
                 }
 
                 // The comment is now half-saved.

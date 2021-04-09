@@ -1423,8 +1423,37 @@ body { background: transparent !important; }
         $this->permission('Garden.SignIn.Allow');
 
         $comment = $this->CommentModel->setVerified($commentID, Gdn::session()->UserID);
+
         if ($comment) {
             $this->View = 'verified';
+            $Discussion = $this->DiscussionModel->getID($comment->DiscussionID);
+            $discussionInsertUser = $this->UserModel->getID($Discussion->InsertUserID);
+            $UserMetaData = Gdn::userModel()->getMeta($Discussion->InsertUserID, 'Profile.%', 'Profile.');
+            $username = $UserMetaData['DisplayName'] ?? "";
+            $message = "this is test";
+            $address = $discussionInsertUser->Email;
+            $subject = "Objet - Oups! Ta question a été refusée.";
+            $discussionLink = url("/discussion/comment/" . $commentID . "/#Comment_" . $commentID);
+            $emailer = new Gdn_Email();
+            $email = $emailer->getEmailTemplate();
+            $email->setUsername($username);
+            $email->setBoxText($message);
+            $email->setDiscussionLink($discussionLink);
+            $emailer = $emailer->setEmailTemplate($email);
+            $emailer->to($address);
+            $emailer->subject($subject);
+
+            try {
+                if ($emailer->send()) {
+                    $this->informMessage(t("The email has been sent."));
+                } else {
+                    $this->Form->addError(t('Error sending email. Please review the addresses and try again.'));
+                }
+            } catch (Exception $e) {
+                if (debug()) {
+                    throw $e;
+                }
+            }
         } else {
 
         }
