@@ -1656,10 +1656,9 @@ $Definition['You wrote:'] = 'Vous avez écrit :';
 
 $Definition['About'] = 'À propos';
 $Definition['Notifications'] = 'Notifications';
-$Definition['Explanation notifications'] = 'Notifications d’explications';
-$Definition['Be notified by email'] = 'Être notifié par courriel';
-$Definition['Moderation notifications'] = 'Notifications de modérations';
-$Definition['Activate all notifications'] = 'Activer toutes les notifications';
+$Definition['Be notified by email'] = 'Notifications par courriel';
+$Definition['Question published or rejected'] = 'Question publiée ou refusée';
+$Definition['Explanation received'] = 'Explication reçue';
 $Definition['Mark all as read'] = 'Marquer tout comme lu';
 $Definition['Access Alloprof 100% solutions'] = 'Accéder à Alloprof 100% solutions';
 $Definition['All my <b>questions,</b>'] = 'Toutes mes <b>questions,</b>';

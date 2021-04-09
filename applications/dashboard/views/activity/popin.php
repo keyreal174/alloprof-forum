@@ -43,19 +43,19 @@
         </div>
         <div>
             <?php
-                if ($this->data('Preferences')['Popup.DiscussionComment']) {
-                    echo Gdn::controller()->Form->toggle('ToggleExplanation', t('Explanation notifications'), [ 'checked' => true ]);
+                if ($this->data('Preferences')['Popup.Moderation']) {
+                    echo Gdn::controller()->Form->toggle('ToggleModeration', t('Question published or rejected'), [ 'checked' => true ]);
                 } else {
-                    echo Gdn::controller()->Form->toggle('ToggleExplanation', t('Explanation notifications'));
+                    echo Gdn::controller()->Form->toggle('ToggleModeration', t('Question published or rejected'));
                 }
             ?>
         </div>
         <div>
             <?php
-                if ($this->data('Preferences')['Popup.Moderation']) {
-                    echo Gdn::controller()->Form->toggle('ToggleModeration', t('Moderation notifications'), [ 'checked' => true ]);
+                if ($this->data('Preferences')['Popup.DiscussionComment']) {
+                    echo Gdn::controller()->Form->toggle('ToggleExplanation', t('Explanation received'), [ 'checked' => true ]);
                 } else {
-                    echo Gdn::controller()->Form->toggle('ToggleModeration', t('Moderation notifications'));
+                    echo Gdn::controller()->Form->toggle('ToggleExplanation', t('Explanation received'));
                 }
             ?>
         </div>
