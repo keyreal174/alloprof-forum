@@ -254,7 +254,7 @@
         padding-left: 15px;
     }
 
-    .ItemDiscussion .verified-info {
+    .verified-info {
         min-height: 40px;
         display: flex !important;
         justify-content: center;
@@ -266,13 +266,13 @@
         margin-bottom: 16px;
     }
 
-    .ItemDiscussion .verified-info img {
+    .verified-info img {
         margin-right: 8px;
         width: 16px;
         height: 16px;
     }
 
-    .ItemDiscussion .verified-badge {
+    .verified-badge {
         display: none;
     }
 

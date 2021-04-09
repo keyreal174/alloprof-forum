@@ -109,32 +109,42 @@ li.ItemDiscussion .Message {
     max-height: 200px;
 }
 
-body.Discussions .DataList.Discussions .MessageWrapper {
+body.Discussions .DataList.Discussions .MessageWrapper,
+body.Search .DataList .MessageWrapper {
     max-height: 168px;
     overflow: hidden;
     position: relative;
     /* text-overflow: ellipsis; */
 }
 
+body.Search .DataList .embedExternal {
+    margin-bottom: 14px;
+}
+
+body.Search .DataList .embedText-body.embedLink-body,
 body.Discussions .DataList.Discussions .embedText-body.embedLink-body {
     display: none;
 }
 
+body.Search .DataList .embedExternal.embedLink,
 body.Discussions .DataList.Discussions .embedExternal.embedLink {
     background-color: transparent;
     box-shadow: none;
     margin: 0;
 }
 
+body.Search .DataList .embedExternal.embedLink .embedExternal-content,
 body.Discussions .DataList.Discussions .embedExternal.embedLink .embedExternal-content {
     text-align: left;
 }
 
+body.Search .DataList .embedExternal.embedImage.crossed,
 body.Discussions .DataList.Discussions .embedExternal.embedImage.crossed {
     position: relative;
     overflow: hidden;
 }
 
+body.Search .DataList .embedExternal.embedImage.crossed::after,
 body.Discussions .DataList.Discussions .embedExternal.embedImage.crossed::after {
     content: " ";
     position: absolute;
@@ -465,7 +475,7 @@ body.Discussions .DataList.Discussions .embedExternal.embedImage.crossed::after 
 .Item-Search .Item-Body .AuthWrapper {
     display: flex;
     align-items: center;
-    margin-bottom: 40px;
+    margin-bottom: 10px;
 }
 
 .Item-Search .Item-Body .AuthWrapper img {

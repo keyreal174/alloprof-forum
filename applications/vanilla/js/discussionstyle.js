@@ -1,5 +1,5 @@
 var convertEmbedLinkToNormalLink = function () {
-    $('body.Discussions .DataList.Discussions .MessageWrapper .embedLink-link').each(function() {
+    $('body.Discussions .DataList.Discussions .MessageWrapper .embedLink-link, body.Search .DataList .MessageWrapper .embedLink-link').each(function() {
         if ($(this).hasClass('converted')) {
             return;
         }
@@ -10,7 +10,7 @@ var convertEmbedLinkToNormalLink = function () {
 }
 
 var handleOverflowedContent = function () {
-    $('body.Discussions .DataList.Discussions .MessageWrapper').each(function(discussionIndex) {
+    $('body.Search .DataList .MessageWrapper, body.Discussions .DataList.Discussions .MessageWrapper').each(function(discussionIndex) {
         if ($(this).hasClass('overflowManaged')) {
             return;
         }
