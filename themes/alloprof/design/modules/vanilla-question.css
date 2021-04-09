@@ -653,6 +653,12 @@ body.Discussions .DataList.Discussions .embedExternal.embedImage.crossed::after 
         right: 20px;
         top: 85px;
     }
+    .SaveComment {
+        margin-left: 0 !important;
+    }
+    .QuestionPopup .DiscussionForm .Category {
+        margin-bottom: 0 !important;
+    }
     .EditDiscussion.QuestionPopup {
         display: flex !important;
     }
