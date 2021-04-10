@@ -24,7 +24,7 @@
         }
 
         p, a, h2 {
-            font-family: Chromatica!important;
+            font-family: "Chromatica", sans-serif !important;
         }
 
         .normal-text {
