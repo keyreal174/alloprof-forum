@@ -63,7 +63,7 @@ class AlloprofPlugin extends Gdn_Plugin {
         // NOTE: disabled as was one-time script to fix existing users
         //// Set default preferences for all users
         //
-        $preferences = '{"Email.CustomNotification": "1", "Popup.DiscussionComment":"1","Popup.Moderation":"1"}';
+        $preferences = '{"Email.CustomNotification": "1", "Email.ConversationMessage":false, "Email.BookmarkComment":false, "Popup.DiscussionComment":"1","Popup.Moderation":"1"}';
         //
         $Sql->update('User')
            ->set('Preferences', $preferences)
