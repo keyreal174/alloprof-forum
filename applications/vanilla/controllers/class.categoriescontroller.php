@@ -555,7 +555,7 @@ class CategoriesController extends VanillaController {
             $this->setData('CountAllComments', $cCount);
 
             // $this->title(Gdn::formatService()->renderPlainText(val('Name', $category, ''), HtmlFormat::FORMAT_KEY));
-
+            $this->title('Zone d’entraide '.val('Name', $category, '').' | Alloprof');
             $this->description(val('Description', $category), false);
 
             switch ($category->DisplayAs) {
