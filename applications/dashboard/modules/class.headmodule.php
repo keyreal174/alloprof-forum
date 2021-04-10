@@ -477,7 +477,11 @@ class HeadModule extends Gdn_Module {
         }
 
         if (str_contains($canonicalUrl, '/categories/')) {
-            $this->addTag('meta', ['name' => 'twitter:title', 'property' => 'og:title', 'content' => 'Zone d’entraide '.val('Name', $this->_Sender).' | Alloprof']);
+            $Explode = explode('/', $canonicalUrl);
+            $CategoryName = $Explode[count($Explode) - 1];
+            $this->addTag('meta', ['name' => 'twitter:title', 'property' => 'og:title', 'content' => 'Zone d’entraide '.$CategoryName.' | Alloprof']);
+            $this->addTag('meta', ['name' => 'description', 'property' => 'og:description', 'content' => "Besoin d’aide en ".$CategoryName."? Alloprof est là pour t’aider grâce à sa Zone d’entraide."]);
+            $this->addTag('meta', ['name' => 'twitter:description', 'content' => "Besoin d’aide en ".$CategoryName."? Alloprof est là pour t’aider grâce à sa Zone d’entraide."]);
         }
 
         if (isset($canonicalUrl)) {
@@ -485,13 +489,8 @@ class HeadModule extends Gdn_Module {
         }
 
         if ($description = trim(Gdn_Format::reduceWhiteSpaces($this->_Sender->description()))) {
-            if (str_contains($canonicalUrl, '/categories/')) {
-                $this->addTag('meta', ['name' => 'description', 'property' => 'og:description', 'content' => "Besoin d’aide en ".val('Name', $this->_Sender)."? Alloprof est là pour t’aider grâce à sa Zone d’entraide."]);
-                $this->addTag('meta', ['name' => 'twitter:description', 'content' => "Besoin d’aide en ".val('Name', $this->_Sender)."? Alloprof est là pour t’aider grâce à sa Zone d’entraide."]);
-            } else {
-                $this->addTag('meta', ['name' => 'description', 'property' => 'og:description', 'content' => $description]);
-                $this->addTag('meta', ['name' => 'twitter:description', 'content' => $description]);
-            }
+            $this->addTag('meta', ['name' => 'description', 'property' => 'og:description', 'content' => $description]);
+            $this->addTag('meta', ['name' => 'twitter:description', 'content' => $description]);
         }
 
         if ($robots = $this->_Sender->data('_robots')) {
