@@ -37,7 +37,7 @@
     <div class="filter-block">
         <h4><?php echo t('Status') ?></h4>
         <div class="FilterMenu">
-            <?php echo writeFilterToggle(null, null, true); ?>
+            <?php echo writeFilterToggle(null, null, null, true); ?>
         </div>
     </div>
 
@@ -74,6 +74,7 @@
         var grade = getUrlParameter('grade');
         var sort = getUrlParameter('sort');
         var explanation = getUrlParameter('explanation');
+        var outexplanation = getUrlParameter('outexplanation');
         var verifiedBy = getUrlParameter('verifiedBy');
         var subject = getUrlParameter('subject');
 
@@ -83,6 +84,9 @@
 
         if(explanation === 'true')
             $('.FilterMenu #Form_MobileExplanation').attr("checked", true);
+
+        if(outexplanation === 'true')
+            $('.FilterMenu #Form_MobileOutExplanation').attr("checked", true);
 
         if(verifiedBy === 'true')
             $('.FilterMenu #Form_MobileVerifiedBy').attr("checked", true);

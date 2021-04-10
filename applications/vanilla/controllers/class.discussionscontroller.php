@@ -92,7 +92,7 @@ class DiscussionsController extends VanillaController {
         $this->IsExplanation = $explanation;
 
         $outexplanation = Gdn::request()->get('outexplanation') ?? false;
-        $this->IsExplanation = $outexplanation;
+        $this->IsOutExplanation = $outexplanation;
 
         $verified = Gdn::request()->get('verifiedBy') ?? false;
         $this->IsVerifiedBy = $verified;
@@ -118,17 +118,23 @@ class DiscussionsController extends VanillaController {
         }
 
         $role = $this->getUserRole(Gdn::session()->UserID);
-        $role_where = $role === 'Teacher' ? 'd.CountComments' : 'd.CountComments >';
-        if ($this->IsExplanation == 'true') {
-            $wheres[$role_where] = 0;
+        if ($role === 'Teacher') {
+            if ($this->IsExplanation == 'true') {
+                $wheres['d.CountComments'] = 0;
+            } else {
+                unset($wheres[$role_where]);
+            }
         } else {
-            unset($wheres[$role_where]);
-        }
-
-        if ($this->IsOutExplanation == 'true') {
-            $wheres['d.CountComments'] = 0;
-        } else {
-            unset($wheres['d.CountComments']);
+            if ($this->IsExplanation == 'true' && $this->IsOutExplanation == 'false') {
+                $wheres['d.CountComments >'] = 0;
+                if ($wheres['d.CountComments']) { unset($wheres['d.CountComments']); }
+            } else if ($this->IsExplanation == 'false' && $this->IsOutExplanation == 'true') {
+                $wheres['d.CountComments'] = 0;
+                if ($wheres['d.CountComments >']) { unset($wheres['d.CountComments >']); }
+            } else if ($this->IsExplanation != 'true' && $this->IsOutExplanation != 'true') {
+                if ($wheres['d.CountComments']) { unset($wheres['d.CountComments']); }
+                if ($wheres['d.CountComments >']) { unset($wheres['d.CountComments >']); }
+            }
         }
 
         $verify_where = $role === 'Teacher' ? 'd.DateAccepted =' : 'd.DateAccepted <>';

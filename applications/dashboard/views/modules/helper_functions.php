@@ -109,6 +109,17 @@ if (!function_exists('writeFilterToggle')) :
             echo $form->toggle('Explanation', $text);
         }
         echo '</li>';
+
+        if ($role != 'Teacher') {
+            echo '<li class="form-group">';
+            if ($explanationout == 'true') {
+                echo Gdn::controller()->Form->toggle(($isMobile?'Mobile':'').'OutExplanation', t('Without explanations only'), [ 'checked' => $explanation ]);
+            } else {
+                echo Gdn::controller()->Form->toggle(($isMobile?'Mobile':'').'OutExplanation', t('Without explanations only'));
+            }
+            echo '</li>';
+        }
+
         echo '<li class="form-group">';
         if ($verified == 'true') {
             echo $form->toggle('VerifiedBy', $verifiedText, [ 'checked' => $verified ]);
