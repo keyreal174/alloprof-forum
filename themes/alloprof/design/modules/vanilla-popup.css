@@ -113,6 +113,10 @@ div.Popup.FlagContentPopup .Body .Content .FlatReportButton input {
     margin: 0 auto;
 }
 
+.SearchPopup {
+    height: 100vh;
+    overflow: hidden;
+}
 
 .SearchPopup .modal-header {
     box-shadow: 0px 8px 20px rgb(26 32 44 / 5%);
@@ -442,6 +446,21 @@ div.Popup.BanPopup .btn {
     margin-top: 10px;
 }
 
+.RulesPopup h3 {
+    padding-top: 0 !important;
+}
+
+.RulesPopup .Footer::before {
+    content: '×';
+    font-size: 40px;
+    position: absolute;
+    top: -11px;
+    right: 10px;
+    display: block;
+    font-weight: 100;
+    font-family: ChromaticaThin;
+    color: black;
+}
 
 @media screen and (max-width: 958px) {
     div.Popup.BanPopup #Message {

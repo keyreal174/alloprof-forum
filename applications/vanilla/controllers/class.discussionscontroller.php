@@ -240,7 +240,7 @@ class DiscussionsController extends VanillaController {
 
         $this->addModule($bannerModule);
 
-        $mobileHeader = new MobileHeaderModule('Home');
+        $mobileHeader = new MobileHeaderModule(null);
         $this->addModule($mobileHeader);
 
         // $this->addModule('BookmarkedModule');
