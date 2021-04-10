@@ -892,7 +892,6 @@ class DiscussionController extends VanillaController {
 
             if ($this->Form->errorCount() == 0) {
                 \Gdn::config()->touch([
-                    'Preferences.Email.Delete' => 2,
                     'Preferences.Popup.Delete' => 2,
                 ]);
                 $text = sprintf(t('Your question has been deleted by a moderator: <b>"%s"</b>.'), $this->Form->getFormValue('DeleteMessage'));
@@ -913,6 +912,41 @@ class DiscussionController extends VanillaController {
                 $ActivityModel = new ActivityModel();
                 $ActivityModel->queue($data, 'Delete');
                 $ActivityModel->saveQueue();
+
+                // send email to discussion owner
+                $discussionInsertUser = $this->UserModel->getID($discussion->InsertUserID);
+                $userPrefs = dbdecode($discussionInsertUser->Preferences);
+
+                if (val("Email.CustomNotification", $userPrefs)) {
+                    $UserMetaData = Gdn::userModel()->getMeta($discussion->InsertUserID, 'Profile.%', 'Profile.');
+
+                    $username = $UserMetaData['DisplayName'] ?? "";
+                    $message = Gdn_Format::to($discussion->Body, 'Rich');
+                    $address = $discussionInsertUser->Email;
+                    $subject = "Objet - Oups! Ta question a été refusée.";
+
+                    $emailer = new Gdn_Email();
+                    $email = $emailer->getEmailTemplate();
+                    $email = $email->setView('discussion-delete-email');
+                    $email->setUsername($username);
+                    $email->setBoxText($message);
+                    $email->setReason($this->Form->getFormValue('DeleteMessage'));
+                    $emailer = $emailer->setEmailTemplate($email);
+                    $emailer->to($address);
+                    $emailer->subject($subject);
+
+                    try {
+                        if ($emailer->send()) {
+                            $this->informMessage(t("The email has been sent."));
+                        } else {
+                            $this->Form->addError(t('Error sending email. Please review the addresses and try again.'));
+                        }
+                    } catch (Exception $e) {
+                        if (debug()) {
+                            throw $e;
+                        }
+                    }
+                }
 
                 if ($this->_DeliveryType === DELIVERY_TYPE_ALL) {
                     redirectTo($target);
@@ -946,10 +980,11 @@ class DiscussionController extends VanillaController {
         $defaultTarget = '/discussions/';
         $validCommentID = is_numeric($commentID) && $commentID > 0;
         $validUser = $session->UserID > 0 && $session->validateTransientKey($transientKey);
+        $discussion = "";
+        $comment = $this->CommentModel->getID($commentID);
 
         if ($validCommentID && $validUser) {
             // Get comment and discussion data
-            $comment = $this->CommentModel->getID($commentID);
             $discussionID = val('DiscussionID', $comment);
             $discussion = $this->DiscussionModel->getID($discussionID);
 
@@ -995,7 +1030,6 @@ class DiscussionController extends VanillaController {
             $this->setJson('ErrorMessage', $this->Form->errors());
         } else {
             \Gdn::config()->touch([
-                'Preferences.Email.Delete' => 2,
                 'Preferences.Popup.Delete' => 2,
             ]);
             $headlineFormat = sprintf(t('Your explanation has been deleted by a moderator: <b>"%s"</b>.'), $this->Form->getFormValue('DeleteMessage'));
@@ -1014,6 +1048,41 @@ class DiscussionController extends VanillaController {
             $ActivityModel = new ActivityModel();
             $ActivityModel->queue($data, 'Delete');
             $ActivityModel->saveQueue();
+
+            // send email to discussion owner
+            $commentInsertUser = $this->UserModel->getID($comment->InsertUserID);
+            $userPrefs = dbdecode($commentInsertUser->Preferences);
+
+            if (val("Email.CustomNotification", $userPrefs)) {
+                $UserMetaData = Gdn::userModel()->getMeta($comment->InsertUserID, 'Profile.%', 'Profile.');
+
+                $username = $UserMetaData['DisplayName'] ?? "";
+                $message = Gdn_Format::to($comment->Body, 'Rich');
+                $address = $commentInsertUser->Email;
+                $subject = "Objet - Oups! Ton explication a été refusée.";
+
+                $emailer = new Gdn_Email();
+                $email = $emailer->getEmailTemplate();
+                $email = $email->setView('comment-delete-email');
+                $email->setUsername($username);
+                $email->setBoxText($message);
+                $email->setReason('Ce n’est pas grave, tu peux réessayer.');
+                $emailer = $emailer->setEmailTemplate($email);
+                $emailer->to($address);
+                $emailer->subject($subject);
+
+                try {
+                    if ($emailer->send()) {
+                        $this->informMessage(t("The email has been sent."));
+                    } else {
+                        $this->Form->addError(t('Error sending email. Please review the addresses and try again.'));
+                    }
+                } catch (Exception $e) {
+                    if (debug()) {
+                        throw $e;
+                    }
+                }
+            }
 
             $this->jsonTarget("#Comment_$commentID", '', 'SlideUp');
         }
@@ -1423,8 +1492,43 @@ body { background: transparent !important; }
         $this->permission('Garden.SignIn.Allow');
 
         $comment = $this->CommentModel->setVerified($commentID, Gdn::session()->UserID);
+
         if ($comment) {
             $this->View = 'verified';
+            $Discussion = $this->DiscussionModel->getID($comment->DiscussionID);
+            $discussionInsertUser = $this->UserModel->getID($Discussion->InsertUserID);
+            $userPrefs = dbdecode($discussionInsertUser->Preferences);
+
+            if (val("Email.CustomNotification", $userPrefs)) {
+                $UserMetaData = Gdn::userModel()->getMeta($Discussion->InsertUserID, 'Profile.%', 'Profile.');
+
+                $username = $UserMetaData['DisplayName'] ?? "";
+                $message = Gdn_Format::to($Discussion->Body, 'Rich');
+                $address = $discussionInsertUser->Email;
+                $subject = "Objet - Yé! Tu as reçu une explication à ta question.";
+                $discussionLink = url("/discussion/comment/" . $commentID . "/#Comment_" . $commentID);
+
+                $emailer = new Gdn_Email();
+                $email = $emailer->getEmailTemplate();
+                $email->setUsername($username);
+                $email->setBoxText($message);
+                $email->setDiscussionLink($discussionLink);
+                $emailer = $emailer->setEmailTemplate($email);
+                $emailer->to($address);
+                $emailer->subject($subject);
+
+                try {
+                    if ($emailer->send()) {
+                        $this->informMessage(t("The email has been sent."));
+                    } else {
+                        $this->Form->addError(t('Error sending email. Please review the addresses and try again.'));
+                    }
+                } catch (Exception $e) {
+                    if (debug()) {
+                        throw $e;
+                    }
+                }
+            }
         } else {
 
         }

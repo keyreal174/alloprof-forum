@@ -49,7 +49,7 @@ jQuery(document).ready(function($) {
 
         const preferences = {
             'All': ['Popup.DiscussionComment', 'Popup.Moderation'],
-            'ToggleEmail': ['Email.DiscussionComment', 'Email.Moderation'],
+            'ToggleEmail': ['Email.CustomNotification'],
             'ToggleExplanation': ['Popup.DiscussionComment'],
             'ToggleModeration': ['Popup.Moderation']
         }

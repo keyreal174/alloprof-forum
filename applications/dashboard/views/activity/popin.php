@@ -34,7 +34,7 @@
     <li class="notification-settings-content FilterMenu">
         <div>
             <?php
-                if ($this->data('Preferences')['Email.DiscussionComment']) {
+                if ($this->data('Preferences')['Email.CustomNotification']) {
                     echo Gdn::controller()->Form->toggle('ToggleEmail', t('Be notified by email'), [ 'checked' => true ]);
                 } else {
                     echo Gdn::controller()->Form->toggle('ToggleEmail', t('Be notified by email'));
