@@ -467,6 +467,7 @@ class HeadModule extends Gdn_Module {
 
         $title = htmlEntityDecode(Gdn_Format::text($this->title('', true)));
         if ($title != '') {
+            $this->addTag('meta', ['name' => 'twitter:card', 'content' => $twitterCardType]);
             $this->addTag('meta', ['name' => 'twitter:title', 'property' => 'og:title', 'content' => $title]);
         }
 
