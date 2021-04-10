@@ -91,13 +91,16 @@ class DiscussionsController extends VanillaController {
         $explanation = Gdn::request()->get('explanation') ?? false;
         $this->IsExplanation = $explanation;
 
+        $outexplanation = Gdn::request()->get('outexplanation') ?? false;
+        $this->IsExplanation = $outexplanation;
+
         $verified = Gdn::request()->get('verifiedBy') ?? false;
         $this->IsVerifiedBy = $verified;
 
         $sort = Gdn::request()->get('sort') ?? 'desc';
         $this->SortDirection = $sort;
 
-        $discussionFilterModule = new DiscussionFilterModule($gradeFilterOption, $sort, $explanation, $verified, $subject);
+        $discussionFilterModule = new DiscussionFilterModule($gradeFilterOption, $sort, $explanation, $verified, $subject, $outexplanation);
         $this->addModule($discussionFilterModule);
         $this->addJsFile('filter.js');
         $wheres = [];
@@ -120,6 +123,12 @@ class DiscussionsController extends VanillaController {
             $wheres[$role_where] = 0;
         } else {
             unset($wheres[$role_where]);
+        }
+
+        if ($this->IsOutExplanation == 'true') {
+            $wheres['d.CountComments'] = 0;
+        } else {
+            unset($wheres['d.CountComments']);
         }
 
         $verify_where = $role === 'Teacher' ? 'd.DateAccepted =' : 'd.DateAccepted <>';

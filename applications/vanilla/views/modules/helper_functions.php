@@ -478,7 +478,7 @@ if (!function_exists('writeFilterToggle')) :
      * @param string $extraClasses any extra classes you add to the drop down
      * @return string
      */
-    function writeFilterToggle($explanation=false, $verified=false, $isMobile=false) {
+    function writeFilterToggle($explanation=false, $verified=false, $explanationout=false, $isMobile=false) {
         $role = getUserRole(Gdn::session()->User->UserID);
         echo '<ul>';
         echo '<li class="form-group">';
@@ -490,6 +490,17 @@ if (!function_exists('writeFilterToggle')) :
             echo Gdn::controller()->Form->toggle(($isMobile?'Mobile':'').'Explanation', $text);
         }
         echo '</li>';
+
+        if ($role != 'Teacher') {
+            echo '<li class="form-group">';
+            if ($explanationout == 'true') {
+                echo Gdn::controller()->Form->toggle(($isMobile?'Mobile':'').'OutExplanation', t('Without explanations only'), [ 'checked' => $explanation ]);
+            } else {
+                echo Gdn::controller()->Form->toggle(($isMobile?'Mobile':'').'OutExplanation', t('Without explanations only'));
+            }
+            echo '</li>';
+        }
+
         echo '<li class="form-group">';
         if ($verified == 'true') {
             echo Gdn::controller()->Form->toggle(($isMobile?'Mobile':'').'VerifiedBy', $verifiedText, [ 'checked' => $verified ]);
