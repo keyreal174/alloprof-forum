@@ -49,12 +49,11 @@ echo '<div class="MainForm">';
             <?php
             echo $this->Form->input('Password', 'password', ['class' => 'InputBox Password', 'placeholder' => t('Password')]);
             echo '<span class="EyeIcon EyeIconPassword"><img src="'.url("/themes/alloprof/design/images/icons/eye.svg").'" alt="image" /></span>';
+            echo anchor(t('Forgot?'), 'https://www.alloprof.qc.ca/fr/auth/mot-de-passe-oublie', 'ForgotPassword', ['title' => t('Forgot your password?'), 'target' => '_blank']);
             ?>
-            <!-- echo anchor(t('Forgot?'), '/entry/passwordrequest', 'ForgotPassword', ['title' => t('Forgot your password?')]); -->
         </li>
     </ul>
 <?php
-
 
 echo '</div>';
 
