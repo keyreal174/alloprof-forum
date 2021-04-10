@@ -455,9 +455,9 @@ select {
     margin-bottom: 24px;
 }
 
-.DataList-Search .embedExternal.embedImage {
+/* .DataList-Search .embedExternal.embedImage {
     display: none;
-}
+} */
 
 /* Not approved question box */
 
@@ -511,7 +511,7 @@ select {
     display: none;
 }
 
-.ItemDiscussion .verified-info {
+.verified-info {
     display: none;
 }
 

@@ -14,6 +14,12 @@ else
     <ol id="search-results" class="DataList DataList-Search" start="<?php echo $this->data('From'); ?>">
         <?php foreach ($this->data('SearchResults') as $Row): ?>
             <li class="Item Item-Search" data-url="<?php echo $Row->Url; ?>">
+                <?php
+                    if ($Row->DateAccepted) {
+                        echo "<div class='verified-info mobile'>
+                            <img src='".url("/themes/alloprof/design/images/icons/verifiedbadge.svg")."'/><span>".t("Verified by Alloprof")."</span></div>";
+                    }
+                ?>
                 <div class="Item-Body Media">
                     <?php
                     $category = CategoryModel::categories($Row->CategoryID);
@@ -28,6 +34,14 @@ else
                     }
                     ?>
                     <div class="AuthWrapper">
+                        <?php
+                            if(!$Row->Published) {
+                                echo '<div class="not-published-badge DisableClick desktop">';
+                                echo '<img src="'.url("/themes/alloprof/design/images/icons/eyebreak.svg").'"/>';
+                                echo t('Awaiting publication');
+                                echo '</div>';
+                            }
+                        ?>
                         <?php
                             $User = Gdn::userModel()->getID($Row->InsertUserID);
                             echo '<span class="DisableClick">';

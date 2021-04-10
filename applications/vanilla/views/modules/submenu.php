@@ -52,20 +52,8 @@
                 %text'. ($discussionsCount > 0 ? "<span class='realcount Count'>".$discussionsCount."</span>" : '') .'</a>');
                 ?>
         </div>
-        <?php
-            if(!Gdn::session()->isValid()) {
-                $Controller = Gdn::controller();
-                $Session = Gdn::session();
-                $SigninUrl = signInUrl($Controller->SelfUrl);
-                $class="";
-                $href = url($SigninUrl);
-            } else {
-                $class="QuestionPopup";
-                $href = url('/post/newQuestionPopup');
-            }
-        ?>
         <div class='Navigation-linkContainer mobile'>
-            <?php echo '<a href="'.$href.'" class="'.$class.'"><svg width="49" height="48" viewBox="0 0 49 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <?php echo '<a href="'.url('/post/newQuestionPopup').'" class="QuestionPopup"><svg width="49" height="48" viewBox="0 0 49 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0.5 24C0.5 10.7452 11.2452 0 24.5 0C37.7548 0 48.5 10.7452 48.5 24C48.5 37.2548 37.7548 48 24.5 48C11.2452 48 0.5 37.2548 0.5 24Z" fill="#05BF8E"/>
                 <path d="M34.0863 19L21.8298 31.2565L16.88 31.9636L17.5871 27.0139L29.8436 14.7574L34.0863 19Z" stroke="white" stroke-width="2"/>
                 <path d="M31.7293 21.8284L27.0153 17.1144" stroke="white" stroke-width="2"/>

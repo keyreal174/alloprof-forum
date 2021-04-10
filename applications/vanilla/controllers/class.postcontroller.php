@@ -841,7 +841,10 @@ class PostController extends VanillaController {
 
     public function newQuestionPopup($selectedCategory = null) {
         $this->View = 'mobile_askquestion';
-        $this->discussion($selectedCategory);
+
+        if(Gdn::session()->isValid())
+            $this->discussion($selectedCategory);
+        else $this->render();
     }
 
     public function rules() {
@@ -1502,7 +1505,11 @@ class PostController extends VanillaController {
 
     public function answerPopup($discussionID = null) {
         $this->View = 'mobile_answer';
-        $this->comment($discussionID);
+        $this->setData('EditingDiscussionID', $discussionID);
+
+        if(Gdn::session()->isValid())
+            $this->comment($discussionID);
+        else $this->render();
     }
 
     /**

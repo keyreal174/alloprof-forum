@@ -279,6 +279,7 @@ body.isMobile .FormWrapper {
     align-items: center;
     justify-content: flex-end !important;
     flex-direction: row !important;
+    padding-top: 10px;
     margin-bottom: 10px;
     padding-right: 10px;
 }
@@ -311,7 +312,7 @@ body.isMobile .FormWrapper {
     background-color: #F3F5F7 !important;
 }
 
-.QuestionPopup .Buttons a {
+.QuestionPopup .Buttons a.RulesPopup {
     height: 24px;
     margin-right: 10px !important;
 }

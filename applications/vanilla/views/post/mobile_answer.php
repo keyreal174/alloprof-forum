@@ -25,12 +25,13 @@
     <h3><?php echo t("Giving an explanation"); ?></h3>
 </div>
 <div class="modal-body">
-    <div class="BoxButtons BoxNewDiscussion">
+    <div class="BoxButtons BoxNewDiscussion MobileCommentForm">
         <div class="FormTitleWrapper">
             <?php
                 echo '<div class="FormWrapper">';
                 echo $this->Form->open(['id' => 'Form_Comment']);
                 echo $this->Form->errors();
+                echo $this->Form->hidden('DiscussionID', ['Value' => $this->data('EditingDiscussionID')]);
                 $this->fireEvent('BeforeBodyField');
             ?>
 
@@ -73,7 +74,13 @@
                             </a>';
                     $this->fireEvent('BeforeFormButtons');
                     $Editing = isset($this->Comment);
-                    echo $this->Form->button($Editing ? t('Save') : t('Publish'), ['class' => 'btn-default btn-primary']);
+                    if (Gdn::session()->isValid()) {
+                        echo $this->Form->button($Editing ? t('Save') : t('Publish'), ['class' => 'btn-default btn-primary']);
+                    } else {
+                        echo anchor(t('Publish'), '/entry/signinstudent?Target=discussions', 'btn-default btn-shadow SignInStudentPopupAgent SaveComment');
+                        echo anchor(t('Publish'), '/entry/signinstudent?Target=discussions', 'btn-default btn-shadow SignInStudentPopup SaveComment HiddenImportant');
+                    }
+
                     $this->fireEvent('AfterFormButtons');
                     echo '</div>';
                 }
