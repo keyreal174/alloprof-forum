@@ -468,7 +468,11 @@ class HeadModule extends Gdn_Module {
         $title = htmlEntityDecode(Gdn_Format::text($this->title('', true)));
         if ($title != '') {
             $this->addTag('meta', ['name' => 'twitter:card', 'content' => 'summary_large_image']);
-            $this->addTag('meta', ['name' => 'twitter:title', 'property' => 'og:title', 'content' => $title]);
+            if (val('DiscussionID', $this->_Sender)) {
+                $this->addTag('meta', ['name' => 'twitter:title', 'property' => 'og:title', 'content' => 'Découvre ma question']);
+            } else {
+                $this->addTag('meta', ['name' => 'twitter:title', 'property' => 'og:title', 'content' => $title]);
+            }
         }
 
         if (isset($canonicalUrl)) {
@@ -477,6 +481,7 @@ class HeadModule extends Gdn_Module {
 
         if ($description = trim(Gdn_Format::reduceWhiteSpaces($this->_Sender->description()))) {
             $this->addTag('meta', ['name' => 'description', 'property' => 'og:description', 'content' => $description]);
+            $this->addTag('meta', ['name' => 'twitter:description', 'content' => $description]);
         }
 
         if ($robots = $this->_Sender->data('_robots')) {
@@ -505,24 +510,24 @@ class HeadModule extends Gdn_Module {
         }
 
         // For the moment at least, only discussions are supported.
-        if ($title && val('DiscussionID', $this->_Sender)) {
-            if ($hasRelevantImage) {
-                $twitterCardType = 'summary_large_image';
-            } else {
-                $twitterCardType = 'summary';
-            }
+        // if ($title && val('DiscussionID', $this->_Sender)) {
+        //     if ($hasRelevantImage) {
+        //         $twitterCardType = 'summary_large_image';
+        //     } else {
+        //         $twitterCardType = 'summary';
+        //     }
 
-            // Let's force a description for the image card since it makes sense to see a card with only an image and a title.
-            if (!$description && $twitterCardType === 'summary_large_image') {
-                $description = '...';
-            }
+        //     // Let's force a description for the image card since it makes sense to see a card with only an image and a title.
+        //     if (!$description && $twitterCardType === 'summary_large_image') {
+        //         $description = '...';
+        //     }
 
-            // Card && Title && Description are required
-            if ($twitterCardType && $description) {
-                $this->addTag('meta', ['name' => 'twitter:description', 'content' => $description]);
-                $this->addTag('meta', ['name' => 'twitter:card', 'content' => $twitterCardType]);
-            }
-        }
+        //     // Card && Title && Description are required
+        //     if ($twitterCardType && $description) {
+        //         $this->addTag('meta', ['name' => 'twitter:description', 'content' => $description]);
+        //         $this->addTag('meta', ['name' => 'twitter:card', 'content' => $twitterCardType]);
+        //     }
+        // }
 
         if ($this->jsonLD) {
             $this->addTag('script', ['type' => 'application/ld+json'], json_encode($this->jsonLD));
