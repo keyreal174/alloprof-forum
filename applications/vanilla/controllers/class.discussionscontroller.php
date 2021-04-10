@@ -215,6 +215,12 @@ class DiscussionsController extends VanillaController {
             $this->Head->addRss(url('/discussions/feed.rss', true), $this->Head->title());
         }
 
+        if ($this->UserRole == "Teacher") {
+            $this->setData('Title', t('Recommended for you'));
+        } else {
+            $this->setData('Title', t('Popular questions'));
+        }
+
         // Add modules
         $this->addModule('AskQuestionModule');
         $this->addModule('CategoriesModule');

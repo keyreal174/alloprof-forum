@@ -6,7 +6,7 @@ include_once $this->fetchViewLocation('helper_functions', 'categories', 'vanilla
 
 $checkMark = !$isDataDrivenTheme ? adminCheck(NULL, ['', ' ']) : '';
 echo '<div class="FilterBanner">';
-if($this->data('Title'))
+if($this->data('Title') && !$this->data('Category'))
 echo '<h1 class="H HomepageTitle">'.
     $checkMark.
     $this->data('Title').

@@ -445,6 +445,10 @@ class DiscussionController extends VanillaController {
 
         // $this->addModule($bannerModule);
 
+        Gdn::controller()->fireEvent('BeforeCommentBody');
+        $FormatBody = Gdn_Format::to($this->Discussion->Body, $this->Discussion->Format);
+        Gdn::controller()->fireEvent('AfterCommentFormat');
+
         $this->render();
     }
 

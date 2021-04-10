@@ -273,6 +273,20 @@ div.Popup.SignInPopup.registerPopup .Buttons.SignUpButtons {
     padding: 0 !important;
 }
 
+a.ForgotPassword br {
+    display: none !important;
+}
+
+a.ForgotPassword div {
+    text-align: right;
+    color: black;
+    font-size: 15px;
+    border-bottom: 1px solid black;
+    width: fit-content;
+    margin: 5px 0 0 auto !important;
+    padding: 0 !important;
+}
+
 @media screen and (max-width: 1200px) {
     div.Popup.SignInPopup .Title {
         font-size: 40px;
