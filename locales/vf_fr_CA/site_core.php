@@ -1848,3 +1848,5 @@ $Definition['Student Question'] = 'Question de l’élève';
 $Definition['Home'] = 'Accueil';
 $Definition['The question is already followed'] = 'La question est déjà suivie';
 $Definition['Salvation! Happy to see you!'] = 'Salut! Content de te voir!';
+$Definition['Alloprof Home'] = 'Accueil Alloprof';
+$Definition['Alloprof 100% solutions'] = 'Alloprof 100% solutions';
