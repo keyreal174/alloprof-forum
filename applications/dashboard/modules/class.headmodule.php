@@ -478,7 +478,7 @@ class HeadModule extends Gdn_Module {
 
         if (str_contains($canonicalUrl, '/categories/')) {
             $Explode = explode('/', $canonicalUrl);
-            $CategoryName = $Explode[count($Explode) - 1];
+            $CategoryName = urlencode($Explode[count($Explode) - 1]);
             $this->addTag('meta', ['name' => 'twitter:title', 'property' => 'og:title', 'content' => 'Zone d’entraide '.$CategoryName.' | Alloprof']);
             $this->addTag('meta', ['name' => 'description', 'property' => 'og:description', 'content' => "Besoin d’aide en ".$CategoryName."? Alloprof est là pour t’aider grâce à sa Zone d’entraide."]);
             $this->addTag('meta', ['name' => 'twitter:description', 'content' => "Besoin d’aide en ".$CategoryName."? Alloprof est là pour t’aider grâce à sa Zone d’entraide."]);
