@@ -685,7 +685,6 @@ class VanillaHooks extends Gdn_Plugin {
         $sender->addJsFile('jquery.popup.js');
         $sender->addJsFile('confirmfollow.js');
         $sender->addJsFile('verify.js');
-        $sender->addJsFile('betabanner.js');
         $sender->addJsFile('select2.js');
         $sender->addJsFile('basic.js', 'vanilla');
         $sender->addJsFile('notification.js', 'vanilla');

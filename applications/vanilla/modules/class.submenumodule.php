@@ -14,12 +14,6 @@ class SubMenuModule extends Gdn_Module {
             return parent::toString();
         }
 
-        $UserMetaData = Gdn::userModel()->getMeta(Gdn::session()->UserID, 'Profile.%', 'Profile.');
-        $this->$additionalClass = " hasBetaBanner";
-
-        if ($UserMetaData["BetaBannerHidden0"] == "1") {
-            $this->$additionalClass = "";
-        }
         return parent::toString();
     }
 }
