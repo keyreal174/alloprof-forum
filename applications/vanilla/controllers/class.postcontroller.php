@@ -1505,6 +1505,8 @@ class PostController extends VanillaController {
 
     public function answerPopup($discussionID = null) {
         $this->View = 'mobile_answer';
+        $this->setData('EditingDiscussionID', $discussionID);
+
         if(Gdn::session()->isValid())
             $this->comment($discussionID);
         else $this->render();

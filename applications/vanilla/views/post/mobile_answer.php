@@ -25,12 +25,13 @@
     <h3><?php echo t("Giving an explanation"); ?></h3>
 </div>
 <div class="modal-body">
-    <div class="BoxButtons BoxNewDiscussion">
+    <div class="BoxButtons BoxNewDiscussion MobileCommentForm">
         <div class="FormTitleWrapper">
             <?php
                 echo '<div class="FormWrapper">';
                 echo $this->Form->open(['id' => 'Form_Comment']);
                 echo $this->Form->errors();
+                echo $this->Form->hidden('DiscussionID', ['Value' => $this->data('EditingDiscussionID')]);
                 $this->fireEvent('BeforeBodyField');
             ?>
 
