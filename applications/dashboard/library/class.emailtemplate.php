@@ -77,6 +77,8 @@ class EmailTemplate extends Gdn_Pluggable implements Gdn_IEmailTemplate {
 
     protected $discussionLink = null;
 
+    protected $reason = null;
+
     // Color properties
 
     /** @var string The hex color code of the text, must include the leading '#'.*/
@@ -161,6 +163,10 @@ class EmailTemplate extends Gdn_Pluggable implements Gdn_IEmailTemplate {
 
     public function setDiscussionLink($link) {
         $this->discussionLink = $link;
+    }
+
+    public function setReason($reason) {
+        $this->reason = $reason;
     }
 
     /**

@@ -2301,7 +2301,7 @@ class UserModel extends Gdn_Model implements UserProviderInterface, EventFromRow
         $formPostValues['LastIPAddress'] = ipEncode(Gdn::request()->ipAddress());
 
         // Set default preferences
-        $formPostValues['Preferences'] = '{"Email.DiscussionComment":"1","Email.Moderation":"1","Popup.DiscussionComment":"1","Popup.Moderation":"1"}';
+        $formPostValues['Preferences'] = '{"Email.CustomNotification":"1","Popup.DiscussionComment":"1","Popup.Moderation":"1"}';
 
         // If the Photo added is not a URL, remove it.
         if (isset($formPostValues['Photo']) && !isUrl($formPostValues['Photo'])) {

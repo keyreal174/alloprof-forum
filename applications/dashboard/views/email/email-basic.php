@@ -17,10 +17,29 @@
     {/literal}
     <![endif]-->
     <style >
+        @font-face {
+            font-family: 'Chromatica';
+            src:  url('https://res.cloudinary.com/deikols3z/raw/upload/v1618077529/Chromatica-Regular_q3kjyr.woff2') format('woff2'),
+                    url('https://res.cloudinary.com/deikols3z/raw/upload/v1618077529/Chromatica-Regular_cl4cuh.ttf') format('ttf');
+        }
+
+        p, a, h2 {
+            font-family: Chromatica!important;
+        }
+
         .normal-text {
             font-size: 15px;
             line-height: 18px;
             margin: 0;
+        }
+
+        .normal-text div {
+            display: none!important;
+        }
+
+        .normal-text p {
+            text-align: left;
+            margin: 0!important;
         }
 
         .btn {
@@ -64,7 +83,7 @@
 </head>
 
 <body bgcolor="{$email.backgroundColor}"
-    style='font-size: 16px;-webkit-font-smoothing: antialiased;-webkit-text-size-adjust: none;width: 100% !important;height: 100%;margin: 0 !important;padding: 0;font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;font-weight: 300;text-align: left;line-height: 1.4;color: {$email.textColor}'>
+    style='font-size: 16px;-webkit-font-smoothing: antialiased;-webkit-text-size-adjust: none;width: 100% !important;height: 100%;margin: 0 !important;padding: 0;font-family: "Chromatica", "Helvetica", Helvetica, Arial, sans-serif;font-weight: 300;text-align: left;line-height: 1.4;color: {$email.textColor}' id="alloprof">
     <center class="wrapper"
         style="margin: 0;padding: 10px;box-sizing: border-box;font-size: 100%;width: 100%;table-layout: fixed;-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;background-color: {$email.backgroundColor}">
         <div class="webkit" style="margin: 0 auto;padding: 0;box-sizing: border-box;font-size: 100%;max-width: 600px">
@@ -79,7 +98,7 @@
                 Une de tes questions a reçu une explication approuvée par Alloprof!</p>
 
             <div class="text-box">
-                <p class="normal-text"><?php echo ($this->Data["email"]["boxtext"]) ?></p>
+                <div class="normal-text"><?php echo ($this->Data["email"]["boxtext"]) ?></div>
             </div>
 
             <a class="btn black--text" href="https://www.alloprof.qc.ca/zonedentraide/<?php echo ($this->Data["email"]["discussionLink"]) ?>">Voir l’explication</a>
@@ -91,11 +110,11 @@
 
             <a href="#" class="black--text" style="font-size: 12px;"><i>Se désabonner</i></a>
 
-            <p class="green-text" style="text-decoration: none; font-size: 12px; margin-top: 40px;margin-bottom: 28px;">Suivez nous sur les réseaux sociaux : </p>
+            <p class="green-text" style="text-decoration: none; font-size: 12px; margin-top: 40px;margin-bottom: 28px; color: #05BF8E!important;">Suivez nous sur les réseaux sociaux : </p>
 
             <div class="social-icons">
                 <a href="https://www.facebook.com/alloprof"><img src="https://i.ibb.co/Q6r5Qj1/Facebook-Icon.png" alt="Facebook-Icon" border="0"></a>
-                <a href="https://www.instagram.com/alloprof"><img src="https://i.ibb.co/GcbjvZ7/Instagram.png" alt="Instagram" border="0" width="32px" height="32px"></a>
+                <a href="https://www.instagram.com/alloprof"><img src="https://i.ibb.co/QpMwC2W/Instagram.png" alt="Instagram" border="0" width="32px" height="32px"></a>
                 <a href="https://www.youtube.com/user/BV2ALLOPROF"><img src="https://i.ibb.co/k15h7Yk/Youtube-Icon.png" alt="Youtube-Icon" border="0"></a>
                 <a href="https://twitter.com/alloprof"><img src="https://i.ibb.co/0VYhBmf/Twitter-Icon.png" alt="Twitter-Icon" border="0"></a>
             </div>
