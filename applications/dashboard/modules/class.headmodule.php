@@ -518,7 +518,7 @@ class HeadModule extends Gdn_Module {
         //     }
         // }
         $this->addTag('meta', ['property' => 'og:image', 'content' => 'https://www.alloprof.qc.ca/zonedentraide/uploads/FB-Zone-entraide-1200x630.png']);
-        $this->addTag('meta', ['name' => 'twitter:image', 'content' => 'https://www.alloprof.qc.ca/zonedentraide/uploads/Twitter-Zone-entraide-800x800px.png']);
+        $this->addTag('meta', ['name' => 'twitter:image', 'property' => 'og:image', 'content' => 'https://www.alloprof.qc.ca/zonedentraide/uploads/Twitter-Zone-entraide-800x800px.png']);
         $this->addTag('meta', ['name' => 'twitter:card', 'content' => 'summary_large_image']);
 
         // For the moment at least, only discussions are supported.
