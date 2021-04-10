@@ -37,8 +37,7 @@
     content: none !important;
 }
 
-.MeBox-header .Flyout.Flyout,
-.MeBox-header .MenuItems {
+.MeBox-header .Flayout-notification {
     min-width: 480px !important;
 }
 
@@ -220,7 +219,7 @@
 }
 
 @media screen and (max-width: 958px) {
-    .MeBox.FlyoutRight .Flyout {
+    .MeBox.FlyoutRight .Flayout-notification {
         max-width: 100% !important;
         top: -7px;
         height: 100% !important;
