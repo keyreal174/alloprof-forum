@@ -597,6 +597,10 @@ div[id*="-formattingMenus-component"] {
     height: auto;
 }
 
+.embedExternal {
+    width: 100% !important;
+}
+
 .embedLink, .embedExternal {
     max-width: 400px !important;
 }
