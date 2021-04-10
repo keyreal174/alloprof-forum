@@ -190,7 +190,7 @@
 
             saveURL = '&target=discussions/saveDiscussion';
         } else if ($(this).hasClass('SaveComment')) {
-            var parent = $(this).parents('.CommentPostForm');
+            var parent = $(this).parents('.CommentPostForm, .MobileCommentForm');
             var frm = $(parent).find('form').first();
             var postValues = $(frm).serialize();
             localStorage.setItem('draft', postValues);
