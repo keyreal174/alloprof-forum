@@ -38,7 +38,6 @@
 @import url("./modules/vanilla-auth.css");
 @import url("./modules/vanilla-confirmfollow.css");
 @import url("./modules/vanilla-notification.css");
-@import url("./modules/vanilla-betabanner.css");
 @import url("./modules/vanilla-pagenotfound.css");
 @import url("./modules/vanilla-newdropdown.css");
 @import url("./modules/vanilla-mobile.css");
@@ -77,10 +76,6 @@
     display: flex;
     min-height: 72px;
     height: auto;
-}
-
-.Frame-menubar.hasBetaBanner {
-    top: 134px;
 }
 
 .Question-submenu .Navigation-linkContainer {
@@ -628,18 +623,6 @@ div[id*="-formattingMenus-component"] {
 @keyframes example {
     from {width: 0; }
     to {width: 100%;}
-}
-
-@media screen and (max-width: 539px) {
-    .Frame-menubar.hasBetaBanner {
-        top: 224px;
-    }
-}
-
-@media screen and (max-width: 398px) {
-    .Frame-menubar.hasBetaBanner {
-        top: 244px;
-    }
 }
 
 /* Teacher Check Icon */

@@ -2340,20 +2340,4 @@ EOT;
         $this->setData('Users', $users);
         $this->render();
     }
-
-    /**
-     *
-     */
-    public function betaBannerClose() {
-        $session = Gdn::session();
-        $this->View = 'index';
-
-        if (!$session->isValid()) {
-            $this->render();
-        }
-
-        $UserMetaData = Gdn::userModel()->setMeta(Gdn::session()->UserID, [true], 'Profile.BetaBannerHidden');
-        $this->View = 'index';
-        $this->render();
-    }
 }

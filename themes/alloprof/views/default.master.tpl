@@ -102,7 +102,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <![endif]-->
 
     <div class="Frame" id="page">
-        {module name="BetaBannerModule"}
         <div class="Frame-top">
             {if $DataDrivenTitleBar}
                 <header id="titleBar" data-react="title-bar-hamburger" style="display: none!important;" data-unhide="true">

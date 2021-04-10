@@ -31,10 +31,6 @@ jQuery(document).ready(function($) {
     if($('.Banner-content').length === 0)
         initHeader();
 
-    $(".Question-submenu.hasBetaBanner").parents('.Frame-menubar').addClass('hasBetaBanner');
-    $(".Question-submenu.hasBetaBanner").parents('.Frame-menubar').parents('.Frame-contentWrap').find('.sidebar').addClass('hasBetaBanner');
-
-
     // Select2 initialization
 
     function formatState (state) {
