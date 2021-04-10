@@ -466,13 +466,18 @@ class HeadModule extends Gdn_Module {
         }
 
         $title = htmlEntityDecode(Gdn_Format::text($this->title('', true)));
+
         if ($title != '') {
             $this->addTag('meta', ['name' => 'twitter:card', 'content' => 'summary_large_image']);
-            if (val('DiscussionID', $this->_Sender)) {
+            if (str_contains($canonicalUrl, '/discussion/')) {
                 $this->addTag('meta', ['name' => 'twitter:title', 'property' => 'og:title', 'content' => 'Découvre ma question']);
             } else {
                 $this->addTag('meta', ['name' => 'twitter:title', 'property' => 'og:title', 'content' => $title]);
             }
+        }
+
+        if (str_contains($canonicalUrl, '/categories/')) {
+            $this->addTag('meta', ['name' => 'twitter:title', 'property' => 'og:title', 'content' => 'Zone d’entraide '.val('Name', $this->_Sender).' | Alloprof']);
         }
 
         if (isset($canonicalUrl)) {
@@ -480,8 +485,13 @@ class HeadModule extends Gdn_Module {
         }
 
         if ($description = trim(Gdn_Format::reduceWhiteSpaces($this->_Sender->description()))) {
-            $this->addTag('meta', ['name' => 'description', 'property' => 'og:description', 'content' => $description]);
-            $this->addTag('meta', ['name' => 'twitter:description', 'content' => $description]);
+            if (str_contains($canonicalUrl, '/categories/')) {
+                $this->addTag('meta', ['name' => 'description', 'property' => 'og:description', 'content' => "Besoin d’aide en ".val('Name', $this->_Sender)."? Alloprof est là pour t’aider grâce à sa Zone d’entraide."]);
+                $this->addTag('meta', ['name' => 'twitter:description', 'content' => "Besoin d’aide en ".val('Name', $this->_Sender)."? Alloprof est là pour t’aider grâce à sa Zone d’entraide."]);
+            } else {
+                $this->addTag('meta', ['name' => 'description', 'property' => 'og:description', 'content' => $description]);
+                $this->addTag('meta', ['name' => 'twitter:description', 'content' => $description]);
+            }
         }
 
         if ($robots = $this->_Sender->data('_robots')) {
@@ -491,23 +501,25 @@ class HeadModule extends Gdn_Module {
         $hasRelevantImage = false;
 
         // Default to the site logo if there were no images provided by the controller.
-        if (count($this->_Sender->image()) == 0) {
-            $logo = c('Garden.ShareImage', c('Garden.Logo', ''));
-            if ($logo != '') {
-                // Fix the logo path.
-                if (stringBeginsWith($logo, 'uploads/')) {
-                    $logo = substr($logo, strlen('uploads/'));
-                }
+        // if (count($this->_Sender->image()) == 0) {
+        //     $logo = c('Garden.ShareImage', c('Garden.Logo', ''));
+        //     if ($logo != '') {
+        //         // Fix the logo path.
+        //         if (stringBeginsWith($logo, 'uploads/')) {
+        //             $logo = substr($logo, strlen('uploads/'));
+        //         }
 
-                $logo = Gdn_Upload::url($logo);
-                $this->addTag('meta', ['property' => 'og:image', 'content' => $logo]);
-            }
-        } else {
-            foreach ($this->_Sender->image() as $img) {
-                $this->addTag('meta', ['name' => 'twitter:image', 'property' => 'og:image', 'content' => $img]);
-                $hasRelevantImage = true;
-            }
-        }
+        //         $logo = Gdn_Upload::url($logo);
+        //         $this->addTag('meta', ['property' => 'og:image', 'content' => $logo]);
+        //     }
+        // } else {
+        //     foreach ($this->_Sender->image() as $img) {
+        //         $this->addTag('meta', ['name' => 'twitter:image', 'property' => 'og:image', 'content' => $img]);
+        //         $hasRelevantImage = true;
+        //     }
+        // }
+        $this->addTag('meta', ['property' => 'og:image', 'content' => 'https://www.alloprof.qc.ca/zonedentraide/uploads/FB-Zone-entraide-1200x630.png']);
+        $this->addTag('meta', ['name' => 'twitter:image', 'property' => 'og:image', 'content' => 'https://www.alloprof.qc.ca/zonedentraide/uploads/Twitter-Zone-entraide-800x800px.png']);
 
         // For the moment at least, only discussions are supported.
         // if ($title && val('DiscussionID', $this->_Sender)) {
