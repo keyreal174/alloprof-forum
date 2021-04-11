@@ -50,6 +50,9 @@ $Configuration['EnabledPlugins']['QnA'] = true;
 $Configuration['EnabledPlugins']['googlesignin'] = true;
 $Configuration['EnabledPlugins']['alloprof'] = true;
 
+// Feature
+$Configuration['Feature']['DeferredLegacyScripts']['Enabled'] = true;
+
 // Garden
 $Configuration['Garden']['Debug'] = true;
 $Configuration['Garden']['Errors']['LogFile'] = 'log/debug.log';
@@ -83,7 +86,22 @@ $Configuration['Garden']['MobileTheme'] = 'alloprof';
 $Configuration['Garden']['Locale'] = 'fr_CA';
 $Configuration['Garden']['EditContentTimeout'] = '-1';
 $Configuration['Garden']['Format']['DisableUrlEmbeds'] = false;
+$Configuration['Garden']['Format']['WarnLeaving'] = false;
 $Configuration['Garden']['SignIn']['Popup'] = '1';
+$Configuration['Garden']['TrustedDomains'] = '';
+$Configuration['Garden']['Security']['Hsts']['MaxAge'] = 604800;
+$Configuration['Garden']['Security']['Hsts']['IncludeSubDomains'] = false;
+$Configuration['Garden']['Security']['Hsts']['Preload'] = false;
+$Configuration['Garden']['HomepageTitle'] = 'Zone d’entraide | Alloprof';
+$Configuration['Garden']['Description'] = 'Rejoins le nouveau forum d’entraide d’Alloprof. Nos enseignants donnent des explications aux élèves qui ont besoin de soutien dans une matière scolaire.';
+$Configuration['Garden']['OrgName'] = '';
+$Configuration['Garden']['Logo'] = '';
+$Configuration['Garden']['MobileLogo'] = '';
+$Configuration['Garden']['BannerImage'] = '';
+$Configuration['Garden']['FavIcon'] = '';
+$Configuration['Garden']['TouchIcon'] = '';
+$Configuration['Garden']['ShareImage'] = 'https://www.alloprof.qc.ca/zonedentraide/uploads/XVRVFM2G0V5F/fb-zone-entraide-1200x630.png';
+$Configuration['Garden']['MobileAddressBarColor'] = '';
 
 // ImageUpload
 $Configuration['ImageUpload']['Limits']['Width'] = '1000';
@@ -97,7 +115,7 @@ $Configuration['Plugins']['GettingStarted']['Profile'] = '1';
 $Configuration['Plugins']['GettingStarted']['Plugins'] = '1';
 $Configuration['Plugins']['Akismet']['UserID'] = '12';
 $Configuration['Plugins']['Flagging']['UseDiscussions'] = false;
-$Configuration['Plugins']['Flagging']['CategoryID'] = '1';
+$Configuration['Plugins']['Flagging']['CategoryID'] = '5';
 $Configuration['Plugins']['StopForumSpam']['UserID'] = '13';
 $Configuration['Plugins']['Vanillicon']['Type'] = 'v2';
 $Configuration['Plugins']['Reactions']['TrackPointsSeparately'] = '';
@@ -146,12 +164,6 @@ $Configuration['ProfileExtender']['Fields'][1]['OnRegister'] = '1';
 $Configuration['ProfileExtender']['Fields'][1]['OnProfile'] = '1';
 $Configuration['ProfileExtender']['Fields'][1]['Name'] = 'DisplayName';
 $Configuration['ProfileExtender']['Fields'][2]['FormType'] = 'CheckBox';
-$Configuration['ProfileExtender']['Fields'][2]['Label'] = 'BetaBannerHidden';
-$Configuration['ProfileExtender']['Fields'][2]['Options'] = '';
-$Configuration['ProfileExtender']['Fields'][2]['Required'] = false;
-$Configuration['ProfileExtender']['Fields'][2]['OnRegister'] = false;
-$Configuration['ProfileExtender']['Fields'][2]['OnProfile'] = false;
-$Configuration['ProfileExtender']['Fields'][2]['Name'] = 'BetaBannerHidden';
 
 // QnA
 $Configuration['QnA']['Points']['Enabled'] = false;
