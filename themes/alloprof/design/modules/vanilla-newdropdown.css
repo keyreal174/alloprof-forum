@@ -6,7 +6,6 @@
 .MeBox.FlyoutRight .Flyout.unauthorized {
     border-top: none;
     min-width: 218px!important;
-    height: 185px;
     padding: 32px!important;
     top: 48px;
 }
@@ -16,7 +15,7 @@
     /* height: 44px; */
 }
 
-.MeBox.FlyoutRight .Flyout.unauthorized li:first-child a {
+.MeBox.FlyoutRight .Flyout.unauthorized .SignInStudentPopupAgent:first-child{
     border-radius: 38px;
     padding: 13px;
     border: 1px solid #000000;
@@ -82,6 +81,7 @@
     .withHeader .mobile-menu-header .Close {
         width: auto;
         position: relative;
+        min-width: 0;
         top: -1px;
         right: 0px;
         font-size: 40px !important;
@@ -104,6 +104,10 @@
         border: none !important;
     }
 
+    .MeBox.FlyoutRight .Flyout.unauthorized {
+        padding: 15px 20px !important;
+    }
+
     /* .MeBox.FlyoutRight .Flyout.authorized,
     .MeBox.FlyoutRight .Flyout.unauthorized {
         top: 0;
@@ -121,12 +125,12 @@
     .MeBox.FlyoutRight .Flyout.authorized li a {
         font-size: 15px;
         font-weight: 300;
+        min-height: 40px;
     }
 
     .MeBox.FlyoutRight .Flyout.unauthorized li a {
-        font-size: 25px;
+        font-size: 15px;
         border: none !important;
-        padding: 13px !important;
     }
 
     .MeBox.FlyoutRight .Flyout li a.dropdown-menu-link-Close {
