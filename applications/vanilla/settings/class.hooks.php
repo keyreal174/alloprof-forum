@@ -940,7 +940,7 @@ class VanillaHooks extends Gdn_Plugin {
      * @param ProfileController $sender
      */
     public function profileController_afterPreferencesDefined_handler($sender) {
-        $sender->Preferences['Notifications']['Email.DiscussionComment'] = t('Notify me when people comment on my discussions.');
+        $sender->Preferences['Notifications']['Email.CustomNotification'] = t('Notify me when people comment on my discussions.');
         $sender->Preferences['Notifications']['Email.BookmarkComment'] = t('Notify me when people comment on my bookmarked discussions.');
         $sender->Preferences['Notifications']['Email.Mention'] = t('Notify me when people mention me.');
         $sender->Preferences['Notifications']['Email.Moderation'] = t('Notify me when moderator changed my content.');

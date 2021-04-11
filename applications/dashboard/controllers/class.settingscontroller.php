@@ -1049,7 +1049,7 @@ class SettingsController extends DashboardController {
         $email->setMessage($message)
             ->setTitle(t('Test Email'))
             ->setButton(externalUrl('/'), t('Check it out'));
-        $emailer->setEmailTemplate($email);
+        $emailer = $emailer->setEmailTemplate($email);
         return $emailer;
     }
 
