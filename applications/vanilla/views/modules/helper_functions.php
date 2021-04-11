@@ -490,6 +490,13 @@ if (!function_exists('writeFilterToggle')) :
             echo Gdn::controller()->Form->toggle(($isMobile?'Mobile':'').'Explanation', $text);
         }
         echo '</li>';
+        echo '<li class="form-group">';
+        if ($verified == 'true') {
+            echo Gdn::controller()->Form->toggle(($isMobile?'Mobile':'').'VerifiedBy', $verifiedText, [ 'checked' => $verified ]);
+        } else {
+            echo Gdn::controller()->Form->toggle(($isMobile?'Mobile':'').'VerifiedBy', $verifiedText);
+        }
+        echo '</li>';
 
         if ($role != 'Teacher') {
             echo '<li class="form-group">';
@@ -501,13 +508,6 @@ if (!function_exists('writeFilterToggle')) :
             echo '</li>';
         }
 
-        echo '<li class="form-group">';
-        if ($verified == 'true') {
-            echo Gdn::controller()->Form->toggle(($isMobile?'Mobile':'').'VerifiedBy', $verifiedText, [ 'checked' => $verified ]);
-        } else {
-            echo Gdn::controller()->Form->toggle(($isMobile?'Mobile':'').'VerifiedBy', $verifiedText);
-        }
-        echo '</li>';
         echo '</ul>';
     }
 endif;

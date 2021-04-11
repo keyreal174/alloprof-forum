@@ -19,10 +19,19 @@ jQuery(document).ready(function($) {
         filterDiscussion();
     });
 
+    $(document).on('change', '.FilterMenu #Form_VerifiedBy', function() {
+        var explanation = $(this).is(":checked");
+        if (explanation) {
+            $(".FilterMenu #Form_OutExplanation").attr("checked", false);
+        }
+        filterDiscussion();
+    });
+
     $(document).on('change', '.FilterMenu #Form_OutExplanation', function() {
         var explanation = $(this).is(":checked");
         if (explanation) {
             $(".FilterMenu #Form_Explanation").attr("checked", false);
+            $(".FilterMenu #Form_VerifiedBy").attr("checked", false);
         }
         filterDiscussion();
     });
@@ -34,10 +43,18 @@ jQuery(document).ready(function($) {
         }
     });
 
+    $(document).on('change', '.FilterMenu #Form_MobileVerifiedBy', function() {
+        var explanation = $(this).is(":checked");
+        if (explanation) {
+            $(".FilterMenu #Form_MobileOutExplanation").attr("checked", false);
+        }
+    });
+
     $(document).on('change', '.FilterMenu #Form_MobileOutExplanation', function() {
         var explanation = $(this).is(":checked");
         if (explanation) {
             $(".FilterMenu #Form_MobileExplanation").attr("checked", false);
+            $(".FilterMenu #Form_MobileVerifiedBy").attr("checked", false);
         }
     });
 

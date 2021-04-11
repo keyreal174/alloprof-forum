@@ -110,6 +110,14 @@ if (!function_exists('writeFilterToggle')) :
         }
         echo '</li>';
 
+        echo '<li class="form-group">';
+        if ($verified == 'true') {
+            echo $form->toggle('VerifiedBy', $verifiedText, [ 'checked' => $verified ]);
+        } else {
+            echo $form->toggle('VerifiedBy', $verifiedText);
+        }
+        echo '</li>';
+
         if ($role != 'Teacher') {
             echo '<li class="form-group">';
             if ($explanationout == 'true') {
@@ -120,13 +128,6 @@ if (!function_exists('writeFilterToggle')) :
             echo '</li>';
         }
 
-        echo '<li class="form-group">';
-        if ($verified == 'true') {
-            echo $form->toggle('VerifiedBy', $verifiedText, [ 'checked' => $verified ]);
-        } else {
-            echo $form->toggle('VerifiedBy', $verifiedText);
-        }
-        echo '</li>';
         echo '</ul>';
     }
 endif;
