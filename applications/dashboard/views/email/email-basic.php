@@ -101,7 +101,7 @@
                 <div class="normal-text"><?php echo ($this->Data["email"]["boxtext"]) ?></div>
             </div>
 
-            <a class="btn black--text" href="https://www.alloprof.qc.ca/zonedentraide/<?php echo ($this->Data["email"]["discussionLink"]) ?>">Voir l’explication</a>
+            <a class="btn black--text" href="https://www.alloprof.qc.ca<?php echo ($this->Data["email"]["discussionLink"]) ?>">Voir l’explication</a>
 
             <p class="black--text" style="margin-top: 32px; margin-bottom: 64px;">On se retrouve dans la <a href="https://www.alloprof.qc.ca/zonedentraide" class="green--text">Zone d’entraide</a>!</p>
 

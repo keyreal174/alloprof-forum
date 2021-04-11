@@ -93,10 +93,10 @@
                 <a href="https://imgbb.com/"><img src="https://i.ibb.co/nkPWPv2/Alloprof-Logo.png" alt="Alloprof-Logo" border="0"></a>
             </div>
 
-            <h2 style="font-size: 21px; line-height: 25px; margin: 32px;"><?php echo ($this->Data["email"]["reason"]) ?></h2>
+            <h2 style="font-size: 21px; line-height: 25px; margin: 32px;">Ce n'est pas grave, tu peux réessayer.</h2>
 
             <p class="normal-text">Bonjour, “<?php echo ($this->Data["email"]["username"]) ?>”! Malheureusement, ton explication a été refusée pour la raison suivante : <br><br>
-            Diam egestas aenean nunc feugiat. Sed nibh arcu volutpat, risus.</p>
+            <?php echo ($this->Data["email"]["reason"]) ?></p>
 
             <div class="text-box">
                 <div class="normal-text">
