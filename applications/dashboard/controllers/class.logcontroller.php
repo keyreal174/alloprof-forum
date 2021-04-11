@@ -16,7 +16,7 @@ use Garden\Schema\Schema;
 class LogController extends DashboardController {
 
     /** @var array Objects to prep. */
-    public $Uses = ['Form', 'LogModel'];
+    public $Uses = ['Form', 'LogModel', 'DiscussionModel', 'CommentModel', 'UserModel'];
 
     /** @var Gdn_Form */
     public $Form;
@@ -114,6 +114,53 @@ class LogController extends DashboardController {
         $this->permission(['Garden.Moderation.Manage', 'Moderation.ModerationQueue.Manage'], false);
         $logIDs = Gdn::request()->post('LogIDs');
         $deleteMessage = Gdn::request()->post('DeleteMessage');
+        $logs = $this->LogModel->getIDs($logIDs);
+        foreach ($logs as $log) {
+            $recordType = $log['RecordType'];
+            $insertUser = $this->UserModel->getID($log["RecordUserID"]);
+            $userPrefs = dbdecode($insertUser->Preferences);
+            if (val("Email.CustomNotification", $userPrefs)) {
+                $UserMetaData = Gdn::userModel()->getMeta($log["RecordUserID"], 'Profile.%', 'Profile.');
+                $username = $UserMetaData['DisplayName'] ?? "";
+                $address = $insertUser->Email;
+                $emailer = new Gdn_Email();
+                $email = $emailer->getEmailTemplate();
+
+                $email->setUsername($username);
+                $message = "";
+                $email->setReason($deleteMessage);
+
+                switch ($recordType) {
+                    case 'Discussion':
+                        $discussion = $this->DiscussionModel->getID($log['RecordID']);
+                        $email = $email->setView('discussion-delete-email');
+                        $message = Gdn_Format::to($discussion->Body, 'Rich');
+                        $subject = "Objet - Oups! Ta question a été refusée.";
+                        break;
+                    case 'Comment':
+                        $comment = $this->CommentModel->getID($log['RecordID']);
+                        $email = $email->setView('comment-delete-email');
+                        $message = Gdn_Format::to($comment->Body, 'Rich');
+                        $subject = "Objet - Oups! Ton explication a été refusée.";
+                        break;
+                }
+                $email->setBoxText($message);
+                $emailer = $emailer->setEmailTemplate($email);
+                $emailer->to($address);
+                $emailer->subject($subject);
+                try {
+                    if ($emailer->send()) {
+                        echo "sent";
+                    } else {
+                        echo "failed";
+                    }
+                } catch (Exception $e) {
+                    if (debug()) {
+                        throw $e;
+                    }
+                }
+            }
+        }
         $this->LogModel->deleteIDs($logIDs, $deleteMessage);
         $this->render('Blank', 'Utility');
     }
