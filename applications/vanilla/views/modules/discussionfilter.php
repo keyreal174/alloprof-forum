@@ -58,7 +58,7 @@ $titleID = "BoxFilterTitle";
             echo writeCategoryDropDown($this, 'Form_SubjectDropdown', $options);
             echo writeGradeFilter($this->GradeID);
             echo writeDiscussionSort($this->Sort);
-            echo writeFilterToggle($this->IsExplanation, $this->IsVerified);
+            echo writeFilterToggle($this->IsExplanation, $this->IsVerified, $this->IsOutExplanation);
         ?>
     </div>
 </div>

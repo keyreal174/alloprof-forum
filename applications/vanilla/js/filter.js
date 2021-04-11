@@ -12,7 +12,33 @@ jQuery(document).ready(function($) {
     });
 
     $(document).on('change', '.FilterMenu #Form_Explanation', function() {
+        var explanation = $(this).is(":checked");
+        if (explanation) {
+            $(".FilterMenu #Form_OutExplanation").attr("checked", false);
+        }
         filterDiscussion();
+    });
+
+    $(document).on('change', '.FilterMenu #Form_OutExplanation', function() {
+        var explanation = $(this).is(":checked");
+        if (explanation) {
+            $(".FilterMenu #Form_Explanation").attr("checked", false);
+        }
+        filterDiscussion();
+    });
+
+    $(document).on('change', '.FilterMenu #Form_MobileExplanation', function() {
+        var explanation = $(this).is(":checked");
+        if (explanation) {
+            $(".FilterMenu #Form_MobileOutExplanation").attr("checked", false);
+        }
+    });
+
+    $(document).on('change', '.FilterMenu #Form_MobileOutExplanation', function() {
+        var explanation = $(this).is(":checked");
+        if (explanation) {
+            $(".FilterMenu #Form_MobileExplanation").attr("checked", false);
+        }
     });
 
     $(document).on('change', '.FilterMenu #Form_VerifiedBy', function() {
@@ -47,25 +73,28 @@ jQuery(document).ready(function($) {
             grade=-1,
             sort='desc',
             explanation=false,
-            verifiedBy=false;
+            verifiedBy=false,
+            outexplanation=false;
 
         if(isMobile) {
             if($('.FilterMenu .mobile-grade .item.selected'))
                 grade = $('.FilterMenu .mobile-grade .item.selected').attr('value');
             sort = $("input[type='radio'][name='sortRadio']:checked").val();
             explanation = $('.FilterMenu #Form_MobileExplanation').is(":checked");
+            outexplanation = $('.FilterMenu #Form_MobileOutExplanation').is(":checked");
             verifiedBy = $('.FilterMenu #Form_MobileVerifiedBy').is(":checked");
         } else {
             subject = $('.FilterMenu #Form_SubjectDropdown').val();
             grade = $('.FilterMenu #Form_GradeDropdown').val();
             sort = $('.FilterMenu #Form_DiscussionSort').val();
             explanation = $('.FilterMenu #Form_Explanation').is(":checked");
+            outexplanation = $('.FilterMenu #Form_OutExplanation').is(":checked");
             verifiedBy = $('.FilterMenu #Form_VerifiedBy').is(":checked");
         }
 
         grade = !grade ? -1 : grade;
         subject = !subject ? -1 : subject;
-        var parameter = 'grade=' + parseInt(grade) + '&sort=' + sort + '&explanation=' + explanation + '&verifiedBy=' + verifiedBy + '&subject=' + subject;
+        var parameter = 'grade=' + parseInt(grade) + '&sort=' + sort + '&explanation=' + explanation + '&verifiedBy=' + verifiedBy + '&subject=' + subject + '&outexplanation=' + outexplanation;
 
         $.ajax({
             type: "POST",
