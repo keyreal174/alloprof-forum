@@ -576,12 +576,14 @@ if (!function_exists('writeDiscussionOptions')):
         echo ' <span class="ToggleFlyout OptionsMenu">';
         echo '<span class="OptionsTitle" title="'.t('Options').'">'.t('Options').'</span>';
         echo sprite('SpFlyoutHandle', 'Arrow');
+        echo '<span class="mobileFlyoutOverlay">';
         echo '<ul class="Flyout MenuItems" style="display: none;">';
         foreach ($options as $code => $option) {
             echo wrap("<a href='". url($option['Url']) . "' class='dd " . val('Class', $option, $code) . "' id='". val('Id', $option, $code) ."'>" . $option['Label'] ."</a>", 'li');
             // echo wrap(anchor($option['Label'], $option['Url'], val('Class', $option, $code)), 'li');
         }
         echo '</ul>';
+        echo '</span>';
         echo '</span>';
     }
 endif;

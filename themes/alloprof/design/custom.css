@@ -634,3 +634,7 @@ div[id*="-formattingMenus-component"] {
 .ItemGrade {
     font-weight: bold;
 }
+
+.ScrollProgress {
+    padding: 0 45% !important;
+}
