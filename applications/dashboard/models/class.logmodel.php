@@ -889,7 +889,7 @@ class LogModel extends Gdn_Pluggable {
             'ActivityType' => 'Default',
             'ActivityUserID' => Gdn::session()->UserID,
             'HeadlineFormat' => ($table=='Discussion'?'Question':'Explanation').' published!',
-            'Story' => '<span>"'.$textstring.'<span>" </span> <b>has been published.</b>',
+            'Story' => '<span>"'.$textstring.'<span>" </span> <b>'.t('has been published.').'</b>',
             "RecordType" => "Comment",
             "RecordID" => $table=='Discussion'?$data->DiscussionID:$data->CommentID,
             "Route" => $table=='Discussion'?DiscussionModel::discussionUrl($data, "", "/"):CommentModel::commentUrl($data),
