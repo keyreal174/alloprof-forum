@@ -170,8 +170,9 @@ class SearchController extends Gdn_Controller {
      * @param string $search The search string.
      * @param string $page Page number.
      */
-    public function index($search = '', $page = '') {
+    public function index($Page = false, $search = '') {
         $this->getUserInfo();
+        $this->allowJSONP(true);
         $this->ShowOptions = true;
         $this->addJsFile('search.js');
         $this->addCssFile('search.css');
@@ -208,22 +209,74 @@ class SearchController extends Gdn_Controller {
         saveToConfig('Garden.Format.EmbedSize', '160x90', false);
         Gdn_Theme::section('SearchResults');
 
+        // Determine offset from $Page
+        list($Offset, $Limit) = offsetLimit($Page, c('Vanilla.Discussions.PerPage', 30));
+        $Page = pageNumber($Offset, $Limit);
+
+        // We want to limit the number of pages on large databases because requesting a super-high page can kill the db.
+        $MaxPages = c('Vanilla.Discussions.MaxPages');
+        if ($MaxPages && $Page > $MaxPages) {
+            throw notFoundException();
+        }
+
         $this->writeFilter();
         $where['Body like'] = '%'.str_replace(['%', '_'], ['\%', '\_'], $search).'%';
-        [$offset, $limit] = offsetLimit($page, c('Garden.Search.PerPage', 20));
-        $this->setData('_Limit', $limit);
+
+        $where = array_merge($where, $this->WhereClause);
         $DiscussionModel = new DiscussionModel();
+
+        // Get Discussion Count
+        $CountDiscussions = $DiscussionModel->getCount($where);
+
+        $this->checkPageRange($Offset, $CountDiscussions);
+
+        if ($MaxPages) {
+            $CountDiscussions = min($MaxPages * $Limit, $CountDiscussions);
+        }
+
         $where = array_merge($where, $this->WhereClause);
         $CountDiscussions = $DiscussionModel->getCount($where);
-        $this->DiscussionData = $DiscussionModel->getWhereWithOrder($where, 'DateLastComment', $this->SortDirection, $limit, $offset, true);
+        $this->DiscussionData = $DiscussionModel->getWhereWithOrder($where, 'DateInserted', $this->SortDirection, $Limit, $Offset);
 
         $this->setData('SearchResults', $this->DiscussionData, true);
         $this->setData('SearchTerm', Gdn_Format::text($search), true);
         $this->setData('searchResultCount', $CountDiscussions);
-
         $this->setData('_CurrentRecords', count($this->DiscussionData));
-
+        $this->setData('CountDiscussions', $CountDiscussions);
+        $this->setData('Discussions', $this->DiscussionData, true);
         $this->canonicalUrl(url('search', true));
+
+        // Build a pager
+        $PagerFactory = new Gdn_PagerFactory();
+        $this->EventArguments['PagerType'] = 'Pager';
+        $this->fireEvent('BeforeBuildPager');
+        if (!$this->data('_PagerUrl')) {
+            $this->setData('_PagerUrl', 'discussions/{Page}');
+        }
+        $queryString = DiscussionModel::getSortFilterQueryString($DiscussionModel->getSort(), $DiscussionModel->getFilters());
+        $this->setData('_PagerUrl', $this->data('_PagerUrl').$queryString);
+        $this->Pager = $PagerFactory->getPager($this->EventArguments['PagerType'], $this);
+        $this->Pager->ClientID = 'Pager';
+        $this->Pager->configure(
+            $Offset,
+            $Limit,
+            $this->data('CountDiscussions'),
+            $this->data('_PagerUrl')
+        );
+
+        PagerModule::current($this->Pager);
+
+        $this->setData('_Page', $Page);
+        $this->setData('_Limit', $Limit);
+        $this->fireEvent('AfterBuildPager');
+
+        // Deliver JSON data if necessary
+        if ($this->_DeliveryType != DELIVERY_TYPE_ALL) {
+            $this->setJson('LessRow', $this->Pager->toString('less'));
+            $this->setJson('MoreRow', $this->Pager->toString('more'));
+            $this->View = 'discussions';
+        }
+
         $this->render();
     }
 
