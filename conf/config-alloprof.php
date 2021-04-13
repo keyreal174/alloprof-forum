@@ -108,6 +108,15 @@ $Configuration['ImageUpload']['Limits']['Width'] = '1000';
 $Configuration['ImageUpload']['Limits']['Height'] = '1400';
 $Configuration['ImageUpload']['Limits']['Enabled'] = false;
 
+// InfiniteScroll
+$Configuration['InfiniteScroll']['Discussion'] = '1';
+$Configuration['InfiniteScroll']['DiscussionList'] = '1';
+$Configuration['InfiniteScroll']['Mobile'] = '1';
+$Configuration['InfiniteScroll']['Hotkey'] = 'j';
+$Configuration['InfiniteScroll']['NavPosition'] = '0';
+$Configuration['InfiniteScroll']['NavStyle'] = '0';
+$Configuration['InfiniteScroll']['ProgressColor'] = '#38abe3';
+
 // Plugins
 $Configuration['Plugins']['GettingStarted']['Dashboard'] = '1';
 $Configuration['Plugins']['GettingStarted']['Discussion'] = '1';
