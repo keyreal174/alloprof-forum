@@ -104,6 +104,10 @@
 }
 
 @media screen and (max-width: 959px) {
+    .ScrollProgress {
+        height: 42px !important;
+    }
+
     .Header {
         padding-left: 16px;
         padding-right: 16px;

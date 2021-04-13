@@ -3290,7 +3290,7 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
 .richEditor-button.isOpen .MenuItems,
 .ToggleFlyout.Open .Flyout,
 .ToggleFlyout.Open .MenuItems {
-    display: block
+    display: block !important;
 }
 
 .Flyout.Flyout,
