@@ -669,8 +669,9 @@ if (!function_exists('getCommentOptions')) :
                 'Label' => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M21.4 4.8H16.6V3.6C16.6 1.61177 14.9882 0 13 0H10.6C8.61177 0 7 1.61177 7 3.6V4.8H2.2C1.53726 4.8 1 5.33726 1 6C1 6.66274 1.53726 7.2 2.2 7.2H3.4V20.4C3.4 22.3882 5.01178 24 7 24H16.6C18.5882 24 20.2 22.3882 20.2 20.4V7.2H21.4C22.0627 7.2 22.6 6.66274 22.6 6C22.6 5.33726 22.0627 4.8 21.4 4.8ZM9.40007 3.60031C9.40007 2.93757 9.93732 2.40031 10.6001 2.40031H13.0001C13.6628 2.40031 14.2001 2.93757 14.2001 3.60031V4.80031H9.40007V3.60031ZM17.8001 20.4C17.8001 21.0627 17.2629 21.6 16.6001 21.6H7.00013C6.33739 21.6 5.80013 21.0627 5.80013 20.4V7.19995H17.8001V20.4Z" fill="#333333"/>
                 </svg><span>'.t('Delete the publication').'</span>',
-                'Url' => '/discussion/deletecomment/'.$comment->CommentID.'/'.$session->transientKey().'/?Target='.urlencode("/discussion/{$comment->DiscussionID}/x"),
-                'Class' => 'DeleteComment'
+                'Url' => '/discussion/deletecomment/'.$comment->CommentID.'/'.$session->transientKey(),
+                // '/discussion/deletecomment/'.$comment->CommentID.'/'.$session->transientKey().'/?Target='.urlencode("/discussion/{$comment->DiscussionID}/x"
+                'Class' => 'DeleteComment SocialPopup'
             ];
         }
 

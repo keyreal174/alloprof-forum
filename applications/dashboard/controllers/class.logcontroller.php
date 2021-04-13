@@ -42,7 +42,7 @@ class LogController extends DashboardController {
         $logIDs = Gdn::request()->post('IDs', false);
 
         $this->Form->addHidden('LogIDs', $logIDs);
-       $this->Form->IDPrefix = 'Confirm_';
+        $this->Form->IDPrefix = 'Confirm_';
 
         if (trim($logIDs)) {
             $logIDArray = explode(',', $logIDs);
