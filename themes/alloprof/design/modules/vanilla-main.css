@@ -7886,6 +7886,13 @@ body.Section-Group .DataTable.DiscussionsTable {
     .GroupWrap .DataTable .Invitation .UserName .Meta {
         display: none
     }
+
+    div.Popup {
+        left: 0 !important;
+        position: fixed;
+        top: 0 !important;
+        transform: none;
+    }
 }
 
 @media screen and (max-width:958px) {

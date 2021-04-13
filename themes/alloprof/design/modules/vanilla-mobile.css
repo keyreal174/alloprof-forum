@@ -393,7 +393,7 @@
         margin: 0 !important;
     }
     .Navigation-linkContainer.mobile {
-        display: flex;
+        display: block;
     }
     .Navigation-linkContainer:after {
         content: none;

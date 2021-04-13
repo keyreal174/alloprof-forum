@@ -238,6 +238,7 @@ body.isMobile .FormWrapper {
 
 .QuestionPopup .BoxNewDiscussion .avatar span {
     display: flex;
+    height: 100%;
 }
 
 .QuestionPopup .BoxNewDiscussion .editor {
@@ -279,7 +280,6 @@ body.isMobile .FormWrapper {
     align-items: center;
     justify-content: flex-end !important;
     flex-direction: row !important;
-    padding-top: 10px;
     margin-bottom: 10px;
     padding-right: 10px;
 }
@@ -289,7 +289,7 @@ body.isMobile .FormWrapper {
 }
 
 .QuestionPopup .BoxNewDiscussion .bottom {
-    position: absolute;
+    position: fixed;
     width: 100%;
     bottom: 0;
     z-index: 2;

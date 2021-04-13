@@ -385,6 +385,12 @@ div.Popup.BanPopup .btn {
     opacity: 0.6;
 }
 
+.QuestionPopup {
+    position: sticky !important;
+    top: 0 !important;
+    left: 0 !important;
+    transform: none !important;
+}
 
 /* Popup scrollToAskQuestionFormPopup hasRichEditor */
 
