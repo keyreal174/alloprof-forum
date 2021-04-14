@@ -652,8 +652,10 @@ $Definition['HeadlineFormat.AcceptAnswer'] = '{ActivityUserID,You} a accepté {N
 $Definition['HeadlineFormat.Answer'] = '{ActivityUserID,user} a répondu à votre question : <a href="{Url,html}">{Data.Name,text}</a>';
 $Definition['HeadlineFormat.Badge'] = '{ActivityUserID,You} avez gagné le badge <a href="{Url,html}">{Data.Name,text}</a> .';
 $Definition['HeadlineFormat.Ban'] = '{RegardingUserID,You} banni {ActivityUserID,you}.';
-$Definition['HeadlineFormat.Comment'] = 'Réponse de {ActivityUserID,user}';
-$Definition['HeadlineFormat.Comment.Answer'] = 'Réponse de {ActivityUserID,user}';
+//$Definition['HeadlineFormat.Comment'] = 'Réponse de {ActivityUserID,user}';
+//$Definition['HeadlineFormat.Comment.Answer'] = 'Réponse de {ActivityUserID,user}';
+$Definition['HeadlineFormat.Comment'] = 'Nouvelle explication!';
+$Definition['HeadlineFormat.Comment.Answer'] = 'Nouvelle explication!';
 $Definition['HeadlineFormat.ConversationMessage'] = '{ActivityUserID,User} vous a envoyé un <a href="{Url,html}">message</a>';
 $Definition['HeadlineFormat.Discussion'] = 'Question de {ActivityUserID,user}';
 $Definition['HeadlineFormat.Discussion.Question'] = 'Question de {ActivityUserID,user}';
