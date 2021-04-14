@@ -1303,7 +1303,7 @@ class PostController extends VanillaController {
                         $username = $UserMetaData['DisplayName'] ?? "";
                         $message = Gdn_Format::to($Discussion->Body, 'Rich');
                         $address = $discussionInsertUser->Email;
-                        $subject = "Objet - Yé! Tu as reçu une explication à ta question.";
+                        $subject = "Yé! Tu as reçu une explication à ta question.";
                         $discussionLink = url("/discussion/comment/" . $CommentID . "/#Comment_" . $CommentID);
 
                         $emailer = new Gdn_Email();
