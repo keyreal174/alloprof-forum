@@ -63,4 +63,4 @@ $Configuration['Vanilla']['SaveFollowingPreference'] = true;
 $Configuration['Vanilla']['ExtraRoles']['Teacher'] = 'Teacher';
 
 // Question/Commment text limit length in notificaion popup
-$Configuration['Vanilla']['Notify']['TextLength'] = 80;
+$Configuration['Vanilla']['Notify']['TextLength'] = 130;
