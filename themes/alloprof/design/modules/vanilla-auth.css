@@ -316,9 +316,6 @@ a.ForgotPassword div {
 }
 
 @media screen and (max-width: 958px) {
-    div.Popup.SignInPopup {
-        left: 50vw !important;
-    }
     div.Popup.SignInPopup .logo {
         display: block;
     }
