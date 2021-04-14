@@ -356,25 +356,25 @@ jQuery(document).ready(function($) {
     });
 
     // Delete comment
-    $('a.DeleteComment').popup({
-        confirm: true,
-        confirmHeading: gdn.definition('ConfirmDeleteCommentHeading', 'Delete Comment'),
-        confirmText: gdn.definition('ConfirmDeleteCommentText', 'Are you sure you want to delete this comment?'),
-        followConfirm: false,
-        deliveryType: 'BOOL', // DELIVERY_TYPE_BOOL
-        afterConfirm: function(json, sender) {
-            var row = $(sender).parents('li.ItemComment');
-            if (json.ErrorMessage) {
-                $.popup({}, json.ErrorMessage);
-            } else {
-                // Remove the affected row
-                $(row).slideUp('fast', function() {
-                    $(this).remove();
-                });
-                gdn.processTargets(json.Targets);
-            }
-        }
-    });
+    // $('a.DeleteComment').popup({
+    //     confirm: true,
+    //     confirmHeading: gdn.definition('ConfirmDeleteCommentHeading', 'Delete Comment'),
+    //     confirmText: gdn.definition('ConfirmDeleteCommentText', 'Are you sure you want to delete this comment?'),
+    //     followConfirm: false,
+    //     deliveryType: 'BOOL', // DELIVERY_TYPE_BOOL
+    //     afterConfirm: function(json, sender) {
+    //         var row = $(sender).parents('li.ItemComment');
+    //         if (json.ErrorMessage) {
+    //             $.popup({}, json.ErrorMessage);
+    //         } else {
+    //             // Remove the affected row
+    //             $(row).slideUp('fast', function() {
+    //                 $(this).remove();
+    //             });
+    //             gdn.processTargets(json.Targets);
+    //         }
+    //     }
+    // });
 
 //   var gettingNew = 0;
 //   var getNew = function() {

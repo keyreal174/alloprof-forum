@@ -19,7 +19,7 @@ use Vanilla\SchemaFactory;
 class DiscussionController extends VanillaController {
 
     /** @var array Models to include. */
-    public $Uses = ['DiscussionModel', 'CategoryModel', 'CommentModel', 'Form', 'UserModel', 'ActivityModel'];
+    public $Uses = ['DiscussionModel', 'CategoryModel', 'CommentModel', 'Form', 'UserModel', 'ActivityModel', 'LogModel'];
 
     /** @var array Unique identifier. */
     public $CategoryID;
@@ -894,6 +894,8 @@ class DiscussionController extends VanillaController {
                 $this->Form->addError('Failed to delete discussion');
             }
 
+            $this->LogModel->delete(['RecordID' => $discussionID]);
+
             if ($this->Form->errorCount() == 0) {
                 \Gdn::config()->touch([
                     'Preferences.Popup.Delete' => 2,
@@ -906,11 +908,7 @@ class DiscussionController extends VanillaController {
                     "RecordType" => "Delete",
                     "RecordID" => $discussionID,
                     "Route" => discussionUrl($discussion, "", "/"),
-                    "Data" => [
-                        "Name" => $discussion->Name,
-                        "Category" => $discussion->Category,
-                        "Text" => $text
-                    ],
+                    "Story" => $text,
                 ];
 
                 $ActivityModel = new ActivityModel();
@@ -986,112 +984,115 @@ class DiscussionController extends VanillaController {
         $validUser = $session->UserID > 0 && $session->validateTransientKey($transientKey);
         $discussion = "";
         $comment = $this->CommentModel->getID($commentID);
+        if ($this->Form->authenticatedPostBack()) {
 
-        if ($validCommentID && $validUser) {
-            // Get comment and discussion data
-            $discussionID = val('DiscussionID', $comment);
-            $discussion = $this->DiscussionModel->getID($discussionID);
+            if ($validCommentID && $validUser) {
+                // Get comment and discussion data
+                $discussionID = val('DiscussionID', $comment);
+                $discussion = $this->DiscussionModel->getID($discussionID);
 
-            if ($comment && $discussion) {
-                $defaultTarget = discussionUrl($discussion);
+                if ($comment && $discussion) {
+                    $defaultTarget = discussionUrl($discussion);
 
-                // Make sure comment is this user's or they have Delete permission.
-                $groupDelete = false;
-                if ($comment->InsertUserID != $session->UserID || !c('Vanilla.Comments.AllowSelfDelete')) {
-                    if (!is_null($discussion->GroupID)) {
-                        $groupModel = new GroupModel;
-                        $groupDelete = $groupModel->canModerate($discussion->GroupID, $session->UserID);
+                    // Make sure comment is this user's or they have Delete permission.
+                    $groupDelete = false;
+                    if ($comment->InsertUserID != $session->UserID || !c('Vanilla.Comments.AllowSelfDelete')) {
+                        if (!is_null($discussion->GroupID)) {
+                            $groupModel = new GroupModel;
+                            $groupDelete = $groupModel->canModerate($discussion->GroupID, $session->UserID);
+                        }
+                        if (!$groupDelete) {
+                            $this->categoryPermission($discussion->CategoryID, 'Vanilla.Comments.Delete');
+                        }
                     }
-                    if (!$groupDelete) {
+
+                    // Make sure that content can (still) be edited.
+                    $editTimeout = 0;
+                    if (!CommentModel::canEdit($comment, $editTimeout, $discussion) && !$groupDelete) {
                         $this->categoryPermission($discussion->CategoryID, 'Vanilla.Comments.Delete');
                     }
-                }
 
-                // Make sure that content can (still) be edited.
-                $editTimeout = 0;
-                if (!CommentModel::canEdit($comment, $editTimeout, $discussion) && !$groupDelete) {
-                    $this->categoryPermission($discussion->CategoryID, 'Vanilla.Comments.Delete');
-                }
+                    // Delete the comment.
+                    if (!$this->CommentModel->deleteID($commentID)) {
+                        $this->Form->addError('Failed to delete comment');
+                    }
 
-                // Delete the comment.
-                if (!$this->CommentModel->deleteID($commentID)) {
-                    $this->Form->addError('Failed to delete comment');
+                    $this->LogModel->delete(['RecordID' => $commentID]);
+                } else {
+                    $this->Form->addError('Invalid comment');
                 }
             } else {
-                $this->Form->addError('Invalid comment');
+                $this->Form->addError('ErrPermission');
             }
-        } else {
-            $this->Form->addError('ErrPermission');
-        }
 
-        // Redirect
-        if ($this->_DeliveryType == DELIVERY_TYPE_ALL) {
-            $target = getIncomingValue('Target', $defaultTarget);
-            redirectTo($target);
-        }
+            // Redirect
+            if ($this->_DeliveryType == DELIVERY_TYPE_ALL) {
+                $target = getIncomingValue('Target', $defaultTarget);
+                redirectTo($target);
+            }
 
-        if ($this->Form->errorCount() > 0) {
-            $this->setJson('ErrorMessage', $this->Form->errors());
-        } else {
-            \Gdn::config()->touch([
-                'Preferences.Popup.Delete' => 2,
-            ]);
-            $headlineFormat = sprintf(t('Your explanation has been deleted by a moderator: <b>"%s"</b>.'), $this->Form->getFormValue('DeleteMessage'));
-            $data = [
-                "ActivityType" => "Delete",
-                "NotifyUserID" => $comment->InsertUserID,
-                "HeadlineFormat" => $headlineFormat,
-                "RecordType" => "Delete",
-                "RecordID" => $commentID,
-                "Route" => commentUrl($comment, "", "/"),
-                "Data" => [
-                    "Name" => 'comment',
-                ],
-            ];
+            if ($this->Form->errorCount() > 0) {
+                $this->setJson('ErrorMessage', $this->Form->errors());
+            } else {
+                \Gdn::config()->touch([
+                    'Preferences.Popup.Delete' => 2,
+                ]);
+                $headlineFormat = sprintf(t('Your explanation has been deleted by a moderator: <b>"%s"</b>.'), $this->Form->getFormValue('DeleteMessage'));
+                $data = [
+                    "ActivityType" => "Delete",
+                    "NotifyUserID" => $comment->InsertUserID,
+                    "HeadlineFormat" => $headlineFormat,
+                    "RecordType" => "Delete",
+                    "RecordID" => $commentID,
+                    "Route" => commentUrl($comment, "", "/"),
+                    "Story" => $headlineFormat,
+                ];
 
-            $ActivityModel = new ActivityModel();
-            $ActivityModel->queue($data, 'Delete');
-            $ActivityModel->saveQueue();
+                $ActivityModel = new ActivityModel();
+                $ActivityModel->queue($data, 'Delete');
+                $ActivityModel->saveQueue();
 
-            // send email to discussion owner
-            $commentInsertUser = $this->UserModel->getID($comment->InsertUserID);
-            $userPrefs = dbdecode($commentInsertUser->Preferences);
+                // send email to discussion owner
+                $commentInsertUser = $this->UserModel->getID($comment->InsertUserID);
+                $userPrefs = dbdecode($commentInsertUser->Preferences);
 
-            if (val("Email.CustomNotification", $userPrefs)) {
-                $UserMetaData = Gdn::userModel()->getMeta($comment->InsertUserID, 'Profile.%', 'Profile.');
+                if (val("Email.CustomNotification", $userPrefs)) {
+                    $UserMetaData = Gdn::userModel()->getMeta($comment->InsertUserID, 'Profile.%', 'Profile.');
 
-                $username = $UserMetaData['DisplayName'] ?? "";
-                $message = Gdn_Format::to($comment->Body, 'Rich');
-                $address = $commentInsertUser->Email;
-                $subject = "Objet - Oups! Ton explication a été refusée.";
+                    $username = $UserMetaData['DisplayName'] ?? "";
+                    $message = Gdn_Format::to($comment->Body, 'Rich');
+                    $address = $commentInsertUser->Email;
+                    $subject = "Objet - Oups! Ton explication a été refusée.";
 
-                $emailer = new Gdn_Email();
-                $email = $emailer->getEmailTemplate();
-                $email = $email->setView('comment-delete-email');
-                $email->setUsername($username);
-                $email->setBoxText($message);
-                $email->setReason('Ce n’est pas grave, tu peux réessayer.');
-                $emailer = $emailer->setEmailTemplate($email);
-                $emailer->to($address);
-                $emailer->subject($subject);
+                    $emailer = new Gdn_Email();
+                    $email = $emailer->getEmailTemplate();
+                    $email = $email->setView('comment-delete-email');
+                    $email->setUsername($username);
+                    $email->setBoxText($message);
+                    $email->setReason($this->Form->getFormValue('DeleteMessage'));
+                    $emailer = $emailer->setEmailTemplate($email);
+                    $emailer->to($address);
+                    $emailer->subject($subject);
 
-                try {
-                    if ($emailer->send()) {
-                        $this->informMessage(t("The email has been sent."));
-                    } else {
-                        $this->Form->addError(t('Error sending email. Please review the addresses and try again.'));
-                    }
-                } catch (Exception $e) {
-                    if (debug()) {
-                        throw $e;
+                    try {
+                        if ($emailer->send()) {
+                            $this->informMessage(t("The email has been sent."));
+                        } else {
+                            $this->Form->addError(t('Error sending email. Please review the addresses and try again.'));
+                        }
+                    } catch (Exception $e) {
+                        if (debug()) {
+                            throw $e;
+                        }
                     }
                 }
-            }
 
-            $this->jsonTarget("#Comment_$commentID", '', 'SlideUp');
+                $this->jsonTarget("#Comment_$commentID", '', 'SlideUp');
+            }
         }
 
-        $this->render();
+        $this->setData('Title', t('Delete Post'));
+        $this->render('delete');
     }
 
     /**
