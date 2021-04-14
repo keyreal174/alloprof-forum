@@ -110,7 +110,7 @@
             <img src="https://i.ibb.co/qNxsqk3/Illustraiton.png" alt="Illustraiton" border="0">
             <div style="background-color: #05BF8E; height: 4px; width: 90%; margin-bottom: 24px;"></div>
 
-            <a href="https://www.alloprof.qc.ca/zonedentraide" class="black--text" style="font-size: 12px;"><i>Se désabonner</i></a>
+            <a href="https://www.alloprof.qc.ca/zonedentraide<?php echo ($this->Data["email"]["unsubscribeLink"]) ?>" class="black--text" style="font-size: 12px;"><em>Se désabonner</em></a>
 
             <p class="green-text" style="text-decoration: none; font-size: 12px; margin-top: 40px;margin-bottom: 28px; color: #05BF8E!important;">Suivez nous sur les réseaux sociaux : </p>
 

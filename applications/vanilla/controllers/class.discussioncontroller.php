@@ -933,6 +933,7 @@ class DiscussionController extends VanillaController {
                     $email->setUsername($username);
                     $email->setBoxText($message);
                     $email->setReason($this->Form->getFormValue('DeleteMessage'));
+                    $email->setUnsubscribeLink($discussion->InsertUserID);
                     $emailer = $emailer->setEmailTemplate($email);
                     $emailer->to($address);
                     $emailer->subject($subject);
@@ -1070,6 +1071,7 @@ class DiscussionController extends VanillaController {
                     $email->setUsername($username);
                     $email->setBoxText($message);
                     $email->setReason($this->Form->getFormValue('DeleteMessage'));
+                    $email->setUnsubscribeLink($comment->InsertUserID);
                     $emailer = $emailer->setEmailTemplate($email);
                     $emailer->to($address);
                     $emailer->subject($subject);
@@ -1518,6 +1520,7 @@ body { background: transparent !important; }
                 $email->setUsername($username);
                 $email->setBoxText($message);
                 $email->setDiscussionLink($discussionLink);
+                $email->setUnsubscribeLink($Discussion->InsertUserID);
                 $emailer = $emailer->setEmailTemplate($email);
                 $emailer->to($address);
                 $emailer->subject($subject);
