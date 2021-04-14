@@ -108,7 +108,7 @@ class NotificationsController extends Gdn_Controller {
             $link = url($activity['Route']);
 
             $verifiedIcon='';
-            $verified = $activity['Verified'] && $activity['ActivityTypeID'] == 30;
+            $verified = $activity['Data']['Verified'];
 
             if($verified) {
                 $verifiedIcon = '<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
