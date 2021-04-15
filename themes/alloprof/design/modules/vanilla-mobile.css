@@ -188,6 +188,7 @@
         text-align: center;
         font-size: 13px;
         line-height: 18px;
+        flex: 1;
     }
 
     .Navigation-linkContainer svg {
@@ -393,7 +394,7 @@
         margin: 0 !important;
     }
     .Navigation-linkContainer.mobile {
-        display: block;
+        display: flex;
     }
     .Navigation-linkContainer:after {
         content: none;
