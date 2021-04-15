@@ -1852,3 +1852,11 @@ $Definition['The question is already followed'] = 'La question est déjà suivie
 $Definition['Salvation! Happy to see you!'] = 'Salut! Content de te voir!';
 $Definition['Alloprof Home'] = 'Accueil Alloprof';
 $Definition['Alloprof 100% solutions'] = 'Alloprof 100% solutions';
+
+$Definition['Password does not meet minimal safety requirements'] = 'Le mot de passe n\'est pas sécuritaire';
+$Definition['E-mail is invalid'] = 'Le courriel est invalide';
+$Definition['Passwords do not match'] = 'Les mots de passe ne se correspondent pas';
+$Definition['Wrong Password'] = 'Mauvais mot de passe';
+$Definition['Not all fields filled out'] = 'Tous les champs ne sont pas complétés';
+$Definition['E-mail is already used by another account'] = 'L\'e-mail est déjà utilisé par un autre compte';
+$Definition['E-mail address doesn’t exist in the system'] = 'L\'adresse e-mail n\'existe pas dans le système';
