@@ -148,7 +148,7 @@
         if (!/\S+@\S+\.\S+/.test(email)) {
           error = gdn.definition('EmailInvalid');
         } else if (!/^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9!$%@#£€*?&-_]+){8,}$/.test(password)) {
-          error = gdn.definition('PasswordSaftey');
+          error = gdn.definition('PasswordSafety');
         } else if (password !== confirmPassword) {
           error = gdn.definition('PasswordNotMatch');
         }

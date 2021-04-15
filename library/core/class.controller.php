@@ -694,8 +694,8 @@ class Gdn_Controller extends Gdn_Pluggable {
             $this->_Definitions['EmailInvalid'] = t('E-mail is invalid');
         }
 
-        if (!array_key_exists('PasswordSaftey', $this->_Definitions)) {
-            $this->_Definitions['PasswordSaftey'] = t('Password does not meet minimal safety requirements');
+        if (!array_key_exists('PasswordSafety', $this->_Definitions)) {
+            $this->_Definitions['PasswordSafety'] = t('Password does not meet minimal safety requirements');
         }
 
         if (!array_key_exists('PasswordNotMatch', $this->_Definitions)) {
