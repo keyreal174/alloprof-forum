@@ -435,11 +435,9 @@ class DiscussionController extends VanillaController {
         $DiscussionMeta = Gdn::userModel()->getMeta($this->Discussion->InsertUserID, 'Profile.%', 'Profile.');
 
         if ($this->UserRole == TEACHER_ROLE) {
-            // $bannerModule = new BannerModule('Home', 'Home', '', 'Mutual Aid Zone', "Welcome to the Mutual Aid Zone! <br/> Want to help the students? It's this way!", "", "Teacher");
-            $discussionsFooterModule = new DiscussionsFooterModule(false, "You have the same problem and the explanations don't help?");
-            $this->addModule($discussionsFooterModule);
+            // $discussionsFooterModule = new DiscussionsFooterModule(false, "You have the same problem and the explanations don't help?");
+            // $this->addModule($discussionsFooterModule);
         } else {
-            // $bannerModule = new BannerModule('Home', 'Home', '', 'Mutual Aid Zone', 'Welcome to the Mutual Aid Zone! <br/> Do you have a question? Here are the explanations!', '');
             $this->addModule('ProfileFilterModule');
         }
 
