@@ -17,10 +17,9 @@
             var err = "";
             const { message, code } = error;
             if (code === "auth/user-not-found") {
-                error = gdn.definition('EmailNotExist');
+                err = gdn.definition('EmailNotExist');
             } else if (code === "auth/wrong-password") {
-                err = "Wrong Password";
-                error = gdn.definition('PasswordNotCorrect');
+                err = gdn.definition('PasswordNotCorrect');
             }
             addErrorMessage(err);
             $('.SignInStudentPopup input[type=submit]').attr('disabled', false);
