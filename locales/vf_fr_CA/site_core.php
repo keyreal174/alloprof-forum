@@ -1847,6 +1847,7 @@ $Definition['The oldest first'] = 'Les plus anciennes d’abord';
 $Definition["You are about to delete the post. It will no longer be visible to users of the Mutual Aid Zone. <br/><br/>You can leave a comment on the reason for the deletion to the author."] = "Vous êtes sur le point de supprimer la publication. Elle ne sera plus visible par les utilisateurs de la Zone d’entraide.<br/><br/>Vous pouvez laisser un commentaire sur les raisons de la suppression à l’auteur.";
 $Definition['Giving an explanation'] = 'Donner une explication';
 $Definition['Student Question'] = 'Question de l’élève';
+$Definition['Explanation from '] = 'Explication de ';
 $Definition['Home'] = 'Accueil';
 $Definition['The question is already followed'] = 'La question est déjà suivie';
 $Definition['Salvation! Happy to see you!'] = 'Salut! Content de te voir!';

@@ -1377,7 +1377,7 @@ class PostController extends VanillaController {
                             "ActivityTypeID" => 30,
                             'NotifyUserID' => $Discussion->InsertUserID,
                             "ActivityUserID" => $Comment->InsertUserID,
-                            "HeadlineFormat" => t('Réponse de '.$username),
+                            "HeadlineFormat" => t('Explanation from ').$username,
                             "RecordType" => "Comment",
                             "RecordID" => $Comment->CommentID,
                             "Route" => CommentModel::commentUrl($Comment),
