@@ -1368,15 +1368,16 @@ class PostController extends VanillaController {
                             $textstring = substr($textstring, 0, Gdn::config('Vanilla.Notify.TextLength')).'...';
                         }
 
+                        $UserMetaData = Gdn::userModel()->getMeta($Comment->InsertUserID, 'Profile.%', 'Profile.');
+
+                        $username = $UserMetaData['DisplayName'] ?? "";
+
                         $activity = [
                             "ActivityType" => "NewComment",
                             "ActivityTypeID" => 30,
                             'NotifyUserID' => $Discussion->InsertUserID,
                             "ActivityUserID" => $Comment->InsertUserID,
-                            "HeadlineFormat" => t(
-                                "HeadlineFormat.Comment",
-                                'Response from {ActivityUserID,user}'
-                            ),
+                            "HeadlineFormat" => t('Réponse de '.$username),
                             "RecordType" => "Comment",
                             "RecordID" => $Comment->CommentID,
                             "Route" => CommentModel::commentUrl($Comment),
