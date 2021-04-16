@@ -94,8 +94,8 @@
 
             <h2 style="font-size: 21px; line-height: 25px; margin: 32px;">Bonne nouvelle!</h2>
 
-            <p class="normal-text">Bonjour, “<?php echo ($this->Data["email"]["username"]) ?>”! <br>
-                Une de tes questions a reçu une explication approuvée par Alloprof!</p>
+            <p class="normal-text">Bonjour, <?php echo ($this->Data["email"]["username"]) ?>! <br>
+            Une de tes questions a reçu une explication approuvée par Alloprof :</p>
 
             <div class="text-box">
                 <div class="normal-text"><?php echo ($this->Data["email"]["boxtext"]) ?></div>
