@@ -97,7 +97,7 @@
             <p class="normal-text">Bonjour, <?php echo ($this->Data["email"]["username"]) ?>!<br> Malheureusement, ta question a été refusée pour la raison suivante : <br><br>
             <?php echo ($this->Data["email"]["reason"]) ?></p>
 
-            <p class="normal-text">Voici la question que tu avais posée :</p>
+            <p class="normal-text" style="margin-top: 32px;">Voici la question que tu avais posée :</p>
 
             <div class="text-box">
                 <div class="normal-text">
