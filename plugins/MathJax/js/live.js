@@ -12,9 +12,13 @@
  */
 
 jQuery(document).on('CommentAdded', function () {
-    MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+    MathJax.typesetPromise();
 });
 
 jQuery('form').on('PreviewLoaded', function() {
-    MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+    MathJax.typesetPromise();
 });
+
+jQuery(document).on('CommentPagingComplete', function() {
+    MathJax.typesetPromise();
+})
