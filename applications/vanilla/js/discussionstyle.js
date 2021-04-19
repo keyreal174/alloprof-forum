@@ -52,7 +52,7 @@ var handleOverflowedContent = function () {
                 }
                 $(this).children().eq(acrossIndex + 1).text('...');
             } else {
-                if (crossedElementClass.indexOf('embedImage') > -1) {
+                if (crossedElementClass && crossedElementClass.indexOf('embedImage') > -1) {
                     crossedElement.css({
                         'max-height': visibleHeight + 'px',
                     });
