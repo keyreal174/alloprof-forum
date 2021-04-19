@@ -33,6 +33,8 @@ class MathJaxPlugin extends Gdn_Plugin {
         $mathJaxConfig = <<<MATHJAX
         <script type="text/x-mathjax-config">
             MathJax.Hub.Config({
+                "HTML-CSS": { linebreaks: { automatic: true } },
+                SVG: { linebreaks: { automatic: true } },
                 tex2jax: {
                     inlineMath: [ ['$$','$$'], ['\\(','\\)'] ]
                 },
@@ -58,6 +60,8 @@ class MathJaxPlugin extends Gdn_Plugin {
         $mathJaxConfig = <<<MATHJAX
         <script type="text/x-mathjax-config">
             MathJax.Hub.Config({
+                "HTML-CSS": { linebreaks: { automatic: true } },
+                SVG: { linebreaks: { automatic: true } },
                 tex2jax: {
                     inlineMath: [ ['$$','$$'], ['\\(','\\)'] ]
                 },
@@ -83,6 +87,8 @@ class MathJaxPlugin extends Gdn_Plugin {
         $mathJaxConfig = <<<MATHJAX
         <script type="text/x-mathjax-config">
             MathJax.Hub.Config({
+                "HTML-CSS": { linebreaks: { automatic: true } },
+                SVG: { linebreaks: { automatic: true } },
                 tex2jax: {
                     inlineMath: [ ['$$','$$'], ['\\(','\\)'] ]
                 },
@@ -108,6 +114,8 @@ class MathJaxPlugin extends Gdn_Plugin {
         $mathJaxConfig = <<<MATHJAX
         <script type="text/x-mathjax-config">
             MathJax.Hub.Config({
+                "HTML-CSS": { linebreaks: { automatic: true } },
+                SVG: { linebreaks: { automatic: true } },
                 tex2jax: {
                     inlineMath: [ ['$$','$$'], ['\\(','\\)'] ]
                 },
