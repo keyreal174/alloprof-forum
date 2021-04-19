@@ -50,7 +50,19 @@
     display: none !important;
 }
 
+.PageNotFound.BanPage {
+    display: none;
+}
+
 @media screen and (max-width: 958px) {
+    .PageNotFound.BanPage {
+        display: block;
+    }
+
+    .BanPopup {
+        display: none;
+    }
+
     .PageNotFound .Content .SplashInfo #Message {
         font-size: 15px;
     }

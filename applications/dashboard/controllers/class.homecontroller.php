@@ -248,7 +248,7 @@ class HomeController extends Gdn_Controller {
         if ($this->deliveryMethod() == DELIVERY_METHOD_XHTML) {
             $this->clearNavigationPreferences();
             safeHeader("HTTP/1.0 401", true, 401);
-            $this->render();
+            redirectTo('/entry/ban');
         } else {
             $this->renderException(permissionException());
         }
