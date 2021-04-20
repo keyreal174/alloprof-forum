@@ -1321,7 +1321,7 @@ class CommentModel extends Gdn_Model implements FormatFieldInterface, EventFromR
                     $fields['CategoryID'] = val('CategoryID', $discussion);
                     $fields['CommentID'] = $commentID;
 
-                    $logRow = Gdn::sql()->getWhere('Log', ['Operation' => 'Pending', 'RecordID' => $commentID])->firstRow(DATASET_TYPE_ARRAY);
+                    $logRow = Gdn::sql()->getWhere('Log', ['Operation' => 'Pending', 'RecordID' => $commentID, 'RecordType' => 'Comment'])->firstRow(DATASET_TYPE_ARRAY);
                     $logData = array_merge($fields, ['InsertUserID' => $insertUserID, 'DateInserted' => $dateInserted]);
 
                     if(!$logRow) {

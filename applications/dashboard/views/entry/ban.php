@@ -1,18 +1,18 @@
 
 <?php
-    // $socialLink = anchor(
-    //     '',
-    //     'entry/banmodal',
-    //     'BanPopup Hidden',
-    //     ['rel' => 'nofollow']
-    // );
+    $socialLink = anchor(
+        '',
+        'entry/banmodal',
+        'BanPopup Hidden',
+        ['rel' => 'nofollow']
+    );
 
-    // echo wrap($socialLink, 'span', ['class' => 'MItem BanLink']);
+    echo wrap($socialLink, 'span', ['class' => 'MItem BanLink']);
 ?>
 
 
 <?php if (!defined('APPLICATION')) exit(); ?>
-<div class="PageNotFound">
+<div class="PageNotFound BanPage">
     <div class="Content">
     <div class="Center SplashInfo">
         <img src=<?php echo url("/themes/alloprof/design/images/ban.svg") ?> />

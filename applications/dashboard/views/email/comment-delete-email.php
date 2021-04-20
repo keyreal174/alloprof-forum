@@ -95,8 +95,11 @@
 
             <h2 style="font-size: 21px; line-height: 25px; margin: 32px;">Ce n'est pas grave, tu peux réessayer.</h2>
 
-            <p class="normal-text">Bonjour, “<?php echo ($this->Data["email"]["username"]) ?>”! Malheureusement, ton explication a été refusée pour la raison suivante : <br><br>
-            <?php echo ($this->Data["email"]["reason"]) ?></p>
+            <p class="normal-text">Bonjour, <?php echo ($this->Data["email"]["username"]) ?>! <br>
+            Malheureusement, ton explication a été refusée pour la raison suivante : <br><br>
+            <i><?php echo ($this->Data["email"]["reason"]) ?></i></p>
+
+            <p class="normal-text" style="margin-top: 32px;">Voici l'explication que tu avais proposée :</p>
 
             <div class="text-box">
                 <div class="normal-text">
@@ -110,7 +113,7 @@
             <img src="https://i.ibb.co/qNxsqk3/Illustraiton.png" alt="Illustraiton" border="0">
             <div style="background-color: #05BF8E; height: 4px; width: 90%; margin-bottom: 24px;"></div>
 
-            <a href="https://www.alloprof.qc.ca/zonedentraide" class="black--text" style="font-size: 12px;"><i>Se désabonner</i></a>
+            <a href="https://www.alloprof.qc.ca/zonedentraide<?php echo ($this->Data["email"]["unsubscribeLink"]) ?>" class="black--text" style="font-size: 12px;"><em>Se désabonner</em></a>
 
             <p class="green-text" style="text-decoration: none; font-size: 12px; margin-top: 40px;margin-bottom: 28px; color: #05BF8E!important;">Suivez nous sur les réseaux sociaux : </p>
 

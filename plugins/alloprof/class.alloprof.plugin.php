@@ -68,6 +68,23 @@ class AlloprofPlugin extends Gdn_Plugin {
         //$Sql->update('User')
         //   ->set('Preferences', $preferences)
         //   ->put();
+
+        // NOTE: disabled as was one-time script to fix existing users
+        //// Set Published as true in comments table for the records which are not in the log model
+
+        $data = $Sql->query("SELECT COUNT(vanilla_dev.GDN_Log.LogID) AS Cnt, vanilla_dev.GDN_Comment.CommentID FROM vanilla_dev.GDN_Comment
+        LEFT JOIN vanilla_dev.GDN_Log on vanilla_dev.GDN_Comment.CommentID = vanilla_dev.GDN_Log.RecordID AND vanilla_dev.GDN_Log.RecordType = 'Comment'
+        WHERE vanilla_dev.GDN_Comment.Published IS false
+        GROUP BY vanilla_dev.GDN_Comment.CommentID")->resultArray();
+
+        foreach ($data as $row) {
+            if ($row["Cnt"] == 0) {
+                $Sql->update('Comment')
+                    ->set('Published', TRUE)
+                    ->where('CommentID', $row["CommentID"])
+                    ->put();
+            }
+        }
     }
 
 }

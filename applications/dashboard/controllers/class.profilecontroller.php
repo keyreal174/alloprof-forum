@@ -2340,4 +2340,17 @@ EOT;
         $this->setData('Users', $users);
         $this->render();
     }
+
+    public function unsubscribe($id, $hash) {
+        if (sha1($id . ':G76bLyJC9c2tgbuX') != $hash) {
+            throw notFoundException();
+        }
+
+        $metaPrefs = UserModel::getMeta($id, 'Preferences.%', 'Preferences.');
+        $metaPrefs['Email.CustomNotification'] = false;
+        $this->UserModel->savePreference($id, $metaPrefs);
+        UserModel::setMeta($id, $metaPrefs, 'Preferences.');
+        $this->View = 'unsubscribe';
+        $this->render();
+    }
 }

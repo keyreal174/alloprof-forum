@@ -69,8 +69,13 @@
             axios.post(ssoUrl, data)
                 .then(response => {
                     window.location.href = gdn.url("/entry/jsconnect-redirect?client_id=alloprof" + saveURL);
-                });
-        });
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+        }).catch(err => {
+            console.log(err);
+        })
     };
 
     const validateEmail = (email) => {

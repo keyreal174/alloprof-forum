@@ -1,3 +1,5 @@
 jQuery(document).ready(function($) {
-    $( ".BanPopup" ).trigger( "click" );
+    if ($(window).width() > 959) {
+        $( ".BanPopup" ).trigger( "click" );
+     }
 });

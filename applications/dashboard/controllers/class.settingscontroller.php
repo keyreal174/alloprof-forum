@@ -1046,6 +1046,8 @@ class SettingsController extends DashboardController {
         }
         $message = t('Test Email Message');
 
+        $email->setView('discussion-delete-email');
+
         $email->setMessage($message)
             ->setTitle(t('Test Email'))
             ->setButton(externalUrl('/'), t('Check it out'));

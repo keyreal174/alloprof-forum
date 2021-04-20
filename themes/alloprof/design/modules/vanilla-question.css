@@ -96,8 +96,32 @@ li.Item-Search .AuthWrapper,
 .Item-Search .Item-Body .Summary p {
     margin: 0;
     font-size: 15px !important;
-    line-height: 18px;
+    line-height: inherit;
     color: black;
+}
+
+.MessageList .Item-BodyWrap .Message.userContent p + p,
+.DataList.Discussions .Item-BodyWrap .Message.userContent p + p,
+.Item-Search .Item-Body .Summary p + p {
+    margin-top: 14px;
+}
+
+.MessageList .Item-BodyWrap .Message.userContent p + div.embedLink,
+.DataList.Discussions .Item-BodyWrap .Message.userContent p + div.embedLink,
+.Item-Search .Item-Body .Summary p + div.embedLink {
+    margin-top: 14px;
+}
+
+.MessageList .Item-BodyWrap .Message.userContent p + div.embedImage,
+.DataList.Discussions .Item-BodyWrap .Message.userContent p + div.embedImage,
+.Item-Search .Item-Body .Summary p + div.embedImage {
+    margin-top: 24px;
+}
+
+.MessageList .Item-BodyWrap .Message.userContent div.embedImage,
+.DataList.Discussions .Item-BodyWrap .Message.userContent div.embedImage,
+.Item-Search .Item-Body .Summary div.embedImage {
+    margin-bottom: 24px;
 }
 
 .userContent.Message {
