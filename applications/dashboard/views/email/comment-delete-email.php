@@ -97,7 +97,7 @@
 
             <p class="normal-text">Bonjour, <?php echo ($this->Data["email"]["username"]) ?>! <br>
             Malheureusement, ton explication a été refusée pour la raison suivante : <br><br>
-            <?php echo ($this->Data["email"]["reason"]) ?></p>
+            <i><?php echo ($this->Data["email"]["reason"]) ?></i></p>
 
             <p class="normal-text" style="margin-top: 32px;">Voici l'explication que tu avais proposée :</p>
 

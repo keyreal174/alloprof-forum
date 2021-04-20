@@ -95,7 +95,7 @@
             <h2 style="font-size: 21px; line-height: 25px; margin: 32px;">Pas de stress, tu peux la reposer.</h2>
 
             <p class="normal-text">Bonjour, <?php echo ($this->Data["email"]["username"]) ?>!<br> Malheureusement, ta question a été refusée pour la raison suivante : <br><br>
-            <?php echo ($this->Data["email"]["reason"]) ?></p>
+            <i><?php echo ($this->Data["email"]["reason"]) ?></i></p>
 
             <p class="normal-text" style="margin-top: 32px;">Voici la question que tu avais posée :</p>
 
