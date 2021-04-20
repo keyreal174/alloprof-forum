@@ -95,8 +95,11 @@
 
             <h2 style="font-size: 21px; line-height: 25px; margin: 32px;">Ce n'est pas grave, tu peux réessayer.</h2>
 
-            <p class="normal-text">Bonjour, “<?php echo ($this->Data["email"]["username"]) ?>”! Malheureusement, ton explication a été refusée pour la raison suivante : <br><br>
+            <p class="normal-text">Bonjour, <?php echo ($this->Data["email"]["username"]) ?>! <br>
+            Malheureusement, ton explication a été refusée pour la raison suivante : <br><br>
             <?php echo ($this->Data["email"]["reason"]) ?></p>
+
+            <p class="normal-text" style="margin-top: 32px;">Voici l'explication que tu avais proposée :</p>
 
             <div class="text-box">
                 <div class="normal-text">
