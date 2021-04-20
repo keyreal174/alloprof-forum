@@ -10,21 +10,24 @@
     // student signin/signup
     var saveURL = '';
     const signIn = (email, password) => {
+        $('.SignInStudentPopup input[type=submit]').attr('disabled', 'disabled');
         auth.signInWithEmailAndPassword(email, password).then(res => {
             ssoLogin(res.user);
         }).catch(error => {
             var err = "";
             const { message, code } = error;
             if (code === "auth/user-not-found") {
-                err = "E-mail address doesn’t exist in the system";
+                err = gdn.definition('EmailNotExist');
             } else if (code === "auth/wrong-password") {
-                err = "Wrong Password";
+                err = gdn.definition('PasswordNotCorrect');
             }
             addErrorMessage(err);
+            $('.SignInStudentPopup input[type=submit]').attr('disabled', false);
         });
     };
 
     const signup = (email, password, grade, displayName) => {
+        $('.registerPopup input[type=submit]').attr('disabled', 'disabled');
         const apiUrl = "https://www.alloprof.qc.ca/ws/services/accnt/createUser";
         const user = {
             email,
@@ -43,11 +46,13 @@
                     ssoLogin(res.user);
                 }).catch(error => {
                     addSignUpErrorMessage("Problème technique");
+                    $('.registerPopup input[type=submit]').attr('disabled', false);
                 });
             })
             .catch(error => {
+                $('.registerPopup input[type=submit]').attr('disabled', false);
                 if (error.response && error.response.data.code == "auth/email-already-exists") {
-                    error = "E-mail is already used by another account";
+                    error = gdn.definition('EmailExist');
                     addSignUpErrorMessage(error);
                 } else {
                     addSignUpErrorMessage("Problème technique");
@@ -111,12 +116,12 @@
         }
     }
 
-    $(document).on('click', '.SignInStudentPopup input[type=submit]', function() {
+    const signinMethod = () => {
         var email = $('.SignInStudentPopup #Form_Email').val();
         var password = $('.SignInStudentPopup #Form_Password').val();
         var error = "";
         if (!email || !password) {
-            error = "Not all fields filled out";
+            error = gdn.definition('AllFieldRequire');
             addErrorMessage(error);
         } else {
             if (validateEmail(email)) {
@@ -124,11 +129,36 @@
                 $('.SignInStudentPopup .ErrorMessage .Messages').remove();
                 signIn(email, password);
             } else {
-                error = "E-mail is not correctly written";
+                error = gdn.definition('EmailInvalid');
                 addErrorMessage(error);
             }
         }
-    });
+    }
+
+    const signupMethod = () => {
+        var username = $('.registerPopup #Form_Name').val();
+        var email = $('.registerPopup #Form_Email').val();
+        var password = $('.registerPopup #Form_Password').val();
+        var confirmPassword = $('.registerPopup #Form_PasswordMatch').val();
+        var grade = $('.registerPopup #Form_Grade').val();
+        var displayName = $('.registerPopup #Form_DisplayName').val();
+
+        var error = '';
+        if (!/\S+@\S+\.\S+/.test(email)) {
+          error = gdn.definition('EmailInvalid');
+        } else if (!/^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9!$%@#£€*?&-_]+){8,}$/.test(password)) {
+          error = gdn.definition('PasswordSafety');
+        } else if (password !== confirmPassword) {
+          error = gdn.definition('PasswordNotMatch');
+        }
+
+        if (error) {
+            addSignUpErrorMessage(error);
+        } else {
+            $('.registerPopup .ErrorMessage .Messages').remove();
+            signup(email, password, grade, displayName);
+        }
+    }
 
     $(document).on('keyup', '.registerPopup .InputBox', function() {
         checkAllFilled();
@@ -142,28 +172,23 @@
         checkAllFilled();
     });
 
+    $(document).on('click', '.SignInStudentPopup input[type=submit]', function() {
+        signinMethod();
+    });
+
     $(document).on('click', '.registerPopup input[type=submit]', function() {
-        var username = $('.registerPopup #Form_Name').val();
-        var email = $('.registerPopup #Form_Email').val();
-        var password = $('.registerPopup #Form_Password').val();
-        var confirmPassword = $('.registerPopup #Form_PasswordMatch').val();
-        var grade = $('.registerPopup #Form_Grade').val();
-        var displayName = $('.registerPopup #Form_DisplayName').val();
+        signupMethod();
+    });
 
-        var error = '';
-        if (!/\S+@\S+\.\S+/.test(email)) {
-          error = 'E-mail is not correctly written';
-        } else if (!/^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9!$%@#£€*?&-_]+){8,}$/.test(password)) {
-          error = 'Password does not contain minimal safety requirements';
-        } else if (password !== confirmPassword) {
-          error = 'Passwords do not match';
+    $(document).on('keydown', '.SignInStudentPopup .SingleEntryMethod', function(event) {
+        if (event.keyCode === 13) {
+            signinMethod();
         }
+    });
 
-        if (error) {
-            addSignUpErrorMessage(error);
-        } else {
-            $('.registerPopup .ErrorMessage .Messages').remove();
-            signup(email, password, grade, displayName);
+    $(document).on('keydown', '.registerPopup .FormWrapper', function(event) {
+        if (event.keyCode === 13 && $(".registerPopup input[type=submit]").attr('disabled') !== "disabled") {
+            signupMethod();
         }
     });
     // student signin/signup end

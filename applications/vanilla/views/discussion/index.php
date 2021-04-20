@@ -72,7 +72,7 @@ if(userRoleCheck() != Gdn::config('Vanilla.ExtraRoles.Teacher')
     echo checkAnswer($this->Data['Discussion']);
 }
 
-if (!$this->Data['Discussion']->Published) {
+if (!$this->Data['Discussion']->Published && userRoleCheck() != Gdn::config('Vanilla.ExtraRoles.Teacher')) {
     echo '<div class="question-not-published">';
     echo '<img src="'.url("/themes/alloprof/design/images/question_not_approved.svg").'"/>';
     echo '<p>'.t('Your question will be reviewed by a moderator.').'</p>';

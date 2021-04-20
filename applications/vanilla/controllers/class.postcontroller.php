@@ -1361,6 +1361,37 @@ class PostController extends VanillaController {
 
                         $activityModel = new ActivityModel();
                         $activityModel->save($activity);
+                    } else {
+                         // Add Notification Popup
+                        $textstring = strip_tags(Gdn_Format::to($Comment->Body, $Comment->Format));
+
+                        if(strlen($textstring) > Gdn::config('Vanilla.Notify.TextLength')) {
+                            $textstring = substr($textstring, 0, Gdn::config('Vanilla.Notify.TextLength')).'...';
+                        }
+
+                        $UserMetaData = Gdn::userModel()->getMeta($Comment->InsertUserID, 'Profile.%', 'Profile.');
+
+                        $username = $UserMetaData['DisplayName'] ?? "";
+
+                        $activity = [
+                            "ActivityType" => "NewComment",
+                            "ActivityTypeID" => 30,
+                            'NotifyUserID' => $Discussion->InsertUserID,
+                            "ActivityUserID" => $Comment->InsertUserID,
+                            "HeadlineFormat" => t('Explanation from ').$username,
+                            "RecordType" => "Comment",
+                            "RecordID" => $Comment->CommentID,
+                            "Route" => CommentModel::commentUrl($Comment),
+                            "Story" => $textstring,
+                            "Data" => [
+                                "Verified" => true
+                            ],
+                            'Notified' => ActivityModel::SENT_PENDING,
+                            'Emailed' => ActivityModel::SENT_PENDING
+                        ];
+
+                        $activityModel = new ActivityModel();
+                        $activityModel->save($activity);
                     }
                 } elseif ($CommentID === SPAM || $CommentID === UNAPPROVED) {
                     // $this->StatusMessage = t('Your comment will appear after it is approved.');

@@ -415,6 +415,7 @@ abbr {
     border: none;
     border-radius: 0;
     padding: 0;
+    max-width: 580px;
     /* width: 47% */
     flex: 1;
 }

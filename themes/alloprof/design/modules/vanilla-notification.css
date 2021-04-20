@@ -142,7 +142,7 @@
 }
 
 .InformMessages .InformMessage, .InformMessages .InformMessage:hover {
-    max-width: 600px;
+    max-width: 586px;
 }
 
 .InformMessage .toast-container {
@@ -168,10 +168,12 @@
     font-size: 18px;
     font-weight: bold;
     color: black;
+    display: flex;
+    align-items: center;
 }
 
 .InformMessages .toast-title {
-    margin-bottom: 12px;
+    margin-bottom: 5px;
 }
 
 .InformMessages .toast-title.verified {
@@ -199,7 +201,9 @@
 .InformMessage .toast-text,
 .InformMessage .toast-text * {
     display: inline-block;
-    font-size: 16px !important;
+    font-size: 15px !important;
+    color: black;
+    line-height: 19px;
 }
 
 .InformMessage a.btn-default {

@@ -690,6 +690,38 @@ class Gdn_Controller extends Gdn_Pluggable {
             $this->_Definitions['Search'] = t('Search');
         }
 
+        if (!array_key_exists('EmailInvalid', $this->_Definitions)) {
+            $this->_Definitions['EmailInvalid'] = t('E-mail is invalid');
+        }
+
+        if (!array_key_exists('PasswordSafety', $this->_Definitions)) {
+            $this->_Definitions['PasswordSafety'] = t('Password does not meet minimal safety requirements');
+        }
+
+        if (!array_key_exists('PasswordNotMatch', $this->_Definitions)) {
+            $this->_Definitions['PasswordNotMatch'] = t('Passwords do not match');
+        }
+
+        if (!array_key_exists('PasswordNotCorrect', $this->_Definitions)) {
+            $this->_Definitions['PasswordNotCorrect'] = t('Wrong Password');
+        }
+
+        if (!array_key_exists('AllFieldRequire', $this->_Definitions)) {
+            $this->_Definitions['AllFieldRequire'] = t('Not all fields filled out');
+        }
+
+        if (!array_key_exists('EmailExist', $this->_Definitions)) {
+            $this->_Definitions['EmailExist'] = t('E-mail is already used by another account');
+        }
+
+        if (!array_key_exists('EmailNotExist', $this->_Definitions)) {
+            $this->_Definitions['EmailNotExist'] = t('E-mail address doesn’t exist in the system');
+        }
+
+        if (!array_key_exists('EmailExist', $this->_Definitions)) {
+            $this->_Definitions['EmailExist'] = t('E-mail is already used by another account');
+        }
+
         if (debug()) {
             $this->_Definitions['debug'] = true;
         }
