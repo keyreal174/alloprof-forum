@@ -129,6 +129,7 @@ class LogController extends DashboardController {
                 $email->setUsername($username);
                 $message = "";
                 $email->setReason($deleteMessage);
+                $email->setUnsubscribeLink($log["RecordUserID"]);
 
                 switch ($recordType) {
                     case 'Discussion':

@@ -639,6 +639,35 @@ div[id*="-formattingMenus-component"] {
     padding: 0 45% !important;
 }
 
+.unsubscribe .Frame-menubar, .unsubscribe .sidebar {
+    display: none;
+}
+
+.unsubscribe .Frame-details {
+    margin-top: 216px;
+}
+
+.unsubscribe .Content {
+    text-align: center;
+}
+
+.unsubscribe .Content h3 {
+    margin-top: 42px;
+    margin-bottom: 24px;
+    font-size: 28px;
+    line-height: 31px;
+}
+
+.unsubscribe .Content p {
+    font-size: 15px;
+    line-height: 18px;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.unsubscribe .Frame-footer {
+    display: none;
+
 mjx-container {
     overflow: auto;
     padding-bottom: 5px;

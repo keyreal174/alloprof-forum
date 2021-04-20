@@ -79,6 +79,8 @@ class EmailTemplate extends Gdn_Pluggable implements Gdn_IEmailTemplate {
 
     protected $reason = null;
 
+    protected $unsubscribeLink = null;
+
     // Color properties
 
     /** @var string The hex color code of the text, must include the leading '#'.*/
@@ -167,6 +169,11 @@ class EmailTemplate extends Gdn_Pluggable implements Gdn_IEmailTemplate {
 
     public function setReason($reason) {
         $this->reason = $reason;
+    }
+
+    public function setUnsubscribeLink($UserID) {
+        $hashedString = sha1($UserID . ':G76bLyJC9c2tgbuX');
+        $this->unsubscribeLink = '/profile/unsubscribe?id='.$UserID.'&hash='.$hashedString;
     }
 
     /**

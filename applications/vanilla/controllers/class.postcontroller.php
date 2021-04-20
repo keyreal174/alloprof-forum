@@ -1311,6 +1311,7 @@ class PostController extends VanillaController {
                         $email->setUsername($username);
                         $email->setBoxText($message);
                         $email->setDiscussionLink($discussionLink);
+                        $email->setUnsubscribeLink($Discussion->InsertUserID);
                         $emailer = $emailer->setEmailTemplate($email);
                         $emailer->to($address);
                         $emailer->subject($subject);
