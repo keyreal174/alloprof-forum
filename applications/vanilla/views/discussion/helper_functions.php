@@ -962,7 +962,7 @@ if (!function_exists('writeDiscussionFooter')) :
                     if (!$sender->data('IsAnswer')) {
                         echo '<a class="btn-default" href="'.$discussionUrl.'">'.$commentsLabel.'</a>';
                     } else {
-                        if ($Discussion->InsertUserID === Gdn::session()->UserID) {
+                        if ($Discussion->InsertUserID == Gdn::session()->UserID) {
                             echo '<a class="btn-default not-clickable">'.$commentsLabel.'</a>';
                         } else {
                             echo '<div class="ReplyQuestionButton d-desktop">';

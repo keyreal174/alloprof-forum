@@ -458,51 +458,51 @@ jQuery(document).ready(function($) {
 
 
     // Edit discussion
-    $(document).on('click', 'a.EditDiscussion', function() {
-        var btn = this;
-        var container = $('.ItemDiscussion');
-        $(container).parent().addClass('Editing');
-        $(container).addClass('Editing');
-        var parent = $(container).find('div.Discussion');
-        var msg = $(parent).find('div.Message').first();
-        $(parent).find('div.Meta span:last').after('<span class="TinyProgress">&#160;</span>');
-        if (!parent.find('.EditDiscussionForm').length) {
-            let discussionid = $(btn).attr('href').split("/").pop();
-            let newurl = gdn.url("/post/editDiscussionDetail/" + discussionid);
-            $.ajax({
-                type: "GET",
-                url: newurl,
-                data: 'DeliveryType=VIEW&DeliveryMethod=JSON',
-                dataType: 'json',
-                error: function(xhr) {
-                    gdn.informError(xhr);
-                },
-                success: function(json) {
-                    $(msg).afterTrigger(json.Data);
-                    $(msg).hide();
-                    $(document).trigger('EditDiscussionFormLoaded', [container]);
+    // $(document).on('click', 'a.EditDiscussion', function() {
+    //     var btn = this;
+    //     var container = $('.ItemDiscussion');
+    //     $(container).parent().addClass('Editing');
+    //     $(container).addClass('Editing');
+    //     var parent = $(container).find('div.Discussion');
+    //     var msg = $(parent).find('div.Message').first();
+    //     $(parent).find('div.Meta span:last').after('<span class="TinyProgress">&#160;</span>');
+    //     if (!parent.find('.EditDiscussionForm').length) {
+    //         let discussionid = $(btn).attr('href').split("/").pop();
+    //         let newurl = gdn.url("/post/editDiscussionDetail/" + discussionid);
+    //         $.ajax({
+    //             type: "GET",
+    //             url: newurl,
+    //             data: 'DeliveryType=VIEW&DeliveryMethod=JSON',
+    //             dataType: 'json',
+    //             error: function(xhr) {
+    //                 gdn.informError(xhr);
+    //             },
+    //             success: function(json) {
+    //                 $(msg).afterTrigger(json.Data);
+    //                 $(msg).hide();
+    //                 $(document).trigger('EditDiscussionFormLoaded', [container]);
 
-                    // Dispatch a native event for things that don't use jquery
-                    var event = document.createEvent('CustomEvent');
-                    event.initCustomEvent('X-EditDiscussionFormLoaded', true, false, {});
-                    container[0].dispatchEvent(event);
-                },
-                complete: function() {
-                    $(parent).find('span.TinyProgress').remove();
-                    $(btn).closest('.Flyout').hide().closest('.ToggleFlyout').removeClass('Open');
-                }
-            });
-        } else {
-            resetDiscussionForm($(parent).find('form'));
-            clearDiscussionForm($(parent).find('form'));
-            $(parent).find('div.EditDiscussionForm').remove();
-            $(parent).find('span.TinyProgress').remove();
-            $(msg).show();
-        }
+    //                 // Dispatch a native event for things that don't use jquery
+    //                 var event = document.createEvent('CustomEvent');
+    //                 event.initCustomEvent('X-EditDiscussionFormLoaded', true, false, {});
+    //                 container[0].dispatchEvent(event);
+    //             },
+    //             complete: function() {
+    //                 $(parent).find('span.TinyProgress').remove();
+    //                 $(btn).closest('.Flyout').hide().closest('.ToggleFlyout').removeClass('Open');
+    //             }
+    //         });
+    //     } else {
+    //         resetDiscussionForm($(parent).find('form'));
+    //         clearDiscussionForm($(parent).find('form'));
+    //         $(parent).find('div.EditDiscussionForm').remove();
+    //         $(parent).find('span.TinyProgress').remove();
+    //         $(msg).show();
+    //     }
 
-        $(document).trigger('DiscussionEditingComplete', [msg]);
-        return false;
-    });
+    //     $(document).trigger('DiscussionEditingComplete', [msg]);
+    //     return false;
+    // });
     // Reveal the original message when cancelling an in-place edit.
     $(document).on('click', '.Discussion .Cancel a, .Discussion a.CancelButton', function(e) {
         e.preventDefault();
