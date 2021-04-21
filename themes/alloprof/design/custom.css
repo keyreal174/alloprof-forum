@@ -41,6 +41,7 @@
 @import url("./modules/vanilla-pagenotfound.css");
 @import url("./modules/vanilla-newdropdown.css");
 @import url("./modules/vanilla-mobile.css");
+@import url("./modules/vanilla-noresult.css");
 
 .BoxNewDiscussion {
     -webkit-box-shadow: none;
