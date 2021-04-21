@@ -11,17 +11,16 @@
 }
 
 span.ReactButtons a.ReactButton.ReactButton-Like {
-    display: inline-block!important;
-    width: 40px;
+    display: flex !important;
     margin-top: 0;
 }
 
 span.ReactButtons a.ReactButton.ReactButton-Like .Count {
     margin-top: 3px;
     margin-right: 0;
-    margin-left: 30px;
-    font-size: 21px;
-    line-height: 21px;
+    margin-left: 25px;
+    font-size: 17px;
+    line-height: 17px;
     color: #1A1919;
 }
 

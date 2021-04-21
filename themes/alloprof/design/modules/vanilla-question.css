@@ -261,23 +261,13 @@ body.Discussions .DataList.Discussions .embedExternal.embedImage.crossed::after 
 
 .Favorite-Icon {
     background: url("../../../../themes/alloprof/design/images/icons/like.svg") no-repeat !important;
-    width: 24px;
-    height: 24px;
+    background-position: center !important;
 }
 
 .Favorite-Icon.isLiked {
     background: url("../../../../themes/alloprof/design/images/icons/liked.svg") no-repeat !important;
-    width: 24px;
-    height: 24px;
-}
-
-.followButton.isFollowing svg {
-    width: 21px;
-    height: 24px;
-}
-
-.followButton.isFollowing svg path {
-    fill: black;
+    background-position-y: center !important;
+    background-position-x: 12px !important;
 }
 
 /* Footer icons in Question Card */
@@ -299,8 +289,8 @@ body.Discussions .DataList.Discussions .embedExternal.embedImage.crossed::after 
 }
 
 .Item-Footer-Icons .Options>a.Option-Icon {
-    margin-left: -10px;
-    margin-right: 10px;
+    margin-left: 0;
+    margin-right: 0;
     width: 44px;
     height: 44px;
     display: flex;
@@ -329,10 +319,14 @@ body.Discussions .DataList.Discussions .embedExternal.embedImage.crossed::after 
 }
 
 .Item-Footer-Icons .Reactions .ReactButtons a.Option-Icon {
-    width: 44px;
+    min-width: 44px;
+    height: 44px;
     display: flex;
+    font-size: 17px;
+    padding: 0 12px;
     align-items: center;
     justify-content: center;
+    margin: 0 !important;
 }
 
 .MessageList .ItemComment .AuthorWrap,

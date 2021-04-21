@@ -4690,8 +4690,9 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
 .DataList .Tag,
 .MessageList .MItem,
 .MessageList .Tag {
-    margin-left: 6px;
-    margin-right: 6px
+    margin-left: 0;
+    margin-right: 0px;
+    min-width: 44px;
 }
 
 .DataList .MItem.Hidden,
@@ -4970,8 +4971,7 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
 
 .DataList .Reactions,
 .MessageList .Reactions {
-    margin: 0 -3px;
-    height: 24px;
+    margin: 0;
 }
 
 .DataList .Reactions .Bullet,
@@ -4982,11 +4982,6 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
 .DataList .Reactions .ToggleFlyout,
 .MessageList .Reactions .ToggleFlyout {
     display: inline-block
-}
-
-.DataList .Reactions .ReactButton,
-.MessageList .Reactions .ReactButton {
-    margin: 3px 3px 0
 }
 
 @media screen and (max-width:958px) {

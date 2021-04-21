@@ -920,9 +920,9 @@ endif;
 if (!function_exists('writeSocialSharing')) :
     function writeSocialSharing($Discussion) {
         $socialLink = anchor(
-            '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M18.212 1.72792C20.7227 0.890167 23.1096 3.27703 22.2718 5.78774L17.2974 20.6959C16.3451 23.5498 12.3495 23.6477 11.2592 20.8514L9.67995 16.8012C9.23627 15.6634 8.33639 14.7635 7.19853 14.3198L3.14834 12.7405C0.352028 11.6502 0.449971 7.6546 3.30385 6.70235L18.212 1.72792Z" stroke="black" stroke-width="2"/>
-                <path d="M9.35449 14.6455L15.4737 8.52631" stroke="black" stroke-width="2" stroke-linecap="round"/>
+            '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18.4024 4.77036L14.257 17.1938C13.5127 19.4245 10.3904 19.5002 9.5386 17.3156L8.22255 13.9405C7.83589 12.9488 7.05163 12.1646 6.05998 11.7779L2.68482 10.4618C0.500266 9.61003 0.575902 6.48771 2.80661 5.74339L15.2301 1.59803C17.192 0.94339 19.057 2.80843 18.4024 4.77036Z" stroke="black" stroke-width="2"/>
+                <path d="M7.7959 12.2044L12.8952 7.10511" stroke="black" stroke-width="2" stroke-linecap="round"/>
             </svg>',
             'discussion/social/'.$Discussion->DiscussionID,
             'SocialIcon SocialPopup',
