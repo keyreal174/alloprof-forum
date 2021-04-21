@@ -264,6 +264,11 @@ body.Discussions .DataList.Discussions .embedExternal.embedImage.crossed::after 
     background-position: center !important;
 }
 
+.Reactions a.HasCount {
+    background-position-y: center !important;
+    background-position-x: 12px !important;
+}
+
 .Favorite-Icon.isLiked {
     background: url("../../../../themes/alloprof/design/images/icons/liked.svg") no-repeat !important;
     background-position-y: center !important;
