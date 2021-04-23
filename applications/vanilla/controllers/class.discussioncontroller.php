@@ -880,14 +880,14 @@ class DiscussionController extends VanillaController {
      * @param int $discussionID Unique discussion ID.
      */
     public function delete(int $discussionID, $target = '') {
+        $session = Gdn::session();
         $discussion = $this->DiscussionModel->getID($discussionID);
 
         if (!$discussion) {
             throw notFoundException('Discussion');
         }
 
-        $this->categoryPermission($discussion->CategoryID, 'Vanilla.Discussions.Delete');
-        if ($this->Form->authenticatedPostBack()) {
+        if ($this->Form->authenticatedPostBack() && ($this->getUserRole() == TEACHER_ROLE || $discussion->InsertUserID == $session->UserID)) {
             if (!$this->DiscussionModel->deleteID($discussionID)) {
                 $this->Form->addError('Failed to delete discussion');
             }
@@ -905,7 +905,6 @@ class DiscussionController extends VanillaController {
                     "HeadlineFormat" => 'Question deleted!',
                     "RecordType" => "Delete",
                     "RecordID" => $discussionID,
-                    "Route" => discussionUrl($discussion, "", "/"),
                     "Story" => $text,
                 ];
 
@@ -995,20 +994,24 @@ class DiscussionController extends VanillaController {
 
                     // Make sure comment is this user's or they have Delete permission.
                     $groupDelete = false;
-                    if ($comment->InsertUserID != $session->UserID || !c('Vanilla.Comments.AllowSelfDelete')) {
+                    if ($comment->InsertUserID != $session->UserID) {
                         if (!is_null($discussion->GroupID)) {
                             $groupModel = new GroupModel;
                             $groupDelete = $groupModel->canModerate($discussion->GroupID, $session->UserID);
                         }
                         if (!$groupDelete) {
-                            $this->categoryPermission($discussion->CategoryID, 'Vanilla.Comments.Delete');
+                            if ($this->getUserRole() != TEACHER_ROLE && $comment->InsertUserID != $session->UserID) {
+                                $this->categoryPermission($discussion->CategoryID, 'Vanilla.Comments.Delete');
+                            }
                         }
                     }
 
                     // Make sure that content can (still) be edited.
                     $editTimeout = 0;
                     if (!CommentModel::canEdit($comment, $editTimeout, $discussion) && !$groupDelete) {
-                        $this->categoryPermission($discussion->CategoryID, 'Vanilla.Comments.Delete');
+                        if ($this->getUserRole() != TEACHER_ROLE && $comment->InsertUserID != $session->UserID) {
+                            $this->categoryPermission($discussion->CategoryID, 'Vanilla.Comments.Delete');
+                        }
                     }
 
                     // Delete the comment.
@@ -1043,7 +1046,6 @@ class DiscussionController extends VanillaController {
                     "HeadlineFormat" => $headlineFormat,
                     "RecordType" => "Delete",
                     "RecordID" => $commentID,
-                    "Route" => commentUrl($comment, "", "/"),
                     "Story" => $headlineFormat,
                 ];
 

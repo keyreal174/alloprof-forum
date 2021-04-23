@@ -240,7 +240,6 @@ class LogModel extends Gdn_Pluggable {
                         "RecordType" => "Delete",
                         "RecordID" => $log['RecordID'],
                         "Story" => $text,
-                        "Route" => $recordType=='Discussion'?DiscussionModel::discussionUrl($log['Data'], "", "/"):CommentModel::commentUrl($log['Data']),
                         "Notified" => ActivityModel::SENT_PENDING
                     ];
 

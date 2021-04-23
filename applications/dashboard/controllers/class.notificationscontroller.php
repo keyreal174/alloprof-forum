@@ -121,7 +121,7 @@ class NotificationsController extends Gdn_Controller {
                 '<div class="toast-container">'.$userPhoto.'<div>'
                 .wrap(t($activity['Headline']).$verifiedIcon, 'div', ['class' => 'toast-title'.($verified?' verified':'')])
                 .wrap(t($story), 'div', ['class' => 'toast-text'])
-                .'<a href="'.$link.'" class="btn-default">'.t('See').'</a></div></div>',
+                .($activity['Route']?'<a href="'.$link.'" class="btn-default">'.t('See').'</a>':'').'</div></div>',
                 'Dismissable'.$activityClass.($userPhoto == '' ? '' : ' HasIcon')
             );
         }
