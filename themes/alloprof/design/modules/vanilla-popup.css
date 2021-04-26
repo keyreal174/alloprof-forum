@@ -138,7 +138,7 @@ div.Popup.FlagContentPopup .Body .Content .FlatReportButton input {
  }
 
  .SearchPopup h2 {
-     text-align: left;
+     text-align: center;
      margin-bottom: 20px;
  }
 
@@ -155,12 +155,13 @@ div.Popup.FlagContentPopup .Body .Content .FlatReportButton input {
      display: flex;
      flex-wrap: wrap;
      align-items: center;
+     justify-content: center;
  }
 
 .SearchPopup .mobile-categories li > div {
      height: 120px;
      margin-right: 12px;
-     width: 72px;
+     width: 90px;
      position: relative;
 }
 
@@ -180,10 +181,12 @@ div.Popup.FlagContentPopup .Body .Content .FlatReportButton input {
 }
 
 .SearchPopup .mobile-categories li .category-icon {
-    width: 72px;
-    height: 72px;
+    width: 64px;
+    height: 64px;
     background: #F2F2F2;
-    border-radius: 14px;
+    margin: 0 auto;
+    border-radius: 12px;
+    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -207,7 +210,10 @@ div.Popup.FlagContentPopup .Body .Content .FlatReportButton input {
 }
 
  .SearchPopup .mobile-categories li .category-icon img {
-    max-height: 40px;
+    max-height: 64px;
+    height: 64px;
+    max-width: 64px;
+    object-fit: cover;
  }
 
  .SearchPopup a.Close {

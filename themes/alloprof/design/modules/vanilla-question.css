@@ -586,7 +586,7 @@ body.Discussions .DataList.Discussions .embedExternal.embedImage.crossed::after 
     box-shadow: 0 4px 10px rgb(0 0 0 / 30%);
     width: 280px;
     min-width: 280px;
-    padding: 0 16px !important;
+    padding: 0 !important;
     background: #FFFFFF;
     border: 1px solid #DDDDDD;
     box-sizing: border-box;
@@ -604,7 +604,7 @@ body.Discussions .DataList.Discussions .embedExternal.embedImage.crossed::after 
     line-height: 24px;
     font-feature-settings: 'tnum' on, 'lnum' on, 'zero' on;
     color: #1A202C;
-    padding: 16px 0!important;
+    padding: 16px !important;
     display: relative;
 }
 
