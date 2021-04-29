@@ -397,7 +397,6 @@ class DiscussionController extends VanillaController {
 
         // Add modules
         // $this->addModule('NewDiscussionModule');
-        $this->addModule('CategoriesModule');
         $this->addModule('BookmarkedModule');
 
         $this->CanEditComments = Gdn::session()->checkPermission('Vanilla.Comments.Edit', true, 'Category', 'any') && c('Vanilla.AdminCheckboxes.Use');

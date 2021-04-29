@@ -1,13 +1,4 @@
 /* Report post(Flag) */
-a.FlagContentPopup:before {
-    content: '';
-    background: url("../../../../themes/alloprof/design/images/icons/flag.svg");
-    width: 13.5px;
-    height: 19.5px;
-    background-repeat: no-repeat;
-    margin-right: 15px;
-}
-
 .Comment a.FlagContentPopup:before {
     background: none;
     display: none;
@@ -211,7 +202,6 @@ div.Popup.FlagContentPopup .Body .Content .FlatReportButton input {
 
  .SearchPopup .mobile-categories li .category-icon img {
     max-height: 64px;
-    height: 64px;
     max-width: 64px;
     object-fit: cover;
  }
@@ -531,6 +521,10 @@ div.Popup.BanPopup .btn {
 
     div.Popup.SocialPopup .Border {
         min-width: 100vw;
+    }
+
+    .DeleteDiscussionPopup h1 {
+        text-align: left;
     }
 
     div.Popup.CustomPopup.SocialPopup h2.d-mobile {

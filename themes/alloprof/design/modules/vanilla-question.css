@@ -690,6 +690,7 @@ body.Discussions .DataList.Discussions .embedExternal.embedImage.crossed::after 
     }
     .QuestionPopup .DiscussionForm .Category {
         margin-bottom: 0 !important;
+        width: 99%;
     }
     .EditDiscussion.QuestionPopup {
         display: flex !important;

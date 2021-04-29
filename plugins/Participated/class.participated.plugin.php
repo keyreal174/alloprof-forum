@@ -204,7 +204,6 @@ class ParticipatedPlugin extends Gdn_Plugin {
         // Add modules
         $sender->addModule('NewDiscussionModule');
         $sender->addModule('DiscussionFilterModule');
-        $sender->addModule('CategoriesModule');
         $sender->addModule('BookmarkedModule');
 
         $sender->title(t('Participated Discussions'));

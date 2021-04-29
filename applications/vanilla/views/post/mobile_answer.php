@@ -75,7 +75,7 @@
                     $this->fireEvent('BeforeFormButtons');
                     $Editing = isset($this->Comment);
                     if (Gdn::session()->isValid()) {
-                        echo $this->Form->button($Editing ? t('Save') : t('Publish'), ['class' => 'btn-default btn-primary']);
+                        echo $this->Form->button($Editing ? t('Save') : t('Publish'), ['class' => 'btn-default btn-shadow']);
                     } else {
                         echo anchor(t('Publish'), '/entry/signinstudent?Target=discussions', 'btn-default btn-shadow SignInStudentPopupAgent SaveComment');
                         echo anchor(t('Publish'), '/entry/signinstudent?Target=discussions', 'btn-default btn-shadow SignInStudentPopup SaveComment HiddenImportant');
