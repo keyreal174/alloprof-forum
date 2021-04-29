@@ -828,6 +828,45 @@ class DiscussionModel extends Gdn_Model implements FormatFieldInterface, EventFr
         return $wheres;
     }
 
+    public function getCountForSearch($where = false) {
+        $CommentJoin = isset($where['CommentJoin'])?$where['CommentJoin']:null;
+        $SearchKey = isset($where['SearchKey'])?$where['SearchKey']:null;
+
+        unset($where['CommentJoin']);
+        unset($where['SearchKey']);
+
+        $where = $this->combineWheres($this->getWheres(), $where);
+
+        $sql = $this->SQL;
+
+        // Build up the base query. Self-join for optimization.
+        $sql->select('d.DiscussionID')
+            ->from('Discussion d');
+
+        if($CommentJoin && $SearchKey) {
+            $sql->join('Comment c', "d.DiscussionID = c.DiscussionID and c.Body like '".$SearchKey."'", 'left');
+            $sql->beginWhereGroup()
+            ->where('d.Body like', $SearchKey)
+            ->orwhere('c.Body like', $SearchKey)
+            ->endWhereGroup()
+            ->groupBy('d.DiscussionID');
+        }
+
+        // Check Approval or Authenticaion
+        $approvalRequired = checkRestriction('Vanilla.Approval.Require');
+        if (($approvalRequired && !val('Verified', Gdn::session()->User)) || !Gdn::session()->User) {
+            // Get Published Question
+            $sql->beginWhereGroup()
+            ->where('d.Published', 1)
+            ->orWhere('d.InsertUserID', Gdn::session()->UserID)
+            ->endWhereGroup();
+        }
+
+        $data = $sql->get()
+            ->resultArray();
+
+        return count($data);
+    }
     /**
      * Get the maximum number of discussion pages.
      *
@@ -856,6 +895,13 @@ class DiscussionModel extends Gdn_Model implements FormatFieldInterface, EventFr
         if (isset($where[DirtyRecordModel::DIRTY_RECORD_OPT])) {
             unset($where[DirtyRecordModel::DIRTY_RECORD_OPT]);
         }
+
+        $CommentJoin = isset($where['CommentJoin'])?$where['CommentJoin']:null;
+        $SearchKey = isset($where['SearchKey'])?$where['SearchKey']:null;
+
+        unset($where['CommentJoin']);
+        unset($where['SearchKey']);
+
         // Add backwards compatibility for the old way getWhere() was called.
         if (is_numeric($orderFields)) {
             deprecated('DiscussionModel->getWhere($where, $limit, ...)', 'DiscussionModel->getWhereRecent()');
@@ -917,6 +963,15 @@ class DiscussionModel extends Gdn_Model implements FormatFieldInterface, EventFr
         // Build up the base query. Self-join for optimization.
         $sql->select('d.DiscussionID')
             ->from('Discussion d');
+
+        if($CommentJoin && $SearchKey) {
+            $sql->join('Comment c', "d.DiscussionID = c.DiscussionID and c.Body like '".$SearchKey."'", 'left');
+            $sql->beginWhereGroup()
+            ->where('d.Body like', $SearchKey)
+            ->orwhere('c.Body like', $SearchKey)
+            ->endWhereGroup()
+            ->groupBy('d.DiscussionID');
+        }
 
         // Check Approval or Authenticaion
         $approvalRequired = checkRestriction('Vanilla.Approval.Require');
