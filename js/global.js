@@ -7,6 +7,13 @@
 
 // Global vanilla library function.
 (function(window, $) {
+    // Disable notification link until website is fully loaded.
+    $('.ToggleFlyout-notification').css("pointer-events", "none");
+
+    $(window).load(function() {
+        $('.ToggleFlyout-notification').css("pointer-events", "auto");
+    });
+
     // student signin/signup
     var saveURL = '';
     const signIn = (email, password) => {
