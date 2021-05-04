@@ -113,9 +113,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <header id="MainHeader" class="Header">
                         <div class="row">
                             <div class="Header-left">
-                                <div class="Header-left__search">
-                                    {searchbox}
-                                </div>
+
                             </div>
                             <div class="Header-logo">
                                 <div class="Hamburger">
@@ -138,12 +136,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                                         <path d="M107.889 6.77148C101.717 6.77148 100.778 11.759 100.778 14.7078V28.5781H104.568V14.7442C104.568 12.0502 105.109 10.6304 107.889 10.6304H108.033V6.77148H107.889Z" fill="#1A1919"/>
                                     </svg>
                                 </a>
-                                <div class="MobileHeader">
-                                    {asset name="MobileHeader"}
-                                </div>
                             </div>
                             <div class="Header-right">
                                 {community_chooser buttonType='titleBarLink' buttonClass='Header-desktopCommunityChooser'}
+
                                 <div class="MeBox-header">
                                     {module name="MeModule" CssClass="FlyoutRight"}
                                 </div>
@@ -158,6 +154,24 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             </div>
                         </nav>
                     </header>
+
+                    <div class="Header" id="SubHeader">
+                        <div class="row">
+                            <div class="Header-left">
+                                <div class="MobileHeader">
+                                    {asset name="MobileHeader"}
+                                </div>
+                                <div class="Frame-menubar">
+                                    {module name="SubMenuModule"}
+                                </div>
+                            </div>
+                            <div class="Header-right">
+                                <div class="Header-left__search">
+                                    {searchbox}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="Frame-banner Banner">
                     {asset name="Banner"}
@@ -167,10 +181,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <div class="Frame-content">
                     <div class="Container">
                         <div class="Frame-contentWrap">
-                            <div class="Frame-menubar">
-                                {module name="SubMenuModule"}
-                            </div>
-
                             <div class="Frame-details">
 
                                 <div class="Frame-row">

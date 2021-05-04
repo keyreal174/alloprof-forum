@@ -640,7 +640,7 @@ class CategoriesController extends VanillaController {
             // Add modules
             // $this->addModule('DiscussionFilterModule');
             $this->addModule('AskQuestionModule');
-            $this->addModule('CategoriesModule');
+
             $this->writeFilter();
             // $this->addModule('BookmarkedModule');
             // $this->addModule('TagModule');
@@ -873,7 +873,7 @@ class CategoriesController extends VanillaController {
         // $this->addModule('NewDiscussionModule');
         // $this->addModule('DiscussionFilterModule');
         // $this->addModule('BookmarkedModule');
-        $this->addModule('CategoriesModule');
+
         $this->addModule($CategoryFollowToggleModule);
         // $this->addModule('TagModule');
 
@@ -987,7 +987,7 @@ class CategoriesController extends VanillaController {
         // Add modules
         // $this->addModule('NewDiscussionModule');
         $this->addModule('DiscussionFilterModule');
-        $this->addModule('CategoriesModule');
+
         $this->addModule('BookmarkedModule');
         $this->addModule($CategoryFollowToggleModule);
 
@@ -1105,5 +1105,9 @@ class CategoriesController extends VanillaController {
         $parameter = $_POST['parameter'];
 
         echo $this->_PagerUrl.'?'.$parameter;
+    }
+
+    public function subjectdropdown() {
+        $this->render('SubjectDropdown', 'Categories', 'Vanilla');
     }
 }

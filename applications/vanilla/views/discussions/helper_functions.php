@@ -105,14 +105,28 @@ if (!function_exists('BookmarkButton')) {
         $accessibleLabel= HtmlUtils::accessibleLabel('%s for discussion: "%s"', [t($isBookmarked? 'UnFollow' : 'Follow'), is_array($discussion) ? $discussion["Name"] : $discussion->Name]);
 
         $icon_following = <<<EOT
-        <svg width="21" height="24" viewBox="0 0 21 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0.5 3.75C0.5 2.09315 1.84315 0.75 3.5 0.75H17.8077C19.4645 0.75 20.8077 2.09315 20.8077 3.75V22.4894C20.8077 23.3576 19.7774 23.8134 19.135 23.2294L10.9902 15.825C10.7995 15.6516 10.5082 15.6516 10.3175 15.825L2.17267 23.2294C1.5303 23.8134 0.5 23.3576 0.5 22.4894V3.75Z" fill="black"/>
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g clip-path="url(#clip0)">
+                <path d="M1.25 3.625C1.25 1.96815 2.59315 0.625 4.25 0.625H15.1731C16.8299 0.625 18.1731 1.96815 18.1731 3.625V18.3644C18.1731 19.2326 17.1428 19.6884 16.5004 19.1044L10.0479 13.2385C9.85716 13.0651 9.56591 13.0651 9.3752 13.2385L2.92268 19.1044C2.2803 19.6884 1.25 19.2326 1.25 18.3644V3.625Z" fill="black"/>
+            </g>
+            <defs>
+                <clipPath id="clip0">
+                    <rect width="20" height="20" fill="white"/>
+                </clipPath>
+            </defs>
         </svg>
         EOT;
 
         $icon_follow = <<<EOT
-        <svg width="21" height="24" viewBox="0 0 19 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M1.75049 3.5C1.75049 2.5335 2.53399 1.75 3.50049 1.75H15.2697C16.2362 1.75 17.0197 2.5335 17.0197 3.5V18.6743L10.5623 12.8039C9.89479 12.1971 8.87541 12.1971 8.20792 12.8039L1.75049 18.6743V3.5Z" stroke="black" stroke-width="2.5"/>
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g clip-path="url(#clip0)">
+                <path d="M4.25 1.625H15.1731C16.2776 1.625 17.1731 2.52043 17.1731 3.625V18.3644L10.7205 12.4985C10.1484 11.9784 9.27466 11.9784 8.70253 12.4985L2.25 18.3644V3.625C2.25 2.52043 3.14543 1.625 4.25 1.625Z" stroke="black" stroke-width="2"/>
+            </g>
+            <defs>
+                <clipPath id="clip0">
+                    <rect width="20" height="20" fill="white"/>
+                </clipPath>
+            </defs>
         </svg>
         EOT;
 

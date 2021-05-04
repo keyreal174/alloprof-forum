@@ -423,7 +423,7 @@ abbr {
 .sidebar {
     width: 20%;
     position: sticky;
-    top: 175px;
+    top: 112px;
 }
 
 .UserLoggedOut .sidebar {
@@ -3303,9 +3303,9 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
     box-shadow: 0 5px 10px 0 rgba(0, 0, 0, .3);
     color: #555a62;
     min-width: 350px;
-    padding: 15px 20px !important;
+    padding: 15px 20px;
     position: absolute;
-    z-index: 1
+    z-index: 3;
 }
 
 @media screen and (max-width:958px) {
@@ -3503,7 +3503,7 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
 
 .Flyout.Flyout strong,
 .MenuItems strong {
-    font-family: Open Sans, HelveticaNeue-Light, Segoe UI, Helvetica Neue, Helvetica, Raleway, Arial, sans-serif;
+    font-family: "ChromaticaBlack", Open Sans, HelveticaNeue-Light, Segoe UI, Helvetica Neue, Helvetica, Raleway, Arial, sans-serif;
     font-size: 21px;
     font-weight: 600;
     line-height: 1.25;
@@ -3547,7 +3547,6 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
     display: -ms-flexbox;
     display: flex;
     line-height: 1.25;
-    min-height: 30px;
     padding: 4px 18px;
     width: 100%
 }
@@ -4690,8 +4689,9 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
 .DataList .Tag,
 .MessageList .MItem,
 .MessageList .Tag {
-    margin-left: 6px;
-    margin-right: 6px
+    margin-left: 0;
+    margin-right: 0px;
+    min-width: 44px;
 }
 
 .DataList .MItem.Hidden,
@@ -4970,8 +4970,7 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
 
 .DataList .Reactions,
 .MessageList .Reactions {
-    margin: 0 -3px;
-    height: 24px;
+    margin: 0;
 }
 
 .DataList .Reactions .Bullet,
@@ -4982,11 +4981,6 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
 .DataList .Reactions .ToggleFlyout,
 .MessageList .Reactions .ToggleFlyout {
     display: inline-block
-}
-
-.DataList .Reactions .ReactButton,
-.MessageList .Reactions .ReactButton {
-    margin: 3px 3px 0
 }
 
 @media screen and (max-width:958px) {
@@ -5684,7 +5678,6 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
 .MeBox.FlyoutRight .Flyout {
     top: 80px;
     right: 0;
-    border-top: 7px solid #05BF8E;
 }
 
 .SignInIcons {
@@ -6732,8 +6725,8 @@ body.hasRichEditor.Section-PostDiscussion #DiscussionForm .FormWrapper {
     border-radius: 4px;
     font-family: ChromaticaMedium;
     font-size: 15px;
-    padding: 3px 16px 0 52px;
-    min-width: 300px;
+    padding: 3px 16px 0 40px;
+    min-width: 240px;
     height: 44px;
     width: 100%;
     color: black
@@ -8549,7 +8542,6 @@ table.PreferenceGroup tbody tr:hover td {
 
 .Frame-banner {
     background-color: #CAEDF9;
-    min-height: 70px;
 }
 
 .Banner-content {
@@ -8579,7 +8571,8 @@ table.PreferenceGroup tbody tr:hover td {
     width: 100%;
     height: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
+    text-align: center;
     flex-direction: column;
     position: relative;
     z-index: 1;
@@ -8588,8 +8581,8 @@ table.PreferenceGroup tbody tr:hover td {
     padding-right: 61px;
     max-width: 1600px;
     background-repeat: no-repeat;
-    background-position-y: bottom;
-    background-position-x: calc(100% - 30px);
+    background-position-y: calc(100% + 40px);
+    background-position-x: center;
     margin: 0 auto;
 }
 
@@ -8651,7 +8644,8 @@ table.PreferenceGroup tbody tr:hover td {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    height: 80px
+    height: 80px;
+    position: relative;
 }
 
 .Header .Hamburger,
@@ -8669,13 +8663,10 @@ table.PreferenceGroup tbody tr:hover td {
     background-repeat: no-repeat;
     background-position-y: center;
     background-position-x: 16px;
-    background-color: white;
-    border-radius: 4px;
-    width: 300px;
-}
-
-.Header.not-transparent .Header-left__search {
+    background-size: 16px 16px;
     background-color: #F2F2F2;
+    border-radius: 99px;
+    width: 240px;
 }
 
 .Header-left__search #Form_Go {
@@ -9150,11 +9141,10 @@ screen and (-ms-high-contrast:none) {
     display: -ms-flexbox;
     display: flex;
     font-size: 18px;
-    font-family: "ChromaticaBlack";
+    font-family: "ChromaticaBold";
     line-height: 36px;
     min-height: 32px;
-    padding: 0 18px;
-    font-weight: bold;
+    padding: 0 20px;
     width: 100%
 }
 
@@ -9789,12 +9779,6 @@ body.Section-EditProfile .Box a {
     display: flex;
     overflow: hidden;
     margin-bottom: 10px;
-}
-
-.BoxCategories.BoxCategories a span img {
-    width: 100%;
-    max-height: 100% !important;
-    height: 100%;
 }
 
 .BoxCategories.BoxCategories a:active,

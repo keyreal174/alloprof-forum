@@ -1,6 +1,6 @@
 <?php if (!defined('APPLICATION')) exit();
 $CountDiscussions = 0;
-$CategoryID = isset($this->_Sender->CategoryID) ? $this->_Sender->CategoryID : '';
+$CategoryID = isset(Gdn::controller()->CategoryID) ? Gdn::controller()->CategoryID : '';
 $OnCategories = strtolower($this->_Sender->ControllerName) == 'categoriescontroller' && !is_numeric($CategoryID);
 $isHomePage = $this->_Sender->Data["isHomepage"] ?? false;
 $onTopLevelCategory = $this->topLevelCategoryOnly && $OnCategories && inSection("CategoryList");
@@ -12,7 +12,6 @@ if ($this->Data !== FALSE && $displayModule) {
 
     ?>
     <div class="Box BoxCategories vanilla-categories">
-        <?php echo panelHeading(t('Subjects')); ?>
         <ul class="PanelInfo PanelCategories">
             <?php
             $MaxDepth = c('Vanilla.Categories.MaxDisplayDepth');
@@ -55,15 +54,17 @@ if ($this->Data !== FALSE && $displayModule) {
                         $photo = '<span class="category-icon"><img src="'.$photoUrl.'" class="CategoryPhoto" /></span>';
                     else $photo = '<span class="category-icon"></span>';
 
-                    if ($Category["CategoryID"] == 0) {
-                        echo "<div class='arrow-icon ".$Category["Name"]."'>".$photo."</div>";
-                    } else {
+                    // if ($Category["CategoryID"] == 0) {
+                    //     echo "<div class='arrow-icon ".$Category["Name"]."'>".$photo."</div>";
+                    // } else {
+                    if($Category["CategoryID"] !== 0) {
                         if ($Category->DisplayAs === 'Heading') {
                             echo htmlspecialchars($Category["Name"]);
                         } else {
                             echo anchor($photo."<span class='name'>".htmlspecialchars($Category["Name"])."</span>", categoryUrl($Category), 'ItemLink');
                         }
                     }
+                    // }
                     echo "</div>\n";
                 }
                 echo "</li>\n";

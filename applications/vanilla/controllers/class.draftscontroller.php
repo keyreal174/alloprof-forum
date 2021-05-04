@@ -73,7 +73,7 @@ class DraftsController extends VanillaController {
         // Add modules
         $this->addModule('DiscussionFilterModule');
         // $this->addModule('NewDiscussionModule');
-        $this->addModule('CategoriesModule');
+        $this->addModule('dule');
         $this->addModule('BookmarkedModule');
 
         // Render default view (drafts/index.php)

@@ -11,13 +11,14 @@
 
 .notification-settings-content.open {
     height: auto;
-    padding: 15px 0;
+    padding: 12px 0;
+    border-bottom: 1px solid #E0E0E0 !important;
 }
 
 .notification-settings-content > div {
     width: 100%;
     font-size: 16px;
-    padding: 6px 12px;
+    padding: 12px 0px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -39,10 +40,16 @@
 
 .MeBox-header .Flayout-notification {
     min-width: 480px !important;
+    border: 1px solid #DDDDDD;
+    box-sizing: border-box !important;
+    box-shadow: 0px 16px 40px -5px rgba(108, 103, 103, 0.05) !important;
+    border-radius: 16px !important;
+    padding: 32px !important;
 }
 
 .Activities .ItemContent {
     position: relative;
+    margin-left: 6px;
 }
 
 .Activities .ItemContent .mark-not-read {
@@ -62,7 +69,7 @@
 
 .Activities .ItemContent h6,
 .Activities .ItemContent h6 a {
-    font-size: 16px;
+    font-size: 18px;
 }
 
 .Activities .ItemContent h6 {
@@ -85,7 +92,7 @@
 }
 
 .Flayout-notification.open .notification-list .Item {
-    padding: 12px 8px;
+    padding: 12px 0px;
 }
 
 .Flayout-notification.open .notification-list .Item .ItemContent {
@@ -95,7 +102,7 @@
 
 .Flayout-notification.open .Item.Title {
     min-height: initial !important;
-    padding-bottom: 16px !important;
+    padding: 0 0 16px 0 !important;
 }
 
 .Flyout .Item.Title a.notification-all-read
@@ -234,7 +241,7 @@
         height: calc(100vh - 80px);
     }
     .PopList.PopList .Item.Title {
-        padding: 16px !important;
+        padding: 20px 16px 11px 16px !important;
         border-bottom: none;
         box-shadow: 0px 8px 20px rgba(26, 32, 44, 0.1);
     }
@@ -262,16 +269,27 @@
     }
     .PopList.PopList .actions {
         display: flex;
-        padding: 12px 16px !important;
+        padding: 20px 16px 12px 16px !important;
         align-items: center;
+        float: right;
         justify-content: space-between;
     }
     .notification-settings {
         padding-top: 5px;
     }
+
+    .notification-settings-content {
+        margin: 0 16px;
+        clear: both;
+    }
+
     .notification-settings-content.open,
     .notification-list {
         border-top: 1px solid #E0E0E0;
+        margin: 0 16px;
+    }
+    .notification-settings-content.open {
+        border-bottom: none !important;
     }
     .notification-all-read {
         color: black;
@@ -279,7 +297,15 @@
     }
     .Activities .notification-list {
         max-height: calc(100% - 105px);
-        padding: 10px;
+        padding: 12px 0;
     }
+    .Activities .ItemContent p {
+        font-size: 13px !important;
+    }
+    .Activities .ItemContent h6,
+    .Activities .ItemContent h6 a {
+        font-size: 15px;
+    }
+
 }
 

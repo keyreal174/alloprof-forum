@@ -261,23 +261,18 @@ body.Discussions .DataList.Discussions .embedExternal.embedImage.crossed::after 
 
 .Favorite-Icon {
     background: url("../../../../themes/alloprof/design/images/icons/like.svg") no-repeat !important;
-    width: 24px;
-    height: 24px;
+    background-position: center !important;
+}
+
+.Reactions a.HasCount {
+    background-position-y: center !important;
+    background-position-x: 12px !important;
 }
 
 .Favorite-Icon.isLiked {
     background: url("../../../../themes/alloprof/design/images/icons/liked.svg") no-repeat !important;
-    width: 24px;
-    height: 24px;
-}
-
-.followButton.isFollowing svg {
-    width: 21px;
-    height: 24px;
-}
-
-.followButton.isFollowing svg path {
-    fill: black;
+    background-position-y: center !important;
+    background-position-x: 12px !important;
 }
 
 /* Footer icons in Question Card */
@@ -299,8 +294,8 @@ body.Discussions .DataList.Discussions .embedExternal.embedImage.crossed::after 
 }
 
 .Item-Footer-Icons .Options>a.Option-Icon {
-    margin-left: -10px;
-    margin-right: 10px;
+    margin-left: 0;
+    margin-right: 0;
     width: 44px;
     height: 44px;
     display: flex;
@@ -329,10 +324,14 @@ body.Discussions .DataList.Discussions .embedExternal.embedImage.crossed::after 
 }
 
 .Item-Footer-Icons .Reactions .ReactButtons a.Option-Icon {
-    width: 44px;
+    min-width: 44px;
+    height: 44px;
     display: flex;
+    font-size: 17px;
+    padding: 0 12px;
     align-items: center;
     justify-content: center;
+    margin: 0 !important;
 }
 
 .MessageList .ItemComment .AuthorWrap,
@@ -585,8 +584,9 @@ body.Discussions .DataList.Discussions .embedExternal.embedImage.crossed::after 
 .DiscussionHeader .MenuItems,
 .CommentsWrap .CommentOptions {
     box-shadow: 0 4px 10px rgb(0 0 0 / 30%);
-    padding: 32px;
-    width: 320px;
+    width: 280px;
+    min-width: 280px;
+    padding: 0 !important;
     background: #FFFFFF;
     border: 1px solid #DDDDDD;
     box-sizing: border-box;
@@ -604,15 +604,13 @@ body.Discussions .DataList.Discussions .embedExternal.embedImage.crossed::after 
     line-height: 24px;
     font-feature-settings: 'tnum' on, 'lnum' on, 'zero' on;
     color: #1A202C;
-    height: 55px;
-    padding-left: 5px!important;
+    padding: 16px !important;
     display: relative;
 }
 
 .DiscussionHeader .MenuItems li a span,
 .CommentsWrap .CommentOptions li a span {
-    position: absolute;
-    left: 40px;
+    margin-left: 10px;
 }
 
 .MessageList.Disucssion {
@@ -692,6 +690,7 @@ body.Discussions .DataList.Discussions .embedExternal.embedImage.crossed::after 
     }
     .QuestionPopup .DiscussionForm .Category {
         margin-bottom: 0 !important;
+        width: 99%;
     }
     .EditDiscussion.QuestionPopup {
         display: flex !important;

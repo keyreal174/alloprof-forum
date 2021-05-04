@@ -172,7 +172,7 @@
     /*display: flex!important;
     flex-wrap: wrap;*/
     display: grid!important;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr;
     padding: 0!important;
 }
 
@@ -196,21 +196,6 @@
     margin-left: auto;
     margin-right: auto;
     margin-top: 5px;
-    border: 2px solid #DDDDDD;
-}
-
-.PanelCategories li > div {
-    position: relative;
-    min-height: 120px;
-    margin: 0 auto;
-    max-width: 85px;
-}
-
-.PanelCategories li > div .name {
-    text-overflow: ellipsis;
-    overflow: hidden;
-    width: 130%;
-    text-align: center;
 }
 
 .PanelCategories{
