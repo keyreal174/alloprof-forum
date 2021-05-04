@@ -324,7 +324,7 @@ class PromotedContentModule extends Gdn_Module {
             }
 
             // Interleave
-            $content = $this->union('DateInserted', [
+            $content = $this->('DateInserted', [
                 'Discussion' => $discussions,
                 'Comment' => $comments
             ]);

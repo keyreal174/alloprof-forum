@@ -220,13 +220,15 @@ class SearchController extends Gdn_Controller {
         }
 
         $this->writeFilter();
-        $where['Body like'] = '%'.str_replace(['%', '_'], ['\%', '\_'], $search).'%';
+        // $where['d.Body like'] = '%'.str_replace(['%', '_'], ['\%', '\_'], $search).'%';
+        $where['CommentJoin'] = true;
+        $where['SearchKey'] = '%'.str_replace(['%', '_'], ['\%', '\_'], $search).'%';
 
         $where = array_merge($where, $this->WhereClause);
         $DiscussionModel = new DiscussionModel();
 
         // Get Discussion Count
-        $CountDiscussions = $DiscussionModel->getCount($where);
+        $CountDiscussions = $DiscussionModel->getCountForSearch($where);
 
         $this->checkPageRange($Offset, $CountDiscussions);
 
@@ -234,8 +236,6 @@ class SearchController extends Gdn_Controller {
             $CountDiscussions = min($MaxPages * $Limit, $CountDiscussions);
         }
 
-        $where = array_merge($where, $this->WhereClause);
-        $CountDiscussions = $DiscussionModel->getCount($where);
         $this->DiscussionData = $DiscussionModel->getWhereWithOrder($where, 'DateInserted', $this->SortDirection, $Limit, $Offset);
 
         $this->setData('SearchResults', $this->DiscussionData, true);
