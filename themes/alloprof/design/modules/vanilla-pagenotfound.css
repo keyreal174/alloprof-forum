@@ -9,7 +9,6 @@
 }
 
 .PageNotFound .Content {
-    height: calc(100vh - 110px);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -21,6 +20,7 @@
     flex-direction: column;
     align-items: center;
     padding: 3% 20px;
+    padding-top: calc((100vh - 800px) / 2);
 }
 
 .PageNotFound .Content .SplashInfo img {
@@ -30,6 +30,9 @@
 
 .PageNotFound .Content .SplashInfo a {
     margin-top: 0 !important;
+    font-size: 18px !important;
+    line-height: 21px !important;
+    padding: 15px 35px !important;
 }
 
 .PageNotFound .Content .SplashInfo h1 {
@@ -77,10 +80,30 @@
 
     .PageNotFound .Content .SplashInfo {
         padding-bottom: 10%;
-        padding-top: 15%;
+        padding-top: calc((100vh - 500px) / 2);
+    }
+
+    .PageNotFound .Content .SplashInfo img {
+        width: 50%;
     }
 
     .PageNotFound .SplashInfo .btn {
         margin-top: 0 !important;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .PageNotFound .Content .SplashInfo img {
+        width: 148px;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .PageNotFound .Content .SplashInfo {
+        padding-top: calc((100vh - 450px) / 2);
+    }
+
+    .PageNotFound .Content .SplashInfo img {
+        width: 120px;
     }
 }
