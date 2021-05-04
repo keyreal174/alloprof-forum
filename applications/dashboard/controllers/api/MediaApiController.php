@@ -291,7 +291,7 @@ class MediaApiController extends AbstractApiController {
      * @return array
      */
     public function post_scrape(array $body) {
-        $this->permission('Garden.SignIn.Allow');
+        // $this->permission('Garden.SignIn.Allow');
 
         $in = $this->schema([
             'url:s' => 'The URL to scrape.',
