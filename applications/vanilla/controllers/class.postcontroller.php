@@ -894,7 +894,6 @@ class PostController extends VanillaController {
 
         $this->CssClass = 'EditDiscussionDetailPage';
 
-        $this->addModule('CategoriesModule');
         $this->addModule('BookmarkedModule');
 
         $mobileHeader = new MobileHeaderModule("Edit question", true);

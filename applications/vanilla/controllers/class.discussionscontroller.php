@@ -238,7 +238,7 @@ class DiscussionsController extends VanillaController {
 
         // Add modules
         $this->addModule('AskQuestionModule');
-        $this->addModule('CategoriesModule');
+
         // Filtering and Sorter Module
         $this->writeFilter();
 
@@ -447,7 +447,7 @@ class DiscussionsController extends VanillaController {
         // Add modules
         $this->addModule('DiscussionFilterModule');
         // $this->addModule('NewDiscussionModule');
-        $this->addModule('CategoriesModule');
+
         $this->addModule('BookmarkedModule');
         $this->addModule('TagModule');
 
@@ -635,7 +635,7 @@ class DiscussionsController extends VanillaController {
         // Add modules
         // $this->addModule('NewDiscussionModule');
         $this->addModule('AskQuestionModule');
-        $this->addModule('CategoriesModule');
+
         $this->addModule('UserPhotoModule');
         $this->fireEvent('AfterAddSideMenu');
         $this->fireEvent('AddProfileTabsInfo');
@@ -803,7 +803,7 @@ class DiscussionsController extends VanillaController {
         // Add modules
         $this->addModule('NewDiscussionModule');
         $this->addModule('AskQuestionModule');
-        $this->addModule('CategoriesModule');
+
         $this->addModule('UserPhotoModule');
         $this->addModule('ProfileFilterModule');
         $this->fireEvent('AfterAddSideMenu');
@@ -900,7 +900,7 @@ class DiscussionsController extends VanillaController {
         }
 
         // Add modules
-        $this->addModule('CategoriesModule');
+
         $this->addModule('BookmarkedModule');
         $this->addModule('TagModule');
 
@@ -1360,7 +1360,7 @@ class DiscussionsController extends VanillaController {
         // Add modules
         $this->addModule('DiscussionFilterModule');
         $this->addModule('NewDiscussionModule');
-        $this->addModule('CategoriesModule');
+
         $this->addModule('BookmarkedModule');
         $this->addModule('TagModule');
 

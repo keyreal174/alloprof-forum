@@ -1,10 +1,8 @@
 $(window).on("scroll", function () {
-    if ($(window).scrollTop() == 0) {
-        if($('.Banner-content').length > 0) {
-            $("header").removeClass("not-transparent");
-        }
+    if ($(window).scrollTop() > 72) {
+        $("#SubHeader").addClass("fixed");
     } else {
-        $("header").addClass("not-transparent");
+        $("#SubHeader").removeClass("fixed");
     }
 });
 
@@ -24,12 +22,12 @@ jQuery(document).ready(function($) {
     $(ContentSelector).append("<div id='PagerAfter'></div>");
 
 
-    function initHeader() {
-        $("header").addClass("not-transparent");
-    }
+    // function initHeader() {
+    //     $("header").addClass("not-transparent");
+    // }
 
-    if($('.Banner-content').length === 0)
-        initHeader();
+    // if($('.Banner-content').length === 0)
+    //     initHeader();
 
     // Select2 initialization
 

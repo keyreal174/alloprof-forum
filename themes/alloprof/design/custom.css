@@ -41,6 +41,7 @@
 @import url("./modules/vanilla-pagenotfound.css");
 @import url("./modules/vanilla-newdropdown.css");
 @import url("./modules/vanilla-mobile.css");
+@import url("./modules/vanilla-noresult.css");
 
 .BoxNewDiscussion {
     -webkit-box-shadow: none;
@@ -69,17 +70,14 @@
 }
 
 .Question-submenu {
-    padding-top: 32px;
     justify-content: center;
     width: 100%;
-    border-bottom: 1px solid #DDD;
     display: flex;
-    min-height: 72px;
     height: auto;
 }
 
 .Question-submenu .Navigation-linkContainer {
-    margin: 0 20px;
+    margin: 0;
 }
 
 .Question-submenu .Navigation-linkContainer:after {
@@ -108,11 +106,15 @@
 }
 
 .Question-submenu a span.realcount.Count {
-    background: #ff00008c;
+    background: #05BF8E;
     color: white;
-    width: 20px;
-    height: 20px;
+    min-width: 22px;
+    width: fit-content;
+    padding: 3.5px 3px 0 3px;
+    height: 22px;
     margin-left: 5px;
+    border-radius: 12px;
+    font-size: 13px;
     display: inline-flex;
 }
 

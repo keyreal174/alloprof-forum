@@ -14,7 +14,7 @@
  }
 
  .MobileHeader {
-    display: none;
+     margin-right: 5%;
  }
 
  .MobileHeader h3 {
@@ -61,16 +61,13 @@
         width: 502px;
     }
 
-    .Banner-content__Container {
-        justify-content: flex-start;
-        padding-top: 100px;
-        background-position-x: center;
-        background-size: 400px;
-        background-position-y: calc(100% + 40px);
+    div.Header-logo {
+        margin: 0 0 0 45px !important;
     }
 
-    .Banner-content.Teacher .Banner-content__Container {
-        background-position-y: calc(100% + 95px);
+    #MainHeader .Header-left {
+        margin-right: 0 !important;
+        width: fit-content !important;
     }
 
     .Banner-content__pagename {
@@ -92,6 +89,12 @@
     .Banner-content h1 b {
         font-weight: 500;
     }
+}
+
+@media screen and (max-width: 959px) {
+    .ScrollProgress {
+        height: 42px !important;
+    }
 
     .Banner-content .Banner-content__description {
         font-size: 21px;
@@ -101,16 +104,30 @@
         text-align: center;
         margin-top: 0;
     }
-}
 
-@media screen and (max-width: 959px) {
-    .ScrollProgress {
-        height: 42px !important;
+    .Banner-content__Container {
+        justify-content: flex-start;
+        padding-top: 100px;
+        background-position-x: center;
+        background-size: 400px;
+        background-position-y: calc(100% + 40px);
+    }
+
+    .Banner-content.Teacher .Banner-content__Container {
+        background-position-y: calc(100% + 95px);
     }
 
     .Header {
         padding-left: 16px;
         padding-right: 16px;
+    }
+
+    .Header-left__search {
+        display: none !important;
+    }
+
+    .MeBox .additional-links {
+        top: 13px;
     }
 
     .sidebar.left {
@@ -160,13 +177,7 @@
 
     .Frame-header .Header .row {
         height: 132px;
-        align-items: flex-start;
-    }
-
-    .Frame-header .Header .Header-left {
-        position: absolute;
-        bottom: 10px;
-        width: calc(100% - 32px);
+        align-items: center;
     }
 
     .Frame-header .Header .Header-logo {
@@ -308,7 +319,7 @@
         display: block;
     }
     .Banner-content {
-        height: 196px;
+        height: 220px;
     }
     .Frame-banner {
         background-color: #CAEDF9;
@@ -359,8 +370,7 @@
         height: 64px;
         justify-content: left;
     }
-    .Frame-header .Header .Header-left,
-    .Banner-content .Banner-content__description,
+    .Frame-header #MainHeader .Header-left,
     .FilterBanner,
     .AskQuestionForm.BoxNewDiscussion,
     .sidebar {
@@ -376,6 +386,7 @@
     }
     .Frame-menubar {
         height: 64px;
+        left: 0;
         position: fixed;
         top: calc(100% - 64px);
         max-width: 100%;
@@ -478,8 +489,9 @@
         width: 128px !important;
         height: 128px !important;
     }
-    .Frame-header .Header .Header-logo a.Header-logo {
-        display: none;
+    .Frame-header .Header .Header-logo a.Header-logo svg{
+        width: 92px;
+        height: 20px;
     }
     .MobileHeader {
         display: flex;
