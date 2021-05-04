@@ -4,8 +4,12 @@
     display: none;
 }
 
+.PageNotFound .Frame-row {
+    justify-content: center;
+}
+
 .PageNotFound .Content {
-    /* height: calc(100vh - 270px); */
+    height: calc(100vh - 110px);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -16,12 +20,15 @@
     flex-direction: column;
     align-items: center;
     padding: 3% 20px;
-    padding-top: 10%;
 }
 
 .PageNotFound .Content .SplashInfo img {
-    width: 70% !important;
-    max-width: 250px;
+    margin-bottom: 0 !important;
+    width: initial;
+}
+
+.PageNotFound .Content .SplashInfo a {
+    margin-top: 0 !important;
 }
 
 .PageNotFound .Content .SplashInfo h1 {

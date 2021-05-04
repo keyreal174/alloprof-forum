@@ -1,7 +1,7 @@
 <?php if (!defined('APPLICATION')) exit(); ?>
 
 <div class="Center SplashInfo">
-<img src=<?php echo url("/themes/alloprof/design/images/notfoundbot.svg") ?> />
+<img src=<?php echo url("/themes/alloprof/design/images/fileNotFound.svg") ?> />
     <h1><?php echo t('Oh no! It\'s a 404 error'); ?></h1>
 
     <div id="Message"><?php echo t('The page you\'re looking for has disappeared!'); ?></div>
