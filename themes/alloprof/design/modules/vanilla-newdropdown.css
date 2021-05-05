@@ -10,6 +10,62 @@
     top: 48px;
 }
 
+.additional-links__popup {
+    left: 0 !important;
+    border: 1px solid #DDDDDD;
+    box-sizing: border-box !important;
+    box-shadow: 0px 16px 40px -5px rgb(108 103 103 / 5%) !important;
+    border-radius: 16px !important;
+    padding: 5px 0 !important;
+ }
+
+ .additional-links__popup li a {
+    font-size: 15px;
+    display: flex !important;
+    padding: 15px !important;
+ }
+
+.MeBox.FlyoutRight .Flyout.Flyout.authorized {
+    min-width: 240px;
+    border: 1px solid #DDDDDD !important;
+    box-sizing: border-box !important;
+    box-shadow: 0px 16px 40px -5px rgba(108, 103, 103, 0.05) !important;
+    border-radius: 8px !important;
+    text-align: center;
+    padding: 5px 0 !important;
+}
+
+.additional-links__popup li,
+.MeBox .Flyout.authorized li {
+    margin: 0 10px;
+}
+
+.MeBox .Flyout.authorized li a {
+    font-size: 15px;
+    text-align: center;
+    display: flex;
+    padding: 15px;
+}
+
+.MeBox .additional-links {
+    position: absolute;
+    left: 0;
+    top: 20px;
+    margin-left: 0 !important;
+}
+
+.MeBox .Flyout.authorized li a img.ProfilePhoto {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.MeBox .Flyout.authorized li a.dropdown-menu-link-entry-signout {
+    font-family: "ChromaticaBold";
+    justify-content: center;
+}
+
 .MeBox.FlyoutRight .Flyout.unauthorized li {
     text-align: center;
     /* height: 44px; */
@@ -50,7 +106,6 @@
 
 .LinksButton .BergerIcon {
     width: 30px;
-    margin-left: 5px;
 }
 
 .additional-links__popup {
@@ -66,6 +121,93 @@
     width: 75px;
 }
 
+a.Flayout-Subject {
+    cursor: pointer;
+}
+
+a.Flayout-Subject::after {
+    background: url(../../../../themes/alloprof/design/images/icons/arrowDown.svg);
+    width: 14px !important;
+    height: 16px !important;
+    background-repeat: no-repeat !important;
+    border-width: 0 !important;
+    transition: 0.3s all;
+    margin-left: 10px;
+    content: '';
+}
+
+a.Flayout-Subject.Open::after {
+    transform: rotate(180deg);
+}
+
+.Flayout-Subject {
+    max-width: 242px;
+    min-width: 0 !important;
+    left: 10px;
+}
+
+a.Flayout-Subject .Flyout {
+    top: 75px;
+    max-height: 632px;
+    overflow-y: auto;
+}
+
+.Flayout-Subject .vanilla-categories {
+    padding: 0 !important;
+    margin: 0;
+}
+
+.Flayout-Subject .PanelCategories {
+    opacity: 1;
+    flex-direction: column;
+    padding: 16px !important;
+}
+
+.Flayout-Subject .PanelCategories a {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0;
+}
+
+.Flayout-Subject .PanelCategories a span {
+    font-size: 15px !important;
+    line-height: 14px;
+}
+
+.Flayout-Subject .PanelCategories li > div {
+    height: 40px;
+    border-radius: 4px;
+}
+
+.Flayout-Subject .PanelCategories li > div:not(:last-child) {
+    margin-bottom: 16px;
+}
+
+.Flayout-Subject .PanelCategories li > div.Depth {
+    display: none;
+}
+
+.Flayout-Subject .PanelCategories a span.category-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    padding: 7px;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: none;
+    margin-right: 10px;
+    margin-bottom: 0;
+}
+
+.Flayout-Subject .PanelCategories a span.category-icon img {
+    margin: 0;
+    max-height: 100% !important;
+    max-width: 100%;
+}
+
 @media screen and (max-width: 958px) {
     .MeBox.FlyoutRight .Flyout.authorized {
         padding: 15px !important;
@@ -75,7 +217,6 @@
         display: flex !important;
         align-items: center;
         justify-content: space-between;
-        padding-bottom: 10px;
     }
 
     .withHeader .mobile-menu-header .Close {
@@ -83,7 +224,7 @@
         position: relative;
         min-width: 0;
         top: -1px;
-        right: 0px;
+        right: 0;
         font-size: 40px !important;
         line-height: 18px;
         min-height: 35px;
@@ -118,14 +259,21 @@
         padding-top: 100px !important;
     } */
 
+    .additional-links__popup li,
+    .MeBox .Flyout.authorized li {
+        margin: 0 24px;
+    }
+
     .MeBox.FlyoutRight .Flyout.authorized li hr {
         min-width: 300px;
     }
 
+    .additional-links__popup li a,
     .MeBox.FlyoutRight .Flyout.authorized li a {
         font-size: 15px;
         font-weight: 300;
         min-height: 40px;
+        padding: 15px 0 !important;
     }
 
     .MeBox.FlyoutRight .Flyout.unauthorized li a {

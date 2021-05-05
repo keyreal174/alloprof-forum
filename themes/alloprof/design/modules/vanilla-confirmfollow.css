@@ -46,3 +46,56 @@
     text-transform: none !important;
 }
 
+.flag-content input {
+    margin: 0 auto;
+}
+
+.flag-content .FlagWarningList {
+    margin-bottom: 30px;
+}
+
+.flag-content .FlagWarningList ul li {
+    font-size: 15px;
+    text-align: left;
+}
+
+.flag-content .FlagWarningList ul li label {
+    font-size: 15px !important;
+}
+
+.flag-content .FlagWarningList .custom-radio {
+    margin: 15px 0;
+}
+
+.flag-content .FlagWarningList .custom-radio .container {
+    justify-content: flex-start;
+}
+
+.flag-content .FlagWarningList .custom-radio .container span.title {
+    margin-left: 10px;
+}
+
+@media screen and (max-width: 958px) {
+    .flag-content h2 {
+        text-align: left;
+    }
+
+    .FlatReportButton {
+        background: #F5F3EF;
+        padding: 24px;
+        margin-bottom: -25px;
+        margin-left: -24px;
+        margin-right: -25px;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .flag-content input,
+    .flag-content button {
+        margin: 0 10px;
+    }
+}
+

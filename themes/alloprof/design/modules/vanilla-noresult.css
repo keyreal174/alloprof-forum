@@ -1,0 +1,31 @@
+.NoResults a {
+    margin-right: 10px;
+}
+
+.no-result__content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 10%;
+}
+
+.no-result__content p {
+    margin-top: 15px;
+    text-align: center;
+    font-size: 15px;
+    color: #4F4F4F;
+}
+
+.no-result__content h2 {
+    font-size: 28px;
+    margin-top: 30px;
+}
+
+.no-result__content p.d-mobile {
+    color: black;
+}
+
+.no-result__content .ask-btn {
+    margin: 30px 0;
+}

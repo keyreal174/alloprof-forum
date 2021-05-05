@@ -41,7 +41,7 @@ if ($this->data('Comments')->numRows() > 0) {
     echo $this->Form->open();
     $discussionUrl = $this->data('Discussion')->Url;
     echo '<div class="CommentHeadingWrapper">';
-    echo '<h2 class="CommentHeading">'.$this->data('_CommentsHeader', t('Explanations')).'('.CommentModel::getPublishedCommentsCount($this->Data['Discussion']->DiscussionID).')</h2>';
+    echo '<h2 class="CommentHeading">'.$this->data('_CommentsHeader', t('Explanations')).' ('.CommentModel::getPublishedCommentsCount($this->Data['Discussion']->DiscussionID).')</h2>';
     echo '</div>';
     echo $this->Form->close();
 }
