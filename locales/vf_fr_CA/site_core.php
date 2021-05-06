@@ -1868,3 +1868,4 @@ $Definition['Wrong Password'] = 'Mauvais mot de passe';
 $Definition['Not all fields filled out'] = 'Tous les champs ne sont pas complétés';
 $Definition['E-mail is already used by another account'] = 'Le courriel est déjà utilisé par un autre compte';
 $Definition['E-mail address doesn’t exist in the system'] = 'L\'adresse courriel n\'existe pas dans le système';
+$Definition['Edit the comment'] = 'Éditer la publication';
