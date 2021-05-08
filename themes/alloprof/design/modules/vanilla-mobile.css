@@ -82,13 +82,13 @@
     }
 }
 
-.ToggleFlyout.Outside {
+/* .ToggleFlyout.Outside {
     display: none;
 }
 
 .ToggleFlyout.Open {
     display: block;
-}
+} */
 
 @media screen and (max-width: 1024px) {
     .Navigation-link {
@@ -114,13 +114,13 @@
         margin: 0 0 0 45px !important;
     }
 
-    .ToggleFlyout.Open {
+    /* .ToggleFlyout.Open {
         display: none !important;
     }
 
     .ToggleFlyout.Outside {
         display: block;
-    }
+    } */
 
     .ToggleFlyout.Outside .MenuItems li a,
     .ToggleFlyout.Outside .CommentOptions li a {
