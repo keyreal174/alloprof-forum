@@ -241,6 +241,7 @@ $Definition['Awaiting Moderation'] = 'En attente de modération';
 $Definition['Awesome'] = 'Génial!';
 
 $Definition['Back to Discussions'] = 'Retour aux discussions';
+$Definition['Back'] = 'Retour';
 $Definition['Back to Profile'] = 'Retour au profil';
 $Definition['Badge404'] = 'Badge introuvable';
 $Definition['BadgesModuleTitle'] = 'Badges';

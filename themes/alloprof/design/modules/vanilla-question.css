@@ -680,6 +680,21 @@ body.Discussions .DataList.Discussions .embedExternal.embedImage.crossed::after 
     width: fit-content;
 }
 
+.goback-btn a{
+    display: flex !important;
+    align-items: center;
+    height: 30px;
+    font-size: 18px;
+    line-height: 20px;
+    color: black;
+    font-family: "ChromaticaBold";
+    margin-bottom: 20px;
+}
+
+.goback-btn a span {
+    margin-left: 10px;
+}
+
 @media screen and (max-width: 958px) {
     .Discussion .PageTitle {
         right: 20px;

@@ -77,4 +77,14 @@ jQuery(document).ready(function($) {
 
     selectCategoryImg({element: $('.FilterMenu .select2-category option:selected')});
     selectCategoryImg({element: $('.EditDiscussionDetail .select2-category option:selected')});
+
+    $('.english-btn').click(function() {
+        gdn.informMessage(
+            `<div class="toast-container" style="max-width: 380px;">
+                <div class="toast-text">
+                    Feel free to submit or ask questions in English, we answer in both languages!
+                </div>
+            </div>`,
+        'Dismissable');
+    })
 });

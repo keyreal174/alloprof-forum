@@ -61,15 +61,6 @@
         width: 502px;
     }
 
-    div.Header-logo {
-        margin: 0 0 0 45px !important;
-    }
-
-    #MainHeader .Header-left {
-        margin-right: 0 !important;
-        width: fit-content !important;
-    }
-
     .Banner-content__pagename {
         display: none;
     }
@@ -91,9 +82,24 @@
     }
 }
 
+@media screen and (max-width: 1024px) {
+    .Navigation-link {
+        padding: 0 15px;
+    }
+}
+
 @media screen and (max-width: 959px) {
     .ScrollProgress {
         height: 42px !important;
+    }
+
+    #MainHeader .Header-left {
+        margin-right: 0 !important;
+        width: fit-content !important;
+    }
+
+    div.Header-logo {
+        margin: 0 0 0 45px !important;
     }
 
     .Banner-content .Banner-content__description {
@@ -303,6 +309,7 @@
     .Header .MeButton {
         width: 32px;
         height: 32px;
+        margin-left: 5px;
     }
     .Header .MeButton svg {
         height: 21px;
