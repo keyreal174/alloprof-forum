@@ -4039,15 +4039,20 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
         z-index: 1
     }
 
+    .ToggleFlyout.Outside {
+        position: relative;
+        z-index: 9;
+    }
+
     .ButtonGroup.Open .mobileFlyoutOverlay,
     .editor-dropdown-open .mobileFlyoutOverlay,
     .richEditor-button.isOpen .mobileFlyoutOverlay,
-    .ToggleFlyout.Open .mobileFlyoutOverlay {
+    .ToggleFlyout.Open .mobileFlyoutOverlay,
+    .ToggleFlyout.Outside .mobileFlyoutOverlay {
         opacity: 1;
         pointer-events: auto;
         z-index: 1
     }
-
 
     .ButtonGroup.Open .Flyout.Flyout,
     .ButtonGroup.Open .MenuItems.MenuItems,
@@ -4056,6 +4061,8 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
     .richEditor-button.isOpen .Flyout.Flyout,
     .richEditor-button.isOpen .MenuItems.MenuItems,
     .ToggleFlyout.Open .Flyout.Flyout,
+    .ToggleFlyout.Outside .Flyout.Flyout,
+    .ToggleFlyout.Outside .MenuItems.MenuItems,
     .ToggleFlyout.Open .MenuItems.MenuItems {
         -o-transition-delay: 0s;
         -webkit-transition-delay: 0s;
@@ -4068,6 +4075,12 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
         transition-delay: 0s;
         visibility: visible;
         display: block !important;
+    }
+
+    .ToggleFlyout.Outside .MenuItems {
+        top: auto !important;
+        bottom: 15px;
+        margin-bottom: 0;
     }
 
     .Flyout,
@@ -5048,7 +5061,8 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
 .MessageList .PageTitle .Options .ToggleFlyout {
     -ms-flex-order: 2;
     -webkit-box-ordinal-group: 3;
-    order: 2
+    order: 2;
+    display: block;
 }
 
 .MessageList .PageTitle {

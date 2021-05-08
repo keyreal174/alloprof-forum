@@ -87,4 +87,35 @@ jQuery(document).ready(function($) {
             </div>`,
         'Dismissable');
     })
+
+    //
+    $(window).click(function() {
+        $('.Overlay').last().remove();
+    });
+
+    $(document).on('click', '.Popup', function(event) {
+        event.stopPropagation();
+    });
+
+    $(document).on('click', '.mobileFlyoutOverlay', function(event) {
+        $(this).remove();
+    });
+
+    $(document).on('click', '.Flyout.MenuItems', function(event) {
+        event.stopPropagation();
+    });
+
+    $('.ToggleFlyout.OptionsMenu').click(function() {
+        const menu = $(this).find('.mobileFlyoutOverlay').html();
+        $(this).removeClass('Open');
+
+        $('.ToggleFlyout.Outside').remove();
+        $("body").append(`<div class="ToggleFlyout Outside">
+            <div class="mobileFlyoutOverlay">${menu}</div></div>`);
+    })
+
+    $(document).on('click', '.ToggleFlyout.Outside a.EditComment', function(event) {
+        $('.ToggleFlyout.Open a.EditComment').trigger('click');
+        event.preventDefault();
+    })
 });

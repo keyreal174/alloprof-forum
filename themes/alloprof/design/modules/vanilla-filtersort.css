@@ -164,7 +164,7 @@
     display: flex;
     overflow-x: auto;
     padding-bottom: 15px;
-    margin-left: -24px;
+    margin-left: -4px;
     margin-right: -24px;
 }
 
@@ -197,6 +197,10 @@
     justify-content: center;
     border-bottom-left-radius: 24px;
     border-bottom-right-radius: 24px;
+}
+
+.FilterPopup .modal-footer button {
+    background: #F5F3EF !important;
 }
 
 .FilterPopup .btn-default {

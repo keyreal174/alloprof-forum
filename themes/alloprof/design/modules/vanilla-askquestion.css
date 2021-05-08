@@ -329,11 +329,10 @@ body.isMobile .FormWrapper {
     align-items: center;
     background: #F2F2F2;
     border-radius: 99px;
-    height: 40px;
-    padding: 4px;
+    height: 35px;
+    padding: 4px 16px;
     font-size: 12px;
     margin-right: 10px;
-    padding-right: 15px;
     color: black;
     white-space: nowrap;
 }

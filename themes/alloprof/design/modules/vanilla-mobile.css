@@ -82,6 +82,14 @@
     }
 }
 
+.ToggleFlyout.Outside {
+    display: none;
+}
+
+.ToggleFlyout.Open {
+    display: block;
+}
+
 @media screen and (max-width: 1024px) {
     .Navigation-link {
         padding: 0 15px;
@@ -93,6 +101,10 @@
         height: 42px !important;
     }
 
+    .Frame-body {
+        position: relative;
+    }
+
     #MainHeader .Header-left {
         margin-right: 0 !important;
         width: fit-content !important;
@@ -100,6 +112,19 @@
 
     div.Header-logo {
         margin: 0 0 0 45px !important;
+    }
+
+    .ToggleFlyout.Open {
+        display: none !important;
+    }
+
+    .ToggleFlyout.Outside {
+        display: block;
+    }
+
+    .ToggleFlyout.Outside .MenuItems li a,
+    .ToggleFlyout.Outside .CommentOptions li a {
+        padding: 16px 0 !important;
     }
 
     .Banner-content .Banner-content__description {

@@ -593,11 +593,15 @@ body.Discussions .DataList.Discussions .embedExternal.embedImage.crossed::after 
     border-radius: 8px;
 }
 
+.ToggleFlyout.Outside .MenuItems li + li a,
+.ToggleFlyout.Outside .CommentOptions li + li a,
 .DiscussionHeader .MenuItems li + li a,
 .CommentsWrap .CommentOptions li + li a {
     border-top: 1px solid #DDDDDD!important;
 }
 
+.ToggleFlyout.Outside .MenuItems li a,
+.ToggleFlyout.Outside .CommentOptions li a,
 .DiscussionHeader .MenuItems li a,
 .CommentsWrap .CommentOptions li a {
     font-size: 15px;
@@ -608,6 +612,8 @@ body.Discussions .DataList.Discussions .embedExternal.embedImage.crossed::after 
     display: relative;
 }
 
+.ToggleFlyout.Outside .MenuItems li a span,
+.ToggleFlyout.Outside .CommentOptions li a span,
 .DiscussionHeader .MenuItems li a span,
 .CommentsWrap .CommentOptions li a span {
     margin-left: 10px;
@@ -737,6 +743,8 @@ body.Discussions .DataList.Discussions .embedExternal.embedImage.crossed::after 
         width: fit-content;
     }
 
+    .ToggleFlyout.Outside .MenuItems,
+    .ToggleFlyout.Outside .CommentOptions,
     .DiscussionHeader .MenuItems,
     .CommentsWrap .CommentOptions {
         width: calc(100% - 30px);
