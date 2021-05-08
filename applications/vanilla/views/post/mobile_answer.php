@@ -1,6 +1,8 @@
 <?php if (!defined('APPLICATION')) exit();
     include_once $this->fetchViewLocation('helper_functions', 'discussions', 'vanilla');
 
+    $Content = $this->Form->getFormValue('Body', false);
+
     $User = val('User', Gdn::controller());
     if (!$User && Gdn::session()->isValid()) {
         $User = Gdn::session()->User;
@@ -53,7 +55,8 @@
                 <div class="editor">
                     <?php
                         if(!$this->invalid) {
-                            echo '<div class="clickToCreate"></div>';
+                            if(!$Content)
+                                echo '<div class="clickToCreate">'.t('Write your explanation here ...').'</div>';
                             echo '<div class="P">';
                             echo $this->Form->bodyBox('Body', ['Table' => 'Comment', 'FileUpload' => true, 'placeholder' => t('Type your comment'), 'title' => t('Type your comment')]);
                             echo '</div>';

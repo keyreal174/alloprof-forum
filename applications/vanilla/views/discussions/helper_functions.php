@@ -413,12 +413,14 @@ if (!function_exists('writeCategoryDropDown')) :
                     }
 
                     $name = htmlspecialchars(val('Name', $category, 'Blank Category Name'));
+                    $bgColor = val('Color', $category) ?? '#F2F2F2';
+
                     if ($depth > 1) {
                         $name = str_repeat('&#160;', 4 * ($depth - 1)).$name;
                     }
 
-                    echo '<div class="category-item '.($selected?'selected':'').'" id="'.$categoryID.'">';
-                    echo '<div class="icon">'.($category['Photo']?'<img src="'.$category['Photo'].'"/>':'').'</div>';
+                    echo '<div class="category-item '.($selected?'selected':'').'" id="'.$categoryID.'" style="background: '.$bgColor.'">';
+                    // echo '<div class="icon">'.($category['Photo']?'<img src="'.$category['Photo'].'"/>':'').'</div>';
                     echo $name;
                     echo '</div>';
                 }

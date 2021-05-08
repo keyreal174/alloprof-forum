@@ -300,9 +300,15 @@ jQuery(document).ready(function($) {
     /* Options */
 
     // Edit comment
-    $(document).on('click', 'a.EditComment', function() {
+    $(document).on('click', '.ToggleFlyout.Open a.EditComment', function() {
         var btn = this;
         var container = $(btn).closest('.ItemComment');
+
+        if(container.length === 0){
+            container = [document.querySelector('.ItemComment.Open')]
+        }
+        console.log(container)
+
         $(container).addClass('Editing');
         var parent = $(container).find('div.Comment');
         var msg = $(parent).find('div.Message').first();

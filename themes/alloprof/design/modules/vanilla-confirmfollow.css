@@ -93,6 +93,11 @@
         justify-content: center;
     }
 
+    .FlatReportButton button,
+    .FlatReportButton input {
+        background: #F5F3EF !important;
+    }
+
     .flag-content input,
     .flag-content button {
         margin: 0 10px;
