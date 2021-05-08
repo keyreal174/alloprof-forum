@@ -11,7 +11,11 @@ if (!function_exists('userRoleCheck'))
 
 // Wrap the discussion related content in a div.
 echo '<div class="MessageList Discussion">';
-
+echo '<div class="d-desktop goback-btn"><a href="'.url('/discussions').'">
+<svg width="26" height="18" viewBox="0 0 26 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M24.25 8.88715L1.75 8.88715" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M9.11842 16.2175L1.77539 8.87444L9.11842 1.53141" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg><span>'.t('Back').'</span></a></div>';
 $this->fireEvent('AfterDiscussionTitle');
 $this->fireEvent('AfterPageTitle');
 

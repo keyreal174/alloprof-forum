@@ -198,6 +198,8 @@
 .InformMessages .InformMessage .Close span {
     font-size: 35px;
     font-weight: 100;
+    min-width: 35px;
+    height: 35px;
 }
 
 .InformMessages p {
@@ -250,7 +252,7 @@
         margin-right: 15px;
     }
     .InformMessage .toast-container {
-        padding: 20px;
+        padding: 20px 10px;
     }
     .InformMessage a.btn-default {
         display: none !important;

@@ -4063,6 +4063,7 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
         max-width: calc(100% - 24px);
         opacity: 1;
         right: auto;
+        left: auto !important;
         min-width: 300px !important;
         transition-delay: 0s;
         visibility: visible;
@@ -5662,8 +5663,8 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
 
 .MeBox .MeButton-user .ProfilePhoto {
     border-radius: 50%;
-    height: 44px;
-    width: 44px;
+    height: 36px;
+    width: 36px;
     border: 2px solid white;
 }
 
@@ -5712,12 +5713,9 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
 }
 
 .MeBox-header .MeMenu {
-    margin-left: 18px
-}
-
-.MeBox-header .MeMenu .ToggleFlyout+.ToggleFlyout {
     margin-left: 8px
 }
+
 
 /*!
  * @author Isis (igraziatto) Graziatto <isis.g@vanillaforums.com>
@@ -8700,12 +8698,6 @@ table.PreferenceGroup tbody tr:hover td {
     border-radius: 50%;
 }
 
-.Header .MeButton:active,
-.Header .MeButton:focus,
-.Header .MeButton:hover {
-    background-color: #1883bc;
-    color: #fff
-}
 
 .Header .MeButton:active .Alert,
 .Header .MeButton:focus .Alert,
@@ -9145,7 +9137,8 @@ screen and (-ms-high-contrast:none) {
     line-height: 36px;
     min-height: 32px;
     padding: 0 20px;
-    width: 100%
+    width: 100%;
+    white-space: nowrap;
 }
 
 .Navigation-link svg {

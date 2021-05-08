@@ -38,6 +38,7 @@ if ($Session->isValid()):
     if (!$useNewFlyouts) {
         echo userPhoto($User);
     }
+    echo '<div class="english-btn">en</div>';
     echo '<div class="WhoIs">';
     if (!$useNewFlyouts) {
         echo userAnchor($User, 'Username');
@@ -155,6 +156,7 @@ if ($Session->isValid()):
     echo '</div>';
 else:
     echo '<div class="MeBox MeBox-SignIn'.$CssClass.'">';
+    echo '<div class="english-btn">en</div>';
     echo '<div class="SignInLinks">';
 
     $dropdown = new DropdownModule('', '', 'account-options', 'unauthorized withHeader');
