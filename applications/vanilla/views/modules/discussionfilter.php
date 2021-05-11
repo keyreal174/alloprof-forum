@@ -55,7 +55,9 @@ $titleID = "BoxFilterTitle";
                 $options = ['Value' => $this->SubjectID];
             else $options = [];
 
-            echo writeCategoryDropDown($this, 'Form_SubjectDropdown', $options);
+            if (!$this->IsCategory) {
+                echo writeCategoryDropDown($this, 'Form_SubjectDropdown', $options);
+            }
             echo writeGradeFilter($this->GradeID);
             echo writeDiscussionSort($this->Sort);
             echo writeFilterToggle($this->IsExplanation, $this->IsVerified, $this->IsOutExplanation);

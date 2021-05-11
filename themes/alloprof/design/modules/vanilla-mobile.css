@@ -22,7 +22,7 @@
  }
 
  .Question-submenu.invalid {
-    display: none;
+    /* display: none; */
  }
 
  .not-published-badge.mobile {
