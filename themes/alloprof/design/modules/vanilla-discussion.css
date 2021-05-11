@@ -29,6 +29,7 @@ span.ReactButtons a.ReactButton.ReactButton-Like .Count {
     align-items: center;
     width: max-content;
     min-width: 40px;
+    height: 40px;
 }
 
 .Comment span.ReactButtons a.ReactButton.ReactButton-Like .Count {

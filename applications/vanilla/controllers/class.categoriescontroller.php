@@ -399,7 +399,7 @@ class CategoriesController extends VanillaController {
         $sort = Gdn::request()->get('sort') ?? 'desc';
         $this->SortDirection = $sort;
 
-        $discussionFilterModule = new DiscussionFilterModule($gradeFilterOption, $sort, $explanation, $verified, $subject, $outexplanation);
+        $discussionFilterModule = new DiscussionFilterModule($gradeFilterOption, $sort, $explanation, $verified, $subject, $outexplanation, true);
         $this->addModule($discussionFilterModule);
         $this->addJsFile('filter.js');
         $wheres = [];

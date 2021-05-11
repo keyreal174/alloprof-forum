@@ -5,7 +5,7 @@
         <?php if($this->image) echo '<img class="Banner-content__background" src="'.$this->image.'"/>'; ?>
         <div class="Banner-content__Container">
             <!-- <p class="Banner-content__pagename"><?php // echo t($this->breadcrumb); ?></p> -->
-            <!-- <h1><strong><?php echo t($this->title2); ?></strong></h1> -->
+            <h1><strong><?php echo t($this->title2); ?></strong></h1>
         </div>
     </div>
 <?php }
