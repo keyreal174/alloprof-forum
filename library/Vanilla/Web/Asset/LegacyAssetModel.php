@@ -112,7 +112,29 @@ class LegacyAssetModel extends Gdn_Model {
         switch ($basename) {
             case 'style':
                 $this->addCssFile('style-compat.css', 'dashboard', ['Sort' => -9.999]);
-                $this->addCssFile('custom.css', false, ['Sort' => 1000]);
+                $this->addCssFile('modules/vanilla-main.css', false, ['Sort' => 1000]);
+                $this->addCssFile('modules/vanilla-layout.css', false, ['Sort' => 1001]);
+                $this->addCssFile('modules/vanilla-question.css', false, ['Sort' => 1002]);
+                $this->addCssFile('modules/vanilla-avatarupload.css', false, ['Sort' => 1003]);
+                $this->addCssFile('modules/vanilla-profilefilter.css', false, ['Sort' => 1004]);
+                $this->addCssFile('modules/vanilla-askquestion.css', false, ['Sort' => 1005]);
+                $this->addCssFile('modules/vanilla-category.css', false, ['Sort' => 1006]);
+                $this->addCssFile('modules/vanilla-discussion.css', false, ['Sort' => 1007]);
+                $this->addCssFile('modules/vanilla-setlocale.css', false, ['Sort' => 1008]);
+                $this->addCssFile('modules/vanilla-footer.css', false, ['Sort' => 1009]);
+                $this->addCssFile('modules/vanilla-checkanswer.css', false, ['Sort' => 1010]);
+                $this->addCssFile('modules/slick/slick-theme.css', false, ['Sort' => 1011]);
+                $this->addCssFile('modules/slick/slick.css', false, ['Sort' => 1012]);
+                $this->addCssFile('modules/vanilla-popup.css', false, ['Sort' => 1013]);
+                $this->addCssFile('modules/vanilla-filtersort.css', false, ['Sort' => 1014]);
+                $this->addCssFile('modules/vanilla-auth.css', false, ['Sort' => 1015]);
+                $this->addCssFile('modules/vanilla-confirmfollow.css', false, ['Sort' => 1016]);
+                $this->addCssFile('modules/vanilla-notification.css', false, ['Sort' => 1017]);
+                $this->addCssFile('modules/vanilla-pagenotfound.css', false, ['Sort' => 1018]);
+                $this->addCssFile('modules/vanilla-newdropdown.css', false, ['Sort' => 1019]);
+                $this->addCssFile('modules/vanilla-mobile.css', false, ['Sort' => 1020]);
+                $this->addCssFile('modules/vanilla-noresult.css', false, ['Sort' => 1021]);
+                $this->addCssFile('custom.css', false, ['Sort' => 1022]);
 
                 if (Gdn::controller()->Theme && Gdn::controller()->ThemeOptions) {
                     $filenames = valr('Styles.Value', Gdn::controller()->ThemeOptions);

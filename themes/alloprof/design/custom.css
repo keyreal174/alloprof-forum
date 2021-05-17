@@ -20,29 +20,6 @@
  * @license GPL-2.0-only
  */
 
-@import url("./modules/vanilla-main.css");
-@import url("./modules/vanilla-layout.css");
-@import url("./modules/vanilla-question.css");
-@import url("./modules/vanilla-avatarupload.css");
-@import url("./modules/vanilla-profilefilter.css");
-@import url("./modules/vanilla-askquestion.css");
-@import url("./modules/vanilla-category.css");
-@import url("./modules/vanilla-discussion.css");
-@import url("./modules/vanilla-setlocale.css");
-@import url("./modules/vanilla-footer.css");
-@import url("./modules/vanilla-checkanswer.css");
-@import url("./modules/slick/slick-theme.css");
-@import url("./modules/slick/slick.css");
-@import url("./modules/vanilla-popup.css");
-@import url("./modules/vanilla-filtersort.css");
-@import url("./modules/vanilla-auth.css");
-@import url("./modules/vanilla-confirmfollow.css");
-@import url("./modules/vanilla-notification.css");
-@import url("./modules/vanilla-pagenotfound.css");
-@import url("./modules/vanilla-newdropdown.css");
-@import url("./modules/vanilla-mobile.css");
-@import url("./modules/vanilla-noresult.css");
-
 .BoxNewDiscussion {
     -webkit-box-shadow: none;
     background: #fff;
