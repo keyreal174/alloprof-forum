@@ -7,6 +7,17 @@
 
 // Global vanilla library function.
 (function(window, $) {
+    // English Button
+    $(document).on('click', '.english-btn', function(event) {
+        event.preventDefault();
+        var numItems = $('.InformMessages .InformWrapper').length;
+        if (numItems > 1) {
+            $('.InformMessages .InformWrapper').eq(1).children().children().eq(0).trigger('click');
+            $('.InformMessages .InformWrapper').eq(1).css("display", "none");
+        }
+        return true;
+    });
+
     // Disable notification link until website is fully loaded.
     $('.ToggleFlyout-notification').css("pointer-events", "none");
 
