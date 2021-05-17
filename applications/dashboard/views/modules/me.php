@@ -172,7 +172,7 @@ else:
     $dropdown->addLink(t('Sign In'), false, '', 'SignInStudentPopupAgent', ['rel' => 'nofollow'], $editModifiers);
     $dropdown->addLink(t('Sign In'), '/entry/signinstudent?Target='.$this->_Sender->SelfUrl, 'studentsignin', 'SignInStudentPopup HiddenImportant', ['rel' => 'nofollow'], $editModifiers);
     $dropdown->addLink(t('Register'), registerUrl($this->_Sender->SelfUrl), 'register', 'registerPopup', [], $editModifiers);
-    $dropdown->addLink(t('Teacher'), signInUrl($this->_Sender->SelfUrl), 'teachersignin', 'SignInPopup', ['rel' => 'nofollow'], $preferencesModifiers);
+    // $dropdown->addLink(t('Teacher'), signInUrl($this->_Sender->SelfUrl), 'teachersignin', 'SignInPopup', ['rel' => 'nofollow'], $preferencesModifiers);
 
     $this->EventArguments['Dropdown'] = &$dropdown;
     $this->fireEvent('FlyoutMenu');
