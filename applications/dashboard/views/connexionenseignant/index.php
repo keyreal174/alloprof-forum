@@ -2,7 +2,7 @@
 $signinLink = anchor(
     '',
     'entry/signin',
-    'SignInPopup Hidden',
+    'SignInPopup TeacherSigninPopup Hidden',
     ['rel' => 'nofollow']
 );
 
