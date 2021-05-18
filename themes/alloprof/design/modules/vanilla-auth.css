@@ -261,6 +261,10 @@ div.Popup.SignInPopup a.Close {
     top: 5px;
 }
 
+div.Popup.SignInPopup.TeacherSigninPopup a.Close {
+    display: none;
+}
+
 div.Popup.SignInPopup .logo {
     display: none;
 }

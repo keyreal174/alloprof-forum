@@ -804,7 +804,7 @@ jQuery(document).ready(function($) {
 
     // This turns SignInPopup anchors into in-page popups
     if ($.fn.popup) {
-        $('a.SignInPopup').popup({containerCssClass: 'SignInPopup'});
+        $('a.TeacherSigninPopup').popup({containerCssClass: 'SignInPopup TeacherSigninPopup'});
         $('a.registerPopup').popup({containerCssClass: 'registerPopup SignInPopup'});
         $('a.SignInStudentPopup').popup({containerCssClass: 'SignInStudentPopup SignInPopup'});
     }
