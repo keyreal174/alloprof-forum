@@ -17,7 +17,7 @@
     if ($this->data('signInUrl')) {
         echo '<div class="Buttons">';
         if ($this->data('registerUrl')) {
-            //echo ' '.anchor(t('Register', t('Apply for Membership', 'Register')), 'https://alloprof.qc.ca/jsconnect/register', 'btn-default btn-shadow', ['rel' => 'nofollow', 'aria-label' => t("Register Now")]);
+            //echo ' '.anchor(t('Register', t('Apply for Membership', 'Register')), 'https://www.alloprof.qc.ca/jsconnect/register', 'btn-default btn-shadow', ['rel' => 'nofollow', 'aria-label' => t("Register Now")]);
             echo ' '.anchor(t('Register', t('Apply for Membership', 'Register')), $this->data('registerUrl'), 'btn-default btn-shadow registerPopup', ['rel' => 'nofollow', 'aria-label' => t("Register Now")]);
         }
         echo '<p>'.t('Do you already have an account?');
