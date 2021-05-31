@@ -88,7 +88,6 @@ jQuery(document).ready(function($) {
         'Dismissable');
     })
 
-    //
     $(window).click(function() {
         $('.Overlay').last().remove();
     });
