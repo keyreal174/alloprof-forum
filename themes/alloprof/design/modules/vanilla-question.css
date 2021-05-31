@@ -687,7 +687,7 @@ body.Discussions .DataList.Discussions .embedExternal.embedImage.crossed::after 
 }
 
 .goback-btn a{
-    display: flex !important;
+    display: inline-flex !important;
     align-items: center;
     height: 30px;
     font-size: 18px;
