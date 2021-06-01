@@ -1,4 +1,8 @@
-<?php if (!defined('APPLICATION')) exit(); ?>
+<?php if (!defined('APPLICATION')) exit();
+
+if (!function_exists('timeElapsedString'))
+    include($this->fetchViewLocation('helper_functions', 'discussions', 'vanilla'));
+?>
 <ul class="PopList Activities">
     <li class="Item Title"><?php
         echo '<a href="#" class="Close d-mobile">×</a>';
@@ -111,7 +115,7 @@
                         echo t(trim($excerpt)); ?>
                 </p>
                 <div class="Meta">
-                    <span class="MItem DateCreated"><?php echo Gdn_Format::date($Activity['DateUpdated']); ?></span>
+                    <span class="MItem DateCreated"><?php echo timeElapsedString($Activity['DateUpdated']); ?></span>
                 </div>
                 <?php
                     if($Activity['Notified'] == ActivityModel::SENT_PENDING) echo '<span class="mark-not-read"></span>'
