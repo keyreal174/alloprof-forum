@@ -617,6 +617,7 @@ body.Discussions .DataList.Discussions .embedExternal.embedImage.crossed::after 
 .DiscussionHeader .MenuItems li a span,
 .CommentsWrap .CommentOptions li a span {
     margin-left: 10px;
+    white-space: pre-wrap;
 }
 
 .MessageList.Disucssion {
