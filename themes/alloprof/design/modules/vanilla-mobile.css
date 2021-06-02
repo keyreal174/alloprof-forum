@@ -42,9 +42,36 @@
      display: none;
  }
 
+ .Categories .Category-banner__img {
+    max-height: 480px;
+ }
+
+ .Header {
+    padding-left: 80px;
+    padding-right: 80px;
+ }
+
  /* Basic Mobile theme */
 
  @media screen and (max-width: 1366px) {
+    .Header {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+
+    .Categories .Category-banner__text {
+        margin-top: 80px;
+    }
+
+    .Categories .Category-banner__container {
+        flex-direction: column;
+    }
+
+    .Categories .Category-banner__img {
+        max-height: 280px;
+        text-align: center;
+    }
+
     .sidebar.right {
         display: none;
     }
@@ -99,6 +126,19 @@
 @media screen and (max-width: 959px) {
     .ScrollProgress {
         height: 42px !important;
+    }
+
+    .Categories .Category-banner__container {
+        padding: 0 24px;
+    }
+
+    .Categories .Category-banner__text {
+        display: none;
+    }
+
+    .Categories .Category-banner__img {
+        max-height: 220px;
+        text-align: center;
     }
 
     .Frame-body {

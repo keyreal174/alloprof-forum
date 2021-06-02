@@ -198,14 +198,6 @@ class SearchController extends Gdn_Controller {
         $this->fireEvent('AddProfileTabsInfo');
         $this->addModule('ProfileFilterModule');
 
-        // $bannerModule = new BannerModule(
-        //     'Search',
-        //     'Home',
-        //     t('Search for'),
-        //     t(Gdn_Format::text($search).',')
-        // );
-        // $this->addModule($bannerModule);
-
         saveToConfig('Garden.Format.EmbedSize', '160x90', false);
         Gdn_Theme::section('SearchResults');
 

@@ -1,11 +1,14 @@
 <?php
     if($this->page === 'Categories') {
 ?>
-    <div class="Banner-content">
-        <?php if($this->image) echo '<img class="Banner-content__background" src="'.$this->image.'"/>'; ?>
-        <div class="Banner-content__Container">
-            <!-- <p class="Banner-content__pagename"><?php // echo t($this->breadcrumb); ?></p> -->
-            <h1><strong><?php echo t($this->title2); ?></strong></h1>
+    <div class="Banner-content" style="background-color: <?php echo $this->bgColor; ?>">
+        <div class="Category-banner__container">
+            <div class="Category-banner__text">
+                <h1><strong><?php echo t($this->title); ?></strong></h1>
+            </div>
+            <div class="Category-banner__img">
+                <?php if($this->image) echo '<img src="'.$this->image.'"/>'; ?>
+            </div>
         </div>
     </div>
 <?php }
@@ -13,8 +16,6 @@
 ?>
     <div class="Banner-content General <?php echo $this->additionalClass; ?>">
         <div class="Banner-content__Container">
-            <!-- <p class="Banner-content__pagename"><?php echo t($this->breadcrumb); ?></p> -->
-            <!-- <h1><strong><?php echo t($this->title2); ?></strong></h1> -->
             <p class="Banner-content__description d-desktop">
                 <?php echo t("Welcome to the Mutual Aid Zone! <br/> Do you have a question? Here are the explanations!"); ?>
             </p>

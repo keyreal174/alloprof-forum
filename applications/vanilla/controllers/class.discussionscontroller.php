@@ -252,10 +252,10 @@ class DiscussionsController extends VanillaController {
         $this->fireEvent('AddProfileTabsInfo');
 
         if ($this->UserRole == "Teacher") {
-            $bannerModule = new BannerModule('Home', 'Home', '', 'Mutual Aid Zone', "Welcome to the Mutual Aid Zone! <br/> Want to help the students? It's this way!", "", "Teacher");
+            $bannerModule = new BannerModule('Home', 'Mutual Aid Zone', "Teacher");
         } else {
             $this->addModule('NewDiscussionModule');
-            $bannerModule = new BannerModule('Home', 'Home', '', 'Mutual Aid Zone', 'Welcome to the Mutual Aid Zone! <br/> Do you have a question? Here are the explanations!', '');
+            $bannerModule = new BannerModule('Home', 'Mutual Aid Zone');
             $this->addModule('ProfileFilterModule');
         }
 
@@ -644,10 +644,10 @@ class DiscussionsController extends VanillaController {
         $this->addModule($mobileHeader);
 
         if ($this->UserRole == "Teacher") {
-            $bannerModule = new BannerModule('Home', 'Home', '', 'Mutual Aid Zone', "Welcome to the Mutual Aid Zone! <br/> Want to help the students? It's this way!", "", "Teacher");
+            $bannerModule = new BannerModule('Home', 'Mutual Aid Zone', "Teacher");
         } else {
             $this->addModule('NewDiscussionModule');
-            $bannerModule = new BannerModule('Home', 'Home', '', 'Mutual Aid Zone', 'Welcome to the Mutual Aid Zone! <br/> Do you have a question? Here are the explanations!', '');
+            $bannerModule = new BannerModule('Home', 'Mutual Aid Zone');
             $this->addModule('ProfileFilterModule');
         }
 

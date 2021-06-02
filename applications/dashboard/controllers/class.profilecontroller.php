@@ -576,15 +576,6 @@ class ProfileController extends Gdn_Controller {
             }
         }
 
-
-        // if ($this->UserRole == "Teacher") {
-        //     $bannerModule = new BannerModule('Home', 'Home', '', 'Mutual Aid Zone', "Welcome to the Mutual Aid Zone! <br/> Want to help the students? It's this way!", "", "Teacher");
-        // } else {
-        //     $bannerModule = new BannerModule('Home', 'Home', '', 'Mutual Aid Zone', 'Welcome to the Mutual Aid Zone! <br/> Do you have a question? Here are the explanations!', '');
-        // }
-
-        // $this->addModule($bannerModule);
-
         $this->title(t('Edit Profile'));
         $this->_setBreadcrumbs(t('Edit Profile'), '/profile/edit');
         $this->render();
