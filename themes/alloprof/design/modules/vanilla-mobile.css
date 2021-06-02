@@ -182,7 +182,12 @@
     }
 
     .MeBox .additional-links {
-        top: 13px;
+        top: 17px;
+    }
+
+    .MeBox .additional-links > a {
+        width: 32px;
+        height: 32px;
     }
 
     .sidebar.left {

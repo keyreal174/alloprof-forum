@@ -5726,10 +5726,9 @@ div.token-input-dropdown ul li[class^=token-input-dropdown-item] {
     display: flex
 }
 
-.MeBox-header .MeMenu {
-    margin-left: 8px
+.MeBox-header .MeMenu > span {
+    margin-left: 6px;
 }
-
 
 /*!
  * @author Isis (igraziatto) Graziatto <isis.g@vanillaforums.com>

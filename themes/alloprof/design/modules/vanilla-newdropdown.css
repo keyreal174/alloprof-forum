@@ -50,8 +50,16 @@
 .MeBox .additional-links {
     position: absolute;
     left: 0;
-    top: 20px;
+    top: 19px;
     margin-left: 0 !important;
+}
+
+.MeBox .additional-links > a {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .MeBox .Flyout.authorized li a img.ProfilePhoto {
@@ -105,7 +113,8 @@
 }
 
 .LinksButton .BergerIcon {
-    width: 30px;
+    width: 24px;
+    height: 24px;
 }
 
 .additional-links__popup {
@@ -218,6 +227,11 @@ a.Flayout-Subject .Flyout {
     cursor: pointer;
     font-weight: bold;
     font-size: 18px;
+    width: 35px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 @media screen and (max-width: 958px) {
@@ -252,6 +266,7 @@ a.Flayout-Subject .Flyout {
 
     .LinksButton .BergerIcon {
         width: 20px;
+        height: 20px;
     }
 
     .MeBox.FlyoutRight .Flyout {
