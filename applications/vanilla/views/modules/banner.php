@@ -1,7 +1,7 @@
 <?php
     if($this->page === 'Categories') {
 ?>
-    <div class="Banner-content" style="background-color: <?php echo $this->bgColor; ?>">
+    <div class="Banner-content Category" style="background-color: <?php echo $this->bgColor; ?>">
         <div class="Category-banner__container">
             <div class="Category-banner__text">
                 <h1><strong><?php echo t($this->title); ?></strong></h1>

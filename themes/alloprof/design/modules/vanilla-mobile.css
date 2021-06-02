@@ -124,8 +124,12 @@
         display: none;
     }
 
+    .Banner-content.Category {
+        max-height: 196px;
+    }
+
     .Categories .Category-banner__img {
-        max-height: 220px;
+        max-height: 196px;
         text-align: center;
     }
 
