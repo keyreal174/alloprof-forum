@@ -21,10 +21,6 @@
     font-size: 18px;
  }
 
- .Question-submenu.invalid {
-    /* display: none; */
- }
-
  .not-published-badge.mobile {
     display: none !important;
     position: relative;
@@ -109,14 +105,6 @@
     }
 }
 
-/* .ToggleFlyout.Outside {
-    display: none;
-}
-
-.ToggleFlyout.Open {
-    display: block;
-} */
-
 @media screen and (max-width: 1024px) {
     .Navigation-link {
         padding: 0 15px;
@@ -153,14 +141,6 @@
     div.Header-logo {
         margin: 0 0 0 45px !important;
     }
-
-    /* .ToggleFlyout.Open {
-        display: none !important;
-    }
-
-    .ToggleFlyout.Outside {
-        display: block;
-    } */
 
     .ToggleFlyout.Outside .MenuItems li a,
     .ToggleFlyout.Outside .CommentOptions li a {
