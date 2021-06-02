@@ -8598,9 +8598,28 @@ table.PreferenceGroup tbody tr:hover td {
     margin: 0 auto;
 }
 
-.Categories .Banner-content__Container {
+.Categories .Category-banner__container {
+    display: flex;
+    align-items: center;
     justify-content: flex-start;
-    padding-top: 85px;
+    max-width: 1920px;
+    margin: 0 auto;
+    padding: 0 80px;
+    height: 100%;
+    width: 100%;
+}
+
+.Categories .Category-banner__container > div {
+    flex: 1;
+}
+
+.Categories .Category-banner__img {
+    width: 100%;
+    text-align: right;
+}
+
+.Categories .Category-banner__img > img {
+    height: 100%;
 }
 
 .Banner-content.General .Banner-content__Container {
@@ -8617,7 +8636,7 @@ table.PreferenceGroup tbody tr:hover td {
 }
 
 .Banner-content.Teacher .Banner-content__Container {
-    background-position-y: calc(100% + 70px);
+    background-position-y: calc(100% + 100px);
     background-image: url(../../../../themes/alloprof/design/images/teacher-banner.svg);
 }
 
@@ -8658,6 +8677,8 @@ table.PreferenceGroup tbody tr:hover td {
     display: flex;
     height: 80px;
     position: relative;
+    max-width: 1760px;
+    margin: 0 auto;
 }
 
 .Header .Hamburger,

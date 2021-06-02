@@ -652,7 +652,7 @@ class CategoriesController extends VanillaController {
             $this->fireEvent('AddProfileTabsInfo');
             $this->addModule('ProfileFilterModule');
 
-            $bannerModule = new BannerModule('Categories', 'Home / '.val('Name', $category, ''), '', val('Name', $category, ''), '', val('BannerImage', $category));
+            $bannerModule = new BannerModule('Categories', val('Name', $category, ''), '', val('BannerImage', $category), val('Color', $category));
             $this->addModule($bannerModule);
 
             $mobileHeader = new MobileHeaderModule(val('Name', $category, ''), true);
