@@ -1614,6 +1614,8 @@ class PostController extends VanillaController {
             $this->Form->setFormValue('Format', $format);
         }
 
+        $discussionID = $this->Comment->DiscussionID ?? 0;
+        $this->setData('PreviousURL', url('/discussion/'.$discussionID.'/question'));
         $this->View = 'editcomment';
         $this->comment($this->Comment->DiscussionID ?? 0);
     }
