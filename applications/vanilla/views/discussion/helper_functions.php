@@ -378,7 +378,7 @@ if (!function_exists('getDiscussionOptions')) :
             $targetUrl = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 
             if (strpos($_SERVER[REQUEST_URI], 'question') !== false) {
-                $targetUrl = urlencode(url('/discussions'));
+                $targetUrl = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]".url('/discussions');
             }
 
             $options['DeleteDiscussion'] = [
