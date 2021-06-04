@@ -279,6 +279,9 @@ if (!function_exists('getDiscussionOptions')) :
             $categoryID = val('CategoryID', $sender->Discussion);
         }
 
+        if ($session && $session->UserID == $discussion->InsertUserID && $sender->getUserRole() == 'member' && val('CountComments', $discussion) != 0)
+            return [];
+
         if ($sender->getUserRole() === 'Teacher') {
             if (!$discussion->Published) {
                 $logID = Gdn::sql()
@@ -453,6 +456,9 @@ if (!function_exists('getDiscussionOptionsDropdown')):
             trace('Getting category ID from controller Discussion property.');
             $categoryID = val('CategoryID', $sender->Discussion);
         }
+
+        if ($session && $session->UserID == $discussion->InsertUserID && $sender->getUserRole() == 'member' && val('CountComments', $discussion) != 0)
+            return '';
 
         $discussionID = $discussion->DiscussionID;
         $categoryUrl = urlencode(categoryUrl(CategoryModel::categories($categoryID)));
