@@ -16,28 +16,31 @@ span.ReactButtons a.ReactButton.ReactButton-Like {
 }
 
 span.ReactButtons a.ReactButton.ReactButton-Like .Count {
-    margin-top: 3px;
+    margin-top: 5px;
     margin-right: 0;
-    margin-left: 25px;
+    margin-left: 24px;
     font-size: 17px;
-    line-height: 17px;
-    color: #1A1919;
+    line-height: 20px;
+    color: #000000;
 }
 
 .Comment span.ReactButtons a.ReactButton.ReactButton-Like {
-    display: flex !important;
+    min-width: 44px;
+    height: 44px;
+    display: flex;
+    font-size: 17px;
+    padding: 0 12px;
     align-items: center;
-    width: max-content;
-    min-width: 40px;
-    height: 40px;
+    justify-content: center;
+    margin: 0 !important;
 }
 
 .Comment span.ReactButtons a.ReactButton.ReactButton-Like .Count {
-    margin-left: 30px;
+    /* margin-left: 30px;
     margin-right: 5px;
     font-size: 17px;
     line-height: 20px;
-    color: #6C6767;
+    color: #6C6767; */
 }
 
 span.ReactButtons a.ReactButton.ReactButton-Like .additional-label {
