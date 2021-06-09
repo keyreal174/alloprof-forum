@@ -342,6 +342,11 @@ div.Popup.SocialPopup .SocialSharingButtons a img {
     line-height: 15px;
 }
 
+.DeleteDiscussionPopup #Form_DeleteMessage {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
 /* Account Banned popup */
 
 div.Popup.BanPopup #Message {
