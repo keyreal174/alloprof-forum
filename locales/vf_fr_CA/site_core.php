@@ -1834,6 +1834,7 @@ $Definition['Publish'] = 'Publier';
 $Definition['Alloprof Teacher'] = 'Enseignant Alloprof';
 $Definition['people found the explanation helpful'] = 'personnes ont trouvé l’explication utile';
 $Definition['person found the explanation helpful'] = 'personne a trouvé l’explication utile';
+$Definition['Be the first to find this explanation useful'] = 'Sois le premier à trouver cette explication utile';
 
 $Definition['Confirm account information'] = 'Confirmer détails du compte';
 $Definition['Display name'] = 'Pseudonyme';

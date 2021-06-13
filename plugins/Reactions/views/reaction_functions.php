@@ -185,11 +185,13 @@ if (!function_exists('reactionButton')) {
             $isLiked = ReactionModel::getCurrentStatus($recordType, 9, $iD);
             $label = t("Like");
             if ($count) {
-                // if ($count > 1) {
-                //     $additionalLabel = t("people found the explanation helpful");
-                // } else {
-                //     $additionalLabel = t("person found the explanation helpful");
-                // }
+                if ($count > 1) {
+                    $additionalLabel = t("people found the explanation helpful");
+                } else {
+                    $additionalLabel = t("person found the explanation helpful");
+                }
+            } else {
+                $additionalLabel = t("Be the first to find this explanation useful");
             }
             if ($isLiked) {
                 $linkClass = $linkClass . " isLiked";
