@@ -1872,3 +1872,4 @@ $Definition['E-mail is already used by another account'] = 'Le courriel est déj
 $Definition['E-mail address doesn’t exist in the system'] = 'L\'adresse courriel n\'existe pas dans le système';
 $Definition['Edit the comment'] = 'Éditer la publication';
 $Definition['Write your explanation here ...'] = 'Écris ton explication ici...';
+$Definition['Your question will be deleted permanently'] = 'Ta question sera supprimée définitivement';
