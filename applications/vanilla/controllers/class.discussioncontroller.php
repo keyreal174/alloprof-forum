@@ -915,7 +915,7 @@ class DiscussionController extends VanillaController {
                 $discussionInsertUser = $this->UserModel->getID($discussion->InsertUserID);
                 $userPrefs = dbdecode($discussionInsertUser->Preferences);
 
-                if (val("Email.CustomNotification", $userPrefs)) {
+                if (val("Email.CustomNotification", $userPrefs) && $discussion->InsertUserID != $session->UserID) {
                     $UserMetaData = Gdn::userModel()->getMeta($discussion->InsertUserID, 'Profile.%', 'Profile.');
 
                     $username = $UserMetaData['DisplayName'] ?? "";
@@ -960,6 +960,10 @@ class DiscussionController extends VanillaController {
         }
 
         $this->setData('Title', t('Delete Post'));
+        $this->setData('IsSelf', false);
+        if ($discussion->InsertUserID == $session->UserID) {
+            $this->setData('IsSelf', true);
+        }
         $this->render();
     }
 
