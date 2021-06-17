@@ -521,9 +521,7 @@ class DiscussionController extends VanillaController {
                 $Roles = array_filter($Roles, 'RoleModel::FilterPersonalInfo');
             }
 
-            if (in_array("Moderator", $Roles))
-                $UserRole = "Moderator";
-            else if(in_array(Gdn::config('Vanilla.ExtraRoles.Teacher'), $Roles))
+            if(in_array(Gdn::config('Vanilla.ExtraRoles.Teacher'), $Roles))
                 $UserRole = Gdn::config('Vanilla.ExtraRoles.Teacher') ?? TEACHER_ROLE;
             else $UserRole = RoleModel::TYPE_MEMBER ?? 'Student';
 
@@ -888,12 +886,15 @@ class DiscussionController extends VanillaController {
             throw notFoundException('Discussion');
         }
 
-        if ($this->Form->authenticatedPostBack() && ($this->getUserRole() == "Moderator" || $this->getUserRole() == TEACHER_ROLE || $discussion->InsertUserID == $session->UserID)) {
+        if ($this->Form->authenticatedPostBack() && ($this->getUserRole() == TEACHER_ROLE || $discussion->InsertUserID == $session->UserID)) {
             if (!$this->DiscussionModel->deleteID($discussionID)) {
                 $this->Form->addError('Failed to delete discussion');
             }
 
             $this->LogModel->delete(['RecordID' => $discussionID]);
+            Gdn::sql()->delete('Flag', [
+                'ForeignURL' => $discussion->Url
+            ]);
 
             if ($this->Form->errorCount() == 0) {
                 \Gdn::config()->touch([
@@ -987,6 +988,7 @@ class DiscussionController extends VanillaController {
         $validUser = $session->UserID > 0 && $session->validateTransientKey($transientKey);
         $discussion = "";
         $comment = $this->CommentModel->getID($commentID);
+
         if ($this->Form->authenticatedPostBack()) {
 
             if ($validCommentID && $validUser) {
@@ -1025,6 +1027,10 @@ class DiscussionController extends VanillaController {
                     }
 
                     $this->LogModel->delete(['RecordID' => $commentID]);
+                    Gdn::sql()->delete('Flag', [
+                        'ForeignType' => 'comment',
+                        'ForeignID' => $commentID
+                    ]);
                 } else {
                     $this->Form->addError('Invalid comment');
                 }
