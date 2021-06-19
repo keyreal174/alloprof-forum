@@ -8,7 +8,9 @@ $ViewPersonalInfo = $Session->checkPermission('Garden.PersonalInfo.View');
 
 foreach ($this->UserData->result() as $User) {
     $Alt = !$Alt;
-    $userBlock = new MediaItemModule(val('Name', $User), userUrl($User));
+    $UserMetaData = Gdn::userModel()->getMeta($User->UserID, 'Profile.%', 'Profile.');
+    $UserName = $UserMetaData["DisplayName"] ?? val('Name', $User);
+    $userBlock = new MediaItemModule($UserName, userUrl($User));
     $userBlock->setView('media-sm')
         ->setImage(userPhotoUrl($User))
         ->addMetaIf($ViewPersonalInfo, Gdn_Format::email($User->Email));
