@@ -3255,16 +3255,20 @@ class UserModel extends Gdn_Model implements UserProviderInterface, EventFromRow
                 ->endWhereGroup();
         } elseif ($keywords) {
             $keywords = $this->SQL->escapeField($keywords);
+            $this->SQL
+                ->join('UserMeta um', "u.UserID = um.UserID")
+                ->groupBy('u.UserID');
             if ($optimize && !$isIPAddress) {
                 // An optimized search should only be done against name OR email.
                 if (strpos($keywords, '@') !== false) {
                     $this->SQL->like('u.Email', $keywords, 'right');
                 } else {
+                    $this->SQL->like('um.Value', $keywords, 'right');
                     $this->SQL->like('u.Name', $keywords, 'right');
                 }
             } else {
                 // Search on the user table.
-                $like = ['u.Name' => $keywords, 'u.Email' => $keywords];
+                $like = ['um.Value' => $keywords, 'u.Email' => $keywords, 'u.Name' => $keywords];
 
                 $this->SQL
                     ->orOp()
