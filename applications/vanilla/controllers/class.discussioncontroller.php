@@ -892,6 +892,9 @@ class DiscussionController extends VanillaController {
             }
 
             $this->LogModel->delete(['RecordID' => $discussionID]);
+            Gdn::sql()->delete('Flag', [
+                'ForeignURL' => $discussion->Url
+            ]);
 
             if ($this->Form->errorCount() == 0) {
                 \Gdn::config()->touch([
@@ -985,6 +988,7 @@ class DiscussionController extends VanillaController {
         $validUser = $session->UserID > 0 && $session->validateTransientKey($transientKey);
         $discussion = "";
         $comment = $this->CommentModel->getID($commentID);
+
         if ($this->Form->authenticatedPostBack()) {
 
             if ($validCommentID && $validUser) {
@@ -1023,6 +1027,10 @@ class DiscussionController extends VanillaController {
                     }
 
                     $this->LogModel->delete(['RecordID' => $commentID]);
+                    Gdn::sql()->delete('Flag', [
+                        'ForeignType' => 'comment',
+                        'ForeignID' => $commentID
+                    ]);
                 } else {
                     $this->Form->addError('Invalid comment');
                 }
