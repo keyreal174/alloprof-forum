@@ -1054,7 +1054,7 @@ class DiscussionController extends VanillaController {
                 $data = [
                     "ActivityType" => "Delete",
                     "NotifyUserID" => $comment->InsertUserID,
-                    "HeadlineFormat" => $headlineFormat,
+                    "HeadlineFormat" => 'Explanation deleted!',
                     "RecordType" => "Delete",
                     "RecordID" => $commentID,
                     "Story" => $headlineFormat,
