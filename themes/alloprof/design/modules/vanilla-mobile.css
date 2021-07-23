@@ -182,7 +182,7 @@
         padding-right: 16px;
     }
 
-    .Header-left__search {
+    .Header .Header-left__search {
         display: none !important;
     }
 
