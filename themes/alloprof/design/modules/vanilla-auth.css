@@ -133,15 +133,10 @@ div.Popup.SignInPopup li.form-group select {
     appearance: none;
 }
 
-div.Popup.SignInPopup li.form-group:after {
-    content: "";
-    background: url('../../../../themes/alloprof/design/images/icons/arrowDown.svg');
-    width: 14px;
-    height: 16px;
-    background-repeat: no-repeat;
-    top: 10px;
-    right: 0px;
-    position: absolute;
+div.Popup.SignInPopup li.select .select2-selection__rendered {
+    padding: 0 !important;
+    font-size: 15px !important;
+    color: black !important;
 }
 
 .UserLoggedOut .PasswordStrength,

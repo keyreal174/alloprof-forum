@@ -76,16 +76,21 @@
                 echo '<span id="PasswordsDontMatch" class="Incorrect" style="display: none;">'.t("Passwords don't match").'</span>';
                 ?>
             </li>
-            <li role="presentation" class="select form-group" style="margin-bottom: 35px;">
+            <li role="presentation" class="select" style="margin-bottom: 35px;">
                 <?php
                     // echo $this->Form->dropDown('Grade', $GradeOption, array('IncludeNull' => t('Grade')));
                 ?>
                 <?php
-                    echo '<div class="rich-select select2 select2-grade" style="border-bottom: none;">';
-                    // echo '<div class="pre-icon"><img src="'.url("/themes/alloprof/design/images/icons/sort.svg").'" width="14" height="8" style="max-height: 10px"/></div>';
-                    echo Gdn::controller()->Form->dropDown('Grade', $GradeOption, array('IncludeNull' => t('Grade')));
+                    echo '<div class="rich-select select2 select2-grade">';
+                    echo Gdn::controller()->Form->dropDown('Grade', $GradeOption);
                     echo '</div>';
                 ?>
+                <script >
+                    $('.select2-grade select').select2({
+                        minimumResultsForSearch: -1,
+                        placeholder: "Niveau",
+                    });
+                </script>
             </li>
             <!-- <?php $this->fireEvent('RegisterBeforePassword'); ?>
             <?php $this->fireEvent('ExtendedRegistrationFields'); ?> -->
