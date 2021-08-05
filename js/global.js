@@ -187,7 +187,9 @@
         checkAllFilled();
     });
 
-    $(document).delegate('.registerPopup #Form_Grade', 'change', function() {
+    $(document).on('change', '.registerPopup #Form_Grade', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
         checkAllFilled();
     });
 
