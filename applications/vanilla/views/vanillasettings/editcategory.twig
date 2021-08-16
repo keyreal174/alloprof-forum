@@ -1,4 +1,3 @@
-
 {% from "@dashboard/components/macros.twig" import dashboardHeading %}
 
 {{ helpAsset(
@@ -29,17 +28,33 @@ dashboardHeading({
     </li>
     <li class="form-group">
         <div class="label-wrap">
+            {{ form.label('Language', 'Language') }}
+        </div>
+        <div class="input-wrap">
+            {{ form.dropDown('Language', {'fr': 'fr', 'en': 'en'}, {'Wrap': true}) }}
+        </div>
+    </li>
+    <li class="form-group">
+        <div class="label-wrap">
+            {{ form.label('Linked CategoryID', 'LinkedCategoryID') }}
+        </div>
+        <div class="input-wrap">
+            {{ form.textBox('LinkedCategoryID', {'MultiLine': false}) }}
+        </div>
+    </li>
+    <li class="form-group">
+        <div class="label-wrap">
             <strong>{{ t('Category Url:') }}</strong>
         </div>
         <div id="UrlCode" class="input-wrap category-url-code">
             {% apply spaceless %}
-                <div class="category-url">
-                    {{ url('/categories', true) }}{{- '/' -}}
-                    <span>{{ form.getValue('UrlCode') }}</span>
-                </div>
-                {{- form.textBox('UrlCode') -}}
-                {{- form.getValue('UrlCode') ? '/' : '' -}}
-                <a class="Edit btn btn-link" href="#">{{ t('edit') }}</a>&nbsp;<a class="Save btn btn-primary" href="#">{{ t('OK') }}</a>&nbsp;
+            <div class="category-url">
+                {{ url('/categories', true) }}{{- '/' -}}
+                <span>{{ form.getValue('UrlCode') }}</span>
+            </div>
+            {{- form.textBox('UrlCode') -}}
+            {{- form.getValue('UrlCode') ? '/' : '' -}}
+            <a class="Edit btn btn-link" href="#">{{ t('edit') }}</a>&nbsp;<a class="Save btn btn-primary" href="#">{{ t('OK') }}</a>&nbsp;
             {% endapply %}
         </div>
     </li>
@@ -86,8 +101,8 @@ dashboardHeading({
         </div>
     </li>
     {#
-        // Extended fields may be defined through some addon.
-     #}
+                                                                                        // Extended fields may be defined through some addon.
+                                                                                     #}
     {% if _ExtendedFields is defined %}
         {{ form.simple(_ExtendedFields, []) }}
     {% endif %}
@@ -127,7 +142,7 @@ dashboardHeading({
     {% endif %}
 
     {% if _PermissionFields is defined %}
-    {{ form.simple(_PermissionFields, []) }}
+        {{ form.simple(_PermissionFields, []) }}
     {% endif %}
 
     <div class="padded">{{ t('Check all permissions that apply for each role') }}</div>

@@ -47,6 +47,7 @@ class AlloprofPlugin extends Gdn_Plugin {
             ->column('AcceptedUserID', 'int', true)
             ->column('Resolved', 'tinyint(1)', 0)
             ->column('Cycle', 'int', 0)
+            ->column('Language', 'varchar(5)', ['Null' => false, 'Default' => 'fr'])
             ->set();
 
         $St->table('Comment')
@@ -54,10 +55,17 @@ class AlloprofPlugin extends Gdn_Plugin {
             ->column('Published', 'tinyint(1)', '0')
             ->column('DateAccepted', 'datetime', true)
             ->column('AcceptedUserID', 'int', true)
+            ->column('Language', 'varchar(5)', ['Null' => false, 'Default' => 'fr'])
             ->set();
 
         $St->table('Category')
             ->column('Color', 'varchar(50)', null)
+            ->column('Language', 'varchar(5)', ['Null' => false, 'Default' => 'fr'])
+            ->column('LinkedCategoryID', 'int', ['Null' => true])
+            ->set();
+
+        $St->table('User')
+            ->column('ProfileLanguage', 'varchar(5)', ['Null' => false, 'Default' => 'fr'])
             ->set();
 
         // NOTE: disabled as was one-time script to fix existing users
@@ -86,5 +94,4 @@ class AlloprofPlugin extends Gdn_Plugin {
             }
         }
     }
-
 }

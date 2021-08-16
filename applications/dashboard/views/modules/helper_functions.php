@@ -95,11 +95,12 @@ if (!function_exists('writeFilterToggle')) :
      * @param string $extraClasses any extra classes you add to the drop down
      * @return string
      */
-    function writeFilterToggle($explanation, $verified) {
+    function writeFilterToggle($explanation, $verified, $language) {
         $form  = new Gdn_Form();
         $role = getUserRole(Gdn::session()->User->UserID);
         $text = $role === 'Teacher' ? t('Without explanations only') : t('With explanations only');
         $verifiedText = $role === 'Teacher' ? t('Not Verified by Alloprof only') : t('Verified by Alloprof only');
+        $languageToggle = t('Show posts in all languages');
 
         echo '<ul>';
         echo '<li class="form-group">';
@@ -115,6 +116,14 @@ if (!function_exists('writeFilterToggle')) :
             echo $form->toggle('VerifiedBy', $verifiedText, [ 'checked' => $verified ]);
         } else {
             echo $form->toggle('VerifiedBy', $verifiedText);
+        }
+        echo '</li>';
+
+        echo '<li class="form-group">';
+        if ($language == 'true') {
+            echo $form->toggle('Language', $languageToggle, [ 'checked' => $verified ]);
+        } else {
+            echo $form->toggle('Language', $languageToggle);
         }
         echo '</li>';
 
