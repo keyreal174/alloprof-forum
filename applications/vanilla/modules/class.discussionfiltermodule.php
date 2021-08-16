@@ -13,7 +13,7 @@
  */
 class DiscussionFilterModule extends Gdn_Module {
 
-    public function __construct($grade=-1, $sort='desc', $explanation=false, $verified=false, $subject=-1, $outexplanation=false, $isCategory=false) {
+    public function __construct($grade=-1, $sort='desc', $explanation=false, $verified=false, $subject=-1, $outexplanation=false, $language=false, $showLanguage=false, $isCategory=false) {
         parent::__construct();
         $this->SubjectID = $subject;
         $this->GradeID = $grade;
@@ -22,6 +22,8 @@ class DiscussionFilterModule extends Gdn_Module {
         $this->IsOutExplanation = $outexplanation;
         $this->IsVerified = $verified;
         $this->IsCategory = $isCategory;
+        $this->IsLanguage = $language;
+        $this->IsShowLanguage = $showLanguage;
     }
 
     public function assetTarget() {

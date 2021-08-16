@@ -188,7 +188,7 @@ class CategoriesController extends VanillaController {
         );
         list($offset, $limit) = offsetLimit($page, $perPage);
 
-        $where = ['Followed' => true];
+        $where = ['Followed' => true, 'Language' => Gdn::config('Garden.Locale')];
 
         if (!empty($filterIDs)) {
             $where['CategoryID'] = $filterIDs;
@@ -396,10 +396,13 @@ class CategoriesController extends VanillaController {
         $verified = Gdn::request()->get('verifiedBy') ?? false;
         $this->IsVerifiedBy = $verified;
 
+        $language = Gdn::request()->get('language') ?? false;
+        $this->IsLanguage = $language;
+
         $sort = Gdn::request()->get('sort') ?? 'desc';
         $this->SortDirection = $sort;
 
-        $discussionFilterModule = new DiscussionFilterModule($gradeFilterOption, $sort, $explanation, $verified, $subject, $outexplanation, true);
+        $discussionFilterModule = new DiscussionFilterModule($gradeFilterOption, $sort, $explanation, $verified, $subject, $outexplanation, $language, true, true);
         $this->addModule($discussionFilterModule);
         $this->addJsFile('filter.js');
         $wheres = [];
@@ -442,6 +445,12 @@ class CategoriesController extends VanillaController {
             $wheres[$verify_where] = $verify_value;
         } else {
             unset($wheres[$verify_where]);
+        }
+
+        if ($this->IsLanguage == 'true') {
+            unset($wheres['d.Language']);
+        } else {
+            $wheres['d.Language'] = Gdn::config('Garden.Locale');
         }
 
         $this->WhereClause = $wheres;
@@ -532,12 +541,15 @@ class CategoriesController extends VanillaController {
             $this->setData('Category', $category, true);
 
             $this->setData('BannerImage', val('BannerImage', $category));
+            $this->writeFilter();
 
             $discussionModel = new DiscussionModel();
 
             $dWheres = [];
             $cWheres = [];
             $cID = val('CategoryID', $category);
+
+            $cID = $this->IsLanguage == 'true' ? [$cID, val('LinkedCategoryID', $category)] : $cID;
 
             if ($this->getUserRole() == 'member') {
                 $cWheres = ['d.Published' => 1, 'cm.Published' => 1, 'd.CategoryID' => $cID];
@@ -635,13 +647,13 @@ class CategoriesController extends VanillaController {
 
             // Set CategoryID
             $categoryID = val('CategoryID', $category);
+            $LinkedCategoryID = val('LinkedCategoryID', $category);
             $this->setData('CategoryID', $categoryID, true);
 
             // Add modules
             // $this->addModule('DiscussionFilterModule');
             $this->addModule('AskQuestionModule');
 
-            $this->writeFilter();
             // $this->addModule('BookmarkedModule');
             // $this->addModule('TagModule');
 
@@ -665,7 +677,7 @@ class CategoriesController extends VanillaController {
             $discussionModel->setFilters(Gdn::request()->get());
             $this->setData('Filters', $discussionModel->getFilters());
 
-            $categoryIDs = [$categoryID];
+            $categoryIDs = $this->IsLanguage == 'true' ? [$categoryID, $LinkedCategoryID] : [$categoryID];
             if (c('Vanilla.ExpandCategories')) {
                 $categoryIDs = array_merge($categoryIDs, array_column($this->data('Categories'), 'CategoryID'));
             }

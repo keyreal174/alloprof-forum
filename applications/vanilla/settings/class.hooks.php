@@ -754,6 +754,17 @@ class VanillaHooks extends Gdn_Plugin {
         $sender->addJsFile('tagging.js', 'vanilla');
         $sender->addJsFile('jquery.tokeninput.js');
         // Tagging END
+
+        // Change config
+        $InterfaceLanguage = $_COOKIE['InterfaceLanguage'];
+        $Language = 'en';
+        if (!is_null($InterfaceLanguage)) {
+            if ($InterfaceLanguage == 'fr') $Language = 'fr_CA';
+        } else if (Gdn::session()->UserID && Gdn::session()->User->ProfileLanguage) {
+            if (Gdn::session()->User->ProfileLanguage == 'fr') $Language = 'fr_CA';
+        }
+
+        saveToConfig('Garden.Locale', $Language);
     }
 
     /**

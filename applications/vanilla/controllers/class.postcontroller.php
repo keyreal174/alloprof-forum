@@ -142,6 +142,9 @@ class PostController extends VanillaController {
             $categoryID = '';
         }
 
+        $Language = Gdn::config('Garden.Locale');
+        $Language = $Language == 'fr_CA' ? 'fr' : $Language;
+
         // Setup head
         $this->addJsFile('jquery.autosize.min.js');
         $this->addJsFile('autosave.js');
@@ -272,6 +275,7 @@ class PostController extends VanillaController {
             $filters = ['Score'];
             $formValues = $this->filterFormValues($formValues, $filters);
             $formValues = $this->DiscussionModel->filterForm($formValues);
+            $formValues['Language'] = $Language;
             $this->deliveryType(Gdn::request()->getValue('DeliveryType', $this->_DeliveryType));
             if ($draftID == 0) {
                 $draftID = $this->Form->getFormValue('DraftID', 0);
@@ -499,6 +503,9 @@ class PostController extends VanillaController {
             $categoryID = '';
         }
 
+        $Language = Gdn::config('Garden.Locale');
+        $Language = $Language == 'fr_CA' ? 'fr' : $Language;
+
         if ($this->getUserRole() == 'Teacher') {
             redirectTo("discussions");
             return;
@@ -632,6 +639,7 @@ class PostController extends VanillaController {
             $filters = ['Score'];
             $formValues = $this->filterFormValues($formValues, $filters);
             $formValues = $this->DiscussionModel->filterForm($formValues);
+            $formValues['Language'] = $Language;
             $this->deliveryType(Gdn::request()->getValue('DeliveryType', $this->_DeliveryType));
             if ($draftID == 0) {
                 $draftID = $this->Form->getFormValue('DraftID', 0);
@@ -1053,6 +1061,8 @@ class PostController extends VanillaController {
         $this->DiscussionID = $DiscussionID;
         $this->Discussion = $Discussion = $this->DiscussionModel->getID($DiscussionID);
 
+        $Language = $Discussion->Language;
+
         if ($Discussion->InsertUserID == Gdn::session()->UserID) {
             return;
         }
@@ -1241,6 +1251,7 @@ class PostController extends VanillaController {
             $filters = ['Score'];
             $FormValues = $this->filterFormValues($FormValues, $filters);
             $FormValues = $this->CommentModel->filterForm($FormValues);
+            $FormValues['Language'] = $Language;
             $formDiscussion = $this->DiscussionModel->getID($this->Form->_FormValues['DiscussionID']);
 
             if ($formDiscussion && $formDiscussion->Closed === 1 && !CategoryModel::checkPermission($formDiscussion->CategoryID, 'Vanilla.Discussions.Close')) {

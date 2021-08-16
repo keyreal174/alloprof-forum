@@ -86,10 +86,13 @@ class SearchController extends Gdn_Controller {
         $verified = Gdn::request()->get('verifiedBy') ?? false;
         $this->IsVerifiedBy = $verified;
 
+        $language = Gdn::request()->get('language') ?? false;
+        $this->IsLanguage = $language;
+
         $sort = Gdn::request()->get('sort') ?? 'desc';
         $this->SortDirection = $sort;
 
-        $dashboardDiscussionFilterModule = new DashboardDiscussionFilterModule($gradeFilterOption, $sort, $explanation, $verified, $subject, $outexplanation);
+        $dashboardDiscussionFilterModule = new DashboardDiscussionFilterModule($gradeFilterOption, $sort, $explanation, $verified, $subject, $outexplanation, $language, true);
         $this->addModule($dashboardDiscussionFilterModule);
         $this->addJsFile('filter.js');
         $wheres = [];
@@ -132,6 +135,12 @@ class SearchController extends Gdn_Controller {
             $wheres[$verify_where] = $verify_value;
         } else {
             unset($wheres[$verify_where]);
+        }
+
+        if ($this->IsLanguage == 'true') {
+            unset($wheres['d.Language']);
+        } else {
+            $wheres['d.Language'] = Gdn::config('Garden.Locale');
         }
 
         $this->WhereClause = $wheres;
