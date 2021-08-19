@@ -529,7 +529,7 @@ if (!function_exists('timeElapsedString')) :
             }
         }
 
-        if (Gdn::config('Garden.Locale') == 'fr') {
+        if (Gdn::config('Garden.Locale') == 'fr_CA') {
             // $string = array_slice($string, 0, 1);
             $frenchStr = "";
             if ($diff->y) {

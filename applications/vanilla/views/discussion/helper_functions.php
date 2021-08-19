@@ -1031,7 +1031,7 @@ if (!function_exists('getGrade')) :
                 });
             }
         }
-        if (Gdn::config('Garden.Locale') == 'fr') {
+        if (Gdn::config('Garden.Locale') == 'fr_CA') {
             return ($GradeID || $GradeID === 0) ? $GradeOption[$GradeID] : "";
         } else {
             if ($GradeID || $GradeID === 0) {
