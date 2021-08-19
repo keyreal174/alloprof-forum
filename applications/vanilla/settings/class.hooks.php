@@ -764,6 +764,10 @@ class VanillaHooks extends Gdn_Plugin {
             if (Gdn::session()->User->ProfileLanguage == 'fr') $Language = 'fr_CA';
         }
 
+        if (is_null($InterfaceLanguage) && !Gdn::session()->UserID) {
+            $Language = 'fr_CA';
+        }
+
         saveToConfig('Garden.Locale', $Language);
     }
 
