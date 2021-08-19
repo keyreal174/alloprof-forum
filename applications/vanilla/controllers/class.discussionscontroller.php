@@ -151,7 +151,7 @@ class DiscussionsController extends VanillaController {
         if ($this->IsLanguage == 'true') {
             unset($wheres['d.Language']);
         } else {
-            $wheres['d.Language'] = Gdn::config('Garden.Locale');
+            $wheres['d.Language'] = Gdn::config('Garden.Locale') == 'fr_CA' ? 'fr' : 'en';
         }
 
         $this->WhereClause = $wheres;

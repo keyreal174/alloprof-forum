@@ -365,9 +365,10 @@ if (!function_exists('writeCategoryDropDown')) :
         // Remove categories the user shouldn't see.
         $safeCategoryData = [];
         $discussionType = val('DiscussionType', $options);
+        $language = Gdn::config('Garden.Locale') == 'fr_CA' ? 'fr' : 'en';
         foreach ($categoryData as $categoryID => $category) {
             if ($value != $categoryID) {
-                if ($category['CategoryID'] <= 0 || !$category['PermsDiscussionsView']) {
+                if ($category['CategoryID'] <= 0 || !$category['PermsDiscussionsView'] || $category['Language'] != $language) {
                     continue;
                 }
 
