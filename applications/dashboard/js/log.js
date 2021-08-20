@@ -206,9 +206,10 @@ jQuery(document).ready(function($) {
     $('.FilterButton').click(function(e) {
         // Get selected value
         var category = $('#Form_CategoryID').val();
+        var language = $('#Form_Language').val();
 
         // Ajax us to filtered results
-        $('#LogTable').load(gdn.url('/log/moderation?DeliveryType=VIEW&CategoryID=' + category));
+        $('#LogTable').load(gdn.url('/log/moderation?DeliveryType=VIEW&CategoryID=' + category + '&Language=' + language));
         return false;
     });
 });

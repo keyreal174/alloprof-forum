@@ -1876,3 +1876,4 @@ $Definition['Write your explanation here ...'] = 'Écris ton explication ici...'
 $Definition['Your question will be deleted permanently'] = 'Ta question sera supprimée définitivement';
 $Definition['Language'] = 'La langue';
 $Definition['Linked CategoryID'] = 'Identifiant de catégorie lié';
+$Definition['Show all languages'] = 'Montrer toutes les langues';
