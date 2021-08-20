@@ -111,6 +111,15 @@
                         }
                     }
 
+                    if (Gdn::config('Garden.Locale') == 'en') {
+                        $translateWord = function($word) {
+                            $res = str_replace('Primaire', 'Primary', $word);
+                            $res = str_replace('Secondaire', 'Secondary', $res);
+                            return $res;
+                        };
+
+                        $GradeOption = array_map($translateWord, $GradeOption);
+                    }
 
                     echo writeCategoryDropDown($this, 'CategoryID', $options, true, $this->Form);
                     echo '<span class="space"></span>';

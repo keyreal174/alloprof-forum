@@ -396,6 +396,16 @@ if (!function_exists('writeGradeFilter')) :
             }
         }
 
+        if (Gdn::config('Garden.Locale') == 'en') {
+            $translateWord = function($word) {
+                $res = str_replace('Primaire', 'Primary', $word);
+                $res = str_replace('Secondaire', 'Secondary', $res);
+                return $res;
+            };
+
+            $GradeOption = array_map($translateWord, $GradeOption);
+        }
+
         if($isMobile) {
             echo '<div class="mobile-grade">';
             if (is_array($GradeOption)) {
