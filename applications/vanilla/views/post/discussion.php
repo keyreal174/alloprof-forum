@@ -132,6 +132,18 @@ if (!$CancelUrl) {
             }
         }
 
+        if (Gdn::config('Garden.Locale') == 'en') {
+            $translateWord = function($word) {
+                $res = str_replace('Primaire', 'Primary', $word);
+                $res = str_replace('Secondaire', 'Secondary', $res);
+                return $res;
+            };
+
+            $GradeOption = array_map($translateWord, $GradeOption);
+        }
+
+        $languageOption = ["en", "fr"];
+
         echo writeCategoryDropDown($this, 'CategoryID', $options);
         echo '<span class="space"></span>';
         echo '<div class="Category rich-select select2 select2-grade">';
@@ -139,6 +151,17 @@ if (!$CancelUrl) {
         echo $this->Form->dropDown('GradeID', $GradeOption, array('Default' => $DefaultGrade, 'IncludeNull' => t('Grade'), 'IsDisabled' => TRUE));
         echo '</div>';
         echo '</div>';
+        if (Gdn::controller()->getUserRole() == "Teacher") {
+            echo '<div class="Language rich-select select2 select2-language">';
+            echo '<div class="pre-icon"><img src="'.url("/themes/alloprof/design/images/icons/grade.svg").'"/></div>';
+            ?>
+            <select id="Form_Language" name="Language">
+                <option value="fr" <?php echo $this->Language == "fr" ? "selected" : ""; ?>>Français</option>
+                <option value="en" <?php echo $this->Language == "en" ? "selected" : ""; ?>>English</option>
+            </select>
+            <?php
+            echo '</div>';
+        }
     // }
 
     // Category select and grade select end

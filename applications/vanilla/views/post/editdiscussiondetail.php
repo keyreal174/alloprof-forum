@@ -132,6 +132,16 @@ if (!$CancelUrl) {
             }
         }
 
+        if (Gdn::config('Garden.Locale') == 'en') {
+            $translateWord = function($word) {
+                $res = str_replace('Primaire', 'Primary', $word);
+                $res = str_replace('Secondaire', 'Secondary', $res);
+                return $res;
+            };
+
+            $GradeOption = array_map($translateWord, $GradeOption);
+        }
+
         echo '<div>';
         echo '<div class="Category rich-select">';
         echo '<img src="'.url("/themes/alloprof/design/images/icons/subject.svg").'"/>';

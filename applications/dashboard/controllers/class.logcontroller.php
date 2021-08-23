@@ -373,6 +373,11 @@ class LogController extends DashboardController {
             $where['CategoryID'] = $categoryID;
         }
 
+        if ($language = Gdn::request()->getValue('Language')) {
+            // $this->setData('ModerationLanguage', $language);
+            $where['Language'] = $language;
+        }
+
         list($offset, $limit) = offsetLimit($page, 10);
         $this->setData('Title', t('Moderation Queue'));
 

@@ -529,7 +529,7 @@ if (!function_exists('timeElapsedString')) :
             }
         }
 
-        if (!$full) {
+        if (Gdn::config('Garden.Locale') == 'fr_CA') {
             // $string = array_slice($string, 0, 1);
             $frenchStr = "";
             if ($diff->y) {
@@ -552,9 +552,31 @@ if (!function_exists('timeElapsedString')) :
                 }
             }
             return $frenchStr;
+        } else {
+            $enStr = "";
+            if ($diff->y) {
+                $enStr = $diff->y . "y";
+            } else {
+                if ($diff->m) {
+                    $enStr = $diff->m . "m";
+                } else {
+                    if ($diff->d) {
+                        $enStr = $diff->d . "d";
+                    } else {
+                        if ($diff->h) {
+                            $enStr = $diff->h . "h";
+                        } else {
+                            if ($diff->i) {
+                                $enStr = $diff->i . "min";
+                            }
+                        }
+                    }
+                }
+            }
+            return $enStr;
         }
 
-        return $string ? implode(', ', $string) . ' ago' : 'just now';
+        // return $string ? implode(', ', $string) . ' ago' : 'just now';
     }
 endif;
 

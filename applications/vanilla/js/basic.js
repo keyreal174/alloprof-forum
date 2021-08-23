@@ -61,18 +61,41 @@ jQuery(document).ready(function($) {
         }
     }
 
+    var selectGradePlaceholder = 'Niveau';
+    if (gdn.meta.siteSection.contentLocale == 'en') {
+        selectGradePlaceholder = 'Grade';
+    }
+
     $('.select2-grade select').select2({
         minimumResultsForSearch: -1,
-        placeholder: "Niveau",
+        placeholder: selectGradePlaceholder,
     });
 
+    var selectCategoryPlaceholder = 'Matière';
+    if (gdn.meta.siteSection.contentLocale == 'en') {
+        selectCategoryPlaceholder = 'Subject';
+    }
+
     $('.select2-category select').select2({
-        placeholder: "Matière",
+        placeholder: selectCategoryPlaceholder,
         minimumResultsForSearch: -1,
         templateResult: formatState
     }).on('select2:select', function (e) {
         var data = e.params.data;
         selectCategoryImg(data);
+    });
+
+    var selectLanguagePlaceholder = 'La langue';
+    if (gdn.meta.siteSection.contentLocale == 'en') {
+        selectLanguagePlaceholder = 'Language';
+    }
+
+    $('.select2-language select').select2({
+        minimumResultsForSearch: -1,
+        placeholder: selectLanguagePlaceholder,
+    }).on('select2:select', function (e) {
+        $('.select2-category select').val(null);
+        $('.select2-category select').trigger('change');
     });
 
     selectCategoryImg({element: $('.FilterMenu .select2-category option:selected')});

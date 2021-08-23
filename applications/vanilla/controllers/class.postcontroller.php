@@ -42,6 +42,8 @@ class PostController extends VanillaController {
     /** @var string UserRole 'Teacher' or 'Student' */
     public $UserRole;
 
+    public $Language = null;
+
     /**
      * General "post" form, allows posting of any kind of form. Attach to PostController_AfterFormCollection_Handler.
      *
@@ -275,7 +277,7 @@ class PostController extends VanillaController {
             $filters = ['Score'];
             $formValues = $this->filterFormValues($formValues, $filters);
             $formValues = $this->DiscussionModel->filterForm($formValues);
-            $formValues['Language'] = $Language;
+            $formValues['Language'] = $formValues['Language'] ? $formValues['Language'] : $Language;
             $this->deliveryType(Gdn::request()->getValue('DeliveryType', $this->_DeliveryType));
             if ($draftID == 0) {
                 $draftID = $this->Form->getFormValue('DraftID', 0);
@@ -881,6 +883,7 @@ class PostController extends VanillaController {
             $record = $this->DiscussionModel->getID($discussionID);
             $this->setData('Discussion', $record, true);
             $this->CategoryID = $this->Discussion->CategoryID;
+            $this->Language = $this->Discussion->Language;
         }
 
         // Normalize the edit data.

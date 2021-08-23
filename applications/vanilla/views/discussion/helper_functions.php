@@ -1031,7 +1031,18 @@ if (!function_exists('getGrade')) :
                 });
             }
         }
-        return ($GradeID || $GradeID === 0) ? $GradeOption[$GradeID] : "";
+        if (Gdn::config('Garden.Locale') == 'fr_CA') {
+            return ($GradeID || $GradeID === 0) ? $GradeOption[$GradeID] : "";
+        } else {
+            if ($GradeID || $GradeID === 0) {
+                $res = str_replace('Primaire', 'Primary', $GradeOption[$GradeID]);
+                $res = str_replace('Post-secondaire', 'Post-secondary', $res);
+                $res = str_replace('Secondaire', 'Secondary', $res);
+                return $res;
+            } else {
+                return "";
+            }
+        }
     }
 endif;
 
