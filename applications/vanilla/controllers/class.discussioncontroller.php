@@ -924,7 +924,9 @@ class DiscussionController extends VanillaController {
                     $username = $UserMetaData['DisplayName'] ?? "";
                     $message = Gdn_Format::to($discussion->Body, 'Rich');
                     $address = $discussionInsertUser->Email;
-                    $subject = "Oups! Ta question a été refusée.";
+
+                    $User = Gdn::userModel()->getID(Gdn::session()->UserID);
+                    $subject = $User->ProfileLanguage == "fr" ? "Oups! Ta question a été refusée." : "Whoops! Your question was denied.";
 
                     $emailer = new Gdn_Email();
                     $email = $emailer->getEmailTemplate();
@@ -1074,7 +1076,9 @@ class DiscussionController extends VanillaController {
                     $username = $UserMetaData['DisplayName'] ?? "";
                     $message = Gdn_Format::to($comment->Body, 'Rich');
                     $address = $commentInsertUser->Email;
-                    $subject = "Oups! Ton explication a été refusée.";
+
+                    $User = Gdn::userModel()->getID(Gdn::session()->UserID);
+                    $subject = $User->ProfileLanguage == "fr" ? "Oups! Ton explication a été refusée." : "Whoops! Your explanation was refused.";
 
                     $emailer = new Gdn_Email();
                     $email = $emailer->getEmailTemplate();
@@ -1523,6 +1527,10 @@ body { background: transparent !important; }
                 $username = $UserMetaData['DisplayName'] ?? "";
                 $message = Gdn_Format::to($Discussion->Body, 'Rich');
                 $address = $discussionInsertUser->Email;
+
+                $User = Gdn::userModel()->getID(Gdn::session()->UserID);
+                $subject = $User->ProfileLanguage == "fr" ? "Yé! Tu as reçu une explication à ta question." : "Ye! You have received an explanation for your question.";
+
                 $subject = "Yé! Tu as reçu une explication à ta question.";
                 $discussionLink = url("/discussion/comment/" . $commentID . "/#Comment_" . $commentID);
 

@@ -1313,7 +1313,10 @@ class PostController extends VanillaController {
                         $username = $UserMetaData['DisplayName'] ?? "";
                         $message = Gdn_Format::to($Discussion->Body, 'Rich');
                         $address = $discussionInsertUser->Email;
-                        $subject = "Yé! Tu as reçu une explication à ta question.";
+
+                        $User = Gdn::userModel()->getID(Gdn::session()->UserID);
+                        $subject = $User->ProfileLanguage == "fr" ? "Yé! Tu as reçu une explication à ta question." : "Ye! You have received an explanation for your question.";
+
                         $discussionLink = url("/discussion/comment/" . $CommentID . "/#Comment_" . $CommentID);
 
                         $emailer = new Gdn_Email();

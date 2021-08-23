@@ -93,13 +93,12 @@
                 <a href="https://imgbb.com/"><img src="https://i.ibb.co/nkPWPv2/Alloprof-Logo.png" alt="Alloprof-Logo" border="0"></a>
             </div>
 
-            <h2 style="font-size: 21px; line-height: 25px; margin: 32px;">Ce n'est pas grave, tu peux réessayer.</h2>
+            <h2 style="font-size: 21px; line-height: 25px; margin: 32px;"><?php echo $this->Data["email"]["profileLanguage"] == 'en' ? "It's okay, you can try again." : "Ce n'est pas grave, tu peux réessayer."; ?></h2>
 
-            <p class="normal-text">Bonjour, <?php echo ($this->Data["email"]["username"]) ?>! <br>
-            Malheureusement, ton explication a été refusée pour la raison suivante : <br><br>
+            <p class="normal-text"><?php echo $this->Data["email"]["profileLanguage"] == 'en' ? "Hello" : "Bonjour"; ?>, <?php echo ($this->Data["email"]["username"]) ?>! <br> <?php echo $this->Data["email"]["profileLanguage"] == 'en' ? "Unfortunately your explanation was refused for the following reason" : "Malheureusement, ton explication a été refusée pour la raison suivante"; ?> : <br><br>
             <i><?php echo ($this->Data["email"]["reason"]) ?></i></p>
 
-            <p class="normal-text" style="margin-top: 32px;">Voici l'explication que tu avais proposée :</p>
+            <p class="normal-text" style="margin-top: 32px;"><?php echo $this->Data["email"]["profileLanguage"] == 'en' ? "Here is the explanation you proposed" : "Voici l'explication que tu avais proposée"; ?> :</p>
 
             <div class="text-box">
                 <div class="normal-text">
@@ -107,15 +106,15 @@
                 </div>
             </div>
 
-            <p class="black--text" style="margin-top: 32px; margin-bottom: 64px;">Retourne sur la <a href="https://www.alloprof.qc.ca/zonedentraide" class="green--text">Zone d’entraide</a> et proposes-en une nouvelle! <br><br>
-            À tout de suite!</p>
+            <p class="black--text" style="margin-top: 32px; margin-bottom: 64px;"><?php echo $this->Data["email"]["profileLanguage"] == 'en' ? "Go back to the" : "Retourne sur la"; ?> <a href="https://www.alloprof.qc.ca/zonedentraide" class="green--text">Zone d’entraide</a> <?php echo $this->Data["email"]["profileLanguage"] == 'en' ? "and come up with a new one!" : "et proposes-en une nouvelle!"; ?> <br><br>
+            <?php echo $this->Data["email"]["profileLanguage"] == 'en' ? "See you soon!" : "À tout de suite!"; ?></p>
 
             <img src="https://i.ibb.co/qNxsqk3/Illustraiton.png" alt="Illustraiton" border="0">
             <div style="background-color: #05BF8E; height: 4px; width: 90%; margin-bottom: 24px;"></div>
 
-            <a href="https://www.alloprof.qc.ca/zonedentraide<?php echo ($this->Data["email"]["unsubscribeLink"]) ?>" class="black--text" style="font-size: 12px;"><em>Se désabonner</em></a>
+            <a href="https://www.alloprof.qc.ca/zonedentraide<?php echo ($this->Data["email"]["unsubscribeLink"]) ?>" class="black--text" style="font-size: 12px;"><em><?php echo $this->Data["email"]["profileLanguage"] == 'en' ? "Unsubscribe" : "Se désabonner"; ?></em></a>
 
-            <p class="green-text" style="text-decoration: none; font-size: 12px; margin-top: 40px;margin-bottom: 28px; color: #05BF8E!important;">Suivez nous sur les réseaux sociaux : </p>
+            <p class="green-text" style="text-decoration: none; font-size: 12px; margin-top: 40px;margin-bottom: 28px; color: #05BF8E!important;"><?php echo $this->Data["email"]["profileLanguage"] == 'en' ? "Follow us on social media" : "Suivez nous sur les réseaux sociaux"; ?> : </p>
 
             <div class="social-icons">
                 <a href="https://www.facebook.com/alloprof"><img src="https://i.ibb.co/Q6r5Qj1/Facebook-Icon.png" alt="Facebook-Icon" border="0"></a>

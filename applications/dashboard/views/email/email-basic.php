@@ -92,25 +92,24 @@
                 <a href="https://imgbb.com/"><img src="https://i.ibb.co/nkPWPv2/Alloprof-Logo.png" alt="Alloprof-Logo" border="0"></a>
             </div>
 
-            <h2 style="font-size: 21px; line-height: 25px; margin: 32px;">Bonne nouvelle!</h2>
+            <h2 style="font-size: 21px; line-height: 25px; margin: 32px;"><?php echo $this->Data["email"]["profileLanguage"] == 'en' ? "Good news!" : "Bonne nouvelle!"; ?></h2>
 
-            <p class="normal-text">Bonjour, <?php echo ($this->Data["email"]["username"]) ?>! <br>
-            Une de tes questions a reçu une explication approuvée par Alloprof :</p>
+            <p class="normal-text"><?php echo $this->Data["email"]["profileLanguage"] == 'en' ? "Hello" : "Bonjour"; ?>, <?php echo ($this->Data["email"]["username"]) ?>! <br> <?php echo $this->Data["email"]["profileLanguage"] == 'en' ? "Une de tes questions a reçu une explication approuvée par Alloprof" : "Une de tes questions a reçu une explication approuvée par Alloprof"; ?> :</p>
 
             <div class="text-box">
                 <div class="normal-text"><?php echo ($this->Data["email"]["boxtext"]) ?></div>
             </div>
 
-            <a class="btn black--text" href="https://www.alloprof.qc.ca<?php echo ($this->Data["email"]["discussionLink"]) ?>">Voir l’explication</a>
+            <a class="btn black--text" href="https://www.alloprof.qc.ca<?php echo ($this->Data["email"]["discussionLink"]) ?>"><?php echo $this->Data["email"]["profileLanguage"] == 'en' ? "See the explanation" : "Voir l’explication"; ?></a>
 
-            <p class="black--text" style="margin-top: 32px; margin-bottom: 64px;">On se retrouve dans la <a href="https://www.alloprof.qc.ca/zonedentraide" class="green--text">Zone d’entraide</a>!</p>
+            <p class="black--text" style="margin-top: 32px; margin-bottom: 64px;"><?php echo $this->Data["email"]["profileLanguage"] == 'en' ? "We meet in the" : "On se retrouve dans la"; ?> <a href="https://www.alloprof.qc.ca/zonedentraide" class="green--text">Zone d’entraide</a>!</p>
 
             <img src="https://i.ibb.co/qNxsqk3/Illustraiton.png" alt="Illustraiton" border="0">
             <div style="background-color: #05BF8E; height: 4px; width: 90%; margin-bottom: 24px;"></div>
 
-            <a href="https://www.alloprof.qc.ca/zonedentraide<?php echo url($this->Data["email"]["unsubscribeLink"]) ?>" class="black--text" style="font-size: 12px;"><em>Se désabonner</em></a>
+            <a href="https://www.alloprof.qc.ca/zonedentraide<?php echo url($this->Data["email"]["unsubscribeLink"]) ?>" class="black--text" style="font-size: 12px;"><em><?php echo $this->Data["email"]["profileLanguage"] == 'en' ? "Unsubscribe" : "Se désabonner"; ?></em></a>
 
-            <p class="green-text" style="text-decoration: none; font-size: 12px; margin-top: 40px;margin-bottom: 28px; color: #05BF8E!important;">Suivez nous sur les réseaux sociaux : </p>
+            <p class="green-text" style="text-decoration: none; font-size: 12px; margin-top: 40px;margin-bottom: 28px; color: #05BF8E!important;"><?php echo $this->Data["email"]["profileLanguage"] == 'en' ? "Follow us on social media" : "Suivez nous sur les réseaux sociaux"; ?> : </p>
 
             <div class="social-icons">
                 <a href="https://www.facebook.com/alloprof"><img src="https://i.ibb.co/Q6r5Qj1/Facebook-Icon.png" alt="Facebook-Icon" border="0"></a>

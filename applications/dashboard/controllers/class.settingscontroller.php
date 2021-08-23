@@ -1046,11 +1046,14 @@ class SettingsController extends DashboardController {
         }
         $message = t('Test Email Message');
 
-        $email->setView('discussion-delete-email');
+        $email->setView('comment-delete-email');
+
+        $userId = Gdn::session()->UserID;
 
         $email->setMessage($message)
             ->setTitle(t('Test Email'))
-            ->setButton(externalUrl('/'), t('Check it out'));
+            ->setButton(externalUrl('/'), t('Check it out'))
+            ->setUnsubscribeLink($userId);
         $emailer = $emailer->setEmailTemplate($email);
         return $emailer;
     }
