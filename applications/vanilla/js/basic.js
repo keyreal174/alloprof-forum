@@ -85,6 +85,19 @@ jQuery(document).ready(function($) {
         selectCategoryImg(data);
     });
 
+    var selectLanguagePlaceholder = 'La langue';
+    if (gdn.meta.siteSection.contentLocale == 'en') {
+        selectLanguagePlaceholder = 'Language';
+    }
+
+    $('.select2-language select').select2({
+        minimumResultsForSearch: -1,
+        placeholder: selectLanguagePlaceholder,
+    }).on('select2:select', function (e) {
+        $('.select2-category select').val(null);
+        $('.select2-category select').trigger('change');
+    });
+
     selectCategoryImg({element: $('.FilterMenu .select2-category option:selected')});
     selectCategoryImg({element: $('.EditDiscussionDetail .select2-category option:selected')});
 
