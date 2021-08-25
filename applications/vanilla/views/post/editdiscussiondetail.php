@@ -136,6 +136,7 @@ if (!$CancelUrl) {
             $translateWord = function($word) {
                 $res = str_replace('Primaire', 'Primary', $word);
                 $res = str_replace('Secondaire', 'Secondary', $res);
+                $res = str_replace('Post-secondaire', 'Post-secondary', $res);
                 return $res;
             };
 

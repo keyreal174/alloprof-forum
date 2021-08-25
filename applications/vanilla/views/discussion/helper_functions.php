@@ -1036,8 +1036,8 @@ if (!function_exists('getGrade')) :
         } else {
             if ($GradeID || $GradeID === 0) {
                 $res = str_replace('Primaire', 'Primary', $GradeOption[$GradeID]);
-                $res = str_replace('Post-secondaire', 'Post-secondary', $res);
                 $res = str_replace('Secondaire', 'Secondary', $res);
+                $res = str_replace('Post-secondaire', 'Post-secondary', $res);
                 return $res;
             } else {
                 return "";
