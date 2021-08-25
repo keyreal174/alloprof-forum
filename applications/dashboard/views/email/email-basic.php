@@ -94,15 +94,15 @@
 
             <h2 style="font-size: 21px; line-height: 25px; margin: 32px;"><?php echo $this->Data["email"]["profileLanguage"] == 'en' ? "Good news!" : "Bonne nouvelle!"; ?></h2>
 
-            <p class="normal-text"><?php echo $this->Data["email"]["profileLanguage"] == 'en' ? "Hello" : "Bonjour"; ?>, <?php echo ($this->Data["email"]["username"]) ?>! <br> <?php echo $this->Data["email"]["profileLanguage"] == 'en' ? "Une de tes questions a reçu une explication approuvée par Alloprof" : "Une de tes questions a reçu une explication approuvée par Alloprof"; ?> :</p>
+            <p class="normal-text"><?php echo $this->Data["email"]["profileLanguage"] == 'en' ? "Hello" : "Bonjour"; ?>, <?php echo ($this->Data["email"]["username"]) ?>! <br> <?php echo $this->Data["email"]["profileLanguage"] == 'en' ? "One of your questions has received an Alloprof-approved answer!" : "Une de tes questions a reçu une explication approuvée par Alloprof!"; ?> :</p>
 
             <div class="text-box">
                 <div class="normal-text"><?php echo ($this->Data["email"]["boxtext"]) ?></div>
             </div>
 
-            <a class="btn black--text" href="https://www.alloprof.qc.ca<?php echo ($this->Data["email"]["discussionLink"]) ?>"><?php echo $this->Data["email"]["profileLanguage"] == 'en' ? "See the explanation" : "Voir l’explication"; ?></a>
+            <a class="btn black--text" href="https://www.alloprof.qc.ca<?php echo ($this->Data["email"]["discussionLink"]) ?>"><?php echo $this->Data["email"]["profileLanguage"] == 'en' ? "View the answer" : "Voir l’explication"; ?></a>
 
-            <p class="black--text" style="margin-top: 32px; margin-bottom: 64px;"><?php echo $this->Data["email"]["profileLanguage"] == 'en' ? "We meet in the" : "On se retrouve dans la"; ?> <a href="https://www.alloprof.qc.ca/zonedentraide" class="green--text">Zone d’entraide</a>!</p>
+            <p class="black--text" style="margin-top: 32px; margin-bottom: 64px;"><?php echo $this->Data["email"]["profileLanguage"] == 'en' ? "See you in the" : "On se retrouve dans la"; ?> <a href="https://www.alloprof.qc.ca/zonedentraide" class="green--text"><?php echo $this->Data["email"]["profileLanguage"] == 'en' ? "Help Zone" : "Zone d’entraide"; ?></a>!</p>
 
             <img src="https://i.ibb.co/qNxsqk3/Illustraiton.png" alt="Illustraiton" border="0">
             <div style="background-color: #05BF8E; height: 4px; width: 90%; margin-bottom: 24px;"></div>

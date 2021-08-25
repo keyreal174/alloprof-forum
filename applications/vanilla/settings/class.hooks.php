@@ -803,7 +803,7 @@ class VanillaHooks extends Gdn_Plugin {
             }
             $sender->addProfileTab(t('questions asked'), userUrl($sender->User, '', 'discussions'), 'Questions', $discussionsLabel);
             $sender->addProfileTab(t('explanations given'), userUrl($sender->User, '', 'comments'), 'Comments', $commentsGivenLabel);
-            $sender->addProfileTab(t('explanations received'), userUrl($sender->User, '', 'comments'), 'Comments', $commentsLabel);
+            $sender->addProfileTab(t('answers received'), userUrl($sender->User, '', 'comments'), 'Comments', $commentsLabel);
             // Add the discussion tab's CSS and Javascript.
             $sender->addJsFile('jquery.gardenmorepager.js');
             $sender->addJsFile('discussions.js', 'vanilla');
@@ -1022,7 +1022,7 @@ class VanillaHooks extends Gdn_Plugin {
 
         // Add the site discussion links.
         $sender->addLinkIf($home !== 'categories', t('All Categories', 'Categories'), '/categories', 'main.categories', '', 1, ['icon' => 'th-list']);
-        $sender->addLinkIf($home !== 'discussions', t('Recent Discussions'), '/discussions', 'main.discussions', '', 1, ['icon' => 'discussion']);
+        $sender->addLinkIf($home !== 'discussions', t('Recent questions'), '/discussions', 'main.discussions', '', 1, ['icon' => 'discussion']);
         $sender->addGroup(t('Favorites'), 'favorites', '', 3);
 
         $discussionsCount = Gdn::sql()

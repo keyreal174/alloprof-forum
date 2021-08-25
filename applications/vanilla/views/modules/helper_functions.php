@@ -494,7 +494,7 @@ if (!function_exists('writeFilterToggle')) :
         $role = getUserRole(Gdn::session()->User->UserID);
         echo '<ul>';
         echo '<li class="form-group">';
-        $text = $role === 'Teacher' ? t('Without explanations only') : t('With explanations only');
+        $text = $role === 'Teacher' ? t('Without explanations only') : t('With answers only');
         $verifiedText = $role === 'Teacher' ? t('Not Verified by Alloprof only') : t('Verified by Alloprof only');
         $languageToggle = t('Show posts in all languages');
 

@@ -17,10 +17,10 @@
     <div class="Banner-content General <?php echo $this->additionalClass; ?>">
         <div class="Banner-content__Container">
             <p class="Banner-content__description d-desktop">
-                <?php echo t("Welcome to the Mutual Aid Zone! <br/> Do you have a question? Here are the explanations!"); ?>
+                <?php echo t("Welcome to the Help Zone! <br/> Do you have a question? Here are the explanations!"); ?>
             </p>
             <p class="Banner-content__description d-mobile">
-                <?php echo t("Do you have a question?<br/> Here are the explanations!"); ?>
+                <?php echo t("Have questions?<br/> Find the answers here!"); ?>
             </p>
         </div>
     </div>

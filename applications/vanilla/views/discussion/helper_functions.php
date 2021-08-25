@@ -127,7 +127,7 @@ if (!function_exists('writeComment')) :
                 if ($comment->DateAccepted) {
                     echo '<div class="verfied-info">
                             <img src="'.url("/themes/alloprof/design/images/icons/verifiedbadge.svg").'"/>
-                            <span>'.t("Explanation verified by Alloprof").'</span>
+                            <span>'.t("Answer verified by Alloprof").'</span>
                         </div>';
                 }
             ?>

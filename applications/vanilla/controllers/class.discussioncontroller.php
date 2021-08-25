@@ -926,7 +926,7 @@ class DiscussionController extends VanillaController {
                     $address = $discussionInsertUser->Email;
 
                     $User = Gdn::userModel()->getID(Gdn::session()->UserID);
-                    $subject = $User->ProfileLanguage == "fr" ? "Oups! Ta question a été refusée." : "Whoops! Your question was denied.";
+                    $subject = $User->ProfileLanguage == "fr" ? "Oups! Ta question a été refusée." : "Oops! Your question was declined.";
 
                     $emailer = new Gdn_Email();
                     $email = $emailer->getEmailTemplate();
@@ -1078,7 +1078,7 @@ class DiscussionController extends VanillaController {
                     $address = $commentInsertUser->Email;
 
                     $User = Gdn::userModel()->getID(Gdn::session()->UserID);
-                    $subject = $User->ProfileLanguage == "fr" ? "Oups! Ton explication a été refusée." : "Whoops! Your explanation was refused.";
+                    $subject = $User->ProfileLanguage == "fr" ? "Oups! Ton explication a été refusée." : "Oops! Your explanation was declined.";
 
                     $emailer = new Gdn_Email();
                     $email = $emailer->getEmailTemplate();

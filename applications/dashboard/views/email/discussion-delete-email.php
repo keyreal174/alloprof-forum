@@ -92,12 +92,12 @@
                 <a href="https://imgbb.com/"><img src="https://i.ibb.co/nkPWPv2/Alloprof-Logo.png" alt="Alloprof-Logo" border="0"></a>
             </div>
 
-            <h2 style="font-size: 21px; line-height: 25px; margin: 32px;"><?php echo $this->Data["email"]["profileLanguage"] == 'en' ? "No stress, you can put it down." : "Pas de stress, tu peux la reposer."; ?></h2>
+            <h2 style="font-size: 21px; line-height: 25px; margin: 32px;"><?php echo $this->Data["email"]["profileLanguage"] == 'en' ? "Don’t worry, you can try again." : "Pas de stress, tu peux la reposer."; ?></h2>
 
-            <p class="normal-text"><?php echo $this->Data["email"]["profileLanguage"] == 'en' ? "Hello" : "Bonjour"; ?>, <?php echo ($this->Data["email"]["username"]) ?>!<br> <?php echo $this->Data["email"]["profileLanguage"] == 'en' ? "Unfortunately your question was declined for the following reason" : "Malheureusement, ta question a été refusée pour la raison suivante"; ?> : <br><br>
+            <p class="normal-text"><?php echo $this->Data["email"]["profileLanguage"] == 'en' ? "Hello" : "Bonjour"; ?>, <?php echo ($this->Data["email"]["username"]) ?>!<br> <?php echo $this->Data["email"]["profileLanguage"] == 'en' ? "Unfortunately, your question was declined for the following reason" : "Malheureusement, ta question a été refusée pour la raison suivante"; ?> : <br><br>
             <i><?php echo ($this->Data["email"]["reason"]) ?></i></p>
 
-            <p class="normal-text" style="margin-top: 32px;"><?php echo $this->Data["email"]["profileLanguage"] == 'en' ? "This is the question you asked" : "Voici la question que tu avais posée"; ?> :</p>
+            <p class="normal-text" style="margin-top: 32px;"><?php echo $this->Data["email"]["profileLanguage"] == 'en' ? "Here is the question you had asked" : "Voici la question que tu avais posée"; ?> :</p>
 
             <div class="text-box">
                 <div class="normal-text">
@@ -105,7 +105,7 @@
                 </div>
             </div>
 
-            <p class="black--text" style="margin-top: 32px; margin-bottom: 64px;"><?php echo $this->Data["email"]["profileLanguage"] == 'en' ? "Go back to the" : "Retourne sur la"; ?> <a href="https://www.alloprof.qc.ca/zonedentraide" class="green--text">Zone d’entraide</a> <?php echo $this->Data["email"]["profileLanguage"] == 'en' ? "and offer us a new version!" : "et propose-nous une nouvelle version!"; ?> <br><br>
+            <p class="black--text" style="margin-top: 32px; margin-bottom: 64px;"><?php echo $this->Data["email"]["profileLanguage"] == 'en' ? "Return to the" : "Retourne sur la"; ?> <a href="https://www.alloprof.qc.ca/zonedentraide" class="green--text"><?php echo $this->Data["email"]["profileLanguage"] == 'en' ? "Help Zone" : "Zone d’entraide"; ?></a> <?php echo $this->Data["email"]["profileLanguage"] == 'en' ? "and ask another question!" : "et propose-nous une nouvelle version!"; ?> <br><br>
             <?php echo $this->Data["email"]["profileLanguage"] == 'en' ? "See you soon!" : "À tout de suite!"; ?></p>
 
             <img src="https://i.ibb.co/qNxsqk3/Illustraiton.png" alt="Illustraiton" border="0">
