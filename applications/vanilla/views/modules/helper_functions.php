@@ -511,22 +511,21 @@ if (!function_exists('writeFilterToggle')) :
             echo Gdn::controller()->Form->toggle(($isMobile?'Mobile':'').'VerifiedBy', $verifiedText);
         }
         echo '</li>';
-        if ($IsShowLanguage) {
-            echo '<li class="form-group">';
-            if ($language == 'true') {
-                echo Gdn::controller()->Form->toggle('Language', $languageToggle, [ 'checked' => $verified ]);
-            } else {
-                echo Gdn::controller()->Form->toggle('Language', $languageToggle);
-            }
-            echo '</li>';
-        }
-
         if ($role != 'Teacher') {
             echo '<li class="form-group">';
             if ($explanationout == 'true') {
                 echo Gdn::controller()->Form->toggle(($isMobile?'Mobile':'').'OutExplanation', t('Without explanations only'), [ 'checked' => $explanation ]);
             } else {
                 echo Gdn::controller()->Form->toggle(($isMobile?'Mobile':'').'OutExplanation', t('Without explanations only'));
+            }
+            echo '</li>';
+        }
+        if ($IsShowLanguage) {
+            echo '<li class="form-group">';
+            if ($language == 'true') {
+                echo Gdn::controller()->Form->toggle('Language', $languageToggle, [ 'checked' => $verified ]);
+            } else {
+                echo Gdn::controller()->Form->toggle('Language', $languageToggle);
             }
             echo '</li>';
         }

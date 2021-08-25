@@ -119,14 +119,6 @@ if (!function_exists('writeFilterToggle')) :
         }
         echo '</li>';
 
-        echo '<li class="form-group">';
-        if ($language == 'true') {
-            echo $form->toggle('Language', $languageToggle, [ 'checked' => $verified ]);
-        } else {
-            echo $form->toggle('Language', $languageToggle);
-        }
-        echo '</li>';
-
         if ($role != 'Teacher') {
             echo '<li class="form-group">';
             if ($explanationout == 'true') {
@@ -136,6 +128,14 @@ if (!function_exists('writeFilterToggle')) :
             }
             echo '</li>';
         }
+
+        echo '<li class="form-group">';
+        if ($language == 'true') {
+            echo $form->toggle('Language', $languageToggle, [ 'checked' => $verified ]);
+        } else {
+            echo $form->toggle('Language', $languageToggle);
+        }
+        echo '</li>';
 
         echo '</ul>';
     }
