@@ -756,15 +756,15 @@ class VanillaHooks extends Gdn_Plugin {
         // Tagging END
 
         // Change config
-        $InterfaceLanguage = $_COOKIE['InterfaceLanguage'];
+        $PreferredLanguage = $_COOKIE['preferredLanguage'];
         $Language = 'en';
-        if (!is_null($InterfaceLanguage)) {
-            if ($InterfaceLanguage == 'fr') $Language = 'fr_CA';
+        if (!is_null($PreferredLanguage)) {
+            if ($PreferredLanguage == 'fr') $Language = 'fr_CA';
         } else if (Gdn::session()->UserID && Gdn::session()->User->ProfileLanguage) {
             if (Gdn::session()->User->ProfileLanguage == 'fr') $Language = 'fr_CA';
         }
 
-        if (is_null($InterfaceLanguage) && !Gdn::session()->UserID) {
+        if (is_null($PreferredLanguage) && !Gdn::session()->UserID) {
             $Language = 'fr_CA';
         }
 
