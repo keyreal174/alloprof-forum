@@ -671,7 +671,7 @@ class DiscussionsController extends VanillaController {
                 $discussionsFooterModule = new DiscussionsFooterModule($DiscussionEmpty, "That's all for now!", "If you have other questions, don't hesitate to ask😉");
             }
         } else {
-            $discussionsFooterModule = new DiscussionsFooterModule($DiscussionEmpty, "It seems there's nothing here at the moment!", "Don't hesitate ask if you have a question.");
+            $discussionsFooterModule = new DiscussionsFooterModule($DiscussionEmpty, "Looks like all is well.", "Don’t hesitate if you have a question.");
         }
 
         $this->addModule($discussionsFooterModule);
@@ -826,7 +826,7 @@ class DiscussionsController extends VanillaController {
             $DiscussionEmpty = false;
             $discussionsFooterModule = new DiscussionsFooterModule($DiscussionEmpty, "That's all for now!", "If you have other questions, don't hesitate to ask😉");
         } else {
-            $discussionsFooterModule = new DiscussionsFooterModule($DiscussionEmpty, "It seems there's nothing here at the moment!", "Don't hesitate ask if you have a question.");
+            $discussionsFooterModule = new DiscussionsFooterModule($DiscussionEmpty, "Looks like all is well.", "Don’t hesitate if you have a question.");
         }
 
         $this->addModule($discussionsFooterModule);
