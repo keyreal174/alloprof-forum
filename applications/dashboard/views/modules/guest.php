@@ -20,9 +20,9 @@
             //echo ' '.anchor(t('Register', t('Apply for Membership', 'Register')), 'https://www.alloprof.qc.ca/jsconnect/register', 'btn-default btn-shadow', ['rel' => 'nofollow', 'aria-label' => t("Register Now")]);
             echo ' '.anchor(t('Register', t('Apply for Membership', 'Register')), $this->data('registerUrl'), 'btn-default btn-shadow registerPopup', ['rel' => 'nofollow', 'aria-label' => t("Register Now")]);
         }
-        echo '<p>'.t('Do you already have an account?');
-        echo anchor(t('Sign In'), '/entry/signinstudent?Target='.$this->_Sender->SelfUrl, 'link SignInStudentPopupAgent', ['rel' => 'nofollow', 'aria-label' => t("Sign In Now")]);
-        echo anchor(t('Sign In'), '/entry/signinstudent?Target='.$this->_Sender->SelfUrl, 'link SignInStudentPopup HiddenImportant', ['rel' => 'nofollow', 'aria-label' => t("Sign In Now")]);
+        echo '<p>'.t('Do you already have an Alloprof account?');
+        echo anchor(t('Log in'), '/entry/signinstudent?Target='.$this->_Sender->SelfUrl, 'link SignInStudentPopupAgent', ['rel' => 'nofollow', 'aria-label' => t("Sign In Now")]);
+        echo anchor(t('Log in'), '/entry/signinstudent?Target='.$this->_Sender->SelfUrl, 'link SignInStudentPopup HiddenImportant', ['rel' => 'nofollow', 'aria-label' => t("Sign In Now")]);
         echo '</p>';
         echo '</div>';
     }

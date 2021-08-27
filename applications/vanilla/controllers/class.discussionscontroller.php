@@ -261,10 +261,10 @@ class DiscussionsController extends VanillaController {
         $this->fireEvent('AddProfileTabsInfo');
 
         if ($this->UserRole == "Teacher") {
-            $bannerModule = new BannerModule('Home', 'Mutual Aid Zone', "Teacher");
+            $bannerModule = new BannerModule('Home', 'Help Zone', "Teacher");
         } else {
             $this->addModule('NewDiscussionModule');
-            $bannerModule = new BannerModule('Home', 'Mutual Aid Zone');
+            $bannerModule = new BannerModule('Home', 'Help Zone');
             $this->addModule('ProfileFilterModule');
         }
 
@@ -653,10 +653,10 @@ class DiscussionsController extends VanillaController {
         $this->addModule($mobileHeader);
 
         if ($this->UserRole == "Teacher") {
-            $bannerModule = new BannerModule('Home', 'Mutual Aid Zone', "Teacher");
+            $bannerModule = new BannerModule('Home', 'Help Zone', "Teacher");
         } else {
             $this->addModule('NewDiscussionModule');
-            $bannerModule = new BannerModule('Home', 'Mutual Aid Zone');
+            $bannerModule = new BannerModule('Home', 'Help Zone');
             $this->addModule('ProfileFilterModule');
         }
 
@@ -671,7 +671,7 @@ class DiscussionsController extends VanillaController {
                 $discussionsFooterModule = new DiscussionsFooterModule($DiscussionEmpty, "That's all for now!", "If you have other questions, don't hesitate to ask😉");
             }
         } else {
-            $discussionsFooterModule = new DiscussionsFooterModule($DiscussionEmpty, "It seems there's nothing here at the moment!", "Don't hesitate ask if you have a question.");
+            $discussionsFooterModule = new DiscussionsFooterModule($DiscussionEmpty, "Looks like all is well.", "Don’t hesitate if you have a question.");
         }
 
         $this->addModule($discussionsFooterModule);
@@ -826,12 +826,12 @@ class DiscussionsController extends VanillaController {
             $DiscussionEmpty = false;
             $discussionsFooterModule = new DiscussionsFooterModule($DiscussionEmpty, "That's all for now!", "If you have other questions, don't hesitate to ask😉");
         } else {
-            $discussionsFooterModule = new DiscussionsFooterModule($DiscussionEmpty, "It seems there's nothing here at the moment!", "Don't hesitate ask if you have a question.");
+            $discussionsFooterModule = new DiscussionsFooterModule($DiscussionEmpty, "Looks like all is well.", "Don’t hesitate if you have a question.");
         }
 
         $this->addModule($discussionsFooterModule);
 
-        // $bannerModule = new BannerModule('Home', 'Home', '', 'Mutual Aid Zone', 'Welcome to the Mutual Aid Zone! <br/> Do you have a question? Here are the explanations!');
+        // $bannerModule = new BannerModule('Home', 'Home', '', 'Help Zone', 'Welcome to the Help Zone! <br/> Do you have a question? Here are the explanations!');
         // $this->addModule($bannerModule);
 
         // Render view

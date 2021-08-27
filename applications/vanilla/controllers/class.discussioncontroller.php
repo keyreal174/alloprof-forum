@@ -926,7 +926,7 @@ class DiscussionController extends VanillaController {
                     $address = $discussionInsertUser->Email;
 
                     $User = Gdn::userModel()->getID(Gdn::session()->UserID);
-                    $subject = $User->ProfileLanguage == "fr" ? "Oups! Ta question a été refusée." : "Whoops! Your question was denied.";
+                    $subject = $User->ProfileLanguage == "fr" ? "Oups! Ta question a été refusée." : "Oops! Your question was declined.";
 
                     $emailer = new Gdn_Email();
                     $email = $emailer->getEmailTemplate();
@@ -1078,7 +1078,7 @@ class DiscussionController extends VanillaController {
                     $address = $commentInsertUser->Email;
 
                     $User = Gdn::userModel()->getID(Gdn::session()->UserID);
-                    $subject = $User->ProfileLanguage == "fr" ? "Oups! Ton explication a été refusée." : "Whoops! Your explanation was refused.";
+                    $subject = $User->ProfileLanguage == "fr" ? "Oups! Ton explication a été refusée." : "Oops! Your explanation was declined.";
 
                     $emailer = new Gdn_Email();
                     $email = $emailer->getEmailTemplate();
@@ -1610,9 +1610,9 @@ body { background: transparent !important; }
     // Social Sharing
     public function social($DiscussionID) {
         $this->setData('Discussion', $this->discussionByID($DiscussionID));
-        $this->setData('DesktopTitle', 'Share your question!');
+        $this->setData('DesktopTitle', 'Share this question!');
         $this->setData('MobileTitle', 'Share');
-        $this->setData('SubTitle', 'Share it with your friends, they may have the explanation!');
+        $this->setData('SubTitle', 'Your friends might like to know the answer too.');
         $this->setData('CopySubTitle', 'Asking yourself the same question? Share it with your friends, they may have the explanation!');
 
         $this->render($this->fetchViewLocation('socialsharing', 'discussion', 'vanilla'));

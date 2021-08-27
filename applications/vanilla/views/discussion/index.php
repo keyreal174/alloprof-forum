@@ -80,6 +80,6 @@ if (!$this->Data['Discussion']->Published && userRoleCheck() != Gdn::config('Van
     echo '<div class="question-not-published">';
     echo '<img src="'.url("/themes/alloprof/design/images/question_not_approved.svg").'"/>';
     echo '<p>'.t('Your question will be reviewed by a moderator.').'</p>';
-    echo '<p>'.t('You will be notified as soon as it is published!').'</p>';
+    echo '<p>'.t('You will be notified as soon as it’s published!').'</p>';
     echo '</div>';
 }

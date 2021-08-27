@@ -127,7 +127,7 @@ if (!function_exists('writeComment')) :
                 if ($comment->DateAccepted) {
                     echo '<div class="verfied-info">
                             <img src="'.url("/themes/alloprof/design/images/icons/verifiedbadge.svg").'"/>
-                            <span>'.t("Explanation verified by Alloprof").'</span>
+                            <span>'.t("Answer verified by Alloprof").'</span>
                         </div>';
                 }
             ?>
@@ -1053,15 +1053,15 @@ if (!function_exists('checkAnswer')) :
         $noanswered = $sender->Resolved === 1 ? 'Hidden' : '';
         ?>
         <div class="BoxCheckAnswer NotAnswered <?php echo $noanswered; ?>">
-            <h2><?php echo t("Have the explanations solved your problem?") ?></h2>
+            <h2><?php echo t("Did you find the answer to your question?") ?></h2>
             <div class="BoxCheckAnswer-answers">
                 <a class="FeedbackPerfect">
                     <img src="<?= url('/themes/alloprof/design/images/peace.svg') ?>" width="80px" height="80px" />
-                    <span> <?php echo t("It's perfect!") ?> </span>
+                    <span> <?php echo t("I sure did!") ?> </span>
                 </a>
                 <a href="<?= url('/discussion/bad') ?>" class="FeedbackHelp">
                     <img src="<?= url('/themes/alloprof/design/images/neutre.svg') ?>" width="80px" height="80px" />
-                    <span> <?php echo t("I need more help") ?> </span>
+                    <span> <?php echo t("I still need help") ?> </span>
                 </a>
             </div>
         </div>

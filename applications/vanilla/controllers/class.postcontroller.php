@@ -452,11 +452,11 @@ class PostController extends VanillaController {
                             $activity = [
                                 'ActivityType' => 'Default',
                                 'NotifyUserID' => $discussion->InsertUserID,
-                                'HeadlineFormat' => 'Question pending approval',
+                                'HeadlineFormat' => 'Your question is pending approval.',
                                 "RecordType" => "Discussion",
                                 "RecordID" => $discussion->DiscussionID,
                                 "Route" => DiscussionModel::discussionUrl($discussion, "", "/"),
-                                'Story' => 'Your question will be reviewed by a moderator. <br/> You will be notified once it is published!',
+                                'Story' => 'Your question will be reviewed by a moderator. <br/> You will be notified as soon as it’s published!',
                                 'Notified' => ActivityModel::SENT_PENDING,
                                 'Emailed' => ActivityModel::SENT_PENDING
                             ];
@@ -801,11 +801,11 @@ class PostController extends VanillaController {
                             $activity = [
                                 'ActivityType' => 'Default',
                                 'NotifyUserID' => $discussion->InsertUserID,
-                                'HeadlineFormat' => 'Question pending approval',
+                                'HeadlineFormat' => 'Your question is pending approval.',
                                 "RecordType" => "Discussion",
                                 "RecordID" => $discussion->DiscussionID,
                                 "Route" => DiscussionModel::discussionUrl($discussion, "", "/"),
-                                'Story' => 'Your question will be reviewed by a moderator. <br/> You will be notified once it is published!',
+                                'Story' => 'Your question will be reviewed by a moderator. <br/> You will be notified as soon as it’s published!',
                                 'Notified' => ActivityModel::SENT_PENDING,
                                 'Emailed' => ActivityModel::SENT_PENDING
                             ];
@@ -1366,11 +1366,11 @@ class PostController extends VanillaController {
                         $activity = [
                             'ActivityType' => 'NewDiscussion',
                             'NotifyUserID' => $Comment->InsertUserID,
-                            'HeadlineFormat' => 'Explanation pending approval',
+                            'HeadlineFormat' => 'Your answer is awaiting approval.',
                             "RecordType" => "Comment",
                             "RecordID" => $Comment->CommentID,
                             "Route" => CommentModel::commentUrl($Comment),
-                            'Story' => 'Your explanation will be reviewed by a moderator. <br/> You will be notified once it is published!',
+                            'Story' => 'Your answer will be reviewed by a moderator. <br/> You will be notified as soon as it’s published!',
                             'Notified' => ActivityModel::SENT_PENDING,
                             'Emailed' => ActivityModel::SENT_PENDING
                         ];

@@ -7,7 +7,7 @@ if (!isset($this->Prefix))
 <div class="Box BoxDiscussions">
 <?php
 if ($this->showTitle) {
-    echo panelHeading(t($this->title ?? 'Recent Discussions'));
+    echo panelHeading(t($this->title ?? 'Recent questions'));
 }
 ?>
     <ul class="PanelInfo PanelDiscussions DataList">

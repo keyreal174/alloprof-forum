@@ -3,7 +3,7 @@ require_once Gdn::controller()->fetchViewLocation('helper_functions', 'discussio
 $user = $this->data('User');
 ?>
 <div class="DataListWrap">
-    <h2 class="H"><?php echo t('Recent Discussions'); ?></h2>
+    <h2 class="H"><?php echo t('Recent questions'); ?></h2>
     <ul class="DataList SearchResults">
 <?php
 if (sizeof($this->data('Discussions'))) {

@@ -555,10 +555,10 @@ if (!function_exists('timeElapsedString')) :
         } else {
             $enStr = "";
             if ($diff->y) {
-                $enStr = $diff->y . "y";
+                $enStr = $diff->y . "yr.";
             } else {
                 if ($diff->m) {
-                    $enStr = $diff->m . "m";
+                    $enStr = $diff->m . "mo.";
                 } else {
                     if ($diff->d) {
                         $enStr = $diff->d . "d";
