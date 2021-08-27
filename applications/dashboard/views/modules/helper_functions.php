@@ -98,7 +98,7 @@ if (!function_exists('writeFilterToggle')) :
     function writeFilterToggle($explanation, $verified, $language) {
         $form  = new Gdn_Form();
         $role = getUserRole(Gdn::session()->User->UserID);
-        $text = $role === 'Teacher' ? t('Without explanations only') : t('With explanations only');
+        $text = $role === 'Teacher' ? t('Without answers only') : t('With answers only');
         $verifiedText = $role === 'Teacher' ? t('Not Verified by Alloprof only') : t('Verified by Alloprof only');
         $languageToggle = t('Show posts in all languages');
 
@@ -122,9 +122,9 @@ if (!function_exists('writeFilterToggle')) :
         if ($role != 'Teacher') {
             echo '<li class="form-group">';
             if ($explanationout == 'true') {
-                echo Gdn::controller()->Form->toggle(($isMobile?'Mobile':'').'OutExplanation', t('Without explanations only'), [ 'checked' => $explanation ]);
+                echo Gdn::controller()->Form->toggle(($isMobile?'Mobile':'').'OutExplanation', t('Without answers only'), [ 'checked' => $explanation ]);
             } else {
-                echo Gdn::controller()->Form->toggle(($isMobile?'Mobile':'').'OutExplanation', t('Without explanations only'));
+                echo Gdn::controller()->Form->toggle(($isMobile?'Mobile':'').'OutExplanation', t('Without answers only'));
             }
             echo '</li>';
         }

@@ -973,7 +973,10 @@ if (!function_exists('writeDiscussionFooter')) :
             </div>
             <div class="Item-Footer-Buttons">
                 <?php
-                    $commentsLabel = $commentsCount < 2 ? $commentsCount . ' ' . t('explanation') : $commentsCount . ' ' . t('explanations');
+                    $commentsLabel = $commentsCount < 2 ? $commentsCount . ' ' . t('answer') : $commentsCount . ' ' . t('answers');
+                    if ($commentsLabel == '0 answer') {
+                        $commentsLabel = '0 answers';
+                    }
                     if (!$sender->data('IsAnswer')) {
                         echo '<a class="btn-default" href="'.$discussionUrl.'">'.$commentsLabel.'</a>';
                     } else {
@@ -987,11 +990,11 @@ if (!function_exists('writeDiscussionFooter')) :
                             $answerButtonForMobile = null;
 
                             // if($userCanComment){
-                                $answerButton = $sender->Form->button(t('Give an explanation'), ['class' => 'btn-default btn-shadow']);
-                                $answerButtonForMobile = anchor(t('Give an explanation'), '/post/answerPopup/'.$Discussion->DiscussionID, 'btn-default btn-shadow AnswerPopup QuestionPopup');
+                                $answerButton = $sender->Form->button(t('Provide an answer'), ['class' => 'btn-default btn-shadow']);
+                                $answerButtonForMobile = anchor(t('Provide an answer'), '/post/answerPopup/'.$Discussion->DiscussionID, 'btn-default btn-shadow AnswerPopup QuestionPopup');
                             // } else {
-                            //     $answerButton = anchor(t('Give an explanation'), '/entry/signinstudent', 'btn-default btn-shadow');
-                            //     $answerButtonForMobile = anchor(t('Give an explanation'), '/entry/signinstudent', 'btn-default btn-shadow');
+                            //     $answerButton = anchor(t('Provide an answer'), '/entry/signinstudent', 'btn-default btn-shadow');
+                            //     $answerButtonForMobile = anchor(t('Provide an answer'), '/entry/signinstudent', 'btn-default btn-shadow');
                             // }
 
                             echo $answerButton;

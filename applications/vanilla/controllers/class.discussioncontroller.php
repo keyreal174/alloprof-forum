@@ -1613,7 +1613,7 @@ body { background: transparent !important; }
         $this->setData('DesktopTitle', 'Share this question!');
         $this->setData('MobileTitle', 'Share');
         $this->setData('SubTitle', 'Your friends might like to know the answer too.');
-        $this->setData('CopySubTitle', 'Asking yourself the same question? Share it with your friends, they may have the explanation!');
+        $this->setData('CopySubTitle', 'Asking yourself the same question? Share it with your friends, they may have the answer!');
 
         $this->render($this->fetchViewLocation('socialsharing', 'discussion', 'vanilla'));
     }

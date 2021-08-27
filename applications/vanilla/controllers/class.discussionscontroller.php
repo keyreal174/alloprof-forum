@@ -831,7 +831,7 @@ class DiscussionsController extends VanillaController {
 
         $this->addModule($discussionsFooterModule);
 
-        // $bannerModule = new BannerModule('Home', 'Home', '', 'Help Zone', 'Welcome to the Help Zone! <br/> Do you have a question? Here are the explanations!');
+        // $bannerModule = new BannerModule('Home', 'Home', '', 'Help Zone', 'Welcome to the Help Zone! <br/> Have questions? Find the answers here!');
         // $this->addModule($bannerModule);
 
         // Render view
