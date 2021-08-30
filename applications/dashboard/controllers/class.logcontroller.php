@@ -136,13 +136,15 @@ class LogController extends DashboardController {
                         $discussion = $this->DiscussionModel->getID($log['RecordID']);
                         $email = $email->setView('discussion-delete-email');
                         $message = Gdn_Format::to($discussion->Body, 'Rich');
-                        $subject = "Oups! Ta question a été refusée.";
+                        $User = Gdn::userModel()->getID(Gdn::session()->UserID);
+                        $subject = $User->ProfileLanguage == "fr" ? "Oups! Ta question a été refusée." : "Oops! Your question was declined.";
                         break;
                     case 'Comment':
                         $comment = $this->CommentModel->getID($log['RecordID']);
                         $email = $email->setView('comment-delete-email');
                         $message = Gdn_Format::to($comment->Body, 'Rich');
-                        $subject = "Oups! Ton explication a été refusée.";
+                        $User = Gdn::userModel()->getID(Gdn::session()->UserID);
+                        $subject = $User->ProfileLanguage == "fr" ? "Oups! Ton explication a été refusée." : "Oops! Your explanation was declined.";
                         break;
                 }
                 $email->setBoxText($message);

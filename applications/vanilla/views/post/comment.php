@@ -93,10 +93,10 @@ $this->fireEvent('BeforeCommentForm');
                     $ButtonOptions = ['class' => 'btn-default btn-shadow btn-m-l-auto'];
 
                     if ($Session->isValid()) {
-                        echo $this->Form->button($Editing ? t('Save Comment') : t('Submit my explanation'), $ButtonOptions);
+                        echo $this->Form->button($Editing ? t('Save Comment') : t('Submit my answer'), $ButtonOptions);
                     } else {
-                        echo anchor(t('Submit my explanation'), '/entry/signinstudent?Target=discussions', 'btn-default btn-shadow SignInStudentPopupAgent SaveComment');
-                        echo anchor(t('Submit my explanation'), '/entry/signinstudent?Target=discussions', 'btn-default btn-shadow SignInStudentPopup SaveComment HiddenImportant');
+                        echo anchor(t('Submit my answer'), '/entry/signinstudent?Target=discussions', 'btn-default btn-shadow SignInStudentPopupAgent SaveComment');
+                        echo anchor(t('Submit my answer'), '/entry/signinstudent?Target=discussions', 'btn-default btn-shadow SignInStudentPopup SaveComment HiddenImportant');
                     }
 
                     $this->fireEvent('AfterFormButtons');
@@ -143,7 +143,7 @@ $this->fireEvent('BeforeCommentForm');
             <path d="M52.7499 19.8435C51.5019 19.8435 50.4819 20.2995 49.8699 21.0315L51.0099 22.1835C51.5019 21.6915 52.0779 21.4395 52.6059 21.4395C53.2179 21.4395 53.6019 21.7155 53.6019 22.1595C53.6019 22.7595 52.9419 23.0595 51.7539 23.0715V25.0875H53.5179L53.5419 24.0435C54.7419 23.6835 55.4619 22.9515 55.4619 21.9195C55.4619 20.6595 54.3819 19.8435 52.7499 19.8435ZM52.6059 26.0595C51.8499 26.0595 51.2859 26.5755 51.2859 27.2715C51.2859 27.9555 51.8499 28.4835 52.6059 28.4835C53.3499 28.4835 53.9019 27.9555 53.9019 27.2715C53.9019 26.5755 53.3499 26.0595 52.6059 26.0595Z" fill="black"/>
             </svg>
         </div>
-        <p><?php echo t('Don\'t publish anything offensive') ?></p>
+        <p><?php echo t('Do not publish anything offensive.') ?></p>
     </div>
     <div>
         <div class="img-box">

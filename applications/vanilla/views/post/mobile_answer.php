@@ -24,7 +24,7 @@
     }
 ?>
 <div class="modal-header">
-    <h3><?php echo t("Giving an explanation"); ?></h3>
+    <h3><?php echo t("Provide an answer"); ?></h3>
 </div>
 <div class="modal-body">
     <div class="BoxButtons BoxNewDiscussion MobileCommentForm">

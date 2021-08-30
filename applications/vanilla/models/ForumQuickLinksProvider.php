@@ -40,7 +40,7 @@ class ForumQuickLinksProvider implements QuickLinkProviderInterface {
         );
 
         $result[] = new QuickLink(
-            'Recent Discussions',
+            'Recent questions',
             '/discussions',
             null,
             -3

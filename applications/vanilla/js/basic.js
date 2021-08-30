@@ -63,7 +63,7 @@ jQuery(document).ready(function($) {
 
     var selectGradePlaceholder = 'Niveau';
     if (gdn.meta.siteSection.contentLocale == 'en') {
-        selectGradePlaceholder = 'Grade';
+        selectGradePlaceholder = 'Level';
     }
 
     $('.select2-grade select').select2({
@@ -73,7 +73,7 @@ jQuery(document).ready(function($) {
 
     var selectCategoryPlaceholder = 'Matière';
     if (gdn.meta.siteSection.contentLocale == 'en') {
-        selectCategoryPlaceholder = 'Subject';
+        selectCategoryPlaceholder = 'Topic';
     }
 
     $('.select2-category select').select2({

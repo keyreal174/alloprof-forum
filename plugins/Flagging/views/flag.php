@@ -3,7 +3,7 @@
 $UcContext = htmlspecialchars(ucfirst($this->data('Plugin.Flagging.Data.Context')));
 $ElementID = htmlspecialchars($this->data('Plugin.Flagging.Data.ElementID'));
 $URL = $this->data('Plugin.Flagging.Data.URL');
-$Title = sprintf("What's wrong?");
+$Title = sprintf("What happened?");
 ?>
     <div>
     <img src='<?= url("/themes/alloprof/design/images/Horreur.") ?>svg' alt='image' class='FlagAvatar' />
@@ -19,7 +19,7 @@ echo $this->Form->errors();
             <label class="container">
                 <input type="radio" name="Plugin-dot-Flagging-dot-Reason" id="Form_Plugin-dot-Flagging-dot-Reason" value="0">
                 <span class="checkmark"></span>
-                <span class="d-desktop title"><?php echo t('The words are offensive or inappropriate') ?></span>
+                <span class="d-desktop title"><?php echo t('This post is offensive or inappropriate') ?></span>
                 <span class="d-mobile title"><?php echo t('Offensive words') ?></span>
             </label>
         </div>
@@ -27,7 +27,7 @@ echo $this->Form->errors();
             <label class="container">
                 <input type="radio" name="Plugin-dot-Flagging-dot-Reason" id="Form_Plugin-dot-Flagging-dot-Reason1" value="1">
                 <span class="checkmark"></span>
-                <span class="d-desktop title"><?php echo t('The author posts spam') ?></span>
+                <span class="d-desktop title"><?php echo t('This post is spam') ?></span>
                 <span class="d-mobile title"><?php echo t('Undesirable content') ?></span>
             </label>
         </div>
@@ -35,7 +35,7 @@ echo $this->Form->errors();
             <label class="container">
                 <input type="radio" name="Plugin-dot-Flagging-dot-Reason" id="Form_Plugin-dot-Flagging-dot-Reason2"  value="2">
                 <span class="checkmark"></span>
-                <span class="d-desktop title"><?php echo t('The post contains an unapproved photo') ?></span>
+                <span class="d-desktop title"><?php echo t('This post contains an inappropriate photo') ?></span>
                 <span class="d-mobile title"><?php echo t('Inappropriate image') ?></span>
             </label>
         </div>

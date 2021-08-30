@@ -18,7 +18,7 @@ if (!count($this->data('SearchResults')) && $this->data('SearchTerm')){
             <img src="<?php echo url('/themes/alloprof/design/images/Horreur.svg'); ?>"/>
             <p class="d-desktop desc">
                 <?php echo sprintf(t('There are no results for "%s".', 'There are no results for "%s".'), $this->data('SearchTerm')); ?> <br/>
-                <?php echo t("Can't find an explanation? ask your question!"); ?>
+                <?php echo t("Can't find an answer? ask your question!"); ?>
             </p>
             <h2 class="d-mobile"><?php echo t('No results'); ?></h2>
             <p class="d-mobile">

@@ -127,7 +127,7 @@ if (!function_exists('writeComment')) :
                 if ($comment->DateAccepted) {
                     echo '<div class="verfied-info">
                             <img src="'.url("/themes/alloprof/design/images/icons/verifiedbadge.svg").'"/>
-                            <span>'.t("Explanation verified by Alloprof").'</span>
+                            <span>'.t("Answer verified by Alloprof").'</span>
                         </div>';
                 }
             ?>
@@ -973,7 +973,10 @@ if (!function_exists('writeDiscussionFooter')) :
             </div>
             <div class="Item-Footer-Buttons">
                 <?php
-                    $commentsLabel = $commentsCount < 2 ? $commentsCount . ' ' . t('explanation') : $commentsCount . ' ' . t('explanations');
+                    $commentsLabel = $commentsCount < 2 ? $commentsCount . ' ' . t('answer') : $commentsCount . ' ' . t('answers');
+                    if ($commentsLabel == '0 answer') {
+                        $commentsLabel = '0 answers';
+                    }
                     if (!$sender->data('IsAnswer')) {
                         echo '<a class="btn-default" href="'.$discussionUrl.'">'.$commentsLabel.'</a>';
                     } else {
@@ -987,11 +990,11 @@ if (!function_exists('writeDiscussionFooter')) :
                             $answerButtonForMobile = null;
 
                             // if($userCanComment){
-                                $answerButton = $sender->Form->button(t('Give an explanation'), ['class' => 'btn-default btn-shadow']);
-                                $answerButtonForMobile = anchor(t('Give an explanation'), '/post/answerPopup/'.$Discussion->DiscussionID, 'btn-default btn-shadow AnswerPopup QuestionPopup');
+                                $answerButton = $sender->Form->button(t('Provide an answer'), ['class' => 'btn-default btn-shadow']);
+                                $answerButtonForMobile = anchor(t('Provide an answer'), '/post/answerPopup/'.$Discussion->DiscussionID, 'btn-default btn-shadow AnswerPopup QuestionPopup');
                             // } else {
-                            //     $answerButton = anchor(t('Give an explanation'), '/entry/signinstudent', 'btn-default btn-shadow');
-                            //     $answerButtonForMobile = anchor(t('Give an explanation'), '/entry/signinstudent', 'btn-default btn-shadow');
+                            //     $answerButton = anchor(t('Provide an answer'), '/entry/signinstudent', 'btn-default btn-shadow');
+                            //     $answerButtonForMobile = anchor(t('Provide an answer'), '/entry/signinstudent', 'btn-default btn-shadow');
                             // }
 
                             echo $answerButton;
@@ -1053,15 +1056,15 @@ if (!function_exists('checkAnswer')) :
         $noanswered = $sender->Resolved === 1 ? 'Hidden' : '';
         ?>
         <div class="BoxCheckAnswer NotAnswered <?php echo $noanswered; ?>">
-            <h2><?php echo t("Have the explanations solved your problem?") ?></h2>
+            <h2><?php echo t("Did you find the answer to your question?") ?></h2>
             <div class="BoxCheckAnswer-answers">
                 <a class="FeedbackPerfect">
                     <img src="<?= url('/themes/alloprof/design/images/peace.svg') ?>" width="80px" height="80px" />
-                    <span> <?php echo t("It's perfect!") ?> </span>
+                    <span> <?php echo t("I sure did!") ?> </span>
                 </a>
                 <a href="<?= url('/discussion/bad') ?>" class="FeedbackHelp">
                     <img src="<?= url('/themes/alloprof/design/images/neutre.svg') ?>" width="80px" height="80px" />
-                    <span> <?php echo t("I need more help") ?> </span>
+                    <span> <?php echo t("I still need help") ?> </span>
                 </a>
             </div>
         </div>

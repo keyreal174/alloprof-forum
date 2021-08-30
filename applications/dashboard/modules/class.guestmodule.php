@@ -17,7 +17,7 @@ class GuestModule extends Gdn_Module {
     public $MessageCode = 'GuestModule.Message';
 
     /** @var string  */
-    public $MessageDefault = "Join the Alloprof community and find answers to your questions!";
+    public $MessageDefault = "Join the Help Zone to ask your questions!";
 
     /**
      *

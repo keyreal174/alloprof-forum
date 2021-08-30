@@ -8,7 +8,7 @@ require Gdn::controller()->fetchViewLocation('helper_functions', 'Discussions', 
 if(userRoleCheck() != Gdn::config('Vanilla.ExtraRoles.Teacher')) {
 ?>
 <div class="scroll-top">
-    <p><?php echo t("Can't find answers?") ?></p>
+    <p><?php echo t("Can’t find the answer to your question?") ?></p>
     <?php
         // if($Session->isValid()) {
             $Controller = Gdn::controller();

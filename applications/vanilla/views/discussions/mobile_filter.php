@@ -42,7 +42,7 @@
     </div>
 
     <div class="filter-block">
-        <h4><?php echo t('Grade') ?></h4>
+        <h4><?php echo t('Level') ?></h4>
         <div class="FilterMenu">
             <?php echo writeGradeFilter(null, true); ?>
         </div>
