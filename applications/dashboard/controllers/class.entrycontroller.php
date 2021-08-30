@@ -1022,8 +1022,20 @@ class EntryController extends Gdn_Controller {
      */
     protected function _setRedirect($checkPopup = false) {
         $url = url($this->getTargetRoute(), true);
+        $UserMetaData = Gdn::userModel()->getMeta(Gdn::session()->UserID, 'Plugin.%', 'Plugin.');
+        if ($UserMetaData && $UserMetaData['Multilingual.Locale']) {
+            $Language = $UserMetaData['Multilingual.Locale'];
+        } else {
+            $Language = Gdn::config('Garden.Locale');
+        }
 
-        $this->setRedirectTo($url);
+        if ($Language == "en") {
+            $newURI = str_replace('zonedentraide', 'helpzone', $url);
+        } else {
+            $newURI = str_replace('helpzone', 'zonedentraide', $url);
+        }
+
+        $this->setRedirectTo($newURI);
         $this->MasterView = 'popup';
         $this->View = 'redirect';
 
@@ -1033,13 +1045,6 @@ class EntryController extends Gdn_Controller {
         } elseif ($checkPopup || $this->data('CheckPopup')) {
             $this->addDefinition('CheckPopup', true);
         } else {
-            $UserMetaData = Gdn::userModel()->getMeta(Gdn::session()->UserID, 'Plugin.%', 'Plugin.');
-            if ($UserMetaData && $UserMetaData['Multilingual.Locale']) {
-                $Language = $UserMetaData['Multilingual.Locale'];
-            } else {
-                $Language = Gdn::config('Garden.Locale');
-            }
-
             $redirectUrl = $this->redirectTo ?: url($this->RedirectUrl);
             if ($Language == "en") {
                 $newURI = str_replace('zonedentraide', 'helpzone', $redirectUrl);
