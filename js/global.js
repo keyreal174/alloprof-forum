@@ -23,6 +23,16 @@
         return true;
     });
 
+    $(document).on('click', '.Header-logo-link', function(event) {
+        event.preventDefault();
+        if (gdn.meta.siteSection.contentLocale == "en") {
+            window.location.href  = '/helpzone';
+        } else {
+            window.location.href  = '/zonedentraide';
+        }
+        return true;
+    });
+
     // Disable notification link until website is fully loaded.
     $('.ToggleFlyout-notification').css("pointer-events", "none");
 
