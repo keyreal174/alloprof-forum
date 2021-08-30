@@ -67,7 +67,13 @@ endif;
                 <path d="M6.25 10L8.75 12.25L13.75 7.75" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg></span>';
             } else {
-                echo $UserMetaData["Grade"];
+                $grade = $UserMetaData["Grade"];
+                if (Gdn::config('Garden.Locale') == 'en') {
+                    $grade = str_replace('Primaire', 'Primary', $grade);
+                    $grade = str_replace('Secondaire', 'Secondary', $grade);
+                    $grade = str_replace('Post-secondaire', 'Post-secondary', $grade);
+                }
+                echo $grade;
             }
         ?>
     </a>

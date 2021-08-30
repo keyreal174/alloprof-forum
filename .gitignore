@@ -24,6 +24,7 @@
 /conf/*
 !/conf/.htaccess
 !/conf/config-alloprof.php
+!/conf/config-helpzone.php
 !/conf/config-defaults.php
 !/conf/constants.php
 !/conf/readme.txt

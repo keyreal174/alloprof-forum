@@ -133,10 +133,12 @@ class MultilingualPlugin extends Gdn_Plugin {
      * @throws Exception
      */
     public function profileController_setLocale_create($sender, $locale) {
-        if (!Gdn::session()->UserID) {
-            throw permissionException('Garden.SignIn.Allow');
-        }
         $redirectURL = $_SERVER['HTTP_REFERER'] ?? url('/');
+        if (!Gdn::session()->UserID) {
+            redirectTo($redirectURL);
+            return;
+        }
+
         // if ($sender->Form->authenticatedPostBack()) {
             // If we got a valid locale, save their preference
             if (isset($locale)) {
@@ -153,8 +155,6 @@ class MultilingualPlugin extends Gdn_Plugin {
             // Back from whence we came.
             redirectTo($redirectURL);
         // }
-
-        redirectTo($redirectURL);
     }
 
     /**

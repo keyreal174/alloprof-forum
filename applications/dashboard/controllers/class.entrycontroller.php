@@ -1033,7 +1033,21 @@ class EntryController extends Gdn_Controller {
         } elseif ($checkPopup || $this->data('CheckPopup')) {
             $this->addDefinition('CheckPopup', true);
         } else {
-            redirectTo($this->redirectTo ?: url($this->RedirectUrl));
+            $UserMetaData = Gdn::userModel()->getMeta(Gdn::session()->UserID, 'Plugin.%', 'Plugin.');
+            if ($UserMetaData && $UserMetaData['Multilingual.Locale']) {
+                $Language = $UserMetaData['Multilingual.Locale'];
+            } else {
+                $Language = Gdn::config('Garden.Locale');
+            }
+
+            $redirectUrl = $this->redirectTo ?: url($this->RedirectUrl);
+            if ($Language == "en") {
+                $newURI = str_replace('zonedentraide', 'helpzone', $redirectUrl);
+            } else {
+                $newURI = str_replace('helpzone', 'zonedentraide', $redirectUrl);
+            }
+
+            redirectTo($newURI);
         }
     }
 

@@ -755,7 +755,6 @@ class VanillaHooks extends Gdn_Plugin {
         $sender->addJsFile('jquery.tokeninput.js');
         // Tagging END
 
-        // Change config
         $PreferredLanguage = $_COOKIE['preferredLanguage'];
         $Language = 'en';
         if (!is_null($PreferredLanguage)) {
@@ -768,7 +767,7 @@ class VanillaHooks extends Gdn_Plugin {
             $Language = 'fr_CA';
         }
 
-        saveToConfig('Garden.Locale', $Language);
+        // saveToConfig('Garden.Locale', $Language);
     }
 
     /**
