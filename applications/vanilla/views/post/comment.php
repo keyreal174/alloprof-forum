@@ -44,7 +44,13 @@ $this->fireEvent('BeforeCommentForm');
             if ($this->UserRole == TEACHER_ROLE) {
                 echo '<span class="UserAuthorGrade">'.t('Teacher').'</span>';
             } else {
-                echo '<span class="UserAuthorGrade">'.$UserMetaData["Grade"].'</span>';
+                $grade = $UserMetaData["Grade"];
+                if (Gdn::config('Garden.Locale') == 'en') {
+                    $grade = str_replace('Primaire', 'Primary', $grade);
+                    $grade = str_replace('Secondaire', 'Secondary', $grade);
+                    $grade = str_replace('Post-secondaire', 'Post-secondary', $grade);
+                }
+                echo '<span class="UserAuthorGrade">'.$grade.'</span>';
             }
             echo '</div>';
 

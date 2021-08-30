@@ -2,7 +2,8 @@
 
 // ContentSecurityPolicy
 $Configuration['ContentSecurityPolicy']['ScriptSrc']['AllowedDomains'] = array (
-  0 => '*.googletagmanager.com',
+  0 => '*.googletagmanager.com
+',
   1 => '*.google-analytics.com',
 );
 

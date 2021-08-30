@@ -8,12 +8,27 @@
 // Global vanilla library function.
 (function(window, $) {
     // English Button
-    $(document).on('click', '.english-btn', function(event) {
+    $(document).on('click', '.language-btn', function(event) {
         event.preventDefault();
-        var numItems = $('.InformMessages .InformWrapper').length;
-        if (numItems > 1) {
-            $('.InformMessages .InformWrapper').eq(1).children().children().eq(0).trigger('click');
-            $('.InformMessages .InformWrapper').eq(1).css("display", "none");
+        if ($(this).attr('data-session') == "invalid") {
+            window.location.href  = $(this).attr('data-url');
+            // document.cookie = "preferredLanguage=" +  $(this).attr('id');
+        } else {
+            axios.get(gdn.url("/profile/setlocale?locale=" + $(this).attr('id')))
+                .then((response) => {
+                    window.location.href  = $(this).attr('data-url');
+                });
+            // window.location.href = gdn.url("/profile/setlocale?locale=" + $(this).attr('id'));
+        }
+        return true;
+    });
+
+    $(document).on('click', '.Header-logo-link', function(event) {
+        event.preventDefault();
+        if (gdn.meta.siteSection.contentLocale == "en") {
+            window.location.href  = '/helpzone';
+        } else {
+            window.location.href  = '/zonedentraide';
         }
         return true;
     });

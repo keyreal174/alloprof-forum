@@ -41,7 +41,13 @@
             <?php
                 echo "<div class='user-info'>";
                 echo "<div class='username'>".$UserName."</div>";
-                echo "<div class='meta'>".$UserMetaData['Grade']."</div>";
+                $Grade = $UserMetaData["Grade"];
+                if (Gdn::config('Garden.Locale') == 'en') {
+                    $Grade = str_replace('Primaire', 'Primary', $Grade);
+                    $Grade = str_replace('Secondaire', 'Secondary', $Grade);
+                    $Grade = str_replace('Post-secondaire', 'Post-secondary', $Grade);
+                }
+                echo "<div class='meta'>".$Grade."</div>";
                 echo "</div>";
             ?>
         </div>

@@ -33,12 +33,25 @@ $useNewFlyouts = Gdn::themeFeatures()->useNewFlyouts();
 $this->EventArguments['DashboardCount'] = &$DashboardCount;
 $this->fireEvent('BeforeFlyoutMenu');
 
+$UserMetaData = Gdn::userModel()->getMeta(Gdn::session()->UserID, 'Plugin.%', 'Plugin.');
+if ($UserMetaData && $UserMetaData['Multilingual.Locale']) {
+    $Language = $UserMetaData['Multilingual.Locale'];
+} else {
+    $Language = Gdn::config('Garden.Locale');
+}
+
 if ($Session->isValid()):
     echo '<div class="MeBox'.$CssClass.'">';
     if (!$useNewFlyouts) {
         echo userPhoto($User);
     }
-    echo '<div class="english-btn">en</div>';
+    if (preg_match('/zonedentraide/i', $_SERVER['REQUEST_URI'])) {
+        $newURI = str_replace('zonedentraide', 'helpzone', $_SERVER['REQUEST_URI']);
+        echo '<div class="language-btn" data-url="'. $newURI .'" id="en_GB">en</div>';
+    } else {
+        $newURI = str_replace('helpzone', 'zonedentraide', $_SERVER['REQUEST_URI']);
+        echo '<div class="language-btn" data-url="'. $newURI .'" id="fr_CA">fr</div>';
+    }
     echo '<div class="WhoIs">';
     if (!$useNewFlyouts) {
         echo userAnchor($User, 'Username');
@@ -156,7 +169,14 @@ if ($Session->isValid()):
     echo '</div>';
 else:
     echo '<div class="MeBox MeBox-SignIn'.$CssClass.'">';
-    echo '<div class="english-btn">en</div>';
+    if (preg_match('/zonedentraide/i', $_SERVER['REQUEST_URI'])) {
+        $newURI = str_replace('zonedentraide', 'helpzone', $_SERVER['REQUEST_URI']);
+        echo '<div class="language-btn" data-session="invalid" data-url="'. $newURI .'" id="en_GB">en</div>';
+    } else {
+        $newURI = str_replace('helpzone', 'zonedentraide', $_SERVER['REQUEST_URI']);
+        echo '<div class="language-btn" data-session="invalid" data-url="'. $newURI .'" id="fr_CA">fr</div>';
+    }
+
     echo '<div class="SignInLinks">';
 
     $dropdown = new DropdownModule('', '', 'account-options', 'unauthorized withHeader');
