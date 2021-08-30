@@ -3,6 +3,9 @@
 
 <head>
     {literal}
+    <script src="https://ap-prod-frontend-observer.firebaseapp.com/main.js?f4f1755908a75cde0200"></script>
+    <link rel="stylesheet" href="https://appa-staging--pr129-update-connection-wi-2llgv1vn.web.app/styles.css"/>
+
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -241,7 +244,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </a>
     <div id="modals"></div>
     {event name="AfterBody"}
-
+    <alloprof-appa></alloprof-appa>
+    <div class="modal-backdrop"></div>
+ 
 {literal}
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-app.js"></script>
@@ -256,8 +261,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   firebase.initializeApp(firebaseConfig);
   var auth = firebase.auth();
 </script>
+<script src="https://appa-staging--pr129-update-connection-wi-2llgv1vn.web.app/alloprof-profile.js"></script>
 {/literal}
-
 </body>
 
 </html>
