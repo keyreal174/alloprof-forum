@@ -256,10 +256,23 @@
             return false;
         } else {
             event.preventDefault();
-            $('.SignInStudentPopup').eq(0).trigger('click');
+            // $('.SignInStudentPopup').eq(0).trigger('click');
+
+            // TODO: Open Observer Login Modal
+            
+            console.log('AlloprofObserver Instance =======', AlloprofObserver)    
         }
     });
     // SignInPopup Trigger end =================
+
+
+    // RegisterPopup
+    $(document).on('click', '.registerPopup', function (event) {
+        event.preventDefault();
+
+        // TODO: Open Observer Register Modal
+
+    })
 
     // Signout
     $(document).on('click', '.dropdown-menu-link-entry-signout', function (event) {
@@ -807,7 +820,10 @@ jQuery(document).ready(function($) {
     // This turns SignInPopup anchors into in-page popups
     if ($.fn.popup) {
         $('a.TeacherSigninPopup').popup({containerCssClass: 'SignInPopup TeacherSigninPopup'});
-        $('a.registerPopup').popup({containerCssClass: 'registerPopup SignInPopup'});
+        // $('a.registerPopup').popup({containerCssClass: 'registerPopup SignInPopup'});
+
+
+
         $('a.SignInStudentPopup').popup({containerCssClass: 'SignInStudentPopup SignInPopup'});
     }
 
