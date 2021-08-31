@@ -1029,7 +1029,7 @@ class EntryController extends Gdn_Controller {
             $Language = Gdn::config('Garden.Locale');
         }
 
-        if ($Language == "en") {
+        if ($Language == "en_GB") {
             $newURI = str_replace('zonedentraide', 'helpzone', $url);
         } else {
             $newURI = str_replace('helpzone', 'zonedentraide', $url);
@@ -1046,7 +1046,7 @@ class EntryController extends Gdn_Controller {
             $this->addDefinition('CheckPopup', true);
         } else {
             $redirectUrl = $this->redirectTo ?: url($this->RedirectUrl);
-            if ($Language == "en") {
+            if ($Language == "en_GB") {
                 $newURI = str_replace('zonedentraide', 'helpzone', $redirectUrl);
             } else {
                 $newURI = str_replace('helpzone', 'zonedentraide', $redirectUrl);
