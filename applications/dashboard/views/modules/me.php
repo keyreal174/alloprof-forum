@@ -47,7 +47,7 @@ if ($Session->isValid()):
     }
     if (preg_match('/zonedentraide/i', $_SERVER['REQUEST_URI'])) {
         $newURI = str_replace('zonedentraide', 'helpzone', $_SERVER['REQUEST_URI']);
-        echo '<div class="language-btn" data-url="'. $newURI .'" id="en">en</div>';
+        echo '<div class="language-btn" data-url="'. $newURI .'" id="en_GB">en</div>';
     } else {
         $newURI = str_replace('helpzone', 'zonedentraide', $_SERVER['REQUEST_URI']);
         echo '<div class="language-btn" data-url="'. $newURI .'" id="fr_CA">fr</div>';
@@ -171,7 +171,7 @@ else:
     echo '<div class="MeBox MeBox-SignIn'.$CssClass.'">';
     if (preg_match('/zonedentraide/i', $_SERVER['REQUEST_URI'])) {
         $newURI = str_replace('zonedentraide', 'helpzone', $_SERVER['REQUEST_URI']);
-        echo '<div class="language-btn" data-session="invalid" data-url="'. $newURI .'" id="en">en</div>';
+        echo '<div class="language-btn" data-session="invalid" data-url="'. $newURI .'" id="en_GB">en</div>';
     } else {
         $newURI = str_replace('helpzone', 'zonedentraide', $_SERVER['REQUEST_URI']);
         echo '<div class="language-btn" data-session="invalid" data-url="'. $newURI .'" id="fr_CA">fr</div>';
