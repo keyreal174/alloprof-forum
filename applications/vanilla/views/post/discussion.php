@@ -144,7 +144,7 @@ if (!$CancelUrl) {
         }
 
         $languageOption = ["en", "fr"];
-
+        
         echo writeCategoryDropDown($this, 'CategoryID', $options);
         echo '<span class="space"></span>';
         echo '<div class="Category rich-select select2 select2-grade">';

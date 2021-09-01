@@ -366,6 +366,7 @@ if (!function_exists('writeCategoryDropDown')) :
         $safeCategoryData = [];
         $discussionType = val('DiscussionType', $options);
         $language = Gdn::config('Garden.Locale') == 'fr_CA' ? 'fr' : 'en';
+        $language = $sender->Language ? $sender->Language : $language;
         foreach ($categoryData as $categoryID => $category) {
             if ($value != $categoryID) {
                 if ($category['CategoryID'] <= 0 || !$category['PermsDiscussionsView'] || $category['Language'] != $language) {
@@ -440,9 +441,9 @@ if (!function_exists('writeCategoryDropDown')) :
             $hasValue = ($value !== [false] && $value !== ['']) ? true : false;
 
             // Start with null option?
-            $includeNull = val('IncludeNull', $options);
+            $includeNull = val('IncludeNull', $options) || $sender->LanguageChanged;
             if ($includeNull === true) {
-                // $return .= '<option value="">'.t('Select a category...').'</option>';
+                $return .= '<option value=""></option>';
             } elseif (is_array($includeNull))
                 $return .= "<option value=\"{$includeNull[0]}\">{$includeNull[1]}</option>\n";
             elseif ($includeNull)

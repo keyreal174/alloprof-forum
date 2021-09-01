@@ -44,6 +44,8 @@ class PostController extends VanillaController {
 
     public $Language = null;
 
+    public $LanguageChanged = null;
+
     /**
      * General "post" form, allows posting of any kind of form. Attach to PostController_AfterFormCollection_Handler.
      *
@@ -870,7 +872,7 @@ class PostController extends VanillaController {
      * @param int $discussionID Unique ID of the discussion to edit.
      * @param int $draftID Unique ID of draft discussion to edit.
      */
-    public function editDiscussion($discussionID = 0, $draftID = 0, $isMobile=false) {
+    public function editDiscussion($discussionID = 0, $draftID = 0, $isMobile=false, $lang=false) {
         if ($draftID != 0) {
             $record = $this->Draft = $this->DraftModel->getID($draftID);
             $this->CategoryID = $this->Draft->CategoryID;
@@ -883,7 +885,8 @@ class PostController extends VanillaController {
             $record = $this->DiscussionModel->getID($discussionID);
             $this->setData('Discussion', $record, true);
             $this->CategoryID = $this->Discussion->CategoryID;
-            $this->Language = $this->Discussion->Language;
+            $this->Language = $lang ? $lang : $this->Discussion->Language;
+            $this->LanguageChanged = $lang ? true : false;
         }
 
         // Normalize the edit data.
@@ -918,6 +921,10 @@ class PostController extends VanillaController {
         // Set view and render
         $this->View = $isMobile?'mobile_askquestion':'Discussion';
         $this->discussion($this->CategoryID);
+    }
+
+    public function changeCategory($language = 'en') {
+
     }
 
     public function editQuestionPopup($discussionID = 0, $draftID = 0) {
