@@ -259,6 +259,14 @@
             // $('.SignInStudentPopup').eq(0).trigger('click');
 
             // TODO: Open Observer Login Modal
+            APForumApp.onReady(function(apForumApp) {
+                apForumApp.app.attachListener('userlogin:done', function(userConnected) {
+                    console.log('logged in');
+                });
+                apForumApp.obs.trigger('userlogin:show');
+            })
+
+
             
             console.log('AlloprofObserver Instance =======', AlloprofObserver)    
         }
@@ -271,6 +279,15 @@
         event.preventDefault();
 
         // TODO: Open Observer Register Modal
+        
+        APForumApp.onReady(function(apForumApp) {
+            apForumApp.app.attachListener('usercreate:done', function(userConnected) {
+                console.log('logged in');
+            });
+            apForumApp.obs.trigger('usercreate:show');
+        })
+
+
 
     })
 
