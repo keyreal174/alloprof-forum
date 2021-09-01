@@ -92,7 +92,19 @@ class SearchController extends Gdn_Controller {
         $sort = Gdn::request()->get('sort') ?? 'desc';
         $this->SortDirection = $sort;
 
-        $dashboardDiscussionFilterModule = new DashboardDiscussionFilterModule($gradeFilterOption, $sort, $explanation, $verified, $subject, $outexplanation, $language, true);
+        $isShowLanguage = true;
+
+        if ($subject != -1) {
+            $category = CategoryModel::categories($subject);
+
+            if (empty($category)) {
+                throw notFoundException();
+            }
+            $category = (object)$category;
+            $isShowLanguage = $category->LinkedCategoryID;
+        }
+
+        $dashboardDiscussionFilterModule = new DashboardDiscussionFilterModule($gradeFilterOption, $sort, $explanation, $verified, $subject, $outexplanation, $language, $isShowLanguage);
         $this->addModule($dashboardDiscussionFilterModule);
         $this->addJsFile('filter.js');
         $wheres = [];
