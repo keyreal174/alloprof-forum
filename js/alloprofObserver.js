@@ -1,3 +1,4 @@
+/*
 function AlloprofForumApp () {
     var self = this;
     self.callbacks = [];
@@ -35,3 +36,4 @@ function AlloprofForumApp () {
 }
 
 window.APForumApp = new AlloprofForumApp();
+*/

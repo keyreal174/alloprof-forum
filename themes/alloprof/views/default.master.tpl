@@ -252,13 +252,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-auth.js"></script>
 <script>
+  var firebaseConfigStaging = {
+    apiKey: "AIzaSyBtJINkqFDFD4Vv-6XyIcbJtKxBvn2uAWo",
+    authDomain: "alloprof-stg.firebaseapp.com",
+    databaseURL: "https://alloprof-stg.firebaseio.com",
+    projectId: "alloprof-stg",
+    storageBucket: "alloprof-stg.appspot.com",
+    messagingSenderId: "743539691644",
+    appId: "1:743539691644:web:6d98a35362f7fc7305b9f9",
+    measurementId: "G-TC2BVXL3TF"
+  }
   var firebaseConfig = {
     apiKey: "AIzaSyACxE0KuvExUdFyx0gx6z_rBP3Nnhkstlc",
     authDomain: "alloprof-production.firebaseapp.com",
     projectId: "alloprof-production",
     appId: "1:811980803247:web:e68aceb268f2ddf3e4185a"
   };
-  firebase.initializeApp(firebaseConfig);
+  firebase.initializeApp(firebaseConfigStaging);
   var auth = firebase.auth();
 </script>
 <script src="https://appa-staging--pr129-update-connection-wi-2llgv1vn.web.app/alloprof-profile.js"></script>
