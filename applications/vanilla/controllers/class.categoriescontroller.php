@@ -380,7 +380,7 @@ class CategoriesController extends VanillaController {
         }
     }
 
-    public function writeFilter() {
+    public function writeFilter($isLinkedCategory) {
         $gradeFilterOption = (Gdn::request()->get('grade') || Gdn::request()->get('grade') == '0') ? strval((int)(Gdn::request()->get('grade'))) : -1;
         $this->GradeID = $gradeFilterOption;
 
@@ -402,7 +402,7 @@ class CategoriesController extends VanillaController {
         $sort = Gdn::request()->get('sort') ?? 'desc';
         $this->SortDirection = $sort;
 
-        $discussionFilterModule = new DiscussionFilterModule($gradeFilterOption, $sort, $explanation, $verified, $subject, $outexplanation, $language, true, true);
+        $discussionFilterModule = new DiscussionFilterModule($gradeFilterOption, $sort, $explanation, $verified, $subject, $outexplanation, $language, $isLinkedCategory, true);
         $this->addModule($discussionFilterModule);
         $this->addJsFile('filter.js');
         $wheres = [];
@@ -541,7 +541,7 @@ class CategoriesController extends VanillaController {
             $this->setData('Category', $category, true);
 
             $this->setData('BannerImage', val('BannerImage', $category));
-            $this->writeFilter();
+            $this->writeFilter($category->LinkedCategoryID);
 
             $discussionModel = new DiscussionModel();
 
