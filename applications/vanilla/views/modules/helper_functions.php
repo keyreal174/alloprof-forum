@@ -523,7 +523,7 @@ if (!function_exists('writeFilterToggle')) :
         if ($IsShowLanguage) {
             echo '<li class="form-group">';
             if ($language == 'true') {
-                echo Gdn::controller()->Form->toggle('Language', $languageToggle, [ 'checked' => $verified ]);
+                echo Gdn::controller()->Form->toggle('Language', $languageToggle, [ 'checked' => true ]);
             } else {
                 echo Gdn::controller()->Form->toggle('Language', $languageToggle);
             }

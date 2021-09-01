@@ -91,7 +91,7 @@ class SearchController extends Gdn_Controller {
 
         $sort = Gdn::request()->get('sort') ?? 'desc';
         $this->SortDirection = $sort;
-
+        
         $dashboardDiscussionFilterModule = new DashboardDiscussionFilterModule($gradeFilterOption, $sort, $explanation, $verified, $subject, $outexplanation, $language, true);
         $this->addModule($dashboardDiscussionFilterModule);
         $this->addJsFile('filter.js');
