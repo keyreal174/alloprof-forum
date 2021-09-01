@@ -530,6 +530,13 @@ class CategoriesController extends VanillaController {
             }
             $category = (object)$category;
 
+            $currentLanguage = Gdn::config('Garden.Locale') == 'fr_CA' ? 'fr' : 'en';
+            if (!$category->LinkedCategoryID && $currentLanguage != $category->Language) {
+                redirectTo("/");
+            } elseif ($category->LinkedCategoryID && $currentLanguage != $category->Language) {
+                redirectTo(CategoryModel::categories($category->LinkedCategoryID)['Url']);
+            }
+
             // Check permission
             $this->permission('Vanilla.Discussions.View', true, 'Category', val('PermissionCategoryID', $category));
 
