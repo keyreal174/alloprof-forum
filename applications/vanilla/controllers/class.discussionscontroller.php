@@ -103,7 +103,20 @@ class DiscussionsController extends VanillaController {
         $sort = Gdn::request()->get('sort') ?? 'desc';
         $this->SortDirection = $sort;
 
-        $discussionFilterModule = new DiscussionFilterModule($gradeFilterOption, $sort, $explanation, $verified, $subject, $outexplanation, $language, $showLanguage);
+        $isShowLanguage = $showLanguage;
+
+        if ($subject != -1) {
+            $category = CategoryModel::categories($subject);
+
+            if (empty($category)) {
+                throw notFoundException();
+            }
+            $category = (object)$category;
+
+            $isShowLanguage = $category->LinkedCategoryID;
+        }
+
+        $discussionFilterModule = new DiscussionFilterModule($gradeFilterOption, $sort, $explanation, $verified, $subject, $outexplanation, $language, $isShowLanguage);
         $this->addModule($discussionFilterModule);
         $this->addJsFile('filter.js');
         $wheres = [];
