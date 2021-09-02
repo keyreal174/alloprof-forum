@@ -95,30 +95,27 @@ if (!function_exists('writeFilterToggle')) :
      * @param string $extraClasses any extra classes you add to the drop down
      * @return string
      */
-    function writeFilterToggle($explanation, $verified, $language) {
-        $form  = new Gdn_Form();
+    function writeFilterToggle($explanation=false, $verified=false, $explanationout=false, $language=false, $IsShowLanguage=false, $isMobile=false) {
         $role = getUserRole(Gdn::session()->User->UserID);
+        echo '<ul>';
+        echo '<li class="form-group">';
         $text = $role === 'Teacher' ? t('Without answers only') : t('With answers only');
         $verifiedText = $role === 'Teacher' ? t('Not Verified by Alloprof only') : t('Verified by Alloprof only');
         $languageToggle = t('Show posts in all languages');
 
-        echo '<ul>';
-        echo '<li class="form-group">';
         if ($explanation == 'true') {
-            echo $form->toggle('Explanation', $text, [ 'checked' => $explanation ]);
+            echo Gdn::controller()->Form->toggle(($isMobile?'Mobile':'').'Explanation', $text, [ 'checked' => $explanation ]);
         } else {
-            echo $form->toggle('Explanation', $text);
+            echo Gdn::controller()->Form->toggle(($isMobile?'Mobile':'').'Explanation', $text);
         }
         echo '</li>';
-
         echo '<li class="form-group">';
         if ($verified == 'true') {
-            echo $form->toggle('VerifiedBy', $verifiedText, [ 'checked' => $verified ]);
+            echo Gdn::controller()->Form->toggle(($isMobile?'Mobile':'').'VerifiedBy', $verifiedText, [ 'checked' => $verified ]);
         } else {
-            echo $form->toggle('VerifiedBy', $verifiedText);
+            echo Gdn::controller()->Form->toggle(($isMobile?'Mobile':'').'VerifiedBy', $verifiedText);
         }
         echo '</li>';
-
         if ($role != 'Teacher') {
             echo '<li class="form-group">';
             if ($explanationout == 'true') {
@@ -128,14 +125,15 @@ if (!function_exists('writeFilterToggle')) :
             }
             echo '</li>';
         }
-
-        echo '<li class="form-group">';
-        if ($language == 'true') {
-            echo $form->toggle('Language', $languageToggle, [ 'checked' => $verified ]);
-        } else {
-            echo $form->toggle('Language', $languageToggle);
+        if ($IsShowLanguage) {
+            echo '<li class="form-group">';
+            if ($language == 'true') {
+                echo Gdn::controller()->Form->toggle('Language', $languageToggle, [ 'checked' => true ]);
+            } else {
+                echo Gdn::controller()->Form->toggle('Language', $languageToggle);
+            }
+            echo '</li>';
         }
-        echo '</li>';
 
         echo '</ul>';
     }

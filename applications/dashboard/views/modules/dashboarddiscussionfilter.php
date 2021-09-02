@@ -59,7 +59,7 @@ $titleID = "BoxFilterTitle";
             // echo writeSubjectFilter($this->SubjectID);
             echo writeGradeFilter($this->GradeID);
             echo writeDiscussionSort($this->Sort);
-            echo writeFilterToggle($this->IsExplanation, $this->IsVerified, $this->IsOutExplanation, $this->IsLanguage, true);
+            echo writeFilterToggle($this->IsExplanation, $this->IsVerified, $this->IsOutExplanation, $this->IsLanguage, $this->IsShowLanguage);
         ?>
     </div>
 </div>
