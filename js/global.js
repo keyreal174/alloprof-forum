@@ -7,7 +7,7 @@
 
 // Global vanilla library function.
 (function(window, $) {
-    
+
     function AlloprofForumApp () {
         var self = this;
         self.callbacks = [];
@@ -271,7 +271,7 @@
         $('div.Popup').remove();
         $('.Overlay').remove();
     });
-    
+
     APForumApp.onReady(function(apForumApp) {
         apForumApp.app.attachListener('userscreen:transition:login_to_signup', function() {
             console.log('show signup')
@@ -289,7 +289,7 @@
             apForumApp.obs.trigger('usercreate:show');
             console.log('show signup from fpass')
         });
-   
+
 
 
 
@@ -330,6 +330,9 @@
             event.preventDefault();
             // $('.SignInStudentPopup').eq(0).trigger('click');
 
+            // Close all forum popups
+            $('.Overlay').remove();
+
             // TODO: Open Observer Login Modal
             APForumApp.onReady(function(apForumApp) {
                 apForumApp.app.attachListener('userlogin:done', function(userConnected) {
@@ -339,8 +342,8 @@
             });
 
 
-            
-           // console.log('AlloprofObserver Instance =======', AlloprofObserver)    
+
+           // console.log('AlloprofObserver Instance =======', AlloprofObserver)
         }
     });
     // SignInPopup Trigger end =================
@@ -350,8 +353,11 @@
     $(document).on('click', '.registerPopup', function (event) {
         event.preventDefault();
 
+        // Close all forum popups
+        $('.Overlay').remove();
+
         // TODO: Open Observer Register Modal
-        
+
         APForumApp.onReady(function(apForumApp) {
             apForumApp.app.attachListener('usercreate:done', function(userConnected) {
                 console.log('logged in');
