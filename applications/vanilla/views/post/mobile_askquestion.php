@@ -102,7 +102,7 @@
                     foreach ($fields as $k => $field) {
                         if ($field['Label'] == "Grade") {
                             $GradeOption = array_filter($field['Options'], function($v) {
-                                return preg_match('/(Primaire|Secondaire|Post-secondaire)/', $v);
+                                return t(preg_match('/(Primaire|Secondaire|Post-secondaire)/', $v));
                             });
 
                             if ($DefaultGrade && $DefaultGrade !== 0) {
