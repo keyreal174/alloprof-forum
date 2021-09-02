@@ -1032,20 +1032,12 @@ if (!function_exists('getGrade')) :
                 $GradeOption = array_filter($field['Options'], function($v) {
                     return preg_match('/(Primaire|Secondaire|Post-secondaire)/', $v);
                 });
+                $GradeOption = array_map(function($val) {
+                    return t($val);
+                }, $GradeOption);
             }
         }
-        if (Gdn::config('Garden.Locale') == 'fr_CA') {
-            return ($GradeID || $GradeID === 0) ? $GradeOption[$GradeID] : "";
-        } else {
-            if ($GradeID || $GradeID === 0) {
-                $res = str_replace('Primaire', 'Primary', $GradeOption[$GradeID]);
-                $res = str_replace('Secondaire', 'Secondary', $res);
-                $res = str_replace('Post-secondaire', 'Post-secondary', $res);
-                return $res;
-            } else {
-                return "";
-            }
-        }
+        return ($GradeID || $GradeID === 0) ? $GradeOption[$GradeID] : "";
     }
 endif;
 

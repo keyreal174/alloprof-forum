@@ -120,7 +120,7 @@ if (!$hasUserID) {
                 <li role="presentation">
                     <?php
                     echo $this->Form->label('Grade', 'Grade');
-                    echo $this->Form->textBox('Grade', ['value' => $this->Form->getFormValue('Grade'), 'id' => 'Grade', 'class' => 'InputBox', 'autocorrect' => 'off', 'autocapitalize' => 'off', 'Wrap' => TRUE, 'disabled' => 'disabled', 'placeholder' => t('Grade')]);
+                    echo $this->Form->textBox('Grade', ['value' => t($this->Form->getFormValue('Grade')), 'id' => 'Grade', 'class' => 'InputBox', 'autocorrect' => 'off', 'autocapitalize' => 'off', 'Wrap' => TRUE, 'disabled' => 'disabled', 'placeholder' => t('Grade')]);
                     ?>
                 </li>
                 <li role="presentation">

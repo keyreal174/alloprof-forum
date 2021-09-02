@@ -125,22 +125,14 @@ if (!$CancelUrl) {
                 $GradeOption = array_filter($field['Options'], function($v) {
                     return preg_match('/(Primaire|Secondaire|Post-secondaire)/', $v);
                 });
+                $GradeOption = array_map(function($val) {
+                    return t($val);
+                }, $GradeOption);
 
                 if ($DefaultGrade && $DefaultGrade !== 0) {
-                    $DefaultGrade = array_search($DefaultGrade, $GradeOption);
+                    $DefaultGrade = array_search(t($DefaultGrade), $GradeOption);
                 }
             }
-        }
-
-        if (Gdn::config('Garden.Locale') == 'en') {
-            $translateWord = function($word) {
-                $res = str_replace('Primaire', 'Primary', $word);
-                $res = str_replace('Secondaire', 'Secondary', $res);
-                $res = str_replace('Post-secondaire', 'Post-secondary', $res);
-                return $res;
-            };
-
-            $GradeOption = array_map($translateWord, $GradeOption);
         }
 
         echo '<div>';

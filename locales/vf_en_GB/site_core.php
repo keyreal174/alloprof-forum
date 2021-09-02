@@ -1,6 +1,7 @@
 <?php
 
 $Definition['Utilisateur'] = 'User';
+$Definition['Primaire'] = 'Elementary';
 $Definition['Primaire 1'] = 'Elementary 1';
 $Definition['Primaire 2'] = 'Elementary 2';
 $Definition['Primaire 3'] = 'Elementary 3';

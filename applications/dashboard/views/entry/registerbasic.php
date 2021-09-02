@@ -10,6 +10,9 @@
             $GradeOption = array_filter($field['Options'], function($v) {
                 return preg_match('/(Primaire|Secondaire|Post-secondaire)/', $v);
             });
+            $GradeOption = array_map(function($val) {
+                return t($val);
+            }, $GradeOption);
         }
     }
 ?>
