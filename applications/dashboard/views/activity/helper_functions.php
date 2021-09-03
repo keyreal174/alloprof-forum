@@ -210,3 +210,21 @@ function writeActivityTabs() {
     </div>
 <?php
 }
+
+if (!function_exists('translate')):
+
+    function translate($story) {
+        $text = $story;
+        if (Gdn::config('Garden.Locale') == 'fr_CA') {
+            $text = str_replace('<b>has been published.</b>', '<b>a été publiée.</b>', $text);
+            $text = str_replace('Your question has been deleted by a moderator:', 'Ta question a été effacée par un modérateur:', $text);
+            $text = str_replace('Your explanation has been deleted by a moderator:', 'Ta explication a été effacée par un modérateur:', $text);
+        } else {
+            $text = str_replace('<b>a été publiée.</b>', '<b>has been published.</b>', $text);
+            $text = str_replace('Ta question a été effacée par un modérateur:', 'Your question has been deleted by a moderator:', $text);
+            $text = str_replace('Ta explication a été effacée par un modérateur:', 'Your explanation has been deleted by a moderator:', $text);
+        }
+        return $text;
+    }
+
+endif;

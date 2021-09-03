@@ -2,6 +2,9 @@
 
 if (!function_exists('timeElapsedString'))
     include($this->fetchViewLocation('helper_functions', 'discussions', 'vanilla'));
+
+if (!function_exists('translate'))
+    include($this->fetchViewLocation('helper_functions', 'activity', 'dashboard'));
 ?>
 <ul class="PopList Activities">
     <li class="Item Title"><?php
@@ -108,7 +111,7 @@ if (!function_exists('timeElapsedString'))
                 <p>
                     <?php
                         $excerpt = '';
-                        $story = $Activity['Story'];
+                        $story = translate($Activity['Story']);
                         $format = $Activity['Format'] ?? Vanilla\Formatting\Formats\HtmlFormat::FORMAT_KEY;
                         $excerpt = htmlspecialchars($story ? Gdn::formatService()->renderExcerpt($story, $format) : $excerpt);
 

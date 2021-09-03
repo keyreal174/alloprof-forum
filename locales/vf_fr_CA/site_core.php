@@ -1883,3 +1883,5 @@ $Definition['Show all languages'] = 'Montrer toutes les langues';
 $Definition['Notifications disabled'] = 'Notifications désactivées';
 $Definition['You will no longer receive email notifications from the Help Zone.'] = 'Tu ne recevras plus de notifications de la Zone d’entraide par courriel.';
 $Definition['Levels'] = 'Niveaux';
+
+$Definition['Question published!'] = 'Question publiée !';
