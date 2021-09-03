@@ -1529,9 +1529,8 @@ body { background: transparent !important; }
                 $address = $discussionInsertUser->Email;
 
                 $User = Gdn::userModel()->getID(Gdn::session()->UserID);
-                $subject = $User->ProfileLanguage == "fr" ? "Yé! Tu as reçu une explication à ta question." : "Ye! You have received an explanation for your question.";
+                $subject = $User->ProfileLanguage == "fr" ? "Yé! Tu as reçu une explication à ta question." : "Yay! Your question has received an answer.";
 
-                $subject = "Yé! Tu as reçu une explication à ta question.";
                 $discussionLink = url("/discussion/comment/" . $commentID . "/#Comment_" . $commentID);
 
                 $emailer = new Gdn_Email();

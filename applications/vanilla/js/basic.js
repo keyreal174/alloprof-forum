@@ -61,9 +61,9 @@ jQuery(document).ready(function($) {
         }
     }
 
-    var selectGradePlaceholder = 'Niveau';
+    var selectGradePlaceholder = 'Niveaux';
     if (gdn.meta.siteSection.contentLocale == 'en') {
-        selectGradePlaceholder = 'Level';
+        selectGradePlaceholder = 'Levels';
     }
 
     $('.select2-grade select').select2({
@@ -71,9 +71,9 @@ jQuery(document).ready(function($) {
         placeholder: selectGradePlaceholder,
     });
 
-    var selectCategoryPlaceholder = 'Matière';
+    var selectCategoryPlaceholder = 'Matières';
     if (gdn.meta.siteSection.contentLocale == 'en') {
-        selectCategoryPlaceholder = 'Topic';
+        selectCategoryPlaceholder = 'Topics';
     }
 
     $('.select2-category select').select2({
