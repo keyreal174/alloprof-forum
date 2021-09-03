@@ -374,9 +374,12 @@ class PostController extends VanillaController {
                                 $GradeOption = array_filter($field['Options'], function($v) {
                                     return preg_match('/(Primaire|Secondaire|Post-secondaire)/', $v);
                                 });
+                                $GradeOption = array_map(function($val) {
+                                    return t($val);
+                                }, $GradeOption);
                             }
                         }
-                        if (str_contains($GradeOption[$this->Form->getValue('GradeID')], 'Primaire')) {
+                        if (str_contains($GradeOption[$this->Form->getValue('GradeID')], t('Primaire'))) {
                             $Cycle = 0;
                         } else {
                             $Cycle = 1;

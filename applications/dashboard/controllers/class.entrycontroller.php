@@ -488,7 +488,7 @@ class EntryController extends Gdn_Controller {
         if ($isGoogleSign) {
             $fullName = explode(' ', $this->Form->getFormValue('FullName'));
             $displayName = $fullName[0].' '.$fullName[1][0].'.';
-            $this->Form->setFormValue('Grade', 'Enseignant');
+            $this->Form->setFormValue('Grade', t('Enseignant'));
             $this->Form->setFormValue('Role', 'Teacher');
             $this->Form->setFormValue('DisplayName', $displayName);
             $this->Form->setFormValue('Photo', 'https://www.alloprof.qc.ca/zonedentraide/uploads/Avatar_Enseignant.svg');

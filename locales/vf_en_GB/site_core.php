@@ -1,33 +1,18 @@
 <?php
 
-$Definition['Align center'] = 'Align centre';
-$Definition['Approve Applicant'] = 'Approve';
-
-$Definition['Color'] = 'Colour';
-$Definition['ConnectCreateAccount'] = 'Add Info &amp; Create Account';
-$Definition['Customize'] = 'Customise';
-$Definition['customize your profile now'] = 'customise your profile now';
-$Definition['Customize your Public Profile'] = 'Customise your Public Profile';
-
-$Definition['Date.DefaultDateTimeFormat'] = '%e %B %Y %H:%M';
-$Definition['Date.DefaultTimeFormat'] = '%H:%M';
-
-$Definition['EmailPassword'] = '%2$s has reset your password at %3$s. Your login credentials are now:
-
-  Email: %6$s
-  Password: %5$s
-  URL: %4$s';
-$Definition['Enter Your OpenID Url'] = 'Enter Your OpenID URL';
-
-$Definition['FileSize'] = 'File Size';
-
-$Definition['Not Authorized (401)'] = 'Not Authorised (401)';
-
-$Definition['Organize discussion categories'] = 'Organise discussion categories';
-$Definition['Organizer'] = 'Organiser';
-$Definition['Organize your Categories'] = 'Organise your Categories';
-
-$Definition['Tags are keywords that users can assign to discussions to help categorize their question with similar questions.'] = 'Tags are keywords that users can assign to discussions to help categorise their question with similar questions.';
-
-$Definition['Url'] = 'URL';
-$Definition['UrlCode'] = 'URL code';
+$Definition['Utilisateur'] = 'User';
+$Definition['Primaire'] = 'Elementary';
+$Definition['Primaire 1'] = 'Elementary 1';
+$Definition['Primaire 2'] = 'Elementary 2';
+$Definition['Primaire 3'] = 'Elementary 3';
+$Definition['Primaire 4'] = 'Elementary 4';
+$Definition['Primaire 5'] = 'Elementary 5';
+$Definition['Primaire 6'] = 'Elementary 6';
+$Definition['Secondaire 1'] = 'Secondary 1';
+$Definition['Secondaire 2'] = 'Secondary 2';
+$Definition['Secondaire 3'] = 'Secondary 3';
+$Definition['Secondaire 4'] = 'Secondary 4';
+$Definition['Secondaire 5'] = 'Secondary 5';
+$Definition['Post-secondaire'] = 'Post-secondary';
+$Definition['Parent'] = 'Parent';
+$Definition['Enseignant'] = 'Teacher';
