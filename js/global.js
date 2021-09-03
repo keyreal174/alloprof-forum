@@ -7,6 +7,49 @@
 
 // Global vanilla library function.
 (function(window, $) {
+
+    function AlloprofForumApp () {
+        var self = this;
+        self.callbacks = [];
+        self.ObserverReady= function (app, obs) {
+            self.app = app;
+            self.obs = obs;
+
+            for (var ku = 0; ku < self.callbacks.length; ku ++) {
+                self.callbacks[ku](self);
+            }
+            self.callbacks = [];
+
+        }
+
+        self.initializeObserverLink= function() {
+            window['Observables'] = window['Observables'] || {
+                apps: []
+            };
+
+            window['Observables'].apps.push({
+                instance: self,
+                name: 'forum'
+            })
+        }
+
+        self.initializeObserverLink();
+
+        self.onReady = function(callback) {
+            if (self.obs) {
+                callback(self);
+            } else {
+                self.callbacks.push(callback);
+            }
+        };
+    }
+
+    window.APForumApp = new AlloprofForumApp();
+
+
+
+
+
     // English Button
     $(document).on('click', '.language-btn', function(event) {
         event.preventDefault();
@@ -244,6 +287,47 @@
         $('.Overlay').remove();
     });
 
+    APForumApp.onReady(function(apForumApp) {
+        apForumApp.app.attachListener('userscreen:transition:login_to_signup', function() {
+            console.log('show signup')
+            apForumApp.obs.trigger('usercreate:show');
+        });
+        apForumApp.app.attachListener('userscreen:transition:signup_to_login', function() {
+            apForumApp.obs.trigger('userlogin:show');
+            console.log('show signin')
+        });
+        apForumApp.app.attachListener('userscreen:transition:login_to_forgotpassword', function() {
+            apForumApp.obs.trigger('userforgotpassword:show');
+            console.log('show fpass')
+        });
+        apForumApp.app.attachListener('userscreen:transition:forgotpassword_to_signup', function() {
+            apForumApp.obs.trigger('usercreate:show');
+            console.log('show signup from fpass')
+        });
+
+        apForumApp.app.attachListener('user:loggedin', function(user) {
+            console.log('logged in');
+            ssoLogin(auth.currentUser);
+        });
+        
+      var pathname = window.location.pathname;
+      var isEnglish = pathname.indexOf('/helpzone/') > -1;
+
+      if (apForumApp.obs.isAppReady('appa')) {
+        apForumApp.obs.trigger('language:change', isEnglish ? 'en': 'fr');
+        apForumApp.obs.trigger('language:load', isEnglish ? 'en': 'fr');
+      } else {
+        var eventID = apForumApp.app.attachListener('OBSERVER:APP:ATTACHED', function (app) {
+          if (app == 'appa') {
+            apForumApp.obs.trigger('language:change', isEnglish ? 'en': 'fr');
+            apForumApp.obs.trigger('language:load', isEnglish ? 'en': 'fr');
+            apForumApp.app.detachListenerByUID(eventID);
+          }
+        });
+    });
+
+
+
     // SignInPopup Trigger
     $(document).on('click', '.SignInStudentPopupAgent', function (event) {
         event.stopPropagation();
@@ -271,10 +355,46 @@
             return false;
         } else {
             event.preventDefault();
-            $('.SignInStudentPopup').eq(0).trigger('click');
+            // $('.SignInStudentPopup').eq(0).trigger('click');
+
+            // Close all forum popups
+            $('.Overlay').remove();
+
+            // TODO: Open Observer Login Modal
+            APForumApp.onReady(function(apForumApp) {
+                apForumApp.app.attachListener('userlogin:done', function(userConnected) {
+                    console.log('logged in');
+                });
+                apForumApp.obs.trigger('userlogin:show');
+            });
+
+
+
+           // console.log('AlloprofObserver Instance =======', AlloprofObserver)
         }
     });
     // SignInPopup Trigger end =================
+
+
+    // RegisterPopup
+    $(document).on('click', '.registerPopup', function (event) {
+        event.preventDefault();
+
+        // Close all forum popups
+        $('.Overlay').remove();
+
+        // TODO: Open Observer Register Modal
+
+        APForumApp.onReady(function(apForumApp) {
+            apForumApp.app.attachListener('usercreate:done', function(userConnected) {
+                console.log('logged in');
+            });
+            apForumApp.obs.trigger('usercreate:show');
+        })
+
+
+
+    })
 
     // Signout
     $(document).on('click', '.dropdown-menu-link-entry-signout', function (event) {
@@ -822,7 +942,10 @@ jQuery(document).ready(function($) {
     // This turns SignInPopup anchors into in-page popups
     if ($.fn.popup) {
         $('a.TeacherSigninPopup').popup({containerCssClass: 'SignInPopup TeacherSigninPopup'});
-        $('a.registerPopup').popup({containerCssClass: 'registerPopup SignInPopup'});
+        // $('a.registerPopup').popup({containerCssClass: 'registerPopup SignInPopup'});
+
+
+
         $('a.SignInStudentPopup').popup({containerCssClass: 'SignInStudentPopup SignInPopup'});
     }
 

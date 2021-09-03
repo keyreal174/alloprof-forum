@@ -3,6 +3,9 @@
 
 <head>
     {literal}
+    <script src="https://ap-prod-frontend-observer.firebaseapp.com/main.js?f4f1755908a75cde0200"></script>
+    <link rel="stylesheet" href="https://ap-user-login-creation.web.app/styles.css">
+
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -18,6 +21,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,700,700i" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.css" />
+    {literal}
+    <style>
+    alloprof-appa .icon, alloprof-appa .icon:before {
+        font-family: 'alicon';
+    }
+    </style>
+    {/literal}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clamp-js/0.7.0/clamp.js" integrity="sha512-TnePtmz3HL4p8nFS2lR46u0iHrwObVnUednDASZK/qS9btkd09xKs1PeCt1kpS4a0gWNQx1AF+WnDHDK+xWcAw==" crossorigin="anonymous"></script>
 </head>
 
@@ -241,23 +251,35 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </a>
     <div id="modals"></div>
     {event name="AfterBody"}
-
+    <alloprof-appa></alloprof-appa>
+    <div class="modal-backdrop"></div>
+ 
 {literal}
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-auth.js"></script>
 <script>
+  var firebaseConfigStaging = {
+    apiKey: "AIzaSyBtJINkqFDFD4Vv-6XyIcbJtKxBvn2uAWo",
+    authDomain: "alloprof-stg.firebaseapp.com",
+    databaseURL: "https://alloprof-stg.firebaseio.com",
+    projectId: "alloprof-stg",
+    storageBucket: "alloprof-stg.appspot.com",
+    messagingSenderId: "743539691644",
+    appId: "1:743539691644:web:6d98a35362f7fc7305b9f9",
+    measurementId: "G-TC2BVXL3TF"
+  }
   var firebaseConfig = {
     apiKey: "AIzaSyACxE0KuvExUdFyx0gx6z_rBP3Nnhkstlc",
     authDomain: "alloprof-production.firebaseapp.com",
     projectId: "alloprof-production",
     appId: "1:811980803247:web:e68aceb268f2ddf3e4185a"
   };
-  firebase.initializeApp(firebaseConfig);
+  firebase.initializeApp(firebaseConfigStaging);
   var auth = firebase.auth();
 </script>
+<script src="https://ap-user-login-creation.web.app/alloprof-profile.js"></script>
 {/literal}
-
 </body>
 
 </html>
