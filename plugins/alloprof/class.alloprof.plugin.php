@@ -98,14 +98,14 @@ class AlloprofPlugin extends Gdn_Plugin {
             }
         }
 
-        $Sql->query("UPDATE vanilla_dev.GDN_Log
-        LEFT JOIN vanilla_dev.GDN_Discussion ON vanilla_dev.GDN_Log.RecordID = vanilla_dev.GDN_Discussion.DiscussionID
-        SET vanilla_dev.GDN_Log.Language = vanilla_dev.GDN_Discussion.Language
-        WHERE vanilla_dev.GDN_Log.RecordType = 'Discussion';");
+        $Sql->query("UPDATE GDN_Log
+        LEFT JOIN GDN_Discussion ON GDN_Log.RecordID = GDN_Discussion.DiscussionID
+        SET GDN_Log.Language = GDN_Discussion.Language
+        WHERE GDN_Log.RecordType = 'Discussion';");
 
-        $Sql->query("UPDATE vanilla_dev.GDN_Log
-        LEFT JOIN vanilla_dev.GDN_Comment ON vanilla_dev.GDN_Log.RecordID = vanilla_dev.GDN_Comment.CommentID
-        SET vanilla_dev.GDN_Log.Language = vanilla_dev.GDN_Comment.Language
-        WHERE vanilla_dev.GDN_Log.RecordType = 'Comment';");
+        $Sql->query("UPDATE GDN_Log
+        LEFT JOIN GDN_Comment ON GDN_Log.RecordID = GDN_Comment.CommentID
+        SET GDN_Log.Language = GDN_Comment.Language
+        WHERE GDN_Log.RecordType = 'Comment';");
     }
 }
