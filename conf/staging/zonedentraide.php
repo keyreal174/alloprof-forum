@@ -15,7 +15,7 @@ $Configuration['Conversations']['ConversationMessage']['SpamTime'] = '30';
 $Configuration['Conversations']['ConversationMessage']['SpamLock'] = '60';
 
 // Database
-$Configuration['Database']['Name'] = 'vanilla_dev';
+$Configuration['Database']['Name'] = 'vanilla';
 $Configuration['Database']['Host'] = 'database';
 $Configuration['Database']['User'] = 'root';
 $Configuration['Database']['Password'] = '';
