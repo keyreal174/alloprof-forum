@@ -290,12 +290,24 @@
             console.log('show signup from fpass')
         });
 
-
-
-
         apForumApp.app.attachListener('user:loggedin', function(user) {
             console.log('logged in');
             ssoLogin(auth.currentUser);
+        });
+        
+      var pathname = window.location.pathname;
+      var isEnglish = pathname.indexOf('/helpzone/') > -1;
+
+      if (apForumApp.obs.isAppReady('appa')) {
+        apForumApp.obs.trigger('language:change', isEnglish ? 'en': 'fr');
+        apForumApp.obs.trigger('language:load', isEnglish ? 'en': 'fr');
+      } else {
+        var eventID = apForumApp.app.attachListener('OBSERVER:APP:ATTACHED', function (app) {
+          if (app == 'appa') {
+            apForumApp.obs.trigger('language:change', isEnglish ? 'en': 'fr');
+            apForumApp.obs.trigger('language:load', isEnglish ? 'en': 'fr');
+            apForumApp.app.detachListenerByUID(eventID);
+          }
         });
     });
 
