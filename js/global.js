@@ -309,6 +309,7 @@
             apForumApp.app.detachListenerByUID(eventID);
           }
         });
+      }
     });
 
 
