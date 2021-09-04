@@ -790,11 +790,20 @@ class VanillaHooks extends Gdn_Plugin {
                         ->select('d.DiscussionID', 'count', 'CountDiscussions')
                         ->from('Discussion d')
                         ->where(['d.InsertUserID' => Gdn::session()->UserID])
+                        ->where(['d.Published' => 1])
                         ->get()
                         ->firstRow()
                         ->CountDiscussions;
-                $commentsCount = $sender->CommentModel->getCount(["InsertUserID" => $userID]);
-                $commentsGivenCount = $sender->CommentModel->getCount(["InsertUserID" => $userID]);
+                $commentsCount = Gdn::sql()
+                        ->select('c.CommentID', 'count', 'CountComments')
+                        ->from('Comment c')
+                        ->join('Discussion d', 'd.DiscussionID = c.DiscussionID')
+                        ->where(['d.InsertUserID' => Gdn::session()->UserID])
+                        ->where(['c.Published' => 1])
+                        ->get()
+                        ->firstRow()
+                        ->CountComments;
+                $commentsGivenCount = $sender->CommentModel->getCount(["InsertUserID" => $userID, "Published" => 1]);
                 // getValueR('User.CountComments', $sender, "0");
                 $discussionsLabel .= $discussionsCount;
                 $commentsLabel .= $commentsCount;
@@ -830,15 +839,24 @@ class VanillaHooks extends Gdn_Plugin {
                         ->select('d.DiscussionID', 'count', 'CountDiscussions')
                         ->from('Discussion d')
                         ->where(['d.InsertUserID' => Gdn::session()->UserID])
+                        ->where(['d.Published' => 1])
                         ->get()
                         ->firstRow()
                         ->CountDiscussions;
-                $commentsCount = $sender->CommentModel->getCount(["InsertUserID" => $userID]);
+                $commentsCount = Gdn::sql()
+                        ->select('c.CommentID', 'count', 'CountComments')
+                        ->from('Comment c')
+                        ->join('Discussion d', 'd.DiscussionID = c.DiscussionID')
+                        ->where(['d.InsertUserID' => Gdn::session()->UserID])
+                        ->where(['c.Published' => 1])
+                        ->get()
+                        ->firstRow()
+                        ->CountComments;
                 $discussionsLabel .= $discussionsCount;
                 $commentsLabel .= $commentsCount;
             }
             $sender->addProfileTab(t('questions asked'), userUrl($sender->User, '', 'discussions'), 'Questions', $discussionsLabel);
-            $sender->addProfileTab(t('answers given'), userUrl($sender->User, '', 'comments'), 'Comments', $commentsLabel);
+            $sender->addProfileTab(t('answers received'), userUrl($sender->User, '', 'comments'), 'Comments', $commentsLabel);
             // Add the discussion tab's CSS and Javascript.
             $sender->addJsFile('jquery.gardenmorepager.js');
             $sender->addJsFile('discussions.js', 'vanilla');
@@ -866,15 +884,24 @@ class VanillaHooks extends Gdn_Plugin {
                         ->select('d.DiscussionID', 'count', 'CountDiscussions')
                         ->from('Discussion d')
                         ->where(['d.InsertUserID' => Gdn::session()->UserID])
+                        ->where(['d.Published' => 1])
                         ->get()
                         ->firstRow()
                         ->CountDiscussions;
-                $commentsCount = $sender->CommentModel->getCount(["InsertUserID" => $userID]);
+                $commentsCount = Gdn::sql()
+                        ->select('c.CommentID', 'count', 'CountComments')
+                        ->from('Comment c')
+                        ->join('Discussion d', 'd.DiscussionID = c.DiscussionID')
+                        ->where(['d.InsertUserID' => Gdn::session()->UserID])
+                        ->where(['c.Published' => 1])
+                        ->get()
+                        ->firstRow()
+                        ->CountComments;
                 $discussionsLabel .= $discussionsCount;
                 $commentsLabel .= $commentsCount;
             }
             $sender->addProfileTab(t('questions asked'), userUrl($sender->User, '', 'discussions'), 'Questions', $discussionsLabel);
-            $sender->addProfileTab(t('answers given'), userUrl($sender->User, '', 'comments'), 'Comments', $commentsLabel);
+            $sender->addProfileTab(t('answers received'), userUrl($sender->User, '', 'comments'), 'Comments', $commentsLabel);
             // Add the discussion tab's CSS and Javascript.
             $sender->addJsFile('jquery.gardenmorepager.js');
             $sender->addJsFile('discussions.js', 'vanilla');
@@ -902,15 +929,24 @@ class VanillaHooks extends Gdn_Plugin {
                         ->select('d.DiscussionID', 'count', 'CountDiscussions')
                         ->from('Discussion d')
                         ->where(['d.InsertUserID' => Gdn::session()->UserID])
+                        ->where(['d.Published' => 1])
                         ->get()
                         ->firstRow()
                         ->CountDiscussions;
-                $commentsCount = $sender->CommentModel->getCount(["InsertUserID" => $userID]);
+                $commentsCount = Gdn::sql()
+                        ->select('c.CommentID', 'count', 'CountComments')
+                        ->from('Comment c')
+                        ->join('Discussion d', 'd.DiscussionID = c.DiscussionID')
+                        ->where(['d.InsertUserID' => Gdn::session()->UserID])
+                        ->where(['c.Published' => 1])
+                        ->get()
+                        ->firstRow()
+                        ->CountComments;
                 $discussionsLabel .= $discussionsCount;
                 $commentsLabel .= $commentsCount;
             }
             $sender->addProfileTab(t('questions asked'), userUrl($sender->User, '', 'discussions'), 'Questions', $discussionsLabel);
-            $sender->addProfileTab(t('answers given'), userUrl($sender->User, '', 'comments'), 'Comments', $commentsLabel);
+            $sender->addProfileTab(t('answers received'), userUrl($sender->User, '', 'comments'), 'Comments', $commentsLabel);
             // Add the discussion tab's CSS and Javascript.
             $sender->addJsFile('jquery.gardenmorepager.js');
             $sender->addJsFile('discussions.js', 'vanilla');
@@ -930,10 +966,19 @@ class VanillaHooks extends Gdn_Plugin {
                         ->select('d.DiscussionID', 'count', 'CountDiscussions')
                         ->from('Discussion d')
                         ->where(['d.InsertUserID' => Gdn::session()->UserID])
+                        ->where(['d.Published' => 1])
                         ->get()
                         ->firstRow()
                         ->CountDiscussions;
-                $commentsCount = $sender->CommentModel->getCount(["InsertUserID" => $userID]);
+                $commentsCount = Gdn::sql()
+                        ->select('c.CommentID', 'count', 'CountComments')
+                        ->from('Comment c')
+                        ->join('Discussion d', 'd.DiscussionID = c.DiscussionID')
+                        ->where(['d.InsertUserID' => Gdn::session()->UserID])
+                        ->where(['c.Published' => 1])
+                        ->get()
+                        ->firstRow()
+                        ->CountComments;
                 $discussionsLabel .= $discussionsCount;
                 $commentsLabel .= $commentsCount;
             }
