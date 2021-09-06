@@ -1022,9 +1022,10 @@ class EntryController extends Gdn_Controller {
      */
     protected function _setRedirect($checkPopup = false) {
         $url = url($this->getTargetRoute(), true);
-        $UserMetaData = Gdn::userModel()->getMeta(Gdn::session()->UserID, 'Plugin.%', 'Plugin.');
-        if ($UserMetaData && $UserMetaData['Multilingual.Locale']) {
-            $Language = $UserMetaData['Multilingual.Locale'];
+        // $UserMetaData = Gdn::userModel()->getMeta(Gdn::session()->UserID, 'Plugin.%', 'Plugin.');
+        if (Gdn::session()->User && Gdn::session()->User->ProfileLanguage) {
+            $Language = Gdn::session()->User->ProfileLanguage == 'en' ? 'en_GB' : 'fr_CA';
+            $this->UserMetaModel->setUserMeta(Gdn::session()->UserID, 'Plugin.Multilingual.Locale', $Language);
         } else {
             $Language = Gdn::config('Garden.Locale');
         }
