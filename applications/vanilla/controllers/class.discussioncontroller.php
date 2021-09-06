@@ -1529,7 +1529,7 @@ body { background: transparent !important; }
                 $address = $discussionInsertUser->Email;
 
                 $User = Gdn::userModel()->getID(Gdn::session()->UserID);
-                $subject = $User->ProfileLanguage == "fr" ? "Yé! Tu as reçu une explication à ta question." : "Yay! Your question has received an answer.";
+                $subject = $discussionInsertUser->ProfileLanguage == "fr" ? "Yé! Tu as reçu une explication à ta question." : "Yay! Your question has received an answer.";
 
                 $discussionLink = url("/discussion/comment/" . $commentID . "/#Comment_" . $commentID);
 
@@ -1555,6 +1555,36 @@ body { background: transparent !important; }
                     }
                 }
             }
+
+            $textstring = strip_tags(Gdn_Format::to($comment->Body, $comment->Format));
+
+            if(strlen($textstring) > Gdn::config('Vanilla.Notify.TextLength')) {
+                $textstring = substr($textstring, 0, Gdn::config('Vanilla.Notify.TextLength')).'...';
+            }
+
+            $UserMetaData = Gdn::userModel()->getMeta($comment->InsertUserID, 'Profile.%', 'Profile.');
+
+            $username = $UserMetaData['DisplayName'] ?? "";
+
+            $activity = [
+                "ActivityType" => "NewComment",
+                "ActivityTypeID" => 30,
+                'NotifyUserID' => $Discussion->InsertUserID,
+                "ActivityUserID" => $comment->InsertUserID,
+                "HeadlineFormat" => t('Explanation from ').$username,
+                "RecordType" => "Comment",
+                "RecordID" => $comment->CommentID,
+                "Route" => CommentModel::commentUrl($comment),
+                "Story" => $textstring,
+                "Data" => [
+                    "Verified" => true
+                ],
+                'Notified' => ActivityModel::SENT_PENDING,
+                'Emailed' => ActivityModel::SENT_PENDING
+            ];
+
+            $activityModel = new ActivityModel();
+            $activityModel->save($activity);
         } else {
 
         }

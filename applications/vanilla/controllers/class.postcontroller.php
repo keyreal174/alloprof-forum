@@ -1328,7 +1328,7 @@ class PostController extends VanillaController {
                         $address = $discussionInsertUser->Email;
 
                         $User = Gdn::userModel()->getID($Discussion->InsertUserID);
-                        $subject = $User->ProfileLanguage == "fr" ? "Yé! Tu as reçu une explication à ta question." : "Yay! Your question has received an answer.";
+                        $subject = $discussionInsertUser->ProfileLanguage == "fr" ? "Yé! Tu as reçu une explication à ta question." : "Yay! Your question has received an answer.";
 
                         $discussionLink = url("/discussion/comment/" . $CommentID . "/#Comment_" . $CommentID);
 
