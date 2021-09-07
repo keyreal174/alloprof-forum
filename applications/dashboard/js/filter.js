@@ -23,11 +23,16 @@ jQuery(document).ready(function($) {
         var explanation = $(this).is(":checked");
         if (explanation) {
             $(".FilterMenu #Form_Explanation").attr("checked", false);
+            $(".FilterMenu #Form_VerifiedBy").attr("checked", false);
         }
         filterDiscussion();
     });
 
     $(document).on('change', '.FilterMenu #Form_VerifiedBy', function() {
+        var explanation = $(this).is(":checked");
+        if (explanation) {
+            $(".FilterMenu #Form_OutExplanation").attr("checked", false);
+        }
         filterDiscussion();
     });
 
