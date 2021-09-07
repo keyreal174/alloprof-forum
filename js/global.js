@@ -10,9 +10,9 @@
     // English Button
     $(document).on('click', '.language-btn', function(event) {
         event.preventDefault();
+        document.cookie = "preferredLanguage=" + ($(this).attr('id').startsWith('en') ? 'en' : 'fr') + ";path=/";
         if ($(this).attr('data-session') == "invalid") {
             window.location.href  = $(this).attr('data-url');
-            // document.cookie = "preferredLanguage=" +  $(this).attr('id');
         } else {
             axios.get(gdn.url("/profile/setlocale?locale=" + $(this).attr('id')))
                 .then((response) => {
