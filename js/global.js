@@ -136,7 +136,7 @@
             });
     };
 
-    const ssoLogin = (user) => {
+    const ssoLogin = (user, customUrl) => {
         const ssoUrl = "/auth/signin";
         user.getIdTokenResult().then(result => {
             const data = {
@@ -144,7 +144,11 @@
             };
             axios.post(ssoUrl, data)
                 .then(response => {
-                    window.location.href = gdn.url("/entry/jsconnect-redirect?client_id=alloprof" + saveURL);
+                    if (customUrl) {
+                        window.location.href = gdn.url("/entry/jsconnect-redirect?client_id=alloprof&target=" + customUrl);
+                    } else{
+                        window.location.href = gdn.url("/entry/jsconnect-redirect?client_id=alloprof" + saveURL);
+                    }
                 })
                 .catch(error => {
                     console.log(error);
@@ -304,12 +308,13 @@
             apForumApp.obs.trigger('usercreate:show');
             console.log('show signup from fpass')
         });
-
+/*
         apForumApp.app.attachListener('user:loggedin', function(user) {
             console.log('logged in');
             ssoLogin(auth.currentUser);
+
         });
-        
+  */      
       var pathname = window.location.pathname;
       var isEnglish = pathname.indexOf('/helpzone/') > -1;
 
@@ -364,6 +369,9 @@
             // TODO: Open Observer Login Modal
             APForumApp.onReady(function(apForumApp) {
                 apForumApp.app.attachListener('userlogin:done', function(userConnected) {
+                    if (userConnected.actionFinished) {
+                        ssoLogin(auth.currentUser);
+                    }
                     console.log('logged in');
                 });
                 apForumApp.obs.trigger('userlogin:show');
@@ -389,6 +397,16 @@
         APForumApp.onReady(function(apForumApp) {
             apForumApp.app.attachListener('usercreate:done', function(userConnected) {
                 console.log('logged in');
+                if (userConnected.actionFinished) {
+                    if (userConnected.gotoProfile) {
+                        var pathname = window.location.pathname;
+                        var isEnglish = pathname.indexOf('/helpzone/') > -1;
+
+                        ssoLogin(auth.currentUser, isEnglish ?'/en/profile': '/fr/profil');
+                    } else {
+                        ssoLogin(auth.currentUser);
+                    }
+                } 
             });
             apForumApp.obs.trigger('usercreate:show');
         })
