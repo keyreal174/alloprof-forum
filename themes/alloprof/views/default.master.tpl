@@ -26,6 +26,12 @@
     alloprof-appa .icon, alloprof-appa .icon:before {
         font-family: 'alicon';
     }
+    alloprof-appa .form__control,
+    alloprof-appa .form__control:hover,
+    alloprof-appa .form__control:focus,
+    alloprof-appa .form__control:active {
+        outline: none !important;
+    }
     </style>
     {/literal}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clamp-js/0.7.0/clamp.js" integrity="sha512-TnePtmz3HL4p8nFS2lR46u0iHrwObVnUednDASZK/qS9btkd09xKs1PeCt1kpS4a0gWNQx1AF+WnDHDK+xWcAw==" crossorigin="anonymous"></script>
