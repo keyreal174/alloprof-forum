@@ -331,7 +331,7 @@
         });
       }
        
-      apForumApp.obs.trigger('userrrappel:show', null);
+      apForumApp.obs.trigger('userrappel:show', null);
     });
 
 
