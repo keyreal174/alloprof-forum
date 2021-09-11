@@ -330,6 +330,8 @@
           }
         });
       }
+       
+      apForumApp.obs.trigger('userrrappel:show', null);
     });
 
 
