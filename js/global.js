@@ -145,7 +145,7 @@
             axios.post(ssoUrl, data)
                 .then(response => {
                     if (customUrl) {
-                        window.location.href = gdn.url("/entry/jsconnect-redirect?client_id=alloprof&target=" + customUrl);
+                        window.location.href = customUrl
                     } else{
                         window.location.href = gdn.url("/entry/jsconnect-redirect?client_id=alloprof" + saveURL);
                     }
@@ -403,8 +403,8 @@
                     if (userConnected.gotoProfile) {
                         var pathname = window.location.pathname;
                         var isEnglish = pathname.indexOf('/helpzone/') > -1;
-
-                        ssoLogin(auth.currentUser, isEnglish ?'/en/profile': '/fr/profil');
+                        //window.location = window.location.origin + (isEnglish ?'/en/profile': '/fr/profil');
+                        ssoLogin(auth.currentUser, window.location.origin + (isEnglish ?'/en/profile': '/fr/profil'));
                     } else {
                         ssoLogin(auth.currentUser);
                     }
