@@ -15,6 +15,10 @@ echo $form->errors();
         <?php echo $form->textBoxWrap('Name'); ?>
     </li>
     <li class="form-group" role="presentation">
+        <?php echo $form->labelWrap('ProfileLanguage', 'ProfileLanguage'); ?>
+        <?php echo $form->textBoxWrap('ProfileLanguage'); ?>
+    </li>
+    <li class="form-group" role="presentation">
         <div class="label-wrap">
             <?php echo $form->label('Email', 'Email');
             if (UserModel::noEmail()) {

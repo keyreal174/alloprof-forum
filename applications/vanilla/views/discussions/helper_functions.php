@@ -365,9 +365,11 @@ if (!function_exists('writeCategoryDropDown')) :
         // Remove categories the user shouldn't see.
         $safeCategoryData = [];
         $discussionType = val('DiscussionType', $options);
+        $language = Gdn::config('Garden.Locale') == 'fr_CA' ? 'fr' : 'en';
+        $language = $sender->Language ? $sender->Language : $language;
         foreach ($categoryData as $categoryID => $category) {
             if ($value != $categoryID) {
-                if ($category['CategoryID'] <= 0 || !$category['PermsDiscussionsView']) {
+                if ($category['CategoryID'] <= 0 || !$category['PermsDiscussionsView'] || $category['Language'] != $language) {
                     continue;
                 }
 
@@ -439,9 +441,9 @@ if (!function_exists('writeCategoryDropDown')) :
             $hasValue = ($value !== [false] && $value !== ['']) ? true : false;
 
             // Start with null option?
-            $includeNull = val('IncludeNull', $options);
+            $includeNull = val('IncludeNull', $options) || $sender->LanguageChanged;
             if ($includeNull === true) {
-                // $return .= '<option value="">'.t('Select a category...').'</option>';
+                $return .= '<option value=""></option>';
             } elseif (is_array($includeNull))
                 $return .= "<option value=\"{$includeNull[0]}\">{$includeNull[1]}</option>\n";
             elseif ($includeNull)
@@ -528,7 +530,7 @@ if (!function_exists('timeElapsedString')) :
             }
         }
 
-        if (!$full) {
+        if (Gdn::config('Garden.Locale') == 'fr_CA') {
             // $string = array_slice($string, 0, 1);
             $frenchStr = "";
             if ($diff->y) {
@@ -551,9 +553,31 @@ if (!function_exists('timeElapsedString')) :
                 }
             }
             return $frenchStr;
+        } else {
+            $enStr = "";
+            if ($diff->y) {
+                $enStr = $diff->y . "yr.";
+            } else {
+                if ($diff->m) {
+                    $enStr = $diff->m . "mo.";
+                } else {
+                    if ($diff->d) {
+                        $enStr = $diff->d . "d";
+                    } else {
+                        if ($diff->h) {
+                            $enStr = $diff->h . "h";
+                        } else {
+                            if ($diff->i) {
+                                $enStr = $diff->i . "min";
+                            }
+                        }
+                    }
+                }
+            }
+            return $enStr;
         }
 
-        return $string ? implode(', ', $string) . ' ago' : 'just now';
+        // return $string ? implode(', ', $string) . ' ago' : 'just now';
     }
 endif;
 

@@ -174,6 +174,11 @@ jQuery(document).ready(function($) {
         return false;
     });
 
+    $(document).on('change', '#Form_Language', function(e) {
+        var val = $("#Form_DiscussionID").val();
+        window.location.href = gdn.url('post/editdiscussion/'+ val +'/0/0/' + e.target.value);
+    });
+
     // Autosave
     if ($.fn.autosave) {
         var btn = $('#Form_SaveDraft');

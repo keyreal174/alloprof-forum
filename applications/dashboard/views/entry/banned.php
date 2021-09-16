@@ -3,11 +3,11 @@
 
 <div class="Center SplashInfo">
 <img src=<?php echo url("/themes/alloprof/design/images/notfoundbot.svg") ?> />
-    <h1><?php echo t('Oh no! It\'s a 404 error'); ?></h1>
+    <h1><?php echo t('Sorry!'); ?></h1>
 
-    <div id="Message"><?php echo t('The page you\'re looking for has disappeared!'); ?></div>
+    <div id="Message"><?php echo t('Page not found.'); ?></div>
 
-    <a href=<?php echo url("/discussions"); ?> class="btn btn-default btn-shadow"><?php echo t("Return to Home") ?></a>
+    <a href=<?php echo url("/discussions"); ?> class="btn btn-default btn-shadow"><?php echo t("Return to the home page") ?></a>
 </div>
 
 <?php if (debug() && $this->data('Trace')): ?>

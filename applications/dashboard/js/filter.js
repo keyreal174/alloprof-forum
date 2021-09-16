@@ -23,11 +23,20 @@ jQuery(document).ready(function($) {
         var explanation = $(this).is(":checked");
         if (explanation) {
             $(".FilterMenu #Form_Explanation").attr("checked", false);
+            $(".FilterMenu #Form_VerifiedBy").attr("checked", false);
         }
         filterDiscussion();
     });
 
     $(document).on('change', '.FilterMenu #Form_VerifiedBy', function() {
+        var explanation = $(this).is(":checked");
+        if (explanation) {
+            $(".FilterMenu #Form_OutExplanation").attr("checked", false);
+        }
+        filterDiscussion();
+    });
+
+    $(document).on('change', '.FilterMenu #Form_Language', function() {
         filterDiscussion();
     });
 
@@ -38,10 +47,11 @@ jQuery(document).ready(function($) {
         var explanation = $('.FilterMenu #Form_Explanation').is(":checked");
         var outexplanation = $('.FilterMenu #Form_OutExplanation').is(":checked");
         var verifiedBy = $('.FilterMenu #Form_VerifiedBy').is(":checked");
+        var language = $('.FilterMenu #Form_Language').is(":checked");
 
         grade = !grade ? -1 : grade;
         subject = !subject ? -1 : subject;
-        var parameter = 'grade=' + parseInt(grade) + '&sort=' + sort + '&explanation=' + explanation + '&verifiedBy=' + verifiedBy + '&subject=' + subject + '&outexplanation=' + outexplanation;
+        var parameter = 'grade=' + parseInt(grade) + '&sort=' + sort + '&explanation=' + explanation + '&verifiedBy=' + verifiedBy + '&subject=' + subject + '&outexplanation=' + outexplanation + '&language=' + language;
         var url = document.location.href;
 
         // get new url;

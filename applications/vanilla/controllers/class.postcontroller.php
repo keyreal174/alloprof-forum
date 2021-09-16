@@ -42,6 +42,10 @@ class PostController extends VanillaController {
     /** @var string UserRole 'Teacher' or 'Student' */
     public $UserRole;
 
+    public $Language = null;
+
+    public $LanguageChanged = null;
+
     /**
      * General "post" form, allows posting of any kind of form. Attach to PostController_AfterFormCollection_Handler.
      *
@@ -141,6 +145,9 @@ class PostController extends VanillaController {
         if (!$useCategories) {
             $categoryID = '';
         }
+
+        $Language = Gdn::config('Garden.Locale');
+        $Language = $Language == 'fr_CA' ? 'fr' : $Language;
 
         // Setup head
         $this->addJsFile('jquery.autosize.min.js');
@@ -272,6 +279,7 @@ class PostController extends VanillaController {
             $filters = ['Score'];
             $formValues = $this->filterFormValues($formValues, $filters);
             $formValues = $this->DiscussionModel->filterForm($formValues);
+            $formValues['Language'] = $formValues['Language'] ? $formValues['Language'] : $Language;
             $this->deliveryType(Gdn::request()->getValue('DeliveryType', $this->_DeliveryType));
             if ($draftID == 0) {
                 $draftID = $this->Form->getFormValue('DraftID', 0);
@@ -366,9 +374,12 @@ class PostController extends VanillaController {
                                 $GradeOption = array_filter($field['Options'], function($v) {
                                     return preg_match('/(Primaire|Secondaire|Post-secondaire)/', $v);
                                 });
+                                $GradeOption = array_map(function($val) {
+                                    return t($val);
+                                }, $GradeOption);
                             }
                         }
-                        if (str_contains($GradeOption[$this->Form->getValue('GradeID')], 'Primaire')) {
+                        if (str_contains($GradeOption[$this->Form->getValue('GradeID')], t('Primaire'))) {
                             $Cycle = 0;
                         } else {
                             $Cycle = 1;
@@ -446,11 +457,11 @@ class PostController extends VanillaController {
                             $activity = [
                                 'ActivityType' => 'Default',
                                 'NotifyUserID' => $discussion->InsertUserID,
-                                'HeadlineFormat' => 'Question pending approval',
+                                'HeadlineFormat' => 'Your question is pending approval.',
                                 "RecordType" => "Discussion",
                                 "RecordID" => $discussion->DiscussionID,
                                 "Route" => DiscussionModel::discussionUrl($discussion, "", "/"),
-                                'Story' => 'Your question will be reviewed by a moderator. <br/> You will be notified once it is published!',
+                                'Story' => 'Your question will be reviewed by a moderator. <br/> You will be notified as soon as it’s published!',
                                 'Notified' => ActivityModel::SENT_PENDING,
                                 'Emailed' => ActivityModel::SENT_PENDING
                             ];
@@ -498,6 +509,9 @@ class PostController extends VanillaController {
         if (!$useCategories) {
             $categoryID = '';
         }
+
+        $Language = Gdn::config('Garden.Locale');
+        $Language = $Language == 'fr_CA' ? 'fr' : $Language;
 
         if ($this->getUserRole() == 'Teacher') {
             redirectTo("discussions");
@@ -632,6 +646,7 @@ class PostController extends VanillaController {
             $filters = ['Score'];
             $formValues = $this->filterFormValues($formValues, $filters);
             $formValues = $this->DiscussionModel->filterForm($formValues);
+            $formValues['Language'] = $Language;
             $this->deliveryType(Gdn::request()->getValue('DeliveryType', $this->_DeliveryType));
             if ($draftID == 0) {
                 $draftID = $this->Form->getFormValue('DraftID', 0);
@@ -791,11 +806,11 @@ class PostController extends VanillaController {
                             $activity = [
                                 'ActivityType' => 'Default',
                                 'NotifyUserID' => $discussion->InsertUserID,
-                                'HeadlineFormat' => 'Question pending approval',
+                                'HeadlineFormat' => 'Your question is pending approval.',
                                 "RecordType" => "Discussion",
                                 "RecordID" => $discussion->DiscussionID,
                                 "Route" => DiscussionModel::discussionUrl($discussion, "", "/"),
-                                'Story' => 'Your question will be reviewed by a moderator. <br/> You will be notified once it is published!',
+                                'Story' => 'Your question will be reviewed by a moderator. <br/> You will be notified as soon as it’s published!',
                                 'Notified' => ActivityModel::SENT_PENDING,
                                 'Emailed' => ActivityModel::SENT_PENDING
                             ];
@@ -860,7 +875,7 @@ class PostController extends VanillaController {
      * @param int $discussionID Unique ID of the discussion to edit.
      * @param int $draftID Unique ID of draft discussion to edit.
      */
-    public function editDiscussion($discussionID = 0, $draftID = 0, $isMobile=false) {
+    public function editDiscussion($discussionID = 0, $draftID = 0, $isMobile=false, $lang=false) {
         if ($draftID != 0) {
             $record = $this->Draft = $this->DraftModel->getID($draftID);
             $this->CategoryID = $this->Draft->CategoryID;
@@ -873,6 +888,8 @@ class PostController extends VanillaController {
             $record = $this->DiscussionModel->getID($discussionID);
             $this->setData('Discussion', $record, true);
             $this->CategoryID = $this->Discussion->CategoryID;
+            $this->Language = $lang ? $lang : $this->Discussion->Language;
+            $this->LanguageChanged = $lang ? true : false;
         }
 
         // Normalize the edit data.
@@ -907,6 +924,10 @@ class PostController extends VanillaController {
         // Set view and render
         $this->View = $isMobile?'mobile_askquestion':'Discussion';
         $this->discussion($this->CategoryID);
+    }
+
+    public function changeCategory($language = 'en') {
+
     }
 
     public function editQuestionPopup($discussionID = 0, $draftID = 0) {
@@ -1052,6 +1073,8 @@ class PostController extends VanillaController {
         // Set discussion data
         $this->DiscussionID = $DiscussionID;
         $this->Discussion = $Discussion = $this->DiscussionModel->getID($DiscussionID);
+
+        $Language = $Discussion->Language;
 
         if ($Discussion->InsertUserID == Gdn::session()->UserID) {
             return;
@@ -1241,6 +1264,7 @@ class PostController extends VanillaController {
             $filters = ['Score'];
             $FormValues = $this->filterFormValues($FormValues, $filters);
             $FormValues = $this->CommentModel->filterForm($FormValues);
+            $FormValues['Language'] = $Language;
             $formDiscussion = $this->DiscussionModel->getID($this->Form->_FormValues['DiscussionID']);
 
             if ($formDiscussion && $formDiscussion->Closed === 1 && !CategoryModel::checkPermission($formDiscussion->CategoryID, 'Vanilla.Discussions.Close')) {
@@ -1302,7 +1326,10 @@ class PostController extends VanillaController {
                         $username = $UserMetaData['DisplayName'] ?? "";
                         $message = Gdn_Format::to($Discussion->Body, 'Rich');
                         $address = $discussionInsertUser->Email;
-                        $subject = "Yé! Tu as reçu une explication à ta question.";
+
+                        $User = Gdn::userModel()->getID($Discussion->InsertUserID);
+                        $subject = $discussionInsertUser->ProfileLanguage == "fr" ? "Yé! Tu as reçu une explication à ta question." : "Yay! Your question has received an answer.";
+
                         $discussionLink = url("/discussion/comment/" . $CommentID . "/#Comment_" . $CommentID);
 
                         $emailer = new Gdn_Email();
@@ -1349,11 +1376,11 @@ class PostController extends VanillaController {
                         $activity = [
                             'ActivityType' => 'NewDiscussion',
                             'NotifyUserID' => $Comment->InsertUserID,
-                            'HeadlineFormat' => 'Explanation pending approval',
+                            'HeadlineFormat' => 'Your answer is awaiting approval.',
                             "RecordType" => "Comment",
                             "RecordID" => $Comment->CommentID,
                             "Route" => CommentModel::commentUrl($Comment),
-                            'Story' => 'Your explanation will be reviewed by a moderator. <br/> You will be notified once it is published!',
+                            'Story' => 'Your answer will be reviewed by a moderator. <br/> You will be notified as soon as it’s published!',
                             'Notified' => ActivityModel::SENT_PENDING,
                             'Emailed' => ActivityModel::SENT_PENDING
                         ];

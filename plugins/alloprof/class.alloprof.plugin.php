@@ -47,6 +47,7 @@ class AlloprofPlugin extends Gdn_Plugin {
             ->column('AcceptedUserID', 'int', true)
             ->column('Resolved', 'tinyint(1)', 0)
             ->column('Cycle', 'int', 0)
+            ->column('Language', 'varchar(5)', ['Null' => false, 'Default' => 'fr'])
             ->set();
 
         $St->table('Comment')
@@ -54,10 +55,21 @@ class AlloprofPlugin extends Gdn_Plugin {
             ->column('Published', 'tinyint(1)', '0')
             ->column('DateAccepted', 'datetime', true)
             ->column('AcceptedUserID', 'int', true)
+            ->column('Language', 'varchar(5)', ['Null' => false, 'Default' => 'fr'])
             ->set();
 
         $St->table('Category')
             ->column('Color', 'varchar(50)', null)
+            ->column('Language', 'varchar(5)', ['Null' => false, 'Default' => 'fr'])
+            ->column('LinkedCategoryID', 'int', ['Null' => true])
+            ->set();
+
+        $St->table('User')
+            ->column('ProfileLanguage', 'varchar(5)', ['Null' => false, 'Default' => 'fr'])
+            ->set();
+
+        $St->table('Log')
+            ->column('Language', 'varchar(5)', ['Null' => true])
             ->set();
 
         // NOTE: disabled as was one-time script to fix existing users
@@ -85,6 +97,15 @@ class AlloprofPlugin extends Gdn_Plugin {
                     ->put();
             }
         }
-    }
 
+        $Sql->query("UPDATE vanilla_dev.GDN_Log
+        LEFT JOIN vanilla_dev.GDN_Discussion ON vanilla_dev.GDN_Log.RecordID = vanilla_dev.GDN_Discussion.DiscussionID
+        SET vanilla_dev.GDN_Log.Language = vanilla_dev.GDN_Discussion.Language
+        WHERE vanilla_dev.GDN_Log.RecordType = 'Discussion';");
+
+        $Sql->query("UPDATE vanilla_dev.GDN_Log
+        LEFT JOIN vanilla_dev.GDN_Comment ON vanilla_dev.GDN_Log.RecordID = vanilla_dev.GDN_Comment.CommentID
+        SET vanilla_dev.GDN_Log.Language = vanilla_dev.GDN_Comment.Language
+        WHERE vanilla_dev.GDN_Log.RecordType = 'Comment';");
+    }
 }

@@ -81,6 +81,8 @@ class EmailTemplate extends Gdn_Pluggable implements Gdn_IEmailTemplate {
 
     protected $unsubscribeLink = null;
 
+    protected $profileLanguage = 'fr';
+
     // Color properties
 
     /** @var string The hex color code of the text, must include the leading '#'.*/
@@ -172,6 +174,8 @@ class EmailTemplate extends Gdn_Pluggable implements Gdn_IEmailTemplate {
     }
 
     public function setUnsubscribeLink($UserID) {
+        $User = Gdn::userModel()->getID($UserID);
+        $this->profileLanguage = $User->ProfileLanguage;
         $hashedString = sha1($UserID . ':G76bLyJC9c2tgbuX');
         $this->unsubscribeLink = '/profile/unsubscribe?id='.$UserID.'&hash='.$hashedString;
     }

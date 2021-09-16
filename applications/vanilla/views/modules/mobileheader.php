@@ -7,5 +7,5 @@
         </svg>
     </a>
 <?php } ?>
-<h1 class="d-desktop"><a href="<?= url('/discussions') ?>"><?php echo t('Mutual Aid Zone')?></a></h1>
-<h3 class="d-mobile"><?php echo t($this->title ?? 'Mutual Aid Zone')?></h3>
+<h1 class="d-desktop"><a href="<?= url('/discussions') ?>"><?php echo t('Help Zone')?></a></h1>
+<h3 class="d-mobile"><?php echo t($this->title ?? 'Help Zone')?></h3>

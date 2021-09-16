@@ -2,8 +2,7 @@
 
 // ContentSecurityPolicy
 $Configuration['ContentSecurityPolicy']['ScriptSrc']['AllowedDomains'] = array (
-  0 => '*.googletagmanager.com
-',
+  0 => '*.googletagmanager.com',
   1 => '*.google-analytics.com',
 );
 
@@ -16,7 +15,7 @@ $Configuration['Conversations']['ConversationMessage']['SpamTime'] = '30';
 $Configuration['Conversations']['ConversationMessage']['SpamLock'] = '60';
 
 // Database
-$Configuration['Database']['Name'] = 'vanilla';
+$Configuration['Database']['Name'] = 'vanilla_dev';
 $Configuration['Database']['Host'] = 'database';
 $Configuration['Database']['User'] = 'root';
 $Configuration['Database']['Password'] = '';
@@ -27,6 +26,7 @@ $Configuration['EnabledApplications']['Vanilla'] = 'vanilla';
 
 // EnabledLocales
 $Configuration['EnabledLocales']['vf_fr_CA'] = 'fr_CA';
+$Configuration['EnabledLocales']['vf_en_GB'] = 'en_GB';
 
 // EnabledPlugins
 $Configuration['EnabledPlugins']['recaptcha'] = false;
@@ -63,17 +63,16 @@ $Configuration['Garden']['Cookie']['Domain'] = '';
 $Configuration['Garden']['Registration']['ConfirmEmail'] = false;
 $Configuration['Garden']['Registration']['Method'] = 'Basic';
 $Configuration['Garden']['Registration']['AutoConnect'] = false;
-$Configuration['Garden']['Email']['SupportName'] = 'Alloprof Zone d\'entraide';
+$Configuration['Garden']['Email']['SupportName'] = 'Alloprof Help Zone';
 $Configuration['Garden']['Email']['Format'] = 'html';
-$Configuration['Garden']['Email']['UseSmtp'] = '1';
+$Configuration['Garden']['Email']['UseSmtp'] = true;
 $Configuration['Garden']['Email']['SmtpHost'] = 'smtp.postmarkapp.com';
-$Configuration['Garden']['Email']['SmtpUser'] = '';
-$Configuration['Garden']['Email']['SmtpPassword'] = '';
+$Configuration['Garden']['Email']['SmtpUser'] = '9e4314d2-aafb-4abd-8f8a-f3664b2a6351';
+$Configuration['Garden']['Email']['SmtpPassword'] = '9e4314d2-aafb-4abd-8f8a-f3664b2a6351';
 $Configuration['Garden']['Email']['SmtpPort'] = '587';
 $Configuration['Garden']['Email']['SmtpSecurity'] = 'tls';
 $Configuration['Garden']['Email']['MimeType'] = 'text/plain';
-$Configuration['Garden']['Email']['SupportAddress'] = 'ne-pas-repondre@alloprof.qc.ca';
-$Configuration['Garden']['Email']['OmitToName'] = false;
+$Configuration['Garden']['Email']['SupportAddress'] = 'info@alloprof.qc.ca';
 $Configuration['Garden']['SystemUserID'] = 1;
 $Configuration['Garden']['UpdateToken'] = '4c0eb03d3f6d822dac9a74ab9839599747658393';
 $Configuration['Garden']['InputFormatter'] = 'rich';
@@ -85,7 +84,7 @@ $Configuration['Garden']['InstallationID'] = 'FF61-A96A2EF9-738F63CD';
 $Configuration['Garden']['InstallationSecret'] = '765eddc30baa22dafe4cc461356382df40d19233';
 $Configuration['Garden']['Theme'] = 'alloprof';
 $Configuration['Garden']['MobileTheme'] = 'alloprof';
-$Configuration['Garden']['Locale'] = 'fr_CA';
+$Configuration['Garden']['Locale'] = 'en';
 $Configuration['Garden']['EditContentTimeout'] = '-1';
 $Configuration['Garden']['Format']['DisableUrlEmbeds'] = false;
 $Configuration['Garden']['Format']['WarnLeaving'] = false;
@@ -94,8 +93,8 @@ $Configuration['Garden']['TrustedDomains'] = '';
 $Configuration['Garden']['Security']['Hsts']['MaxAge'] = 604800;
 $Configuration['Garden']['Security']['Hsts']['IncludeSubDomains'] = false;
 $Configuration['Garden']['Security']['Hsts']['Preload'] = false;
-$Configuration['Garden']['HomepageTitle'] = 'Zone d’entraide | Alloprof';
-$Configuration['Garden']['Description'] = 'Trouve des explications à tes questions scolaires sur la Zone d\'entraide, bonifiées par nos 200 enseignants dans toutes les matières. Allo les bonnes notes.';
+$Configuration['Garden']['HomepageTitle'] = 'Help Zone | Alloprof';
+$Configuration['Garden']['Description'] = 'Join the new Alloprof Help Zone. Students who need support can ask teachers questions on a variety of school subjects.';
 $Configuration['Garden']['OrgName'] = '';
 $Configuration['Garden']['Logo'] = '';
 $Configuration['Garden']['MobileLogo'] = '';

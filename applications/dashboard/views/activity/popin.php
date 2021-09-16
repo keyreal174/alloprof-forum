@@ -2,6 +2,9 @@
 
 if (!function_exists('timeElapsedString'))
     include($this->fetchViewLocation('helper_functions', 'discussions', 'vanilla'));
+
+if (!function_exists('translate'))
+    include($this->fetchViewLocation('helper_functions', 'activity', 'dashboard'));
 ?>
 <ul class="PopList Activities">
     <li class="Item Title"><?php
@@ -39,27 +42,27 @@ if (!function_exists('timeElapsedString'))
         <div>
             <?php
                 if ($this->data('Preferences')['Email.CustomNotification']) {
-                    echo Gdn::controller()->Form->toggle('ToggleEmail', t('Be notified by email'), [ 'checked' => true ]);
+                    echo Gdn::controller()->Form->toggle('ToggleEmail', t('Email notifications'), [ 'checked' => true ]);
                 } else {
-                    echo Gdn::controller()->Form->toggle('ToggleEmail', t('Be notified by email'));
+                    echo Gdn::controller()->Form->toggle('ToggleEmail', t('Email notifications'));
                 }
             ?>
         </div>
         <div>
             <?php
                 if ($this->data('Preferences')['Popup.Moderation']) {
-                    echo Gdn::controller()->Form->toggle('ToggleModeration', t('Question published or rejected'), [ 'checked' => true ]);
+                    echo Gdn::controller()->Form->toggle('ToggleModeration', t('Question published or declined'), [ 'checked' => true ]);
                 } else {
-                    echo Gdn::controller()->Form->toggle('ToggleModeration', t('Question published or rejected'));
+                    echo Gdn::controller()->Form->toggle('ToggleModeration', t('Question published or declined'));
                 }
             ?>
         </div>
         <div>
             <?php
                 if ($this->data('Preferences')['Popup.DiscussionComment']) {
-                    echo Gdn::controller()->Form->toggle('ToggleExplanation', t('Explanation received'), [ 'checked' => true ]);
+                    echo Gdn::controller()->Form->toggle('ToggleExplanation', t('Answer received'), [ 'checked' => true ]);
                 } else {
-                    echo Gdn::controller()->Form->toggle('ToggleExplanation', t('Explanation received'));
+                    echo Gdn::controller()->Form->toggle('ToggleExplanation', t('Answer received'));
                 }
             ?>
         </div>
@@ -108,7 +111,7 @@ if (!function_exists('timeElapsedString'))
                 <p>
                     <?php
                         $excerpt = '';
-                        $story = $Activity['Story'];
+                        $story = translate($Activity['Story']);
                         $format = $Activity['Format'] ?? Vanilla\Formatting\Formats\HtmlFormat::FORMAT_KEY;
                         $excerpt = htmlspecialchars($story ? Gdn::formatService()->renderExcerpt($story, $format) : $excerpt);
 

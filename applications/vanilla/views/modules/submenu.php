@@ -24,7 +24,7 @@
 %text</a>'); ?>
         </div>
         <div class='Navigation-linkContainer'>
-            <?php echo Gdn_Theme::link('discussions/bookmarked', sprite('Home').' '.'<span class="desktop">'.t('Questions followed').($followedDiscussionsCount > 0 ? "<span class='realcount Count'>".$followedDiscussionsCount."</span>" : '').'</span>'.'<span class="mobile">'.t('Followed'), '<a href="%url" class="%class Navigation-link"><br/>
+            <?php echo Gdn_Theme::link('discussions/bookmarked', sprite('Home').' '.'<span class="desktop">'.t('Follow ups').($followedDiscussionsCount > 0 ? "<span class='realcount Count'>".$followedDiscussionsCount."</span>" : '').'</span>'.'<span class="mobile">'.t('Follow ups'), '<a href="%url" class="%class Navigation-link"><br/>
 %text</a>'); ?>
         </div>
         <div class='Navigation-linkContainer mobile'>
@@ -77,7 +77,7 @@
                 ->CountDiscussions;
 
                 echo "<div class='Navigation-linkContainer'>";
-                echo Gdn_Theme::link('discussions/bookmarked', sprite('Home').' '.'<span>'.t('Followed').'</span>', '<a href="%url" class="%class Navigation-link"><svg class="d-mobile" width="19" height="21" viewBox="0 0 19 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                echo Gdn_Theme::link('discussions/bookmarked', sprite('Home').' '.'<span>'.t('Follow ups').'</span>', '<a href="%url" class="%class Navigation-link"><svg class="d-mobile" width="19" height="21" viewBox="0 0 19 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M1.75049 3.5C1.75049 2.5335 2.53399 1.75 3.50049 1.75H15.2697C16.2362 1.75 17.0197 2.5335 17.0197 3.5V18.6743L10.5623 12.8039C9.89479 12.1971 8.87541 12.1971 8.20792 12.8039L1.75049 18.6743V3.5Z" stroke="black" stroke-width="2.5"/>
                     </svg><br/>
                     %text'. ($followedDiscussionsCount > 0 ? "<span class='realcount Count'>".$followedDiscussionsCount."</span>" : '') .'</a>');
@@ -95,7 +95,7 @@
      <div class='Navigation-linkContainer d-desktop'>
         <?php
                echo '<a class="Navigation-link ToggleFlyout Flayout-Subject Subject-toggle" rel="/categories/subjectdropdown">';
-               echo t("Subjects");
+               echo t("Topics");
                echo '<div class="Flyout FlyoutMenu Flyout-withFrame Flayout-Subject"></div></a>';
         ?>
      </div>

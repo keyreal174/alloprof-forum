@@ -47,7 +47,7 @@ $titleID = "BoxFilterTitle";
 ?>
 <div class="BoxDiscussionFilter Panel" role="navigation" aria-labelledby="<?php echo $titleID ?>">
     <h2 id="<?php echo $titleID ?>" class="BoxFilter-Heading">
-        <?php echo t('Filter'); ?>
+        <?php echo t('Filters'); ?>
     </h2>
     <div class="FilterMenu">
         <?php
@@ -60,7 +60,7 @@ $titleID = "BoxFilterTitle";
             }
             echo writeGradeFilter($this->GradeID);
             echo writeDiscussionSort($this->Sort);
-            echo writeFilterToggle($this->IsExplanation, $this->IsVerified, $this->IsOutExplanation);
+            echo writeFilterToggle($this->IsExplanation, $this->IsVerified, $this->IsOutExplanation, $this->IsLanguage, $this->IsShowLanguage);
         ?>
     </div>
 </div>

@@ -86,10 +86,26 @@ class SearchController extends Gdn_Controller {
         $verified = Gdn::request()->get('verifiedBy') ?? false;
         $this->IsVerifiedBy = $verified;
 
+        $language = Gdn::request()->get('language') ?? false;
+        $this->IsLanguage = $language;
+
         $sort = Gdn::request()->get('sort') ?? 'desc';
         $this->SortDirection = $sort;
 
-        $dashboardDiscussionFilterModule = new DashboardDiscussionFilterModule($gradeFilterOption, $sort, $explanation, $verified, $subject, $outexplanation);
+        $isShowLanguage = true;
+
+        if ($subject != -1) {
+            $category = CategoryModel::categories($subject);
+
+            if (empty($category)) {
+                throw notFoundException();
+            }
+            $category = (object)$category;
+            $isShowLanguage = $category->LinkedCategoryID;
+        }
+
+        $dashboardDiscussionFilterModule = new DashboardDiscussionFilterModule($gradeFilterOption, $sort, $explanation, $verified, $subject, $outexplanation, $language, $isShowLanguage);
+        
         $this->addModule($dashboardDiscussionFilterModule);
         $this->addJsFile('filter.js');
         $wheres = [];
@@ -132,6 +148,12 @@ class SearchController extends Gdn_Controller {
             $wheres[$verify_where] = $verify_value;
         } else {
             unset($wheres[$verify_where]);
+        }
+
+        if ($this->IsLanguage == 'true') {
+            unset($wheres['d.Language']);
+        } else {
+            $wheres['d.Language'] = Gdn::config('Garden.Locale') == 'fr_CA' ? 'fr' : 'en';
         }
 
         $this->WhereClause = $wheres;

@@ -479,9 +479,15 @@ class HeadModule extends Gdn_Module {
         if (str_contains($canonicalUrl, '/categories/')) {
             $Explode = explode('/', $canonicalUrl);
             $CategoryName = urldecode($Explode[count($Explode) - 1]);
-            $this->addTag('meta', ['name' => 'twitter:title', 'property' => 'og:title', 'content' => 'Zone d’entraide '.$CategoryName.' | Alloprof']);
-            $this->addTag('meta', ['name' => 'description', 'property' => 'og:description', 'content' => "Besoin d’aide en ".$CategoryName."? Alloprof est là pour t’aider grâce à sa Zone d’entraide."]);
-            $this->addTag('meta', ['name' => 'twitter:description', 'content' => "Besoin d’aide en ".$CategoryName."? Alloprof est là pour t’aider grâce à sa Zone d’entraide."]);
+            if (Gdn::config('Garden.Locale') == 'fr_CA') {
+                $this->addTag('meta', ['name' => 'twitter:title', 'property' => 'og:title', 'content' => 'Zone d’entraide '.$CategoryName.' | Alloprof']);
+                $this->addTag('meta', ['name' => 'description', 'property' => 'og:description', 'content' => "Besoin d’aide en ".$CategoryName."? Alloprof est là pour t’aider grâce à sa Zone d’entraide."]);
+                $this->addTag('meta', ['name' => 'twitter:description', 'content' => "Besoin d’aide en ".$CategoryName."? Alloprof est là pour t’aider grâce à sa Zone d’entraide."]);
+            } else {
+                $this->addTag('meta', ['name' => 'twitter:title', 'property' => 'og:title', 'content' => 'Help Zone '.$CategoryName.' | Alloprof']);
+                $this->addTag('meta', ['name' => 'description', 'property' => 'og:description', 'content' => "Need help with ".$CategoryName."? Elementary and high school students can find the answers they need in our Help Zone."]);
+                $this->addTag('meta', ['name' => 'twitter:description', 'content' => "Need help with ".$CategoryName."? Elementary and high school students can find the answers they need in our Help Zone."]);
+            }
         }
 
         if (isset($canonicalUrl)) {

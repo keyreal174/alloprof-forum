@@ -67,8 +67,10 @@ class CategoriesModule extends Gdn_Module {
         $categories = CategoryModel::flattenTree($categories);
 
         $categories = array_filter($categories, function ($category) {
-            return val('PermsDiscussionsView', $category) && val('Following', $category);
+            $language = Gdn::config('Garden.Locale') == 'fr_CA' ? 'fr' : 'en';
+            return val('PermsDiscussionsView', $category) && val('Following', $category) && val('Language', $category) == $language;
         });
+
 
         $userCategories = $categoryModel->getFollowed(Gdn::session()->UserID);
 

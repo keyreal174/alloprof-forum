@@ -262,9 +262,9 @@ class FlaggingPlugin extends Gdn_Plugin {
             $sQL = Gdn::sql();
             $comment = $sender->Form->getValue('Plugin.Flagging.Reason');
             $reasons = Array(
-                t('The words are offensive or inappropriate'),
-                t('The author posts spam'),
-                t('The post contains an unapproved photo'),
+                t('This post is offensive or inappropriate'),
+                t('This post is spam'),
+                t('This post contains an inappropriate photo'),
             );
             $sender->setData('Plugin.Flagging.Reason', $reasons[$comment]);
             $createDiscussion = c('Plugins.Flagging.UseDiscussions');
@@ -435,7 +435,7 @@ class FlaggingPlugin extends Gdn_Plugin {
                 }
             }
 
-            $sender->informMessage(t('FlagSent', "Your complaint has been registered."));
+            $sender->informMessage(t('FlagSent', "The moderation team will review the post."));
         }
         $sender->render($sender->fetchViewLocation('flag', '', 'plugins/Flagging'));
     }

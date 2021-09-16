@@ -6,6 +6,6 @@
 <path d="M31.4304 41.4028C31.4304 44.2538 29.1194 46.5648 26.2694 46.5648C23.4184 46.5648 21.1084 44.2538 21.1084 41.4028" fill="#05BF8E"/>
 <path d="M27.8493 40.8398C27.8493 43.6908 25.5383 46.0018 22.6883 46.0018C19.8373 46.0018 17.5273 43.6908 17.5273 40.8398" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
-<h3>Notifications courriel désactivées!</h3>
-<p>Tu ne recevra plus de notifications de la zone d’entraide par courriel.</p>
+<h3><?php echo t('Notifications disabled'); ?></h3>
+<p><?php echo t('You will no longer receive email notifications from the Help Zone.'); ?></p>
 </div>

@@ -594,7 +594,8 @@ class LogModel extends Gdn_Pluggable {
             'ParentRecordID' => $parentRecordID,
             'CategoryID' => self::logValue($data, 'CategoryID'),
             'OtherUserIDs' => implode(',', val('OtherUserIDs', $options, [])),
-            'Data' => dbencode($data)
+            'Data' => dbencode($data),
+            'Language' => self::logValue($data, 'Language')
         ];
         if ($logRow['RecordDate'] == null) {
             $logRow['RecordDate'] = Gdn_Format::toDateTime();

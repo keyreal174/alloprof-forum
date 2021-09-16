@@ -191,7 +191,7 @@ if (!function_exists('reactionButton')) {
                     $additionalLabel = t("person found the explanation helpful");
                 }
             } else {
-                $additionalLabel = t("Be the first to find this explanation useful");
+                $additionalLabel = t("Be the first to find this answer useful");
             }
             if ($isLiked) {
                 $linkClass = $linkClass . " isLiked";

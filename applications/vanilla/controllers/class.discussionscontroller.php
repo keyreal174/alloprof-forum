@@ -80,7 +80,7 @@ class DiscussionsController extends VanillaController {
         $this->index($page);
     }
 
-    public function writeFilter() {
+    public function writeFilter($showLanguage=false) {
         $gradeFilterOption = (Gdn::request()->get('grade') || Gdn::request()->get('grade') == '0') ? strval((int)(Gdn::request()->get('grade'))) : -1;
         $this->GradeID = $gradeFilterOption;
         $this->PublicGradeID = $gradeFilterOption;
@@ -97,10 +97,26 @@ class DiscussionsController extends VanillaController {
         $verified = Gdn::request()->get('verifiedBy') ?? false;
         $this->IsVerifiedBy = $verified;
 
+        $language = Gdn::request()->get('language') ?? false;
+        $this->IsLanguage = $language;
+
         $sort = Gdn::request()->get('sort') ?? 'desc';
         $this->SortDirection = $sort;
 
-        $discussionFilterModule = new DiscussionFilterModule($gradeFilterOption, $sort, $explanation, $verified, $subject, $outexplanation);
+        $isShowLanguage = $showLanguage;
+
+        if ($subject != -1) {
+            $category = CategoryModel::categories($subject);
+
+            if (empty($category)) {
+                throw notFoundException();
+            }
+            $category = (object)$category;
+
+            $isShowLanguage = $category->LinkedCategoryID;
+        }
+
+        $discussionFilterModule = new DiscussionFilterModule($gradeFilterOption, $sort, $explanation, $verified, $subject, $outexplanation, $language, $isShowLanguage);
         $this->addModule($discussionFilterModule);
         $this->addJsFile('filter.js');
         $wheres = [];
@@ -143,6 +159,12 @@ class DiscussionsController extends VanillaController {
             $wheres[$verify_where] = $verify_value;
         } else {
             unset($wheres[$verify_where]);
+        }
+
+        if ($this->IsLanguage == 'true') {
+            unset($wheres['d.Language']);
+        } else {
+            $wheres['d.Language'] = Gdn::config('Garden.Locale') == 'fr_CA' ? 'fr' : 'en';
         }
 
         $this->WhereClause = $wheres;
@@ -240,7 +262,7 @@ class DiscussionsController extends VanillaController {
         $this->addModule('AskQuestionModule');
 
         // Filtering and Sorter Module
-        $this->writeFilter();
+        $this->writeFilter(true);
 
         // Make sure the userphoto module gets added to the page
         $this->addModule('UserPhotoModule');
@@ -252,10 +274,10 @@ class DiscussionsController extends VanillaController {
         $this->fireEvent('AddProfileTabsInfo');
 
         if ($this->UserRole == "Teacher") {
-            $bannerModule = new BannerModule('Home', 'Mutual Aid Zone', "Teacher");
+            $bannerModule = new BannerModule('Home', 'Help Zone', "Teacher");
         } else {
             $this->addModule('NewDiscussionModule');
-            $bannerModule = new BannerModule('Home', 'Mutual Aid Zone');
+            $bannerModule = new BannerModule('Home', 'Help Zone');
             $this->addModule('ProfileFilterModule');
         }
 
@@ -644,10 +666,10 @@ class DiscussionsController extends VanillaController {
         $this->addModule($mobileHeader);
 
         if ($this->UserRole == "Teacher") {
-            $bannerModule = new BannerModule('Home', 'Mutual Aid Zone', "Teacher");
+            $bannerModule = new BannerModule('Home', 'Help Zone', "Teacher");
         } else {
             $this->addModule('NewDiscussionModule');
-            $bannerModule = new BannerModule('Home', 'Mutual Aid Zone');
+            $bannerModule = new BannerModule('Home', 'Help Zone');
             $this->addModule('ProfileFilterModule');
         }
 
@@ -662,7 +684,7 @@ class DiscussionsController extends VanillaController {
                 $discussionsFooterModule = new DiscussionsFooterModule($DiscussionEmpty, "That's all for now!", "If you have other questions, don't hesitate to ask😉");
             }
         } else {
-            $discussionsFooterModule = new DiscussionsFooterModule($DiscussionEmpty, "It seems there's nothing here at the moment!", "Don't hesitate ask if you have a question.");
+            $discussionsFooterModule = new DiscussionsFooterModule($DiscussionEmpty, "Looks like all is well.", "Don’t hesitate if you have a question.");
         }
 
         $this->addModule($discussionsFooterModule);
@@ -817,12 +839,12 @@ class DiscussionsController extends VanillaController {
             $DiscussionEmpty = false;
             $discussionsFooterModule = new DiscussionsFooterModule($DiscussionEmpty, "That's all for now!", "If you have other questions, don't hesitate to ask😉");
         } else {
-            $discussionsFooterModule = new DiscussionsFooterModule($DiscussionEmpty, "It seems there's nothing here at the moment!", "Don't hesitate ask if you have a question.");
+            $discussionsFooterModule = new DiscussionsFooterModule($DiscussionEmpty, "Looks like all is well.", "Don’t hesitate if you have a question.");
         }
 
         $this->addModule($discussionsFooterModule);
 
-        // $bannerModule = new BannerModule('Home', 'Home', '', 'Mutual Aid Zone', 'Welcome to the Mutual Aid Zone! <br/> Do you have a question? Here are the explanations!');
+        // $bannerModule = new BannerModule('Home', 'Home', '', 'Help Zone', 'Welcome to the Help Zone! <br/> Have questions? Find the answers here!');
         // $this->addModule($bannerModule);
 
         // Render view

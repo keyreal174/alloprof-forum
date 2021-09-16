@@ -488,7 +488,7 @@ class EntryController extends Gdn_Controller {
         if ($isGoogleSign) {
             $fullName = explode(' ', $this->Form->getFormValue('FullName'));
             $displayName = $fullName[0].' '.$fullName[1][0].'.';
-            $this->Form->setFormValue('Grade', 'Enseignant');
+            $this->Form->setFormValue('Grade', t('Enseignant'));
             $this->Form->setFormValue('Role', 'Teacher');
             $this->Form->setFormValue('DisplayName', $displayName);
             $this->Form->setFormValue('Photo', 'https://www.alloprof.qc.ca/zonedentraide/uploads/Avatar_Enseignant.svg');
@@ -1022,8 +1022,22 @@ class EntryController extends Gdn_Controller {
      */
     protected function _setRedirect($checkPopup = false) {
         $url = url($this->getTargetRoute(), true);
+        // $UserMetaData = Gdn::userModel()->getMeta(Gdn::session()->UserID, 'Plugin.%', 'Plugin.');
+        if (Gdn::session()->User && Gdn::session()->User->ProfileLanguage) {
+            $UserLanguage = $_COOKIE['preferredLanguage'] ? $_COOKIE['preferredLanguage'] : Gdn::session()->User->ProfileLanguage;
+            $Language = $UserLanguage == 'en' ? 'en_GB' : 'fr_CA';
+            $this->UserMetaModel->setUserMeta(Gdn::session()->UserID, 'Plugin.Multilingual.Locale', $Language);
+        } else {
+            $Language = Gdn::config('Garden.Locale');
+        }
 
-        $this->setRedirectTo($url);
+        if ($Language == "en_GB") {
+            $newURI = str_replace('zonedentraide', 'helpzone', $url);
+        } else {
+            $newURI = str_replace('helpzone', 'zonedentraide', $url);
+        }
+
+        $this->setRedirectTo($newURI);
         $this->MasterView = 'popup';
         $this->View = 'redirect';
 
@@ -1033,7 +1047,14 @@ class EntryController extends Gdn_Controller {
         } elseif ($checkPopup || $this->data('CheckPopup')) {
             $this->addDefinition('CheckPopup', true);
         } else {
-            redirectTo($this->redirectTo ?: url($this->RedirectUrl));
+            $redirectUrl = $this->redirectTo ?: url($this->RedirectUrl);
+            if ($Language == "en_GB") {
+                $newURI = str_replace('zonedentraide', 'helpzone', $redirectUrl);
+            } else {
+                $newURI = str_replace('helpzone', 'zonedentraide', $redirectUrl);
+            }
+
+            redirectTo($newURI);
         }
     }
 

@@ -22,10 +22,18 @@ echo heading($this->data('Title'));
                     'Value' => val('ModerationCategoryID', $this->Data),
                     'IncludeNull' => t('Show all categories')]
             );
+            ?>
+            <select id="Form_Language" name="Language">
+                <option value=""><? echo t('Show all languages'); ?></option>
+                <option value="fr">Français</option>
+                <option value="en">English</option>
+            </select>
+            <?php
             echo anchor(t('Filter'), '#', ['class' => 'FilterButton btn btn-primary']);
             echo '</div>';
         }
-        ?></div>
+        ?>
+        </div>
     <?php PagerModule::write(['Sender' => $this, 'Limit' => 10, 'View' => 'pager-dashboard']); ?>
 </div>
 <?php

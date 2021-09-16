@@ -270,9 +270,10 @@ if (!function_exists('writeCategoryDropDown')) :
         // Remove categories the user shouldn't see.
         $safeCategoryData = [];
         $discussionType = val('DiscussionType', $options);
+        $language = Gdn::config('Garden.Locale') == 'fr_CA' ? 'fr' : 'en';
         foreach ($categoryData as $categoryID => $category) {
             if ($value != $categoryID) {
-                if ($category['CategoryID'] <= 0 || !$category['PermsDiscussionsView']) {
+                if ($category['CategoryID'] <= 0 || !$category['PermsDiscussionsView'] || $category['Language'] != $language) {
                     continue;
                 }
 
@@ -375,7 +376,7 @@ if (!function_exists('writeGradeFilter')) :
             $UserID = $Session->UserID;
             $AuthorMetaData = Gdn::userModel()->getMeta($UserID, 'Profile.%', 'Profile.');
             if ($AuthorMetaData['Grade']) {
-                $DefaultGrade = $AuthorMetaData['Grade'];
+                $DefaultGrade = t($AuthorMetaData['Grade']);
             }
         }
 
@@ -388,9 +389,12 @@ if (!function_exists('writeGradeFilter')) :
                 $GradeOption = array_filter($field['Options'], function($v) {
                     return preg_match('/(Primaire|Secondaire|Post-secondaire)/', $v);
                 });
+                $GradeOption = array_map(function($val) {
+                    return t($val);
+                }, $GradeOption);
 
                 if ($DefaultGrade && $DefaultGrade !== 0) {
-                    $DefaultGrade = array_search($DefaultGrade, $GradeOption);
+                    $DefaultGrade = array_search(t($DefaultGrade), $GradeOption);
                 }
             }
         }
@@ -478,12 +482,14 @@ if (!function_exists('writeFilterToggle')) :
      * @param string $extraClasses any extra classes you add to the drop down
      * @return string
      */
-    function writeFilterToggle($explanation=false, $verified=false, $explanationout=false, $isMobile=false) {
+    function writeFilterToggle($explanation=false, $verified=false, $explanationout=false, $language=false, $IsShowLanguage=false, $isMobile=false) {
         $role = getUserRole(Gdn::session()->User->UserID);
         echo '<ul>';
         echo '<li class="form-group">';
-        $text = $role === 'Teacher' ? t('Without explanations only') : t('With explanations only');
+        $text = $role === 'Teacher' ? t('Without answers only') : t('With answers only');
         $verifiedText = $role === 'Teacher' ? t('Not Verified by Alloprof only') : t('Verified by Alloprof only');
+        $languageToggle = t('Show posts in all languages');
+
         if ($explanation == 'true') {
             echo Gdn::controller()->Form->toggle(($isMobile?'Mobile':'').'Explanation', $text, [ 'checked' => $explanation ]);
         } else {
@@ -497,13 +503,21 @@ if (!function_exists('writeFilterToggle')) :
             echo Gdn::controller()->Form->toggle(($isMobile?'Mobile':'').'VerifiedBy', $verifiedText);
         }
         echo '</li>';
-
         if ($role != 'Teacher') {
             echo '<li class="form-group">';
             if ($explanationout == 'true') {
-                echo Gdn::controller()->Form->toggle(($isMobile?'Mobile':'').'OutExplanation', t('Without explanations only'), [ 'checked' => $explanation ]);
+                echo Gdn::controller()->Form->toggle(($isMobile?'Mobile':'').'OutExplanation', t('Without answers only'), [ 'checked' => $explanation ]);
             } else {
-                echo Gdn::controller()->Form->toggle(($isMobile?'Mobile':'').'OutExplanation', t('Without explanations only'));
+                echo Gdn::controller()->Form->toggle(($isMobile?'Mobile':'').'OutExplanation', t('Without answers only'));
+            }
+            echo '</li>';
+        }
+        if ($IsShowLanguage) {
+            echo '<li class="form-group">';
+            if ($language == 'true') {
+                echo Gdn::controller()->Form->toggle('Language', $languageToggle, [ 'checked' => true ]);
+            } else {
+                echo Gdn::controller()->Form->toggle('Language', $languageToggle);
             }
             echo '</li>';
         }

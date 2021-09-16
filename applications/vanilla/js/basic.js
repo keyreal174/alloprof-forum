@@ -61,13 +61,23 @@ jQuery(document).ready(function($) {
         }
     }
 
+    var selectGradePlaceholder = 'Niveaux';
+    if (gdn.meta.siteSection.contentLocale == 'en') {
+        selectGradePlaceholder = 'Levels';
+    }
+
     $('.select2-grade select').select2({
         minimumResultsForSearch: -1,
-        placeholder: "Niveau",
+        placeholder: selectGradePlaceholder,
     });
 
+    var selectCategoryPlaceholder = 'Matières';
+    if (gdn.meta.siteSection.contentLocale == 'en') {
+        selectCategoryPlaceholder = 'Topics';
+    }
+
     $('.select2-category select').select2({
-        placeholder: "Matière",
+        placeholder: selectCategoryPlaceholder,
         minimumResultsForSearch: -1,
         templateResult: formatState
     }).on('select2:select', function (e) {
@@ -75,18 +85,21 @@ jQuery(document).ready(function($) {
         selectCategoryImg(data);
     });
 
+    var selectLanguagePlaceholder = 'La langue';
+    if (gdn.meta.siteSection.contentLocale == 'en') {
+        selectLanguagePlaceholder = 'Language';
+    }
+
+    $('.select2-language select').select2({
+        minimumResultsForSearch: -1,
+        placeholder: selectLanguagePlaceholder,
+    }).on('select2:select', function (e) {
+        $('.select2-category select').val(null);
+        $('.select2-category select').trigger('change');
+    });
+
     selectCategoryImg({element: $('.FilterMenu .select2-category option:selected')});
     selectCategoryImg({element: $('.EditDiscussionDetail .select2-category option:selected')});
-
-    $('.english-btn').click(function() {
-        gdn.informMessage(
-            `<div class="toast-container" style="max-width: 380px;">
-                <div class="toast-text">
-                    Feel free to submit or ask questions in English, we answer in both languages!
-                </div>
-            </div>`,
-        'Dismissable');
-    })
 
     $(window).click(function() {
         $('.Overlay').last().remove();
