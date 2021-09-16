@@ -145,7 +145,11 @@
             axios.post(ssoUrl, data)
                 .then(response => {
                     if (customUrl) {
-                        window.location.href = customUrl
+                        if (customUrl.match(/^(https?:\/\/|\/(en|fr)\/)/)) {
+                            window.location.href = customUrl;
+                        } else {
+                            window.location.href = gdn.url("/entry/jsconnect-redirect?client_id=alloprof&target=" + customUrl);
+                        }
                     } else{
                         window.location.href = gdn.url("/entry/jsconnect-redirect?client_id=alloprof" + saveURL);
                     }
