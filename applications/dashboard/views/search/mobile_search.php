@@ -2,7 +2,7 @@
     include_once $this->fetchViewLocation('helper_functions', 'discussions', 'vanilla');
 ?>
 <div class="modal-header">
-    <h3><?php echo t("Explorer"); ?></h3>
+    <h3><?php echo t("Explore"); ?></h3>
 
     <div class="Header-left__search">
         <!-- <form method="get" action="/search" autocomplete="off"> -->
