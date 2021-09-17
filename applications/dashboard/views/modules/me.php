@@ -153,8 +153,8 @@ if ($Session->isValid()):
     $LinkToDropdownTitle = t('additional-links');
     $LinkToDropdownIcon = "<img class='ProfilePhoto BergerIcon' src='".url('/themes/alloprof/design/images/icons/Burger.svg')."'/>";
     $LinkToDropdown->setTrigger('', 'anchor', 'LinksButton FlyoutButton', $LinkToDropdownIcon, '/', ['title' => $LinkToDropdownTitle, 'tabindex' => '0', "role" => "button", "aria-haspopup" => "true"]);
-    $LinkToDropdown->addLink(t('Alloprof Home'), $Language == "en_GB" ? "https://www.alloprof.qc.ca/en/students" : "https://www.alloprof.qc.ca/");
-    $LinkToDropdown->addLink(t('Alloprof 100% solutions'), $Language == "en_GB" ? "https://www.alloprof.qc.ca/en/solutions" : "https://www.alloprof.qc.ca/fr/solutions");
+    $LinkToDropdown->addLink(t('Alloprof Home'), preg_match('/^en/', $Language) ? "https://www.alloprof.qc.ca/en/students" : "https://www.alloprof.qc.ca/");
+    $LinkToDropdown->addLink(t('Alloprof 100% solutions'), preg_match('/^en/', $Language) ? "https://www.alloprof.qc.ca/en/solutions" : "https://www.alloprof.qc.ca/fr/solutions");
     echo $LinkToDropdown;
 
     if ($useNewFlyouts) {
@@ -199,8 +199,8 @@ else:
     $LinkToDropdownTitle = t('additional-links');
     $LinkToDropdownIcon = "<img class='ProfilePhoto BergerIcon' src='".url('/themes/alloprof/design/images/icons/Burger.svg')."'/>";
     $LinkToDropdown->setTrigger('', 'anchor', 'LinksButton FlyoutButton', $LinkToDropdownIcon, '/', ['title' => $LinkToDropdownTitle, 'tabindex' => '0', "role" => "button", "aria-haspopup" => "true"]);
-    $LinkToDropdown->addLink(t('Alloprof Home'), $Language == "en_GB" ? "https://www.alloprof.qc.ca/en/students" : "https://www.alloprof.qc.ca/");
-    $LinkToDropdown->addLink(t('Alloprof 100% solutions'), $Language == "en_GB" ? "https://www.alloprof.qc.ca/en/solutions" : "https://www.alloprof.qc.ca/fr/solutions");
+    $LinkToDropdown->addLink(t('Alloprof Home'), preg_match('/^en/', $Language) ? "https://www.alloprof.qc.ca/en/students" : "https://www.alloprof.qc.ca/");
+    $LinkToDropdown->addLink(t('Alloprof 100% solutions'), preg_match('/^en/', $Language) ? "https://www.alloprof.qc.ca/en/solutions" : "https://www.alloprof.qc.ca/fr/solutions");
     echo $LinkToDropdown;
 
     echo ' <div class="SignInIcons">';
