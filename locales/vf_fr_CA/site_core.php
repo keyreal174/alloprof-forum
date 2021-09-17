@@ -1854,6 +1854,7 @@ $Definition['Clean'] = 'Effacer';
 $Definition['Followed'] = 'Suivies';
 $Definition['Publication rules'] = 'Règles de publication';
 $Definition['Explore by subject'] = 'Explorer par matières';
+$Definition['Explore'] = 'Explorer';
 $Definition['Sort By'] = 'Trier par';
 $Definition['Most recent first'] = 'Les plus récentes d’abord';
 $Definition['The oldest first'] = 'Les plus anciennes d’abord';
