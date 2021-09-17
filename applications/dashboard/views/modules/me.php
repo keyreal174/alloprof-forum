@@ -34,11 +34,7 @@ $this->EventArguments['DashboardCount'] = &$DashboardCount;
 $this->fireEvent('BeforeFlyoutMenu');
 
 $UserMetaData = Gdn::userModel()->getMeta(Gdn::session()->UserID, 'Plugin.%', 'Plugin.');
-if ($UserMetaData && $UserMetaData['Multilingual.Locale']) {
-    $Language = $UserMetaData['Multilingual.Locale'];
-} else {
-    $Language = Gdn::config('Garden.Locale');
-}
+$Language = Gdn::config('Garden.Locale');
 
 if ($Session->isValid()):
     echo '<div class="MeBox'.$CssClass.'">';
@@ -157,8 +153,8 @@ if ($Session->isValid()):
     $LinkToDropdownTitle = t('additional-links');
     $LinkToDropdownIcon = "<img class='ProfilePhoto BergerIcon' src='".url('/themes/alloprof/design/images/icons/Burger.svg')."'/>";
     $LinkToDropdown->setTrigger('', 'anchor', 'LinksButton FlyoutButton', $LinkToDropdownIcon, '/', ['title' => $LinkToDropdownTitle, 'tabindex' => '0', "role" => "button", "aria-haspopup" => "true"]);
-    $LinkToDropdown->addLink(t('Alloprof Home'), "https://www.alloprof.qc.ca/");
-    $LinkToDropdown->addLink(t('Alloprof 100% solutions'), "https://www.alloprof.qc.ca/fr/solutions");
+    $LinkToDropdown->addLink(t('Alloprof Home'), $Language == "en_GB" ? "https://www.alloprof.qc.ca/en/students" : "https://www.alloprof.qc.ca/");
+    $LinkToDropdown->addLink(t('Alloprof 100% solutions'), $Language == "en_GB" ? "https://www.alloprof.qc.ca/en/solutions" : "https://www.alloprof.qc.ca/fr/solutions");
     echo $LinkToDropdown;
 
     if ($useNewFlyouts) {
@@ -203,8 +199,8 @@ else:
     $LinkToDropdownTitle = t('additional-links');
     $LinkToDropdownIcon = "<img class='ProfilePhoto BergerIcon' src='".url('/themes/alloprof/design/images/icons/Burger.svg')."'/>";
     $LinkToDropdown->setTrigger('', 'anchor', 'LinksButton FlyoutButton', $LinkToDropdownIcon, '/', ['title' => $LinkToDropdownTitle, 'tabindex' => '0', "role" => "button", "aria-haspopup" => "true"]);
-    $LinkToDropdown->addLink(t('Alloprof Home'), "https://www.alloprof.qc.ca/");
-    $LinkToDropdown->addLink(t('Alloprof 100% solutions'), "https://www.alloprof.qc.ca/fr/solutions");
+    $LinkToDropdown->addLink(t('Alloprof Home'), $Language == "en_GB" ? "https://www.alloprof.qc.ca/en/students" : "https://www.alloprof.qc.ca/");
+    $LinkToDropdown->addLink(t('Alloprof 100% solutions'), $Language == "en_GB" ? "https://www.alloprof.qc.ca/en/solutions" : "https://www.alloprof.qc.ca/fr/solutions");
     echo $LinkToDropdown;
 
     echo ' <div class="SignInIcons">';
