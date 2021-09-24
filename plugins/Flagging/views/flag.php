@@ -8,6 +8,12 @@ $Title = sprintf("What happened?");
     <div>
     <img src='<?= url("/themes/alloprof/design/images/Horreur.") ?>svg' alt='image' class='FlagAvatar' />
     </div>
+<?php if ($this->data('Flagged')) { ?>
+    <div class="flag-content">
+        <h2 style="margin-bottom: 16px"><?php echo t('Thank you !'); ?></h2>
+        <p style="font-size: 18px; line-height: 32px; color: black; margin: 0; padding: 0;"><?php echo t('The moderator team will review the post.'); ?></p>
+    </div>
+<?php } else { ?>
     <div class="flag-content">
     <h2><?php echo t($Title); ?></h2>
 <?php
@@ -52,6 +58,7 @@ echo '<div class="FlatReportButton">',
 echo $this->Form->close();
 ?>
 </div>
+<?php } ?>
 
 <script>
     $(document).ready(function() {

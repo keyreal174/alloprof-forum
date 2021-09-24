@@ -94,6 +94,14 @@ class FlaggingPlugin extends Gdn_Plugin {
         $this->dispatch($sender, $sender->RequestArgs);
     }
 
+    public function pluginController_flagged_create($sender) {
+        // $sender->permission('Garden.Moderation.Manage');
+        // $sender->title('Content Flagging');
+        $sender->setHighlightRoute('plugin/flagged');
+        // $sender->Form = new Gdn_Form();
+        $this->dispatch($sender, $sender->RequestArgs);
+    }
+
     /**
      * Get flagged content & show settings.
      *
@@ -435,7 +443,10 @@ class FlaggingPlugin extends Gdn_Plugin {
                 }
             }
 
-            $sender->informMessage(t('FlagSent', "The moderation team will review the post."));
+            // $sender->informMessage(t('FlagSent', "The moderation team will review the post."));
+            $sender->Form->addError('failed');
+            $sender->setData('Flagged', true);
+            
         }
         $sender->render($sender->fetchViewLocation('flag', '', 'plugins/Flagging'));
     }

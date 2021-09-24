@@ -240,6 +240,10 @@ div.Popup.SocialPopup .Body {
     max-height: fit-content !important;
 }
 
+div.Popup.SocialPopup.FlagPopup .Body {
+    padding: 40px !important;
+}
+
 div.Popup.SocialPopup h2 {
     font-size: 21px;
     line-height: 25px;

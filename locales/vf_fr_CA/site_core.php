@@ -1886,3 +1886,5 @@ $Definition['You will no longer receive email notifications from the Help Zone.'
 $Definition['Levels'] = 'Niveaux';
 
 $Definition['Question published!'] = 'Question publiée!';
+$Definition['The moderator team will review the post.'] = 'L\'équipe des modérateurs va examiner la publication.';
+$Definition['Thank you !'] = 'Merci !';
