@@ -582,6 +582,50 @@ class ProfileController extends Gdn_Controller {
     }
 
     /**
+     * get stats of user account.
+     *
+     * @since 2.0.0
+     * @access public
+     * @param mixed $userReference Username or User ID.
+     */
+
+    public function stats($username = '') {
+        $userid = Gdn::sql()
+                ->select('u.UserID')
+                ->from('User u')
+                ->where(['u.Name' => $username])
+                ->get()
+                ->firstRow()
+                ->UserID;
+        $discussionsCount = Gdn::sql()
+                ->select('d.DiscussionID', 'count', 'CountDiscussions')
+                ->from('Discussion d')
+                ->where(['d.InsertUserID' => $userid])
+                ->where(['d.Published' => 1])
+                ->get()
+                ->firstRow()
+                ->CountDiscussions;
+        $commentsCount = Gdn::sql()
+                ->select('c.CommentID', 'count', 'CountComments')
+                ->from('Comment c')
+                ->join('Discussion d', 'd.DiscussionID = c.DiscussionID')
+                ->where(['d.InsertUserID' => $userid])
+                ->where(['c.Published' => 1])
+                ->get()
+                ->firstRow()
+                ->CountComments;
+        $commentsGivenCount = $this->CommentModel->getCount(["InsertUserID" => $userid, "Published" => 1]);
+
+        $obj->questionsAsked = $discussionsCount;
+        $obj->answersGiven = $commentsCount;
+        $obj->answersReceived = $commentsGivenCount;
+
+        $myJSON = json_encode($obj);
+
+        echo $myJSON;
+    }
+
+    /**
      * Default profile page.
      *
      * If current user's profile, get notifications. Otherwise show their activity (if available) or discussions.
