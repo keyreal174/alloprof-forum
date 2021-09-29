@@ -619,7 +619,7 @@ class ProfileController extends Gdn_Controller {
         $obj->questionsAsked = $discussionsCount;
         $obj->answersGiven = $commentsCount;
         $obj->answersReceived = $commentsGivenCount;
-
+        header('Content-type: application/json');
         $myJSON = json_encode($obj);
 
         echo $myJSON;
