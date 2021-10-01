@@ -566,12 +566,18 @@ class CategoriesController extends VanillaController {
                 $dWheres = ['d.CategoryID' => $cID];
             }
 
+            $cWheres = array_merge($cWheres, $this->WhereClause);
+            $dWheres = array_merge($dWheres, $this->WhereClause);
+
+            $orWheres = ['d.CategoryID' => $cID, 'd.InsertUserID' => Gdn::session()->UserID];
+            $orWheres = array_merge($orWheres, $this->WhereClause);
+
             $cCount = Gdn::sql()
                 ->select('cm.CommentID', 'count', 'CountComments')
                 ->from('Comment cm')
                 ->join('Discussion d', 'd.DiscussionID = cm.DiscussionID')
                 ->where($cWheres)
-                ->orWhere(['d.CategoryID' => $cID, 'd.InsertUserID' => Gdn::session()->UserID])
+                ->orWhere($orWheres)
                 ->get()
                 ->firstRow()
                 ->CountComments;
@@ -580,7 +586,7 @@ class CategoriesController extends VanillaController {
                 ->select('d.DiscussionID', 'count', 'CountDiscussions')
                 ->from('Discussion d')
                 ->where($dWheres)
-                ->orWhere(['d.CategoryID' => $cID, 'd.InsertUserID' => Gdn::session()->UserID])
+                ->orWhere($orWheres)
                 ->get()
                 ->firstRow()
                 ->CountDiscussions;
