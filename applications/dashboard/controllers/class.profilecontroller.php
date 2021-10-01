@@ -640,6 +640,8 @@ class ProfileController extends Gdn_Controller {
         $this->editMode(false);
         $this->getUserInfo($user, $username, $userID);
 
+        throw notFoundException();
+
         // Optional profile redirection.
         if ($this->Request->get('redirect') !== '0' && $this->profileRedirect()) {
             $this->render('blank', 'utility', 'dashboard');
