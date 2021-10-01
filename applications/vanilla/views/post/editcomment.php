@@ -1,8 +1,12 @@
 <?php if (!defined('APPLICATION')) exit();
 $Session = Gdn::session();
 $this->fireEvent('BeforeCommentForm');
+$formCssClass = 'MessageForm EditCommentForm';
+if ($this->UserRole == TEACHER_ROLE) {
+    $formCssClass = $formCssClass . " InlineFormatterEnabled";
+}
 ?>
-<div class="MessageForm EditCommentForm">
+<div class="<?php echo $formCssClass; ?>">
 
     <div class="Form-BodyWrap">
         <div class="Form-Body">

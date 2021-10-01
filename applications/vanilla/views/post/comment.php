@@ -14,6 +14,9 @@ $Session = Gdn::session();
 $NewOrDraft = !isset($this->Comment) || property_exists($this->Comment, 'DraftID') ? true : false;
 $Editing = isset($this->Comment);
 $formCssClass = 'BoxButtons BoxNewDiscussion MessageForm CommentPostForm FormTitleWrapper';
+if ($this->UserRole == TEACHER_ROLE) {
+    $formCssClass = $formCssClass . " InlineFormatterEnabled";
+}
 $this->EventArguments['FormCssClass'] = &$formCssClass;
 $this->fireEvent('BeforeCommentForm');
 ?>
@@ -78,8 +81,8 @@ $this->fireEvent('BeforeCommentForm');
                     $this->fireEvent('BeforeBodyField');
 
                     echo $this->Form->bodyBox('Body', ['Table' => 'Comment', 'FileUpload' => true, 'placeholder' => t('Type your comment'), 'title' => t('Type your comment')]);
-                    echo '<div class="CommentOptions List Inline">';
                     $this->fireEvent('AfterBodyField');
+                    echo '<div class="CommentOptions List Inline">';
                     echo '</div>';
 
                     echo "<div class=\"Buttons\">\n";
