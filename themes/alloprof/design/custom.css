@@ -652,3 +652,11 @@ mjx-container {
     overflow: auto;
     padding-bottom: 5px;
 }
+
+.CommentPostForm:not(.InlineFormatterEnabled) .richEditor-inlineToolbarContainer {
+    visibility: hidden!important;
+}
+
+.EditCommentForm:not(.InlineFormatterEnabled) .richEditor-inlineToolbarContainer {
+    visibility: hidden!important;
+}

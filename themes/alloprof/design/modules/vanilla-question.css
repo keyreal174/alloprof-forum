@@ -379,9 +379,11 @@ body.Discussions .DataList.Discussions .embedExternal.embedImage.crossed::after 
 
 /* Comment Post Box */
 .CommentPostForm {
-    display: none;
+    height: 0;
+    overflow: hidden;
     border-radius: 8px;
     position: relative;
+    padding: 0 !important;
 }
 
 .CommentPostForm .CommentFormWrap {
@@ -389,7 +391,8 @@ body.Discussions .DataList.Discussions .embedExternal.embedImage.crossed::after 
 }
 
 .CommentPostForm.open {
-    display: block;
+    height: auto;
+    padding: 24px !important;
 }
 
 .CommentPostForm .close-icon {
