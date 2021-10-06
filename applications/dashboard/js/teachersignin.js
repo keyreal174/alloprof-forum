@@ -1,3 +1,3 @@
 jQuery(document).ready(function($) {
-    $( ".TeacherSigninPopup" ).trigger( "click" );
+    $( ".TeacherSigninPopup.Normal" ).trigger( "click" );
 });

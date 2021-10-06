@@ -14,11 +14,16 @@ class ConnexionenseignantController extends VanillaController {
         parent::__construct();
     }
 
-    public function index() {
+    public function index($error=null) {
         if (Gdn::session()->isValid()) {
             redirectTo('/');
         }
-        $this->addJsFile('teachersignin.js');
+
+        if ($error == 'banned') {
+            $this->addJsFile('teachersignin_banned.js');
+        }  else {
+            $this->addJsFile('teachersignin.js');
+        }
         return $this->render();
     }
 }
