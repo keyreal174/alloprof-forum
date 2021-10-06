@@ -493,7 +493,9 @@ class EntryController extends Gdn_Controller {
             $this->Form->setFormValue('DisplayName', $displayName);
             $this->Form->setFormValue('Photo', 'https://www.alloprof.qc.ca/zonedentraide/uploads/Avatar_Enseignant.svg');
             if (!str_contains($this->Form->getFormValue('Email'), '@alloprof.qc.ca') && !str_contains($this->Form->getFormValue('Email'), '@alloprof.ca')) {
-                redirectTo('/entry/ban');
+                // redirectTo('/entry/ban');
+                redirectTo('/connexionenseignant/banned');
+                // $this->Form->addError(t('You do not have access to this zone'));
             }
         }
 
@@ -1142,7 +1144,10 @@ class EntryController extends Gdn_Controller {
      * @return string Rendered XHTML template.
      * Teacher signin
      */
-    public function signIn($method = false, $arg1 = false) {
+    public function signIn($method = false, $arg1 = false, $error = false) {
+        if ($error) {
+            $this->Form->addError('You do not have access to this zone');
+        }
         $this->canonicalUrl(url('/entry/signin', true));
         if (!$this->Request->isPostBack()) {
             $this->checkOverride('SignIn', $this->target());
