@@ -194,7 +194,7 @@ final class PageHead implements PageHeadInterface {
             if ($title === "") {
                 $title = $this->siteMeta->getSiteTitle();
             } else {
-                $title .= " - " . $this->siteMeta->getSiteTitle();
+                $title .= " | " . $this->siteMeta->getSiteTitle();
             }
         }
         $this->seoTitle = $title;

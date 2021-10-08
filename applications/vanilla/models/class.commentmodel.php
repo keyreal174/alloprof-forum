@@ -2111,4 +2111,20 @@ class CommentModel extends Gdn_Model implements FormatFieldInterface, EventFromR
 
         return count($result);
     }
+
+    public function getPublishedComments($discussionID) {
+        $data = Gdn::sql()->select('*')
+            ->from('Comment')
+            ->where('DiscussionID', $discussionID)
+            ->beginWhereGroup()
+            ->where('Published', 1)
+            ->orWhere('InsertUserID', Gdn::session()->UserID)
+            ->endWhereGroup()
+            ->orderBy('DateInserted', 'desc')
+            ->get();
+
+        $result =& $data->result();
+
+        return $result;
+    }
 }

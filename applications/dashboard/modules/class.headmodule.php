@@ -469,11 +469,11 @@ class HeadModule extends Gdn_Module {
 
         if ($title != '') {
             $this->addTag('meta', ['name' => 'twitter:card', 'content' => 'summary_large_image']);
-            if (str_contains($canonicalUrl, '/discussion/')) {
-                $this->addTag('meta', ['name' => 'twitter:title', 'property' => 'og:title', 'content' => 'Découvre ma question']);
-            } else {
-                $this->addTag('meta', ['name' => 'twitter:title', 'property' => 'og:title', 'content' => $title]);
-            }
+        //     if (str_contains($canonicalUrl, '/discussion/')) {
+        //         $this->addTag('meta', ['name' => 'twitter:title', 'property' => 'og:title', 'content' => $title]);
+        //     } else {
+        //         $this->addTag('meta', ['name' => 'twitter:title', 'property' => 'og:title', 'content' => 'Découvre ma question']);
+        //     }
         }
 
         if (str_contains($canonicalUrl, '/categories/')) {
