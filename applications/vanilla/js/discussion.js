@@ -14,12 +14,12 @@ window.addEventListener('resize', function(event) {
     if(!window.mobileAndTabletCheck() && isAnswerEditing() && width >= 960) {
         if($('.MobileCommentForm .ql-editor') && $('.MobileCommentForm .ql-editor').html()) {
             var content = $('.MobileCommentForm .ql-editor').html();
-            console.log(content)
-            if(!$('.CommentPostForm').hasClass('open'))
-                $('.CommentPostForm').addClass('open')
 
             $('.CommentPostForm .ql-editor').html(content);
             $('.Overlay').remove();
+
+            if(!$('.CommentPostForm').hasClass('open'))
+                $('.CommentPostForm').addClass('open')
         }
     }
 
@@ -40,6 +40,13 @@ window.addEventListener('resize', function(event) {
 }, true);
 
 jQuery(document).ready(function($) {
+
+    $("body").on('DOMNodeRemoved', function(e) {
+        if(e.target && e.target.classList.contains('Overlay') && isAnswerEditing()) {
+            $('.CommentPostForm').removeClass('open');
+        }
+    });
+
     if (gdn.definition('NotifyNewDiscussion', false))
         $.post(gdn.url('/post/notifynewdiscussion?discussionid=' + gdn.definition('DiscussionID', '')));
     /* Comment Form */
