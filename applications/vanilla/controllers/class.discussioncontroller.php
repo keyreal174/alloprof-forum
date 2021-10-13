@@ -194,9 +194,6 @@ class DiscussionController extends VanillaController {
 
         $this->setData('Breadcrumbs', CategoryModel::getAncestors($this->CategoryID));
 
-        // Setup
-        $this->title($this->Discussion->Name);
-
         // Actual number of comments, excluding the discussion itself.
         $ActualResponses = $this->Discussion->CountComments;
 
@@ -292,7 +289,7 @@ class DiscussionController extends VanillaController {
         $this->setData('Page', $PageNumber);
         $this->_SetOpenGraph();
         if ($PageNumber == 1) {
-            $this->description(sliceParagraph(Gdn_Format::plainText($this->Discussion->Body, $this->Discussion->Format), 160));
+            // $this->description(sliceParagraph(Gdn_Format::plainText($this->Discussion->Body, $this->Discussion->Format), 160));
             // Add images to head for open graph
             $Dom = pQuery::parseStr(Gdn_Format::to($this->Discussion->Body, $this->Discussion->Format));
         } else {
@@ -301,9 +298,29 @@ class DiscussionController extends VanillaController {
             $FirstComment = $this->data('Comments')->firstRow();
             $FirstBody = val('Body', $FirstComment);
             $FirstFormat = val('Format', $FirstComment);
-            $this->description(sliceParagraph(Gdn_Format::plainText($FirstBody, $FirstFormat), 160));
+            // $this->description(sliceParagraph(Gdn_Format::plainText($FirstBody, $FirstFormat), 160));
             // Add images to head for open graph
             $Dom = pQuery::parseStr(Gdn_Format::to($FirstBody, $FirstFormat));
+        }
+
+        $publishedComments = $this->CommentModel->getPublishedComments($this->Discussion->DiscussionID);
+        if(count($publishedComments) == 0) {
+            $this->Head->addTag('meta', ['name' => 'robots', 'content' => 'noindex']);
+        } else {
+            $question = Gdn_Format::plainText($this->Discussion->Body, $this->Discussion->Format);
+            $title = substr($question, 0, 60);
+            $this->title($title);
+            $this->Head->addTag('meta', ['name' => 'twitter:title',  'property' => 'og:title', 'content' => $question]);
+
+            $verifed_comments = array_filter($publishedComments, function ($val, $key) {
+                return !is_null(val('DateAccepted', $val));
+            }, ARRAY_FILTER_USE_BOTH);
+
+            $FirstComment = count($verifed_comments) == 0?$publishedComments[0]:$verifed_comments[0];
+            $FirstBody = val('Body', $FirstComment);
+            $FirstFormat = val('Format', $FirstComment);
+
+            $this->description(Gdn_Format::plainText($FirstBody, $FirstFormat));
         }
 
         if ($Dom) {
