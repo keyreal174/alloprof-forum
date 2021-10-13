@@ -26,8 +26,13 @@ if (!$CancelUrl) {
         $CancelUrl = '/categories/'.urlencode($this->Category->UrlCode);
     }
 }
+
+$formCssClass = 'FormTitleWrapper DiscussionForm';
+if ($this->UserRole == TEACHER_ROLE) {
+    $formCssClass = $formCssClass . " InlineFormatterEnabled";
+}
 ?>
-<div id="DiscussionForm" class="FormTitleWrapper DiscussionForm">
+<div id="DiscussionForm" class="<?php echo $formCssClass; ?>">
 
     <?php
 

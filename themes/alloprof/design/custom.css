@@ -653,10 +653,8 @@ mjx-container {
     padding-bottom: 5px;
 }
 
-.CommentPostForm:not(.InlineFormatterEnabled) .richEditor-inlineToolbarContainer {
-    visibility: hidden!important;
-}
-
+.DiscussionForm:not(.InlineFormatterEnabled) .richEditor-inlineToolbarContainer,
+.CommentPostForm:not(.InlineFormatterEnabled) .richEditor-inlineToolbarContainer,
 .EditCommentForm:not(.InlineFormatterEnabled) .richEditor-inlineToolbarContainer {
     visibility: hidden!important;
 }
