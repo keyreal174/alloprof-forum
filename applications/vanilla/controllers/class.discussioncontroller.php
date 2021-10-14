@@ -141,6 +141,7 @@ class DiscussionController extends VanillaController {
         $this->addJsFile('discussion.js');
         $this->addJsFile('replyQuestion.js');
         $this->addJsFile('feedback.js');
+        $this->addJsFile('post.js');
 
         // write comment filter
         $this->writeCommentFilter();
