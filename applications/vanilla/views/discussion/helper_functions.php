@@ -951,6 +951,7 @@ endif;
 if (!function_exists('writeDiscussionFooter')) :
     function writeDiscussionFooter($Discussion, $sender ,$page='') {
         $discussionUrl = $Discussion->Url;
+        $Session = Gdn::session();
         $isUser = $Discussion->InsertUserID === Gdn::session()->UserID;
         $commentsCount = CommentModel::getPublishedCommentsCount($Discussion->DiscussionID);
         $userCanComment = CategoryModel::checkPermission($categoryID, 'Vanilla.Comments.Add');
@@ -990,8 +991,8 @@ if (!function_exists('writeDiscussionFooter')) :
                             $answerButtonForMobile = null;
 
                             // if($userCanComment){
-                                $answerButton = $sender->Form->button(t('Provide an answer'), ['class' => 'btn-default btn-shadow']);
-                                $answerButtonForMobile = anchor(t('Provide an answer'), '/post/answerPopup/'.$Discussion->DiscussionID, 'btn-default btn-shadow AnswerPopup QuestionPopup');
+                                $answerButton = $sender->Form->button(t('Provide an answer'), ['class' => 'btn-default btn-shadow '.($Session->isValid()?'':'SignInStudentPopupAgent')]);
+                                $answerButtonForMobile = anchor(t('Provide an answer'), '/post/answerPopup/'.$Discussion->DiscussionID, 'btn-default btn-shadow AnswerPopup QuestionPopup '.($Session->isValid()?'':'SignInStudentPopupAgent'));
                             // } else {
                             //     $answerButton = anchor(t('Provide an answer'), '/entry/signinstudent', 'btn-default btn-shadow');
                             //     $answerButtonForMobile = anchor(t('Provide an answer'), '/entry/signinstudent', 'btn-default btn-shadow');

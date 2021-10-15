@@ -116,7 +116,7 @@
     }
 }
 
-@media screen and (max-width: 959px) {
+@media screen and (max-width: 958px) {
     .ScrollProgress {
         height: 42px !important;
     }

@@ -11,7 +11,7 @@ function isAnswerEditing() {
 window.addEventListener('resize', function(event) {
     var width = window.innerWidth
 
-    if(!window.mobileAndTabletCheck() && isAnswerEditing() && width >= 960) {
+    if(!window.mobileAndTabletCheck() && isAnswerEditing() && width >= 957) {
         if($('.MobileCommentForm .ql-editor') && $('.MobileCommentForm .ql-editor').html()) {
             var content = $('.MobileCommentForm .ql-editor').html();
 
@@ -23,7 +23,7 @@ window.addEventListener('resize', function(event) {
         }
     }
 
-    if(!window.mobileAndTabletCheck() && isAnswerEditing() && width < 960) {
+    if(!window.mobileAndTabletCheck() && isAnswerEditing() && width <= 958) {
         if($('.CommentPostForm .ql-editor') && $('.CommentPostForm .ql-editor').html() && $('.Overlay').length == 0) {
             var content = $('.CommentPostForm .ql-editor').html();
             $('.answer-button-mobile > a').trigger('click');
