@@ -72,7 +72,7 @@ $this->fireEvent('BeforeCommentForm');
         <?php
             // endif;
         ?>
-        <div class="Form-BodyWrap">
+        <div class="Form-BodyWrap" id="CommentForm">
             <div class="Form-Body">
                 <div class="FormWrapper FormWrapper-Condensed">
                     <?php
@@ -91,6 +91,7 @@ $this->fireEvent('BeforeCommentForm');
                     $ButtonOptions = ['class' => 'btn-default btn-shadow btn-m-l-auto'];
 
                     if ($Session->isValid()) {
+                        // echo "<button type='button' class='CommentButton btn-default btn-shadow btn-m-l-auto'> " . ($Editing ? t('Save Comment') : t('Submit my answer')) . "</button>";
                         echo $this->Form->button($Editing ? t('Save Comment') : t('Submit my answer'), $ButtonOptions);
                     } else {
                         echo anchor(t('Submit my answer'), '/entry/signinstudent?Target=discussions', 'btn-default btn-shadow SignInStudentPopupAgent SaveComment');

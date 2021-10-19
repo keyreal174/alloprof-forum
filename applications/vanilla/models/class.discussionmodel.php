@@ -2391,7 +2391,7 @@ class DiscussionModel extends Gdn_Model implements FormatFieldInterface, EventFr
             } else {
                 // Add min length if body is required.
                 if (Gdn::config('Vanilla.DiscussionBody.Required', true) && !$ignoreMinLength) {
-                    $validation->setSchemaProperty('Body', 'MinTextLength', 1);
+                    $validation->setSchemaProperty('Body', 'MinTextLength', 20);
                     $validation->applyRule('Body', 'MinTextLength');
                 }
             }

@@ -74,10 +74,10 @@ jQuery(document).ready(function($) {
                 } else if (preview) {
                     // Pop up the new preview.
                     $.popup({}, json.Data);
-                } else if (!draft && json.DiscussionUrl != null) {
+                } else if (!draft && json.RedirectUrl != null) {
                     $(frm).triggerHandler('complete');
                     // Redirect to the discussion
-                    document.location = json.DiscussionUrl;
+                    document.location = json.RedirectUrl;
                 }
                 gdn.inform(json);
             },
