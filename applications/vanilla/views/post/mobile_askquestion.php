@@ -65,8 +65,12 @@
 
                             $this->fireEvent('BeforeBodyInput');
 
-                            if(!$Content)
-                                echo '<div class="clickToCreate">'.t('What is your question?').'</div>';
+                            if(!$Content){
+                                $Session = Gdn::session();
+                                if ($Session->isValid())
+                                    echo '<div class="clickToCreate">'.t('What is your question?').'</div>';
+                                else echo '<a class="clickToCreate SignInStudentPopupAgent">'.t('What is your question?').'</a>';
+                            }
 
                             echo '<div class="P">';
                             echo $this->Form->bodyBox('Body', ['Table' => 'Discussion', 'FileUpload' => true, 'placeholder' => t('Type your question'), 'title' => t('Type your question')]);

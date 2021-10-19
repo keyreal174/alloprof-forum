@@ -49,7 +49,7 @@
                 $Session = Gdn::session();
                 $SigninUrl = signInUrl($Controller->SelfUrl);
 
-                echo '<a href="'.url("/entry/jsconnect-redirect?client_id=alloprof").'" class="AskQuestion" rel="nofollow">'.t('What is your question?').'</a>';
+                echo '<a href="'.url("/entry/jsconnect-redirect?client_id=alloprof").'" class="SignInStudentPopupAgent " rel="nofollow">'.t('What is your question?').'</a>';
             } else echo '<div class="clickToCreate">'.t('What is your question?').'</div>';
         ?>
     </div>

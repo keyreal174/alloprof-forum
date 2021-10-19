@@ -46,8 +46,12 @@
                 echo "</div>";
             ?>
         </div>
+        
         <?php
-            echo '<div class="clickToCreate">'.t('What is your question?').'</div>';
+            $Session = Gdn::session();
+            if ($Session->isValid())
+                echo '<div class="clickToCreate">'.t('What is your question?').'</div>';
+            else echo '<a class="clickToCreate SignInStudentPopupAgent">'.t('What is your question?').'</a>';
         ?>
     </div>
     <div class="close-icon">
