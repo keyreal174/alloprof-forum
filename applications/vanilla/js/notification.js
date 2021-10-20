@@ -8,11 +8,16 @@ jQuery(document).ready(function($) {
     }
 
     function toggleNotificationSettingsContent() {
-        if($('.notification-settings-content').hasClass('open')) {
-            $('.notification-settings-content').removeClass('open');
+        if (gdn.meta.siteSection.contentLocale.indexOf("en") > -1) {
+            window.open("https://www.alloprof.qc.ca/en/preferences", "_blank");
         } else {
-            $('.notification-settings-content').addClass('open');
+            window.open("https://www.alloprof.qc.ca/fr/preferences", "_blank");
         }
+        // if($('.notification-settings-content').hasClass('open')) {
+        //     $('.notification-settings-content').removeClass('open');
+        // } else {
+        //     $('.notification-settings-content').addClass('open');
+        // }
     }
 
     function markAllAsRead() {
