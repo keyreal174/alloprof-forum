@@ -3,6 +3,30 @@ if (!function_exists('writeDiscussionFooter')) {
     include $this->fetchViewLocation('helper_functions', 'discussion', 'vanilla');
     include $this->fetchViewLocation('helper_functions', 'discussions', 'vanilla');
 }
+
+function reOrderDiscussion($body) {
+    $texts = [];
+    $images = [];
+    $rowArray = json_decode($body, true);
+    if(is_array($rowArray)) {
+        foreach ($rowArray as $row) {
+            if(isset($row['insert'])) {
+                if(gettype($row['insert']) == 'string')
+                    array_push($texts, $row);
+                else if(gettype($row['insert']) == 'array') {
+                    if(isset($row['insert']['embed-external']))
+                        array_push($images, $row);
+                    else array_push($texts, $row);
+                }
+            } else  {
+                array_push($texts, $row);
+            }
+        }
+    }
+
+    return json_encode(array_merge($texts, $images));
+}
+
 ?>
 <?php echo "<h1 class='sr-only'>" . t('Search') . "</h1>" ?>
 <?php
@@ -36,8 +60,10 @@ else
     <ul id="search-results" class="DataList Discussions" start="<?php echo $this->data('From'); ?>">
 
         <?php
-            foreach ($this->data('SearchResults') as $Row)
+            foreach ($this->data('SearchResults') as $Row){
+                $Row->Body = reOrderDiscussion($Row->Body);
                 writeDiscussionDetail($Row, $this, Gdn::session());
+            }
         ?>
     </ul>
 

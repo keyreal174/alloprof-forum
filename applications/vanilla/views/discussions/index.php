@@ -87,7 +87,7 @@ if ($this->DiscussionData->numRows() > 0 || (isset($this->AnnounceData) && is_ob
     ?>
     <h2 class="sr-only"><?php echo t('Discussion List'); ?></h2>
     <ul class="<?php echo $ulClass ?>">
-        <?php include($this->fetchViewLocation('discussions', 'Discussions', 'Vanilla')); ?>
+        <?php include($this->fetchViewLocation('ordered_discussions', 'Discussions', 'Vanilla')); ?>
     </ul>
     <?php $this->fireEvent('AfterDiscussionsList'); ?>
     <?php
