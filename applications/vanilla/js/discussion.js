@@ -31,7 +31,7 @@ window.addEventListener('resize', function(event) {
             var checkExist = setInterval(function() {
                 if ($('.MobileCommentForm .ql-editor').length) {
                     $('.MobileCommentForm .ql-editor').html(content);
-                    $('.MobileCommentForm .clickToCreate').hide();
+                    $('.MobileCommentForm div.clickToCreate').hide();
                    clearInterval(checkExist);
                 }
              }, 100);

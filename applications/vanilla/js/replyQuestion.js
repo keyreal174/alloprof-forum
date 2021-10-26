@@ -1,5 +1,5 @@
 jQuery(document).ready(function($) {
-    $('.ReplyQuestionButton').click(function() {
+    $('div.ReplyQuestionButton').click(function() {
         $('.CommentPostForm').addClass('open');
         $('.information-block.newcomment').addClass('show');
     })
