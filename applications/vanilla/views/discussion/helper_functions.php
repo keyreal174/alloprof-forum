@@ -984,7 +984,7 @@ if (!function_exists('writeDiscussionFooter')) :
                         if ($Discussion->InsertUserID == Gdn::session()->UserID) {
                             echo '<a class="btn-default not-clickable">'.$commentsLabel.'</a>';
                         } else {
-                            echo '<div class="ReplyQuestionButton d-desktop">';
+                            echo $Session->isValid()?'<div class="ReplyQuestionButton d-desktop">':'<a class="ReplyQuestionButton d-desktop">';
 
                             $sender->fireEvent('BeforeFormButtons');
                             $answerButton = '';
@@ -1001,7 +1001,7 @@ if (!function_exists('writeDiscussionFooter')) :
                             echo $answerButton;
 
                             $sender->fireEvent('AfterFormButtons');
-                            echo '</div>';
+                            echo $Session->isValid()?'</div>':'</a>';
                         }
                     }
                 ?>
