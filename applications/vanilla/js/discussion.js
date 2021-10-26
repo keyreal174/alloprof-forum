@@ -15,7 +15,7 @@ window.addEventListener('resize', function(event) {
         $('.Overlay').find('.QuestionPopup').attr('style', 'top: 0 !important; left: 0;');
     }
 
-    if(!mobileAndTabletCheck() && isAnswerEditing() && width >= 960) {
+    if(!window.mobileAndTabletCheck() && isAnswerEditing() && width >= 960) {
         if($('.MobileCommentForm .ql-editor') && $('.MobileCommentForm .ql-editor').html()) {
             var content = $('.MobileCommentForm .ql-editor').html();
 
@@ -27,7 +27,7 @@ window.addEventListener('resize', function(event) {
         }
     }
 
-    if(!mobileAndTabletCheck() && isAnswerEditing() && width < 960) {
+    if(!window.mobileAndTabletCheck() && isAnswerEditing() && width < 960) {
         if($('.CommentPostForm .ql-editor') && $('.CommentPostForm .ql-editor').html() && $('.Overlay').length == 0) {
             var content = $('.CommentPostForm .ql-editor').html();
             $('.answer-button-mobile > a').trigger('click');

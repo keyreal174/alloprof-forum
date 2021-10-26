@@ -29,7 +29,7 @@ $Definition['BanReason.8'] = 'Banned by warnings.';
 
 // THESE ARE RELATED TO VALIDATION FUNCTIONS IN /garden/library/core/validation.functions.php
 $Definition['ValidateRegex'] = '%s does not appear to be in the correct format.';
-$Definition['ValidateRequired'] = '%s is required.';
+$Definition['ValidateRequired'] = 'The content is too short, you should add details';
 $Definition['ValidateRequiredArray'] = 'You must select at least one %s.';
 $Definition['ValidateEmail'] = '%s does not appear to be valid.';
 $Definition['ValidateFormat'] = 'You are not allowed to post raw HTML.';
@@ -41,9 +41,9 @@ $Definition['ValidateTime'] = '%s is not a valid time.';
 $Definition['ValidateTimestamp'] = '%s is not a valid timestamp.';
 $Definition['ValidateUsername'] = 'Usernames must be 3-20 characters and consist of letters, numbers, and underscores.';
 $Definition['ValidateLength'] = '%1$s is %2$s characters too long.';
-$Definition['ValidateMinLength'] = '%1$s is %2$s characters too short.'; // Deprecated
-$Definition['ValidateMinLengthSingular'] = '%1$s is %2$s character too short.';
-$Definition['ValidateMinLengthPlural'] = '%1$s is %2$s characters too short.';
+$Definition['ValidateMinLength'] = 'The content is too short, you should add details'; // Deprecated
+$Definition['ValidateMinLengthSingular'] = 'The content is too short, you should add details';
+$Definition['ValidateMinLengthPlural'] = 'The content is too short, you should add details';
 $Definition['ValidateEnum'] = '%s is not valid.';
 $Definition['ValidateOneOrMoreArrayItemRequired'] = 'You must select at least one %s.';
 $Definition['ValidateConnection'] = 'The connection parameters you specified failed to open a connection to the database. The database reported the following error: <code>%s</code>';

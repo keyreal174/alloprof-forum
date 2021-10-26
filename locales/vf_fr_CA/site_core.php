@@ -1463,13 +1463,12 @@ $Definition['ValidateIntegerArray'] = '%s doit être une liste de nombres délim
 $Definition['ValidateLength'] = '%1$s est trop long de %2$s caractères.';
 $Definition['ValidateMatch'] = 'Le(s) champ(s) %s ne correspondent pas.';
 $Definition['ValidateMinimumAge'] = 'Vous n\'êtes pas assez âgé pour rejoindre cette communauté.';
-$Definition['ValidateMinLength'] = '%1$s est trop court de %2$s caractère(s).
-';
-$Definition['ValidateMinLengthPlural'] = '%1$s est trop court de %2$s caractères.';
-$Definition['ValidateMinLengthSingular'] = '%1$s est trop court de %2$s caractère.';
+$Definition['ValidateMinLength'] = 'Le contenu est trop court, rajoute des détails!';
+$Definition['ValidateMinLengthPlural'] = 'Le contenu est trop court, rajoute des détails!';
+$Definition['ValidateMinLengthSingular'] = 'Le contenu est trop court, rajoute des détails!';
 $Definition['ValidateOneOrMoreArrayItemRequired'] = 'Vous devez sélectionner au moins un %s.';
 $Definition['ValidateRegex'] = '%s ne semble pas avoir un format correct.';
-$Definition['ValidateRequired'] = '%s est obligatoire.';
+$Definition['ValidateRequired'] = 'Le contenu est trop court, rajoute des détails!';
 $Definition['ValidateRequiredArray'] = 'Vous devez choisir au moins un %s.';
 $Definition['ValidateStrength'] = 'Le %s fourni est trop faible. Essayez d\'utiliser un mot de passe plus fort et utilisez le compteur de force comme guide.';
 $Definition['ValidateString'] = '%s n\'est pas une chaîne valide.';

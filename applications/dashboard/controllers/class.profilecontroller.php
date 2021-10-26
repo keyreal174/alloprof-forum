@@ -147,7 +147,9 @@ class ProfileController extends Gdn_Controller {
                 $Roles = array_filter($Roles, 'RoleModel::FilterPersonalInfo');
             }
 
-            if(in_array(Gdn::config('Vanilla.ExtraRoles.Teacher'), $Roles))
+            if(in_array("Administrator", $Roles))
+                $UserRole = "Administrator";
+            else if(in_array(Gdn::config('Vanilla.ExtraRoles.Teacher'), $Roles))
                 $UserRole = Gdn::config('Vanilla.ExtraRoles.Teacher') ?? 'Teacher';
             else $UserRole = RoleModel::TYPE_MEMBER ?? 'Student';
 
@@ -640,7 +642,9 @@ class ProfileController extends Gdn_Controller {
         $this->editMode(false);
         $this->getUserInfo($user, $username, $userID);
 
-        throw notFoundException();
+        if ($this->UserRole !== "Administrator") {
+            throw notFoundException();
+        }
 
         // Optional profile redirection.
         if ($this->Request->get('redirect') !== '0' && $this->profileRedirect()) {
