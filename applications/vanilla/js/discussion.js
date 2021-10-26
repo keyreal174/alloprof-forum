@@ -11,7 +11,11 @@ function isAnswerEditing() {
 window.addEventListener('resize', function(event) {
     var width = window.innerWidth
 
-    if(!window.mobileAndTabletCheck() && isAnswerEditing() && width >= 957) {
+    if(width >= 959) {
+        $('.Overlay').find('.QuestionPopup').attr('style', 'top: 0 !important; left: 0;');
+    }
+
+    if(!window.mobileAndTabletCheck() && isAnswerEditing() && width >= 960) {
         if($('.MobileCommentForm .ql-editor') && $('.MobileCommentForm .ql-editor').html()) {
             var content = $('.MobileCommentForm .ql-editor').html();
 
@@ -23,12 +27,13 @@ window.addEventListener('resize', function(event) {
         }
     }
 
-    if(!window.mobileAndTabletCheck() && isAnswerEditing() && width <= 958) {
+    if(!window.mobileAndTabletCheck() && isAnswerEditing() && width < 960) {
         if($('.CommentPostForm .ql-editor') && $('.CommentPostForm .ql-editor').html() && $('.Overlay').length == 0) {
             var content = $('.CommentPostForm .ql-editor').html();
             $('.answer-button-mobile > a').trigger('click');
 
             var checkExist = setInterval(function() {
+                $('.Overlay').find('.QuestionPopup').attr('style', 'top: 0 !important; left: 0;');
                 if ($('.MobileCommentForm .ql-editor').length) {
                     $('.MobileCommentForm .ql-editor').html(content);
                     $('.MobileCommentForm div.clickToCreate').hide();
