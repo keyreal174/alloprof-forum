@@ -25,8 +25,11 @@ function reOrderDiscussion($body) {
     if(is_array($rowArray)) {
         foreach ($rowArray as $row) {
             if(isset($row['insert'])) {
-                if(gettype($row['insert']) == 'string')
+                if(gettype($row['insert']) == 'string') {
+                    $row['insert'] = trim($row['insert']);
+                    // $row['insert'] = str_replace(array("\r", "\n"), '', $row['insert']);
                     array_push($texts, $row);
+                }
                 else if(gettype($row['insert']) == 'array') {
                     if(isset($row['insert']['embed-external']))
                         array_push($images, $row);
