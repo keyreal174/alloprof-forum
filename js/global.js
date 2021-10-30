@@ -318,7 +318,7 @@
             ssoLogin(auth.currentUser);
 
         });
-  */      
+  */
       var pathname = window.location.pathname;
       var isEnglish = pathname.indexOf('/helpzone/') > -1;
 
@@ -334,7 +334,7 @@
           }
         });
       }
-       
+
       apForumApp.obs.trigger('userrappel:show', null);
     });
 
@@ -379,6 +379,16 @@
                         ssoLogin(auth.currentUser);
                     }
                     console.log('logged in');
+
+                    const inZone = localStorage.getItem("inZone");
+                    if (!inZone) {
+                        var isEnglish = gdn.meta.siteSection.contentLocale.indexOf('en') > -1;
+                        if (isEnglish) {
+                            window.location.href = "https://fr.research.net/r/AP-Geo-EN";
+                        } else {
+                            window.location.href = "https://fr.research.net/r/AP-Geo-FR";
+                        }
+                    }
                 });
                 apForumApp.obs.trigger('userlogin:show');
             });
@@ -412,7 +422,7 @@
                     } else {
                         ssoLogin(auth.currentUser);
                     }
-                } 
+                }
             });
             apForumApp.obs.trigger('usercreate:show');
         })
