@@ -1,5 +1,8 @@
 /* Make content only scrolling */
 /*# sourceMappingURL=custom.css.map */
+*, a, span, p, div h1, h2, h3, h4, h5, h6, button {
+    outline: none !important;
+}
 
 .Container {
     max-width: 1280px !important;
