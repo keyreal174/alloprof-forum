@@ -55,7 +55,7 @@ window.addEventListener('resize', function(event) {
                 $('.Overlay').find('.QuestionPopup').attr('style', 'top: 0 !important; left: 0;');
                 if ($('.MobileCommentForm .ql-editor').length) {
                     $('.MobileCommentForm .ql-editor').html(content);
-                    $('.MobileCommentForm .clickToCreate').hide();
+                    $('.MobileCommentForm div.clickToCreate').hide();
                    clearInterval(checkExist);
                 }
              }, 100);

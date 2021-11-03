@@ -1,6 +1,6 @@
 jQuery(document).ready(function($) {
     /* Autosave functionality for comment & discussion drafts */
-    $('.AskQuestionForm .clickToCreate').click(function() {
+    $('.AskQuestionForm div.clickToCreate').click(function() {
         $(this).hide();
         $('.AskQuestionForm .FormWrapper').show();
         $('.BoxNewDiscussion .user-info').show();
@@ -13,7 +13,7 @@ jQuery(document).ready(function($) {
 
     $('.AskQuestionForm .close-icon').click(function(){
         $(this).removeClass('show');
-        $('.AskQuestionForm .clickToCreate').show()
+        $('.AskQuestionForm div.clickToCreate').show()
         $('.AskQuestionForm .FormWrapper').hide()
         $('.BoxNewDiscussion .user-info').hide();
         $('.information-block.newdiscussion').removeClass('show');
@@ -21,7 +21,7 @@ jQuery(document).ready(function($) {
 
     $(document).on('click', '.QuestionPopup .editor', function() {
         if($('.QuestionPopup .editor .richEditor-text').hasClass('focus-visible')) {
-            $('.QuestionPopup .clickToCreate').hide();
+            $('.QuestionPopup div.clickToCreate').hide();
         }
     })
 
