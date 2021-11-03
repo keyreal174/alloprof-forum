@@ -8,6 +8,13 @@ function isAnswerEditing() {
     return $('.CommentPostForm').hasClass('open');
 }
 
+function isQuestionEditing(screen) {
+    if(screen === 'desktop')
+        return $('.AskQuestionForm .DiscussionForm > .FormWrapper').css('display') === 'block';
+    else if(screen === 'mobile')
+        return $('.Overlay .QuestionPopup');
+}
+
 window.addEventListener('resize', function(event) {
     var width = window.innerWidth
 
@@ -27,6 +34,18 @@ window.addEventListener('resize', function(event) {
         }
     }
 
+    if(!window.mobileAndTabletCheck() && isQuestionEditing('mobile') && width >= 960) {
+        if($('.QuestionPopup .DiscussionForm .ql-editor') && $('.QuestionPopup .DiscussionForm .ql-editor').html()) {
+            var content = $('.QuestionPopup .DiscussionForm .ql-editor').html();
+
+            $('.AskQuestionForm .DiscussionForm .ql-editor').html(content);
+            $('.Overlay').remove();
+
+            if($('.AskQuestionForm .DiscussionForm > .FormWrapper').css('display') != 'block')
+                $('.AskQuestionForm .clickToCreate').trigger('click');
+        }
+    }
+
     if(!window.mobileAndTabletCheck() && isAnswerEditing() && width < 960) {
         if($('.CommentPostForm .ql-editor') && $('.CommentPostForm .ql-editor').html() && $('.Overlay').length == 0) {
             var content = $('.CommentPostForm .ql-editor').html();
@@ -42,6 +61,22 @@ window.addEventListener('resize', function(event) {
              }, 100);
         }
     }
+
+    if(!window.mobileAndTabletCheck() && isQuestionEditing('desktop') && width < 960) {
+        if($('.AskQuestionForm .DiscussionForm .ql-editor') && $('.AskQuestionForm .DiscussionForm .ql-editor').html() && $('.Overlay').length == 0) {
+            var content = $('.AskQuestionForm .DiscussionForm .ql-editor').html();
+            $('.Question-submenu a.QuestionPopup').trigger('click');
+
+            var checkExist = setInterval(function() {
+                $('.Overlay').find('.QuestionPopup').attr('style', 'top: 0 !important; left: 0;');
+                if ($('.QuestionPopup .DiscussionForm .ql-editor').length) {
+                    $('.QuestionPopup .DiscussionForm .ql-editor').html(content);
+                    $('.QuestionPopup .DiscussionForm .clickToCreate').hide();
+                   clearInterval(checkExist);
+                }
+             }, 100);
+        }
+    }
 }, true);
 
 jQuery(document).ready(function($) {
@@ -49,6 +84,10 @@ jQuery(document).ready(function($) {
     $("body").on('DOMNodeRemoved', function(e) {
         if(e.target && e.target.classList.contains('Overlay') && isAnswerEditing()) {
             $('.CommentPostForm').removeClass('open');
+        }
+
+        if(e.target && e.target.classList.contains('Overlay') && isQuestionEditing('desktop')) {
+            $('.AskQuestionForm .close-icon').trigger('click');
         }
     });
 
