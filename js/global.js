@@ -312,13 +312,12 @@
             apForumApp.obs.trigger('usercreate:show');
             console.log('show signup from fpass')
         });
-/*
+
         apForumApp.app.attachListener('user:loggedin', function(user) {
             console.log('logged in');
             ssoLogin(auth.currentUser);
-
         });
-  */      
+
       var pathname = window.location.pathname;
       var isEnglish = pathname.indexOf('/helpzone/') > -1;
 
@@ -334,7 +333,7 @@
           }
         });
       }
-       
+
       apForumApp.obs.trigger('userrappel:show', null);
     });
 
@@ -412,7 +411,7 @@
                     } else {
                         ssoLogin(auth.currentUser);
                     }
-                } 
+                }
             });
             apForumApp.obs.trigger('usercreate:show');
         })
