@@ -199,6 +199,7 @@ class DiscussionsController extends VanillaController {
         $this->addJsFile('autosave.js');
         $this->addJsFile('post.js');
         $this->addJsFile('askquestion.js');
+        $this->addJsFile('discussion.js');
         $this->addJsFile('discussionstyle.js');
 
         // Remove score sort
