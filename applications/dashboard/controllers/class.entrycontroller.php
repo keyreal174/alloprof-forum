@@ -805,7 +805,6 @@ class EntryController extends Gdn_Controller {
                 $user['SourceID'] = $this->Form->getFormValue('UniqueID');
                 $user['Attributes'] = $this->Form->getFormValue('Attributes', null);
                 $user['Email'] = $this->Form->getFormValue('ConnectEmail', $this->Form->getFormValue('Email', null));
-                $user['Position'] = $_SESSION['Position'];
                 if ($isGoogleSign) {
                     $user['Name'] = $this->Form->getFormValue('ConnectEmail', $this->Form->getFormValue('Email', null));
                     $userID = $userModel->register($user, $registerOptions);
@@ -959,7 +958,6 @@ class EntryController extends Gdn_Controller {
                 }
                 $user['Password'] = randomString(16); // Required field.
                 $user['HashMethod'] = 'Random';
-                $user['Position'] = $_SESSION['Position'];
                 $userID = $userModel->register($user, [
                     'CheckCaptcha' => false,
                     'NoConfirmEmail' => !$userProvidedEmail || !UserModel::requireConfirmEmail(),
