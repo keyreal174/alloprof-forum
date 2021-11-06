@@ -144,6 +144,16 @@
             };
             axios.post(ssoUrl, data)
                 .then(response => {
+                    const inZone = localStorage.getItem("inZone");
+                    if (!inZone) {
+                        var pathname = window.location.pathname;
+                        var isEnglish = pathname.indexOf('/helpzone/') > -1;
+                        if (isEnglish) {
+                            window.location.href = "https://fr.research.net/r/AP-Geo-EN";
+                        } else {
+                            window.location.href = "https://fr.research.net/r/AP-Geo-FR";
+                        }
+                    }
                     if (customUrl) {
                         if (customUrl.match(/^(https?:\/\/|\/(en|fr)\/)/)) {
                             window.location.href = customUrl;
@@ -348,7 +358,8 @@
 
                 const inZone = localStorage.getItem("inZone");
                 if (!inZone) {
-                    var isEnglish = gdn.meta.siteSection.contentLocale.indexOf('en') > -1;
+                    var pathname = window.location.pathname;
+                    var isEnglish = pathname.indexOf('/helpzone/') > -1;
                     if (isEnglish) {
                         window.location.href = "https://fr.research.net/r/AP-Geo-EN";
                     } else {
@@ -404,7 +415,8 @@
 
                     const inZone = localStorage.getItem("inZone");
                     if (!inZone) {
-                        var isEnglish = gdn.meta.siteSection.contentLocale.indexOf('en') > -1;
+                        var pathname = window.location.pathname;
+                        var isEnglish = pathname.indexOf('/helpzone/') > -1;
                         if (isEnglish) {
                             window.location.href = "https://fr.research.net/r/AP-Geo-EN";
                         } else {
