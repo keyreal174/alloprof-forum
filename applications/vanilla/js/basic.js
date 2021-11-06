@@ -181,26 +181,55 @@ jQuery(document).ready(function($) {
                     apForumApp.obs.trigger('geoblocking:hide');
                 });
                 apForumApp.app.attachListener('geoblocking:done', function() {
-                    apForumApp.obs.trigger('userlogin:show');
+                    // apForumApp.obs.trigger('userlogin:show');
+                    if (window.showLogin) {
+                        window.showLogin();
+
+                    }
                 });
             }
         })
     }
 
-    $.ajax({
-        type: "POST",
-        url: "https://us-central1-alloprof-stg.cloudfunctions.net/apiFunctionsApp/geo/probe",
-        dataType: 'json',
-        error: function(XMLHttpRequest, textStatus, errorThrown) {
-            console.log(XMLHttpRequest.responseText);
-        },
-        success: function(json) {
-            console.log(json)
-            const { inZone } = json;
-            localStorage.setItem("inZone", inZone);
-            if (!inZone) {
-                showGeoBlockingModal();
-            }
+    firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+            user.getIdToken().then(function(idToken) {  // <------ Check this line
+
+                $.ajax({
+                    type: "POST",
+                    url: "https://us-central1-alloprof-stg.cloudfunctions.net/apiFunctionsApp/geo/probe",
+                    headers: {
+                        'authorization': 'Bearer ' + idToken
+                    },
+                    dataType: 'json',
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        console.log(XMLHttpRequest.responseText);
+                    },
+                    success: function(json) {
+                        const { inZone } = json;
+                        localStorage.setItem("inZone", inZone);
+                        if (!inZone) {
+                            showGeoBlockingModal();
+                        }
+                    }
+                });
+            });
+        } else {
+            $.ajax({
+                type: "POST",
+                url: "https://us-central1-alloprof-stg.cloudfunctions.net/apiFunctionsApp/geo/probe",
+                dataType: 'json',
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    console.log(XMLHttpRequest.responseText);
+                },
+                success: function(json) {
+                    const { inZone } = json;
+                    localStorage.setItem("inZone", inZone);
+                    if (!inZone) {
+                        showGeoBlockingModal();
+                    }
+                }
+            });
         }
     });
 });

@@ -259,7 +259,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     {event name="AfterBody"}
     <alloprof-appa></alloprof-appa>
     <div class="modal-backdrop"></div>
- 
+
 {literal}
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-app.js"></script>
@@ -281,10 +281,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     projectId: "alloprof-production",
     appId: "1:811980803247:web:e68aceb268f2ddf3e4185a"
   };
-  firebase.initializeApp(firebaseConfig);
+  firebase.initializeApp(firebaseConfigStaging);
+//   firebase.initializeApp(firebaseConfig);
   var auth = firebase.auth();
 </script>
-<script src="https://alloprof-appa-prod.web.app/alloprof-profile.js"></script>
+<!-- <script src="https://alloprof-appa-prod.web.app/alloprof-profile.js"></script> -->
+<script src="https://ap-user-login-creation.web.app/alloprof-profile.js"></script>
 {/literal}
 </body>
 

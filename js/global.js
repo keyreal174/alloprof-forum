@@ -338,7 +338,29 @@
       apForumApp.obs.trigger('userrappel:show', null);
     });
 
+    const showLogin = function() {
+        APForumApp.onReady(function(apForumApp) {
+            apForumApp.app.attachListener('userlogin:done', function(userConnected) {
+                if (userConnected.actionFinished) {
+                    ssoLogin(auth.currentUser);
+                }
+                console.log('logged in');
 
+                const inZone = localStorage.getItem("inZone");
+                if (!inZone) {
+                    var isEnglish = gdn.meta.siteSection.contentLocale.indexOf('en') > -1;
+                    if (isEnglish) {
+                        window.location.href = "https://fr.research.net/r/AP-Geo-EN";
+                    } else {
+                        window.location.href = "https://fr.research.net/r/AP-Geo-FR";
+                    }
+                }
+            });
+            apForumApp.obs.trigger('userlogin:show');
+        });
+    }
+
+    window.showLogin = showLogin;
 
     // SignInPopup Trigger
     $(document).on('click', '.SignInStudentPopupAgent', function (event) {
