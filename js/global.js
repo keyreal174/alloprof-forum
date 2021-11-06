@@ -315,7 +315,7 @@
 
         apForumApp.app.attachListener('user:loggedin', function(user) {
             console.log('logged in');
-            ssoLogin(auth.currentUser);
+            // ssoLogin(auth.currentUser);
         });
 
       var pathname = window.location.pathname;

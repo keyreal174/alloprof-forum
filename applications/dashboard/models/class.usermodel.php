@@ -4700,6 +4700,10 @@ class UserModel extends Gdn_Model implements UserProviderInterface, EventFromRow
         return $this->saveToSerializedColumn('Attributes', $userID, $attribute, $value);
     }
 
+    public function savePosition($userID, $value = '') {
+        return Gdn::sql()->put('User', ['Position' => $value], ['UserID' => $userID]);
+    }
+
     /**
      * Save the authentication row for the user.
      *
