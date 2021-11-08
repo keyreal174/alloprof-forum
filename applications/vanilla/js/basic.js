@@ -211,6 +211,7 @@ jQuery(document).ready(function($) {
                         if (!inZone) {
                             showGeoBlockingModal();
                         }
+                        storePosition(inZone);
                     }
                 });
             });
@@ -228,8 +229,28 @@ jQuery(document).ready(function($) {
                     if (!inZone) {
                         showGeoBlockingModal();
                     }
+                    storePosition(inZone);
                 }
             });
         }
     });
+    function storePosition(inZone = false, email = null, idToken = null) {
+        var data = {
+            inZone: inZone,
+            email: email,
+            idToken: idToken
+        }
+        $.ajax({
+            type: "POST",
+            url: gdn.url('/discussions/checkPosition'),
+            data: data,
+            dataType: 'json',
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                console.log(XMLHttpRequest.responseText);
+            },
+            success: function(json) {
+                console.log(json)
+            }
+        });
+    }
 });

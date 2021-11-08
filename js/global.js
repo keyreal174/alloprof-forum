@@ -322,13 +322,12 @@
             apForumApp.obs.trigger('usercreate:show');
             console.log('show signup from fpass')
         });
-/*
+
         apForumApp.app.attachListener('user:loggedin', function(user) {
             console.log('logged in');
-            ssoLogin(auth.currentUser);
-
+            // ssoLogin(auth.currentUser);
         });
-  */
+      
       var pathname = window.location.pathname;
       var isEnglish = pathname.indexOf('/helpzone/') > -1;
 

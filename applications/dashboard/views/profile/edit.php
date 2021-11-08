@@ -53,7 +53,25 @@ echo Gdn_Theme::module('UserPhotoModule');
         }
     ?>
 </div>
-
-<a class="btn-default btn-shadow modify-btn" href="https://www.alloprof.qc.ca/fr/profil"><?php echo t('Modify my profile on Alloprof') ?></a>
+<?php
+    $host = $_SERVER['HTTP_HOST'];
+    $link = '';
+    if (
+        preg_match('/alloprof.qc.ca/i', $host) ||
+        preg_match('/www.alloprof.qc.ca/i', $host) ||
+        preg_match('/webapp-stg.alloprof.qc.ca/i', $host)
+    )  {
+        $link = 'https://'.$host;
+    } else {
+        $link = 'https://www.alloprof.qc.ca';
+    }
+    if (preg_match('/zonedentraide/i', $_SERVER['REQUEST_URI'])) {
+        $link  = $link.'/fr/profil';
+    } else {
+        $link = $link.'/en/profile';
+    }
+?>
+<a target="_blank" class="btn-default btn-shadow modify-btn"
+    href="<?php echo $link; ?>"><?php echo t('Modify my profile on Alloprof') ?></a>
 </div>
 <?php } ?>

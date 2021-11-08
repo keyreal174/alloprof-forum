@@ -66,6 +66,7 @@ class AlloprofPlugin extends Gdn_Plugin {
 
         $St->table('User')
             ->column('ProfileLanguage', 'varchar(5)', ['Null' => false, 'Default' => 'fr'])
+            ->column('Position', 'varchar(50)', ['Null' => false, 'Default' => ''])
             ->set();
 
         $St->table('Log')

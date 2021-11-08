@@ -40,26 +40,48 @@ if ($IsProfilePage) {
 $UserMetaData = Gdn::userModel()->getMeta(Gdn::session()->UserID, 'Profile.%', 'Profile.');
 $UserName = $UserMetaData["DisplayName"] ?? "";
 echo "<div class='Boxuserphoto'>";
+
+$host = $_SERVER['HTTP_HOST'];
+$link = '';
+if (
+    preg_match('/alloprof.qc.ca/i', $host) ||
+    preg_match('/www.alloprof.qc.ca/i', $host) ||
+    preg_match('/webapp-stg.alloprof.qc.ca/i', $host)
+)  {
+    $link = 'https://'.$host;
+} else {
+    $link = 'https://www.alloprof.qc.ca';
+}
+if (preg_match('/zonedentraide/i', $_SERVER['REQUEST_URI'])) {
+    $link  = $link.'/fr/profil';
+} else {
+    $link = $link.'/en/profile';
+}
+
 if ($Photo) : ?>
-    <div class="Photo PhotoWrap PhotoWrapLarge <?php echo val('_CssClass', $User); ?>">
-        <?php
-            $IsDefault = str_contains($Photo, 'avatars/0.svg');
-            $ClassName = $IsDefault ? 'ProfilePhotoLarge ProfilePhotoDefaultWrapper' : 'ProfilePhotoLarge';
-            echo "<a ".($IsProfilePage ? '' : 'href="'.$profileUrl.'"')." class='".$ClassName."' avatar--first-letter='".$UserName[0]."'>";
-            echo "<img src='".$Photo."' class='ProfilePhotoLarge' alt='".$PhotoAlt."'/>";
-            echo "</a>";
-        ?>
-    </div>
+<div class="Photo PhotoWrap PhotoWrapLarge <?php echo val('_CssClass', $User); ?>">
+    <?php
+        $IsDefault = str_contains($Photo, 'avatars/0.svg');
+        $ClassName = $IsDefault ? 'ProfilePhotoLarge ProfilePhotoDefaultWrapper' : 'ProfilePhotoLarge';
+        echo "<a target='_blank' ".($IsProfilePage ? '' : 'href="'.$link.'"')." class='".$ClassName."' avatar--first-letter='".$UserName[0]."'>";
+        echo "<img src='".$Photo."' class='ProfilePhotoLarge' alt='".$PhotoAlt."'/>";
+        echo "</a>";
+    ?>
+</div>
 <?php elseif ($User->UserID == Gdn::session()->UserID || Gdn::session()->checkPermission('Garden.Users.Edit')) : ?>
-    <div class="Photo">
-        <?php echo anchor(t('Add a Profile Picture'), '/profile/picture?userid='.$User->UserID, 'AddPicture BigButton'); ?>
-    </div>
+<div class="Photo">
+    <?php echo anchor(t('Add a Profile Picture'), '/profile/picture?userid='.$User->UserID, 'AddPicture BigButton'); ?>
+</div>
 <?php
 endif;
 ?>
 <div class="userphoto-personalinfo">
-    <a <?php echo $IsProfilePage || $User->UserID !== Gdn::session()->UserID ? '' : 'href="'.$profileUrl.'"' ?> class="userphoto-personalinfo__name"><?php echo $UserName; ?></a>
-    <a <?php echo $IsProfilePage || $User->UserID !== Gdn::session()->UserID ? '' : 'href="'.$profileUrl.'"' ?> class="userphoto-personalinfo__secondary">
+    <a target="_blank"
+        <?php echo $IsProfilePage || $User->UserID !== Gdn::session()->UserID ? '' : 'href="'.$link.'"' ?>
+        class="userphoto-personalinfo__name"><?php echo $UserName; ?></a>
+    <a target="_blank"
+        <?php echo $IsProfilePage || $User->UserID !== Gdn::session()->UserID ? '' : 'href="'.$link.'"' ?>
+        class="userphoto-personalinfo__secondary">
         <?php
             if(userRoleCheck() == Gdn::config('Vanilla.ExtraRoles.Teacher')) {
                 echo t('Alloprof Teacher').'<svg width="15" height="15" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
