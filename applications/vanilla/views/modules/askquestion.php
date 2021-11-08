@@ -17,7 +17,7 @@ if(userRoleCheck() != Gdn::config('Vanilla.ExtraRoles.Teacher')) {
                 $categoryID = val('CategoryID', $category);
             }
 
-            if($Session->isValid()) 
+            if($Session->isValid())
                 echo '<a href="'.url('/post/newDiscussion/'. $categoryID) .'" class="btn-default btn-shadow scrollToAskQuestionForm scrollToAskQuestionFormPopup ">'.t("Ask a question").'</a>';
             else echo '<a href="'.url('/post/newDiscussion/'. $categoryID) .'" class="btn-default btn-shadow SignInStudentPopupAgent scrollToAskQuestionForm scrollToAskQuestionFormPopup ">'.t("Ask a question").'</a>';
     ?>

@@ -144,6 +144,16 @@
             };
             axios.post(ssoUrl, data)
                 .then(response => {
+                    const inZone = localStorage.getItem("inZone");
+                    if (!inZone) {
+                        var pathname = window.location.pathname;
+                        var isEnglish = pathname.indexOf('/helpzone/') > -1;
+                        if (isEnglish) {
+                            window.location.href = "https://fr.research.net/r/AP-Geo-EN";
+                        } else {
+                            window.location.href = "https://fr.research.net/r/AP-Geo-FR";
+                        }
+                    }
                     if (customUrl) {
                         if (customUrl.match(/^(https?:\/\/|\/(en|fr)\/)/)) {
                             window.location.href = customUrl;
@@ -317,7 +327,7 @@
             console.log('logged in');
             // ssoLogin(auth.currentUser);
         });
-
+      
       var pathname = window.location.pathname;
       var isEnglish = pathname.indexOf('/helpzone/') > -1;
 
@@ -337,7 +347,30 @@
       apForumApp.obs.trigger('userrappel:show', null);
     });
 
+    const showLogin = function() {
+        APForumApp.onReady(function(apForumApp) {
+            apForumApp.app.attachListener('userlogin:done', function(userConnected) {
+                if (userConnected.actionFinished) {
+                    ssoLogin(auth.currentUser);
+                }
+                console.log('logged in');
 
+                const inZone = localStorage.getItem("inZone");
+                if (!inZone) {
+                    var pathname = window.location.pathname;
+                    var isEnglish = pathname.indexOf('/helpzone/') > -1;
+                    if (isEnglish) {
+                        window.location.href = "https://fr.research.net/r/AP-Geo-EN";
+                    } else {
+                        window.location.href = "https://fr.research.net/r/AP-Geo-FR";
+                    }
+                }
+            });
+            apForumApp.obs.trigger('userlogin:show');
+        });
+    }
+
+    window.showLogin = showLogin;
 
     // SignInPopup Trigger
     $(document).on('click', '.SignInStudentPopupAgent', function (event) {
@@ -378,6 +411,17 @@
                         ssoLogin(auth.currentUser);
                     }
                     console.log('logged in');
+
+                    const inZone = localStorage.getItem("inZone");
+                    if (!inZone) {
+                        var pathname = window.location.pathname;
+                        var isEnglish = pathname.indexOf('/helpzone/') > -1;
+                        if (isEnglish) {
+                            window.location.href = "https://fr.research.net/r/AP-Geo-EN";
+                        } else {
+                            window.location.href = "https://fr.research.net/r/AP-Geo-FR";
+                        }
+                    }
                 });
                 apForumApp.obs.trigger('userlogin:show');
             });
