@@ -395,7 +395,17 @@
                 apForumApp.app.attachListener('geoblocking:done', function() {
                     // apForumApp.obs.trigger('userlogin:show');
                     localStorage.setItem('geoBlockingModalTrigger', true);
-                    showLogin();
+                    if (auth.currentUser) {
+                        showLogin();
+                    } else {
+                        var pathname = window.location.pathname;
+                        var isEnglish = pathname.indexOf('/helpzone/') > -1;
+                        if (isEnglish) {
+                            window.location.href = "https://fr.research.net/r/AP-Geo-EN";
+                        } else {
+                            window.location.href = "https://fr.research.net/r/AP-Geo-FR";
+                        }
+                    }
                 });
             }
         })
@@ -472,11 +482,11 @@
                             localStorage.setItem("inZone", inZone);
                             if (!inZone) {
                                 var geoBlockingModalTrigger = localStorage.getItem("geoBlockingModalTrigger");
-                                if (geoBlockingModalTrigger) {
+                                // if (geoBlockingModalTrigger) {
                                     //
-                                } else {
+                                // } else {
                                     showGeoBlockingModal();
-                                }
+                                // }
                             } else {
                                 signInPopup();
                             }
@@ -497,11 +507,11 @@
                         localStorage.setItem("inZone", inZone);
                         if (!inZone) {
                             var geoBlockingModalTrigger = localStorage.getItem("geoBlockingModalTrigger");
-                            if (geoBlockingModalTrigger) {
+                            // if (geoBlockingModalTrigger) {
                                 //
-                            } else {
+                            // } else {
                                 showGeoBlockingModal();
-                            }
+                            // }
                         } else {
                             signInPopup();
                         }
