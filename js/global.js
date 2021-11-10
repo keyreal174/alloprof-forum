@@ -396,8 +396,6 @@
                     // apForumApp.obs.trigger('userlogin:show');
                     localStorage.setItem('geoBlockingModalTrigger', true);
                     if (auth.currentUser) {
-                        showLogin();
-                    } else {
                         var pathname = window.location.pathname;
                         var isEnglish = pathname.indexOf('/helpzone/') > -1;
                         if (isEnglish) {
@@ -405,6 +403,8 @@
                         } else {
                             window.location.href = "https://fr.research.net/r/AP-Geo-FR";
                         }
+                    } else {
+                        showLogin();
                     }
                 });
             }
@@ -1123,6 +1123,8 @@ jQuery(document).ready(function($) {
         $('a.QuestionPopup').popup({containerCssClass: 'SearchPopup QuestionPopup CustomPopup'});
         $('a.RulesPopup').popup({containerCssClass: 'SocialPopup RulesPopup'});
         $('a.FeedbackHelp').popup({containerCssClass: 'SocialPopup'});
+        const inZone = localStorage.getItem('inZone');
+        console.log(inZone);
         $('a.scrollToAskQuestionFormPopup').popup({containerCssClass: 'scrollToAskQuestionFormPopup'});
     }
 
