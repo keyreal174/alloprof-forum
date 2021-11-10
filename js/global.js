@@ -1124,8 +1124,16 @@ jQuery(document).ready(function($) {
         $('a.RulesPopup').popup({containerCssClass: 'SocialPopup RulesPopup'});
         $('a.FeedbackHelp').popup({containerCssClass: 'SocialPopup'});
         const inZone = localStorage.getItem('inZone');
-        console.log(inZone);
+        console.log(inZone, typeof(inZone))
         $('a.scrollToAskQuestionFormPopup').popup({containerCssClass: 'scrollToAskQuestionFormPopup'});
+        // if (inZone != 'false') {
+        //     $('a.scrollToAskQuestionFormPopup').popup({containerCssClass: 'scrollToAskQuestionFormPopup'});
+        // } else {
+        //     $('a.scrollToAskQuestionFormPopup').click(function(e) {
+        //         e.stopPropagation();
+        //         e.preventDefault();
+        //     });
+        // }
     }
 
     // This turns DeleteDiscussionPopup anchors into in-page popups
