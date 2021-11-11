@@ -547,33 +547,6 @@
         });
     });
 
-    $(document).on('click', '.ReplyQuestionSubmitButton', function (event) {
-        event.preventDefault();
-        auth.currentUser.getIdToken().then(function(idToken) {  // <------ Check this line
-            $.ajax({
-                type: "POST",
-                url: "https://us-central1-alloprof-stg.cloudfunctions.net/apiFunctionsApp/geo/probe",
-                headers: {
-                    'authorization': 'Bearer ' + idToken
-                },
-                dataType: 'json',
-                error: function(XMLHttpRequest, textStatus, errorThrown) {
-                    console.log(XMLHttpRequest.responseText);
-                },
-                success: function(json) {
-                    const { inZone } = json;
-                    localStorage.setItem("inZone", inZone);
-                    if (!inZone) {
-                        var geoBlockingModalTrigger = localStorage.getItem("geoBlockingModalTrigger");
-                        showGeoBlockingModal();
-                    } else {
-                        return false;
-                    }
-                }
-            });
-        });
-    });
-
 
     // RegisterPopup
     $(document).on('click', '.registerPopup', function (event) {
