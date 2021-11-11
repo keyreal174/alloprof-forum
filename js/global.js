@@ -440,7 +440,7 @@
     $(document).on('click', '.SignInStudentPopupAgent', function (event) {
         event.stopPropagation();
         var regularSignIn = false;
-        if ($(this).hasClass('dropdown-menu-link')) {
+        if ($(this).hasClass('dropdown-menu-link') || $(this).hasClass('link')) {
             regularSignIn = true;
         }
         if ($(this).hasClass('SaveDiscussion')) {
@@ -521,7 +521,7 @@
         }
     });
     // SignInPopup Trigger end =================
-    $(document).on('click', '.AskQuestionPopup', function (event) {
+    $(document).on('click', '.AskQuestionPopupValid', function (event) {
         auth.currentUser.getIdToken().then(function(idToken) {  // <------ Check this line
             $.ajax({
                 type: "POST",
@@ -544,6 +544,27 @@
                     }
                 }
             });
+        });
+    });
+
+    $(document).on('click', '.AskQuestionPopupInValid', function (event) {
+        $.ajax({
+            type: "POST",
+            url: "https://us-central1-alloprof-stg.cloudfunctions.net/apiFunctionsApp/geo/probe",
+            dataType: 'json',
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                console.log(XMLHttpRequest.responseText);
+            },
+            success: function(json) {
+                const { inZone } = json;
+                localStorage.setItem("inZone", inZone);
+                if (!inZone) {
+                    var geoBlockingModalTrigger = localStorage.getItem("geoBlockingModalTrigger");
+                    showGeoBlockingModal();
+                } else {
+                    signInPopup();
+                }
+            }
         });
     });
 
