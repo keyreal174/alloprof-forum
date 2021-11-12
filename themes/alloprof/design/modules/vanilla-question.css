@@ -236,8 +236,6 @@ body.Discussions .DataList.Discussions .embedExternal.embedImage.crossed::after 
 
 .Item-Header.DiscussionHeader .Options-Icon,
 .Item-Search .Options-Icon {
-    width: 44px;
-    height: 44px;
     display: flex;
     align-items: center;
     justify-content: center;

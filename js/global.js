@@ -144,15 +144,34 @@
             };
             axios.post(ssoUrl, data)
                 .then(response => {
-                    const inZone = localStorage.getItem("inZone");
-                    if (!inZone) {
-                        var pathname = window.location.pathname;
-                        var isEnglish = pathname.indexOf('/helpzone/') > -1;
-                        if (isEnglish) {
-                            window.location.href = "https://fr.research.net/r/AP-Geo-EN";
-                        } else {
-                            window.location.href = "https://fr.research.net/r/AP-Geo-FR";
-                        }
+                    var geoBlockingModalTrigger = localStorage.getItem("geoBlockingModalTrigger");
+                    if (geoBlockingModalTrigger) {
+                        //
+                        $.ajax({
+                            type: "POST",
+                            url: "https://us-central1-alloprof-stg.cloudfunctions.net/apiFunctionsApp/geo/probe",
+                            headers: {
+                                'authorization': 'Bearer ' + result.token
+                            },
+                            dataType: 'json',
+                            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                                console.log(XMLHttpRequest.responseText);
+                            },
+                            success: function(json) {
+                                const { inZone } = json;
+                                localStorage.setItem("inZone", inZone);
+                                if (!inZone) {
+                                    localStorage.setItem("geoBlockingModalTrigger", true);
+                                    var pathname = window.location.pathname;
+                                    var isEnglish = pathname.indexOf('/helpzone/') > -1;
+                                    if (isEnglish) {
+                                        window.location.href = "https://fr.research.net/r/AP-Geo-EN";
+                                    } else {
+                                        window.location.href = "https://fr.research.net/r/AP-Geo-FR";
+                                    }
+                                }
+                            }
+                        });
                     }
                     if (customUrl) {
                         if (customUrl.match(/^(https?:\/\/|\/(en|fr)\/)/)) {
@@ -327,7 +346,7 @@
             console.log('logged in');
             // ssoLogin(auth.currentUser);
         });
-      
+
       var pathname = window.location.pathname;
       var isEnglish = pathname.indexOf('/helpzone/') > -1;
 
@@ -354,27 +373,76 @@
                     ssoLogin(auth.currentUser);
                 }
                 console.log('logged in');
-
-                const inZone = localStorage.getItem("inZone");
-                if (!inZone) {
-                    var pathname = window.location.pathname;
-                    var isEnglish = pathname.indexOf('/helpzone/') > -1;
-                    if (isEnglish) {
-                        window.location.href = "https://fr.research.net/r/AP-Geo-EN";
-                    } else {
-                        window.location.href = "https://fr.research.net/r/AP-Geo-FR";
-                    }
-                }
             });
             apForumApp.obs.trigger('userlogin:show');
         });
     }
 
-    window.showLogin = showLogin;
+    const showGeoBlockingModal = function() {
+        if (!window.APForumApp) {
+            window.APForumApp = new AlloprofForumApp();
+        }
+        // show geoblocking modal
+
+        APForumApp.onReady(function(apForumApp) {
+            var pathname = window.location.pathname;
+            var isEnglish = pathname.indexOf('/helpzone/') > -1;
+            if (apForumApp.obs.isAppReady('appa')) {
+                apForumApp.obs.trigger('geoblocking:show', isEnglish ? 'en': 'fr');
+                apForumApp.app.attachListener('geoblocking:close', function() {
+                    apForumApp.obs.trigger('geoblocking:hide');
+                });
+                apForumApp.app.attachListener('geoblocking:done', function() {
+                    // apForumApp.obs.trigger('userlogin:show');
+                    localStorage.setItem('geoBlockingModalTrigger', true);
+                    if (auth.currentUser) {
+                        var pathname = window.location.pathname;
+                        var isEnglish = pathname.indexOf('/helpzone/') > -1;
+                        if (isEnglish) {
+                            window.location.href = "https://fr.research.net/r/AP-Geo-EN";
+                        } else {
+                            window.location.href = "https://fr.research.net/r/AP-Geo-FR";
+                        }
+                    } else {
+                        showLogin();
+                    }
+                });
+            }
+        })
+    }
+
+    const signInPopup = function () {
+        if (auth.currentUser) {
+            ssoLogin(auth.currentUser);
+            return false;
+        } else {
+            event.preventDefault();
+            // $('.SignInStudentPopup').eq(0).trigger('click');
+
+            // Close all forum popups
+            $('.Overlay').remove();
+
+            // TODO: Open Observer Login Modal
+            APForumApp.onReady(function(apForumApp) {
+                apForumApp.app.attachListener('userlogin:done', function(userConnected) {
+                    if (userConnected.actionFinished) {
+                        ssoLogin(auth.currentUser);
+                    }
+                    console.log('logged in');
+                });
+                apForumApp.obs.trigger('userlogin:show');
+            });
+           // console.log('AlloprofObserver Instance =======', AlloprofObserver)
+        }
+    }
 
     // SignInPopup Trigger
     $(document).on('click', '.SignInStudentPopupAgent', function (event) {
         event.stopPropagation();
+        var regularSignIn = false;
+        if ($(this).hasClass('dropdown-menu-link')) {
+            regularSignIn = true;
+        }
         if ($(this).hasClass('SaveDiscussion')) {
             var parent = $(this).parents('.DiscussionForm, .EditDiscussionForm');
             var frm = $(parent).find('form').first();
@@ -394,44 +462,90 @@
             isSaveDiscussion = '';
         }
 
-        if (auth.currentUser) {
-            ssoLogin(auth.currentUser);
-            return false;
+        if (regularSignIn) {
+            signInPopup();
         } else {
-            event.preventDefault();
-            // $('.SignInStudentPopup').eq(0).trigger('click');
-
-            // Close all forum popups
-            $('.Overlay').remove();
-
-            // TODO: Open Observer Login Modal
-            APForumApp.onReady(function(apForumApp) {
-                apForumApp.app.attachListener('userlogin:done', function(userConnected) {
-                    if (userConnected.actionFinished) {
-                        ssoLogin(auth.currentUser);
-                    }
-                    console.log('logged in');
-
-                    const inZone = localStorage.getItem("inZone");
-                    if (!inZone) {
-                        var pathname = window.location.pathname;
-                        var isEnglish = pathname.indexOf('/helpzone/') > -1;
-                        if (isEnglish) {
-                            window.location.href = "https://fr.research.net/r/AP-Geo-EN";
+            if (auth.currentUser) {
+                auth.currentUser.getIdToken().then(function(idToken) {  // <------ Check this line
+                    $.ajax({
+                        type: "POST",
+                        url: "https://us-central1-alloprof-stg.cloudfunctions.net/apiFunctionsApp/geo/probe",
+                        headers: {
+                            'authorization': 'Bearer ' + idToken
+                        },
+                        dataType: 'json',
+                        error: function(XMLHttpRequest, textStatus, errorThrown) {
+                            console.log(XMLHttpRequest.responseText);
+                        },
+                        success: function(json) {
+                            const { inZone } = json;
+                            localStorage.setItem("inZone", inZone);
+                            if (!inZone) {
+                                var geoBlockingModalTrigger = localStorage.getItem("geoBlockingModalTrigger");
+                                // if (geoBlockingModalTrigger) {
+                                    //
+                                // } else {
+                                    showGeoBlockingModal();
+                                // }
+                            } else {
+                                signInPopup();
+                            }
+                        }
+                    });
+                });
+                return false;
+            } else {
+                $.ajax({
+                    type: "POST",
+                    url: "https://us-central1-alloprof-stg.cloudfunctions.net/apiFunctionsApp/geo/probe",
+                    dataType: 'json',
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        console.log(XMLHttpRequest.responseText);
+                    },
+                    success: function(json) {
+                        const { inZone } = json;
+                        localStorage.setItem("inZone", inZone);
+                        if (!inZone) {
+                            var geoBlockingModalTrigger = localStorage.getItem("geoBlockingModalTrigger");
+                            // if (geoBlockingModalTrigger) {
+                                //
+                            // } else {
+                                showGeoBlockingModal();
+                            // }
                         } else {
-                            window.location.href = "https://fr.research.net/r/AP-Geo-FR";
+                            signInPopup();
                         }
                     }
                 });
-                apForumApp.obs.trigger('userlogin:show');
-            });
-
-
-
-           // console.log('AlloprofObserver Instance =======', AlloprofObserver)
+            }
         }
     });
     // SignInPopup Trigger end =================
+    $(document).on('click', '.AskQuestionPopup', function (event) {
+        auth.currentUser.getIdToken().then(function(idToken) {  // <------ Check this line
+            $.ajax({
+                type: "POST",
+                url: "https://us-central1-alloprof-stg.cloudfunctions.net/apiFunctionsApp/geo/probe",
+                headers: {
+                    'authorization': 'Bearer ' + idToken
+                },
+                dataType: 'json',
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    console.log(XMLHttpRequest.responseText);
+                },
+                success: function(json) {
+                    const { inZone } = json;
+                    localStorage.setItem("inZone", inZone);
+                    if (!inZone) {
+                        var geoBlockingModalTrigger = localStorage.getItem("geoBlockingModalTrigger");
+                        showGeoBlockingModal();
+                    } else {
+                        $(".scrollToAskQuestionFormPopup").trigger('click');
+                    }
+                }
+            });
+        });
+    });
 
 
     // RegisterPopup
@@ -1034,7 +1148,17 @@ jQuery(document).ready(function($) {
         $('a.QuestionPopup').popup({containerCssClass: 'SearchPopup QuestionPopup CustomPopup'});
         $('a.RulesPopup').popup({containerCssClass: 'SocialPopup RulesPopup'});
         $('a.FeedbackHelp').popup({containerCssClass: 'SocialPopup'});
+        const inZone = localStorage.getItem('inZone');
+        console.log(inZone, typeof(inZone))
         $('a.scrollToAskQuestionFormPopup').popup({containerCssClass: 'scrollToAskQuestionFormPopup'});
+        // if (inZone != 'false') {
+        //     $('a.scrollToAskQuestionFormPopup').popup({containerCssClass: 'scrollToAskQuestionFormPopup'});
+        // } else {
+        //     $('a.scrollToAskQuestionFormPopup').click(function(e) {
+        //         e.stopPropagation();
+        //         e.preventDefault();
+        //     });
+        // }
     }
 
     // This turns DeleteDiscussionPopup anchors into in-page popups

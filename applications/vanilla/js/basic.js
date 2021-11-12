@@ -131,66 +131,6 @@ jQuery(document).ready(function($) {
     //     event.preventDefault();
     // })
 
-    function AlloprofForumApp () {
-        var self = this;
-        self.callbacks = [];
-        self.ObserverReady= function (app, obs) {
-            self.app = app;
-            self.obs = obs;
-
-            for (var ku = 0; ku < self.callbacks.length; ku ++) {
-                self.callbacks[ku](self);
-            }
-            self.callbacks = [];
-
-        }
-
-        self.initializeObserverLink= function() {
-            window['Observables'] = window['Observables'] || {
-                apps: []
-            };
-
-            window['Observables'].apps.push({
-                instance: self,
-                name: 'forum'
-            })
-        }
-
-        self.initializeObserverLink();
-
-        self.onReady = function(callback) {
-            if (self.obs) {
-                callback(self);
-            } else {
-                self.callbacks.push(callback);
-            }
-        };
-    }
-
-    const showGeoBlockingModal = function() {
-        if (!window.APForumApp) {
-            window.APForumApp = new AlloprofForumApp();
-        }
-        // show geoblocking modal
-
-        APForumApp.onReady(function(apForumApp) {
-            var isEnglish = gdn.meta.siteSection.contentLocale.indexOf('en') > -1;
-            if (apForumApp.obs.isAppReady('appa')) {
-                apForumApp.obs.trigger('geoblocking:show', isEnglish ? 'en': 'fr');
-                apForumApp.app.attachListener('geoblocking:close', function() {
-                    apForumApp.obs.trigger('geoblocking:hide');
-                });
-                apForumApp.app.attachListener('geoblocking:done', function() {
-                    // apForumApp.obs.trigger('userlogin:show');
-                    if (window.showLogin) {
-                        window.showLogin();
-
-                    }
-                });
-            }
-        })
-    }
-
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
             user.getIdToken().then(function(idToken) {  // <------ Check this line
@@ -208,9 +148,6 @@ jQuery(document).ready(function($) {
                     success: function(json) {
                         const { inZone } = json;
                         localStorage.setItem("inZone", inZone);
-                        if (!inZone) {
-                            showGeoBlockingModal();
-                        }
                         storePosition(inZone);
                     }
                 });
@@ -226,9 +163,6 @@ jQuery(document).ready(function($) {
                 success: function(json) {
                     const { inZone } = json;
                     localStorage.setItem("inZone", inZone);
-                    if (!inZone) {
-                        showGeoBlockingModal();
-                    }
                     storePosition(inZone);
                 }
             });

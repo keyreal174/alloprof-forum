@@ -122,8 +122,8 @@ if (!function_exists('writeComment')) :
         $sender->fireEvent('BeforeCommentDisplay');
 
         ?>
-        <li class="<?php echo $cssClass; ?>" id="<?php echo 'Comment_'.$comment->CommentID; ?>">
-            <?php
+<li class="<?php echo $cssClass; ?>" id="<?php echo 'Comment_'.$comment->CommentID; ?>">
+    <?php
                 if ($comment->DateAccepted) {
                     echo '<div class="verfied-info">
                             <img src="'.url("/themes/alloprof/design/images/icons/verifiedbadge.svg").'"/>
@@ -131,24 +131,24 @@ if (!function_exists('writeComment')) :
                         </div>';
                 }
             ?>
-            <div class="Comment">
-                <?php
+    <div class="Comment">
+        <?php
                 // Write a stub for the latest comment so it's easy to link to it from outside.
                 if ($currentOffset == Gdn::controller()->data('_LatestItem') && Gdn::config('Vanilla.Comments.AutoOffset')) {
                     echo '<span id="latest"></span>';
                 }
                 ?>
-                <?php
+        <?php
                 if (Gdn::session()->isValid()) {
                 ?>
-                    <div class="Options">
-                        <?php writeCommentOptions($comment); ?>
-                    </div>
-                <?php } ?>
-                <?php $sender->fireEvent('BeforeCommentMeta'); ?>
-                <div class="Item-Header CommentHeader">
-                    <div class="AuthorWrap">
-                        <?php
+        <div class="Options">
+            <?php writeCommentOptions($comment); ?>
+        </div>
+        <?php } ?>
+        <?php $sender->fireEvent('BeforeCommentMeta'); ?>
+        <div class="Item-Header CommentHeader">
+            <div class="AuthorWrap">
+                <?php
                             if(!$comment->Published) {
                                 echo '<div class="not-published-badge">';
                                 echo '<img src="'.url("/themes/alloprof/design/images/icons/eyebreak.svg").'"/>';
@@ -156,8 +156,8 @@ if (!function_exists('writeComment')) :
                                 echo '</div>';
                             }
                         ?>
-                        <span class="Author">
-                        <?php
+                <span class="Author">
+                    <?php
                         if ($userPhotoFirst) {
                             echo userPhoto($author);
                             if ($sender->getUserRole($comment->InsertUserID) == "Teacher") {
@@ -174,18 +174,18 @@ if (!function_exists('writeComment')) :
                         echo formatMeAction($comment);
                         $sender->fireEvent('AuthorPhoto');
                         ?>
-                        </span>
-                        <span class="AuthorInfo">
-                        <?php
+                </span>
+                <span class="AuthorInfo">
+                    <?php
                         echo ' '.wrapIf(htmlspecialchars(val('Title', $author)), 'span', ['class' => 'MItem AuthorTitle']);
                         echo ' '.wrapIf(htmlspecialchars(val('Location', $author)), 'span', ['class' => 'MItem AuthorLocation']);
                         $sender->fireEvent('AuthorInfo');
                         ?>
-                        </span>
-                    </div>
-                    <div class="Meta CommentMeta CommentInfo">
-                        <span class="MItem TimeAgo">
-                        <?php
+                </span>
+            </div>
+            <div class="Meta CommentMeta CommentInfo">
+                <span class="MItem TimeAgo">
+                    <?php
                             $grade = getGrade($comment->GradeID);
                             if ($sender->getUserRole($comment->InsertUserID) === TEACHER_ROLE) {
                                 echo '<span class="ItemGrade">'.t("Alloprof Teacher") . ' • </span>'. timeElapsedString($comment->DateInserted, false);
@@ -197,11 +197,11 @@ if (!function_exists('writeComment')) :
                                 }
                             }
                         ?>
-                        </span>
-                        <?php
+                </span>
+                <?php
                         echo dateUpdated($comment, ['<span class="MItem">', '</span>']);
                         ?>
-                        <?php
+                <?php
                         // Include source if one was set
                         if ($source = val('Source', $comment)) {
                             echo wrap(sprintf(t('via %s'), t($source.' Source', $source)), 'span', ['class' => 'MItem Source']);
@@ -211,27 +211,27 @@ if (!function_exists('writeComment')) :
                         $sender->fireEvent('InsideCommentMeta'); // DEPRECATED
                         $sender->fireEvent('AfterCommentMeta'); // DEPRECATED
                         ?>
-                    </div>
-                </div>
-                <div class="Item-BodyWrap">
-                    <div class="Item-Body">
-                        <div class="Message userContent">
-                            <?php
+            </div>
+        </div>
+        <div class="Item-BodyWrap">
+            <div class="Item-Body">
+                <div class="Message userContent">
+                    <?php
                             echo formatBody($comment);
                             ?>
-                        </div>
-                        <?php
+                </div>
+                <?php
                         $sender->fireEvent('AfterCommentBody');
                         if (val('Attachments', $comment)) {
                             writeAttachments($comment->Attachments);
                         }
                         writeReactions($comment);
                         ?>
-                    </div>
-                </div>
             </div>
-        </li>
-        <?php
+        </div>
+    </div>
+</li>
+<?php
         $sender->fireEvent('AfterComment');
     }
 endif;
@@ -776,14 +776,14 @@ if (!function_exists('writeCommentForm')) :
         // Closed notification
         if ($discussion->Closed == '1') {
             ?>
-            <div class="Foot Closed">
-                <div class="Note Closed"><?php echo t('This discussion has been closed.'); ?></div>
-            </div>
-        <?php
+<div class="Foot Closed">
+    <div class="Note Closed"><?php echo t('This discussion has been closed.'); ?></div>
+</div>
+<?php
         } elseif (!$userCanComment) {
             if (!Gdn::session()->isValid()) {
                 ?>
-                <!-- <div class="Foot Closed">
+<!-- <div class="Foot Closed">
                     <div class="Note Closed SignInOrRegister"><?php
                         $popup = (c('Garden.SignIn.Popup')) ? ' class="Popup"' : '';
                         $returnUrl = Gdn::request()->pathAndQuery();
@@ -798,7 +798,7 @@ if (!function_exists('writeCommentForm')) :
                     </div>
                     <?php //echo anchor(t('All Discussions'), 'discussions', 'TabLink'); ?>
                 </div> -->
-            <?php
+<?php
             }
         }
 
@@ -835,13 +835,13 @@ if (!function_exists('writeEmbedCommentForm')) :
 
         if ($discussion && $discussion->Closed == '1') {
             ?>
-            <div class="Foot Closed">
-                <div class="Note Closed"><?php echo t('This discussion has been closed.'); ?></div>
-            </div>
-        <?php } else { ?>
-            <h2><?php echo t('Leave a comment'); ?></h2>
-            <div class="MessageForm CommentForm EmbedCommentForm">
-                <?php
+<div class="Foot Closed">
+    <div class="Note Closed"><?php echo t('This discussion has been closed.'); ?></div>
+</div>
+<?php } else { ?>
+<h2><?php echo t('Leave a comment'); ?></h2>
+<div class="MessageForm CommentForm EmbedCommentForm">
+    <?php
                 echo '<div class="FormWrapper">';
                 echo $controller->Form->open(['id' => 'Form_Comment']);
                 echo $controller->Form->errors();
@@ -882,8 +882,8 @@ if (!function_exists('writeEmbedCommentForm')) :
                 echo $controller->Form->close();
                 echo '</div> ';
                 ?>
-            </div>
-        <?php
+</div>
+<?php
         }
     }
 endif;
@@ -956,9 +956,9 @@ if (!function_exists('writeDiscussionFooter')) :
         $commentsCount = CommentModel::getPublishedCommentsCount($Discussion->DiscussionID);
         $userCanComment = CategoryModel::checkPermission($categoryID, 'Vanilla.Comments.Add');
         ?>
-        <div class="Item-Footer">
-            <div class="Item-Footer-Icons DisableClick">
-                <?php
+<div class="Item-Footer">
+    <div class="Item-Footer-Icons DisableClick">
+        <?php
                 include($sender->fetchViewLocation('helper_functions', 'discussions', 'vanilla'));
 
                 if (!Gdn::themeFeatures()->get('EnhancedAccessibility')) {
@@ -971,9 +971,9 @@ if (!function_exists('writeDiscussionFooter')) :
                         echo '</span>';
                     }
                 ?>
-            </div>
-            <div class="Item-Footer-Buttons">
-                <?php
+    </div>
+    <div class="Item-Footer-Buttons">
+        <?php
                     $commentsLabel = $commentsCount < 2 ? $commentsCount . ' ' . t('answer') : $commentsCount . ' ' . t('answers');
                     if ($commentsLabel == '0 answer') {
                         $commentsLabel = '0 answers';
@@ -991,7 +991,7 @@ if (!function_exists('writeDiscussionFooter')) :
                             $answerButtonForMobile = null;
 
                             // if($userCanComment){
-                                $answerButton = $sender->Form->button(t('Provide an answer'), ['class' => 'btn-default btn-shadow '.($Session->isValid()?'':'SignInStudentPopupAgent')]);
+                                $answerButton = $sender->Form->button(t('Provide an answer'), ['class' => 'btn-default btn-shadow '.($Session->isValid()?'ReplyQuestionSubmitButton':'SignInStudentPopupAgent')]);
                                 $answerButtonForMobile = anchor(t('Provide an answer'), '/post/answerPopup/'.$Discussion->DiscussionID, 'btn-default btn-shadow AnswerPopup QuestionPopup '.($Session->isValid()?'':'SignInStudentPopupAgent'));
                             // } else {
                             //     $answerButton = anchor(t('Provide an answer'), '/entry/signinstudent', 'btn-default btn-shadow');
@@ -1005,18 +1005,18 @@ if (!function_exists('writeDiscussionFooter')) :
                         }
                     }
                 ?>
-            </div>
-        </div>
-        <div class="Answer-Button d-mobile ReplyQuestionButton">
-            <?php
+    </div>
+</div>
+<div class="Answer-Button d-mobile ReplyQuestionButton">
+    <?php
                 if($answerButtonForMobile) {
                     echo '<div class="answer-button-mobile">';
                     echo $answerButtonForMobile;
                     echo '</div>';
                 }
             ?>
-        </div>
-        <?php
+</div>
+<?php
     }
 endif;
 
@@ -1048,27 +1048,27 @@ if (!function_exists('checkAnswer')) :
         $answered = $sender->Resolved !== 1 ? 'Hidden' : '';
         $noanswered = $sender->Resolved === 1 ? 'Hidden' : '';
         ?>
-        <div class="BoxCheckAnswer NotAnswered <?php echo $noanswered; ?>">
-            <h2><?php echo t("Did you find the answer to your question?") ?></h2>
-            <div class="BoxCheckAnswer-answers">
-                <a class="FeedbackPerfect">
-                    <img src="<?= url('/themes/alloprof/design/images/peace.svg') ?>" width="80px" height="80px" />
-                    <span> <?php echo t("I sure did!") ?> </span>
-                </a>
-                <a href="<?= url('/discussion/bad') ?>" class="FeedbackHelp">
-                    <img src="<?= url('/themes/alloprof/design/images/neutre.svg') ?>" width="80px" height="80px" />
-                    <span> <?php echo t("I still need help") ?> </span>
-                </a>
-            </div>
-        </div>
-        <div class="BoxCheckAnswer Answered <?php echo $answered; ?>">
-            <h2><?php echo t("The explanations have helped you!") ?></h2>
-            <div class="BoxCheckAnswer-answers">
-                <a class="">
-                    <img src="<?= url('/themes/alloprof/design/images/peace.svg') ?>" width="80px" height="80px" />
-                </a>
-            </div>
-        </div>
-        <?php
+<div class="BoxCheckAnswer NotAnswered <?php echo $noanswered; ?>">
+    <h2><?php echo t("Did you find the answer to your question?") ?></h2>
+    <div class="BoxCheckAnswer-answers">
+        <a class="FeedbackPerfect">
+            <img src="<?= url('/themes/alloprof/design/images/peace.svg') ?>" width="80px" height="80px" />
+            <span> <?php echo t("I sure did!") ?> </span>
+        </a>
+        <a href="<?= url('/discussion/bad') ?>" class="FeedbackHelp">
+            <img src="<?= url('/themes/alloprof/design/images/neutre.svg') ?>" width="80px" height="80px" />
+            <span> <?php echo t("I still need help") ?> </span>
+        </a>
+    </div>
+</div>
+<div class="BoxCheckAnswer Answered <?php echo $answered; ?>">
+    <h2><?php echo t("The explanations have helped you!") ?></h2>
+    <div class="BoxCheckAnswer-answers">
+        <a class="">
+            <img src="<?= url('/themes/alloprof/design/images/peace.svg') ?>" width="80px" height="80px" />
+        </a>
+    </div>
+</div>
+<?php
     }
 endif;
