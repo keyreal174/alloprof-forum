@@ -19,9 +19,11 @@ if(userRoleCheck() != Gdn::config('Vanilla.ExtraRoles.Teacher')) {
 
             if($Session->isValid()) {
                 echo '<a href="'.url('/post/newDiscussion/'. $categoryID) .'" class="btn-default btn-shadow scrollToAskQuestionForm scrollToAskQuestionFormPopup HiddenImportant">'.t("Ask a question").'</a>';
-                echo '<a tabIndex="1" class="btn-default btn-shadow AskQuestionPopup">'.t("Ask a question").'</a>';
+                echo '<a tabIndex="1" class="btn-default btn-shadow AskQuestionPopupValid">'.t("Ask a question").'</a>';
+            } else {
+                echo '<a href="'.url('/post/newDiscussion/'. $categoryID) .'" class="btn-default btn-shadow SignInStudentPopupAgent scrollToAskQuestionForm scrollToAskQuestionFormPopup HiddenImportant">'.t("Ask a question").'</a>';
+                echo '<a tabIndex="1" class="btn-default btn-shadow AskQuestionPopupInValid">'.t("Ask a question").'</a>';
             }
-            else echo '<a href="'.url('/post/newDiscussion/'. $categoryID) .'" class="btn-default btn-shadow SignInStudentPopupAgent scrollToAskQuestionForm scrollToAskQuestionFormPopup">'.t("Ask a question").'</a>';
     ?>
 </div>
 <?php } ?>
