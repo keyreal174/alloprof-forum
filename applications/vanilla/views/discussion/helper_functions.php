@@ -984,11 +984,19 @@ if (!function_exists('writeDiscussionFooter')) :
                         if ($Discussion->InsertUserID == Gdn::session()->UserID) {
                             echo '<a class="btn-default not-clickable">'.$commentsLabel.'</a>';
                         } else {
-                            echo $Session->isValid()?'<div class="ReplyQuestionButton d-desktop">':'<a class="ReplyQuestionButton d-desktop">';
+                            if (!function_exists('userRoleCheck'))
+                                include($this->fetchViewLocation('helper_functions', 'discussions', 'vanilla'));
+                            $teacherClass = "";
+                            if(userRoleCheck() == Gdn::config('Vanilla.ExtraRoles.Teacher')) {
+                                $teacherClass = " teacher ";
+                            }
+
+                            echo $Session->isValid()?'<div class="ReplyQuestionButton '.$teacherClass.' d-desktop">':'<a class="ReplyQuestionButton d-desktop'.$teacherClass.'">';
 
                             $sender->fireEvent('BeforeFormButtons');
                             $answerButton = '';
                             $answerButtonForMobile = null;
+
 
                             // if($userCanComment){
                                 $answerButton = $sender->Form->button(t('Provide an answer'), ['class' => 'btn-default btn-shadow '.($Session->isValid()?'ReplyQuestionSubmitButton':'SignInStudentPopupAgent')]);
@@ -1007,7 +1015,7 @@ if (!function_exists('writeDiscussionFooter')) :
                 ?>
     </div>
 </div>
-<div class="Answer-Button d-mobile ReplyQuestionButton">
+<div class="Answer-Button d-mobile ReplyQuestionButton" . $teacherClass>
     <?php
                 if($answerButtonForMobile) {
                     echo '<div class="answer-button-mobile">';
