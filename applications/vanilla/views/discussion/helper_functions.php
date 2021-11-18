@@ -997,7 +997,6 @@ if (!function_exists('writeDiscussionFooter')) :
                             $answerButton = '';
                             $answerButtonForMobile = null;
 
-
                             // if($userCanComment){
                                 $answerButton = $sender->Form->button(t('Provide an answer'), ['class' => 'btn-default btn-shadow '.($Session->isValid()?'ReplyQuestionSubmitButton':'SignInStudentPopupAgent')]);
                                 $answerButtonForMobile = anchor(t('Provide an answer'), '/post/answerPopup/'.$Discussion->DiscussionID, 'btn-default btn-shadow AnswerPopup QuestionPopup '.($Session->isValid()?'':'SignInStudentPopupAgent'));
