@@ -8,7 +8,7 @@ jQuery(document).ready(function($) {
     }
 
     function toggleNotificationSettingsContent() {
-        if (gdn.meta.siteSection.contentLocale.indexOf("en") > -1) {
+        /*if (gdn.meta.siteSection.contentLocale.indexOf("en") > -1) {
             if (window.location.host.indexOf('alloprof') > -1) {
                 window.open("/en/preferences", "_blank");
             } else {
@@ -20,12 +20,12 @@ jQuery(document).ready(function($) {
             } else {
                 window.open("https://www.alloprof.qc.ca/fr/preferences", "_blank");
             }
+        }*/
+        if($('.notification-settings-content').hasClass('open')) {
+            $('.notification-settings-content').removeClass('open');
+        } else {
+            $('.notification-settings-content').addClass('open');
         }
-        // if($('.notification-settings-content').hasClass('open')) {
-        //     $('.notification-settings-content').removeClass('open');
-        // } else {
-        //     $('.notification-settings-content').addClass('open');
-        // }
     }
 
     function markAllAsRead() {
