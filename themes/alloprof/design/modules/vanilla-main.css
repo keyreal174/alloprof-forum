@@ -1112,9 +1112,10 @@ table.PreferenceGroup th {
 }
 
 .SpFlyoutHandle:before {
-    content: '\2807';
-    font-size: 40px !important;
-    transform: rotate(90deg);
+    content: url(../../../../themes/alloprof/design/images/icons/More.svg);
+    width: 24px;
+    height: 24px;
+    margin-top: 0 !important;
 }
 
 .SpOptions:before {

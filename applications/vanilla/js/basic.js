@@ -130,4 +130,61 @@ jQuery(document).ready(function($) {
     //     $('.ToggleFlyout.Open a.EditComment').trigger('click');
     //     event.preventDefault();
     // })
+
+    firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+            user.getIdToken().then(function(idToken) {  // <------ Check this line
+
+                $.ajax({
+                    type: "POST",
+                    url: "https://us-central1-alloprof-stg.cloudfunctions.net/apiFunctionsApp/geo/probe",
+                    headers: {
+                        'authorization': 'Bearer ' + idToken
+                    },
+                    dataType: 'json',
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        console.log(XMLHttpRequest.responseText);
+                    },
+                    success: function(json) {
+                        const { inZone } = json;
+                        localStorage.setItem("inZone", inZone);
+                        storePosition(inZone);
+                    }
+                });
+            });
+        } else {
+            $.ajax({
+                type: "POST",
+                url: "https://us-central1-alloprof-stg.cloudfunctions.net/apiFunctionsApp/geo/probe",
+                dataType: 'json',
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    console.log(XMLHttpRequest.responseText);
+                },
+                success: function(json) {
+                    const { inZone } = json;
+                    localStorage.setItem("inZone", inZone);
+                    storePosition(inZone);
+                }
+            });
+        }
+    });
+    function storePosition(inZone = false, email = null, idToken = null) {
+        var data = {
+            inZone: inZone,
+            email: email,
+            idToken: idToken
+        }
+        $.ajax({
+            type: "POST",
+            url: gdn.url('/discussions/checkPosition'),
+            data: data,
+            dataType: 'json',
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                console.log(XMLHttpRequest.responseText);
+            },
+            success: function(json) {
+                console.log(json)
+            }
+        });
+    }
 });

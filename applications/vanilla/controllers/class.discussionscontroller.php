@@ -1414,4 +1414,8 @@ class DiscussionsController extends VanillaController {
         $this->View = 'saveDiscussion';
         $this->render();
     }
+
+    public function checkPosition() {
+        $_SESSION['Position'] = $_POST['inZone'] ? "quebec" : "international";
+    }
 }
