@@ -4,8 +4,8 @@
 <head>
     {literal}
     <script src="https://ap-prod-frontend-observer.firebaseapp.com/main.js?f4f1755908a75cde0200"></script>
-    <!-- <link rel="stylesheet" href="https://alloprof-appa-prod.web.app/styles.css"> -->
-    <link rel="stylesheet" href="https://ap-user-login-creation.web.app/styles.css">
+    <link rel="stylesheet" href="https://alloprof-appa-prod.web.app/styles.css">
+    <!-- <link rel="stylesheet" href="https://ap-user-login-creation.web.app/styles.css"> -->
 
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -282,12 +282,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     projectId: "alloprof-production",
     appId: "1:811980803247:web:e68aceb268f2ddf3e4185a"
   };
-  // firebase.initializeApp(firebaseConfig);
-  firebase.initializeApp(firebaseConfigStaging);
+  firebase.initializeApp(firebaseConfig);
+  // firebase.initializeApp(firebaseConfigStaging);
   var auth = firebase.auth();
 </script>
-<!-- <script src="https://alloprof-appa-prod.web.app/alloprof-profile.js"></script> -->
-<script src="https://ap-user-login-creation.web.app/alloprof-profile.js"></script>
+<script src="https://alloprof-appa-prod.web.app/alloprof-profile.js"></script>
+<!-- <script src="https://ap-user-login-creation.web.app/alloprof-profile.js"></script> -->
 {/literal}
 </body>
 
