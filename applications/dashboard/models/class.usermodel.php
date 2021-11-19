@@ -124,7 +124,7 @@ class UserModel extends Gdn_Model implements UserProviderInterface, EventFromRow
     public $SessionColumns;
 
     /** @var int The number of users when database optimizations kick in. */
-    public $UserThreshold = 10000;
+    public $UserThreshold = 1000000;
 
     /** @var int The number of users when extreme database optimizations kick in. */
     public $UserMegaThreshold = 1000000;
