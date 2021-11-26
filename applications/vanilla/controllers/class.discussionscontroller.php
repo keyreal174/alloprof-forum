@@ -80,7 +80,7 @@ class DiscussionsController extends VanillaController {
         $this->index($page);
     }
 
-    public function writeFilter($showLanguage=false) {
+    public function writeFilter($showLanguage=false, $unsetLanguageFilter=false) {
         $gradeFilterOption = (Gdn::request()->get('grade') || Gdn::request()->get('grade') == '0') ? strval((int)(Gdn::request()->get('grade'))) : -1;
         $this->GradeID = $gradeFilterOption;
         $this->PublicGradeID = $gradeFilterOption;
@@ -165,6 +165,10 @@ class DiscussionsController extends VanillaController {
             unset($wheres['d.Language']);
         } else {
             $wheres['d.Language'] = Gdn::config('Garden.Locale') == 'fr_CA' ? 'fr' : 'en';
+        }
+
+        if ($unsetLanguageFilter) {
+            unset($wheres['d.Language']);
         }
 
         $this->WhereClause = $wheres;
@@ -783,7 +787,7 @@ class DiscussionsController extends VanillaController {
         }
 
         // Filter Discussion Module
-        $this->writeFilter();
+        $this->writeFilter(false, true);
         $wheres = array_merge($wheres, $this->WhereClause);
 
         $discussionModel = new DiscussionModel();
