@@ -108,5 +108,13 @@ class AlloprofPlugin extends Gdn_Plugin {
         LEFT JOIN GDN_Comment ON GDN_Log.RecordID = GDN_Comment.CommentID
         SET GDN_Log.Language = GDN_Comment.Language
         WHERE GDN_Log.RecordType = 'Comment';");
+
+        $St->table('Discussion')
+            ->column('DatePublished', 'datetime', true)
+            ->set();
+
+        $St->table('Comment')
+            ->column('DatePublished', 'datetime', true)
+            ->set();
     }
 }

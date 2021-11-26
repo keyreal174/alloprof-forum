@@ -13,7 +13,7 @@ use Vanilla\Community\Events\CommentEvent;
 use Vanilla\Community\Events\DiscussionEvent;
 use Vanilla\PrunableTrait;
 use Vanilla\Web\Middleware\LogTransactionMiddleware;
-
+use Vanilla\Formatting\DateTimeFormatter;
 
 /**
  * Handles additional logging.
@@ -872,6 +872,7 @@ class LogModel extends Gdn_Pluggable {
         // Publish
         Gdn::sql()->update($table)
         ->set('Published', true)
+        ->set('DatePublished', DateTimeFormatter::getCurrentDateTime())
         ->where($table.'ID', $ID)
         ->put();
 
