@@ -84,20 +84,20 @@ class AlloprofPlugin extends Gdn_Plugin {
 
         // NOTE: disabled as was one-time script to fix existing users
         //// Set Published as true in comments table for the records which are not in the log model
-
-        $data = $Sql->query("SELECT COUNT(GDN_Log.LogID) AS Cnt, GDN_Comment.CommentID FROM GDN_Comment
-        LEFT JOIN GDN_Log on GDN_Comment.CommentID = GDN_Log.RecordID AND GDN_Log.RecordType = 'Comment'
-        WHERE GDN_Comment.Published IS false
-        GROUP BY GDN_Comment.CommentID")->resultArray();
-
-        foreach ($data as $row) {
-            if ($row["Cnt"] == 0) {
-                $Sql->update('Comment')
-                    ->set('Published', TRUE)
-                    ->where('CommentID', $row["CommentID"])
-                    ->put();
-            }
-        }
+        //
+        //$data = $Sql->query("SELECT COUNT(GDN_Log.LogID) AS Cnt, GDN_Comment.CommentID FROM GDN_Comment
+        //LEFT JOIN GDN_Log on GDN_Comment.CommentID = GDN_Log.RecordID AND GDN_Log.RecordType = 'Comment'
+        //WHERE GDN_Comment.Published IS false
+        //GROUP BY GDN_Comment.CommentID")->resultArray();
+        //
+        //foreach ($data as $row) {
+        //    if ($row["Cnt"] == 0) {
+        //        $Sql->update('Comment')
+        //            ->set('Published', TRUE)
+        //            ->where('CommentID', $row["CommentID"])
+        //            ->put();
+        //    }
+        //}
 
         $Sql->query("UPDATE GDN_Log
         LEFT JOIN GDN_Discussion ON GDN_Log.RecordID = GDN_Discussion.DiscussionID
