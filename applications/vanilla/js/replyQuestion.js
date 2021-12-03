@@ -87,6 +87,11 @@ jQuery(document).ready(function($) {
     }
 
     $('div.ReplyQuestionButton').click(function() {
+        if ($(this).hasClass('teacher')) {
+            $('.CommentPostForm').addClass('open');
+            $('.information-block.newcomment').addClass('show');
+            return;
+        }
         auth.currentUser.getIdToken().then(function(idToken) {  // <------ Check this line
             $.ajax({
                 type: "POST",
