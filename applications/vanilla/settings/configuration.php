@@ -61,6 +61,7 @@ $Configuration['Vanilla']['SaveFollowingPreference'] = true;
 
 // Define Extra Role Name
 $Configuration['Vanilla']['ExtraRoles']['Teacher'] = 'Teacher';
+$Configuration['Vanilla']['ExtraRoles']['Pro'] = 'Pro';
 
 // Question/Commment text limit length in notificaion popup
 $Configuration['Vanilla']['Notify']['TextLength'] = 130;
