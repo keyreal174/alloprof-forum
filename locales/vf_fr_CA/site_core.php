@@ -1888,3 +1888,4 @@ $Definition['Question published!'] = 'Question publiée!';
 $Definition['The moderator team will review the post.'] = 'L\'équipe des modérateurs va examiner la publication.';
 $Definition['Thank you !'] = 'Merci !';
 $Definition['You do not have access to this zone'] = 'Vous n\'avez pas accès à cette zone';
+$Definition['Help Zone Pro'] = 'Pro de la zone d’entraide';

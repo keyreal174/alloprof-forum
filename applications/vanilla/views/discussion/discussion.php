@@ -15,6 +15,9 @@ if (!function_exists('writeDiscussionDetail'))
 if (!function_exists('timeElapsedString'))
     include($this->fetchViewLocation('helper_functions', 'discussions', 'vanilla'));
 
+if (!function_exists('userRoleCheck'))
+    include($this->fetchViewLocation('helper_functions', 'discussion', 'vanilla'));
+
 $UserPhotoFirst = c('Vanilla.Comment.UserPhotoFirst', true);
 
 $Discussion = $this->data('Discussion');
@@ -60,7 +63,7 @@ $this->fireEvent('BeforeDiscussionDisplay');
                 }
             ?>
             <div class="AuthorWrap">
-            <?php
+                <?php
                 if(!$Discussion->Published) {
                     echo '<div class="not-published-badge desktop">';
                     echo '<img src="'.url("/themes/alloprof/design/images/icons/eyebreak.svg").'"/>';
@@ -68,8 +71,8 @@ $this->fireEvent('BeforeDiscussionDisplay');
                     echo '</div>';
                 }
             ?>
-            <span class="Author">
-                <?php
+                <span class="Author">
+                    <?php
                 if ($UserPhotoFirst) {
                     echo userPhoto($Author);
                     echo userAnchor($Author, 'Username');
@@ -79,19 +82,21 @@ $this->fireEvent('BeforeDiscussionDisplay');
                 }
                 echo formatMeAction($Discussion);
                 ?>
-            </span>
-            <span class="AuthorInfo">
-                <?php
+                </span>
+                <span class="AuthorInfo">
+                    <?php
                 echo wrapIf(htmlspecialchars(val('Title', $Author)), 'span', ['class' => 'MItem AuthorTitle']);
                 echo wrapIf(htmlspecialchars(val('Location', $Author)), 'span', ['class' => 'MItem AuthorLocation']);
                 $this->fireEvent('AuthorInfo');
                 ?>
-            </span>
+                </span>
             </div>
             <div class="Meta DiscussionMeta">
                 <span class="MItem TimeAgo">
                     <?php
-                        if ($Grade) {
+                        if (userRoleCheck($Author->UserID) == 'Pro') {
+                            echo '<span class="ItemGrade">'.t('Help Zone Pro'). ' • </span>' . timeElapsedString($Discussion->FirstDate, false);
+                        } else if ($Grade) {
                             echo $Grade . ' • ' . timeElapsedString($Discussion->FirstDate, false);
                         } else {
                             echo timeElapsedString($Discussion->FirstDate, false);

@@ -227,14 +227,14 @@ if (!function_exists('WriteDiscussion')) :
 
         $discussion->CountPages = ceil($discussion->CountComments / $sender->CountCommentsPerPage);
         ?>
-        <li id="Discussion_<?php echo $discussion->DiscussionID; ?>" class="<?php echo $cssClass; ?>">
-            <?php
+<li id="Discussion_<?php echo $discussion->DiscussionID; ?>" class="<?php echo $cssClass; ?>">
+    <?php
             if (!property_exists($sender, 'CanEditDiscussions')) {
                 $sender->CanEditDiscussions = val('PermsDiscussionsEdit', CategoryModel::categories($discussion->CategoryID)) && c('Vanilla.AdminCheckboxes.Use');
             }
             $sender->fireEvent('BeforeDiscussionContent');
             ?>
-      <?php
+    <?php
       // render legacy options
       if (!Gdn::themeFeatures()->get('EnhancedAccessibility')) {
             echo '<span class="Options">';
@@ -244,35 +244,35 @@ if (!function_exists('WriteDiscussion')) :
         }
       ?>
 
-            <div class="ItemContent Discussion">
-                <div class="Title" role="heading" aria-level="3">
-                    <?php
+    <div class="ItemContent Discussion">
+        <div class="Title" role="heading" aria-level="3">
+            <?php
                     echo adminCheck($discussion, ['', ' ']).anchor($discussionName, $discussionUrl);
                     $sender->fireEvent('AfterDiscussionTitle');
                     ?>
-                </div>
-                <div class="Meta Meta-Discussion">
-                    <?php
+        </div>
+        <div class="Meta Meta-Discussion">
+            <?php
                     writeTags($discussion);
                     ?>
-                    <span class="MItem MCount ViewCount"><?php
+            <span class="MItem MCount ViewCount"><?php
                         printf(pluralTranslate($discussion->CountViews,
                             '%s view html', '%s views html', t('%s view'), t('%s views')),
                             bigPlural($discussion->CountViews, '%s view'));
                         ?></span>
-         <span class="MItem MCount CommentCount"><?php
+            <span class="MItem MCount CommentCount"><?php
              printf(pluralTranslate($discussion->CountComments,
                  '%s comment html', '%s comments html', t('%s comment'), t('%s comments')),
                  bigPlural($discussion->CountComments, '%s comment'));
              ?></span>
-         <span class="MItem MCount DiscussionScore Hidden"><?php
+            <span class="MItem MCount DiscussionScore Hidden"><?php
              $score = $discussion->Score;
              if ($score == '') $score = 0;
              printf(plural($score,
                  '%s point', '%s points',
                  bigPlural($score, '%s point')));
              ?></span>
-                    <?php
+            <?php
                     echo newComments($discussion);
                     $layout = c('Vanilla.Categories.Layout');
 
@@ -321,9 +321,9 @@ if (!function_exists('WriteDiscussion')) :
                     }
                     $sender->fireEvent('DiscussionMeta');
                     ?>
-                </div>
-            </div>
-            <?php
+        </div>
+    </div>
+    <?php
                 // render enhanced accessibility options
                 if (Gdn::themeFeatures()->get('EnhancedAccessibility')) {
                     echo '<span class="Options">';
@@ -333,8 +333,8 @@ if (!function_exists('WriteDiscussion')) :
                 }
                 $sender->fireEvent('AfterDiscussionContent');
             ?>
-        </li>
-    <?php
+</li>
+<?php
     }
 endif;
 
@@ -654,18 +654,20 @@ if (!function_exists('writeDiscussionDetail')) :
         $sender->EventArguments['Type'] = 'Discussion';
 
         $userId = Gdn::session()->UserID;
+        $isPro = userRoleCheck($Author->UserID) == 'Pro';
 
         $sender->fireEvent('BeforeDiscussionDisplay');
         ?>
-        <li id="Discussion_<?php echo $Discussion->DiscussionID; ?>" class="<?php echo $cssClass; ?>" data-url="<?php echo $Discussion->Url; ?>">
-            <?php
+<li id="Discussion_<?php echo $Discussion->DiscussionID; ?>" class="<?php echo $cssClass; ?>"
+    data-url="<?php echo $Discussion->Url; ?>">
+    <?php
                 if ($Discussion->DateAccepted) {
                     echo "<div class='verified-info mobile'>
                         <img src='".url("/themes/alloprof/design/images/icons/verifiedbadge.svg")."'/><span>".t("Verified by Alloprof")."</span></div>";
                 }
             ?>
-            <div class="Discussion">
-                <?php
+    <div class="Discussion">
+        <?php
                     if(!$Discussion->Published) {
                         echo '<div class="not-published-badge mobile">';
                         echo '<img src="'.url("/themes/alloprof/design/images/icons/eyebreak.svg").'"/>';
@@ -673,20 +675,20 @@ if (!function_exists('writeDiscussionDetail')) :
                         echo '</div>';
                     }
                 ?>
-                <div class="Item-Header DiscussionHeader">
-                    <?php
+        <div class="Item-Header DiscussionHeader">
+            <?php
                     if (!Gdn::themeFeatures()->get('EnhancedAccessibility') && Gdn::session()->isValid()) {
                         ?>
-                        <span class="Options-Icon DisableClick">
-                        <?php
+            <span class="Options-Icon DisableClick">
+                <?php
                             echo optionsList($Discussion);
                         ?>
-                        </span>
-                        <?php
+            </span>
+            <?php
                     }
                     ?>
-                    <div class="AuthorWrap">
-                        <?php
+            <div class="AuthorWrap">
+                <?php
                             if(!$Discussion->Published) {
                                 echo '<div class="not-published-badge DisableClick desktop">';
                                 echo '<img src="'.url("/themes/alloprof/design/images/icons/eyebreak.svg").'"/>';
@@ -694,8 +696,8 @@ if (!function_exists('writeDiscussionDetail')) :
                                 echo '</div>';
                             }
                         ?>
-                        <span class="Author DisableClick">
-                            <?php
+                <span class="Author DisableClick">
+                    <?php
                             if ($UserPhotoFirst) {
                                 echo userPhoto($Author);
                                 echo userAnchor($Author, 'Username');
@@ -705,13 +707,13 @@ if (!function_exists('writeDiscussionDetail')) :
                             }
                             echo formatMeAction($Discussion);
                             ?>
-                        </span>
-                        <span class="AuthorInfo">
-                            <?php
+                </span>
+                <span class="AuthorInfo">
+                    <?php
                                 $sender->fireEvent('AuthorInfo');
                             ?>
-                        </span>
-                        <?php
+                </span>
+                <?php
                             if ($sender->data('_ShowCategoryLink', true) && $category && c('Vanilla.Categories.Use') &&
                                 CategoryModel::checkPermission($category, 'Vanilla.Discussions.View')) {
                                 $accessibleAttributes = ["tabindex" => "0", "aria-label" => HtmlUtils::accessibleLabel($template, $accessibleVars)];
@@ -727,7 +729,7 @@ if (!function_exists('writeDiscussionDetail')) :
                                 );
                             }
                         ?>
-                        <?php
+                <?php
                             if ($Discussion->DateAccepted) {
                                 echo "<div class='verified-badge DisableClick'>
                                         <img src='".url("/themes/alloprof/design/images/icons/verifiedbadge.svg")."'/>
@@ -735,48 +737,51 @@ if (!function_exists('writeDiscussionDetail')) :
                                     </div>";
                             }
                         ?>
-                    </div>
-                    <div class="Meta DiscussionMeta">
-                        <span class="MItem TimeAgo DisableClick">
-                            <?php
-                                if ($grade) {
+            </div>
+            <div class="Meta DiscussionMeta">
+                <span class="MItem TimeAgo DisableClick">
+                    <?php
+                                if ($isPro) {
+                                    echo '<span class="ItemGrade">'.t('Help Zone Pro'). ' • </span>' . timeElapsedString($Discussion->FirstDate, false);
+                                }
+                                else if ($grade) {
                                     echo '<span class="ItemGrade">'.$grade . ' • </span>' . timeElapsedString($Discussion->FirstDate, false);
                                 } else {
                                     echo timeElapsedString($Discussion->FirstDate, false);
                                 }
                             ?>
-                        </span>
-                        <?php
+                </span>
+                <?php
                             $sender->fireEvent('DiscussionInfo');
                             $sender->fireEvent('AfterDiscussionMeta'); // DEPRECATED
                         ?>
-                    </div>
-                </div>
-                <?php $sender->fireEvent('BeforeDiscussionBody'); ?>
-                <div class="Item-BodyWrap">
-                    <div class="Item-Body">
-                        <div class="Message userContent">
-                            <div class="MessageWrapper">
-                                <?php
+            </div>
+        </div>
+        <?php $sender->fireEvent('BeforeDiscussionBody'); ?>
+        <div class="Item-BodyWrap">
+            <div class="Item-Body">
+                <div class="Message userContent">
+                    <div class="MessageWrapper">
+                        <?php
                                 echo formatBody($Discussion);
                                 ?>
-                            </div>
-                        </div>
-                        <?php
+                    </div>
+                </div>
+                <?php
                         $sender->fireEvent('AfterDiscussionBody');
                         if (val('Attachments', $Discussion)) {
                             writeAttachments($Discussion->Attachments);
                         }
                         ?>
-                        <?php  echo "<div class='DisableClick DisableClickWrapper'><a class='QuestionCategory' style='background: ".$category["Color"]."' href='".url('/categories/'.$category["UrlCode"])."'>".$category["Name"]."</a></div>"; ?>
-                    </div>
-                    <?php
+                <?php  echo "<div class='DisableClick DisableClickWrapper'><a class='QuestionCategory' style='background: ".$category["Color"]."' href='".url('/categories/'.$category["UrlCode"])."'>".$category["Name"]."</a></div>"; ?>
+            </div>
+            <?php
                         writeDiscussionFooter($Discussion, $sender);
                     ?>
-                </div>
-            </div>
-        </li>
-        <?php
+        </div>
+    </div>
+</li>
+<?php
     }
 endif;
 
@@ -801,8 +806,8 @@ if (!function_exists('WriteDiscussionSorter')) :
         ];
 
         ?>
-        <span class="ToggleFlyout SelectFlyout">
-        <?php
+<span class="ToggleFlyout SelectFlyout">
+    <?php
         if (isset($options[$selected])) {
             $text = $options[$selected];
         } else {
@@ -810,17 +815,17 @@ if (!function_exists('WriteDiscussionSorter')) :
         }
         echo wrap($text.' '.sprite('', 'DropHandle'), 'span', ['class' => 'Selected']);
         ?>
-            <div class="Flyout MenuItems">
-                <ul>
-                    <?php
+    <div class="Flyout MenuItems">
+        <ul>
+            <?php
                     foreach ($options as $sortField => $sortText) {
                         echo wrap(anchor($sortText, '#', ['class' => 'SortDiscussions', 'data-field' => $sortField]), 'li');
                     }
                     ?>
-                </ul>
-            </div>
-         </span>
-        <?php
+        </ul>
+    </div>
+</span>
+<?php
     }
 endif;
 
@@ -965,23 +970,24 @@ if (!function_exists('writeFilterTabs')) :
         }
 
         ?>
-        <div class="Tabs DiscussionsTabs">
-            <?php
+<div class="Tabs DiscussionsTabs">
+    <?php
             if (!property_exists($sender, 'CanEditDiscussions')) {
                 $sender->CanEditDiscussions = $session->checkPermission('Vanilla.Discussions.Edit', true, 'Category', 'any') && c('Vanilla.AdminCheckboxes.Use');
             }
             if ($sender->CanEditDiscussions) {
                 ?>
-                <span class="Options"><span class="AdminCheck">
-                    <input type="checkbox" aria-label="<?php echo t('Select Discussion') ?>" name="Toggle"/>
-                </span></span>
-            <?php } ?>
-            <ul>
-                <?php $sender->fireEvent('BeforeDiscussionTabs'); ?>
-                <li<?php echo strtolower($sender->ControllerName) == 'discussionscontroller' && strtolower($sender->RequestMethod) == 'index' ? ' class="Active"' : ''; ?>><?php echo anchor(t('All Discussions'), 'discussions', 'TabLink'); ?></li>
-                <?php $sender->fireEvent('AfterAllDiscussionsTab'); ?>
+    <span class="Options"><span class="AdminCheck">
+            <input type="checkbox" aria-label="<?php echo t('Select Discussion') ?>" name="Toggle" />
+        </span></span>
+    <?php } ?>
+    <ul>
+        <?php $sender->fireEvent('BeforeDiscussionTabs'); ?>
+        <li<?php echo strtolower($sender->ControllerName) == 'discussionscontroller' && strtolower($sender->RequestMethod) == 'index' ? ' class="Active"' : ''; ?>>
+            <?php echo anchor(t('All Discussions'), 'discussions', 'TabLink'); ?></li>
+            <?php $sender->fireEvent('AfterAllDiscussionsTab'); ?>
 
-                <?php
+            <?php
                 if (c('Vanilla.Categories.ShowTabs')) {
                     $cssClass = '';
                     if (strtolower($sender->ControllerName) == 'categoriescontroller' && strtolower($sender->RequestMethod) == 'all') {
@@ -991,26 +997,29 @@ if (!function_exists('writeFilterTabs')) :
                     echo " <li class=\"$cssClass\">".anchor(t('Categories'), '/categories/all', 'TabLink').'</li> ';
                 }
                 ?>
-                <?php if ($countBookmarks > 0 || $sender->RequestMethod == 'bookmarked') { ?>
-                    <li<?php echo $sender->RequestMethod == 'bookmarked' ? ' class="Active"' : ''; ?>><?php echo anchor($bookmarked, '/discussions/bookmarked', 'MyBookmarks TabLink'); ?></li>
-                    <?php
+            <?php if ($countBookmarks > 0 || $sender->RequestMethod == 'bookmarked') { ?>
+            <li<?php echo $sender->RequestMethod == 'bookmarked' ? ' class="Active"' : ''; ?>>
+                <?php echo anchor($bookmarked, '/discussions/bookmarked', 'MyBookmarks TabLink'); ?></li>
+                <?php
                     $sender->fireEvent('AfterBookmarksTab');
                 }
                 if (($countDiscussions > 0 || $sender->RequestMethod == 'mine') && c('Vanilla.Discussions.ShowMineTab', true)) {
                     ?>
-                    <li<?php echo $sender->RequestMethod == 'mine' ? ' class="Active"' : ''; ?>><?php echo anchor($myDiscussions, '/discussions/mine', 'MyDiscussions TabLink'); ?></li>
-                <?php
+                <li<?php echo $sender->RequestMethod == 'mine' ? ' class="Active"' : ''; ?>>
+                    <?php echo anchor($myDiscussions, '/discussions/mine', 'MyDiscussions TabLink'); ?></li>
+                    <?php
                 }
                 if ($countDrafts > 0 || $sender->ControllerName == 'draftscontroller') {
                     ?>
-                    <li<?php echo $sender->ControllerName == 'draftscontroller' ? ' class="Active"' : ''; ?>><?php echo anchor($myDrafts, '/drafts', 'MyDrafts TabLink'); ?></li>
-                <?php
+                    <li<?php echo $sender->ControllerName == 'draftscontroller' ? ' class="Active"' : ''; ?>>
+                        <?php echo anchor($myDrafts, '/drafts', 'MyDrafts TabLink'); ?></li>
+                        <?php
                 }
                 $sender->fireEvent('AfterDiscussionTabs');
                 ?>
-            </ul>
-        </div>
-    <?php
+    </ul>
+</div>
+<?php
     }
 endif;
 
@@ -1081,6 +1090,10 @@ if (!function_exists('userRoleCheck')) :
 
             if(in_array(Gdn::config('Vanilla.ExtraRoles.Teacher'), $Roles))
                 $UserRole = Gdn::config('Vanilla.ExtraRoles.Teacher') ?? 'Teacher';
+
+            else if(in_array(Gdn::config('Vanilla.ExtraRoles.Pro'), $Roles))
+                $UserRole = Gdn::config('Vanilla.ExtraRoles.Pro') ?? 'Pro';
+
             else $UserRole = RoleModel::TYPE_MEMBER ?? 'student';
 
             return $UserRole;
