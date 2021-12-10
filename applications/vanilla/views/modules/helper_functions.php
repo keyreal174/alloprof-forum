@@ -9,27 +9,27 @@ if (!function_exists('WriteModuleDiscussion')):
         $htmlSanitizer = Gdn::getContainer()->get(Vanilla\Formatting\Html\HtmlSanitizer::class);
 
         ?>
-        <li id="<?php echo "{$px}_{$discussion->DiscussionID}"; ?>" class="<?php echo cssClass($discussion); ?>">
-            <?php if ($showPhotos) :
+<li id="<?php echo "{$px}_{$discussion->DiscussionID}"; ?>" class="<?php echo cssClass($discussion); ?>">
+    <?php if ($showPhotos) :
                 $firstUser = userBuilder($discussion, 'First');
                 echo userPhoto($firstUser, ['LinkClass' => 'IndexPhoto']);
             endif; ?>
-   <span class="Options">
-      <?php
+    <span class="Options">
+        <?php
       //      echo optionsList($Discussion);
       echo bookmarkButton($discussion);
       ?>
-   </span>
+    </span>
 
-            <div class="Title"><?php
+    <div class="Title"><?php
                 echo anchor(
                     $htmlSanitizer->filter($discussion->Name), // Should already be encoded, but filter as an additional measure.
                     discussionUrl($discussion).($discussion->CountCommentWatch > 0 ? '#Item_'.$discussion->CountCommentWatch : ''),
                     'DiscussionLink'
                 );
             ?></div>
-            <div class="Meta DiscussionsModuleMeta">
-                <?php
+    <div class="Meta DiscussionsModuleMeta">
+        <?php
                 $last = new stdClass();
                 $last->UserID = $discussion->LastUserID;
                 $last->Name = $discussion->LastName;
@@ -40,9 +40,9 @@ if (!function_exists('WriteModuleDiscussion')):
                 echo '<span class="MItem">'.Gdn_Format::date($discussion->FirstDate, 'html').userAnchor($last).'</span>';
                 echo '<span class="MItem CountComments Hidden">'.sprintf($translation, $discussion->CountComments).'</span>';
                 ?>
-            </div>
-        </li>
-    <?php
+    </div>
+</li>
+<?php
     }
 endif;
 
@@ -65,9 +65,9 @@ if (!function_exists('WritePromotedContent')):
         $sender->EventArguments['Content'] = &$content;
         $sender->EventArguments['ContentUrl'] = &$contentURL;
         ?>
-        <div id="<?php echo "Promoted_{$contentType}_{$contentID}"; ?>" class="<?php echo cssClass($content); ?>">
-            <div class="AuthorWrap">
-         <span class="Author">
+<div id="<?php echo "Promoted_{$contentType}_{$contentID}"; ?>" class="<?php echo cssClass($content); ?>">
+    <div class="AuthorWrap">
+        <span class="Author">
             <?php
             if ($userPhotoFirst) {
                 echo userPhoto($author);
@@ -78,31 +78,32 @@ if (!function_exists('WritePromotedContent')):
             }
             $sender->fireEvent('AuthorPhoto');
             ?>
-         </span>
-         <span class="AuthorInfo">
+        </span>
+        <span class="AuthorInfo">
             <?php
             echo ' '.wrapIf(htmlspecialchars(val('Title', $author)), 'span', ['class' => 'MItem AuthorTitle']);
             echo ' '.wrapIf(htmlspecialchars(val('Location', $author)), 'span', ['class' => 'MItem AuthorLocation']);
             $sender->fireEvent('AuthorInfo');
             ?>
-         </span>
-            </div>
-            <div class="Meta CommentMeta CommentInfo">
-         <span class="MItem DateCreated">
+        </span>
+    </div>
+    <div class="Meta CommentMeta CommentInfo">
+        <span class="MItem DateCreated">
             <?php echo anchor(Gdn_Format::date($content['DateInserted'], 'html'), $contentURL, 'Permalink', ['rel' => 'nofollow']); ?>
-         </span>
-                <?php
+        </span>
+        <?php
                 // Include source if one was set
                 if ($source = val('Source', $content))
                     echo wrap(sprintf(t('via %s'), t($source.' Source', $source)), 'span', ['class' => 'MItem Source']);
 
                 $sender->fireEvent('ContentInfo');
                 ?>
-            </div>
-            <div
-                class="Title"><?php echo anchor(htmlspecialchars(sliceString($content['Name'], $sender->TitleLimit), false), $contentURL, 'DiscussionLink'); ?></div>
-            <div class="Body">
-                <?php
+    </div>
+    <div class="Title">
+        <?php echo anchor(htmlspecialchars(sliceString($content['Name'], $sender->TitleLimit), false), $contentURL, 'DiscussionLink'); ?>
+    </div>
+    <div class="Body">
+        <?php
                 $linkContent = Gdn::formatService()->renderExcerpt($content['Body'], $content['Format']);
                 $trimmedLinkContent = sliceString($linkContent, $sender->BodyLimit);
 
@@ -110,9 +111,9 @@ if (!function_exists('WritePromotedContent')):
 
                 $sender->fireEvent('AfterPromotedBody'); // separate event to account for less space.
                 ?>
-            </div>
-        </div>
-    <?php
+    </div>
+</div>
+<?php
     }
 endif;
 
@@ -124,12 +125,12 @@ if (!function_exists('writePromotedContentList')):
      */
     function writePromotedContentList($data) {
         ?>
-        <ul class="PromotedContentList DataList">
-            <?php foreach ($data as $row) {
+<ul class="PromotedContentList DataList">
+    <?php foreach ($data as $row) {
                 writePromotedContentRow($row, 'modern');
             } ?>
-        </ul>
-    <?php
+</ul>
+<?php
     }
 endif;
 
@@ -141,26 +142,26 @@ if (!function_exists('writePromotedContentTable')):
      */
     function writePromotedContentTable($data) {
         ?>
-        <div class="DataTableContainer">
-            <div class="DataTableWrap">
-                <table class="DataTable">
-                    <thead>
-                    <tr>
-                        <td class="DiscussionName" role="columnheader">
-                            <div class="Wrap"><?php echo t('Subject'); ?></div>
-                        </td>
-                        <td class="BlockColumn BlockColumn-User LastUser" role="columnheader">
-                            <div class="Wrap"><?php echo t('Author'); ?></div>
-                        </td>
-                    </tr>
-                    </thead>
-                    <?php foreach ($data as $row) {
+<div class="DataTableContainer">
+    <div class="DataTableWrap">
+        <table class="DataTable">
+            <thead>
+                <tr>
+                    <td class="DiscussionName" role="columnheader">
+                        <div class="Wrap"><?php echo t('Subject'); ?></div>
+                    </td>
+                    <td class="BlockColumn BlockColumn-User LastUser" role="columnheader">
+                        <div class="Wrap"><?php echo t('Author'); ?></div>
+                    </td>
+                </tr>
+            </thead>
+            <?php foreach ($data as $row) {
                         writePromotedContentRow($row, 'table');
                     } ?>
-                </table>
-            </div>
-        </div>
-    <?php
+        </table>
+    </div>
+</div>
+<?php
     }
 endif;
 
@@ -191,61 +192,64 @@ if (!function_exists('writePromotedContentRow')):
 
         if ($view == 'table') {
             ?>
-            <tr id="Promoted_<?php echo $type.'_'.$id; ?>" class="Item PromotedContent-Item <?php echo $cssClass; ?>">
-                <td class="Name">
-                    <div class="Wrap">
-                        <a class="Title" href="<?php echo $url; ?>">
-                            <?php echo $title; ?>
-                        </a>
-                        <span class="MItem Category"><?php echo t('in'); ?> <a href="<?php echo $categoryUrl; ?>" aria-label="<?php echo $accessibleLabel; ?>"
-                                                                               class="MItem-CategoryName"><?php echo $categoryName; ?></a></span>
+<tr id="Promoted_<?php echo $type.'_'.$id; ?>" class="Item PromotedContent-Item <?php echo $cssClass; ?>">
+    <td class="Name">
+        <div class="Wrap">
+            <a class="Title" href="<?php echo $url; ?>">
+                <?php echo $title; ?>
+            </a>
+            <span class="MItem Category"><?php echo t('in'); ?> <a href="<?php echo $categoryUrl; ?>"
+                    aria-label="<?php echo $accessibleLabel; ?>"
+                    class="MItem-CategoryName"><?php echo $categoryName; ?></a></span>
 
-                        <div class="Description"><?php echo $body; ?></div>
-                    </div>
-                </td>
-                <td class="BlockColumn BlockColumn-User User">
-                    <div class="Block Wrap">
-                        <a class="PhotoWrap PhotoWrapSmall" href="<?php echo $userUrl; ?>">
-                            <?php
+            <div class="Description"><?php echo $body; ?></div>
+        </div>
+    </td>
+    <td class="BlockColumn BlockColumn-User User">
+        <div class="Block Wrap">
+            <a class="PhotoWrap PhotoWrapSmall" href="<?php echo $userUrl; ?>">
+                <?php
                                 $accessibleLabel = HtmlUtils::accessibleLabel('User: "%s"', [$username]);
                             ?>
-                            <img class="ProfilePhoto ProfilePhotoSmall" src="<?php echo $userPhoto; ?>" alt="<?php echo $accessibleLabel; ?>">
-                        </a>
-                        <a class="UserLink BlockTitle" href="<?php echo $userUrl; ?>"><?php echo $username; ?></a>
+                <img class="ProfilePhoto ProfilePhotoSmall" src="<?php echo $userPhoto; ?>"
+                    alt="<?php echo $accessibleLabel; ?>">
+            </a>
+            <a class="UserLink BlockTitle" href="<?php echo $userUrl; ?>"><?php echo $username; ?></a>
 
-                        <div class="Meta">
-                            <a class="CommentDate MItem" href="<?php echo $url; ?>"><?php echo $date; ?></a>
-                        </div>
-                    </div>
-                </td>
-            </tr>
+            <div class="Meta">
+                <a class="CommentDate MItem" href="<?php echo $url; ?>"><?php echo $date; ?></a>
+            </div>
+        </div>
+    </td>
+</tr>
 
-        <?php } else { ?>
+<?php } else { ?>
 
-            <li id="Promoted_<?php echo $type.'_'.$id; ?>" class="Item PromotedContent-Item <?php echo $cssClass; ?>">
-                <?php if (c('EnabledPlugins.IndexPhotos')) { ?>
-                    <a title="<?php echo $username; ?>" href="<?php echo $userUrl; ?>" class="IndexPhoto PhotoWrap">
-                        <img src="<?php echo $userPhoto; ?>" alt="<?php echo $username; ?>"
-                             class="ProfilePhoto ProfilePhotoMedium">
-                    </a>
-                <?php } ?>
-                <div class="ItemContent Discussion">
-                    <div class="Title">
-                        <a href="<?php echo $url; ?>">
-                            <?php echo $title; ?>
-                        </a>
-                    </div>
-                    <div class="Excerpt"><?php echo $body; ?></div>
-                    <div class="Meta">
-                        <span class="MItem DiscussionAuthor"><ahref="<?php echo $userUrl; ?>
-                            "><?php echo $username; ?></a></span>
-                        <span class="MItem Category"><?php echo t('in'); ?> <a href="<?php echo $categoryUrl; ?>" aria-label="<?php echo $accessibleLabel; ?>"
-                                                                               class="MItem-CategoryName"><?php echo $categoryName; ?></a></span>
-                    </div>
-                </div>
-            </li>
+<li id="Promoted_<?php echo $type.'_'.$id; ?>" class="Item PromotedContent-Item <?php echo $cssClass; ?>">
+    <?php if (c('EnabledPlugins.IndexPhotos')) { ?>
+    <a title="<?php echo $username; ?>" href="<?php echo $userUrl; ?>" class="IndexPhoto PhotoWrap">
+        <img src="<?php echo $userPhoto; ?>" alt="<?php echo $username; ?>" class="ProfilePhoto ProfilePhotoMedium">
+    </a>
+    <?php } ?>
+    <div class="ItemContent Discussion">
+        <div class="Title">
+            <a href="<?php echo $url; ?>">
+                <?php echo $title; ?>
+            </a>
+        </div>
+        <div class="Excerpt"><?php echo $body; ?></div>
+        <div class="Meta">
+            <span class="MItem DiscussionAuthor">
+                <ahref="<?php echo $userUrl; ?> "><?php echo $username; ?></a></span>
+                        <span class=" MItem Category"><?php echo t('in'); ?> <a href="<?php echo $categoryUrl; ?>"
+                        aria-label="<?php echo $accessibleLabel; ?>"
+                        class="MItem-CategoryName"><?php echo $categoryName; ?></a>
+            </span>
+        </div>
+    </div>
+</li>
 
-        <?php }
+<?php }
     }
 endif;
 
@@ -466,9 +470,15 @@ if (!function_exists('getUserRole')) :
                 $Roles = array_filter($Roles, 'RoleModel::FilterPersonalInfo');
             }
 
-            if(in_array(Gdn::config('Vanilla.ExtraRoles.Teacher'), $Roles))
+            if(in_array("Administrator", $Roles))
+                $UserRole = "Administrator";
+            else if(in_array(Gdn::config('Vanilla.ExtraRoles.Teacher'), $Roles))
                 $UserRole = Gdn::config('Vanilla.ExtraRoles.Teacher') ?? 'Teacher';
-            else $UserRole = RoleModel::TYPE_MEMBER ?? 'Student';
+
+            else if(in_array(Gdn::config('Vanilla.ExtraRoles.Pro'), $Roles))
+                $UserRole = Gdn::config('Vanilla.ExtraRoles.Pro') ?? 'Pro';
+
+            else $UserRole = RoleModel::TYPE_MEMBER ?? 'student';
 
             return $UserRole;
         } else return null;

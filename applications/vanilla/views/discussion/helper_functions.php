@@ -108,8 +108,14 @@ if (!function_exists('writeComment')) :
             $cssClass .= ' Accepted';
         }
 
+        $isPro = $sender->getUserRole($comment->InsertUserID) == Gdn::config('Vanilla.ExtraRoles.Pro');
+
         if ($sender->getUserRole($comment->InsertUserID) === 'Teacher') {
             $cssClass .= ' TeacherComment ';
+        }
+
+        if ($isPro) {
+            $cssClass .= ' ProComment ';
         }
 
         // DEPRECATED ARGUMENTS (as of 2.1)
@@ -124,7 +130,27 @@ if (!function_exists('writeComment')) :
         ?>
 <li class="<?php echo $cssClass; ?>" id="<?php echo 'Comment_'.$comment->CommentID; ?>">
     <?php
-                if ($comment->DateAccepted) {
+                if ($isPro) {
+                    $ProCSS = $comment->DateAccepted ? "pro-role-verified" : "pro-role-unverified";
+                    $ProBlock = !$comment->DateAccepted ? '<div>
+                        <img src="'.url("/themes/alloprof/design/images/icons/SuperBadge.svg").'"/>
+                        <span class="desktop">'.t("Explanation from a Help Zone Pro").'</span>
+                        <span class="mobile">'.t("Explanation from a Pro").'</span>
+                    </div>' :  '<div>
+                        <img src="'.url("/themes/alloprof/design/images/icons/verifiedbadge.svg").'"/>
+                        <span>'.t("Answer verified by Alloprof").'</span>
+                    </div>';
+                    echo '<div class="verfied-info pro-role '.$ProCSS.'">'.$ProBlock.'
+                            <img class="help-icon" src="'.url("/themes/alloprof/design/images/icons/help.svg").'"/>
+                            <div class="pro-help-popup">
+                                <div>
+                                    <img src="'.url("/themes/alloprof/design/images/icons/SuperBadge.svg").'"/>
+                                    <p class="text">'.t('Explanation from a Help Zone Pro').'</p>
+                                    <p class="subtext">'.t('This Explanation is reliable because it was submitted by someone Alloprof has identified as trustworthy.').'</p>
+                                </div>
+                            </div>
+                        </div>';
+                } else if ($comment->DateAccepted) {
                     echo '<div class="verfied-info">
                             <img src="'.url("/themes/alloprof/design/images/icons/verifiedbadge.svg").'"/>
                             <span>'.t("Answer verified by Alloprof").'</span>
@@ -160,10 +186,12 @@ if (!function_exists('writeComment')) :
                     <?php
                         if ($userPhotoFirst) {
                             echo userPhoto($author);
+                            $UserMetaData = Gdn::userModel()->getMeta($author->UserID, 'Profile.%', 'Profile.');
+                            $name = $UserMetaData["DisplayName"] ?? "";
                             if ($sender->getUserRole($comment->InsertUserID) == "Teacher") {
-                                $UserMetaData = Gdn::userModel()->getMeta($author->UserID, 'Profile.%', 'Profile.');
-                                $name = $UserMetaData["DisplayName"] ?? "";
                                 echo '<a class="Username js-userCard" style="display: flex;" data-userid="'.$author->UserID.'">'.$name.'<img class="TeacherCheckIcon" src="'.url("/themes/alloprof/design/images/icons/teacherCheck.svg").'" alt="teacher check"></a>';
+                            } else if ($isPro) {
+                                echo '<a class="Username js-userCard" style="display: flex;" data-userid="'.$author->UserID.'">'.$name.'<img class="TeacherCheckIcon" src="'.url("/themes/alloprof/design/images/icons/SuperBadge.svg").'" alt="teacher check"></a>';
                             } else {
                                 echo userAnchor($author, 'Username');
                             }
@@ -189,6 +217,8 @@ if (!function_exists('writeComment')) :
                             $grade = getGrade($comment->GradeID);
                             if ($sender->getUserRole($comment->InsertUserID) === TEACHER_ROLE) {
                                 echo '<span class="ItemGrade">'.t("Alloprof Teacher") . ' • </span>'. timeElapsedString($comment->DateInserted, false);
+                            } else if ($isPro) {
+                                echo '<span class="ItemGrade">'.t('Help Zone Pro'). ' • </span>' . timeElapsedString($comment->DateInserted, false);
                             } else {
                                 if ($grade) {
                                     echo '<span class="ItemGrade">'.$grade . ' • </span>' . timeElapsedString($comment->DateInserted, false);

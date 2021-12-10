@@ -105,7 +105,7 @@ class SearchController extends Gdn_Controller {
         }
 
         $dashboardDiscussionFilterModule = new DashboardDiscussionFilterModule($gradeFilterOption, $sort, $explanation, $verified, $subject, $outexplanation, $language, $isShowLanguage);
-        
+
         $this->addModule($dashboardDiscussionFilterModule);
         $this->addJsFile('filter.js');
         $wheres = [];
@@ -178,9 +178,15 @@ class SearchController extends Gdn_Controller {
                 $Roles = array_filter($Roles, 'RoleModel::FilterPersonalInfo');
             }
 
-            if(in_array(Gdn::config('Vanilla.ExtraRoles.Teacher'), $Roles))
+            if(in_array("Administrator", $Roles))
+                $UserRole = "Administrator";
+            else if(in_array(Gdn::config('Vanilla.ExtraRoles.Teacher'), $Roles))
                 $UserRole = Gdn::config('Vanilla.ExtraRoles.Teacher') ?? 'Teacher';
-            else $UserRole = RoleModel::TYPE_MEMBER ?? 'Student';
+
+            else if(in_array(Gdn::config('Vanilla.ExtraRoles.Pro'), $Roles))
+                $UserRole = Gdn::config('Vanilla.ExtraRoles.Pro') ?? 'Pro';
+
+            else $UserRole = RoleModel::TYPE_MEMBER ?? 'student';
 
             return $UserRole;
         } else return null;

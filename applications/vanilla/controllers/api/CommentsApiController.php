@@ -525,9 +525,15 @@ class CommentsApiController extends AbstractApiController {
                 $Roles = array_filter($Roles, 'RoleModel::FilterPersonalInfo');
             }
 
-            if(in_array(Gdn::config('Vanilla.ExtraRoles.Teacher'), $Roles))
+            if(in_array("Administrator", $Roles))
+                $UserRole = "Administrator";
+            else if(in_array(Gdn::config('Vanilla.ExtraRoles.Teacher'), $Roles))
                 $UserRole = Gdn::config('Vanilla.ExtraRoles.Teacher') ?? 'Teacher';
-            else $UserRole = RoleModel::TYPE_MEMBER ?? 'Student';
+
+            else if(in_array(Gdn::config('Vanilla.ExtraRoles.Pro'), $Roles))
+                $UserRole = Gdn::config('Vanilla.ExtraRoles.Pro') ?? 'Pro';
+
+            else $UserRole = RoleModel::TYPE_MEMBER ?? 'student';
 
             return $UserRole;
         } else return null;
