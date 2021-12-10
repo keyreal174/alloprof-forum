@@ -94,7 +94,7 @@ $this->fireEvent('BeforeDiscussionDisplay');
             <div class="Meta DiscussionMeta">
                 <span class="MItem TimeAgo">
                     <?php
-                        if (userRoleCheck($Author->UserID) == 'Pro') {
+                        if (userRoleCheck($Author->UserID) == Gdn::config('Vanilla.ExtraRoles.Pro')) {
                             echo '<span class="ItemGrade">'.t('Help Zone Pro'). ' • </span>' . timeElapsedString($Discussion->FirstDate, false);
                         } else if ($Grade) {
                             echo $Grade . ' • ' . timeElapsedString($Discussion->FirstDate, false);

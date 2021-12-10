@@ -654,7 +654,7 @@ if (!function_exists('writeDiscussionDetail')) :
         $sender->EventArguments['Type'] = 'Discussion';
 
         $userId = Gdn::session()->UserID;
-        $isPro = userRoleCheck($Author->UserID) == 'Pro';
+        $isPro = userRoleCheck($Author->UserID) == Gdn::config('Vanilla.ExtraRoles.Pro');
 
         $sender->fireEvent('BeforeDiscussionDisplay');
         ?>
@@ -743,8 +743,7 @@ if (!function_exists('writeDiscussionDetail')) :
                     <?php
                                 if ($isPro) {
                                     echo '<span class="ItemGrade">'.t('Help Zone Pro'). ' • </span>' . timeElapsedString($Discussion->FirstDate, false);
-                                }
-                                else if ($grade) {
+                                } else if ($grade) {
                                     echo '<span class="ItemGrade">'.$grade . ' • </span>' . timeElapsedString($Discussion->FirstDate, false);
                                 } else {
                                     echo timeElapsedString($Discussion->FirstDate, false);

@@ -539,9 +539,15 @@ class DiscussionController extends VanillaController {
                 $Roles = array_filter($Roles, 'RoleModel::FilterPersonalInfo');
             }
 
-            if(in_array(Gdn::config('Vanilla.ExtraRoles.Teacher'), $Roles))
-                $UserRole = Gdn::config('Vanilla.ExtraRoles.Teacher') ?? TEACHER_ROLE;
-            else $UserRole = RoleModel::TYPE_MEMBER ?? 'Student';
+            if(in_array("Administrator", $Roles))
+                $UserRole = "Administrator";
+            else if(in_array(Gdn::config('Vanilla.ExtraRoles.Teacher'), $Roles))
+                $UserRole = Gdn::config('Vanilla.ExtraRoles.Teacher') ?? 'Teacher';
+
+            else if(in_array(Gdn::config('Vanilla.ExtraRoles.Pro'), $Roles))
+                $UserRole = Gdn::config('Vanilla.ExtraRoles.Pro') ?? 'Pro';
+
+            else $UserRole = RoleModel::TYPE_MEMBER ?? 'student';
 
             return $UserRole;
         } else return null;

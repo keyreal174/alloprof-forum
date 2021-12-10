@@ -1889,3 +1889,6 @@ $Definition['The moderator team will review the post.'] = 'L\'équipe des modér
 $Definition['Thank you !'] = 'Merci !';
 $Definition['You do not have access to this zone'] = 'Vous n\'avez pas accès à cette zone';
 $Definition['Help Zone Pro'] = 'Pro de la zone d’entraide';
+$Definition['Explanation from a Help Zone Pro'] = 'Explication d\'un(e) pro de la Zone d\'entraide';
+$Definition['Explanation from a Pro'] = 'Explication d\'un(e) Pro';
+$Definition['This Explanation is reliable because it was submitted by someone Alloprof has identified as trustworthy.'] = 'Tu peux faire confiance à cette explication, car elle est donnée par une personne identifiée comme étant fiable par Alloprof.';
