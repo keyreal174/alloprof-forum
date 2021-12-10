@@ -817,6 +817,7 @@ $Definition['Moderate'] = 'Modérer';
 $Definition['Moderation'] = 'Modération';
 $Definition['Moderation Queue'] = 'En attente de modération';
 $Definition['Moderator'] = 'Modérateur';
+$Definition['Principal Moderator'] = 'Modérateur Principal';
 $Definition['Moderator Activity'] = 'Activité du modérateur';
 $Definition['Moderators'] = 'Modérateurs';
 $Definition['moderators'] = 'modérateurs';
