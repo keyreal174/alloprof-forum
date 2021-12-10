@@ -106,6 +106,7 @@ class Gdn_Smarty implements \Vanilla\Contracts\Web\LegacyViewHandlerInterface {
         // Now it returns defaultcontroller. This restores BC behavior.
         $isHomepage = val('isHomepage', $controller->Data);
         $path = ($isHomepage) ? "" : Gdn::request()->path();
+        $smarty->assign('IsStagingURL', (str_contains($_SERVER[HTTP_HOST], 'staging') || str_contains($_SERVER[HTTP_HOST], 'stg')));
         $smarty->assign('Path', $path);
         $smarty->assign('Homepage', $isHomepage); // true/false
 
