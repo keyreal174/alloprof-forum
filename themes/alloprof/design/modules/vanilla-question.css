@@ -647,6 +647,7 @@ body.Discussions .DataList.Discussions .embedExternal.embedImage.crossed::after 
 .MessageList .ItemComment .verfied-info span {
     font-size: 16px;
     line-height: 19px;
+    flex: 1;
     color: #000000;
 }
 

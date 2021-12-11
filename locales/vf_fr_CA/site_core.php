@@ -1893,3 +1893,7 @@ $Definition['Help Zone Pro'] = 'Pro de la zone d’entraide';
 $Definition['Explanation from a Help Zone Pro'] = 'Explication d\'un(e) pro de la Zone d\'entraide';
 $Definition['Explanation from a Pro'] = 'Explication d\'un(e) Pro';
 $Definition['This Explanation is reliable because it was submitted by someone Alloprof has identified as trustworthy.'] = 'Tu peux faire confiance à cette explication, car elle est donnée par une personne identifiée comme étant fiable par Alloprof.';
+$Definition['Explanation from Alloprof'] = 'Explication d\'Alloprof';
+$Definition['Explanation verified by Alloprof'] = 'Explication vérifiée par Alloprof';
+$Definition['This Explanation was verified by a member of the Alloprof team.'] = 'Cette explication a été vérifiée par un membre de l’équipe d’Alloprof.';
+$Definition['This Explanation was submitted by a member of the Alloprof team.'] = 'Cette explication a été donnée par un membre de l\'équipe d\'Alloprof.';
