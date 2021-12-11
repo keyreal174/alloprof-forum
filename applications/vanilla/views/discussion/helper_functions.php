@@ -109,9 +109,19 @@ if (!function_exists('writeComment')) :
         }
 
         $isPro = $sender->getUserRole($comment->InsertUserID) == Gdn::config('Vanilla.ExtraRoles.Pro');
+        $isTeacher = $sender->getUserRole($comment->InsertUserID) == 'Teacher';
+        // if ($sender->getUserRole($comment->InsertUserID) === 'Teacher') {
+        //     $cssClass .= ' TeacherComment ';
+        // }
 
-        if ($sender->getUserRole($comment->InsertUserID) === 'Teacher') {
-            $cssClass .= ' TeacherComment ';
+        if($isTeacher) {
+            $vri_title = t("Explanation from Alloprof");
+            $vri_tip_title = t("Explanation from Alloprof");
+            $vri_tip_desc = t("This Explanation was submitted by a member of the Alloprof team.");
+        } else {
+            $vri_title = t("Explanation verified by Alloprof");
+            $vri_tip_title = t("Explanation verified by Alloprof");
+            $vri_tip_desc = t("This Explanation was verified by a member of the Alloprof team.");
         }
 
         if ($isPro) {
@@ -130,15 +140,12 @@ if (!function_exists('writeComment')) :
         ?>
 <li class="<?php echo $cssClass; ?>" id="<?php echo 'Comment_'.$comment->CommentID; ?>">
     <?php
-                if ($isPro) {
+                if ($isPro && !$comment->DateAccepted) {
                     $ProCSS = $comment->DateAccepted ? "pro-role-verified" : "pro-role-unverified";
-                    $ProBlock = !$comment->DateAccepted ? '<div>
+                    $ProBlock = '<div>
                         <img src="'.url("/themes/alloprof/design/images/icons/SuperBadge.svg").'"/>
                         <span class="desktop">'.t("Explanation from a Help Zone Pro").'</span>
                         <span class="mobile">'.t("Explanation from a Pro").'</span>
-                    </div>' :  '<div>
-                        <img src="'.url("/themes/alloprof/design/images/icons/verifiedbadge.svg").'"/>
-                        <span>'.t("Answer verified by Alloprof").'</span>
                     </div>';
                     echo '<div class="verfied-info pro-role '.$ProCSS.'">'.$ProBlock.'
                             <img class="help-icon" src="'.url("/themes/alloprof/design/images/icons/help.svg").'"/>
@@ -151,9 +158,17 @@ if (!function_exists('writeComment')) :
                             </div>
                         </div>';
                 } else if ($comment->DateAccepted) {
-                    echo '<div class="verfied-info">
+                    echo '<div class="verfied-info pro-role">
                             <img src="'.url("/themes/alloprof/design/images/icons/verifiedbadge.svg").'"/>
-                            <span>'.t("Answer verified by Alloprof").'</span>
+                            <span>'.$vri_title.'</span>
+                            <img class="help-icon" src="'.url("/themes/alloprof/design/images/icons/help.svg").'"/>
+                            <div class="pro-help-popup">
+                                <div>
+                                    <img src="'.url("/themes/alloprof/design/images/icons/verifiedbadge.svg").'"/>
+                                    <p class="text">'.$vri_tip_title.'</p>
+                                    <p class="subtext">'.$vri_tip_desc.'</p>
+                                </div>
+                            </div>
                         </div>';
                 }
             ?>
