@@ -598,7 +598,7 @@ class EntryController extends Gdn_Controller {
                 $userModel->save($data, [
                     UserModel::OPT_NO_CONFIRM_EMAIL => true,
                     UserModel::OPT_FIX_UNIQUE => true,
-                    UserModel::OPT_SAVE_ROLES => $saveRoles,
+                    UserModel::OPT_SAVE_ROLES => false,
                     UserModel::OPT_VALIDATE_NAME => !$isTrustedProvider,
                     UserModel::OPT_ROLE_SYNC => $userModel->getConnectRoleSync(),
                 ]);
