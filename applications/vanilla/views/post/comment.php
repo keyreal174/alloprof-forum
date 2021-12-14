@@ -46,7 +46,7 @@ $this->fireEvent('BeforeCommentForm');
             }
             if ($this->UserRole == TEACHER_ROLE) {
                 echo '<span class="UserAuthorGrade">'.t('Teacher').'</span>';
-            } else if ($this->UserRole == Gdn::config('Vanilla.ExtraRoles.Teacher')) {
+            } else if ($this->UserRole == Gdn::config('Vanilla.ExtraRoles.Pro')) {
                 echo '<span class="UserAuthorGrade">'.t('Help Zone Pro').'</span>';
             } else {
                 $grade = t($UserMetaData["Grade"]);
