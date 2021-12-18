@@ -82,7 +82,7 @@
                 echo Gdn_Theme::link('discussions/bookmarked', sprite('Home').' '.'<span>'.t('Follow ups').'</span>', '<a href="%url" class="%class Navigation-link"><svg class="d-mobile" width="19" height="21" viewBox="0 0 19 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M1.75049 3.5C1.75049 2.5335 2.53399 1.75 3.50049 1.75H15.2697C16.2362 1.75 17.0197 2.5335 17.0197 3.5V18.6743L10.5623 12.8039C9.89479 12.1971 8.87541 12.1971 8.20792 12.8039L1.75049 18.6743V3.5Z" stroke="black" stroke-width="2.5"/>
                     </svg><br/>
-                    %text</a>');
+                    %text'. ($followedDiscussionsCount > 0 ? "<span class='realcount Count'>".$followedDiscussionsCount."</span>" : '') .'</a>');
                 echo '</div>';
         }?>
     <div class='Navigation-linkContainer mobile'>
