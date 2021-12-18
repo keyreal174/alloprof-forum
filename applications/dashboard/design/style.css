@@ -1441,13 +1441,8 @@ td.CheckBoxColumn {
 }
 
 .MeButton:hover {
-  background: #eee;
-  background: rgba(0, 0, 0, 0.07);
-}
-
-.MeButton:hover {
-  background: #eee;
-  background: rgba(0, 0, 0, 0.07);
+  /* background: #eee;
+  background: rgba(0, 0, 0, 0.07); */
 }
 
 .MeButton .Alert {

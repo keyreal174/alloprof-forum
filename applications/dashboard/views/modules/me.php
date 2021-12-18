@@ -36,18 +36,30 @@ $this->fireEvent('BeforeFlyoutMenu');
 $UserMetaData = Gdn::userModel()->getMeta(Gdn::session()->UserID, 'Plugin.%', 'Plugin.');
 $Language = Gdn::config('Garden.Locale');
 
+$session_invalid = $Session->isValid()?'':'data-session="invalid"';
+
+if (preg_match('/zonedentraide/i', $_SERVER['REQUEST_URI'])) {
+    $newURI = str_replace('zonedentraide', 'helpzone', $_SERVER['REQUEST_URI']);
+    echo '<div slot="lang_switcher" class="language-btn link link--xsm" '.$session_invalid.' data-url="'. $newURI .'" id="en_GB"><span class="link__text locale-switcher__text">English</span></div>';
+} else {
+    $newURI = str_replace('helpzone', 'zonedentraide', $_SERVER['REQUEST_URI']);
+    echo '<div slot="lang_switcher" class="language-btn link link--xsm" '.$session_invalid.' data-url="'. $newURI .'" id="fr_CA"><span class="link__text locale-switcher__text">Français</span></div>';
+}
+
+echo '<div slot="main_menu_right_before" class="Header-right">';
+echo '<div class="MeBox-header">';
 if ($Session->isValid()):
     echo '<div class="MeBox'.$CssClass.'">';
     if (!$useNewFlyouts) {
         echo userPhoto($User);
     }
-    if (preg_match('/zonedentraide/i', $_SERVER['REQUEST_URI'])) {
-        $newURI = str_replace('zonedentraide', 'helpzone', $_SERVER['REQUEST_URI']);
-        echo '<div class="language-btn" data-url="'. $newURI .'" id="en_GB">en</div>';
-    } else {
-        $newURI = str_replace('helpzone', 'zonedentraide', $_SERVER['REQUEST_URI']);
-        echo '<div class="language-btn" data-url="'. $newURI .'" id="fr_CA">fr</div>';
-    }
+    // if (preg_match('/zonedentraide/i', $_SERVER['REQUEST_URI'])) {
+    //     $newURI = str_replace('zonedentraide', 'helpzone', $_SERVER['REQUEST_URI']);
+    //     echo '<div slot="main_menu_right_after" class="language-btn" data-url="'. $newURI .'" id="en_GB">en</div>';
+    // } else {
+    //     $newURI = str_replace('helpzone', 'zonedentraide', $_SERVER['REQUEST_URI']);
+    //     echo '<div slot="main_menu_right_after" class="language-btn" data-url="'. $newURI .'" id="fr_CA">fr</div>';
+    // }
     echo '<div class="WhoIs">';
     if (!$useNewFlyouts) {
         echo userAnchor($User, 'Username');
@@ -149,13 +161,13 @@ if ($Session->isValid()):
     $this->fireEvent('FlyoutMenu');
     echo $dropdown;
 
-    $LinkToDropdown = new DropdownModule('', '', 'additional-links', 'additional-links__popup withHeader');
-    $LinkToDropdownTitle = t('additional-links');
-    $LinkToDropdownIcon = "<img class='ProfilePhoto BergerIcon' src='".url('/themes/alloprof/design/images/icons/Burger.svg')."'/>";
-    $LinkToDropdown->setTrigger('', 'anchor', 'LinksButton FlyoutButton', $LinkToDropdownIcon, '/', ['title' => $LinkToDropdownTitle, 'tabindex' => '0', "role" => "button", "aria-haspopup" => "true"]);
-    $LinkToDropdown->addLink(t('Alloprof Home'), preg_match('/^en/', $Language) ? "https://www.alloprof.qc.ca/en/students" : "https://www.alloprof.qc.ca/");
-    $LinkToDropdown->addLink(t('Alloprof 100% solutions'), preg_match('/^en/', $Language) ? "https://www.alloprof.qc.ca/en/solutions" : "https://www.alloprof.qc.ca/fr/solutions");
-    echo $LinkToDropdown;
+    // $LinkToDropdown = new DropdownModule('', '', 'additional-links', 'additional-links__popup withHeader');
+    // $LinkToDropdownTitle = t('additional-links');
+    // $LinkToDropdownIcon = "<img class='ProfilePhoto BergerIcon' src='".url('/themes/alloprof/design/images/icons/Burger.svg')."'/>";
+    // $LinkToDropdown->setTrigger('', 'anchor', 'LinksButton FlyoutButton', $LinkToDropdownIcon, '/', ['title' => $LinkToDropdownTitle, 'tabindex' => '0', "role" => "button", "aria-haspopup" => "true"]);
+    // $LinkToDropdown->addLink(t('Alloprof Home'), preg_match('/^en/', $Language) ? "https://www.alloprof.qc.ca/en/students" : "https://www.alloprof.qc.ca/");
+    // $LinkToDropdown->addLink(t('Alloprof 100% solutions'), preg_match('/^en/', $Language) ? "https://www.alloprof.qc.ca/en/solutions" : "https://www.alloprof.qc.ca/fr/solutions");
+    // echo $LinkToDropdown;
 
     if ($useNewFlyouts) {
         echo "<button class='MeBox-mobileClose'>×</button>";
@@ -165,13 +177,13 @@ if ($Session->isValid()):
     echo '</div>';
 else:
     echo '<div class="MeBox MeBox-SignIn'.$CssClass.'">';
-    if (preg_match('/zonedentraide/i', $_SERVER['REQUEST_URI'])) {
-        $newURI = str_replace('zonedentraide', 'helpzone', $_SERVER['REQUEST_URI']);
-        echo '<div class="language-btn" data-session="invalid" data-url="'. $newURI .'" id="en_GB">en</div>';
-    } else {
-        $newURI = str_replace('helpzone', 'zonedentraide', $_SERVER['REQUEST_URI']);
-        echo '<div class="language-btn" data-session="invalid" data-url="'. $newURI .'" id="fr_CA">fr</div>';
-    }
+    // if (preg_match('/zonedentraide/i', $_SERVER['REQUEST_URI'])) {
+    //     $newURI = str_replace('zonedentraide', 'helpzone', $_SERVER['REQUEST_URI']);
+    //     echo '<div slot="main_menu_right_after" class="language-btn" data-session="invalid" data-url="'. $newURI .'" id="en_GB">en</div>';
+    // } else {
+    //     $newURI = str_replace('helpzone', 'zonedentraide', $_SERVER['REQUEST_URI']);
+    //     echo '<div slot="main_menu_right_after" class="language-btn" data-session="invalid" data-url="'. $newURI .'" id="fr_CA">fr</div>';
+    // }
 
     echo '<div class="SignInLinks">';
 
@@ -185,9 +197,9 @@ else:
     $editModifiers['listItemCssClasses'] = ['EditProfileWrap', 'link-editprofile'];
     $preferencesModifiers['listItemCssClasses'] = ['EditProfileWrap', 'link-preferences'];
 
-    $dropdown->addLink(t('Sign In'), false, '', 'SignInStudentPopupAgent', ['rel' => 'nofollow'], $editModifiers);
+    $dropdown->addLink(t('Sign In'), false, '', 'SignInStudentPopupAgent btn btn--sm btn--login text-align-center', ['rel' => 'nofollow'], $editModifiers);
     $dropdown->addLink(t('Sign In'), '/entry/signinstudent?Target='.$this->_Sender->SelfUrl, 'studentsignin', 'SignInStudentPopup HiddenImportant', ['rel' => 'nofollow'], $editModifiers);
-    $dropdown->addLink(t('Register'), registerUrl($this->_Sender->SelfUrl), 'register', 'registerPopup', [], $editModifiers);
+    $dropdown->addLink('<span class="link__text">'.t('Register').'</span>', registerUrl($this->_Sender->SelfUrl), 'register', 'registerPopup link link--sm link--active text-align-center', [], $editModifiers);
     // $dropdown->addLink(t('Teacher'), signInUrl($this->_Sender->SelfUrl), 'teachersignin', 'SignInPopup', ['rel' => 'nofollow'], $preferencesModifiers);
 
     $this->EventArguments['Dropdown'] = &$dropdown;
@@ -195,16 +207,18 @@ else:
     echo $dropdown;
     echo '</div>';
 
-    $LinkToDropdown = new DropdownModule('', '', 'additional-links', 'additional-links__popup withHeader');
-    $LinkToDropdownTitle = t('additional-links');
-    $LinkToDropdownIcon = "<img class='ProfilePhoto BergerIcon' src='".url('/themes/alloprof/design/images/icons/Burger.svg')."'/>";
-    $LinkToDropdown->setTrigger('', 'anchor', 'LinksButton FlyoutButton', $LinkToDropdownIcon, '/', ['title' => $LinkToDropdownTitle, 'tabindex' => '0', "role" => "button", "aria-haspopup" => "true"]);
-    $LinkToDropdown->addLink(t('Alloprof Home'), preg_match('/^en/', $Language) ? "https://www.alloprof.qc.ca/en/students" : "https://www.alloprof.qc.ca/");
-    $LinkToDropdown->addLink(t('Alloprof 100% solutions'), preg_match('/^en/', $Language) ? "https://www.alloprof.qc.ca/en/solutions" : "https://www.alloprof.qc.ca/fr/solutions");
-    echo $LinkToDropdown;
+    // $LinkToDropdown = new DropdownModule('', '', 'additional-links', 'additional-links__popup withHeader');
+    // $LinkToDropdownTitle = t('additional-links');
+    // $LinkToDropdownIcon = "<img class='ProfilePhoto BergerIcon' src='".url('/themes/alloprof/design/images/icons/Burger.svg')."'/>";
+    // $LinkToDropdown->setTrigger('', 'anchor', 'LinksButton FlyoutButton', $LinkToDropdownIcon, '/', ['title' => $LinkToDropdownTitle, 'tabindex' => '0', "role" => "button", "aria-haspopup" => "true"]);
+    // $LinkToDropdown->addLink(t('Alloprof Home'), preg_match('/^en/', $Language) ? "https://www.alloprof.qc.ca/en/students" : "https://www.alloprof.qc.ca/");
+    // $LinkToDropdown->addLink(t('Alloprof 100% solutions'), preg_match('/^en/', $Language) ? "https://www.alloprof.qc.ca/en/solutions" : "https://www.alloprof.qc.ca/fr/solutions");
+    // echo $LinkToDropdown;
 
     echo ' <div class="SignInIcons">';
     $this->fireEvent('SignInIcons');
     echo '</div>';
     echo '</div>';
 endif;
+echo '</div>';
+echo '</div>';

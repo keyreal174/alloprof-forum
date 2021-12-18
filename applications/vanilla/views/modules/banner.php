@@ -1,7 +1,8 @@
 <?php
     if($this->page === 'Categories') {
 ?>
-    <div class="Banner-content Category" style="background-color: <?php echo $this->bgColor; ?>">
+<div class="Frame-banner Banner" style="background-color: <?php echo $this->bgColor; ?>">
+    <div class="Banner-content Category">
         <div class="Category-banner__container">
             <div class="Category-banner__text">
                 <h1><strong><?php echo t($this->title); ?></strong></h1>
@@ -11,9 +12,11 @@
             </div>
         </div>
     </div>
+</div>
 <?php }
     else {
 ?>
+<div class="Frame-banner Banner">
     <div class="Banner-content General <?php echo $this->additionalClass; ?>">
         <div class="Banner-content__Container">
             <p class="Banner-content__description d-desktop">
@@ -24,4 +27,5 @@
             </p>
         </div>
     </div>
+</div>
 <?php } ?>
