@@ -22,6 +22,20 @@ jQuery(document).ready(function($) {
     $(ContentSelector).append("<div id='PagerAfter'></div>");
 
 
+    $('.toggle-search').click(function(){
+        if($(this).hasClass('opened')) {
+            $(this).removeClass('opened')
+            $('.header__search').removeClass('opened')
+        }else {
+            $(this).addClass('opened')
+            $('.header__search').addClass('opened')
+        }
+    })
+
+    $('.header__search .submit-search').click(function(){
+        $('.header__search form').submit()
+    })
+
     // function initHeader() {
     //     $("header").addClass("not-transparent");
     // }
