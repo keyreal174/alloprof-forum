@@ -679,6 +679,7 @@ class VanillaHooks extends Gdn_Plugin {
             $sender->Menu->addLink('Discussions', t('Discussions'), '/discussions', false, ['Standard' => true]);
         }
 
+        // $sender->addJsFile('component.js');
         $sender->addJsFile('alloprofObserver.js');
         $sender->addJsFile('setlocale.js', 'vanilla');
         $sender->addJsFile('slick.js', 'vanilla');

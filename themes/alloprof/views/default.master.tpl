@@ -120,16 +120,38 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!--[if lt IE 9]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-
+    <header-component portal="solutions">
+        <div slot="sub_logo" class="MobileHeader d-desktop">
+            {asset name="MobileHeader"}
+        </div>
+        <div slot="main_menu" class="header_main_menu">
+            <div id="SubHeader">
+                <div class="row">
+                    <div class="Header-left">
+                        <div class="Frame-menubar d-desktop">
+                            {module name="SubMenuModule"}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mobile__lang_switcher"></div>
+        {module name="MeModule" CssClass="FlyoutRight"}
+    </header-component>
+    <!-- <div class="Header-right">
+        <div class="Header-left__search">
+            {searchbox}
+        </div>
+    </div> -->
     <div class="Frame" id="page">
         <div class="Frame-top">
+
             {if $DataDrivenTitleBar}
                 <header id="titleBar" data-react="title-bar-hamburger" style="display: none!important;" data-unhide="true">
                     {$smarty.capture.menu}
                 </header>
             {else}
-                <div class="Frame-header">
-
+                <!-- <div class="Frame-header">
                     <header id="MainHeader" class="Header">
                         <div class="row">
                             <div class="Header-left">
@@ -175,28 +197,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         </nav>
                     </header>
 
-                    <div class="Header" id="SubHeader">
-                        <div class="row">
-                            <div class="Header-left">
-                                <div class="MobileHeader">
-                                    {asset name="MobileHeader"}
-                                </div>
-                                <div class="Frame-menubar">
-                                    {module name="SubMenuModule"}
-                                </div>
-                            </div>
-                            <div class="Header-right">
-                                <div class="Header-left__search">
-                                    {searchbox}
-                                </div>
-                            </div>
+
+                </div> -->
+                {asset name="Banner"}
+            {/if}
+            <div class="d-mobile" id="SubHeader">
+                <div class="row">
+                    <div class="Header-left">
+                        <div class="Frame-menubar">
+                            {module name="SubMenuModule"}
                         </div>
                     </div>
                 </div>
-                <div class="Frame-banner Banner">
-                    {asset name="Banner"}
-                </div>
-            {/if}
+            </div>
             <div class="Frame-body">
                 <div class="Frame-content">
                     <div class="Container">
@@ -298,6 +311,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   firebase.initializeApp(firebaseConfig);
   var auth = firebase.auth();
 </script>
+<script type="text/javascript" src="/helpzone/applications/vanilla/js/component.js"></script>
 <script src="https://alloprof-appa-prod.web.app/alloprof-profile.js"></script>
 {/if}
 </body>

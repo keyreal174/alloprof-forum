@@ -1,9 +1,9 @@
 $(window).on("scroll", function () {
-    if ($(window).scrollTop() > 72) {
-        $("#SubHeader").addClass("fixed");
-    } else {
-        $("#SubHeader").removeClass("fixed");
-    }
+    // if ($(window).scrollTop() > 72) {
+    //     $("#SubHeader").addClass("fixed");
+    // } else {
+    //     $("#SubHeader").removeClass("fixed");
+    // }
 });
 
 jQuery(document).ready(function($) {
