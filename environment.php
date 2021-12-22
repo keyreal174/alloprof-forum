@@ -22,7 +22,7 @@ if (!defined('APPLICATION')) {
 if (!defined('APPLICATION_VERSION')) {
     // Rules for the versioning
     // {OSS version}-{Cloud release version}-{? SNAPSHOT if it's a dev build}
-    define('APPLICATION_VERSION', '00bfb05bb8c94b6bafb624271ed4e4754e56f35e');
+    define('APPLICATION_VERSION', '5fef25c2f8592032582847ac44d9cd20edf3878f');
 }
 if (!defined('DS')) {
     define('DS', DIRECTORY_SEPARATOR);
