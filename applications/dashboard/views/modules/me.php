@@ -72,10 +72,11 @@ if ($Session->isValid()):
 
     echo '<span class="ToggleFlyout ToggleFlyout-notification" rel="/profile/notificationspopin?TransientKey='.htmlspecialchars(urlencode($transientKey)).'">';
 
-    echo anchor('<svg width="21" height="24" viewBox="0 0 21 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M18.5268 15.2311L18.5268 15.2312L18.5347 15.2407L19.8387 16.823C20.2338 17.332 19.8556 18 19.3064 18H1.69462C1.14305 18 0.764022 17.3264 1.16734 16.8166L1.16737 16.8166L1.17274 16.8097L2.40446 15.2245C3.51673 13.8373 4.11854 12.1416 4.11854 10.361V7.40559C4.11854 4.31771 6.26062 1.766 9.1025 1.14555C10.0377 0.941367 10.9822 0.961874 11.8235 1.14555C14.6654 1.76598 16.8075 4.3177 16.8075 7.40559V10.361C16.8075 12.1444 17.4112 13.8427 18.5268 15.2311Z" stroke="black" stroke-width="2"/>
-            <path d="M13.7894 20.6971C13.543 21.3742 13.0935 21.9587 12.5025 22.3709C11.9115 22.783 11.2076 23.0027 10.487 23C9.76649 22.9972 9.06435 22.7721 8.47649 22.3554C7.88863 21.9387 7.44371 21.3508 7.20247 20.6718" stroke="black" stroke-width="2" stroke-linecap="round"/>
-        </svg>'.sprite('SpNotifications', 'Sprite Sprite16', t('Notifications')).$CNotifications, userUrl($User), 'MeButton FlyoutButton js-clear-notifications', ['title' => t('Notifications'), 'tabindex' => '0', "role" => "button", "aria-haspopup" => "true"]);
+    echo anchor('<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M19.9161 14.9179L19.9161 14.9179L19.92 14.9227L21.2281 16.51C21.8749 17.333 21.2922 18.5 20.3059 18.5H2.69413C1.70638 18.5 1.12341 17.3296 1.77473 16.5064L1.77743 16.5029L3.01156 14.9147C4.05484 13.6148 4.61805 12.0281 4.61805 10.361V7.40559C4.61805 4.08081 6.92567 1.32724 9.99536 0.657052C11.0045 0.436726 12.0219 0.458866 12.9297 0.657053C15.9994 1.32722 18.307 4.0808 18.307 7.40559V10.361C18.307 12.0295 18.8712 13.6175 19.9161 14.9179Z" stroke="black"/>
+    <circle cx="18.25" cy="5.25" r="5.25" fill="#EB5757"/>
+    <path d="M15.2588 20.8681C14.9771 21.6419 14.4635 22.31 13.788 22.781C13.1125 23.2521 12.3081 23.5031 11.4846 23.5C10.6611 23.4968 9.8587 23.2396 9.18686 22.7633C8.51502 22.2871 8.00654 21.6152 7.73083 20.8392" stroke="black" stroke-linecap="round"/>
+    </svg>'.sprite('SpNotifications', 'Sprite Sprite16', t('Notifications')).$CNotifications, userUrl($User), 'MeButton FlyoutButton js-clear-notifications', ['title' => t('Notifications'), 'tabindex' => '0', "role" => "button", "aria-haspopup" => "true"]);
     echo sprite('SpFlyoutHandle', 'Arrow');
     echo '<div class="Flyout FlyoutMenu Flyout-withFrame Flayout-notification"></div></span>';
 
@@ -169,6 +170,17 @@ if ($Session->isValid()):
     // $LinkToDropdown->addLink(t('Alloprof 100% solutions'), preg_match('/^en/', $Language) ? "https://www.alloprof.qc.ca/en/solutions" : "https://www.alloprof.qc.ca/fr/solutions");
     // echo $LinkToDropdown;
 
+    echo '<span class="ToggleFlyout d-desktop">';
+    echo '<a class="MeButton FlyoutButton toggle-search"><svg class="search-open" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="10.5852" cy="10.5852" r="9.0852" stroke="black"/>
+        <path d="M17 17L23 23" stroke="black" stroke-linecap="round"/>
+        </svg>
+        <svg class="search-close" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M22 2.00046L2.00018 22.0002" stroke="black" stroke-linecap="round"/>
+        <path d="M22 21.9996L2 1.99997" stroke="black" stroke-linecap="round"/>
+        </svg></a>';
+    echo '</span>';
+
     if ($useNewFlyouts) {
         echo "<button class='MeBox-mobileClose'>×</button>";
     }
@@ -190,10 +202,10 @@ else:
     $dropdown = new DropdownModule('', '', 'account-options', 'unauthorized withHeader');
     $dropdown->setData('DashboardCount', $DashboardCount);
 
-    $dropdown->setTrigger('', 'anchor', 'MeButton FlyoutButton MeButton-user unauthorized', '<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="16.0005" cy="9.5" r="5.5" stroke="black" stroke-width="2"/>
-    <rect x="4.00049" y="19.1667" width="24" height="8.83333" rx="4.41667" stroke="black" stroke-width="2"/>
-    </svg>', '', ['title' => '', 'tabindex' => '0', "role" => "button", "aria-haspopup" => "true"]);
+    $dropdown->setTrigger('', 'anchor', 'MeButton FlyoutButton MeButton-user unauthorized', '<svg style="width: 24px;" viewBox="0 0 25 25" class="header__avatar ng-tns-c83-1 ng-star-inserted"><g transform="translate(18.000000, 18.000000)" class="ng-tns-c83-1"><path d="M2-3c2.8,0,5,2.2,5,5S4.8,7,2,7h-15c-2.8,0-5-2.2-5-5s2.2-5,5-5H2z M-5.5-17c3,0,5.5,2.5,5.5,5.5
+    S-2.5-6-5.5-6S-11-8.5-11-11.5S-8.5-17-5.5-17z" class="login__state ng-tns-c83-1" style="fill: transparent"></path><path d="M2-3c2.8,0,5,2.2,5,5S4.8,7,2,7h-15c-2.8,0-5-2.2-5-5s2.2-5,5-5H2z M2-2h-15c-2.2,0-4,1.8-4,4
+    s1.8,4,4,4H2c2.2,0,4-1.8,4-4S4.2-2,2-2z M-5.5-18c3.6,0,6.5,2.9,6.5,6.5S-1.9-5-5.5-5S-12-7.9-12-11.5S-9.1-18-5.5-18z M-5.5-17
+    c-3,0-5.5,2.5-5.5,5.5S-8.5-6-5.5-6S0-8.5,0-11.5S-2.5-17-5.5-17z" class="login__stroke ng-tns-c83-1"></path></g></svg>', '', ['title' => '', 'tabindex' => '0', "role" => "button", "aria-haspopup" => "true"]);
     $editModifiers['listItemCssClasses'] = ['EditProfileWrap', 'link-editprofile'];
     $preferencesModifiers['listItemCssClasses'] = ['EditProfileWrap', 'link-preferences'];
 
@@ -214,6 +226,17 @@ else:
     // $LinkToDropdown->addLink(t('Alloprof Home'), preg_match('/^en/', $Language) ? "https://www.alloprof.qc.ca/en/students" : "https://www.alloprof.qc.ca/");
     // $LinkToDropdown->addLink(t('Alloprof 100% solutions'), preg_match('/^en/', $Language) ? "https://www.alloprof.qc.ca/en/solutions" : "https://www.alloprof.qc.ca/fr/solutions");
     // echo $LinkToDropdown;
+
+    echo '<span class="ToggleFlyout d-desktop">';
+    echo '<a class="MeButton FlyoutButton toggle-search"><svg class="search-open" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="10.5852" cy="10.5852" r="9.0852" stroke="black"/>
+        <path d="M17 17L23 23" stroke="black" stroke-linecap="round"/>
+        </svg>
+        <svg class="search-close" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M22 2.00046L2.00018 22.0002" stroke="black" stroke-linecap="round"/>
+        <path d="M22 21.9996L2 1.99997" stroke="black" stroke-linecap="round"/>
+        </svg></a>';
+    echo '</span>';
 
     echo ' <div class="SignInIcons">';
     $this->fireEvent('SignInIcons');

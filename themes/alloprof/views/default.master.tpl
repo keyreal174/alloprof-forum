@@ -138,11 +138,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="mobile__lang_switcher"></div>
         {module name="MeModule" CssClass="FlyoutRight"}
     </header-component>
-    <!-- <div class="Header-right">
-        <div class="Header-left__search">
+    <div class="header__search d-desktop">
+        <div class="Container" style="position: relative;">
             {searchbox}
+            <span class="submit-search">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="10.5852" cy="10.5852" r="9.0852" stroke="black"/>
+                <path d="M17 17L23 23" stroke="black" stroke-linecap="round"/>
+                </svg>
+            </span>
         </div>
-    </div> -->
+    </div>
     <div class="Frame" id="page">
         <div class="Frame-top">
 
