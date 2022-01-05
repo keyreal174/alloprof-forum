@@ -20,10 +20,10 @@
     <div class="Banner-content General <?php echo $this->additionalClass; ?>">
         <div class="Banner-content__Container">
             <p class="Banner-content__description d-desktop">
-                <?php echo t("Welcome to the Help Zone! <br/> Have questions? Find the answers here!"); ?>
+                <?php echo t("Welcome to the Help Zone! <br/> Have questions? Find the explanations here!"); ?>
             </p>
             <p class="Banner-content__description d-mobile">
-                <?php echo t("Have questions?<br/> Find the answers here!"); ?>
+                <?php echo t("Have questions?<br/> Find the explanations here!"); ?>
             </p>
         </div>
     </div>
