@@ -279,7 +279,7 @@ class DiscussionsController extends VanillaController {
         $this->fireEvent('AddProfileTabsInfo');
 
         if ($this->UserRole == "Teacher") {
-            $bannerModule = new BannerModule('Home', 'Help Zone', "Teacher");
+            $bannerModule = new BannerModule('Home', 'Help Zone', "Teacher", "", "#0C6B52");
         } else {
             $this->addModule('NewDiscussionModule');
             $bannerModule = new BannerModule('Home', 'Help Zone');
@@ -671,7 +671,7 @@ class DiscussionsController extends VanillaController {
         $this->addModule($mobileHeader);
 
         if ($this->UserRole == "Teacher") {
-            $bannerModule = new BannerModule('Home', 'Help Zone', "Teacher");
+            $bannerModule = new BannerModule('Home', 'Help Zone', "Teacher", "", "#0C6B52");
         } else {
             $this->addModule('NewDiscussionModule');
             $bannerModule = new BannerModule('Home', 'Help Zone');
