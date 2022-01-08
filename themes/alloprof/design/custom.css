@@ -108,6 +108,21 @@
     fill: #05BF8E;
 }
 
+.Question-submenu .Navigation-link {
+    font-size: 16px;
+    line-height: 19px;
+    color: #000;
+    font-family: 'CHROMATICAMEDiUM';
+}
+
+.Question-submenu .Navigation-link:hover {
+    color: #000;
+}
+
+.Question-submenu .Navigation-link:hover .link__text {
+    background-size: 100% 2px;
+}
+
 /* Basic inputs */
 
 select {
