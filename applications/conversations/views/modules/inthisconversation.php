@@ -1,8 +1,8 @@
 <?php if (!defined('APPLICATION')) exit();
 /** @var InThisConversationModule $this */
 ?>
-<div class="Box InThisConversation">
-    <?php echo panelHeading(t('In this Conversation')); ?>
+<div class="InThisConversation">
+    <?php echo '<h2 style="margin-bottom: 24px;">'.(t('In this Conversation')).'</h2>'; ?>
     <ul class="PanelInfo">
         <?php foreach ($this->data('Participants') as $User): ?>
             <li>

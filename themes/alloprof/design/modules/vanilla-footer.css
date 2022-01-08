@@ -202,9 +202,9 @@ footer.Footer {
     padding-bottom: 1px;
 }
 
-.link:not(.link--sm):not(.link--small) .link__text {
+/* .link:not(.link--sm):not(.link--small) .link__text {
     line-height: 1.25rem;
-}
+} */
 
 .Footer p {
     color: black;

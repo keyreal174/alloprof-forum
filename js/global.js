@@ -1147,8 +1147,6 @@ jQuery(document).ready(function($) {
         $('a.TeacherSigninPopup').popup({containerCssClass: 'SignInPopup TeacherSigninPopup'});
         // $('a.registerPopup').popup({containerCssClass: 'registerPopup SignInPopup'});
 
-
-
         $('a.SignInStudentPopup').popup({containerCssClass: 'SignInStudentPopup SignInPopup'});
     }
 
@@ -1180,6 +1178,14 @@ jQuery(document).ready(function($) {
         //         e.preventDefault();
         //     });
         // }
+
+        $('a.AddToConversationPopup').popup({
+            containerCssClass: 'BanPopup CustomPopup AddToConversationPopup',
+            afterLoad: function() {
+                // Enable multicomplete on selected inputs
+                $('.AddToConversationPopup .MultiComplete').userTokenInput();
+            }
+        });
     }
 
     // This turns DeleteDiscussionPopup anchors into in-page popups

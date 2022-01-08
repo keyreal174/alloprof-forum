@@ -264,7 +264,7 @@ $Definition['month.short.12'] = 'Dec';
 $Definition['MyBadgesModuleTitle'] = 'My Badges';
 
 $Definition['NewApplicantEmail'] = 'New applicant:';
-$Definition['New Conversation'] = 'New Message';
+$Definition['New Conversation'] = 'New Conversation';
 $Definition['new discussion'] = 'new';
 $Definition['NoBadgesEarned'] = 'Any minute now&hellip;';
 $Definition['NoPermissionToDeleteDiscussions'] = 'You do not have permission to delete %1$s of the selected discussions.';

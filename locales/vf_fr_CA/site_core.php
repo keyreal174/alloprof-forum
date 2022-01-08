@@ -1897,3 +1897,5 @@ $Definition['Explanation from Alloprof'] = 'Explication d\'Alloprof';
 $Definition['Explanation verified by Alloprof'] = 'Explication vérifiée par Alloprof';
 $Definition['This Explanation was verified by a member of the Alloprof team.'] = 'Cette explication a été vérifiée par un membre de l’équipe d’Alloprof.';
 $Definition['This Explanation was submitted by a member of the Alloprof team.'] = 'Cette explication a été donnée par un membre de l\'équipe d\'Alloprof.';
+
+$Definition['There is no discussion at the moment.'] = 'Il n’y a aucune conversation pour l’instant.';

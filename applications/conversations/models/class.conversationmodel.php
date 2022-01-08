@@ -548,7 +548,7 @@ SQL;
             unset($formPostValues['ConversationID']);
         }
         $deprecated = $settings instanceof ConversationMessageModel;
-        $createMessage =  $deprecated || empty($settings[self::OPT_CONVERSATION_ONLY]);
+        $createMessage =  false; //$deprecated || empty($settings[self::OPT_CONVERSATION_ONLY]);
 
         if ($createMessage) {
             if ($deprecated) {
@@ -584,11 +584,11 @@ SQL;
             $formPostValues['Format'] = c('Garden.InputFormatter');
         }
 
-        if ($createMessage) {
-            // Add & apply any extra validation rules:
-            $this->Validation->applyRule('Body', 'Required');
-            $messageModel->Validation->applyRule('Body', 'Required');
-        }
+        // if ($createMessage) {
+        //     // Add & apply any extra validation rules:
+        //     $this->Validation->applyRule('Body', 'Required');
+        //     $messageModel->Validation->applyRule('Body', 'Required');
+        // }
 
         // Make sure that there is at least one recipient
         $this->Validation->addRule('OneOrMoreArrayItemRequired', 'function:ValidateOneOrMoreArrayItemRequired');

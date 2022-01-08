@@ -473,6 +473,92 @@ div.Popup.BanPopup .btn {
     color: black;
 }
 
+/* Leave conversation confirmation popup css */
+
+.leave-conversation-popup {
+    padding: 60px 40px 40px 40px;
+    max-width: 540px;
+    text-align: center;
+}
+
+.leave-conversation-popup h2 {
+    margin-bottom: 16px;
+}
+
+.leave-conversation-popup P {
+    font-size: 16px;
+    color: black;
+}
+
+.leave-conversation-popup .Buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.leave-conversation-popup .Buttons .Close {
+    border: none !important;
+    line-height: initial;
+    text-decoration: underline;
+}
+
+
+/* Add people to conversation popup */
+
+.AddToConversationPopup .Border {
+    width: 100% !important;
+    max-width: 580px !important;
+}
+
+.AddToConversationPopup hr {
+    margin: 16px 0;
+}
+
+.AddToConversationPopup .Border .Body{ 
+    padding: 24px !important;
+}
+
+.AddToConversationPopup form#Form_AddPeople > div {
+    display: flex;
+    align-items: center;
+}
+
+.AddToConversationPopup .Border h2 {
+    text-align: left;
+}
+
+.AddToConversationPopup .TextBoxWrapper {
+    flex: 1;
+}
+
+.AddToConversationPopup .TextBoxWrapper ul {
+    height: 56px !important;
+    background: #f8f8f8;
+    border: none;
+}
+
+.AddToConversationPopup .TextBoxWrapper ul input {
+    background: transparent;
+}
+
+.AddToConversationPopup .Buttons {
+    margin: 0;
+    margin-left: 16px;
+}
+
+.AddToConversationPopup #ConversationForm {
+    margin-bottom: 0;
+}
+
+.AddToConversationPopup #Form_Createaconversation {
+    margin-top: 24px;
+    margin-left: auto;
+}
+
+.AddToConversationPopup .ql-editor {
+    text-align: left;
+}
+
 @media screen and (max-width: 958px) {
     div.Popup.BanPopup #Message {
         font-size: 15px;
