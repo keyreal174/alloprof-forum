@@ -232,7 +232,10 @@ class LogModel extends Gdn_Pluggable {
                         'Preferences.Email.Delete' => 2,
                         'Preferences.Popup.Delete' => 2,
                     ]);
-                    $text = sprintf(t('Your '.($recordType=='Discussion'?'question':'explanation').' has been deleted by a moderator: <b>"%s"</b>.'), $deleteMessage);
+
+                    $InsertUser = Gdn::userModel()->getID($log['InsertUserID']);
+
+                    $text = $InsertUser->ProfileLanguage == 'fr' ? sprintf(($recordType=='Discussion'?'Ta question':'Ton explication').' a été effacée par un modérateur: <b>"%s"</b>.', $deleteMessage) : sprintf('Your '.($recordType=='Discussion'?'question':'explanation').' has been deleted by a moderator: <b>"%s"</b>.', $deleteMessage);
                     $data = [
                         "ActivityType" => "Delete",
                         "NotifyUserID" => $log['InsertUserID'],
