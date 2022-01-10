@@ -92,30 +92,35 @@ jQuery(document).ready(function($) {
             $('.information-block.newcomment').addClass('show');
             return;
         }
-        auth.currentUser.getIdToken().then(function(idToken) {  // <------ Check this line
-            $.ajax({
-                type: "POST",
-                url: "https://us-central1-alloprof-stg.cloudfunctions.net/apiFunctionsApp/geo/probe",
-                headers: {
-                    'authorization': 'Bearer ' + idToken
-                },
-                dataType: 'json',
-                error: function(XMLHttpRequest, textStatus, errorThrown) {
-                    console.log(XMLHttpRequest.responseText);
-                },
-                success: function(json) {
-                    const { inZone } = json;
-                    localStorage.setItem("inZone", inZone);
-                    if (!inZone) {
-                        var geoBlockingModalTrigger = localStorage.getItem("geoBlockingModalTrigger");
-                            showGeoBlockingModal();
-                    } else {
-                        $('.CommentPostForm').addClass('open');
-                        $('.information-block.newcomment').addClass('show');
+        if (auth && auth.currentUser) {
+            auth.currentUser.getIdToken().then(function(idToken) {  // <------ Check this line
+                $.ajax({
+                    type: "POST",
+                    url: "https://us-central1-alloprof-stg.cloudfunctions.net/apiFunctionsApp/geo/probe",
+                    headers: {
+                        'authorization': 'Bearer ' + idToken
+                    },
+                    dataType: 'json',
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        console.log(XMLHttpRequest.responseText);
+                    },
+                    success: function(json) {
+                        const { inZone } = json;
+                        localStorage.setItem("inZone", inZone);
+                        if (!inZone) {
+                            var geoBlockingModalTrigger = localStorage.getItem("geoBlockingModalTrigger");
+                                showGeoBlockingModal();
+                        } else {
+                            $('.CommentPostForm').addClass('open');
+                            $('.information-block.newcomment').addClass('show');
+                        }
                     }
-                }
+                });
             });
-        });
+        } else {
+            // $('.CommentPostForm').addClass('open');
+            // $('.information-block.newcomment').addClass('show');
+        }
     })
 
     $('.CommentPostForm .close-icon').click(function(){

@@ -921,10 +921,12 @@ class DiscussionController extends VanillaController {
             ]);
 
             if ($this->Form->errorCount() == 0) {
+                $discussionInsertUser = $this->UserModel->getID($discussion->InsertUserID);
                 \Gdn::config()->touch([
                     'Preferences.Popup.Delete' => 2,
                 ]);
-                $text = sprintf(t('Your question has been deleted by a moderator: <b>"%s"</b>.'), $this->Form->getFormValue('DeleteMessage'));
+                $text = $discussionInsertUser->ProfileLanguage == "fr" ? sprintf('Ta question a été effacée par un modérateur: <b>"%s"</b>.', $this->Form->getFormValue('DeleteMessage')) : sprintf('Your question has been deleted by a moderator: <b>"%s"</b>.', $this->Form->getFormValue('DeleteMessage'));
+
                 $data = [
                     "ActivityType" => "Delete",
                     "NotifyUserID" => $discussion->InsertUserID,
@@ -939,7 +941,6 @@ class DiscussionController extends VanillaController {
                 $ActivityModel->saveQueue();
 
                 // send email to discussion owner
-                $discussionInsertUser = $this->UserModel->getID($discussion->InsertUserID);
                 $userPrefs = dbdecode($discussionInsertUser->Preferences);
 
                 if (val("Email.CustomNotification", $userPrefs) && $discussion->InsertUserID != $session->UserID) {
@@ -1076,7 +1077,10 @@ class DiscussionController extends VanillaController {
                 \Gdn::config()->touch([
                     'Preferences.Popup.Delete' => 2,
                 ]);
-                $headlineFormat = sprintf(t('Your explanation has been deleted by a moderator: <b>"%s"</b>.'), $this->Form->getFormValue('DeleteMessage'));
+                $commentInsertUser = $this->UserModel->getID($comment->InsertUserID);
+
+                $headlineFormat = $commentInsertUser->ProfileLanguage == "fr" ? sprintf('Ton explication a été effacée par un modérateur: <b>"%s"</b>.', $this->Form->getFormValue('DeleteMessage')) : sprintf('Your explanation has been deleted by a moderator: <b>"%s"</b>.', $this->Form->getFormValue('DeleteMessage'));
+
                 $data = [
                     "ActivityType" => "Delete",
                     "NotifyUserID" => $comment->InsertUserID,
@@ -1091,7 +1095,6 @@ class DiscussionController extends VanillaController {
                 $ActivityModel->saveQueue();
 
                 // send email to discussion owner
-                $commentInsertUser = $this->UserModel->getID($comment->InsertUserID);
                 $userPrefs = dbdecode($commentInsertUser->Preferences);
 
                 if (val("Email.CustomNotification", $userPrefs)) {
