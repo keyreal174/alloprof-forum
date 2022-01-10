@@ -10,6 +10,7 @@ foreach ($this->data('Conversations') as $Conversation) {
 
     // Figure out the last photo.
     $LastPhoto = '';
+    $LastUser = '';
     if (empty($Conversation->Participants)) {
         $User = Gdn::userModel()->getID($Conversation->LastInsertUserID);
         $LastPhoto = userPhoto($User);
@@ -17,6 +18,7 @@ foreach ($this->data('Conversations') as $Conversation) {
         foreach ($Conversation->Participants as $User) {
             if ($User['UserID'] == $Conversation->LastInsertUserID) {
                 $LastPhoto = userPhoto($User);
+                $LastUser = $User;
                 if ($LastPhoto)
                     break;
             } elseif (!$LastPhoto) {
@@ -48,15 +50,22 @@ foreach ($this->data('Conversations') as $Conversation) {
         <div class="ItemContent Conversation">
             <?php
             $Url = '/messages/'.$Conversation->ConversationID.'/#Item_'.$JumpToItem;
+            $session = Gdn::session();
+            echo '<div class="Header">';
+            echo '<h2>'.htmlspecialchars($Names).', '.$session->User->Name.'</h2>';
+            echo anchor('<svg width="26" height="18" viewBox="0 0 26 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M24.25 8.88715L1.75 8.88715" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M9.11842 16.2175L1.77539 8.87444L9.11842 1.53141" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>', $Url);
 
-            echo '<h3 aria-level="2" class="Users">';
+            echo '</div>';
+
+            echo '<hr/>';
 
             if ($Names) {
                 if ($LastPhoto) {
                     echo '<div class="Author Photo">'.$LastPhoto.'</div>';
                 }
-
-                echo anchor(htmlspecialchars($Names), $Url);
             }
             if ($Subject = val('Subject', $Conversation)) {
                 if ($Names) {
@@ -65,21 +74,26 @@ foreach ($this->data('Conversations') as $Conversation) {
                 echo '<span class="Subject">'.anchor(htmlspecialchars($Subject), $Url).'</span>';
             }
 
-            echo '</h3>';
             ?>
-            <div class="Excerpt"><?php echo anchor(htmlspecialchars($Message), $Url, 'Message'); ?></div>
-            <div class="Meta">
-                <?php
-                $this->fireEvent('BeforeConversationMeta');
+            <div class="Content">
+                <!-- <div class="User"><?php echo anchor(htmlspecialchars($Names), $Url); ?></div> -->
+                <div class="User">
+                    <?php echo $LastUser['Name']; ?>
+                    <div class="Meta">
+                        <?php
+                        $this->fireEvent('BeforeConversationMeta');
 
-                echo ' <span class="MItem CountMessages">'.sprintf(plural($Conversation->CountMessages, '%s message', '%s messages'), $Conversation->CountMessages).'</span> ';
+                        // echo ' <span class="MItem CountMessages">'.sprintf(plural($Conversation->CountMessages, '%s message', '%s messages'), $Conversation->CountMessages).'</span> ';
 
-                if ($Conversation->CountNewMessages > 0) {
-                    echo ' <strong class="HasNew"> '.plural($Conversation->CountNewMessages, '%s new', '%s new').'</strong> ';
-                }
+                        if ($Conversation->CountNewMessages > 0) {
+                            echo ' <strong class="HasNew"> '.plural($Conversation->CountNewMessages, '%s new', '%s new').'</strong> ';
+                        }
 
-                echo ' <span class="MItem LastDateInserted">'.Gdn_Format::date($Conversation->LastDateInserted).'</span> ';
-                ?>
+                        echo ' <span class="MItem LastDateInserted">'.Gdn_Format::date($Conversation->LastDateInserted).'</span> ';
+                        ?>
+                    </div>
+                </div>
+                <div class="Excerpt"><?php echo htmlspecialchars($Message); ?></div>
             </div>
         </div>
     </li>

@@ -43,8 +43,11 @@ class MessagesController extends ConversationsController {
         $this->addModule('SignedInModule');
 
         if (checkPermission('Conversations.Conversations.Add')) {
-            $this->addModule('NewConversationModule');
+            // $this->addModule('NewConversationModule');
         }
+
+        $mobileHeader = new MobileHeaderModule(null);
+        $this->addModule($mobileHeader);
     }
 
     /**
@@ -244,7 +247,7 @@ class MessagesController extends ConversationsController {
      * @param string $page The page number argument.
      */
     public function all($page = '') {
-        $this->title(t('Inbox'));
+        $this->title(t('Conversations'));
         Gdn_Theme::section('ConversationList');
 
         list($offset, $limit) = offsetLimit($page, c('Conversations.Conversations.PerPage', 50));
@@ -382,7 +385,6 @@ class MessagesController extends ConversationsController {
         $this->setData('Conversation', $this->Conversation);
 
 
-
         // Get limit
         if ($limit == '' || !is_numeric($limit) || $limit < 0) {
             $limit = c('Conversations.Messages.PerPage', 50);
@@ -453,17 +455,30 @@ class MessagesController extends ConversationsController {
         }
 
         // Add modules.
-        $clearHistoryModule = new ClearHistoryModule($this);
-        $clearHistoryModule->conversationID($conversationID);
-        $this->addModule($clearHistoryModule);
 
         $inThisConversationModule = new InThisConversationModule($this);
         $inThisConversationModule->setData('Participants', $this->Conversation->Participants);
         $this->addModule($inThisConversationModule);
 
+        $clearHistoryModule = new ClearHistoryModule($this);
+        $clearHistoryModule->conversationID($conversationID);
+        $this->addModule($clearHistoryModule);
+
+        // Make sure the userphoto module gets added to the page
+        $this->addModule('UserPhotoModule');
+
+        // And add the filter menu module
+        $this->fireEvent('AfterAddSideMenu');
+
+        // Add discussion and question count on the profile block
+        $this->fireEvent('AddProfileTabsInfo');
+
+        $this->addModule('ProfileFilterModule');
+
+
         // Doesn't make sense for people who can't even start conversations to be adding people
         if (checkPermission('Conversations.Conversations.Add')) {
-            $this->addModule('AddPeopleModule');
+            // $this->addModule('AddPeopleModule');
         }
 
         $subject = $this->data('Conversation.Subject');
@@ -605,6 +620,65 @@ class MessagesController extends ConversationsController {
      */
     public function inbox($page = '') {
         $this->View = 'All';
+        // Make sure the userphoto module gets added to the page
+        $this->addModule('UserPhotoModule');
+
+        // And add the filter menu module
+        $this->fireEvent('AfterAddSideMenu');
+
+        // Add discussion and question count on the profile block
+        $this->fireEvent('AddProfileTabsInfo');
+
+        $this->addModule('ProfileFilterModule');
+
         $this->all($page);
+    }
+
+
+    public function addPeople($conversationID = false) {
+        // Figure out Conversation ID
+        if (!is_numeric($conversationID) || $conversationID < 0) {
+            $conversationID = 0;
+        }
+
+        $this->Conversation = $this->ConversationModel->getID($conversationID);
+
+        // Bad conversation? Redirect
+        if ($this->Conversation === false) {
+            throw notFoundException('Conversation');
+        }
+        
+        $this->Conversation->Participants = $this->ConversationModel->getRecipients($conversationID);
+        $this->setData('Conversation', $this->Conversation);
+        $this->setData('Participants', $this->Conversation->Participants);
+
+        // Allowed to use this module?
+        $this->AddUserAllowed = $this->ConversationModel->addUserAllowed($this->Conversation->ConversationID);
+
+        $this->Form = Gdn::factory('Form', 'AddPeople');
+        // If the form was posted back, check for people to add to the conversation
+        if ($this->Form->authenticatedPostBack()) {
+            // Defer exceptions until they try to use the form so we don't fill our logs
+            if (!$this->AddUserAllowed || !checkPermission('Conversations.Conversations.Add')) {
+                throw permissionException();
+            }
+            $newRecipientUserIDs = explode(',', $this->Form->getFormValue('AddPeople', ''));
+            if ($this->ConversationModel->addUserToConversation($this->Conversation->ConversationID, $newRecipientUserIDs)) {
+                // $this->informMessage(t('Your changes were saved.'));
+            } else {
+                $maxRecipients = ConversationModel::getMaxRecipients();
+                $this->informMessage(sprintf(
+                    plural(
+                        $maxRecipients,
+                        "You are limited to %s recipient.",
+                        "You are limited to %s recipients."
+                    ),
+                    $maxRecipients
+                ));
+            }
+            $this->setRedirectTo('/messages/'.$this->Conversation->ConversationID, false);
+        } 
+        
+        $this->render();
     }
 }

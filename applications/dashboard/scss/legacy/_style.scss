@@ -3687,7 +3687,7 @@ position on the page to notify users of things like drafts being saved, etc. */
   top: auto;
   bottom: 0;
   left: 0;
-  z-index: 200;
+  z-index: 999;
   margin: 0;
   padding: 0;
   list-style: none;

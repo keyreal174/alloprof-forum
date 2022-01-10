@@ -18,7 +18,7 @@ jQuery(document).ready(function($) {
          var lastMessage = $(messages).get(messages.length - 1);
          var lastMessageID = $(lastMessage).attr('id');
          postValues += '&' + prefix + 'LastMessageID=' + lastMessageID;
-         $(button).before('<span class="TinyProgress">&#160;</span>');
+         $(button).html('<span class="TinyProgress">&#160;</span>');
          $.ajax({
             type: "POST",
             url: $(frm).attr('action'),
@@ -61,7 +61,9 @@ jQuery(document).ready(function($) {
             },
             complete: function(XMLHttpRequest, textStatus) {
                // Remove any spinners, and re-enable buttons.
+               $('.MessageList li.empty').remove();
                $('span.TinyProgress').remove();
+               $(button).html('<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="m13.887 21.348-3.68-5.586L16.51 7.99c.18-.224-.047-.428-.25-.249l-7.776 6.323-5.59-3.7c-.724-.478-.57-1.56.217-1.826l16.94-5.65c.789-.267 1.56.504 1.292 1.292l-5.653 16.93c-.267.81-1.349.94-1.803.24z" fill="#fff"/></svg>')
                $(frm).find(':submit').removeAttr("disabled");
             }
          });

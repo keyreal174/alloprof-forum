@@ -28,19 +28,19 @@ foreach ($Messages as $Message) {
     ?>
     <li id="Message_<?php echo $Message->MessageID; ?>"<?php echo $Class == '' ? '' : ' class="'.$Class.'"'; ?>>
         <div id="Item_<?php echo $CurrentOffset ?>" class="ConversationMessage">
-            <div class="Meta">
-         <span class="Author">
-            <?php
-            echo userPhoto($Author, 'Photo');
-            echo userAnchor($Author, 'Name');
-            ?>
-         </span>
-                <span class="MItem DateCreated"><?php echo Gdn_Format::date($Message->DateInserted, 'html'); ?></span>
+            <span class="Author">
                 <?php
-                $this->fireEvent('AfterConversationMessageDate');
+                echo userPhoto($Author, 'Photo');
                 ?>
-            </div>
+            </span>
             <div class="Message userContent">
+                <div class="Meta">
+                    <h3><?php echo $Author->Name; ?></h3>
+                    <span class="MItem DateCreated"><?php echo Gdn_Format::date($Message->DateInserted, 'html'); ?></span>
+                    <?php
+                        $this->fireEvent('AfterConversationMessageDate');
+                    ?>
+                </div>
                 <?php
                 $this->fireEvent('BeforeConversationMessageBody');
                 echo Gdn_Format::to($Message->Body, $Format);

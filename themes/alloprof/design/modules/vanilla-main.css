@@ -6788,16 +6788,20 @@ body.hasRichEditor.Section-PostDiscussion #DiscussionForm .FormWrapper {
 .InputBox.js-search {
     background-color: transparent !important;
     border: none;
-    border-radius: 0;
+    border-radius: 4px;
     font-family: ChromaticaMedium;
     font-size: 15px;
-    padding: 0;
-    padding-right: 40px;
-    border-bottom: 1px solid black;
+    padding: 3px 16px 0 40px;
     min-width: 240px;
     height: 44px;
     width: 100%;
     color: black
+}
+
+.header__search .InputBox.js-search {
+    border-bottom: 1px solid black;
+    padding: 0 0 40px 0 !important;
+    border-radius: 0;
 }
 
 .InputAndButton .BigInput::-webkit-input-placeholder,
@@ -11262,7 +11266,7 @@ body.noGroupIcon .Group-Header-Info {
     margin-bottom: 14px
 }
 
-.Section-Conversation .Conversation .PhotoWrap,
+/* .Section-Conversation .Conversation .PhotoWrap,
 .Section-Conversation .DataList.Conversations .PhotoWrap,
 .Section-ConversationList .Conversation .PhotoWrap,
 .Section-ConversationList .DataList.Conversations .PhotoWrap {
@@ -11270,19 +11274,20 @@ body.noGroupIcon .Group-Header-Info {
     margin-right: 0;
     position: absolute;
     top: 16px
-}
+} */
 
 .Section-Conversation .Conversation .Author+a,
 .Section-Conversation .Conversation .Excerpt,
-.Section-Conversation .Conversation .Meta,
+/* .Section-Conversation .Conversation .Meta, */
 .Section-Conversation .DataList.Conversations .Author+a,
 .Section-Conversation .DataList.Conversations .Excerpt,
 .Section-Conversation .DataList.Conversations .Meta,
-.Section-ConversationList .Conversation .Author+a,
+/* .Section-ConversationList .Conversation .Author+a, */
 .Section-ConversationList .Conversation .Excerpt,
 .Section-ConversationList .Conversation .Meta,
-.Section-ConversationList .DataList.Conversations .Author+a,
+/* .Section-ConversationList .DataList.Conversations .Author+a, */
 .Section-ConversationList .DataList.Conversations .Excerpt,
+.Section-ConversationList .DataList.Conversations .User,
 .Section-ConversationList .DataList.Conversations .Meta {
     padding-left: 50px
 }
@@ -11298,6 +11303,184 @@ body.noGroupIcon .Group-Header-Info {
     display: block
 }
 
+.Section-ConversationList .Conversation hr {
+    background-color: #e0e0e0;
+    margin-top: 15px;
+    margin-bottom: 24px;
+}
+
+.Section-ConversationList .Conversation .Content {
+    margin-left: 8px;
+}
+
+.Section-ConversationList .DataList.Conversations .Author+a {
+    margin-right: 16px;
+}
+
+.Section-ConversationList .Conversation .Header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+}
+
+.Section-ConversationList .Conversation .Header a svg {
+    transform: rotate(180deg);
+}
+
+.Section-Conversation .userContent,
+.Section-ConversationList .Conversation .User,
+.Section-ConversationList .Conversation .Excerpt {
+    font-size: 16px;
+    color: black;
+    line-height: 24px;
+}
+
+.Section-Conversation .userContent .Meta,
+.Section-Conversation .userContent p {
+    margin: 0 !important;
+}
+
+.Section-ConversationList .Conversation .User {
+    font-weight: bold;
+    margin-bottom: 4px;
+    position: relative;
+}
+
+.Section-Conversation .Meta .DateCreated,
+.Section-ConversationList .Conversation .User .Meta {
+    position: absolute;
+    top: 0;
+    right:0;
+}
+
+.Section-Conversation .back-home,
+.Section-ConversationList .back-home {
+    display: block;
+    padding-bottom: 17px;
+}
+
+.Section-Conversation .back-home a,
+.Section-ConversationList .back-home a {
+    display: flex;
+    align-items: center;
+}
+
+.Section-Conversation .back-home span,
+.Section-ConversationList .back-home span {
+    font-size: 14px;
+    line-height: 21px;
+}
+
+.Section-Conversation .back-home svg ,
+.Section-ConversationList .back-home svg {
+    width: 17px;
+    height: 17px;
+    margin-right: 4px;
+}
+
+.Section-Conversation .LeftPanel {
+    background-color: white !important;
+    padding: 24px !important;
+}
+
+.Section-Conversation .LeftPanel .leave-conversation{
+    justify-content: center;
+    width: 100% !important;
+    margin-top: 24px;
+}
+
+.Section-ConversationList .add-people {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+.Section-Conversation hr,
+.Section-ConversationList hr {
+    background-color: #e0e0e0;
+}
+
+.Section-Conversation .MessageList li {
+    margin-bottom: 24px;
+    padding: 0;
+    border-bottom: none !important;
+}
+
+.Section-Conversation .MessageList li.empty {
+    margin-top: 20px;
+    height: 55px;
+    text-align: center;
+}
+
+.Section-Conversation .MessageList li:not(:last-child) {
+    margin-top: 24px;
+}
+
+.Section-Conversation .Meta {
+    position: relative;
+}
+
+.Section-Conversation .Meta h3{
+    color: black;
+}
+
+.Section-Conversation .DataListWrap {
+    background-color: white;
+    border-radius: 8px;
+    padding: 24px;
+}
+
+.Section-Conversation .message-input-wrapper {
+    display: flex;
+    align-items: flex-end;
+}
+
+.Section-Conversation .message-input-wrapper .bodybox-wrap {
+    flex: 1;
+    padding-left: 40px;
+    margin-bottom: 0;
+}
+
+.Section-Conversation .message-input-wrapper .richEditor .richEditor-frame {
+    padding: 0;
+    min-height: 0;
+    border-radius: 24px;
+}
+
+.Section-Conversation .message-input-wrapper .richEditor .richEditor-textWrap {
+    min-height: 0;
+}
+
+.Section-Conversation .message-input-wrapper .richEditor-text {
+    min-height: 45px !important;
+    max-height: 200px;
+    overflow-y: auto;
+    padding: 15px !important;
+}
+
+.Section-Conversation .message-input-wrapper .message-send {
+    width: 48px;
+    min-width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: #05bf8e;
+    margin-left: 12px;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Section-Conversation .message-input-wrapper .richEditor-embedBar {
+    position: absolute;
+    bottom: 3px;
+    left: -43px;
+    width: fit-content;
+}
+
 .Section-ConversationList .Frame-content>.Container {
     max-width: 800px
 }
@@ -11307,7 +11490,7 @@ body.noGroupIcon .Group-Header-Info {
 }
 
 .Section-Conversation .SearchBox,
-.Section-ConversationList .Frame-content .Panel {
+.Section-ConversationList .Frame-content .LeftPanel {
     display: none
 }
 
@@ -11325,6 +11508,54 @@ body.noGroupIcon .Group-Header-Info {
     padding-left: 50px
 }
 
+.Section-Conversation .conversation-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.Section-Conversation .add-people {
+    position: relative;
+}
+
+.Section-Conversation .add-people svg {
+    width: 20px;
+    height: 20px;
+}
+
+.Section-Conversation .add-people span {
+    position: absolute;
+    top: -8px;
+    right: -3px;
+}
+
+.AddToConversationPopup .InThisConversation ul {
+    margin-top: 24px;
+}
+
+.InThisConversation ul li {
+    text-align: left;
+}
+
+.InThisConversation ul li a {
+    padding: 0 !important;
+}
+
+.InThisConversation ul li:not(:last-child) {
+    margin-bottom: 16px;
+}
+
+.InThisConversation ul li .Conversation-User {
+    display: flex;
+    align-items: center;
+}
+
+.InThisConversation ul li .Conversation-User .Username {
+    font-size: 16px;
+    color: black;
+    font-weight: bold;
+    margin-left: 8px;
+}
 /*!
  * @author Isis (igraziatto) Graziatto <isis.g@vanillaforums.com>
  * @copyright 2009-2018 Vanilla Forums Inc.

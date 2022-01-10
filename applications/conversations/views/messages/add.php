@@ -1,10 +1,9 @@
 <?php if (!defined('APPLICATION')) exit(); ?>
 <div id="ConversationForm" class="FormTitleWrapper ConversationForm">
     <?php
-    echo wrap($this->data('Title'), 'h1', ['class' => 'H']);
+    echo '<h2>'.t('New conversation').'</h2>';
     $this->fireEvent('BeforeMessageAdd');
-
-    echo '<div class="FormWrapper">';
+    echo '<hr/>';
     echo $this->Form->open();
     echo $this->Form->errors();
 
@@ -15,7 +14,6 @@
     }
     $userData = $this->Data('userData');
     echo '<div class="P">';
-    echo $this->Form->label('Recipients', 'To');
     echo wrap($this->Form->textBox('To', ['MultiLine' => true, 'class' => 'MultiComplete', 'data-users' => json_encode($userData)]), 'div', ['class' => 'TextBoxWrapper']);
     echo '</div>';
 
@@ -30,16 +28,15 @@
     }
 
     echo '<div class="P">';
-    echo $this->Form->bodyBox('Body', ['Table' => 'ConversationMessage', 'FileUpload' => true]);
+    // echo $this->Form->bodyBox('Body', ['Table' => 'ConversationMessage', 'FileUpload' => true]);
     //      echo wrap($this->Form->textBox('Body', array('MultiLine' => TRUE)), 'div', array('class' => 'TextBoxWrapper'));
     echo '</div>';
 
     echo '<div class="Buttons">';
-    echo $this->Form->button('Start Conversation', ['class' => 'Button Primary DiscussionButton']);
-    echo anchor(t('Cancel'), '/messages/inbox', 'Button Cancel');
+    echo $this->Form->button(t('Create a conversation'), ['class' => 'btn-default btn-shadow DiscussionButton']);
+    // echo anchor(t('Cancel'), '/messages/inbox', 'Button Cancel');
     echo '</div>';
 
     echo $this->Form->close();
-    echo '</div>';
     ?>
 </div>
