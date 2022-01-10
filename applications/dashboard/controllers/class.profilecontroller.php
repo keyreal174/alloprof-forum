@@ -933,6 +933,7 @@ class ProfileController extends Gdn_Controller {
         $this->ActivityModel = new ActivityModel();
         $activities = $this->ActivityModel->getWhere($where, '', '', c('Vanilla.Discussions.PerPage', 5), 0)->resultArray();
         $UnreadNotifications = $this->ActivityModel->getUserTotalUnread(Gdn::session()->UserID);
+        $UnreadConvNotifications = $this->ActivityModel->getUserTotalConvUnread(Gdn::session()->UserID);
 
         $user = Gdn::userModel()->getID(Gdn::session()->UserID);
         if (val('CountNotifications', $user) != 0) {
@@ -945,6 +946,7 @@ class ProfileController extends Gdn_Controller {
 
         $this->setData('Activities', $activities);
         $this->setData('UnreadNotifications', $UnreadNotifications);
+        $this->setData('UnreadConvNotifications', $UnreadConvNotifications);
         $this->setData('Preferences', $userPrefs);
         // $this->ActivityModel->markRead(Gdn::session()->UserID);
 

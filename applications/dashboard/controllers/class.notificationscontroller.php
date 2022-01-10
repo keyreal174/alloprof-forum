@@ -117,13 +117,23 @@ class NotificationsController extends Gdn_Controller {
                 </svg>';
             }
 
-            $sender->informMessage(
-                '<div class="toast-container">'.$userPhoto.'<div>'
-                .wrap(t($activity['Headline']).$verifiedIcon, 'div', ['class' => 'toast-title'.($verified?' verified':'')])
-                .wrap(t($story), 'div', ['class' => 'toast-text'])
-                .($activity['Route']?'<a href="'.$link.'" class="btn-default">'.t('See').'</a>':'').'</div></div>',
-                'Dismissable'.$activityClass.($userPhoto == '' ? '' : ' HasIcon')
-            );
+            if ($activity['ActivityTypeID'] == '21') {
+                $sender->informMessage(
+                    '<div class="toast-container">'.$userPhoto.'<div>'
+                    .wrap(t("New message!").$verifiedIcon, 'div', ['class' => 'toast-title'.($verified?' verified':'')])
+                    .wrap(t("You have a new message from a moderator."), 'div', ['class' => 'toast-text'])
+                    .($activity['Route']?'<a href="'.$link.'" class="btn-default">'.t('Reply').'</a>':'').'</div></div>',
+                    'Dismissable'.$activityClass.($userPhoto == '' ? '' : ' HasIcon')
+                );
+            } else {
+                $sender->informMessage(
+                    '<div class="toast-container">'.$userPhoto.'<div>'
+                    .wrap(t($activity['Headline']).$verifiedIcon, 'div', ['class' => 'toast-title'.($verified?' verified':'')])
+                    .wrap(t($story), 'div', ['class' => 'toast-text'])
+                    .($activity['Route']?'<a href="'.$link.'" class="btn-default">'.t('See').'</a>':'').'</div></div>',
+                    'Dismissable'.$activityClass.($userPhoto == '' ? '' : ' HasIcon')
+                );
+            }
         }
     }
 
