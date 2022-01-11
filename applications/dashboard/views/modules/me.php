@@ -74,7 +74,6 @@ if ($Session->isValid()):
 
     echo anchor('<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M19.9161 14.9179L19.9161 14.9179L19.92 14.9227L21.2281 16.51C21.8749 17.333 21.2922 18.5 20.3059 18.5H2.69413C1.70638 18.5 1.12341 17.3296 1.77473 16.5064L1.77743 16.5029L3.01156 14.9147C4.05484 13.6148 4.61805 12.0281 4.61805 10.361V7.40559C4.61805 4.08081 6.92567 1.32724 9.99536 0.657052C11.0045 0.436726 12.0219 0.458866 12.9297 0.657053C15.9994 1.32722 18.307 4.0808 18.307 7.40559V10.361C18.307 12.0295 18.8712 13.6175 19.9161 14.9179Z" stroke="black"/>
-    <circle cx="18.25" cy="5.25" r="5.25" fill="#EB5757"/>
     <path d="M15.2588 20.8681C14.9771 21.6419 14.4635 22.31 13.788 22.781C13.1125 23.2521 12.3081 23.5031 11.4846 23.5C10.6611 23.4968 9.8587 23.2396 9.18686 22.7633C8.51502 22.2871 8.00654 21.6152 7.73083 20.8392" stroke="black" stroke-linecap="round"/>
     </svg>'.sprite('SpNotifications', 'Sprite Sprite16', t('Notifications')).$CNotifications, userUrl($User), 'MeButton FlyoutButton js-clear-notifications', ['title' => t('Notifications'), 'tabindex' => '0', "role" => "button", "aria-haspopup" => "true"]);
     echo sprite('SpFlyoutHandle', 'Arrow');

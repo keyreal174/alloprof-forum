@@ -119,7 +119,7 @@ class NotificationsController extends Gdn_Controller {
 
             if ($activity['ActivityTypeID'] == '21') {
                 $sender->informMessage(
-                    '<div class="toast-container">'.$userPhoto.'<div>'
+                    '<div class="toast-container conversation-toast-container">'.$userPhoto.'<div>'
                     .wrap(t("New message!").$verifiedIcon, 'div', ['class' => 'toast-title'.($verified?' verified':'')])
                     .wrap(t("You have a new message from a moderator."), 'div', ['class' => 'toast-text'])
                     .($activity['Route']?'<a href="'.$link.'" class="btn-default">'.t('Reply').'</a>':'').'</div></div>',
