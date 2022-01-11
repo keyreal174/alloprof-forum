@@ -1278,11 +1278,13 @@ class CommentModel extends Gdn_Model implements FormatFieldInterface, EventFromR
                 }
 
                 $fields['Published'] = true;
+                $fields['WasPro'] = true;
 
                 // Check for spam
                 $spam = SpamModel::isSpam('Comment', $commentData);
                 if ($spam) {
                     $fields['Published'] = false;
+                    $fields['WasPro'] = false;
                     // return SPAM;
                 }
 
@@ -1298,6 +1300,7 @@ class CommentModel extends Gdn_Model implements FormatFieldInterface, EventFromR
                     $UserRole = true;
                 if ((!$UserRole && $approvalRequired && !val('Verified', Gdn::session()->User)) || !Gdn::session()->User) {
                     $fields['Published'] = false;
+                    $fields['WasPro'] = false;
                     // return UNAPPROVED;
                 }
 

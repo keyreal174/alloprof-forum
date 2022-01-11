@@ -115,6 +115,7 @@ class AlloprofPlugin extends Gdn_Plugin {
 
         $St->table('Comment')
             ->column('DatePublished', 'datetime', true)
+            ->column('WasPro', 'tinyint(1)', '0')
             ->set();
     }
 }
