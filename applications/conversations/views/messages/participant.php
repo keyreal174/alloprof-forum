@@ -10,12 +10,12 @@
     <div class="InThisConversation">
         <ul class="PanelInfo">
             <?php foreach ($this->data('Participants') as $User): ?>
-                <li data-userid="<?php echo $User->UserID ?? $User['UserID']; ?>">
+                <li>
                     <?php
                     $UserMetaData = Gdn::userModel()->getMeta(val('UserID', $User), 'Profile.%', 'Profile.');
                     $Username = $UserMetaData['DisplayName'] ?? "";
                     $Photo = val('Photo', $User);
-                    $userID = $User->UserID ?? $User['UserID'];
+                    $userID = $user->UserID ?? $user['UserID'];
 
 
                     if (val('Deleted', $User)) {
@@ -48,9 +48,6 @@
                             wrap($Username, 'span', ['class' => 'Username']),
                             'span', ['class' => 'Conversation-User']
                         );
-                    }
-                    if($userID != Gdn::session()->UserID){
-                        echo "<button class='delete-user' data-conversation-id=".$this->data('Conversation')->ConversationID." data-user-id=".$userID.">".t('Delete')."</button>";
                     }
                     ?>
                 </li>

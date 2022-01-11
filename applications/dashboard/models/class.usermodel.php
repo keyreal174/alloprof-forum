@@ -3463,12 +3463,29 @@ class UserModel extends Gdn_Model implements UserProviderInterface, EventFromRow
 
         [$order, $direction] = $this->getMentionsSort();
 
+        // return $this->SQL
+        //     ->select('UserID', '', 'id')
+        //     ->select('Name', '', 'name')
+        //     ->from('User')
+        //     ->like('Name', $search, 'right')
+        //     ->where('Deleted', 0)
+        //     ->orderBy($order, $direction)
+        //     ->limit($limit)
+        //     ->get()
+        //     ->resultArray();
+
+        $displayName = 'Profile.DisplayName';
         return $this->SQL
-            ->select('UserID', '', 'id')
-            ->select('Name', '', 'name')
-            ->from('User')
-            ->like('Name', $search, 'right')
-            ->where('Deleted', 0)
+            ->select('u.UserID', '', 'id')
+            ->select('um.Value', '', 'name')
+            ->from('User u')
+            ->join('UserMeta um', "um.UserID = u.UserID")
+            ->beginWhereGroup()
+            ->like('u.Email', $search)
+            ->orLike('um.Value', $search)
+            ->endWhereGroup()
+            ->where("um.Name", $displayName)
+            ->where('u.Deleted', 0)
             ->orderBy($order, $direction)
             ->limit($limit)
             ->get()

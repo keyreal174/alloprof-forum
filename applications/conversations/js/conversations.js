@@ -40,6 +40,8 @@ jQuery(document).ready(function($) {
                   // Clean up the form
                   clearMessageForm();
 
+                  console.log(json.Data)
+
                   // And show the new comments
                   $('ul.Conversation').appendTrigger(json.Data);
 
@@ -71,6 +73,32 @@ jQuery(document).ready(function($) {
 
       });
    }
+
+   $(document).on('click', '.delete-user', function() {
+      var conversationID = $(this).attr('data-conversation-id');
+      var userID = $(this).attr('data-user-id');
+
+      console.log(conversationID)
+
+      var fd = new FormData();    
+      fd.append('conversationID', conversationID);
+      fd.append('userID', userID);
+
+      $.ajax({
+         type: "GET",
+         url: gdn.url('messages/leave'),
+         data: {"conversationID": conversationID, "userID": userID},
+         error: function(xhr) {
+            gdn.informError(xhr);
+         },
+         success: function(json) {
+            $('.InThisConversation li[data-userid='+userID+']').remove();
+         },
+         complete: function(XMLHttpRequest, textStatus) {
+            console.log('complete')
+         }
+      });
+   })
    $('#Form_ConversationMessage :submit').handleMessageForm();
 
    // Utility function to clear out the message form
@@ -92,7 +120,7 @@ jQuery(document).ready(function($) {
       $(this).each(function() {
          /// Author tag token input.
            var $author = $(this);
-         if (this.dataset.users) {
+            if (this.dataset.users) {
                var author = JSON.parse(this.dataset.users);
            }
            // gdn.definition can't return null default because that'd be too easy
