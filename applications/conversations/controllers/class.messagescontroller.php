@@ -14,7 +14,7 @@
 class MessagesController extends ConversationsController {
 
     /** @var array Models to include. */
-    public $Uses = ['Form', 'ConversationModel', 'ConversationMessageModel'];
+    public $Uses = ['Form', 'ConversationModel', 'ConversationMessageModel', 'UserModel'];
 
     /**  @var ConversationModel */
     public $ConversationModel;
@@ -28,6 +28,10 @@ class MessagesController extends ConversationsController {
     /** @var int The current offset of the paged data set. Defined and used by $this->Index and $this->All. */
     public $Offset;
 
+    /** @var array List of available tabs. */
+    public $ProfileTabs;
+    public $User;
+
     /**
      * Highlight route and include JS, CSS, and modules used by all methods.
      *
@@ -38,6 +42,8 @@ class MessagesController extends ConversationsController {
      */
     public function initialize() {
         parent::initialize();
+        $this->ProfileTabs = [];
+        $this->User = false;
         $this->Menu->highlightRoute('/messages/inbox');
         $this->setData('Breadcrumbs', [['Name' => t('Inbox'), 'Url' => '/messages/inbox']]);
         $this->addModule('SignedInModule');
@@ -48,6 +54,12 @@ class MessagesController extends ConversationsController {
 
         $mobileHeader = new MobileHeaderModule(null);
         $this->addModule($mobileHeader);
+    }
+
+    public function getUserInfo() {
+        $this->User = $this->UserModel->getID(Gdn::session()->UserID);
+        $this->fireEvent('UserLoaded');
+        return true;
     }
 
     /**
@@ -247,6 +259,7 @@ class MessagesController extends ConversationsController {
      * @param string $page The page number argument.
      */
     public function all($page = '') {
+        $this->getUserInfo();
         $this->title(t('Conversations'));
         Gdn_Theme::section('ConversationList');
 
@@ -352,6 +365,7 @@ class MessagesController extends ConversationsController {
      * @param int|false $limit Number to show.
      */
     public function index($conversationID = false, $offset = -1, $limit = false) {
+        $this->getUserInfo();
         $this->Offset = $offset;
         $session = Gdn::session();
         Gdn_Theme::section('Conversation');
@@ -474,6 +488,8 @@ class MessagesController extends ConversationsController {
         $this->fireEvent('AddProfileTabsInfo');
 
         $this->addModule('ProfileFilterModule');
+
+        $this->fireEvent('AddProfileTabsInfo');
 
 
         // Doesn't make sense for people who can't even start conversations to be adding people
@@ -619,6 +635,7 @@ class MessagesController extends ConversationsController {
      * @param string $page The page number string.
      */
     public function inbox($page = '') {
+        $this->getUserInfo();
         $this->View = 'All';
         // Make sure the userphoto module gets added to the page
         $this->addModule('UserPhotoModule');
@@ -634,6 +651,36 @@ class MessagesController extends ConversationsController {
         $this->all($page);
     }
 
+    /**
+     * Adds a tab (or array of tabs) to the profile tab collection ($this->ProfileTabs).
+     *
+     * @since 2.0.0
+     * @access public
+     * @param mixed $tabName Tab name (or array of tab names) to add to the profile tab collection.
+     * @param string $tabUrl URL the tab should point to.
+     * @param string $cssClass Class property to apply to tab.
+     * @param string $tabHtml Overrides tab's HTML.
+     */
+    public function addProfileTab($tabName, $tabUrl = '', $cssClass = '', $tabHtml = '') {
+        if (!is_array($tabName)) {
+            if ($tabHtml == '') {
+                $tabHtml = $tabName;
+            }
+
+            $tabName = [$tabName => ['TabUrl' => $tabUrl, 'CssClass' => $cssClass, 'TabHtml' => $tabHtml]];
+        }
+
+        foreach ($tabName as $name => $tabInfo) {
+            $url = val('TabUrl', $tabInfo, '');
+            if ($url == '') {
+                $tabInfo['TabUrl'] = userUrl($this->User, '', strtolower($name));
+            }
+
+            $this->ProfileTabs[$name] = $tabInfo;
+            $this->_ProfileTabs[$name] = $tabInfo; // Backwards Compatibility
+        }
+    }
+
 
     public function addPeople($conversationID = false) {
         // Figure out Conversation ID
@@ -647,7 +694,7 @@ class MessagesController extends ConversationsController {
         if ($this->Conversation === false) {
             throw notFoundException('Conversation');
         }
-        
+
         $this->Conversation->Participants = $this->ConversationModel->getRecipients($conversationID);
         $this->setData('Conversation', $this->Conversation);
         $this->setData('Participants', $this->Conversation->Participants);
@@ -677,8 +724,8 @@ class MessagesController extends ConversationsController {
                 ));
             }
             $this->setRedirectTo('/messages/'.$this->Conversation->ConversationID, false);
-        } 
-        
+        }
+
         $this->render();
     }
 }

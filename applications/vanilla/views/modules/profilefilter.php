@@ -64,4 +64,3 @@ foreach ($Controller->ProfileTabs as $TabCode => $TabInfo) {
     <?php } ?>
 </div>
 <?php } ?>
-

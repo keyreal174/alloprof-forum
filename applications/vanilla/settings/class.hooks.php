@@ -911,6 +911,50 @@ class VanillaHooks extends Gdn_Plugin {
     }
 
     /**
+     *
+     * @since 2.0.0
+     * @package Vanilla
+     *
+     * @param MessagesController $sender
+     */
+    public function messagesController_addProfileTabsInfo_handler($sender) {
+        if (is_object($sender->User) && $sender->User->UserID > 0) {
+            $userID = Gdn::session()->UserID;
+            // Add the discussion tab
+            // $discussionsLabel = sprite('SpDiscussions').' '.t('Questions');
+            // $commentsLabel = sprite('SpComments').' '.t('Comments');
+            $discussionsLabel = "";
+            $commentsLabel = "";
+            if (c('Vanilla.Profile.ShowCounts', true)) {
+                $discussionsCount = Gdn::sql()
+                        ->select('d.DiscussionID', 'count', 'CountDiscussions')
+                        ->from('Discussion d')
+                        ->where(['d.InsertUserID' => Gdn::session()->UserID])
+                        ->where(['d.Published' => 1])
+                        ->get()
+                        ->firstRow()
+                        ->CountDiscussions;
+                $commentsCount = Gdn::sql()
+                        ->select('c.CommentID', 'count', 'CountComments')
+                        ->from('Comment c')
+                        ->join('Discussion d', 'd.DiscussionID = c.DiscussionID')
+                        ->where(['d.InsertUserID' => Gdn::session()->UserID])
+                        ->where(['c.Published' => 1])
+                        ->get()
+                        ->firstRow()
+                        ->CountComments;
+                $discussionsLabel .= $discussionsCount;
+                $commentsLabel .= $commentsCount;
+            }
+            $sender->addProfileTab(t('questions asked'), userUrl($sender->User, '', 'discussions'), 'Questions', $discussionsLabel);
+            $sender->addProfileTab(t('answers received'), userUrl($sender->User, '', 'comments'), 'Comments', $commentsLabel);
+            // Add the discussion tab's CSS and Javascript.
+            $sender->addJsFile('jquery.gardenmorepager.js');
+            $sender->addJsFile('discussions.js', 'vanilla');
+        }
+    }
+
+    /**
      * Adds 'Categories' tab to profiles and adds CSS & JS files to their head.
      *
      * @since 2.0.0
