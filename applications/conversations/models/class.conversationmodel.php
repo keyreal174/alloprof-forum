@@ -485,17 +485,20 @@ SQL;
         $users = [];
         $i = 0;
         foreach ($participants as $row) {
-            if (val('UserID', $row) == $myID) {
-                $foundMe = true;
-                continue;
-            }
+            // if (val('UserID', $row) == $myID) {
+            //     $foundMe = true;
+            //     continue;
+            // }
             if (val('Deleted', $row)) {
                 continue;
             }
             if ($html) {
                 $users[] = userAnchor($row);
             } else {
-                $users[] = val('Name', $row);
+                $UserMetaData = Gdn::userModel()->getMeta(val('UserID', $row), 'Profile.%', 'Profile.');
+                $UserDisplayName = $UserMetaData['DisplayName'] ?? "";
+
+                $users[] = $UserDisplayName;
             }
 
             $i++;
@@ -722,13 +725,17 @@ SQL;
      * @param int $conversationID Unique ID of conversation effected.
      * @param int $clearingUserID Unique ID of current user.
      */
-    public function clear($conversationID, $clearingUserID) {
-        $this->SQL->update('UserConversation')
-            ->set('Deleted', 1)
-            ->set('DateLastViewed', Gdn_Format::toDateTime())
-            ->where('UserID', $clearingUserID)
-            ->where('ConversationID', $conversationID)
-            ->put();
+    public function clear($conversationID, $clearingUserID, $delete=false) {
+        if($delete) {
+            $this->SQL->delete('UserConversation', ['UserID' => $clearingUserID, 'ConversationID' => $conversationID]);
+        } else {
+            $this->SQL->update('UserConversation')
+                ->set('Deleted', 1)
+                ->set('DateLastViewed', Gdn_Format::toDateTime())
+                ->where('UserID', $clearingUserID)
+                ->where('ConversationID', $conversationID)
+                ->put();
+        }
 
         $this->countUnread($clearingUserID);
         $this->updateParticipantCount($conversationID);

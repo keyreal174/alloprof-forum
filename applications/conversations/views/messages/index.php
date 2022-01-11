@@ -17,9 +17,8 @@ include($this->fetchViewLocation('helper_functions', 'discussions', 'vanilla'));
     <div class="DataListWrap">
         <h2 class="H conversation-header">
             <?php
-            $session = Gdn::session();
             $Names = ConversationModel::participantTitle($this->data('Conversation'), false);
-            echo $Names.', '.$session->User->Name;
+            echo $Names;
 
             // if ($this->data('Conversation.Subject')) {
             //     echo

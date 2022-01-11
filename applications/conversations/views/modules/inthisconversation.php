@@ -5,9 +5,11 @@
     <?php echo '<h2 style="margin-bottom: 24px;">'.(t('In this Conversation')).'</h2>'; ?>
     <ul class="PanelInfo">
         <?php foreach ($this->data('Participants') as $User): ?>
-            <li>
+            <li data-userid="<?php echo $User->UserID ?? $User['UserID']; ?>">
                 <?php
-                $Username = htmlspecialchars(val('Name', $User));
+                $UserMetaData = Gdn::userModel()->getMeta(val('UserID', $User), 'Profile.%', 'Profile.');
+                $UserDisplayName = $UserMetaData['DisplayName'] ?? "";
+                $Username = htmlspecialchars($UserDisplayName);
                 $Photo = val('Photo', $User);
                 $userID = $user->UserID ?? $user['UserID'];
 

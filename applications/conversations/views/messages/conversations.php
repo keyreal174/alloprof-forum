@@ -27,6 +27,9 @@ foreach ($this->data('Conversations') as $Conversation) {
         }
     }
 
+    $UserMetaData = Gdn::userModel()->getMeta($LastUser['UserID'], 'Profile.%', 'Profile.');
+    $lastusername = $UserMetaData['DisplayName'] ?? "";
+
     $CssClass = 'Item';
     $CssClass .= $Alt ? ' Alt' : '';
     $CssClass .= $Conversation->CountNewMessages > 0 ? ' New' : '';
@@ -52,7 +55,7 @@ foreach ($this->data('Conversations') as $Conversation) {
             $Url = '/messages/'.$Conversation->ConversationID.'/#Item_'.$JumpToItem;
             $session = Gdn::session();
             echo '<div class="Header">';
-            echo '<h2>'.htmlspecialchars($Names).', '.$session->User->Name.'</h2>';
+            echo '<h2>'.htmlspecialchars($Names).'</h2>';
             echo anchor('<svg width="26" height="18" viewBox="0 0 26 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M24.25 8.88715L1.75 8.88715" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 <path d="M9.11842 16.2175L1.77539 8.87444L9.11842 1.53141" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -78,7 +81,7 @@ foreach ($this->data('Conversations') as $Conversation) {
             <div class="Content">
                 <!-- <div class="User"><?php echo anchor(htmlspecialchars($Names), $Url); ?></div> -->
                 <div class="User">
-                    <?php echo $LastUser['Name']; ?>
+                    <?php echo $lastusername; ?>
                     <div class="Meta">
                         <?php
                         $this->fireEvent('BeforeConversationMeta');

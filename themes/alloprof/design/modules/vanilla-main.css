@@ -9707,7 +9707,6 @@ screen and (-ms-high-contrast:none) {
     line-height: 38px;
     margin-left: 10px;
     max-width: 100%;
-    max-width: 92px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap
@@ -11535,6 +11534,18 @@ body.noGroupIcon .Group-Header-Info {
 
 .InThisConversation ul li {
     text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.InThisConversation ul li button.delete-user {
+    color: black;
+    background: transparent;
+    border: none;
+    text-decoration: underline;
+    font-size: 16px;
 }
 
 .InThisConversation ul li a {

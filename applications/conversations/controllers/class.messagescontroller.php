@@ -320,7 +320,7 @@ class MessagesController extends ConversationsController {
      *
      * @param int $conversationID The ID of the conversation to leave.
      */
-    public function leave($conversationID) {
+    public function leave($conversationID, $userID=null) {
         if (!Gdn::session()->UserID) {
             throw new Gdn_UserException('You must be signed in.', 403);
         }
@@ -328,17 +328,17 @@ class MessagesController extends ConversationsController {
         // Make sure the user has participated in the conversation before.
         $row = Gdn::sql()->getWhere(
             'UserConversation',
-            ['ConversationID' => $conversationID, 'UserID' => Gdn::session()->UserID]
+            ['ConversationID' => $conversationID, 'UserID' => $userID ?? Gdn::session()->UserID]
         )->firstRow();
 
         if (!$row) {
             throw notFoundException('Conversation');
         }
 
-        if ($this->Form->authenticatedPostBack(true)) {
-            $this->ConversationModel->clear($conversationID, Gdn::session()->UserID);
+        // if ($this->Form->authenticatedPostBack(true)) {
+            $this->ConversationModel->clear($conversationID, $userID ?? Gdn::session()->UserID, $userID?true:false);
             $this->setRedirectTo('/messages/all');
-        }
+        // }
 
         $this->title(t('Leave Conversation'));
         $this->render();

@@ -25,6 +25,9 @@ foreach ($Messages as $Message) {
     $this->EventArguments['Class'] = &$Class;
     $this->fireEvent('BeforeConversationMessageItem');
     $Class = trim($Class);
+    
+    $UserMetaData = Gdn::userModel()->getMeta(val('UserID', $Author), 'Profile.%', 'Profile.');
+    $UserDisplayName = $UserMetaData['DisplayName'] ?? "";
     ?>
     <li id="Message_<?php echo $Message->MessageID; ?>"<?php echo $Class == '' ? '' : ' class="'.$Class.'"'; ?>>
         <div id="Item_<?php echo $CurrentOffset ?>" class="ConversationMessage">
@@ -35,7 +38,7 @@ foreach ($Messages as $Message) {
             </span>
             <div class="Message userContent">
                 <div class="Meta">
-                    <h3><?php echo $Author->Name; ?></h3>
+                    <h3><?php echo $UserDisplayName; ?></h3>
                     <span class="MItem DateCreated"><?php echo Gdn_Format::date($Message->DateInserted, 'html'); ?></span>
                     <?php
                         $this->fireEvent('AfterConversationMessageDate');
