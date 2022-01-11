@@ -8,7 +8,37 @@ if (!function_exists('translate'))
 ?>
 <ul class="PopList Activities">
     <li class="Item Title"><?php
+        $prefix = '';
+        if (preg_match('/zonedentraide/i', $_SERVER['REQUEST_URI'])) {
+            $prefix = '/zonedentraide/messages/inbox';
+        } else {
+            $prefix = '/helpzone/messages/inbox';
+        }
         echo '<a href="#" class="Close d-mobile">×</a>';
+        if ($this->data('UnreadConvNotifications'))  {
+            echo '
+                <a href="'.$prefix.'" class="notification-inbox d-desktop" style="right: 32px">
+                    <svg width="27" height="24" viewBox="0 0 27 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M23 19 12 9 1 19" stroke="#000"/>
+                        <path d="m23 5-11 8L1 5" fill="#fff"/>
+                        <path d="m23 5-11 8L1 5" stroke="#000"/>
+                        <path d="m23.5 4.5-.009 15H.5v-15h23z" stroke="#000"/>
+                        <circle cx="23" cy="4" r="4" fill="#F95928"/>
+                    </svg>
+                </a>
+            ';
+        } else {
+            echo '
+                <a href="'.$prefix.'" class="notification-inbox d-desktop" style="right: 32px">
+                    <svg width="27" height="24" viewBox="0 0 27 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M23 19 12 9 1 19" stroke="#000"/>
+                        <path d="m23 5-11 8L1 5" fill="#fff"/>
+                        <path d="m23 5-11 8L1 5" stroke="#000"/>
+                        <path d="m23.5 4.5-.009 15H.5v-15h23z" stroke="#000"/>
+                    </svg>
+                </a>
+            ';
+        }
         echo '
             <a class="notification-settings d-desktop">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -17,17 +47,25 @@ if (!function_exists('translate'))
             </a>
         ';
 
-        if (count($this->data('Activities')))
-            echo '<a class="notification-all-read d-desktop">'.t('Mark all as read').'</a>';
-
         echo '<strong>'.t('Notifications').' (<span class="notification-count">'.($this->data('UnreadNotifications')).'</span>)</strong>';
         ?>
     </li>
     <li class="d-mobile">
         <div class="actions">
-        <?php
+            <?php
             if (count($this->data('Activities')))
                 echo '<div class="notification-all-read d-mobile">'.t('Mark all as read').'</div>';
+            // echo '
+            //     <a href="'.$prefix.'" class="notification-inbox d-desktop" style="right: 32px">
+            //         <svg width="27" height="24" viewBox="0 0 27 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            //             <path d="M23 19 12 9 1 19" stroke="#000"/>
+            //             <path d="m23 5-11 8L1 5" fill="#fff"/>
+            //             <path d="m23 5-11 8L1 5" stroke="#000"/>
+            //             <path d="m23.5 4.5-.009 15H.5v-15h23z" stroke="#000"/>
+            //             <circle cx="23" cy="4" r="4" fill="#F95928"/>
+            //         </svg>
+            //     </a>
+            // ';
             echo '
                 <div class="notification-settings d-mobile">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -37,7 +75,7 @@ if (!function_exists('translate'))
             ';
         ?>
         </div>
-    </div>
+        </div>
     <li class="notification-settings-content FilterMenu">
         <div>
             <?php
@@ -67,68 +105,143 @@ if (!function_exists('translate'))
             ?>
         </div>
     </li>
+    <?php
+        if (count($this->data('Activities')))
+            echo '<div class="notification-all-read-wrapper"><a class="notification-all-read d-desktop">'.t('Mark all as read').'</a></div>';
+    ?>
     <div class="notification-list">
         <?php
         if (count($this->data('Activities'))):
-        foreach ($this->data('Activities') as $Activity): ?>
+            $convCount = 0;
+            $PostActivities = array_filter($this->data('Activities'), function($k) {
+                return $k['ActivityTypeID'] != '21';
+            });
+            $ConvActivities = array_slice(array_filter($this->data('Activities'), function($k) {
+                return $k['ActivityTypeID'] == '21';
+            }), 0, 3);
+            if (count($ConvActivities)):
+                echo  '<div class="conversaton-notification-list">';
+                foreach ($ConvActivities as $Activity): ?>
         <?php
-            $rel = !empty($Activity['Route']) ? ' rel="'.url($Activity['Route']).'"' : null;
-            $id = ($Activity['Notified'] == ActivityModel::SENT_PENDING)?' id="'.$Activity['ActivityID'].'"':null;
-        ?>
-        <li class="Item"<?php echo $rel, $id?>>
+                    $rel = !empty($Activity['Route']) ? ' rel="'.url($Activity['Route']).'"' : null;
+                    $id = ($Activity['Notified'] == ActivityModel::SENT_PENDING)?' id="'.$Activity['ActivityID'].'"':null;
+                ?>
+        <li class="Item" <?php echo $rel, $id?>>
             <?php
-            if ($Activity['Photo']) {
-                if (str_contains($Activity['Photo'], 'avatars/0.svg')) {
-                    $ClassName = 'ProfilePhotoDefaultWrapper';
-                }
+                        if ($Activity['Photo']) {
+                            if (str_contains($Activity['Photo'], 'avatars/0.svg')) {
+                                $ClassName = 'ProfilePhotoDefaultWrapper';
+                            }
 
-                $firstLetter = getFirstLetter($Activity['ActivityUserID']);
+                            $firstLetter = getFirstLetter($Activity['ActivityUserID']);
 
-                $PhotoAnchor = anchor(
-                    img($Activity['Photo'], ['class' => 'ProfilePhoto PhotoWrapMedium']),
-                    $Activity['PhotoUrl'], 'PhotoWrap PhotoWrapMedium '.$ClassName, ["avatar--first-letter" => $firstLetter]);
-            } else {
-                $PhotoAnchor = '';
-            }
-            ?>
+                            $PhotoAnchor = anchor(
+                                img($Activity['Photo'], ['class' => 'ProfilePhoto PhotoWrapMedium']),
+                                $Activity['PhotoUrl'], 'PhotoWrap PhotoWrapMedium '.$ClassName, ["avatar--first-letter" => $firstLetter]);
+                        } else {
+                            $PhotoAnchor = '';
+                        }
+                    ?>
             <div class="Author Photo">
                 <?php echo $PhotoAnchor; ?>
             </div>
 
             <div class="ItemContent Activity">
                 <?php
-                    $verified = $Activity['Verified'] && $Activity['ActivityTypeID'] == 30;
-                ?>
+                            $verified = $Activity['Verified'] && $Activity['ActivityTypeID'] == 30;
+                        ?>
                 <h6 class="<?php echo $verified?'verified':'' ?>">
-                    <b><?php echo t($Activity['Headline']); ?></b>
-                    <?php if($verified) {?>
-                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M1.25 9C1.25 4.71979 4.71979 1.25 9 1.25C11.0554 1.25 13.0267 2.06652 14.4801 3.51992C15.9335 4.97333 16.75 6.94457 16.75 9C16.75 13.2802 13.2802 16.75 9 16.75C4.71979 16.75 1.25 13.2802 1.25 9Z" fill="#05BF8E" stroke="#05BF8E" stroke-width="2.5"/>
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M5.02851 8.40338C5.35801 8.07387 5.89224 8.07387 6.22175 8.40338L8.01161 10.1932L12.188 6.01689C12.5175 5.68739 13.0517 5.68739 13.3812 6.01689C13.7107 6.3464 13.7107 6.88063 13.3812 7.21014L8.60823 11.9831C8.27873 12.3126 7.7445 12.3126 7.41499 11.9831L5.02851 9.59662C4.699 9.26712 4.699 8.73288 5.02851 8.40338Z" fill="white"/>
-                        </svg>
-                    <?php } ?>
+                    <?php echo t('New message!'); ?>
                 </h6>
                 <p>
                     <?php
-                        $excerpt = '';
-                        $story = translate($Activity['Story']);
-                        $format = $Activity['Format'] ?? Vanilla\Formatting\Formats\HtmlFormat::FORMAT_KEY;
-                        $excerpt = htmlspecialchars($story ? Gdn::formatService()->renderExcerpt($story, $format) : $excerpt);
-
-                        echo t(trim($excerpt)); ?>
+                                echo t('You have a new message from a moderator.');
+                            ?>
                 </p>
                 <div class="Meta">
                     <span class="MItem DateCreated"><?php echo timeElapsedString($Activity['DateUpdated']); ?></span>
                 </div>
                 <?php
-                    if($Activity['Notified'] == ActivityModel::SENT_PENDING) echo '<span class="mark-not-read"></span>'
-                ?>
+                            if($Activity['Notified'] == ActivityModel::SENT_PENDING) echo '<span class="mark-not-read"></span>'
+                        ?>
                 <span></span>
             </div>
         </li>
-        <?php endforeach; ?>
+        <?php
+                endforeach;
+            echo '</div>';
+            endif;
+
+            if (count($PostActivities)):
+                echo  '<div class="post-notification-list">';
+                foreach ($PostActivities as $Activity): ?>
+        <?php
+                        $rel = !empty($Activity['Route']) ? ' rel="'.url($Activity['Route']).'"' : null;
+                        $id = ($Activity['Notified'] == ActivityModel::SENT_PENDING)?' id="'.$Activity['ActivityID'].'"':null;
+                    ?>
+        <li class="Item" <?php echo $rel, $id?>>
+            <?php
+                        if ($Activity['Photo']) {
+                            if (str_contains($Activity['Photo'], 'avatars/0.svg')) {
+                                $ClassName = 'ProfilePhotoDefaultWrapper';
+                            }
+
+                            $firstLetter = getFirstLetter($Activity['ActivityUserID']);
+
+                            $PhotoAnchor = anchor(
+                                img($Activity['Photo'], ['class' => 'ProfilePhoto PhotoWrapMedium']),
+                                $Activity['PhotoUrl'], 'PhotoWrap PhotoWrapMedium '.$ClassName, ["avatar--first-letter" => $firstLetter]);
+                        } else {
+                            $PhotoAnchor = '';
+                        }
+                        ?>
+            <div class="Author Photo">
+                <?php echo $PhotoAnchor; ?>
+            </div>
+
+            <div class="ItemContent Activity">
+                <?php
+                                        $verified = $Activity['Verified'] && $Activity['ActivityTypeID'] == 30;
+                                    ?>
+                <h6 class="<?php echo $verified?'verified':'' ?>">
+                    <b><?php echo t($Activity['Headline']); ?></b>
+                    <?php if($verified) {?>
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M1.25 9C1.25 4.71979 4.71979 1.25 9 1.25C11.0554 1.25 13.0267 2.06652 14.4801 3.51992C15.9335 4.97333 16.75 6.94457 16.75 9C16.75 13.2802 13.2802 16.75 9 16.75C4.71979 16.75 1.25 13.2802 1.25 9Z"
+                            fill="#05BF8E" stroke="#05BF8E" stroke-width="2.5" />
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M5.02851 8.40338C5.35801 8.07387 5.89224 8.07387 6.22175 8.40338L8.01161 10.1932L12.188 6.01689C12.5175 5.68739 13.0517 5.68739 13.3812 6.01689C13.7107 6.3464 13.7107 6.88063 13.3812 7.21014L8.60823 11.9831C8.27873 12.3126 7.7445 12.3126 7.41499 11.9831L5.02851 9.59662C4.699 9.26712 4.699 8.73288 5.02851 8.40338Z"
+                            fill="white" />
+                    </svg>
+                    <?php } ?>
+                </h6>
+                <p>
+                    <?php
+                                            $excerpt = '';
+                                            $story = translate($Activity['Story']);
+                                            $format = $Activity['Format'] ?? Vanilla\Formatting\Formats\HtmlFormat::FORMAT_KEY;
+                                            $excerpt = htmlspecialchars($story ? Gdn::formatService()->renderExcerpt($story, $format) : $excerpt);
+
+                                            echo t(trim($excerpt)); ?>
+                </p>
+                <div class="Meta">
+                    <span class="MItem DateCreated"><?php echo timeElapsedString($Activity['DateUpdated']); ?></span>
+                </div>
+                <?php
+                                        if($Activity['Notified'] == ActivityModel::SENT_PENDING) echo '<span class="mark-not-read"></span>'
+                                    ?>
+                <span></span>
+            </div>
+        </li>
+        <?php
+                endforeach;
+            echo  '</div>';
+            endif;
+            ?>
         <?php else: ?>
-            <li class="Item Empty Center"><?php echo t('Notifications will appear here.', t('You do not have any notifications yet.')); ?></li>
+        <li class="Item Empty Center">
+            <?php echo t('Notifications will appear here.', t('You do not have any notifications yet.')); ?></li>
         <?php endif; ?>
     </div>
 </ul>

@@ -1395,6 +1395,31 @@ class ActivityModel extends Gdn_Model {
         return $notificationCount;
     }
 
+    public function getUserTotalConvUnread($userID) {
+        if (!$userID) {
+            return 0; // If false or null or 0 (guest) get called, we don't have any notifications.
+        }
+        $key = sprintf(self::NOTIFICATIONS_COUNT_CACHE_KEY, $userID);
+        $notificationCount = $this->cache->get($key, null);
+        if ($notificationCount === null) {
+            $notifications = $this->SQL
+                ->select("ActivityID", "count", "total")
+                ->from($this->Name)
+                ->where("NotifyUserID", $userID)
+                ->where("ActivityTypeID", 21)
+                ->where("Notified", self::SENT_PENDING)
+                ->get()
+                ->resultArray();
+            if (!is_array($notifications) || !isset($notifications[0])) {
+                $notificationCount = 0;
+            } else {
+                $notificationCount = $notifications[0]["total"] ?? 0;
+            }
+            $this->cache->set($key, $notificationCount, self::NOTIFICATION_COUNT_TTL);
+        }
+        return $notificationCount;
+    }
+
     /**
      * Get total notifications for a user.
      *

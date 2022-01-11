@@ -1899,3 +1899,5 @@ $Definition['This Explanation was verified by a member of the Alloprof team.'] =
 $Definition['This Explanation was submitted by a member of the Alloprof team.'] = 'Cette explication a été donnée par un membre de l\'équipe d\'Alloprof.';
 
 $Definition['There is no discussion at the moment.'] = 'Il n’y a aucune conversation pour l’instant.';
+$Definition['New message!'] = 'Nouveau message!';
+$Definition['You have a new message from a moderator.'] = 'Tu as reçu un message d’un modérateur.';

@@ -232,6 +232,28 @@
     display: block !important;
 }
 
+.notification-all-read-wrapper {
+    padding-top: 16px;
+}
+
+.notification-all-read {
+    text-decoration: underline;
+    font-size: 16px;
+    font-weight: 500 !important;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #000 !important;
+}
+
+.conversaton-notification-list  {
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 8px;
+    margin-bottom: 8px;
+}
+
 @media screen and (max-width: 958px) {
     .MeBox.FlyoutRight .Flayout-notification {
         max-width: 100% !important;
@@ -293,10 +315,6 @@
     }
     .notification-settings-content.open {
         border-bottom: none !important;
-    }
-    .notification-all-read {
-        color: black;
-        text-decoration: underline;
     }
     .Activities .notification-list {
         max-height: calc(100% - 105px);
