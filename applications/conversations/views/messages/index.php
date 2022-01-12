@@ -14,8 +14,22 @@ include($this->fetchViewLocation('helper_functions', 'discussions', 'vanilla'));
         </a>
         <hr/>
     </div>
+    <div class="d-mobile">
+        <div class="modal-header back-home">
+            <a class="InboxPopup" href="<?php echo url('/messages/inbox'); ?>">
+                <svg width="26" height="18" viewBox="0 0 26 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M24.25 8.88715L1.75 8.88715" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M9.11842 16.2175L1.77539 8.87444L9.11842 1.53141" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>
+                <?php echo t('Back to my conversations'); ?>
+                </span>
+            </a>
+        </div>
+    </div>
+    <div class="modal-body Section-Conversation">
     <div class="DataListWrap">
-        <h2 class="H conversation-header">
+        <h2 class="H conversation-header d-desktop">
             <?php
             $Names = ConversationModel::participantTitle($this->data('Conversation'), false);
             echo $Names;
@@ -37,9 +51,8 @@ include($this->fetchViewLocation('helper_functions', 'discussions', 'vanilla'));
                 </a>
             <?php } ?>
         </h2>
-        <hr/>
+        <div class="d-desktop"><hr/></div>
         <?php
-
         if ($this->data('Conversation.Type')) {
             $this->fireEvent('Conversation'.str_replace('_', '', $this->data('Conversation.Type')));
         }
@@ -63,6 +76,7 @@ include($this->fetchViewLocation('helper_functions', 'discussions', 'vanilla'));
         <?php 
             echo Gdn::controller()->fetchView('addmessage');
         ?>
+    </div>
     </div>
 <?php
 echo $this->Pager->toString();

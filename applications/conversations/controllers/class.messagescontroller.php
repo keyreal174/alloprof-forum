@@ -293,9 +293,9 @@ class MessagesController extends ConversationsController {
 
         // Deliver json data if necessary
         if ($this->_DeliveryType != DELIVERY_TYPE_ALL && $this->_DeliveryMethod == DELIVERY_METHOD_XHTML) {
-            $this->setJson('LessRow', $this->Pager->toString('less'));
-            $this->setJson('MoreRow', $this->Pager->toString('more'));
-            $this->View = 'conversations';
+            // $this->setJson('LessRow', $this->Pager->toString('less'));
+            // $this->setJson('MoreRow', $this->Pager->toString('more'));
+            // $this->View = 'conversations';
         }
 
         // Build and display page.
@@ -462,11 +462,11 @@ class MessagesController extends ConversationsController {
         $this->ConversationModel->markRead($conversationID, $session->UserID);
 
         // Deliver json data if necessary
-        if ($this->_DeliveryType != DELIVERY_TYPE_ALL) {
-            $this->setJson('LessRow', $this->Pager->toString('less'));
-            $this->setJson('MoreRow', $this->Pager->toString('more'));
-            $this->View = 'messages';
-        }
+        // if ($this->_DeliveryType != DELIVERY_TYPE_ALL) {
+        //     $this->setJson('LessRow', $this->Pager->toString('less'));
+        //     $this->setJson('MoreRow', $this->Pager->toString('more'));
+        //     $this->View = 'messages';
+        // }
 
         // Add modules.
 

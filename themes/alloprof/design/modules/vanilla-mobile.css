@@ -442,7 +442,7 @@
     .sidebar {
         display: none !important;
     }
-    div.Popup a.Close {
+    div.Popup:not(.AddToConversationPopup) a.Close {
         position: absolute;
         right: 15px;
         top: 5px;

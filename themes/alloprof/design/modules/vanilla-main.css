@@ -7953,12 +7953,14 @@ body.Section-Group .DataTable.DiscussionsTable {
         display: none
     }
 
-    div.Popup {
+    div.Popup:not(.AddToConversationPopup) {
         left: 0 !important;
         position: fixed;
         top: 0 !important;
         transform: none;
     }
+
+    .AddToConversationPopup
 }
 
 @media screen and (max-width:958px) {
@@ -11659,6 +11661,68 @@ body.Section-Profile .Profile h2 {
     body.Section-Profile .BadgeGrid h4,
     body.Section-Profile .Profile h2 {
         font-size: 18px
+    }
+
+    .InboxPopup .Section-Conversation.modal-body {
+        padding: 0 30px !important;
+        position: relative;
+    }
+    .InboxPopup .Section-ConversationList.modal-body {
+        padding: 0 30px !important;
+        height: calc(100vh - 60px);
+        overflow-y: auto;
+        position: relative;
+    }
+
+    .InboxPopup .Section-Conversation .MessageList {
+        height: calc(100vh - 140px);
+        overflow-y: auto;
+    }
+
+    .InboxPopup .Section-ConversationList .DataList {
+        margin: 0;
+    }
+
+    .InboxPopup .Section-ConversationList .add-people {
+        flex-direction: row-reverse;
+        justify-content: center;
+    }
+
+    .InboxPopup .Section-ConversationList .add-people h2 {
+        margin-bottom: 0 !important;
+    }
+
+    .InboxPopup .Section-ConversationList .add-people svg {
+        margin-right: 10px;
+    }
+
+    .InboxPopup .Section-ConversationList .DataList .Item {
+        margin: 0;
+        padding: 24px 0;
+        border-bottom: 1px solid #f2f2f2;
+        position: relative;
+    }
+
+    .Section-ConversationList .DataList .Item .mobile-detail-link {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 1;
+    }
+
+    .InboxPopup .Section-ConversationList .DataListWrap,
+    .InboxPopup .Section-Conversation .DataListWrap {
+        padding: 0;
+    }
+
+    .InboxPopup .Section-Conversation .Meta {
+        padding-left: 0 !important;
+    }
+
+    .InboxPopup .Section-Conversation .Meta h3 {
+        padding: 0;
     }
 }
 

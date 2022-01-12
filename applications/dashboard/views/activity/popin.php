@@ -14,6 +14,7 @@ if (!function_exists('translate'))
         } else {
             $prefix = '/helpzone/messages/inbox';
         }
+        $prefix = url('/messages/inbox');
         $inboxWithCircle = '<svg width="27" height="24" viewBox="0 0 27 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M23 19 12 9 1 19" stroke="#000"/>
             <path d="m23 5-11 8L1 5" fill="#fff"/>
@@ -60,13 +61,13 @@ if (!function_exists('translate'))
             echo '<div style="display: flex; align-items: center;">';
             if ($this->data('UnreadConvNotifications'))  {
                 echo '
-                    <a href="'.$prefix.'" class="notification-inbox d-mobilee" style="margin-right: 8px; display: block !important;">
+                    <a href="'.$prefix.'" class="notification-inbox d-mobile InboxPopup" style="margin-right: 8px; display: block !important;">
                         '.$inboxWithCircle.'
                     </a>
                 ';
             } else {
                 echo '
-                    <a href="'.$prefix.'" class="notification-inbox d-mobile" style="margin-right: 8px; display: block !important;">
+                    <a href="'.$prefix.'" class="notification-inbox d-mobile InboxPopup" style="margin-right: 8px; display: block !important;">
                         '.$inbox.'
                     </a>
                 ';

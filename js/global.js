@@ -1186,6 +1186,15 @@ jQuery(document).ready(function($) {
                 $('.AddToConversationPopup .MultiComplete').userTokenInput();
             }
         });
+        $('a.InboxPopup').popup({
+            containerCssClass: 'SearchPopup InboxPopup',
+            onLoad: function() {
+                $('.Flayout-notification').removeClass('open');
+            },
+            afterLoad: function() {
+                $('.Flayout-notification').removeClass('open');
+            }
+        });
     }
 
     // This turns DeleteDiscussionPopup anchors into in-page popups

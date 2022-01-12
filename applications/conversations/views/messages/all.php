@@ -1,6 +1,12 @@
 <?php if (!defined('APPLICATION')) exit();
 include($this->fetchViewLocation('helper_functions', 'discussions', 'vanilla'));
 ?>
+<div class="d-mobile">
+    <div class="modal-header">
+        <h3><?php echo t("Conversations"); ?></h3>
+    </div>
+</div>
+
 <div class="d-desktop back-home">
     <a href="<?php echo url('/discussions'); ?>">
         <svg width="26" height="18" viewBox="0 0 26 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -16,7 +22,8 @@ include($this->fetchViewLocation('helper_functions', 'discussions', 'vanilla'));
     <hr />
 </div>
 
-<h1 class="H"><?php echo $this->data('Title'); ?></h1>
+<h1 class="H d-desktop"><?php echo $this->data('Title'); ?></h1>
+<div class="modal-body Section-ConversationList">
 <?php if(userRoleCheck() == Gdn::config('Vanilla.ExtraRoles.Teacher')) { ?>
 <a href="<?php echo url('/messages/add'); ?>" class="AddToConversationPopup">
     <div class="DataList">
@@ -53,7 +60,6 @@ if (checkPermission('Conversations.Conversations.Add')) {
 echo '</div>';
 ?>
 <div class="DataListWrap">
-
     <?php
             if (count($this->data('Conversations')) > 0):
                 echo '<ul class="Condensed DataList Conversations">';
@@ -70,7 +76,7 @@ echo '</div>';
             ?>
     </ul>
 </div>
-
+</div>
 <?php
 // Post Pager
 echo '<div class="PageControls Bottom">';

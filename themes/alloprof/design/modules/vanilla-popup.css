@@ -642,4 +642,22 @@ div.Popup.BanPopup .btn {
         font-family: ChromaticaThin;
         color: black;
     }
+
+    .AddToConversationPopup form#Form_AddPeople > div {
+        flex-direction: column;
+    }
+
+    .AddToConversationPopup .TextBoxWrapper {
+        margin-bottom: 16px;
+        width: 100%;
+    }
+
+    .AddToConversationPopup .Buttons {
+        margin-left: 0;
+    }
+
+    .AddToConversationPopup #Form_Createaconversation {
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
