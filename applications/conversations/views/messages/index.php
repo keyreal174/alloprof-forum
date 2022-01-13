@@ -1,6 +1,20 @@
 <?php 
 if (!defined('APPLICATION')) exit(); 
 include($this->fetchViewLocation('helper_functions', 'discussions', 'vanilla'));
+$User = Gdn::session()->User;
+$Photo = $User->Photo;
+
+$UserMetaData = Gdn::userModel()->getMeta($User->UserID, 'Profile.%', 'Profile.');
+$UserDisplayName = $UserMetaData['DisplayName'] ?? "";
+
+if ($Photo) {
+    $Photo = (isUrl($Photo)) ? $Photo : Gdn_Upload::url(changeBasename($Photo, 'p%s'));
+    $PhotoAlt = t('Avatar');
+} else {
+    $Photo = UserModel::getDefaultAvatarUrl($User, 'profile');
+    $PhotoAlt = t('Default Avatar');
+}
+
 ?>
     <div class="d-desktop back-home">
         <a href="<?php echo url('/messages/inbox'); ?>">
@@ -15,16 +29,38 @@ include($this->fetchViewLocation('helper_functions', 'discussions', 'vanilla'));
         <hr/>
     </div>
     <div class="d-mobile">
-        <div class="modal-header back-home">
-            <a class="InboxPopup" href="<?php echo url('/messages/inbox'); ?>">
+        <div class="modal-header back-home back-inbox">
+            <a>
                 <svg width="26" height="18" viewBox="0 0 26 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M24.25 8.88715L1.75 8.88715" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     <path d="M9.11842 16.2175L1.77539 8.87444L9.11842 1.53141" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
-                <span>
-                <?php echo t('Back to my conversations'); ?>
-                </span>
+                <?php 
+                    echo "<img src='".$Photo."' class='ProfilePhotoLarge' alt='".$PhotoAlt."'/>"; 
+                    echo "<span>".$UserDisplayName."</span>";
+                ?>
             </a>
+            <div class="Options-Icon">
+                <span class="ToggleFlyout OptionsMenu">
+                    <span class="OptionsTitle"><?php echo t('Options') ?></span>
+                    <?php echo sprite('SpFlyoutHandle', 'Arrow'); ?>
+                    <span class="mobileFlyoutOverlay">
+                        <ul class="Flyout MenuItems" style="display: none;">
+                            <?php if(userRoleCheck() == Gdn::config('Vanilla.ExtraRoles.Teacher')) { 
+                                ?>
+                                <li>
+                                    <a href="<?php echo url('/messages/addPeople/'.$this->data('Conversation.ConversationID')); ?>" class="AddToConversationPopup add-people">
+                                        <?php echo t('Manage the conversation'); ?>
+                                    </a>
+                                </li>
+                            <?php } ?>
+                            <li>
+                                <?php echo anchor(t('Leave Conversation'), '/messages/leave/'.$this->data('Conversation.ConversationID'), 'leave-conversation AddToConversationPopup'); ?>
+                            </li>
+                        </ul>
+                    </span>
+                </span>
+            </div>
         </div>
     </div>
     <div class="modal-body Section-Conversation">

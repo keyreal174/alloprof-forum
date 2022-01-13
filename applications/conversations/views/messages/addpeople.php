@@ -63,4 +63,5 @@
             <?php endforeach; ?>
         </ul>
     </div>
+    <div class="mobile-footer d-mobile"><span>×</span></div>
 </div>

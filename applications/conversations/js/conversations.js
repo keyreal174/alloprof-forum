@@ -78,8 +78,6 @@ jQuery(document).ready(function($) {
       var conversationID = $(this).attr('data-conversation-id');
       var userID = $(this).attr('data-user-id');
 
-      console.log(conversationID)
-
       var fd = new FormData();    
       fd.append('conversationID', conversationID);
       fd.append('userID', userID);
@@ -133,8 +131,6 @@ jQuery(document).ready(function($) {
                json.ErrorMessages = null;
             }
 
-            console.log($(frm))
-
             if (json.FormSaved) {
                // Clean up the form
                clearMessageForm();
@@ -146,9 +142,10 @@ jQuery(document).ready(function($) {
                $('#PagerMore').remove();
 
                // And scroll to them
-               var target = $('#' + json.MessageID);
+               var target = $('#Message_' + json.MessageID);
+
                if (target.offset()) {
-                  $('html,body').animate({scrollTop: target.offset().top}, 'fast');
+                  $('.Section-Conversation .MessageList').animate({scrollTop: target.offset().top}, 'fast');
                }
 
                // Let listeners know that the message was added.
@@ -163,7 +160,7 @@ jQuery(document).ready(function($) {
             $('.MessageList li.empty').remove();
             $('span.TinyProgress').remove();
             $(button).html('<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="m13.887 21.348-3.68-5.586L16.51 7.99c.18-.224-.047-.428-.25-.249l-7.776 6.323-5.59-3.7c-.724-.478-.57-1.56.217-1.826l16.94-5.65c.789-.267 1.56.504 1.292 1.292l-5.653 16.93c-.267.81-1.349.94-1.803.24z" fill="#fff"/></svg>')
-            $(frm).find(':submit').removeAttr("disabled");
+            $(button).removeAttr('disabled');
          }
       });
       return false;

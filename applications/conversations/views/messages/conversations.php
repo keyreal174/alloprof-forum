@@ -63,7 +63,7 @@ foreach ($this->data('Conversations') as $Conversation) {
 
             echo '</div>';
 
-            echo '<a class="mobile-detail-link d-mobile InboxPopup" href="'.url($Url).'"></a>';
+            echo '<a class="mobile-detail-link d-mobile InboxMessagePopup" href="'.url($Url).'"></a>';
             
             echo '<div class="d-desktop"><hr/></div>';
 

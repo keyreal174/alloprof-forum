@@ -493,10 +493,11 @@ div.Popup.BanPopup .btn {
 .leave-conversation-popup .Buttons {
     display: flex;
     justify-content: center;
-    margin-top: 40px;
+    margin-top: 40px !important;
 }
 
-.leave-conversation-popup .Buttons .Close {
+.leave-conversation-popup .Buttons .Close,
+.leave-conversation-popup .Buttons .mobile-close {
     border: none !important;
     line-height: initial;
     text-decoration: underline;
@@ -659,5 +660,29 @@ div.Popup.BanPopup .btn {
     .AddToConversationPopup #Form_Createaconversation {
         margin-left: auto;
         margin-right: auto;
+    }
+
+    .MobilePopup .Footer {
+        display: none !important;
+    }
+    .MobilePopup .mobile-footer {
+        position: absolute;
+        right: 28px;
+        top: 14px;
+    }
+
+    .MobilePopup .mobile-footer span {
+        font-size: 40px;
+        font-weight: 100;
+        font-family: ChromaticaThin;
+        color: black;
+    }
+
+    .leave-conversation-popup {
+        padding: 36px 16px 16px 16px;
+    }
+
+    .leave-conversation-popup h2 {
+        text-align: center !important;
     }
 }

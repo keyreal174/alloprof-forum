@@ -11,7 +11,10 @@ Do you want to leave the conversation? ').'</div>';
 
 echo '<div class="Buttons Buttons-Confirm">';
 echo $this->Form->button(t('Leave'), ['class' => 'btn-default btn-shadow']);
-echo $this->Form->button('Cancel', ['type' => 'button', 'class' => 'Close btn-default']);
+echo '<div class="d-desktop">'.$this->Form->button('Cancel', ['type' => 'button', 'class' => 'Close btn-default']).'</div>';
+echo '<div class="d-mobile">'.$this->Form->button('Cancel', ['type' => 'button', 'class' => 'mobile-close btn-default']).'</div>';
+
 echo '</div>';
 echo $this->Form->close();
+echo '<div class="mobile-footer d-mobile"><span>×</span></div>';
 echo '</div>';

@@ -11346,6 +11346,7 @@ body.noGroupIcon .Group-Header-Info {
     font-weight: bold;
     margin-bottom: 4px;
     position: relative;
+    font-family: 'ChromaticaMedium';
 }
 
 .Section-Conversation .Meta .DateCreated,
@@ -11380,6 +11381,27 @@ body.noGroupIcon .Group-Header-Info {
     margin-right: 4px;
 }
 
+.modal-header.back-inbox > a {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+}
+
+.modal-header.back-inbox img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    margin-left: 14px;
+    margin-right: 8px;
+}
+
+.modal-header.back-inbox span {
+    font-size: 18px;
+    font-family: ChromaticaMedium;
+    color: black;
+    font-weight: bold;
+}
+
 .Section-Conversation .LeftPanel {
     background-color: white !important;
     padding: 24px !important;
@@ -11402,6 +11424,11 @@ body.noGroupIcon .Group-Header-Info {
 .Section-Conversation hr,
 .Section-ConversationList hr {
     background-color: #e0e0e0;
+}
+
+.Section-Conversation .MessageList {
+    max-height: 500px;
+    overflow-y: auto;
 }
 
 .Section-Conversation .MessageList li {
@@ -11667,6 +11694,30 @@ body.Section-Profile .Profile h2 {
         padding: 0 30px !important;
         position: relative;
     }
+
+    .back-inbox {
+        display: flex !important;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .InboxPopup .modal-header .Flyout {
+        top: 45px !important;
+    }
+
+    .InboxPopup .modal-header .SpFlyoutHandle:before {
+        transform: rotate(90deg);
+    }
+    
+    .AddToConversationPopup hr,
+    .InboxPopup hr {
+        background-color: #e0e0e0;
+    }
+
+    .InboxPopup .Body {
+        overflow-y: hidden !important;
+    }
+
     .InboxPopup .Section-ConversationList.modal-body {
         padding: 0 30px !important;
         height: calc(100vh - 60px);
@@ -11676,6 +11727,7 @@ body.Section-Profile .Profile h2 {
 
     .InboxPopup .Section-Conversation .MessageList {
         height: calc(100vh - 140px);
+        max-height: calc(100vh - 140px);
         overflow-y: auto;
     }
 
@@ -11715,6 +11767,14 @@ body.Section-Profile .Profile h2 {
     .InboxPopup .Section-ConversationList .DataListWrap,
     .InboxPopup .Section-Conversation .DataListWrap {
         padding: 0;
+        position: relative;
+    }
+
+    .InboxPopup #MessageForm {
+        position: absolute;
+        bottom: -65px;
+        width: 100%;
+        left: 0;
     }
 
     .InboxPopup .Section-Conversation .Meta {
@@ -11723,6 +11783,13 @@ body.Section-Profile .Profile h2 {
 
     .InboxPopup .Section-Conversation .Meta h3 {
         padding: 0;
+    }
+
+    .InboxPopup .Section-Conversation .MessageList li.empty {
+        height: calc(100vh - 190px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 }
 

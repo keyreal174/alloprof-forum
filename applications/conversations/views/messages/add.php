@@ -37,6 +37,8 @@
     // echo anchor(t('Cancel'), '/messages/inbox', 'Button Cancel');
     echo '</div>';
 
+    echo '<div class="mobile-footer d-mobile"><span>×</span></div>';
+
     echo $this->Form->close();
     ?>
 </div>

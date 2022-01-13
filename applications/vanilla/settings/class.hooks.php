@@ -691,6 +691,7 @@ class VanillaHooks extends Gdn_Plugin {
         $sender->addJsFile('basic.js', 'vanilla');
         $sender->addJsFile('notification.js', 'vanilla');
         $sender->addJsFile('askquestion.js', 'vanilla');
+        $sender->addJsFile('conversations.js', 'conversations');
 
         if (!inSection('Dashboard')) {
             // Spoilers assets
