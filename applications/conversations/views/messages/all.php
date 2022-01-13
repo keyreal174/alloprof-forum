@@ -22,7 +22,7 @@ include($this->fetchViewLocation('helper_functions', 'discussions', 'vanilla'));
     <div class="DataList">
         <div class="Item add-people">
             <h2>
-                <?php echo t('New conversation');?>
+                <?php echo t('New discussion');?>
             </h2>
             <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M18.763 1.502 6.117 14.537v4.478h4.417l12.3-13.442-4.071-4.071z" stroke="#000" />

@@ -1,5 +1,5 @@
-<?php 
-if (!defined('APPLICATION')) exit(); 
+<?php
+if (!defined('APPLICATION')) exit();
 include($this->fetchViewLocation('helper_functions', 'discussions', 'vanilla'));
 ?>
     <div class="d-desktop back-home">
@@ -9,7 +9,7 @@ include($this->fetchViewLocation('helper_functions', 'discussions', 'vanilla'));
                 <path d="M9.11842 16.2175L1.77539 8.87444L9.11842 1.53141" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
             <span>
-            <?php echo t('Back to my conversations'); ?>
+            <?php echo t('Back to my discussions'); ?>
             </span>
         </a>
         <hr/>
@@ -26,7 +26,7 @@ include($this->fetchViewLocation('helper_functions', 'discussions', 'vanilla'));
             //         '<span class="Gloss">'.htmlspecialchars($this->data('Conversation.Subject')).'</span>';
             // }
             ?>
-            <?php if(userRoleCheck() == Gdn::config('Vanilla.ExtraRoles.Teacher')) { 
+            <?php if(userRoleCheck() == Gdn::config('Vanilla.ExtraRoles.Teacher')) {
                 ?>
                 <a href="<?php echo url('/messages/addPeople/'.$this->data('Conversation.ConversationID')); ?>" class="AddToConversationPopup add-people">
                     <svg style="width: 24px;" viewBox="0 0 25 25" class="header__avatar ng-tns-c83-1 ng-star-inserted"><g transform="translate(18.000000, 18.000000)" class="ng-tns-c83-1"><path d="M2-3c2.8,0,5,2.2,5,5S4.8,7,2,7h-15c-2.8,0-5-2.2-5-5s2.2-5,5-5H2z M-5.5-17c3,0,5.5,2.5,5.5,5.5
@@ -60,7 +60,7 @@ include($this->fetchViewLocation('helper_functions', 'discussions', 'vanilla'));
                 }
             ?>
         </ul>
-        <?php 
+        <?php
             echo Gdn::controller()->fetchView('addmessage');
         ?>
     </div>

@@ -1,7 +1,7 @@
 <?php if (!defined('APPLICATION')) exit(); ?>
 <div id="ConversationForm" class="FormTitleWrapper ConversationForm">
     <?php
-    echo '<h2>'.t('New conversation').'</h2>';
+    echo '<h2>'.t('New discussion').'</h2>';
     $this->fireEvent('BeforeMessageAdd');
     echo '<hr/>';
     echo $this->Form->open();
@@ -14,7 +14,7 @@
     }
     $userData = $this->Data('userData');
     echo '<div class="P">';
-    echo wrap($this->Form->textBox('To', ['MultiLine' => true, 'class' => 'MultiComplete', 'data-users' => json_encode($userData)]), 'div', ['class' => 'TextBoxWrapper']);
+    echo wrap($this->Form->textBox('To', ['MultiLine' => true, 'placeholder' => t('Mail or username'), 'class' => 'MultiComplete', 'data-users' => json_encode($userData)]), 'div', ['class' => 'TextBoxWrapper']);
     echo '</div>';
 
     if (c('Conversations.Subjects.Visible')) {

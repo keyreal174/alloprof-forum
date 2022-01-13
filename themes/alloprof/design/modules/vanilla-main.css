@@ -2782,7 +2782,8 @@ ul.token-input-list li input {
     height: 30px;
     line-height: normal;
     margin: 0 !important;
-    padding: 0
+    padding: 0;
+    width: 100% !important;
 }
 
 ul.token-input-list.token-input-focused {

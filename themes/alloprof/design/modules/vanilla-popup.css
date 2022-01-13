@@ -514,7 +514,7 @@ div.Popup.BanPopup .btn {
     margin: 16px 0;
 }
 
-.AddToConversationPopup .Border .Body{ 
+.AddToConversationPopup .Border .Body{
     padding: 24px !important;
 }
 
@@ -539,6 +539,7 @@ div.Popup.BanPopup .btn {
 
 .AddToConversationPopup .TextBoxWrapper ul input {
     background: transparent;
+    width: 100% !important;
 }
 
 .AddToConversationPopup .Buttons {

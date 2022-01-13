@@ -23,7 +23,6 @@
 !/cache/.htaccess
 /conf/*
 !/conf/.htaccess
-!/conf/bootstrap.before.php
 !/conf/config-alloprof.php
 !/conf/config-helpzone.php
 !/conf/config-defaults.php
