@@ -24,6 +24,11 @@
     "config": {
         "platform": {
             "php": "7.2"
+        },
+        "allow-plugins": {
+            "metasyntactical/composer-plugin-license-check": true,
+            "composer/package-versions-deprecated": true,
+            "wikimedia/composer-merge-plugin": true
         }
     },
     "repositories": [
