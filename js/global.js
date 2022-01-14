@@ -1635,6 +1635,12 @@ jQuery(document).ready(function($) {
         });
     });
 
+    $(document).delegate('div.InformWrapper.Dismissable a.btn-default', 'click', function() {
+        $(this).parents('div.InformWrapper').fadeOut('fast', function() {
+            $(this).remove();
+        });
+    });
+
     gdn.setAutoDismiss = function() {
         var timerId = $('div.InformMessages').attr('autodismisstimerid');
         if (!timerId) {
