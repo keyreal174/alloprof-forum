@@ -1,7 +1,7 @@
 <?php if (!defined('APPLICATION')) exit(); ?>
 <div class="AddPeople">
     <?php
-    echo '<h2>'.t('Manage the conversation').'</h2>';
+    echo '<h2>'.t('Manage the discussion').'</h2>';
     echo '<hr/>';
     echo $this->Form->open(['id' => 'Form_AddPeople']);
     echo wrap($this->Form->textBox('AddPeople', ['MultiLine' => true, 'class' => 'MultiComplete']), 'div', ['class' => 'TextBoxWrapper']);

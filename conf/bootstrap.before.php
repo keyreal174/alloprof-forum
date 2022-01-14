@@ -1,1 +1,1 @@
-../../vanilla-docker/bootstrap.before.php
+./vanilla-docker/bootstrap.before.php

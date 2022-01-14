@@ -80,7 +80,7 @@ jQuery(document).ready(function($) {
 
       console.log(conversationID)
 
-      var fd = new FormData();    
+      var fd = new FormData();
       fd.append('conversationID', conversationID);
       fd.append('userID', userID);
 
@@ -140,6 +140,7 @@ jQuery(document).ready(function($) {
                prePopulate: author,
                animateDropdown: false,
                ariaLabel: window.gdn.translate("Users"),
+               placeholder: window.gdn.translate('Mail or username')
            });
       });
    };

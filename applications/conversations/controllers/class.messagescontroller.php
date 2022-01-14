@@ -148,7 +148,7 @@ class MessagesController extends ConversationsController {
         }
 
         Gdn_Theme::section('PostConversation');
-        $this->title(t('New Conversation'));
+        $this->title(t('New discussion'));
         $this->setData('Breadcrumbs', [
             ['Name' => t('Inbox'), 'Url' => '/messages/inbox'],
             ['Name' => $this->data('Title'), 'Url' => 'messages/add']
@@ -260,7 +260,7 @@ class MessagesController extends ConversationsController {
      */
     public function all($page = '') {
         $this->getUserInfo();
-        $this->title(t('Conversations'));
+        $this->title(t('Discussion'));
         Gdn_Theme::section('ConversationList');
 
         list($offset, $limit) = offsetLimit($page, c('Conversations.Conversations.PerPage', 50));
@@ -353,7 +353,7 @@ class MessagesController extends ConversationsController {
             $this->setRedirectTo('/messages/all');
         // }
 
-        $this->title(t('Leave Conversation'));
+        $this->title(t('Leave the discussion'));
         $this->render();
     }
 

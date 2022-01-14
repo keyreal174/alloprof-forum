@@ -2,7 +2,7 @@
 /** @var InThisConversationModule $this */
 ?>
 <div class="InThisConversation">
-    <?php echo '<h2 style="margin-bottom: 24px;">'.(t('In this Conversation')).'</h2>'; ?>
+    <?php echo '<h2 style="margin-bottom: 24px;">'.(t('In this discussion')).'</h2>'; ?>
     <ul class="PanelInfo">
         <?php foreach ($this->data('Participants') as $User): ?>
             <li data-userid="<?php echo $User->UserID ?? $User['UserID']; ?>">
