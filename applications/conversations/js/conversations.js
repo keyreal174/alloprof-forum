@@ -205,6 +205,7 @@ jQuery(document).ready(function($) {
                prePopulate: author,
                animateDropdown: false,
                ariaLabel: window.gdn.translate("Users"),
+               placeholder: window.gdn.translate('Mail or username')
            });
       });
    };
@@ -218,13 +219,12 @@ jQuery(document).ready(function($) {
       $('.token-input-dropdown').css('display', 'none');
    });
 
-   $('#Form_AddPeople :submit').click(function() {
+   $(document).on('click', '#Form_AddPeople .add-people', function() {
       var btn = this;
-      $(btn).hide();
-      $(btn).before('<span class="TinyProgress">&#160;</span>');
+      // $(btn).hide();
+      // $(btn).before('<span class="TinyProgress">&#160;</span>');
 
       var frm = $(btn).parents('form');
-      var textbox = $(frm).find('textarea');
 
       // Post the form, show the status and then redirect.
       $.ajax({
@@ -233,14 +233,79 @@ jQuery(document).ready(function($) {
          data: $(frm).serialize() + '&DeliveryType=VIEW&DeliveryMethod=JSON',
          dataType: 'json',
          error: function(xhr, textStatus, errorThrown) {
-            $('span.TinyProgress').remove();
-            $(btn).show();
+            // $('span.TinyProgress').remove();
+            // $(btn).show();
             gdn.informError(xhr);
          },
          success: function(json) {
             gdn.inform(json);
             if (json.RedirectTo)
-              setTimeout(function() { window.location.replace(json.RedirectTo); }, 300);
+               if($(btn).hasClass('mobile')) {
+                  $('.Popup.AddToConversationPopup .Content').html(json.Data);
+                  $('.MultiComplete').userTokenInput();
+               } else setTimeout(function() { window.location.replace(json.RedirectTo); }, 300);
+         }
+      });
+      return false;
+   });
+
+   $(document).on('click', '.d-mobile .create-conversation', function() {
+      var btn = this;
+      // $(btn).hide();
+      // $(btn).before('<span class="TinyProgress">&#160;</span>');
+
+      var frm = $(btn).parents('form');
+      // Post the form, show the status and then redirect.
+      $.ajax({
+         type: "POST",
+         url: $(frm).attr('action'),
+         data: $(frm).serialize() + '&DeliveryType=VIEW&DeliveryMethod=JSON',
+         dataType: 'json',
+         error: function(xhr, textStatus, errorThrown) {
+            // $('span.TinyProgress').remove();
+            // $(btn).show();
+            gdn.informError(xhr);
+         },
+         success: function(json) {
+            // $('span.TinyProgress').remove();
+            if(json.FormSaved) {
+               $('.Popup.InboxPopup .Content').html(json.Data);
+               $('.Popup.AddToConversationPopup').parent().remove();
+               $('.Popup.InboxPopup .Conversations li:first-child a').click();
+            } else {
+               $('.Popup.AddToConversationPopup .Content').html(json.Data);
+               $('.MultiComplete').userTokenInput();
+            }
+            gdn.inform(json);
+         }
+      });
+      return false;
+   });
+
+   $(document).on('click', '.leave-conversation-popup .leave-conversation', function() {
+      var btn = this;
+      // $(btn).hide();
+      // $(btn).before('<span class="TinyProgress">&#160;</span>');
+
+      var frm = $(btn).parents('form');
+      // Post the form, show the status and then redirect.
+      $.ajax({
+         type: "POST",
+         url: $(frm).attr('action'),
+         data: $(frm).serialize() + '&DeliveryType=VIEW&DeliveryMethod=JSON',
+         dataType: 'json',
+         error: function(xhr, textStatus, errorThrown) {
+            // $('span.TinyProgress').remove();
+            // $(btn).show();
+            gdn.informError(xhr);
+         },
+         success: function(json) {
+            if(json.FormSaved) {
+               $('.Popup.InboxPopup .Conversations li#Conversation_'+$('.current-conversation-id').val()).remove();
+               $('.Popup.AddToConversationPopup').parent().remove();
+               $('.Popup.InboxPopup').last().parent().remove();
+            }
+            gdn.inform(json);
          }
       });
       return false;

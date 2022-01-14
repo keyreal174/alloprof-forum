@@ -515,7 +515,7 @@ div.Popup.BanPopup .btn {
     margin: 16px 0;
 }
 
-.AddToConversationPopup .Border .Body{ 
+.AddToConversationPopup .Border .Body{
     padding: 24px !important;
 }
 
@@ -540,6 +540,7 @@ div.Popup.BanPopup .btn {
 
 .AddToConversationPopup .TextBoxWrapper ul input {
     background: transparent;
+    width: 100% !important;
 }
 
 .AddToConversationPopup .Buttons {
@@ -657,9 +658,9 @@ div.Popup.BanPopup .btn {
         margin-left: 0;
     }
 
-    .AddToConversationPopup #Form_Createaconversation {
-        margin-left: auto;
-        margin-right: auto;
+    .AddToConversationPopup .Buttons input.submit {
+        margin-left: auto !important;
+        margin-right: auto !important;
     }
 
     .MobilePopup .Footer {
@@ -669,6 +670,10 @@ div.Popup.BanPopup .btn {
         position: absolute;
         right: 28px;
         top: 14px;
+    }
+
+    .Popup .leave-conversation {
+        margin-right: 10px;
     }
 
     .MobilePopup .mobile-footer span {

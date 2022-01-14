@@ -118,6 +118,14 @@ class MessagesController extends ConversationsController {
                 $newMessageID = val('FirstMessageID', $conversation);
                 $this->EventArguments['MessageID'] = $newMessageID;
                 $this->fireEvent('AfterConversationSave');
+
+                // Deliver json data if necessary
+                if ($this->_DeliveryType == 'VIEW') {
+                    // $this->setJson('LessRow', $this->Pager->toString('less'));
+                    // $this->setJson('MoreRow', $this->Pager->toString('more'));
+                    $this->View = 'All';
+                    $this->all();
+                }
             }
         } else {
             // Check if valid user name has been passed.
@@ -148,7 +156,7 @@ class MessagesController extends ConversationsController {
         }
 
         Gdn_Theme::section('PostConversation');
-        $this->title(t('New Conversation'));
+        $this->title(t('New discussion'));
         $this->setData('Breadcrumbs', [
             ['Name' => t('Inbox'), 'Url' => '/messages/inbox'],
             ['Name' => $this->data('Title'), 'Url' => 'messages/add']
@@ -260,7 +268,7 @@ class MessagesController extends ConversationsController {
      */
     public function all($page = '') {
         $this->getUserInfo();
-        $this->title(t('Conversations'));
+        $this->title(t('Discussion'));
         Gdn_Theme::section('ConversationList');
 
         list($offset, $limit) = offsetLimit($page, c('Conversations.Conversations.PerPage', 50));
@@ -353,7 +361,7 @@ class MessagesController extends ConversationsController {
             $this->setRedirectTo('/messages/all');
         // }
 
-        $this->title(t('Leave Conversation'));
+        $this->title(t('Leave the discussion'));
         $this->render();
     }
 
@@ -723,6 +731,8 @@ class MessagesController extends ConversationsController {
                     $maxRecipients
                 ));
             }
+
+            $this->setData('Participants', $this->ConversationModel->getRecipients($conversationID));
             $this->setRedirectTo('/messages/'.$this->Conversation->ConversationID, false);
         }
 

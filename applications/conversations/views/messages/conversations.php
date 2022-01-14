@@ -46,7 +46,7 @@ foreach ($this->data('Conversations') as $Conversation) {
 
     $this->EventArguments['Conversation'] = $Conversation;
     ?>
-    <li class="<?php echo $CssClass; ?>">
+    <li class="<?php echo $CssClass; ?>" id="Conversation_<?php echo $Conversation->ConversationID; ?>">
         <?php
         $Names = ConversationModel::participantTitle($Conversation, false);
         ?>

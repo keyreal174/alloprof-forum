@@ -3167,6 +3167,7 @@ textarea.MultiComplete {
 
 .AddPeople form div {
   text-align: right;
+  display: flex;
 }
 
 .ac_results {
