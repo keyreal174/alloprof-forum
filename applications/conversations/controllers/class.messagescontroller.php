@@ -356,10 +356,10 @@ class MessagesController extends ConversationsController {
             throw notFoundException('Conversation');
         }
 
-        // if ($this->Form->authenticatedPostBack(true)) {
+        if ($this->Form->authenticatedPostBack(true) || $userID) {
             $this->ConversationModel->clear($conversationID, $userID ?? Gdn::session()->UserID, $userID?true:false);
-            $this->setRedirectTo('/messages/all');
-        // }
+            $this->setRedirectTo('/messages/inbox');
+        }
 
         $this->title(t('Leave the discussion'));
         $this->render();
