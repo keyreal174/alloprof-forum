@@ -108,7 +108,7 @@ if (!function_exists('writeComment')) :
             $cssClass .= ' Accepted';
         }
 
-        $isPro = $sender->getUserRole($comment->InsertUserID) == Gdn::config('Vanilla.ExtraRoles.Pro');
+        $isPro = $comment->WasPro;
         $isTeacher = $sender->getUserRole($comment->InsertUserID) == 'Teacher';
         // if ($sender->getUserRole($comment->InsertUserID) === 'Teacher') {
         //     $cssClass .= ' TeacherComment ';
