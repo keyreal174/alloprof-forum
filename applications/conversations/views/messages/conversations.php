@@ -46,7 +46,7 @@ foreach ($this->data('Conversations') as $Conversation) {
 
     $this->EventArguments['Conversation'] = $Conversation;
     ?>
-    <li class="<?php echo $CssClass; ?>">
+    <li class="<?php echo $CssClass; ?>" id="Conversation_<?php echo $Conversation->ConversationID; ?>">
         <?php
         $Names = ConversationModel::participantTitle($Conversation, false);
         ?>
@@ -54,7 +54,7 @@ foreach ($this->data('Conversations') as $Conversation) {
             <?php
             $Url = '/messages/'.$Conversation->ConversationID.'/#Item_'.$JumpToItem;
             $session = Gdn::session();
-            echo '<div class="Header">';
+            echo '<div class="Header d-desktop">';
             echo '<h2>'.htmlspecialchars($Names).'</h2>';
             echo anchor('<svg width="26" height="18" viewBox="0 0 26 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M24.25 8.88715L1.75 8.88715" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -63,7 +63,9 @@ foreach ($this->data('Conversations') as $Conversation) {
 
             echo '</div>';
 
-            echo '<hr/>';
+            echo '<a class="mobile-detail-link d-mobile InboxMessagePopup" href="'.url($Url).'"></a>';
+            
+            echo '<div class="d-desktop"><hr/></div>';
 
             if ($Names) {
                 if ($LastPhoto) {

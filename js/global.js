@@ -324,6 +324,10 @@
         $('.Overlay').remove();
     });
 
+    $(document).on('click', '.MobilePopup .mobile-footer, .MobilePopup .mobile-close', function() {
+        $('.Popup.MobilePopup').last().parent().remove();
+    })
+
     APForumApp.onReady(function(apForumApp) {
         apForumApp.app.attachListener('userscreen:transition:login_to_signup', function() {
             console.log('show signup')
@@ -1180,10 +1184,28 @@ jQuery(document).ready(function($) {
         // }
 
         $('a.AddToConversationPopup').popup({
-            containerCssClass: 'BanPopup CustomPopup AddToConversationPopup',
+            containerCssClass: 'BanPopup CustomPopup AddToConversationPopup MobilePopup',
             afterLoad: function() {
                 // Enable multicomplete on selected inputs
                 $('.AddToConversationPopup .MultiComplete').userTokenInput();
+            }
+        });
+        $('a.InboxPopup').popup({
+            containerCssClass: 'SearchPopup InboxPopup',
+            onLoad: function() {
+                $('.Flayout-notification').removeClass('open');
+            },
+            afterLoad: function() {
+                $('.Flayout-notification').removeClass('open');
+            }
+        });
+
+        $('a.InboxMessagePopup').popup({
+            containerCssClass: 'SearchPopup InboxPopup InboxMessagePopup MobilePopup',
+            afterLoad: function() {
+                $('.InboxMessagePopup .back-inbox > a').click(function() {
+                    $('.Popup.InboxMessagePopup').parent().remove();
+                })
             }
         });
     }

@@ -493,10 +493,11 @@ div.Popup.BanPopup .btn {
 .leave-conversation-popup .Buttons {
     display: flex;
     justify-content: center;
-    margin-top: 40px;
+    margin-top: 40px !important;
 }
 
-.leave-conversation-popup .Buttons .Close {
+.leave-conversation-popup .Buttons .Close,
+.leave-conversation-popup .Buttons .mobile-close {
     border: none !important;
     line-height: initial;
     text-decoration: underline;
@@ -642,5 +643,51 @@ div.Popup.BanPopup .btn {
         font-weight: 100;
         font-family: ChromaticaThin;
         color: black;
+    }
+
+    .AddToConversationPopup form#Form_AddPeople > div {
+        flex-direction: column;
+    }
+
+    .AddToConversationPopup .TextBoxWrapper {
+        margin-bottom: 16px;
+        width: 100%;
+    }
+
+    .AddToConversationPopup .Buttons {
+        margin-left: 0;
+    }
+
+    .AddToConversationPopup .Buttons input.submit {
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+
+    .MobilePopup .Footer {
+        display: none !important;
+    }
+    .MobilePopup .mobile-footer {
+        position: absolute;
+        right: 28px;
+        top: 14px;
+    }
+
+    .Popup .leave-conversation {
+        margin-right: 10px;
+    }
+
+    .MobilePopup .mobile-footer span {
+        font-size: 40px;
+        font-weight: 100;
+        font-family: ChromaticaThin;
+        color: black;
+    }
+
+    .leave-conversation-popup {
+        padding: 36px 16px 16px 16px;
+    }
+
+    .leave-conversation-popup h2 {
+        text-align: center !important;
     }
 }

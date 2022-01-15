@@ -118,6 +118,14 @@ class MessagesController extends ConversationsController {
                 $newMessageID = val('FirstMessageID', $conversation);
                 $this->EventArguments['MessageID'] = $newMessageID;
                 $this->fireEvent('AfterConversationSave');
+
+                // Deliver json data if necessary
+                if ($this->_DeliveryType == 'VIEW') {
+                    // $this->setJson('LessRow', $this->Pager->toString('less'));
+                    // $this->setJson('MoreRow', $this->Pager->toString('more'));
+                    $this->View = 'All';
+                    $this->all();
+                }
             }
         } else {
             // Check if valid user name has been passed.
@@ -293,9 +301,9 @@ class MessagesController extends ConversationsController {
 
         // Deliver json data if necessary
         if ($this->_DeliveryType != DELIVERY_TYPE_ALL && $this->_DeliveryMethod == DELIVERY_METHOD_XHTML) {
-            $this->setJson('LessRow', $this->Pager->toString('less'));
-            $this->setJson('MoreRow', $this->Pager->toString('more'));
-            $this->View = 'conversations';
+            // $this->setJson('LessRow', $this->Pager->toString('less'));
+            // $this->setJson('MoreRow', $this->Pager->toString('more'));
+            // $this->View = 'conversations';
         }
 
         // Build and display page.
@@ -348,10 +356,10 @@ class MessagesController extends ConversationsController {
             throw notFoundException('Conversation');
         }
 
-        // if ($this->Form->authenticatedPostBack(true)) {
+        if ($this->Form->authenticatedPostBack(true) || $userID) {
             $this->ConversationModel->clear($conversationID, $userID ?? Gdn::session()->UserID, $userID?true:false);
-            $this->setRedirectTo('/messages/all');
-        // }
+            $this->setRedirectTo('/messages/inbox');
+        }
 
         $this->title(t('Leave the discussion'));
         $this->render();
@@ -462,11 +470,11 @@ class MessagesController extends ConversationsController {
         $this->ConversationModel->markRead($conversationID, $session->UserID);
 
         // Deliver json data if necessary
-        if ($this->_DeliveryType != DELIVERY_TYPE_ALL) {
-            $this->setJson('LessRow', $this->Pager->toString('less'));
-            $this->setJson('MoreRow', $this->Pager->toString('more'));
-            $this->View = 'messages';
-        }
+        // if ($this->_DeliveryType != DELIVERY_TYPE_ALL) {
+        //     $this->setJson('LessRow', $this->Pager->toString('less'));
+        //     $this->setJson('MoreRow', $this->Pager->toString('more'));
+        //     $this->View = 'messages';
+        // }
 
         // Add modules.
 
@@ -723,6 +731,8 @@ class MessagesController extends ConversationsController {
                     $maxRecipients
                 ));
             }
+
+            $this->setData('Participants', $this->ConversationModel->getRecipients($conversationID));
             $this->setRedirectTo('/messages/'.$this->Conversation->ConversationID, false);
         }
 

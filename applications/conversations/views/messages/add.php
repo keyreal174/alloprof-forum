@@ -33,9 +33,12 @@
     echo '</div>';
 
     echo '<div class="Buttons">';
-    echo $this->Form->button(t('Create a conversation'), ['class' => 'btn-default btn-shadow DiscussionButton']);
+    echo '<div class="d-desktop" >'.$this->Form->button(t('Create a conversation'), ['class' => 'btn-default btn-shadow DiscussionButton']).'</div>';
+    echo '<div class="d-mobile">'.$this->Form->button(t('Create a conversation'), ['class' => 'btn-default btn-shadow create-conversation submit', 'type' => 'button']).'</div>';
     // echo anchor(t('Cancel'), '/messages/inbox', 'Button Cancel');
     echo '</div>';
+
+    echo '<div class="mobile-footer d-mobile"><span>×</span></div>';
 
     echo $this->Form->close();
     ?>

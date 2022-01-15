@@ -1020,7 +1020,6 @@ $.TokenList = function (input, url_or_data, settings) {
     function focus_with_timeout(obj) {
         setTimeout(function() { obj.focus(); }, 50);
     }
-
 };
 
 // Really basic cache for the results
