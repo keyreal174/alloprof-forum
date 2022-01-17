@@ -11,15 +11,17 @@
                 $UserDisplayName = $UserMetaData['DisplayName'] ?? "";
                 $Username = htmlspecialchars($UserDisplayName);
                 $Photo = val('Photo', $User);
-                $userID = $user->UserID ?? $user['UserID'];
-
+                $userID = $User->UserID ?? $User['UserID'];
+                $badge = userExtraInfo($userID)['badge'];
+                $text = userExtraInfo($userID)['grade'];
+                
 
                 if (val('Deleted', $User)) {
                     echo anchor(
                         wrap(
                             ($Photo ? img($Photo, ['class' => 'ProfilePhoto ProfilePhotoSmall']) : '').' '.
-                            wrap($Username, 'del', ['class' => 'Username']),
-                            'span', ['class' => 'Conversation-User',]
+                            wrap('<span><span class="Name">'.$Username.$badge.'</span><span class="Grade">'.$text.'</span></span>', 'del', ['class' => 'Username']),
+                            'span', ['class' => 'Conversation-User']
                         ),
                         userUrl($User),
                         [
@@ -31,7 +33,7 @@
                     echo anchor(
                         wrap(
                             ($Photo ? img($Photo, ['class' => 'ProfilePhoto ProfilePhotoSmall']) : '').' '.
-                            wrap($Username, 'span', ['class' => 'Username']),
+                            wrap('<span><span class="Name">'.$Username.$badge.'</span><span class="Grade">'.$text.'</span></span>', 'span', ['class' => 'Username']),
                             'span', ['class' => 'Conversation-User']
                         ),
                         userUrl($User),

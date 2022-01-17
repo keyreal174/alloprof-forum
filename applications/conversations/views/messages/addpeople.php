@@ -1,4 +1,6 @@
-<?php if (!defined('APPLICATION')) exit(); ?>
+<?php if (!defined('APPLICATION')) exit(); 
+include($this->fetchViewLocation('helper_functions', 'discussions', 'vanilla'));
+?>
 <div class="AddPeople">
     <?php
     echo '<h2>'.t('Manage the discussion').'</h2>';
@@ -21,36 +23,19 @@
                     $Username = $UserMetaData['DisplayName'] ?? "";
                     $Photo = val('Photo', $User);
                     $userID = $User->UserID ?? $User['UserID'];
-
+                    $badge = userExtraInfo($userID)['badge'];
+                    $text = userExtraInfo($userID)['grade'];
 
                     if (val('Deleted', $User)) {
-                        echo anchor(
-                            wrap(
-                                ($Photo ? img($Photo, ['class' => 'ProfilePhoto']) : '').' '.
-                                wrap($Username, 'del', ['class' => 'Username']),
-                                'span', ['class' => 'Conversation-User',]
-                            ),
-                            userUrl($User),
-                            [
-                                'title' => sprintf(t('%s has left this conversation.'), $Username),
-                                "data-userid"=> $userID
-                            ]
-                        );
-                    } else {
-                        // echo anchor(
-                        //     wrap(
-                        //         ($Photo ? img($Photo, ['class' => 'ProfilePhoto']) : '').' '.
-                        //         wrap($Username, 'span', ['class' => 'Username']),
-                        //         'span', ['class' => 'Conversation-User']
-                        //     ),
-                        //     userUrl($User),
-                        //     [
-                        //         "data-userid"=> $userID
-                        //     ]
-                        // );
                         echo wrap(
                             ($Photo ? img($Photo, ['class' => 'ProfilePhoto']) : '').' '.
-                            wrap($Username, 'span', ['class' => 'Username']),
+                            wrap('<span><span class="Name">'.$Username.$badge.'</span><span class="Grade">'.$text.'</span></span>', 'span', ['class' => 'Username']),
+                            'del', ['class' => 'Conversation-User']
+                        );
+                    } else {
+                        echo wrap(
+                            ($Photo ? img($Photo, ['class' => 'ProfilePhoto']) : '').' '.
+                            wrap('<span><span class="Name">'.$Username.$badge.'</span><span class="Grade">'.$text.'</span></span>', 'span', ['class' => 'Username']),
                             'span', ['class' => 'Conversation-User']
                         );
                     }

@@ -11291,7 +11291,7 @@ body.noGroupIcon .Group-Header-Info {
 .Section-ConversationList .DataList.Conversations .Excerpt,
 .Section-ConversationList .DataList.Conversations .User,
 .Section-ConversationList .DataList.Conversations .Meta {
-    padding-left: 50px
+    /* padding-left: 50px */
 }
 
 .Section-Conversation .Conversation .Excerpt,
@@ -11330,6 +11330,11 @@ body.noGroupIcon .Group-Header-Info {
     transform: rotate(180deg);
 }
 
+.Section-Conversation .Conversation .Author a,
+.Section-ConversationList .Conversation .Author a {
+    margin-right: 16px;
+}
+
 .Section-Conversation .userContent,
 .Section-ConversationList .Conversation .User,
 .Section-ConversationList .Conversation .Excerpt {
@@ -11343,11 +11348,21 @@ body.noGroupIcon .Group-Header-Info {
     margin: 0 !important;
 }
 
+.Section-Conversation .Conversation .Meta h3,
 .Section-ConversationList .Conversation .User {
     font-weight: bold;
     margin-bottom: 4px;
+    line-height: 15px;
+    display: flex;
+    align-items: center;
     position: relative;
     font-family: 'ChromaticaMedium';
+}
+
+.InboxPopup .Section-Conversation .Meta h3 svg,
+.Section-Conversation .Conversation .Meta h3 svg,
+.Section-ConversationList .Conversation .User svg {
+    margin-left: 4px;
 }
 
 .Section-Conversation .Meta .DateCreated,
@@ -11593,11 +11608,29 @@ body.noGroupIcon .Group-Header-Info {
 }
 
 .InThisConversation ul li .Conversation-User .Username {
+    line-height: 22px;
+    margin-left: 10px;
+}
+
+.InThisConversation ul li .Conversation-User .Username .Name {
     font-size: 16px;
     color: black;
     font-weight: bold;
-    margin-left: 8px;
+    display: flex;
+    align-items: center;
 }
+
+.InThisConversation ul li .Conversation-User .Username .Name svg {
+    margin-left: 4px;
+}
+
+.InThisConversation .Conversation-User img {
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+}
+
+
 /*!
  * @author Isis (igraziatto) Graziatto <isis.g@vanillaforums.com>
  * @copyright 2009-2018 Vanilla Forums Inc.
