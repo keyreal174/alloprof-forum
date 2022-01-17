@@ -546,13 +546,14 @@ div.Popup.BanPopup .btn {
 .AddToConversationPopup .Buttons {
     margin: 0;
     margin-left: 16px;
+    height: 50px;
 }
 
 .AddToConversationPopup #ConversationForm {
     margin-bottom: 0;
 }
 
-.AddToConversationPopup #Form_Createaconversation {
+.AddToConversationPopup #ConversationForm .d-desktop input {
     margin-top: 24px;
     margin-left: auto;
 }

@@ -1,4 +1,5 @@
 <?php if (!defined('APPLICATION')) exit();
+include($this->fetchViewLocation('helper_functions', 'discussions', 'vanilla'));
 $Session = Gdn::session();
 $Alt = false;
 $SubjectsVisible = c('Conversations.Subjects.Visible');
@@ -83,7 +84,10 @@ foreach ($this->data('Conversations') as $Conversation) {
             <div class="Content">
                 <!-- <div class="User"><?php echo anchor(htmlspecialchars($Names), $Url); ?></div> -->
                 <div class="User">
-                    <?php echo $lastusername; ?>
+                    <?php 
+                        $badge = userExtraInfo($LastUser['UserID'])['badge'];
+                        echo $lastusername.$badge;
+                    ?>
                     <div class="Meta">
                         <?php
                         $this->fireEvent('BeforeConversationMeta');
