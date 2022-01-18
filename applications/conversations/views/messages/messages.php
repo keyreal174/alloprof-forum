@@ -26,7 +26,7 @@ foreach ($Messages as $Message) {
     $this->EventArguments['Class'] = &$Class;
     $this->fireEvent('BeforeConversationMessageItem');
     $Class = trim($Class);
-    
+
     $UserMetaData = Gdn::userModel()->getMeta(val('UserID', $Author), 'Profile.%', 'Profile.');
     $UserDisplayName = $UserMetaData['DisplayName'] ?? "";
     $badge = userExtraInfo(val('UserID', $Author))['badge'];
@@ -55,4 +55,10 @@ foreach ($Messages as $Message) {
             </div>
         </div>
     </li>
-<?php }
+<?php } ?>
+
+<script>
+    if (window.location.hash) {
+        window.location.href = window.location.href.split('#')[0];
+    }
+</script>
