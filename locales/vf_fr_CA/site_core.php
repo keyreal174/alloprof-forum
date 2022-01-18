@@ -1909,5 +1909,7 @@ $Definition['Manage the discussion'] = 'Gérer la conversation';
 $Definition['Back to my discussions'] = 'Retour à mes conversations';
 $Definition['Write your first message to start the discussion!'] = 'Écris ton premier message pour lancer la discussion!';
 $Definition['Write your message'] = 'Écris ton message';
+$Definition['Manage the conversation'] = 'Gérer la conversation';
+$Definition['Leave Conversation'] = 'Quitter la conversation';
 $Definition['Leave'] = 'Quitter';
 $Definition['When you leave, you will no longer see the messages exchanged.<br/>Do you want to leave the conversation?'] = 'En quittant, tu ne verra plus les messages échangés.<br/>Veux-tu quitter la conversation?';

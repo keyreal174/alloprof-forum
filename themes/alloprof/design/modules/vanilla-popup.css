@@ -673,10 +673,18 @@ div.Popup.BanPopup .btn {
         top: 14px;
     }
 
+    .MobilePopup .conversation-mobile-back {
+        position: absolute;
+        right: 18px;
+        top: 0px;
+        z-index: 99;
+    }
+
     .Popup .leave-conversation {
         margin-right: 10px;
     }
 
+    .MobilePopup .conversation-mobile-back span,
     .MobilePopup .mobile-footer span {
         font-size: 40px;
         font-weight: 100;

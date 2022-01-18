@@ -74,6 +74,22 @@ jQuery(document).ready(function($) {
    //    });
    // }
 
+   function autoPopup() {
+      if($(window).width() > 958) {
+         if($('.Popup.InboxPopup').length > 0)
+            $('.Popup.InboxPopup').parent().remove(); 
+      } else {
+         if($('.Popup.InboxPopup').length == 0)
+            $('.mobile-auto-popup').trigger('click');
+      }
+   }
+
+   $(window).resize(function() {
+      autoPopup()
+   })
+
+   autoPopup();
+
    $(document).on('click', '.delete-user', function() {
       var conversationID = $(this).attr('data-conversation-id');
       var userID = $(this).attr('data-user-id');
@@ -169,8 +185,9 @@ jQuery(document).ready(function($) {
    // Utility function to clear out the message form
    function clearMessageForm() {
       // $('div.Popup').remove();
-      var frm = $('#Form_ConversationMessage');
+      var frm = $('.MessageForm form');
       frm.find('textarea').val('');
+      frm.find('.ql-editor ').empty();
       frm.trigger('clearCommentForm');
 
      // Dispatch a native event for things that don't use jquery

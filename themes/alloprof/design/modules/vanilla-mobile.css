@@ -118,6 +118,16 @@
 }
 
 @media screen and (max-width: 958px) {
+    body.flyoutIsOpen {
+        overflow: hidden;
+    }
+
+    body.Section-ConversationList .discussion-filters-mobile,
+    body.Section-Conversation .discussion-filters-mobile {
+        display: none;
+    }
+
+
     .ScrollProgress {
         height: 42px !important;
     }

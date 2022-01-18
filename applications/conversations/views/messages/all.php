@@ -24,6 +24,10 @@ include($this->fetchViewLocation('helper_functions', 'discussions', 'vanilla'));
 
 <h1 class="H d-desktop"><?php echo $this->data('Title'); ?></h1>
 <div class="modal-body Section-ConversationList">
+
+<a class="mobile-auto-popup d-mobile InboxPopup" href="<?php echo url('/messages/inbox'); ?>"></a>
+<a class="mobile-auto-back-popup" href="<?php echo url('/discussions'); ?>"></a>
+
 <?php if(userRoleCheck() == Gdn::config('Vanilla.ExtraRoles.Teacher')) { ?>
 <a href="<?php echo url('/messages/add'); ?>" class="AddToConversationPopup">
     <div class="DataList">
@@ -72,12 +76,13 @@ echo '</div>';
         <p><?php echo t('There is no discussion at the moment.'); ?></p>
     </div>
     <?php
-                endif;
-            ?>
+        endif;
+    ?>
     </ul>
 </div>
 </div>
 <?php
+echo '<div class="conversation-mobile-back d-mobile"><span>×</span></div>';
 // Post Pager
 echo '<div class="PageControls Bottom">';
 PagerModule::write($PagerOptions);

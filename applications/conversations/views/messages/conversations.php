@@ -13,17 +13,26 @@ foreach ($this->data('Conversations') as $Conversation) {
     $LastPhoto = '';
     $LastUser = '';
     if (empty($Conversation->Participants)) {
-        $User = Gdn::userModel()->getID($Conversation->LastInsertUserID);
-        $LastPhoto = userPhoto($User);
+        $LastUser = Gdn::userModel()->getID($Conversation->LastInsertUserID);
+        $LastPhoto = userPhoto($LastUser);
     } else {
-        foreach ($Conversation->Participants as $User) {
-            if ($User['UserID'] == $Conversation->LastInsertUserID) {
-                $LastPhoto = userPhoto($User);
-                $LastUser = $User;
+        foreach ($Conversation->Participants as $user) {
+            if ($user['UserID'] == $Conversation->LastInsertUserID && $user['UserID'] != Gdn::session()->UserID) {
+                $LastPhoto = userPhoto($user);
+                $LastUser = $user;
                 if ($LastPhoto)
                     break;
-            } elseif (!$LastPhoto) {
-                $LastPhoto = userPhoto($User);
+            }
+        }
+
+        if($LastPhoto == '') {
+            $ops = array_filter($Conversation->Participants, function($var){
+                return $var['UserID'] != Gdn::session()->UserID;
+            });
+            
+            if(count($ops) > 0) {
+                $LastPhoto = userPhoto($ops[0] ?? $ops[1]);
+                $LastUser = $ops[0] ?? $ops[1];
             }
         }
     }

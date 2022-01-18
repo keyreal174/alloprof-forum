@@ -357,7 +357,30 @@ class MessagesController extends ConversationsController {
         }
 
         if ($this->Form->authenticatedPostBack(true) || $userID) {
-            $this->ConversationModel->clear($conversationID, $userID ?? Gdn::session()->UserID, $userID?true:false);
+
+            $userModel = new UserModel();
+            $User = $userModel->getID($userID ?? Gdn::session()->UserID);
+            $isModerator = false;
+
+            if($User) {
+                $RoleData = $userModel->getRoles($User->UserID);
+
+                $RoleData = $userModel->getRoles($User->UserID);
+                if ($RoleData !== false) {
+                    $Roles = array_column($RoleData->resultArray(), 'Name');
+                }
+
+                // Hide personal info roles
+                if (!checkPermission('Garden.PersonalInfo.View')) {
+                    $Roles = array_filter($Roles, 'RoleModel::FilterPersonalInfo');
+                }
+
+                if(in_array('Teacher', $Roles) || in_array('Moderator', $Roles))
+                    $isModerator = true;
+
+            }
+
+            $this->ConversationModel->clear($conversationID, $userID ?? Gdn::session()->UserID, $userID?true:false, $isModerator);
             $this->setRedirectTo('/messages/inbox');
         }
 

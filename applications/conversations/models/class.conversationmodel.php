@@ -725,7 +725,11 @@ SQL;
      * @param int $conversationID Unique ID of conversation effected.
      * @param int $clearingUserID Unique ID of current user.
      */
-    public function clear($conversationID, $clearingUserID, $delete=false) {
+    public function clear($conversationID, $clearingUserID, $delete=false, $deleteConversation) {
+        if($deleteConversation) {
+            $this->SQL->delete('Conversation', ['ConversationID' => $conversationID, 'InsertUserID' => $clearingUserID]);
+        }
+
         if($delete) {
             $this->SQL->delete('UserConversation', ['UserID' => $clearingUserID, 'ConversationID' => $conversationID]);
         } else {
