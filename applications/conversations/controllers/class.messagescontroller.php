@@ -430,7 +430,7 @@ class MessagesController extends ConversationsController {
 
             // Send the hash link in.
             if ($countReadMessages > 1) {
-                $this->addDefinition('LocationHash', '#Item_'.$countReadMessages);
+                // $this->addDefinition('LocationHash', '#Item_'.$countReadMessages);
             }
         }
 
