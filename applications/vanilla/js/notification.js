@@ -99,12 +99,8 @@ jQuery(document).ready(function($) {
     }
 
     function initNotification() {
-        $(document).on('click', '.ToggleFlyout-notification', function() {
-            customNotificationToggle();
-        });
-
-        $(window).click(function() {
-            $('.Flayout-notification').removeClass('open');
+        $(document).on('click', '.ToggleFlyout-notification .mobileFlyoutOverlay', function(e) {
+            e.stopPropagation();
         });
 
         $('.Flayout-notification').on('click', '.notification-settings', function(e) {

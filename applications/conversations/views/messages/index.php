@@ -64,6 +64,8 @@ if ($Photo) {
         </div>
     </div>
     <div class="modal-body Section-Conversation">
+        <a class="mobile-auto-back-popup d-mobile InboxPopup" href="<?php echo url('/messages/inbox'); ?>"></a>
+        <a class="mobile-auto-popup d-mobile InboxMessagePopup" href="<?php echo url('/messages/'.$this->data('Conversation.ConversationID')); ?>"></a>
         <input type="hidden" class="current-conversation-id" value="<?php echo $this->data('Conversation.ConversationID'); ?>"/>
     <div class="DataListWrap">
         <h2 class="H conversation-header d-desktop">

@@ -1191,12 +1191,19 @@ jQuery(document).ready(function($) {
             }
         });
         $('a.InboxPopup').popup({
-            containerCssClass: 'SearchPopup InboxPopup',
+            containerCssClass: 'SearchPopup InboxPopup MobilePopup',
             onLoad: function() {
                 $('.Flayout-notification').removeClass('open');
             },
             afterLoad: function() {
                 $('.Flayout-notification').removeClass('open');
+                $('.InboxPopup .conversation-mobile-back').click(function() {
+                    if($('body').hasClass('Conversations')) {
+                        window.location.replace($('.mobile-auto-back-popup').attr('href'));
+                    } else {
+                        $('.Popup.InboxPopup').parent().remove();
+                    }
+                })
             }
         });
 
@@ -1205,6 +1212,9 @@ jQuery(document).ready(function($) {
             afterLoad: function() {
                 $('.InboxMessagePopup .back-inbox > a').click(function() {
                     $('.Popup.InboxMessagePopup').parent().remove();
+                    if($('.Popup.InboxPopup').length === 0) {
+                        $('.mobile-auto-back-popup').trigger('click');
+                    }
                 })
             }
         });
