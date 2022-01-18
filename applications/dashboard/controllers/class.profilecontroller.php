@@ -927,7 +927,8 @@ class ProfileController extends Gdn_Controller {
 
         $where = [
             'NotifyUserID' => Gdn::session()->UserID,
-            'DateUpdated >=' => Gdn_Format::toDateTime(strtotime('-2 weeks'))
+            'DateUpdated >=' => Gdn_Format::toDateTime(strtotime('-2 weeks')),
+            'Notified' => 3
         ];
 
         $this->ActivityModel = new ActivityModel();
@@ -943,7 +944,6 @@ class ProfileController extends Gdn_Controller {
         // Get user data
         $this->getUserInfo();
         $userPrefs = dbdecode($this->User->Preferences);
-
         $this->setData('Activities', $activities);
         $this->setData('UnreadNotifications', $UnreadNotifications);
         $this->setData('UnreadConvNotifications', $UnreadConvNotifications);
