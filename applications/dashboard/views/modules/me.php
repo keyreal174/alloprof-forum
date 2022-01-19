@@ -53,13 +53,13 @@ if ($Session->isValid()):
     if (!$useNewFlyouts) {
         echo userPhoto($User);
     }
-    // if (preg_match('/zonedentraide/i', $_SERVER['REQUEST_URI'])) {
-    //     $newURI = str_replace('zonedentraide', 'helpzone', $_SERVER['REQUEST_URI']);
-    //     echo '<div slot="main_menu_right_after" class="language-btn" data-url="'. $newURI .'" id="en_GB">en</div>';
-    // } else {
-    //     $newURI = str_replace('helpzone', 'zonedentraide', $_SERVER['REQUEST_URI']);
-    //     echo '<div slot="main_menu_right_after" class="language-btn" data-url="'. $newURI .'" id="fr_CA">fr</div>';
-    // }
+    if (preg_match('/zonedentraide/i', $_SERVER['REQUEST_URI'])) {
+        $newURI = str_replace('zonedentraide', 'helpzone', $_SERVER['REQUEST_URI']);
+        echo '<div slot="main_menu_right_after" class="language-btn d-mobile" data-url="'. $newURI .'" id="en_GB">en</div>';
+    } else {
+        $newURI = str_replace('helpzone', 'zonedentraide', $_SERVER['REQUEST_URI']);
+        echo '<div slot="main_menu_right_after" class="language-btn d-mobile" data-url="'. $newURI .'" id="fr_CA">fr</div>';
+    }
     echo '<div class="WhoIs">';
     if (!$useNewFlyouts) {
         echo userAnchor($User, 'Username');

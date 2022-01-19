@@ -7,6 +7,8 @@ $(window).on("scroll", function () {
 });
 
 jQuery(document).ready(function($) {
+    window.dispatchEvent(new Event('resize'));
+    
     var DataListSelector = '#Content ul.DataList.Comments, ' +
         'main.page-content ul.DataList.Comments, ' +
         'main.Content ul.DataList.Comments, ' +

@@ -135,7 +135,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 </div>
             </div>
         </div>
-        <div class="mobile__lang_switcher"></div>
         {module name="MeModule" CssClass="FlyoutRight"}
     </header-component>
     <div class="header__search d-desktop">
