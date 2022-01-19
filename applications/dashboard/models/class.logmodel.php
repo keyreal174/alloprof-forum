@@ -888,12 +888,16 @@ class LogModel extends Gdn_Pluggable {
             $textstring = substr($textstring, 0, Gdn::config('Vanilla.Notify.TextLength')).'...';
         }
 
+        $InsertUser = Gdn::userModel()->getID($notifyUser);
+
+        $text = $InsertUser->ProfileLanguage == 'fr' ? 'a été publiée.' : 'has been published.';
+
         // Notify
         $activity = [
             'ActivityType' => 'Default',
             'ActivityUserID' => Gdn::session()->UserID,
             'HeadlineFormat' => ($table=='Discussion'?'Question':'Explanation').' published!',
-            'Story' => '<span>"'.$textstring.'<span>" </span> <b>'.t('has been published.').'</b>',
+            'Story' => '<span>"'.$textstring.'<span>" </span> <b>'.$text.'</b>',
             "RecordType" => "Comment",
             "RecordID" => $table=='Discussion'?$data->DiscussionID:$data->CommentID,
             "Route" => $table=='Discussion'?DiscussionModel::discussionUrl($data, "", "/"):CommentModel::commentUrl($data),
