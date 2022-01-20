@@ -671,7 +671,6 @@ div.Popup.BanPopup .btn {
         position: absolute;
         right: 28px;
         top: 14px;
-        cursor: pointer;
     }
 
     .MobilePopup .conversation-mobile-back {
