@@ -38,6 +38,9 @@ jQuery(document).ready(function($) {
             success: function(res) {
                 $('.notification-list .mark-not-read').remove();
                 $('.notification-count').text(0);
+                $('.conversaton-notification-list').remove();
+                $('.Item.Empty.Center.jquery-empty-section').css("display", "block");
+                $('.notification-inbox svg circle').css("display", "none");
             }
         });
         return false;

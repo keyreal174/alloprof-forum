@@ -117,6 +117,9 @@ if (!function_exists('translate'))
             echo '<div class="notification-all-read-wrapper"><a class="notification-all-read d-desktop">'.t('Mark all as read').'</a></div>';
     ?>
     <div class="notification-list">
+        <li class="Item Empty Center jquery-empty-section" style="display: none">
+            <?php echo t('Notifications will appear here.', t('You do not have any notifications yet.')); ?>
+        </li>
         <?php
         if (count($this->data('Activities'))):
             $convCount = 0;
