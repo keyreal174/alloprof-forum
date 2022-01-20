@@ -6801,7 +6801,7 @@ body.hasRichEditor.Section-PostDiscussion #DiscussionForm .FormWrapper {
 
 .header__search .InputBox.js-search {
     border-bottom: 1px solid black;
-    padding: 0 0 40px 0 !important;
+    padding: 0px !important;
     border-radius: 0;
 }
 

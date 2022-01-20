@@ -232,7 +232,8 @@ a.Flayout-Subject .Flyout {
     font-size: .6875rem;
     line-height: 24px;
     line-height: 1.5rem;
-    margin: 0 16px;
+    margin: 0 8px;
+    white-space: nowrap;
     /* font-size: 18px; */
 }
 
