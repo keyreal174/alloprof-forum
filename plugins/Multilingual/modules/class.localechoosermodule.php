@@ -47,6 +47,6 @@ class LocaleChooserModule extends Gdn_Module {
         if (!$this->Links)
             $this->Links = $this->buildLocales();
 
-        echo wrap($this->Links, 'div', ['class' => 'LocaleOptions']);
+        return wrap($this->Links, 'div', ['class' => 'LocaleOptions']);
     }
 }
