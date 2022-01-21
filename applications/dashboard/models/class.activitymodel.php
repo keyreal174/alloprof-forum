@@ -1455,6 +1455,17 @@ class ActivityModel extends Gdn_Model {
             ->put();
     }
 
+    public function setInAppNotified($activityIDs) {
+        if (!is_array($activityIDs) || count($activityIDs) == 0) {
+            return;
+        }
+
+        $this->SQL->update('Activity')
+            ->set('InAppNotified', self::SENT_OK)
+            ->whereIn('ActivityID', $activityIDs)
+            ->put();
+    }
+
 
     public function setReadPopup($activityIDs) {
         if (!is_array($activityIDs) || count($activityIDs) == 0) {

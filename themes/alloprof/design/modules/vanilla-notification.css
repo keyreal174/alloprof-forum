@@ -218,7 +218,7 @@
     line-height: 19px;
 }
 
-.InformMessage a.btn-default {
+.InformMessage button.btn-default {
     font-size: 14px;
     margin-top: 20px;
     height: 41px;

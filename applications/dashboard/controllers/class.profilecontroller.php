@@ -928,7 +928,6 @@ class ProfileController extends Gdn_Controller {
         $where = [
             'NotifyUserID' => Gdn::session()->UserID,
             'DateUpdated >=' => Gdn_Format::toDateTime(strtotime('-2 weeks')),
-            'Notified' => 3
         ];
 
         $this->ActivityModel = new ActivityModel();
@@ -936,10 +935,10 @@ class ProfileController extends Gdn_Controller {
         $UnreadNotifications = $this->ActivityModel->getUserTotalUnread(Gdn::session()->UserID);
         $UnreadConvNotifications = $this->ActivityModel->getUserTotalConvUnread(Gdn::session()->UserID);
 
-        $user = Gdn::userModel()->getID(Gdn::session()->UserID);
-        if (val('CountNotifications', $user) != 0) {
-            Gdn::userModel()->setField(Gdn::session()->UserID, 'CountNotifications', 0);
-        }
+        // $user = Gdn::userModel()->getID(Gdn::session()->UserID);
+        // if (val('CountNotifications', $user) != 0) {
+        //     Gdn::userModel()->setField(Gdn::session()->UserID, 'CountNotifications', 0);
+        // }
 
         // Get user data
         $this->getUserInfo();
