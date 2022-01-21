@@ -120,7 +120,6 @@ jQuery(document).ready(function($) {
     }
 
     function initNotification() {
-        console.log("234234234");
         $(document).on('click', '.ToggleFlyout-notification .mobileFlyoutOverlay', function(e) {
             e.stopPropagation();
         });
