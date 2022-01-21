@@ -157,7 +157,6 @@ class DashboardHooks extends Gdn_Plugin implements LoggerAwareInterface {
             $sender->fireEvent('GetAppSettingsMenuItems');
 
             $sender->removeJsFile('jquery.popup.js');
-            $sender->addJsFile('notification.js', 'vanilla');
             $sender->addJsFile('vendors/jquery.checkall.min.js', 'dashboard');
             $sender->addJsFile('buttongroup.js', 'dashboard');
             $sender->addJsFile('dashboard.js', 'dashboard');
