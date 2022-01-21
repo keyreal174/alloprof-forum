@@ -1296,8 +1296,12 @@ class CommentModel extends Gdn_Model implements FormatFieldInterface, EventFromR
                     $Roles = array_column($RoleData->resultArray(), 'Name');
                 }
 
-                if(in_array(Gdn::config('Vanilla.ExtraRoles.Pro'), $Roles))
+                if(in_array(Gdn::config('Vanilla.ExtraRoles.Pro'), $Roles)) {
                     $UserRole = true;
+                } else {
+                    $fields['WasPro'] = false;
+                }
+
                 if ((!$UserRole && $approvalRequired && !val('Verified', Gdn::session()->User)) || !Gdn::session()->User) {
                     $fields['Published'] = false;
                     $fields['WasPro'] = false;
