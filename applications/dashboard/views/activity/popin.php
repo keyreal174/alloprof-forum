@@ -29,7 +29,7 @@ if (!function_exists('translate'))
             <path d="m23.5 4.5-.009 15H.5v-15h23z" stroke="#000"/>
         </svg>';
         echo '<a href="#" class="Close d-mobile">×</a>';
-        if ($this->data('UnreadConvNotifications'))  {
+        if ($this->data('UnreadConvNotifications') && $this->data('UnreadConvNotifications') > 0)  {
             echo '
                 <a href="'.$prefix.'" class="notification-inbox d-desktop" style="right: 32px">
                     '.$inboxWithCircle.'

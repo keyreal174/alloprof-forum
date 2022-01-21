@@ -49,7 +49,7 @@ jQuery(document).ready(function($) {
         return false;
     }
 
-    function markSingleRead($id) {
+    function markSingleRead($id, $rel) {
         $.ajax({
             type: "POST",
             url: gdn.url('/notifications/markSingleRead/'+$id),
@@ -57,7 +57,7 @@ jQuery(document).ready(function($) {
                 alert(errorThrown);
             },
             success: function(res) {
-                console.log(res)
+                window.location.href = $rel;
             }
         });
         return false;
@@ -71,10 +71,9 @@ jQuery(document).ready(function($) {
                 alert(errorThrown);
             },
             success: function(res) {
-
+                window.location.href = $href;
             }
         });
-        window.location.href = $href;
         return false;
     }
 
@@ -134,8 +133,12 @@ jQuery(document).ready(function($) {
         });
 
         $('.Flayout-notification').on('click', '.notification-list .Item', function(e) {
-            if($(this).attr('id'))
-                markSingleRead($(this).attr('id'));
+            e.preventDefault();
+            if($(this).attr('id')) {
+                markSingleRead($(this).attr('id'), $(this).attr('rel'));
+                return false;
+            }
+            return true;
         });
 
         $(document).on('click', '.reply-notification', function(e) {
