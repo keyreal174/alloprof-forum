@@ -36,10 +36,13 @@ jQuery(document).ready(function($) {
                 alert(errorThrown);
             },
             success: function(res) {
+                $('.NotificationsAlert').remove();
                 $('.notification-list .mark-not-read').remove();
                 $('.notification-count').text(0);
                 $('.conversaton-notification-list').remove();
-                $('.Item.Empty.Center.jquery-empty-section').css("display", "block");
+                if (!$('.post-notification-list')) {
+                    $('.Item.Empty.Center.jquery-empty-section').css("display", "block");
+                }
                 $('.notification-inbox svg circle').css("display", "none");
             }
         });
@@ -57,6 +60,21 @@ jQuery(document).ready(function($) {
                 console.log(res)
             }
         });
+        return false;
+    }
+
+    function markSingleReadByReply($id, $href) {
+        $.ajax({
+            type: "POST",
+            url: gdn.url('/notifications/markSingleRead/'+$id),
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                alert(errorThrown);
+            },
+            success: function(res) {
+
+            }
+        });
+        window.location.href = $href;
         return false;
     }
 
@@ -102,6 +120,7 @@ jQuery(document).ready(function($) {
     }
 
     function initNotification() {
+        console.log("234234234");
         $(document).on('click', '.ToggleFlyout-notification .mobileFlyoutOverlay', function(e) {
             e.stopPropagation();
         });
@@ -119,6 +138,11 @@ jQuery(document).ready(function($) {
             if($(this).attr('id'))
                 markSingleRead($(this).attr('id'));
         });
+
+        $(document).on('click', '.reply-notification', function(e) {
+            if($(this).attr('data-id'))
+                markSingleReadByReply($(this).attr('data-id'), $(this).attr('data-href'));
+        })
 
         $('.Flayout-notification').on('click', '.notification-all-read', function(e) {
             markAllAsRead();

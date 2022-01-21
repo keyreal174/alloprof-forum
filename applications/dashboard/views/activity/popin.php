@@ -127,7 +127,7 @@ if (!function_exists('translate'))
                 return $k['ActivityTypeID'] != '21';
             });
             $ConvActivities = array_slice(array_filter($this->data('Activities'), function($k) {
-                return $k['ActivityTypeID'] == '21';
+                return $k['ActivityTypeID'] == '21' && $k['Notified'] == '3' ;
             }), 0, 3);
             if (count($ConvActivities)):
                 echo  '<div class="conversaton-notification-list">';

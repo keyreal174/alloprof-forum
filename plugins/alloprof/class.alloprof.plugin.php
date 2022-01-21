@@ -117,5 +117,9 @@ class AlloprofPlugin extends Gdn_Plugin {
             ->column('DatePublished', 'datetime', true)
             ->column('WasPro', 'tinyint(1)', '0')
             ->set();
+
+        $St->table('Activity')
+            ->column('InAppNotified', 'tinyint(1)', 3, 'index.Notify')
+            ->set();
     }
 }

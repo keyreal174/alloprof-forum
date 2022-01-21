@@ -69,7 +69,7 @@ class NotificationsController extends Gdn_Controller {
         // Get five pending notifications.
         $where = [
             'NotifyUserID' => Gdn::session()->UserID,
-            'Notified' => ActivityModel::SENT_PENDING];
+            'InAppNotified' => ActivityModel::SENT_PENDING];
 
         // If we're in the middle of a visit only get very recent notifications.
         $where['DateUpdated >'] = Gdn_Format::toDateTime(strtotime('-5 minutes'));
@@ -77,7 +77,7 @@ class NotificationsController extends Gdn_Controller {
         $activities = $activityModel->getWhere($where, '', '', 5, 0)->resultArray();
 
         $activityIDs = array_column($activities, 'ActivityID');
-        $activityModel->setNotified($activityIDs);
+        $activityModel->setInAppNotified($activityIDs);
 
         $sender->EventArguments['Activities'] = &$activities;
         $sender->fireEvent('InformNotifications');
@@ -122,7 +122,7 @@ class NotificationsController extends Gdn_Controller {
                     '<div class="toast-container conversation-toast-container">'.$userPhoto.'<div>'
                     .wrap(t("New message!").$verifiedIcon, 'div', ['class' => 'toast-title'.($verified?' verified':'')])
                     .wrap(t("You have a new message from a moderator."), 'div', ['class' => 'toast-text'])
-                    .($activity['Route']?'<a href="'.$link.'" class="btn-default">'.t('Reply').'</a>':'').'</div></div>',
+                    .($activity['Route']?'<button data-id="'.$activity['ActivityID'].'" data-href="'.$link.'" class="btn-default reply-notification">'.t('Reply').'</button>':'').'</div></div>',
                     'Dismissable'.$activityClass.($userPhoto == '' ? '' : ' HasIcon')
                 );
             } else {
@@ -130,7 +130,7 @@ class NotificationsController extends Gdn_Controller {
                     '<div class="toast-container">'.$userPhoto.'<div>'
                     .wrap(t($activity['Headline']).$verifiedIcon, 'div', ['class' => 'toast-title'.($verified?' verified':'')])
                     .wrap(t($story), 'div', ['class' => 'toast-text'])
-                    .($activity['Route']?'<a href="'.$link.'" class="btn-default">'.t('See').'</a>':'').'</div></div>',
+                    .($activity['Route']?'<button data-id="'.$activity['ActivityID'].'" data-href="'.$link.'" class="btn-default reply-notification">'.t('See').'</button>':'').'</div></div>',
                     'Dismissable'.$activityClass.($userPhoto == '' ? '' : ' HasIcon')
                 );
             }

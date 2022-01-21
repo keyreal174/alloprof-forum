@@ -1923,7 +1923,7 @@ jQuery(document).ready(function($) {
 
     // Clear notifications alerts when they are accessed anywhere.
     $(document).on('click', '.js-clear-notifications', function() {
-        $('.NotificationsAlert').remove();
+        // $('.NotificationsAlert').remove();
     });
 
     $(document).on('change', '.js-nav-dropdown', function() {
