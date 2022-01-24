@@ -933,7 +933,7 @@ class DiscussionController extends VanillaController {
                     "HeadlineFormat" => 'Question deleted!',
                     "RecordType" => "Delete",
                     "RecordID" => $discussionID,
-                    "Story" => "=======",
+                    "Story" => $text,
                 ];
 
                 $ActivityModel = new ActivityModel();
