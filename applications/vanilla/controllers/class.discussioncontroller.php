@@ -925,7 +925,7 @@ class DiscussionController extends VanillaController {
                 \Gdn::config()->touch([
                     'Preferences.Popup.Delete' => 2,
                 ]);
-                $text = $discussionInsertUser->ProfileLanguage == "fr" ? sprintf('Ta question a été effacée par un modérateur: <b>"%s"</b>.', $this->Form->getFormValue('DeleteMessage')) : sprintf('Your question has been deleted by a moderator: <b>"%s"</b>.', $this->Form->getFormValue('DeleteMessage'));
+                $text = sprintf('Your question has been deleted by a moderator: <b>"%s"</b>.', $this->Form->getFormValue('DeleteMessage'));
 
                 $data = [
                     "ActivityType" => "Delete",
@@ -933,7 +933,7 @@ class DiscussionController extends VanillaController {
                     "HeadlineFormat" => 'Question deleted!',
                     "RecordType" => "Delete",
                     "RecordID" => $discussionID,
-                    "Story" => $text,
+                    "Story" => "=======",
                 ];
 
                 $ActivityModel = new ActivityModel();
@@ -1079,7 +1079,7 @@ class DiscussionController extends VanillaController {
                 ]);
                 $commentInsertUser = $this->UserModel->getID($comment->InsertUserID);
 
-                $headlineFormat = $commentInsertUser->ProfileLanguage == "fr" ? sprintf('Ton explication a été effacée par un modérateur: <b>"%s"</b>.', $this->Form->getFormValue('DeleteMessage')) : sprintf('Your explanation has been deleted by a moderator: <b>"%s"</b>.', $this->Form->getFormValue('DeleteMessage'));
+                $text = sprintf('Your explanation has been deleted by a moderator: <b>"%s"</b>.', $this->Form->getFormValue('DeleteMessage'));
 
                 $data = [
                     "ActivityType" => "Delete",
@@ -1087,7 +1087,7 @@ class DiscussionController extends VanillaController {
                     "HeadlineFormat" => 'Explanation deleted!',
                     "RecordType" => "Delete",
                     "RecordID" => $commentID,
-                    "Story" => $headlineFormat,
+                    "Story" => $text,
                 ];
 
                 $ActivityModel = new ActivityModel();
