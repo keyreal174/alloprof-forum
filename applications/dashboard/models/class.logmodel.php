@@ -235,7 +235,7 @@ class LogModel extends Gdn_Pluggable {
 
                     $InsertUser = Gdn::userModel()->getID($log['InsertUserID']);
 
-                    $text = $InsertUser->ProfileLanguage == 'fr' ? sprintf(($recordType=='Discussion'?'Ta question':'Ton explication').' a été effacée par un modérateur: <b>"%s"</b>.', $deleteMessage) : sprintf('Your '.($recordType=='Discussion'?'question':'explanation').' has been deleted by a moderator: <b>"%s"</b>.', $deleteMessage);
+                    $text = sprintf('Your '.($recordType=='Discussion'?'question':'explanation').' has been deleted by a moderator: <b>"%s"</b>.', $deleteMessage);
                     $data = [
                         "ActivityType" => "Delete",
                         "NotifyUserID" => $log['InsertUserID'],
@@ -890,14 +890,14 @@ class LogModel extends Gdn_Pluggable {
 
         $InsertUser = Gdn::userModel()->getID($notifyUser);
 
-        $text = $InsertUser->ProfileLanguage == 'fr' ? 'a été publiée.' : 'has been published.';
+        $text = 'has been published.';
 
         // Notify
         $activity = [
             'ActivityType' => 'Default',
             'ActivityUserID' => Gdn::session()->UserID,
             'HeadlineFormat' => ($table=='Discussion'?'Question':'Explanation').' published!',
-            'Story' => '<span>"'.$textstring.'<span>" </span> <b>'.$text.'</b>',
+            'Story' => '<span>"'.$textstring.'" </span> <b>'.$text.'</b>',
             "RecordType" => "Comment",
             "RecordID" => $table=='Discussion'?$data->DiscussionID:$data->CommentID,
             "Route" => $table=='Discussion'?DiscussionModel::discussionUrl($data, "", "/"):CommentModel::commentUrl($data),
