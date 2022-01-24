@@ -1086,8 +1086,14 @@ if (!function_exists('userRoleCheck')) :
             if (!checkPermission('Garden.PersonalInfo.View')) {
                 $Roles = array_filter($Roles, 'RoleModel::FilterPersonalInfo');
             }
+            
+            if(in_array('Administrator ', $Roles))
+                $UserRole = 'Administrator ';
 
-            if(in_array(Gdn::config('Vanilla.ExtraRoles.Teacher'), $Roles))
+            else if(in_array('Moderator', $Roles))
+                $UserRole = 'Moderator';
+
+            else if(in_array(Gdn::config('Vanilla.ExtraRoles.Teacher'), $Roles))
                 $UserRole = Gdn::config('Vanilla.ExtraRoles.Teacher') ?? 'Teacher';
 
             else if(in_array(Gdn::config('Vanilla.ExtraRoles.Pro'), $Roles))

@@ -679,6 +679,7 @@ div.Popup.BanPopup .btn {
         right: 18px;
         top: 0px;
         z-index: 99;
+        cursor: pointer;
     }
 
     .Popup .leave-conversation {
