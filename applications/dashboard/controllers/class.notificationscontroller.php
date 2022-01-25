@@ -126,10 +126,17 @@ class NotificationsController extends Gdn_Controller {
                     'Dismissable'.$activityClass.($userPhoto == '' ? '' : ' HasIcon')
                 );
             } else {
+                $text = $story;
+                if (preg_match('/zonedentraide/i', $_SERVER['REQUEST_URI'])) {
+                    $text = str_replace('<b>has been published.</b>', '<b>a été publiée.</b>', $text);
+                    $text = str_replace('Your question has been deleted by a moderator:', 'Ta question a été effacée par un modérateur:', $text);
+                    $text = str_replace('Your explanation has been deleted by a moderator:', 'Ta explication a été effacée par un modérateur:', $text);
+                }
+
                 $sender->informMessage(
                     '<div class="toast-container">'.$userPhoto.'<div>'
                     .wrap(t($activity['Headline']).$verifiedIcon, 'div', ['class' => 'toast-title'.($verified?' verified':'')])
-                    .wrap(t($story), 'div', ['class' => 'toast-text'])
+                    .wrap(t($text), 'div', ['class' => 'toast-text'])
                     .($activity['Route']?'<button data-id="'.$activity['ActivityID'].'" data-href="'.$link.'" class="btn-default reply-notification">'.t('See').'</button>':'').'</div></div>',
                     'Dismissable'.$activityClass.($userPhoto == '' ? '' : ' HasIcon')
                 );

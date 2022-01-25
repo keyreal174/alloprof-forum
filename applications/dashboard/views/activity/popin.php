@@ -229,11 +229,11 @@ if (!function_exists('translate'))
                 <p>
                     <?php
                                             $excerpt = '';
-                                            $story = translate($Activity['Story']);
+                                            $story = t($Activity['Story']);
                                             $format = $Activity['Format'] ?? Vanilla\Formatting\Formats\HtmlFormat::FORMAT_KEY;
                                             $excerpt = htmlspecialchars($story ? Gdn::formatService()->renderExcerpt($story, $format) : $excerpt);
 
-                                            echo t(trim($excerpt)); ?>
+                                            echo translate(trim($story)); ?>
                 </p>
                 <div class="Meta">
                     <span class="MItem DateCreated"><?php echo timeElapsedString($Activity['DateUpdated']); ?></span>
