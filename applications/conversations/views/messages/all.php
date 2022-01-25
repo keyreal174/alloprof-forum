@@ -22,27 +22,27 @@ include($this->fetchViewLocation('helper_functions', 'discussions', 'vanilla'));
     <hr />
 </div>
 
-<h1 class="H d-desktop"><?php echo $this->data('Title'); ?></h1>
+<div class="d-desktop"><h1 class="H"><?php echo $this->data('Title'); ?></h1></div>
 <div class="modal-body Section-ConversationList">
 
 <a class="mobile-auto-popup d-mobile InboxPopup" href="<?php echo url('/messages/inbox'); ?>"></a>
 <a class="mobile-auto-back-popup" href="<?php echo url('/discussions'); ?>"></a>
 
-<?php if(userRoleCheck() == Gdn::config('Vanilla.ExtraRoles.Teacher')) { ?>
-<a href="<?php echo url('/messages/add'); ?>" class="AddToConversationPopup">
-    <div class="DataList">
-        <div class="Item add-people">
-            <h2>
-                <?php echo t('New discussion');?>
-            </h2>
-            <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M18.763 1.502 6.117 14.537v4.478h4.417l12.3-13.442-4.071-4.071z" stroke="#000" />
-                <path d="M22.206 12.978v8.52a2 2 0 0 1-2 2H3.166a2 2 0 0 1-2-2V4.458a2 2 0 0 1 2-2h8.52" stroke="#000"
-                    stroke-linecap="round" />
-            </svg>
+<?php if(userRoleCheck() == 'Administrator' || userRoleCheck() == 'Moderator') { ?>
+    <a href="<?php echo url('/messages/add'); ?>" class="AddToConversationPopup">
+        <div class="DataList">
+            <div class="Item add-people">
+                <h2>
+                    <?php echo t('New discussion');?>
+                </h2>
+                <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18.763 1.502 6.117 14.537v4.478h4.417l12.3-13.442-4.071-4.071z" stroke="#000" />
+                    <path d="M22.206 12.978v8.52a2 2 0 0 1-2 2H3.166a2 2 0 0 1-2-2V4.458a2 2 0 0 1 2-2h8.52" stroke="#000"
+                        stroke-linecap="round" />
+                </svg>
+            </div>
         </div>
-    </div>
-</a>
+    </a>
 <?php
     }
 ?>

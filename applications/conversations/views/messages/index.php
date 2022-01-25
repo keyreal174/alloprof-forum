@@ -46,7 +46,7 @@ if ($Photo) {
                     <?php echo sprite('SpFlyoutHandle', 'Arrow'); ?>
                     <span class="mobileFlyoutOverlay">
                         <ul class="Flyout MenuItems" style="display: none;">
-                            <?php if(userRoleCheck() == Gdn::config('Vanilla.ExtraRoles.Teacher')) { 
+                            <?php if(userRoleCheck() == 'Administrator' || userRoleCheck() == 'Moderator') { 
                                 ?>
                                 <li>
                                     <a href="<?php echo url('/messages/addPeople/'.$this->data('Conversation.ConversationID')); ?>" class="AddToConversationPopup">
@@ -68,28 +68,30 @@ if ($Photo) {
         <a class="mobile-auto-popup d-mobile InboxMessagePopup" href="<?php echo url('/messages/'.$this->data('Conversation.ConversationID')); ?>"></a>
         <input type="hidden" class="current-conversation-id" value="<?php echo $this->data('Conversation.ConversationID'); ?>"/>
     <div class="DataListWrap">
-        <h2 class="H conversation-header d-desktop">
-            <?php
-            $Names = ConversationModel::participantTitle($this->data('Conversation'), false);
-            echo $Names;
+        <div class="d-desktop">
+            <h2 class="H conversation-header">
+                <?php
+                $Names = ConversationModel::participantTitle($this->data('Conversation'), false);
+                echo $Names;
 
-            // if ($this->data('Conversation.Subject')) {
-            //     echo
-            //         bullet(' ').
-            //         '<span class="Gloss">'.htmlspecialchars($this->data('Conversation.Subject')).'</span>';
-            // }
-            ?>
-            <?php if(userRoleCheck() == Gdn::config('Vanilla.ExtraRoles.Teacher')) {
+                // if ($this->data('Conversation.Subject')) {
+                //     echo
+                //         bullet(' ').
+                //         '<span class="Gloss">'.htmlspecialchars($this->data('Conversation.Subject')).'</span>';
+                // }
                 ?>
-                <a href="<?php echo url('/messages/addPeople/'.$this->data('Conversation.ConversationID')); ?>" class="AddToConversationPopup add-people">
-                    <svg style="width: 24px;" viewBox="0 0 25 25" class="header__avatar ng-tns-c83-1 ng-star-inserted"><g transform="translate(18.000000, 18.000000)" class="ng-tns-c83-1"><path d="M2-3c2.8,0,5,2.2,5,5S4.8,7,2,7h-15c-2.8,0-5-2.2-5-5s2.2-5,5-5H2z M-5.5-17c3,0,5.5,2.5,5.5,5.5
-                    S-2.5-6-5.5-6S-11-8.5-11-11.5S-8.5-17-5.5-17z" class="login__state ng-tns-c83-1" style="fill: transparent"></path><path d="M2-3c2.8,0,5,2.2,5,5S4.8,7,2,7h-15c-2.8,0-5-2.2-5-5s2.2-5,5-5H2z M2-2h-15c-2.2,0-4,1.8-4,4
-                    s1.8,4,4,4H2c2.2,0,4-1.8,4-4S4.2-2,2-2z M-5.5-18c3.6,0,6.5,2.9,6.5,6.5S-1.9-5-5.5-5S-12-7.9-12-11.5S-9.1-18-5.5-18z M-5.5-17
-                    c-3,0-5.5,2.5-5.5,5.5S-8.5-6-5.5-6S0-8.5,0-11.5S-2.5-17-5.5-17z" class="login__stroke ng-tns-c83-1"></path></g></svg>
-                    <span>+</span>
-                </a>
-            <?php } ?>
-        </h2>
+                <?php if(userRoleCheck() == 'Administrator' || userRoleCheck() == 'Moderator') {
+                    ?>
+                    <a href="<?php echo url('/messages/addPeople/'.$this->data('Conversation.ConversationID')); ?>" class="AddToConversationPopup add-people">
+                        <svg style="width: 24px;" viewBox="0 0 25 25" class="header__avatar ng-tns-c83-1 ng-star-inserted"><g transform="translate(18.000000, 18.000000)" class="ng-tns-c83-1"><path d="M2-3c2.8,0,5,2.2,5,5S4.8,7,2,7h-15c-2.8,0-5-2.2-5-5s2.2-5,5-5H2z M-5.5-17c3,0,5.5,2.5,5.5,5.5
+                        S-2.5-6-5.5-6S-11-8.5-11-11.5S-8.5-17-5.5-17z" class="login__state ng-tns-c83-1" style="fill: transparent"></path><path d="M2-3c2.8,0,5,2.2,5,5S4.8,7,2,7h-15c-2.8,0-5-2.2-5-5s2.2-5,5-5H2z M2-2h-15c-2.2,0-4,1.8-4,4
+                        s1.8,4,4,4H2c2.2,0,4-1.8,4-4S4.2-2,2-2z M-5.5-18c3.6,0,6.5,2.9,6.5,6.5S-1.9-5-5.5-5S-12-7.9-12-11.5S-9.1-18-5.5-18z M-5.5-17
+                        c-3,0-5.5,2.5-5.5,5.5S-8.5-6-5.5-6S0-8.5,0-11.5S-2.5-17-5.5-17z" class="login__stroke ng-tns-c83-1"></path></g></svg>
+                        <span>+</span>
+                    </a>
+                <?php } ?>
+            </h2>
+        </div>
         <div class="d-desktop"><hr/></div>
         <?php
         if ($this->data('Conversation.Type')) {
