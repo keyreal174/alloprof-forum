@@ -53,10 +53,15 @@ if ($Session->isValid()):
     if (!$useNewFlyouts) {
         echo userPhoto($User);
     }
+
+    $currentLocale = 'fr';
+
     if (preg_match('/zonedentraide/i', $_SERVER['REQUEST_URI'])) {
+        $currentLocale = 'fr';
         $newURI = str_replace('zonedentraide', 'helpzone', $_SERVER['REQUEST_URI']);
         echo '<div slot="main_menu_right_after" class="language-btn d-mobile" data-url="'. $newURI .'" id="en_GB">en</div>';
     } else {
+        $currentLocale = 'en';
         $newURI = str_replace('helpzone', 'zonedentraide', $_SERVER['REQUEST_URI']);
         echo '<div slot="main_menu_right_after" class="language-btn d-mobile" data-url="'. $newURI .'" id="fr_CA">fr</div>';
     }
@@ -98,7 +103,7 @@ if ($Session->isValid()):
     // }
 
     // Profile Settings & Logout
-    $dropdown = new DropdownModule('', '', 'account-options', 'authorized withHeader');
+    $dropdown = new DropdownModule('', '', 'account-options', 'authorized');
     $dropdown->setData('DashboardCount', $DashboardCount);
     $triggerTitle = t('Account Options');
 
@@ -134,8 +139,16 @@ if ($Session->isValid()):
     $editModifiers['listItemCssClasses'] = ['EditProfileWrap', 'link-editprofile'];
     $preferencesModifiers['listItemCssClasses'] = ['EditProfileWrap', 'link-preferences'];
 
-    $dropdown->addLinkIf(hasEditProfile(Gdn::session()->UserID), $triggerIcon.t('My Profile'), '/profile/edit', 'profile.edit', '', [], $editModifiers);
+    // $dropdown->addLinkIf(hasEditProfile(Gdn::session()->UserID), $triggerIcon.t('My Profile'), '/profile/edit', 'profile.edit', '', [], $editModifiers);
     $dropdown->addLinkIf(!hasEditProfile(Gdn::session()->UserID), t('Preferences'), '/profile/preferences', 'profile.preferences', '', [], $preferencesModifiers);
+
+    $site_url = 'https://www.alloprof.qc.ca/'.$currentLocale.'/';
+
+    $dropdown->addLink(t('My space'), $site_url.($currentLocale == 'fr'?'espace':'space'), '', '');
+    $dropdown->addLink(t('My profile'), $site_url.($currentLocale == 'fr'?'profil':'profile'), '', '');
+    $dropdown->addLink(t('My settings'), $site_url.($currentLocale == 'fr'?'parametres':'settings'), '', '');
+
+    $dropdown->addDivider();
 
     $applicantModifiers = $ApplicantCount > 0 ? ['badge' => $ApplicantCount] : [];
     $applicantModifiers['listItemCssClasses'] = ['link-applicants'];
@@ -155,7 +168,7 @@ if ($Session->isValid()):
     $dropdown->addLinkIf($modPermission, t('Moderation Queue'), '/dashboard/log/moderation', 'moderation.moderation', '', [], $modModifiers);
     $dropdown->addLinkIf($dashboardPermission, t('Dashboard'), '/dashboard/settings', 'dashboard.dashboard', '', [], $dashboardModifiers);
 
-    $dropdown->addLink(t('Sign Out'), signOutUrl(), 'entry.signout', '', $signoutModifiers);
+    $dropdown->addLink('<span class="link__text">'.t('Log out').'</span>', signOutUrl(), 'entry.signout', 'link link--sm link--active text-align-center', $signoutModifiers);
 
     $this->EventArguments['Dropdown'] = &$dropdown;
     $this->fireEvent('FlyoutMenu');
@@ -198,7 +211,7 @@ else:
 
     echo '<div class="SignInLinks">';
 
-    $dropdown = new DropdownModule('', '', 'account-options', 'unauthorized withHeader');
+    $dropdown = new DropdownModule('', '', 'account-options', 'unauthorized');
     $dropdown->setData('DashboardCount', $DashboardCount);
 
     $dropdown->setTrigger('', 'anchor', 'MeButton FlyoutButton MeButton-user unauthorized', '<svg style="width: 24px;" viewBox="0 0 25 25" class="header__avatar ng-tns-c83-1 ng-star-inserted"><g transform="translate(18.000000, 18.000000)" class="ng-tns-c83-1"><path d="M2-3c2.8,0,5,2.2,5,5S4.8,7,2,7h-15c-2.8,0-5-2.2-5-5s2.2-5,5-5H2z M-5.5-17c3,0,5.5,2.5,5.5,5.5
@@ -210,7 +223,7 @@ else:
 
     $dropdown->addLink(t('Sign In'), false, '', 'SignInStudentPopupAgent btn btn--sm btn--login text-align-center', ['rel' => 'nofollow'], $editModifiers);
     $dropdown->addLink(t('Sign In'), '/entry/signinstudent?Target='.$this->_Sender->SelfUrl, 'studentsignin', 'SignInStudentPopup HiddenImportant', ['rel' => 'nofollow'], $editModifiers);
-    $dropdown->addLink('<span class="link__text">'.t('Register').'</span>', registerUrl($this->_Sender->SelfUrl), 'register', 'registerPopup link link--sm link--active text-align-center', [], $editModifiers);
+    $dropdown->addLink('<span class="link__text">'.t('Create an account').'</span>', registerUrl($this->_Sender->SelfUrl), 'register', 'registerPopup link link--sm link--active text-align-center', [], $editModifiers);
     // $dropdown->addLink(t('Teacher'), signInUrl($this->_Sender->SelfUrl), 'teachersignin', 'SignInPopup', ['rel' => 'nofollow'], $preferencesModifiers);
 
     $this->EventArguments['Dropdown'] = &$dropdown;
