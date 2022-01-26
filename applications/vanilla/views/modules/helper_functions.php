@@ -442,7 +442,7 @@ if (!function_exists('writeDiscussionSort')) :
         ];
 
         echo '<div class="rich-select select2 select2-grade">';
-        echo '<div class="pre-icon"><img src="'.url("/themes/alloprof/design/images/icons/sort.svg").'" width="14" height="8" style="max-height: 10px"/></div>';
+        echo '<div class="pre-icon"><img src="'.url("/themes/alloprof/design/images/icons/sort.svg").'"/></div>';
         echo Gdn::controller()->Form->dropDown('DiscussionSort', $options, [ 'Value' => $sort ]);
         echo '</div>';
     }
@@ -552,7 +552,7 @@ if (!function_exists('writeCommentSort')) :
         ];
 
         echo '<div class="rich-select select2 select2-grade">';
-        echo '<div class="pre-icon"><img src="'.url("/themes/alloprof/design/images/icons/sort.svg").'" width="14" height="8" style="max-height: 10px"/></div>';
+        echo '<div class="pre-icon"><img src="'.url("/themes/alloprof/design/images/icons/sort.svg").'"/></div>';
         echo Gdn::controller()->Form->dropDown('CommentSort', $options, [ 'Value' => $sort ]);
         echo '</div>';
     }

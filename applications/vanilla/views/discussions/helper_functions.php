@@ -1087,8 +1087,8 @@ if (!function_exists('userRoleCheck')) :
                 $Roles = array_filter($Roles, 'RoleModel::FilterPersonalInfo');
             }
             
-            if(in_array('Administrator ', $Roles))
-                $UserRole = 'Administrator ';
+            if(in_array('Administrator', $Roles))
+                $UserRole = 'Administrator';
 
             else if(in_array('Moderator', $Roles))
                 $UserRole = 'Moderator';
