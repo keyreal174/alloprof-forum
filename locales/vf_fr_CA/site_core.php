@@ -1249,6 +1249,7 @@ $Definition['Sign In with OpenID'] = 'Se connecter avec un OpenID';
 $Definition['Sign In with Twitter'] = 'Se connecter avec votre compte Twitter';
 $Definition['Sign Out'] = 'Se déconnecter';
 $Definition['sign out'] = 'se déconnecter';
+$Definition['Log out'] = 'Déconnexion';
 $Definition['Sink'] = 'Déclasser';
 $Definition['Sink this discussion'] = 'Décalsser cette discussion.';
 $Definition['Sitemap Settings'] = 'Paramètres du sitemap';
@@ -1915,3 +1916,8 @@ $Definition['Manage the conversation'] = 'Gérer la conversation';
 $Definition['Leave Conversation'] = 'Quitter la conversation';
 $Definition['Leave'] = 'Quitter';
 $Definition['When you leave, you will no longer see the messages exchanged.<br/>Do you want to leave the conversation?'] = 'En quittant, tu ne verra plus les messages échangés.<br/>Veux-tu quitter la conversation?';
+$Definition['Create an account'] = 'Créer un compte';
+
+$Definition['My space'] = 'Mon espace';
+$Definition['My profile'] = 'Mon profil';
+$Definition['My settings'] = 'Mes paramètres';

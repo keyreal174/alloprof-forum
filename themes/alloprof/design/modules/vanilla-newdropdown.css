@@ -45,6 +45,9 @@
     text-align: center;
     display: flex;
     padding: 15px;
+    font-family: 'ChromaticaBold';
+    color: black !important;
+    background: none !important;
 }
 
 .MeBox .additional-links {
@@ -70,8 +73,14 @@
 }
 
 .MeBox .Flyout.authorized li a.dropdown-menu-link-entry-signout {
-    font-family: "ChromaticaBold";
+    font-family: "ChromaticaMedium";
     justify-content: center;
+    color: black !important;
+    background: none !important;
+}
+
+.MeBox .Flyout.authorized li a.dropdown-menu-link-entry-signout span {
+    font-size: 15px;
 }
 
 .MeBox.FlyoutRight .Flyout.unauthorized li {
@@ -83,14 +92,13 @@
     border-radius: 38px;
     padding: 13px;
     border: 1px solid #000000;
-    font-weight: 600;
+    font-family: 'ChromaticaBold';
     justify-self: center;
 }
 
 .MeBox.FlyoutRight .Flyout.unauthorized li:first-child a:hover {
     border-radius: 38px;
     border: 1px solid #000000;
-    font-weight: 600;
     text-decoration: none;
     background-color: #05bf8e;
 }
@@ -102,9 +110,9 @@
 }
 
 .MeBox.FlyoutRight .Flyout.unauthorized li a {
-    font-size: 15px;
+    font-size: 16px;
+    font-family: 'ChromaticaMedium';
     line-height: 18px;
-    font-weight: 300;
     color: black;
     padding-top: 13px;
     justify-content: center;
@@ -276,27 +284,18 @@ a.Flayout-Subject .Flyout {
         border: none !important;
     }
 
+    .MeBox.FlyoutRight .Flyout.authorized,
     .MeBox.FlyoutRight .Flyout.unauthorized {
-        padding: 15px 20px !important;
+        min-width: 218px!important;
+        width: fit-content;
+        padding: 32px!important;
+        top: 87px;
+        right: 45px;
     }
-
-    /* .MeBox.FlyoutRight .Flyout.authorized,
-    .MeBox.FlyoutRight .Flyout.unauthorized {
-        top: 0;
-        flex-direction: column;
-        justify-content: center;
-        height: 100vh !important;
-        align-items: center;
-        padding-top: 100px !important;
-    } */
 
     .additional-links__popup li,
     .MeBox .Flyout.authorized li {
         margin: 0 12px;
-    }
-
-    .MeBox.FlyoutRight .Flyout.authorized li hr {
-        min-width: 300px;
     }
 
     .additional-links__popup li a,
@@ -305,11 +304,6 @@ a.Flayout-Subject .Flyout {
         font-weight: 300;
         min-height: 40px;
         padding: 15px 12px !important;
-    }
-
-    .MeBox.FlyoutRight .Flyout.unauthorized li a {
-        font-size: 15px;
-        border: none !important;
     }
 
     .MeBox.FlyoutRight .Flyout li a.dropdown-menu-link-Close {
