@@ -1090,7 +1090,7 @@ if (!function_exists('userRoleCheck')) :
             if(in_array('Administrator', $Roles))
                 $UserRole = 'Administrator';
 
-            else if(in_array('Moderator', $Roles))
+            else if(in_array('Principal Moderator', $Roles))
                 $UserRole = 'Moderator';
 
             else if(in_array(Gdn::config('Vanilla.ExtraRoles.Teacher'), $Roles))
