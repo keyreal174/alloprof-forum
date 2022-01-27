@@ -375,7 +375,7 @@ class MessagesController extends ConversationsController {
                     $Roles = array_filter($Roles, 'RoleModel::FilterPersonalInfo');
                 }
 
-                if(in_array('Teacher', $Roles) || in_array('Moderator', $Roles))
+                if(in_array('Principal Moderator', $Roles))
                     $isModerator = true;
 
             }
